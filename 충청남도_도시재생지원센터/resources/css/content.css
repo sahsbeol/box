@@ -7,10 +7,10 @@
                 */
 
 #header{position:relative; z-index:102; height: 120px;}
-#contents{position:relative; z-index:101; min-width: 1440px;}
+#contents{position:relative; z-index:101;}
 #footer{position:relative; z-index:100; background:#424242;}
 
-#wrap {background: url(../images/common/wrap_bg.png) no-repeat 0 0; height: 100%; width: 100%; background-size: 100% 100%;}
+#wrap { min-width: 1440px; width:100%; background: url(../images/common/wrap_bg.png) no-repeat 0 0; height: 100%; width: 100%; background-size: 100% 100%;}
 
 .inner_center {width:1440px; margin: 0 auto;}
 
