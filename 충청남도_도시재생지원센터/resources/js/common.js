@@ -456,3 +456,31 @@ function layerContShow(thisClass){
 function layerContHide(thisClass){
 	$('.'+thisClass).hide();
 }
+
+$(function(){
+	tab.init();
+});
+
+var tab = {
+
+	init:function(){
+
+		$('.tab_list').on('click', 'li', function(){			
+			
+			var $tab = $(this);
+			var i = $tab.index();
+			var $contents =	$tab.closest('.tab_wrap');
+			var $Layers = $contents.find('.tab_layer');
+
+			// 누르면 실행
+			if(!$tab.hasClass('is_active')){
+
+				$tab.siblings().removeClass('is_active');
+				$tab.addClass('is_active');
+				$Layers.removeClass('is_active');
+		    	$($Layers[i]).addClass('is_active');				
+			}	
+		});
+	}
+}
+

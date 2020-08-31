@@ -114,3 +114,18 @@
 .banner_zone .banner_zone_control .num:before {content:'';display: block;width:1px;height:16px;background: rgba(0,0,0,.41);position: absolute;left: 22px;top: 2px;}
 .banner_zone .banner_zone_control .num strong {display: block;float: left;margin-right: 26px;}
 
+
+.tab_wrap {position: relative; width:710px; float: left; margin-left:20px;}
+.tab_list {border-radius: 30px;box-shadow: 10px 10px 30px rgba(0,0,0,.16);width: 99.9%;}
+.tab_list:after {content:''; display:block; clear:both;}
+.tab_list li {float: left;width: 33.3333%; background: rgba(255,255,255,0.42);text-align: center;height: 50px;display: table;position: relative;}
+.tab_list a {color:#fff;display: table-cell;vertical-align: middle;padding: 0 10px; font-size:16px; color:#000; position: relative;}
+.tab_layer_wrap {position: relative; top:0px;}
+.tab_layer { position: absolute; top:0px; color: #ccc; opacity: .5; display: none; height: 150px; overflow: hidden;}
+.tab_layer.is_active {display: block;}
+.tab_list li.is_active a {width:217px;height:50px;box-shadow: 0px 0px 10px rgba(0,0,0,.016);border-radius: 30px;background:transparent url(../images/common/tab_list_bg.png) no-repeat center center;color:#fff;}
+
+.tab_list li._first {border-radius: 30px 0 0 30px;}
+.tab_list li._last {border-radius: 0 30px 30px 0;}
+.tab_list li._first a{background-position: top left;}
+.tab_list li._last a{background-position: top right;}
