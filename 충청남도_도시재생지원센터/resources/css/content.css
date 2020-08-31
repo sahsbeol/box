@@ -85,3 +85,32 @@
 
 /* banner */
 #contents .banner_wrap {margin-top:50px;}
+#contents .banner_wrap:after {content: ''; display: block; clear:both;}
+
+.banner_wrap .banner_info {font-size: 18px; font-weight: 400; position:relative; text-align: left;}
+.banner_wrap .banner_info:before {content:''; display: block; width:430px; height:1px; background: #000; position: absolute; top:8px; left:98px;}
+
+
+.banner_zone_list {width:710px; height: 480px; box-sizing: border-box;}
+.slick-list, .slick-track {height: inherit;}
+.banner_zone_list .item {width:710px; height: 480px;}
+.banner_zone_list .item a{display:block; height:100%; font-size:0;}
+.banner_zone_list .item ._text {font-size:30px; text-align: left;}
+.banner_zone_list .item ._bg {width:710px; height: 480px; margin-top:22px; box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.05);}
+
+.banner_zone {width:710px; float: left; position: relative;}
+.banner_zone .banner_zone_wrap {margin-top:35px;}
+.banner_zone .banner_zone_control {position: absolute; top:-4px; right:0;}
+.banner_zone .banner_zone_control:after {content:''; display: block; clear:both;}
+.banner_zone .banner_zone_control .banner_zone_btn {position: relative;float: left;}
+.banner_zone .banner_zone_control .banner_zone_btn:before {content:'';display: block;width:1px;height:16px;background: rgba(0,0,0,.41);position: absolute;left: 29px;top: 4px;}
+.banner_zone .banner_zone_control .banner_zone_btn:after {content:''; display: block; clear:both;}
+.banner_zone .banner_zone_control .banner_zone_btn button {font-size: 0;display: block;float: left;}
+.banner_zone .banner_zone_control .banner_zone_btn .prev {width:24px; height:24px; background:transparent url(../images/common/banner_prev.png) no-repeat center center;margin-right: 6px;}
+.banner_zone .banner_zone_control .banner_zone_btn .stop {width:24px; height:24px; margin-left:3px; background:transparent url(../images/common/banner_stop.png) no-repeat center center;}
+.banner_zone .banner_zone_control .banner_zone_btn .play {width:24px; height:24px; margin-left:3px; background:transparent url(../images/common/banner_play.png) no-repeat center center;}
+.banner_zone .banner_zone_control .banner_zone_btn .next {width:24px; height:24px; background:transparent url(../images/common/banner_next.png) no-repeat center center;margin-left: 6px;}
+.banner_zone .banner_zone_control .num {float: left;display: block;font-size: 18px;position: relative;margin-left: 20px;margin-top: 2px;}
+.banner_zone .banner_zone_control .num:before {content:'';display: block;width:1px;height:16px;background: rgba(0,0,0,.41);position: absolute;left: 22px;top: 2px;}
+.banner_zone .banner_zone_control .num strong {display: block;float: left;margin-right: 26px;}
+

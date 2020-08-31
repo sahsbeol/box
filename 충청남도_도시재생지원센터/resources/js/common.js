@@ -117,7 +117,7 @@ $(function(){
 		var banner_zone_bnr = $(".banner_zone_list");
 		banner_zone_bnr.on('init afterChange', function(event, slick, currentSlide, nextSlide){
 			if(event.type === 'init'){
-				$('.banner_zone_control .num').text(' / '+slick.slideCount);
+				$('.banner_zone_control .num').text(slick.slideCount);
 				$('.banner_zone_control .num').prepend('<strong>1</strong>')
 			} else if(event.type === 'afterChange'){
 				$('.banner_zone_control .num strong').text(currentSlide + 1);
@@ -404,10 +404,14 @@ function dim_close(){
 function bnr_stop(bnr, btn){
 	if (btn.text() === '정지') {
 		bnr.slick('slickPause');
-		btn.text('시작');
+		btn.text('재생');		
+		btn.removeClass('stop');	
+		btn.addClass('play');
 	} else {
 		bnr.slick('slickPlay');
-		btn.text('정지');
+		btn.text('정지');			
+		btn.removeClass('play');
+		btn.addClass('stop');
 	};
 };
 
