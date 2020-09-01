@@ -138,6 +138,33 @@ $(function(){
 	}
 	/*//배너존 슬라이드*/
 
+	/*info 슬라이드*/
+	if($('.notice_zone').length){
+		var notice_zone_bnr = $(".notice_zone_list");
+		// notice_zone_bnr.on('init afterChange', function(event, slick, currentSlide, nextSlide){
+		// 	if(event.type === 'init'){
+		// 		$('.notice_zone_control .num').text(slick.slideCount);
+		// 		$('.notice_zone_control .num').prepend('<strong>1</strong>')
+		// 	} else if(event.type === 'afterChange'){
+		// 		$('.notice_zone_control .num strong').text(currentSlide + 1);
+		// 	}
+		// });
+		notice_zone_bnr.slick({
+			infinite: true,
+			accessibility: true,
+			slidesToScroll: 1,
+			autoplay: true,
+			draggable: false,
+			vertical:true,
+			prevArrow: $('.notice_zone_wrap .notice_zone_control .prev'),
+			nextArrow: $('.notice_zone_wrap .notice_zone_control .next')
+		});
+		$('.notice_zone_control .stop').click(function(){
+			bnr_stop(notice_zone_bnr, $(this));
+		});
+	}
+	/*//info 슬라이드*/
+
 	/*링크그룹 슬라이드*/
 	if($('.link_group').length){
 		var link_group_bnr = $(".link_group_list");

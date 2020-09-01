@@ -114,7 +114,7 @@
 .banner_zone .banner_zone_control .num:before {content:'';display: block;width:1px;height:16px;background: rgba(0,0,0,.41);position: absolute;left: 22px;top: 2px;}
 .banner_zone .banner_zone_control .num strong {display: block;float: left;margin-right: 26px;}
 
-
+/* tab */
 .tab_wrap {position: relative; width:710px; float: left; margin-left:20px;}
 .tab_list {border-radius: 30px;box-shadow: 10px 10px 30px rgba(0,0,0,.16);width: 99.9%;}
 .tab_list:after {content:''; display:block; clear:both;}
@@ -129,3 +129,32 @@
 .tab_list li._last {border-radius: 0 30px 30px 0;}
 .tab_list li._first a{background-position: top left;}
 .tab_list li._last a{background-position: top right;}
+
+/* notice */
+#contents .info_wrap {margin-top:50px;}
+#contents .info_wrap:after {content: ''; display: block; clear:both;}
+
+.info_wrap h3 {font-size: 20px;float: left; margin: 26px 22px;}
+
+.notice_zone_list { height: 15px; width:568px; box-sizing: border-box;}
+.slick-list, .slick-track {height: inherit;}
+.notice_zone_list .item {width:568px; height:15px;}
+.notice_zone_list .item a{display:block; height:100%; font-size:0; position: relative; }
+.notice_zone_list .item ._text {font-size:16px; text-align: left;text-overflow: ellipsis; width:100%; position: absolute; top:0; left:0; color:#000;}
+.notice_zone_list .item ._date {font-size:14px; color:#000;}
+
+.notice_zone {width:50%; float: left; position: relative; background: #fff; border-radius: 15px 0 0 0;}
+.notice_zone .notice_zone_wrap {margin-top: 29px;}
+.notice_zone .notice_zone_control {position: absolute;top: 19px;right:0;}
+.notice_zone .notice_zone_control:after {content:''; display: block; clear:both;}
+.notice_zone .notice_zone_control .notice_zone_btn {position: relative;}
+.notice_zone .notice_zone_control .notice_zone_btn:before {content:'';display: block;width:1px;height:16px;background: rgba(0,0,0,.41);position: absolute;left: 29px;top: 4px;}
+.notice_zone .notice_zone_control .notice_zone_btn:after {content:''; display: block; clear:both;}
+.notice_zone .notice_zone_control .notice_zone_btn button {font-size: 0;display: block;}
+.notice_zone .notice_zone_control .notice_zone_btn .prev {width:24px;height:24px;background:transparent url(../images/common/info_prev.png) no-repeat center center;/* margin-right: 6px; */}
+.notice_zone .notice_zone_control .notice_zone_btn .stop {width:24px; height:24px; margin-left:3px; background:transparent url(../images/common/notice_stop.png) no-repeat center center;}
+.notice_zone .notice_zone_control .notice_zone_btn .play {width:24px; height:24px; margin-left:3px; background:transparent url(../images/common/notice_play.png) no-repeat center center;}
+.notice_zone .notice_zone_control .notice_zone_btn .next {width:24px; height:24px; background:transparent url(../images/common/info_next.png) no-repeat center center;margin-left: 6px;}
+.notice_zone .notice_zone_control .num {float: left;display: block;font-size: 18px;position: relative;margin-left: 20px;margin-top: 2px;}
+.notice_zone .notice_zone_control .num:before {content:'';display: block;width:1px;height:16px;background: rgba(0,0,0,.41);position: absolute;left: 22px;top: 2px;}
+.notice_zone .notice_zone_control .num strong {display: block;float: left;margin-right: 26px;}
