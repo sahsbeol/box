@@ -133,7 +133,7 @@
                 <!-- 주문결제 form : S -->
                 <form action="">
                     <div class="user_info_wrap">
-                        <div class="user_title">주문자 정보</div>
+                        <h3 class="user_title">주문자 정보</h3>
                         <div class="user_table_wrap">                        
                             <table class="table_wrap">
                                 <colgroup> 
@@ -143,53 +143,21 @@
                                 <tbody>
                                      <tr>
                                         <th>이름</th>
-                                        <td>
-                                            <div class="input_wrap">
-                                                <input type="text" placeholder="" class="width_name">
-                                            </div>
-                                        </td>                                    
+                                        <td>홍길동 </td>                                    
                                     </tr>
                                      <tr>
                                         <th>휴대전화</th>
-                                        <td>                                         
-                                            <div class="choice_wrap type_squre have_inner_txt inner_float">
-                                                <span class="input_wrap">
-                                                    <select name="" id="" class="width_phone">
-                                                        <option value="">선택</option>
-                                                    </select>
-                                                </span>  
-                                                <span class="input_wrap">
-                                                    <input type="text" placeholder="" class="width_phone">
-                                                </span>
-                                                <span class="input_wrap">
-                                                    <input type="text" placeholder="" class="width_phone">
-                                                </span>                                               
-                                            </div>
-                                        </td>                                    
-                                    </t
-                                    r>
+                                        <td>010-1234-5678</td>                                    
+                                    </tr>
                                     <tr>
                                         <th>이메일</th>
                                         <td>
-                                            <div class="choice_wrap type_squre have_inner_txt inner_float_dot">                                                  
-                                                <span class="input_wrap">
-                                                    <input type="text" placeholder="" class="width_email">
-                                                </span>
-                                                <span class="input_wrap">@</span>
-                                                <span class="input_wrap">
-                                                    <input type="text" placeholder="" class="width_email">
-                                                </span> 
-                                                <span class="input_wrap _last">
-                                                    <select name="" id="" class="width_email">
-                                                        <option value="">직접입력</option>
-                                                    </select>
-                                                </span>                                              
-                                            </div>
+                                            <span>ottracks@ottracks.co.kr</span>
+                                            <a href="javascript:;" class="icon_arrow">회원정보수정</a>
                                         </td>                                    
                                     </tr>
                                     <tr>
                                         <th>SMS수신</th>
-
                                         <td>
                                             <div class="choice_wrap">
                                                 <span class="choice_wrap_inner">
@@ -207,8 +175,76 @@
                             </table>
                         </div>
 
+                        <div class="user_title distance have_inner_txt">
+                            <h3 class="i_txt">배송지 정보</h3>
+                            <div class="choice_wrap">
+                                <span class="choice_wrap_inner">
+                                    <input type="radio" name="orderInfo1" id="orderInfo_11" value="Y" />
+                                    <label for="orderInfo_11">기본 배송지</label>
+                                </span>
+                                <span class="choice_wrap_inner">
+                                    <input type="radio" name="orderInfo1" id="orderInfo_12" value="N" />
+                                    <label for="orderInfo_12">최근 배송지</label>
+                                </span>
+                                <a href="javascript:;" class="icon_arrow">배송지 변경</a>
+                            </div>
+                        </div>               
+                        <div class="user_table_wrap">                        
+                            <table class="table_wrap">
+                                <colgroup> 
+                                    <col width="14.8%" /> 
+                                    <col width="85.2%" />                    
+                                </colgroup>
+                                <tbody>
+                                     <tr>
+                                        <th>이름</th>
+                                        <td>홍길동 </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>휴대전화</th>
+                                        <td>                                            
+                                            <div class="choice_wrap type_squre have_inner_txt">
+                                                <p class="i_txt">010-1234-5678</p>
+                                                <div class="choice_wrap_inner">
+                                                    <span>
+                                                        <input type="checkbox" name="orderInfo2" id="orderInfo_21" value="Y" />
+                                                        <label for="orderInfo_21">안심번호 사용</label>
+                                                    </span>
+                                                    <a href="javascript:;" class="icon_question" title="팝업 열기">팝업 열기</a>
+                                                </div>
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>주소</th>
+                                        <td>
+                                            (001-100) 경기도 파주시 회동길 78
+                                        </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>주문 요청사항</th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input type="text" placeholder="주문 상품 업체에 전달되는 메시지입니다. 요청사항을 입력해주세요." class="width_check">
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>배송 요청사항</th>
+                                        <td>
+                                            <div class="select_wrap">
+                                                <select name="" id="" class="width_check">
+                                                    <option value="">배송기사에게 전달되는 메시지입니다. 선택하여 주세요.</option>
+                                                </select>
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                </tbody> 
+                            </table>
+                        </div>
+
                         <div class="user_title distance">
-                            <p>배송지 정보</p>
+                            <h3>배송지 정보</h3>
                         </div>               
                         <div class="user_table_wrap">                        
                             <table class="table_wrap">
@@ -239,7 +275,14 @@
                                                 </span>
                                                 <span class="input_wrap">
                                                     <input type="text" placeholder="" class="width_phone">
-                                                </span>                                              
+                                                </span>
+                                                <span class="choice_wrap_inner">
+                                                    <span>
+                                                        <input type="checkbox" name="orderInfo3" id="orderInfo_31" value="Y" />
+                                                        <label for="orderInfo_31">안심번호 사용</label>
+                                                    </span>
+                                                    <a href="javascript:;" class="icon_question" title="팝업 열기">팝업 열기</a>
+                                                </span>                                                 
                                             </div>
                                         </td>                                    
                                     </tr>
@@ -250,7 +293,7 @@
                                                 <span class="input_wrap">
                                                    <input type="text" placeholder="" class="width_address">                                                 
                                                 </span>
-                                                <button class="btn_defalut">우편번호검색</button>   
+                                                <a href="javascript:;" class="btn_defalut">우편번호검색</a>
                                                 <span class="choice_wrap_inner">
                                                     <span>
                                                         <input type="checkbox" name="orderInfo4" id="orderInfo_41" value="Y" />
@@ -283,8 +326,83 @@
                         </div>
 
                         <div class="user_title distance have_inner_txt">
-                            <p class="i_txt"><span>주문상품  : </span><span class="red">999</span> <span>개</span></p>
+                            <h3 class="i_txt"><span>주문상품  : </span><span class="point02">999</span> <span>개</span></h3>
                             <p class="i_small_txt">상품수량 및 옵션변경은 상품상세 또는 장바구니에서 가능합니다.</p>                            
+                        </div>
+                        <div class="user_table_wrap">
+                            <p class="">핫트랙스 배송</p>
+                            <table class="table_wrap bbs_list_v2">                               
+                                <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트, 상품 처리 </span></caption>
+                                <colgroup>
+                                <col style="width:12%">
+                                <col style="width:12%">
+                                <col style="width:30%">
+                                <col style="width:10%">
+                                <col style="width:10%">
+                                <col style="width:10%">
+                                <col style="width:8%">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th scope="col">
+                                        상품코드
+                                    </th>
+                                    <th scope="col">
+                                        상품
+                                    </th>
+                                    <th scope="col">
+                                        상품명
+                                    </th>
+                                    <th scope="col">
+                                        판매가
+                                    </th>
+                                    <th scope="col">
+                                        수량
+                                    </th>
+                                    <th scope="col">
+                                        가격
+                                    </th>
+                                    <th scope="col">
+                                        통합포인트
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                         상품금액 <strong>156,000</strong>원 + 배송비 <strong>0</strong>원 = <strong class="point02">156,000</strong>원
+                                    </td>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr>
+                                    <td>2310042665814</td>
+                                    <td>
+                                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1690/hot1553670797576.jpg" alt="[삼성전자] 갤럭시버즈 블루투스 이어폰" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"></a>
+                                    </td>
+                                    <td>
+                                         [삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰
+                                        <p class="txt_option">
+                                            블랙
+                                        </p>
+                                    </td>
+                                    <td>
+                                        156,000원<br>
+                                        [2%↓]
+                                    </td>
+                                    <td>
+                                        <input type="text" class="input_txt t_center inputNumberText" value="1" name="prdtCount" style="ime-mode:disabled;width:25px;" maxlength="4" title="[[삼성전자] 갤럭시버즈 블루투스 이어폰] 주문 수량">
+                                        <a href="#n" class="btn_type05_v2 btnChangePrdtCount">수정</a>
+                                    </td>
+                                    <td>
+                                        156,000원
+                                    </td>
+                                    <td>
+                                         0원
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>

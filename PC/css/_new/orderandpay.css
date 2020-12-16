@@ -15,6 +15,11 @@
 .orderandpay .distance {margin-top:100px;}
 .orderandpay .width_check {max-width: 520px;}
 .orderandpay .width_phone {max-width: 80px;}
+.orderandpay .width_name {max-width: 190px;}
+.orderandpay .width_address {max-width: 270px; width:270px !important;}
+.orderandpay .width_email {max-width: 140px; width:140px !important;}
+.orderandpay .input_wrap select.width_phone,
+.orderandpay .select_wrap select.width_phone  {width: 80px !important;}
 
 /* 기본 박스 */
 .orderandpay .user_info_wrap {margin-top:100px;}
@@ -24,12 +29,15 @@
 /* 기본 박스 타이틀 안에 글자 있을때 */
 .orderandpay .have_inner_txt:after {content: ''; display:block; clear:both;}
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_txt,
+.orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt,
 .orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {float: left;}
 .orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left:36px;}
+.orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt {margin-top: 8px; margin-left: 10px;}
 
 .orderandpay .choice_wrap.type_squre.have_inner_txt .i_txt,
-.orderandpay .choice_wrap.type_squre.have_inner_txt .choice_wrap_inner,
-.orderandpay .choice_wrap.type_squre.have_inner_txt .icon_question {float: left;}
+.orderandpay .choice_wrap.type_squre.have_inner_txt .choice_wrap_inner {float: left;}
+
+.orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt {font-size: 14px; font-weight: 400;}
 
 /*--- 아이콘 --*/
 /* 화살표 */
@@ -37,13 +45,20 @@
 .orderandpay .icon_arrow:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/_new/icon_arrow.png) no-repeat 0 0;margin-left:5px;margin-bottom: -1px;}
 
 /* 안내 */
-.orderandpay .icon_question {font-size: 0; display: block; width:18px; height:18px; border:1px #999999 solid; border-radius: 100%; background: url(../../images/_new/icon_question.png) no-repeat 6px 0px; box-sizing: border-box; margin-left:5px;}
+.orderandpay .icon_question {font-size: 0; display: block; float: right; width:18px; height:18px; border:1px #999999 solid; border-radius: 100%; background: url(../../images/_new/icon_question.png) no-repeat 6px 0px; box-sizing: border-box; margin-left:5px;}
+.orderandpay .icon_question:after {content: ''; display: block; clear:both;}
+
 
 /* table */
+/* 기본형 */
 .orderandpay .table_wrap {margin-top: 15px;}
 .orderandpay .table_wrap th, .orderandpay .table_wrap td {text-align: left; font-size:14px; font-weight: 500;}
 .orderandpay .table_wrap th {font-size:14px; font-weight: 400;}
 .orderandpay .table_wrap td {padding:8px 0; font-size: 14px; font-weight: 500; height:38px;}
+
+/* 주문상품 */
+.orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;}
+.orderandpay .table_wrap.bbs_list_v2 tfoot th, .orderandpay .table_wrap.bbs_list_v2 tfoot td {text-align:right; font-size: 22px; font-weight: 500;}
 
 /* radio , checkbox 원형 */
 .orderandpay .choice_wrap .choice_wrap_inner {margin-left:30px; font-size:14px; font-weight: 500;}
@@ -73,10 +88,26 @@
 
 
 /* input 기본형 */
-.orderandpay .input_wrap input {padding: 10px 10px 11px;border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 400;display: block;width: 100%; color:#777777;}
+.orderandpay .input_wrap input {padding: 10px 10px 11px;  border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 400;display: block;width: 100%; color:#777777;}
 
 /* select 기본형 */
-.select_wrap select {width:100%; padding: 10px 7px 11px;border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 400;display: block; color:#777777;font-family: inherit;background: url('../../images/_new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
-.select_wrap select::-ms-expand {display: none;}
+.orderandpay .select_wrap select ,
+.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background: url('../../images/_new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+.orderandpay .input_wrap select::-ms-expand ,
+.orderandpay .select_wrap select::-ms-expand {display: none;}
 
-/**/
+
+/* input 및 unit 개수 추가 시 */
+.orderandpay .inner_float .input_wrap {float: left; position: relative; margin-left: 30px;}
+.orderandpay .inner_float .input_wrap:first-child {margin-left: 0;}
+.orderandpay .inner_float .input_wrap:before {content: '';display: block;position: absolute;top: 50%;left: -20px;width:10px;height: 1px;background: #707070;}
+.orderandpay .inner_float .input_wrap:first-child:before {content: '';display: none;}
+.orderandpay .inner_float .choice_wrap_inner {margin-top: 11px; margin-left: 20px;}
+.orderandpay .inner_float .btn_defalut {float: left;}
+
+.orderandpay .inner_float_dot .input_wrap {float: left; margin-left: 3px; line-height: 35px;}
+.orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
+.orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
+
+/* btn */
+.btn_defalut {padding:10px 22px; height:38px; background: #000; font-size: 14px; font-weight: 500; color:#FFFFFF; outline:none;}
