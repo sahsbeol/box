@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SystemSQL">
+	<typeAlias alias="adminCriteria" type="kr.co.hottracks.site.model.backoffice.AdminCriteria"/>
+    <typeAlias alias="admin" type="kr.co.hottracks.site.model.backoffice.Admin"/>
+    <typeAlias alias="codeCriteria" type="kr.co.hottracks.site.model.backoffice.CodeCriteria"/>
+    <typeAlias alias="code" type="kr.co.hottracks.site.model.common.Code"/>
+    <typeAlias alias="sequenceKey" type="kr.co.hottracks.site.model.common.SequenceKey"/>
+    <typeAlias alias="sequence" type="kr.co.hottracks.site.model.common.Sequence"/>
+    <typeAlias alias="weekType" type="kr.co.hottracks.site.model.common.WeekType"/>
+    <typeAlias alias="batchStatCriteria" type="kr.co.hottracks.site.model.backoffice.BatchStatCriteria"/>
+    <typeAlias alias="batchStatDto" type="kr.co.hottracks.site.model.backoffice.BatchStatDto"/>	
+	<typeAlias alias="sms" type="kr.co.hottracks.site.model.common.Sms"/>
+	<typeAlias alias="tableListData" type="kr.co.hottracks.site.model.common.TableListData"/>
+	<typeAlias alias="tableInfoParam" type="kr.co.hottracks.site.model.common.TableInfoParam"/>
+	<typeAlias alias="mall" type="kr.co.hottracks.site.model.common.Mall"/>
+	<typeAlias alias="creditCode" type="kr.co.hottracks.site.model.common.CreditCode"/>
+    
+    <select id="getNow" resultClass="date">
+        SELECT sysdate FROM dual
+    </select>
+    
+    <select id="getAdminById" resultClass="admin" parameterClass="string">
+        SELECT a.admin_id adminId,
+               a.admin_passwd password,
+               a.admin_name adminName,
+               a.admin_email adminEmail,
+               a.role_code roleCode,
+			   a.use_yn useYn,
+			   a.tel_num telNumber,
+               a.hdphn_tel_num cellNumber,
+               a.dptmt deptName,
+               a.pos position, 
+			   b.vndr_id vendorId,
+			   b.vndr_name vendorName,
+			   a.etc_text etcText
+          FROM tb_admin a,
+		       tb_vendor b
+         WHERE a.admin_id = #value#
+		       and a.admin_id = b.mngr_vndr_admin_id(+)
+    </select>
+    
+    <select id="getCodeByParentCode" resultClass="code" parameterClass="string">
+        SELECT code code,
+               parnt_code parentCode,
+               code_name codeName,
+               code_order codeOrder,
+               use_yn use,
+               code_desc codeDescription
+          FROM tb_code
+         WHERE parnt_code = #value#
+            OR code = #value#
+         ORDER BY code_order
+    </select>
+    
+    <select id="getCodeList" resultClass="code" parameterClass="codeCriteria">
+        SELECT code code,
+               parnt_code parentCode,
+               code_name codeName,
+               code_order codeOrder,
+               use_yn use,
+               code_desc codeDescription,
+               CASE WHEN parnt_code = 'T0001' THEN code ELSE parnt_code END code_for_sort
+          FROM tb_code
+         WHERE parnt_code is not null
+           AND use_yn = #use# 
+       <isNotEmpty property="code" prepend="AND">
+           code like #code# || '%'
+       </isNotEmpty>
+       <isNotEmpty property="parentCode" prepend="AND">
+           parnt_code like #parentCode# || '%'
+       </isNotEmpty>
+       <isNotEmpty property="codeName" prepend="AND">
+           UPPER(code_name) like '%' || UPPER(#codeName#) || '%'
+       </isNotEmpty>
+       <isNotEmpty property="codeType">
+           <isEqual property="codeType" compareValue="P" prepend="AND">
+                parnt_code = 'T0001'
+           </isEqual>
+           <isEqual property="codeType" compareValue="C" prepend="AND">
+                parnt_code != 'T0001'
+           </isEqual>
+       </isNotEmpty>
+        ORDER BY
+            code_for_sort ASC, code_order ASC
+    </select>
+    
+    <select id="getCodeCount" resultClass="int" parameterClass="codeCriteria">
+        SELECT count(code)
+          FROM tb_code
+         WHERE parnt_code is not null
+           AND rownum <![CDATA[ < ]]> #topCount# + 1
+           AND use_yn = #use#
+       <isNotEmpty property="code" prepend="AND">
+           code like #code# || '%'
+       </isNotEmpty>
+       <isNotEmpty property="parentCode" prepend="AND">
+           parnt_code like #parentCode# || '%'
+       </isNotEmpty>
+       <isNotEmpty property="codeName" prepend="AND">
+           UPPER(code_name) like '%' || UPPER(#codeName#) || '%'
+       </isNotEmpty>
+       <isNotEmpty property="codeType">
+           <isEqual property="codeType" compareValue="P" prepend="AND">
+                parnt_code = 'T0001'
+           </isEqual>
+           <isEqual property="codeType" compareValue="C" prepend="AND">
+                parnt_code != 'T0001'
+           </isEqual>
+       </isNotEmpty>
+    </select>
+    
+    <insert id="insertCode" parameterClass="code">
+        INSERT INTO tb_code (code, parnt_code, code_name, code_order, use_yn, code_desc) values (#code#, #parentCode#, #codeName#, #codeOrder#, #use#, #codeDescription#)
+    </insert>
+    
+    <update id="updateCode" parameterClass="code">
+        UPDATE tb_code 
+           SET parnt_code = #parentCode#, 
+               code_name = #codeName#, 
+               code_order = #codeOrder#, 
+               use_yn = #use#, 
+               code_desc = #codeDescription#
+         WHERE code = #code#
+    </update>
+	
+    <select id="getCodeListForHandler" resultClass="code">
+		SELECT 
+			code code, 
+			parnt_code parentcode,
+			code_name codename,
+	        code_order codeorder,
+	        use_yn USE, 
+	        code_desc codedescription,
+	        CASE
+	            WHEN parnt_code = 'T0001'
+	               THEN code
+	            ELSE parnt_code
+	         END code_for_sort,
+	         CASE
+	            WHEN parnt_code = 'T0001'
+	               THEN 0
+	            ELSE code_order
+	         END code_for_sort_order
+	    FROM tb_code
+	    WHERE parnt_code IS NOT NULL AND use_yn = 'Y'
+	    START WITH CODE = 'T0001'
+	    CONNECT BY PRIOR CODE = PARNT_CODE
+		ORDER BY code_for_sort ASC, code_for_sort_order ASC
+	</select>
+	
+	<sql id="getAdminWhere">
+        <isNotEmpty removeFirstPrepend="true">
+        	<isNotEmpty property="adminId" prepend="AND">
+                UPPER(admin_id) like '%' || UPPER(#adminId#) || '%'
+			</isNotEmpty>
+			<isNotEmpty property="adminName" prepend="AND">
+                UPPER(admin_name) like '%' || UPPER(#adminName#) || '%'
+			</isNotEmpty>
+			<isNotEmpty property="roleCode" prepend="AND">
+                role_code = #roleCode#
+			</isNotEmpty>
+			<isNotEmpty property="useYn" prepend="AND">
+                use_yn = #useYn#
+            </isNotEmpty>
+        </isNotEmpty>
+    </sql>
+	
+	
+	
+	 <select id="getAdminByIdForAdminEdit" parameterClass="string" resultClass="admin" >
+        SELECT 
+       	    admin.admin_id 			adminId
+       	    ,admin.admin_passwd 	password
+       	    ,admin.admin_name 		adminName
+            ,admin.admin_email	 	adminEmail
+            ,admin.role_code 		roleCode
+			,admin.use_yn 			useYn
+			,admin.tel_num			telNumber
+			,admin.hdphn_tel_num	cellNumber
+			,admin.pos				position
+			,admin.dptmt			deptName
+			,vendor.vndr_name		vendorName
+            ,admin.etc_text         etcText
+          FROM 
+          	tb_admin admin, tb_vendor vendor
+         WHERE 
+         	admin.admin_id = #value#    
+         AND  
+         	admin.admin_id = vendor.mngr_vndr_admin_id(+)
+    </select>
+	
+	<select id="getAdminList" resultClass="admin" parameterClass="adminCriteria">
+        SELECT 
+            admin_id 		adminId
+            ,admin_passwd 	password
+            ,admin_name 	adminName
+            ,role_code 		roleCode
+			,use_yn 		useYn
+			,tel_num		telNumber
+			,hdphn_tel_num  cellNumber
+			,admin_email	adminEmail 
+			,etc_text		etcText
+        FROM 
+            tb_admin
+       <dynamic prepend="WHERE">
+       		<include refid="getAdminWhere"/>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+       		<isEmpty property="orderBy">
+       			admin_id
+       		</isEmpty>
+			<isNotEmpty property="orderBy">
+	            <isEqual property="orderBy" compareValue="userNameAsc">
+	               	admin_name
+	            </isEqual>
+	            <isEqual property="orderBy" compareValue="userIdAsc">
+	            	admin_id
+	            </isEqual>
+	        </isNotEmpty>
+       </dynamic>
+    </select>
+	
+	<select id="getAdminCount" resultClass="int" parameterClass="adminCriteria">
+        SELECT 
+            count(admin_id)
+        FROM 
+            tb_admin
+        WHERE 
+            rownum <![CDATA[ < ]]> #topCount# + 1
+            <dynamic prepend="AND">
+            	<include refid="getAdminWhere"/>
+            </dynamic>
+    </select>
+	
+	<insert id="insertAdmin" parameterClass="admin">
+        INSERT INTO tb_admin 
+    	(
+    		admin_id 
+    		,admin_passwd
+    		,admin_name 
+    		,admin_email
+    		,role_code
+    		,use_yn
+    		,tel_num
+			,hdphn_tel_num
+			,dptmt
+			,pos
+    		,etc_text
+    	) 
+        values 
+        (
+        	#adminId# 
+        	,#password# 
+        	,#adminName# 
+        	,#adminEmail# 
+        	,#roleCode# 
+        	,'Y'
+        	,#telNumber#
+			,#cellNumber#
+			,#deptName#
+			,#position#
+			,#etcText#
+        )
+    </insert>
+    
+    <update id="updateAdmin" parameterClass="admin">
+        UPDATE 
+		    tb_admin 
+        SET 
+			admin_name		=	#adminName#
+			,tel_num		=	#telNumber#
+			,hdphn_tel_num	=	#cellNumber#
+			,admin_email	=	#adminEmail#
+			,dptmt			=	#deptName#
+			,pos			=	#position#
+			,etc_text		= 	#etcText#
+			<isNotEmpty property="password">
+		 	    ,admin_passwd	=	#password#
+			</isNotEmpty>
+			<isNotEmpty property="roleCode">
+			    ,role_code		=	#roleCode#
+			</isNotEmpty>
+			<isNotEmpty property="useYn">
+			    ,use_yn			=	#useYn#
+			</isNotEmpty>
+        WHERE 
+		    admin_id = #adminId#
+    </update>
+    
+    <select id="getSequenceByIdKey" resultClass="sequence" parameterClass="sequenceKey">
+        SELECT A.crt_num_id as sequenceId,
+               A.num_len as length,
+               A.crt_num_name as sequenceName,
+               B.crt_num_key as sequenceKey,
+               B.num as next
+          FROM tb_create_number_master A,
+               tb_create_number_detail B
+         WHERE 
+               A.crt_num_id = B.crt_num_id 
+           AND A.crt_num_id = #sequenceId# 
+           AND B.crt_num_key = #sequenceKey#
+    </select>
+    
+    <select id="getSequenceById" resultClass="sequence" parameterClass="string">
+        SELECT crt_num_id as sequenceId,
+               num_len as length,
+               crt_num_name as sequenceName
+          FROM tb_create_number_master
+         WHERE crt_num_id = #value# 
+    </select>
+    
+    <insert id="insertSequenceDetail" parameterClass="sequence">
+        INSERT INTO tb_create_number_detail (crt_num_id, crt_num_key, num) values (#sequenceId#, #sequenceKey#, #next#)
+    </insert>
+    
+    <update id="increaseSequence" parameterClass="sequenceKey">
+        UPDATE tb_create_number_detail 
+           SET num = num + 1
+         WHERE crt_num_id = #sequenceId# 
+           AND crt_num_key = #sequenceKey#
+    </update>
+    
+    <select id="getWeekByMonth" parameterClass="string" resultClass="weekType">
+        SELECT MIN(DECODE(TO_CHAR(days, 'd'), 1, TO_CHAR(days, 'yyyymmdd'))) s1,
+               MIN(DECODE(TO_CHAR(days, 'd'), 2, TO_CHAR(days, 'yyyymmdd'))) s2,
+               MIN(DECODE(TO_CHAR(days, 'd'), 3, TO_CHAR(days, 'yyyymmdd'))) s3,
+               MIN(DECODE(TO_CHAR(days, 'd'), 4, TO_CHAR(days, 'yyyymmdd'))) s4,
+               MIN(DECODE(TO_CHAR(days, 'd'), 5, TO_CHAR(days, 'yyyymmdd'))) s5,
+               MIN(DECODE(TO_CHAR(days, 'd'), 6, TO_CHAR(days, 'yyyymmdd'))) s6,
+               MIN(DECODE(TO_CHAR(days, 'd'), 7, TO_CHAR(days, 'yyyymmdd'))) s7
+          FROM (SELECT base_mon + LEVEL - 1 days, (TRUNC(base_mon + LEVEL - 1, 'd') - TRUNC(TRUNC(base_mon + LEVEL - 1, 'y'), 'd')) / 7 + 1 week_grp
+                  FROM (SELECT TO_DATE (#value#, 'yyyymm') base_mon FROM DUAL)
+               CONNECT BY base_mon + LEVEL - 1 <![CDATA[ <= ]]> LAST_DAY(base_mon))
+         GROUP BY week_grp
+         ORDER BY week_grp    
+    </select>
+    
+    <sql id="select_BatchMaster">
+    	SELECT 
+		  tb_master.batch_id			batchId
+		  , tb_master.batch_name		batchName
+		  , tb_master.batch_mnl_url	batchUrl
+		  , tb_master.batch_use_yn	batchUseYn
+		  , tb_master.batch_type        batchType
+		  , tb_master.batch_cycle       batchCycle
+		FROM
+		  tb_batch_master tb_master
+    </sql>
+    
+    <sql id="where_BatchMaster">
+    	<isNotEmpty property="batchId">
+    		AND tb_master.batch_id = #batchId#
+    	</isNotEmpty>
+    	<isNotEmpty property="batchName">
+    		AND  tb_master.batch_name = #batchName#
+    	</isNotEmpty>
+    	<isNotEmpty property="batchUrl">
+    		AND tb_master.batch_mnl_url = #batchUrl#
+    	</isNotEmpty>
+    	<isNotEmpty property="batchUseYn">
+    		AND tb_master.batch_use_yn = #batchUseYn#
+    	</isNotEmpty>
+    </sql>
+    
+    <sql id="where_BatchDetail">
+    	<include refid="where_BatchMaster"/>
+    	<isNotEmpty property="batchStartDate">
+    		AND   tb_history.batch_start_dtm = #batchStartDate#
+    	</isNotEmpty>
+    	<isNotEmpty property="batchEndDate">
+    		AND tb_history.batch_end_dtm = #batchEndDate#
+    	</isNotEmpty>
+    	<isNotEmpty property="batchSuccessSf">
+    		AND tb_history.batch_status_gbn	= #batchSuccessSf#
+    	</isNotEmpty>
+    	<isNotEmpty property="batchDetailSeq">
+    		AND tb_history.batch_hist_seq = #batchDetailSeq#
+    	</isNotEmpty>
+    </sql>
+    
+    <sql id="select_BatchDetail">
+    	SELECT 
+		  tb_master.batch_id			batchId
+		  , tb_master.batch_name		batchName
+		  , tb_history.batch_start_dtm	batchStartDate
+		  , tb_history.batch_end_dtm	batchEndDate
+		  , tb_history.batch_status_gbn	batchSuccessSf
+		  , tb_history.batch_exe_fail_rsn 	batchErrorDetail
+		  , tb_history.batch_hist_seq	batchDetailSeq
+		FROM
+		  tb_batch_master tb_master
+		  , tb_batch_history tb_history
+		WHERE
+		  tb_master.batch_id = tb_history.batch_id
+    </sql>
+    
+    <select id="selectBatchMasterList" parameterClass="batchStatCriteria" resultClass="batchStatDto">
+    	<include refid="select_BatchMaster"/>
+    </select>
+    
+    <select id="selectBatchNameById" parameterClass="batchStatDto" resultClass="batchStatDto">
+    	<include refid="select_BatchMaster"/>
+    	WHERE
+    		tb_master.batch_id = #batchId#
+    </select>
+    
+    <select id="selectBatchDetailList" parameterClass="batchStatCriteria" resultClass="batchStatDto">
+    	<include refid="select_BatchDetail" />
+		<include refid="where_BatchDetail"/>
+		ORDER BY tb_history.batch_hist_seq DESC
+    </select>
+    
+    <select id="selectBatchDetailRow" parameterClass="batchStatDto" resultClass="batchStatDto">
+    	<include refid="select_BatchDetail" />
+		<include refid="where_BatchDetail"/>
+    </select>
+    
+    <select id="selectBatchMasterTotalRowSize" parameterClass="batchStatCriteria" resultClass="Integer" >
+        SELECT 
+		  COUNT(tb_master.batch_id)
+		FROM
+		  tb_batch_master tb_master
+		WHERE
+            rownum <![CDATA[ < ]]> #topCount# + 1
+        <include refid="where_BatchMaster"/>
+    </select>
+    
+    <select id="selectBatchDetailTotalRowSize" parameterClass="batchStatCriteria" resultClass="Integer" >
+        SELECT 
+		  COUNT(tb_history.batch_hist_seq)
+		FROM
+		  tb_batch_master tb_master
+		  , tb_batch_history tb_history
+		WHERE
+			tb_master.batch_id = tb_history.batch_id
+		AND
+            rownum <![CDATA[ < ]]> #topCount# + 1
+        <include refid="where_BatchDetail"/>
+    </select>
+    
+	<insert id="insertSms" parameterClass="sms">
+		INSERT INTO SC_TRAN(
+		            TR_NUM
+			        , TR_SENDDATE
+			        , TR_SENDSTAT
+			        , TR_MSGTYPE
+			        , TR_PHONE
+			        , TR_CALLBACK
+			        , TR_MSG
+			        , TR_CUSTNM)
+             VALUES (SC_TRAN_SEQ.nextval
+			        , nvl(#sendDate#,sysdate) 
+					, #sendStat#
+					, #msgType#
+					, #receivePhoneNumber#
+					, #sendPhoneNum#
+					, substrb(#message#,1,160)
+					, #custNum#)
+    </insert>
+	
+    <select id="selectTableList" resultClass="tableListData">
+        SELECT  TBL.TABLE_NAME tableName
+              , TCM.COMMENTS tableComment
+          FROM  USER_TABLES TBL
+              , USER_TAB_COMMENTS TCM
+         WHERE  TBL.TABLE_NAME = TCM.TABLE_NAME
+           AND  TBL.TABLE_NAME LIKE 'TB_%'
+         ORDER  BY TBL.TABLE_NAME
+    </select>
+    
+    <select id="selectTableInfo" parameterClass="tableInfoParam" resultClass="tableListData">
+        SELECT  TBL.TABLE_NAME tableName
+              , TCM.COMMENTS tableComment
+              , TBL.TABLESPACE_NAME tablespaceName
+              , TCL.COLUMN_ID columnId
+              , TCL.COLUMN_NAME columnName
+              , TCL.DATA_TYPE dataType 
+              , CON.PK_YN pkYn
+              , CON.FK_YN fkYn
+              , DECODE(NULLABLE , 'N' , 'NOT NULL' , 'NULL') AS notNull
+              , DATA_DEFAULT dataDefault
+              , DATA_LENGTH dataLength
+              , CCM.COMMENTS columnComment
+          FROM  USER_TABLES TBL
+              , USER_TAB_COMMENTS TCM
+              , USER_TAB_COLUMNS TCL
+              , USER_COL_COMMENTS CCM
+              , (SELECT  CCL.TABLE_NAME
+                       , COLUMN_NAME
+                       , CASE WHEN SUM(DECODE(CONSTRAINT_TYPE , 'P' , 1 , 0)) > 0 THEN 'Y'
+                              ELSE 'N' END as PK_YN 
+                       , CASE WHEN SUM(DECODE(CONSTRAINT_TYPE , 'R' , 1 , 0)) > 0 THEN 'Y'
+                              ELSE 'N' END as FK_YN 
+                       , SUM(DECODE(CONSTRAINT_TYPE , 'C' , 0 , 'P' , 0 , 'R' , 0 , 1)) as CCC
+                   FROM  USER_CONS_COLUMNS CCL , USER_CONSTRAINTS CNS
+                  WHERE  CCL.CONSTRAINT_NAME = CNS.CONSTRAINT_NAME
+                  GROUP  BY CCL.TABLE_NAME , COLUMN_NAME ) CON
+         WHERE  TBL.TABLE_NAME = TCM.TABLE_NAME
+           AND  TBL.TABLE_NAME = TCL.TABLE_NAME 
+           AND  TCL.TABLE_NAME = CCM.TABLE_NAME 
+           AND  TCL.COLUMN_NAME = CCM.COLUMN_NAME
+           AND  TCL.TABLE_NAME = CON.TABLE_NAME(+) 
+           AND  TCL.COLUMN_NAME = CON.COLUMN_NAME(+)
+           <isEmpty property="listType" prepend="AND">
+                TBL.TABLE_NAME = #tableName#
+           </isEmpty>
+           <isNotEmpty property="listType">
+              <isEqual property="listType" compareValue="excel" prepend="AND">
+                TBL.TABLE_NAME LIKE 'TB_%'
+              </isEqual>
+           </isNotEmpty>
+         ORDER  BY TBL.TABLE_NAME , COLUMN_ID
+    </select>
+    
+    <select id="setTableComment" parameterClass="tableInfoParam">
+        COMMENT ON TABLE $tableName$ IS '$tableComment$'
+    </select>
+    
+    <select id="setColumnComment" parameterClass="tableListData">
+        COMMENT ON COLUMN $tableName$.$columnName$ IS '$columnComment$'
+    </select>
+    
+    <select id="selectTableCommentQueryList" resultClass="string">
+        SELECT  'COMMENT ON TABLE TBL.TABLE_NAME || ' IS ''' || TCM.COMMENTS || ''';' tableCommentListQuery 
+          FROM  USER_TABLES TBL
+              , USER_TAB_COMMENTS TCM
+         WHERE  TBL.TABLE_NAME = TCM.TABLE_NAME
+           AND  TBL.TABLE_NAME LIKE 'TB_%'
+         ORDER  BY TBL.TABLE_NAME
+    </select>
+    
+    <select id="selectColumnCommentQueryList" resultClass="string">
+        SELECT  'COMMENT ON TABLE TBL.TABLE_NAME || '.' || TCL.COLUMN_NAME || ' IS ''' || CCM.COMMENTS || ''';' columnCommentListQuery 
+          FROM  USER_TABLES TBL
+              , USER_TAB_COLUMNS TCL
+              , USER_COL_COMMENTS CCM
+         WHERE  TBL.TABLE_NAME = TCL.TABLE_NAME 
+           AND  TCL.TABLE_NAME = CCM.TABLE_NAME
+           AND  TCL.COLUMN_NAME = CCM.COLUMN_NAME
+           AND  TBL.TABLE_NAME LIKE 'TB_%'
+         ORDER  BY TBL.TABLE_NAME, TCL.COLUMN_ID
+    </select>
+    
+    <select id="getAllBarcodes" resultClass="string">
+        SELECT sell_prdt_bcode
+          FROM tb_sell_product
+    </select>
+    
+    <parameterMap id="insertLoginMap" class="java.util.Map">
+        <parameter property="p_ID"        javaType="java.lang.String"  jdbcType="VARCHAR" mode="IN"  />
+        <parameter property="p_PASSWD"    javaType="java.lang.String"  jdbcType="VARCHAR" mode="IN"  />
+        <parameter property="p_DIV"       javaType="java.lang.String"  jdbcType="VARCHAR" mode="IN"  />
+        <parameter property="p_SYSTEM"    javaType="java.lang.String"  jdbcType="VARCHAR" mode="IN"  />
+        <parameter property="p_CONN_TYPE" javaType="java.lang.String"  jdbcType="VARCHAR" mode="IN"  />
+        <parameter property="p_COMPUTER"  javaType="java.lang.String"  jdbcType="VARCHAR" mode="IN"  />
+        <parameter property="p_RTNMSG"    javaType="java.lang.String"  jdbcType="VARCHAR" mode="OUT"  />
+    </parameterMap>
+    
+    <procedure id="loginCheckForCenter" parameterMap="insertLoginMap">
+        { call PK_INNER_ACC_PASSWD.CHKWEB_PROCESS@center(?, ?, ?, ?, ?, ?, ?) }
+    </procedure>
+	
+	<select id="getMallListForHandler" resultClass="mall">
+        SELECT MALL_ID mallId
+		       , MALL_NAME mallName
+			   , MALL_URL mallUrl
+               , GIFT_NAME giftName
+               , OFCE_NAME ofceName
+               , STD_CHGE_RATE stdChgeRate
+               , SAVED_RATE savedRate
+               , STD_PYMNT_AMT stdPymntAmt
+          FROM TB_MALL_MASTER
+         ORDER BY mall_id DESC 
+    </select>
+    
+    <insert id="insertSmsHistory" parameterClass="sms">
+       	<selectKey keyProperty="smsSeq" resultClass="Integer" type="pre">SELECT SMS_SEQ.NEXTVAL FROM DUAL</selectKey>
+		INSERT INTO TB_SMS_HISTORY
+		(
+			SMS_SEQ
+			, USER_NUM
+			, MALL_ID
+			, USER_YN
+			, SNDR_TEL_NUM
+			, RCVR_TEL_NUM
+			, SEND_MSG
+			, REGST_DTM
+			, ORDER_NUM
+		)
+		VALUES
+		(
+			#smsSeq#
+			, #userNum#
+			, #mallId#
+			, #userYn#
+			, #sendPhoneNum#
+			, #receivePhoneNumber#
+			, #message#
+			, #sendDate#
+			, #orderNum#
+		)
+    </insert>
+    
+    <cacheModel type="LRU" id="creditCardCompanyCodeChache" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="size" value="100"/>
+    </cacheModel>
+    
+    <cacheModel type="LRU" id="creditTransferBankChache" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="size" value="100"/>
+    </cacheModel>
+    
+    <select id="selectCreditCardCompanyCodeList" resultClass="creditCode" cacheModel="creditCardCompanyCodeChache">
+        SELECT  code_id codeId
+              , card_cmpy_name name
+          FROM  tb_credit_card_company_code
+    </select>
+    
+    <select id="selectCreditTransferBankCodeList" resultClass="creditCode" cacheModel="creditTransferBankChache">
+        SELECT  code_id codeId
+              , bank_name name
+          FROM  tb_credit_transfer_bank_code
+    </select>
+	
+	<select id="selectBankCodeName" parameterClass="String" resultClass="String">
+		SELECT bank_name name
+		FROM  tb_credit_transfer_bank_code
+		WHERE code_id = #codeId#
+	</select>
+    
+    <select id="selectCardCodeName" parameterClass="String" resultClass="String">
+        SELECT card_cmpy_name name
+        FROM  tb_credit_card_company_code
+        WHERE code_id = #codeId#
+    </select>
+    
+    <select id="getOrderSms" parameterClass="String" resultClass="String">
+        select F_GET_SMSCONS('01',#value#)
+          from dual
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-10-01
+        기능: 키워드의 속성 확인(해당 키워드에 음반 관련 키워드가 있는지 여부)
+        - N: 해당조건 없음
+        - G: 기프트 속성
+        - R: 음반 속성
+     -->
+    <select id="getKeywordType" parameterClass="string" resultClass="string">
+        /* SystemSQL.getKeywordType */
+        SELECT NVL(MAX(TYPE), 'N') TYPE
+          FROM TB_KEYWORD_TYPE
+         WHERE UPPER(#value#) = UPPER(KEYWORD)
+    </select>
+</sqlMap>

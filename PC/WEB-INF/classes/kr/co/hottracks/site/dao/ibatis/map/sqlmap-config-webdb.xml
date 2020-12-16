@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings
+        maxRequests="512"
+        maxSessions="128"
+        maxTransactions="32"
+        cacheModelsEnabled="true"
+        lazyLoadingEnabled="false"
+        enhancementEnabled="false"
+        errorTracingEnabled="true"
+        useStatementNamespaces="true"/>
+    
+    <typeAlias alias="resultMap" type="kr.co.hottracks.site.model.ResultMap"/>
+        
+	<typeHandler javaType="boolean" callback="kr.co.hottracks.site.dao.ibatis.YNBooleanTypeHandler"/>
+	
+    <sqlMap resource="kr/co/hottracks/site/dao/ibatis/map/DummySQL.xml"/>
+</sqlMapConfig>

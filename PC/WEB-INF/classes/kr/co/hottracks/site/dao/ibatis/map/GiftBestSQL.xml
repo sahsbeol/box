@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="GiftBestSQL">
+    <typeAlias alias="sellGiftCriteria" type="kr.co.hottracks.site.model.common.sellGift.SellGiftCriteria"/>
+    <typeAlias alias="sellGiftExt" type="kr.co.hottracks.site.model.common.sellGift.SellGiftExt"/>
+    
+    <!-- 
+        기능 : 기프트 베트스 BY 카테고리
+        작성자 : 장진용
+        작성일 : 2014.04.22
+    -->
+    <select id="getGiftBestByCtgr" resultClass="sellGiftExt" parameterClass="sellGiftCriteria">
+        /* GiftBestSQL.getGiftBestByCtgr */
+        SELECT V.SELL_PRDT_BCODE    sellPrdtBcode
+             , V.PRDT_SELL_PRICE    prdtSellPrice
+             , V.NYO_SELL_BAN_YN    nyoSellBanYn
+             , FC_GET_PRDT_NAME(V.SELL_PRDT_BCODE, #mallId#)    prdtName
+             , FC_GET_CPN_PRICE(V.SELL_PRDT_BCODE, #mallId#)    lastCpnPrice
+             , FC_GET_PRODUCT_IMAGE_URL(V.SELL_PRDT_BCODE)     productImageUrl
+             , (SELECT NVL(SA.BRAND_ENG_NAME, SA.BRAND_NAME) FROM TB_BRAND SA WHERE SA.BRAND_ID = V.BRAND_ID)    brandName
+          FROM (
+                SELECT A.SELL_PRDT_BCODE
+                     , A.PRDT_SELL_PRICE
+                     , A.NYO_SELL_BAN_YN
+                     , A.BRAND_ID
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-0) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK1
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-2) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK2
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-4) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK3
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-6) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK4
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-8) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK5
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-10) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK6
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-12) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK7
+                     , (SELECT SA.RANK FROM TB_GIFT_BEST SA WHERE SA.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE AND SA.CTGR_ID = SUBSTR(#ctgrId#, 1, LENGTH(#ctgrId#)-14) AND SA.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND SA.BEST_TYPE_CODE = 'C1281' AND SA.RANGE_TYPE_CODE = 'C1002' AND SA.MALL_ID = #mallId#) RANK8
+                  FROM TB_DISPLAY_PRODUCT A
+                 WHERE A.PRDT_STAT_CODE = 'C0312'
+                   AND INSTR('P|G', A.SELL_PRDT_GBN) > 0
+                   AND EXISTS (SELECT T.SELL_PRDT_BCODE
+                                 FROM TB_GIFT_BEST T
+                                WHERE T.BEST_TYPE_CODE = 'C1281'
+                                  AND T.RANGE_TYPE_CODE = 'C1002'
+                                  AND T.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+                                  AND T.MALL_ID = #mallId#
+                                  AND #ctgrId# LIKE T.CTGR_ID || '%'
+                                  AND A.SELL_PRDT_BCODE = T.SELL_PRDT_BCODE
+                              )
+                 ORDER BY RANK1, RANK2, RANK3, RANK4, RANK5, RANK6, RANK7, RANK8
+               ) V
+         WHERE ROWNUM &lt; 5
+    </select>
+    
+    <!-- 
+        기능 : 기프트 베트스 BY 브랜드
+        작성자 : 장진용
+        작성일 : 2014.04.22
+    -->
+    <select id="getGiftBestByBrand" resultClass="sellGiftExt" parameterClass="sellGiftCriteria">
+        /* GiftBestSQL.getGiftBestByBrand */
+        SELECT V.SELL_PRDT_BCODE    sellPrdtBcode
+             , V.PRDT_SELL_PRICE    prdtSellPrice
+             , V.NYO_SELL_BAN_YN    nyoSellBanYn
+             , FC_GET_PRDT_NAME(V.SELL_PRDT_BCODE, #mallId#)    prdtName
+             , FC_GET_CPN_PRICE(V.SELL_PRDT_BCODE, #mallId#)    lastCpnPrice
+             , FC_GET_PRODUCT_IMAGE_URL(V.SELL_PRDT_BCODE)     productImageUrl
+             , (SELECT NVL(SA.BRAND_ENG_NAME, SA.BRAND_NAME) FROM TB_BRAND SA WHERE SA.BRAND_ID = V.BRAND_ID)    brandName
+          FROM (
+                SELECT A.SELL_PRDT_BCODE
+                     , A.PRDT_SELL_PRICE
+                     , A.NYO_SELL_BAN_YN
+                     , A.BRAND_ID
+                     , B.RANK
+                  FROM TB_DISPLAY_PRODUCT A
+                  LEFT JOIN TB_GIFT_BEST B ON A.BRAND_ID = B.BRAND_ID AND B.BEST_TYPE_CODE = 'C1282' AND B.RANGE_TYPE_CODE = 'C1002' AND B.STD_DT = TO_CHAR(SYSDATE, 'YYYYMMDD') AND B.MALL_ID = #mallId#
+                 WHERE A.PRDT_STAT_CODE = 'C0312'
+                   AND INSTR('P|G', A.SELL_PRDT_GBN) > 0
+                   AND A.BRAND_ID = (SELECT BRAND_ID FROM TB_SELL_PRODUCT WHERE SELL_PRDT_BCODE = #sellPrdtBcode#)
+                 ORDER BY B.RANK, A.PRMT_DTM DESC
+               ) V
+         WHERE ROWNUM &lt; 5
+    </select>
+    
+    <!-- 
+        기능 : 기프트 베트스 BY 브랜드
+        작성자 : 장진용
+        작성일 : 2014.04.22
+    -->
+    <select id="getGiftNewByCtgr" resultClass="sellGiftExt" parameterClass="sellGiftCriteria">
+        /* GiftBestSQL.getGiftNewByCtgr */
+        SELECT V.SELL_PRDT_BCODE    sellPrdtBcode
+             , V.PRDT_SELL_PRICE    prdtSellPrice
+             , V.NYO_SELL_BAN_YN    nyoSellBanYn
+             , FC_GET_PRDT_NAME(V.SELL_PRDT_BCODE, #mallId#)    prdtName
+             , FC_GET_CPN_PRICE(V.SELL_PRDT_BCODE, #mallId#)    lastCpnPrice
+             , FC_GET_PRODUCT_IMAGE_URL(V.SELL_PRDT_BCODE)     productImageUrl
+             , (SELECT NVL(SA.BRAND_ENG_NAME, SA.BRAND_NAME) FROM TB_BRAND SA WHERE SA.BRAND_ID = V.BRAND_ID)    brandName
+          FROM (
+                SELECT A.SELL_PRDT_BCODE
+                     , A.PRDT_SELL_PRICE
+                     , A.NYO_SELL_BAN_YN
+                     , A.BRAND_ID
+                  FROM TB_DISPLAY_PRODUCT A
+                 WHERE A.PRDT_STAT_CODE = 'C0312'
+                   AND INSTR('P|G', A.SELL_PRDT_GBN) > 0
+                   AND EXISTS (SELECT A.SELL_PRDT_BCODE FROM TB_PRODUCT_CATEGORY B WHERE A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND B.CTGR_ID LIKE #ctgrId# || '%')
+                 ORDER BY A.PRMT_DTM DESC
+               ) V
+         WHERE ROWNUM &lt; 5
+    </select>
+</sqlMap>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="MusicSQL">
+    <typeAlias alias="musicTrendCriteria" type="kr.co.hottracks.site.model.common.music.MusicTrendCriteria"/>
+    <typeAlias alias="musicTrendExt" type="kr.co.hottracks.site.model.common.music.MusicTrendExt"/>
+    <typeAlias alias="musicTrendComments" type="kr.co.hottracks.site.model.common.music.MusicTrendComments"/>
+    <typeAlias alias="musicTrendCommentsParam" type="kr.co.hottracks.site.model.common.music.MusicTrendCommentsParam"/>
+    <typeAlias alias="musicTrendCommentsExt" type="kr.co.hottracks.site.model.common.music.MusicTrendCommentsExt"/>
+    
+    <typeAlias alias="artist" type="kr.co.hottracks.site.model.common.music.Artist"/>
+    <typeAlias alias="album" type="kr.co.hottracks.site.model.common.music.Album"/>
+    <typeAlias alias="track" type="kr.co.hottracks.site.model.common.music.Track"/>
+    <typeAlias alias="disc" type="kr.co.hottracks.site.model.common.music.Disc"/>
+    <typeAlias alias="albumArtist" type="kr.co.hottracks.site.model.common.music.AlbumArtist"/>
+    <typeAlias alias="trackArtist" type="kr.co.hottracks.site.model.common.music.TrackArtist"/>
+    <typeAlias alias="musicGift" type="kr.co.hottracks.site.model.common.music.MusicGift"/>
+    <typeAlias alias="musicGiftTrack" type="kr.co.hottracks.site.model.common.music.MusicGiftTrack"/>
+    <typeAlias alias="musicGiftCriteria" type="kr.co.hottracks.site.model.common.music.MusicGiftCriteria"/>
+    <typeAlias alias="musicGiftExt" type="kr.co.hottracks.site.model.common.music.MusicGiftExt"/>
+    <typeAlias alias="track" type="kr.co.hottracks.site.model.common.music.Track"/>
+    <typeAlias alias="trackExt" type="kr.co.hottracks.site.model.common.music.TrackExt"/>
+    <typeAlias alias="trackCriteria" type="kr.co.hottracks.site.model.common.music.TrackCriteria"/>
+    <typeAlias alias="trackModel" type="kr.co.hottracks.site.model.common.music.TrackModel"/>
+    <typeAlias alias="musicGiftExt" type="kr.co.hottracks.site.model.common.music.MusicGiftExt"/>
+    <typeAlias alias="hotIssue" type="kr.co.hottracks.site.model.common.music.HotIssue"/>
+    <typeAlias alias="hotIssueItem" type="kr.co.hottracks.site.model.common.music.HotIssueItem"/>
+    <typeAlias alias="fanMetting" type="kr.co.hottracks.site.model.common.music.FanMetting"/>
+    <typeAlias alias="fanMettingExt" type="kr.co.hottracks.site.model.common.music.FanMettingExt"/>
+    <typeAlias alias="fanMettingCriteria" type="kr.co.hottracks.site.model.common.music.FanMettingCriteria"/>
+    <typeAlias alias="musicTrend" type="kr.co.hottracks.site.model.common.music.MusicTrend"/>
+    
+    <!-- 
+        기능 : 트랜드 공감 리스트 반환
+        작성일 : 2011. 09. 29
+    -->
+    <select id="selectMusicTrendList" parameterClass="musicTrendCriteria" resultClass="musicTrendExt">
+        /* MusicSQL.selectMusicTrendList */
+        SELECT A.TREND_SEQ      trendSeq
+             , A.TITLE          title
+             , A.IMAGE          image
+             , A.SUMMARY        summary
+             , A.DISP_YN        dispYn
+             , A.CONTENTS       contents
+             , A.ADMIN_ID       adminId
+             , A.REGST_DTM      regstDtm
+             , A.VIEW_CNT       viewCnt
+             , A.TREND_TYPE     trendType
+             , A.CONCERT_DT     concertDt
+             , (SELECT ADMIN_NAME FROM TB_ADMIN T WHERE T.ADMIN_ID = A.ADMIN_ID)                                        adminName
+             , NVL((SELECT COUNT(1) FROM TB_TREND_COMMENTS T WHERE T.TREND_SEQ = A.TREND_SEQ AND T.USE_YN = 'Y'), 0)    commentsCnt
+          FROM TB_TREND A
+         INNER JOIN (SELECT DISTINCT A.TREND_SEQ
+                       FROM TB_TREND A
+                       LEFT OUTER JOIN TB_TREND_RECORD B ON A.TREND_SEQ = B.TREND_SEQ
+                       LEFT OUTER JOIN TB_RECORD C ON C.RCRD_CD = B.RCRD_CD
+                      <dynamic prepend="WHERE">
+                          <isNotEmpty property="trendTypeCode" removeFirstPrepend="true" prepend="and">
+                              a.trend_type = #trendTypeCode#
+                          </isNotEmpty>
+                          <isNotEmpty property="searchSd">
+                              <isNotEmpty property="searchEd" removeFirstPrepend="true" prepend="and">
+                                  a.regst_dtm between to_date(#searchSd# || '000000','YYYYMMDDHH24MISS') and to_date(#searchEd# || '235959','YYYYMMDDHH24MISS')  
+                              </isNotEmpty>
+                          </isNotEmpty>
+                          <isNotEmpty property="dispYn" removeFirstPrepend="true" prepend="and">
+                              a.disp_yn = #dispYn#
+                          </isNotEmpty>
+                          <isNotEmpty property="keyWord" removeFirstPrepend="true" prepend="and">
+                              <isEqual property="keyField" compareValue="all">
+                                  (TO_CHAR(A.TREND_SEQ) = #keyWord# OR INSTR(UPPER(A.TITLE), UPPER(#keyWord#)) > 0 OR INSTR(UPPER(C.RCRD_NAME), UPPER(#keyWord#)) > 0)
+                              </isEqual>
+                              <isEqual property="keyField" compareValue="title">
+                                  INSTR(UPPER(A.TITLE), UPPER(#keyWord#)) > 0
+                              </isEqual>
+                              <isEqual property="keyField" compareValue="albumName">
+                                  INSTR(UPPER(C.RCRD_NAME), UPPER(#keyWord#)) > 0
+                              </isEqual>
+                              <isEqual property="keyField" compareValue="seq">
+                                  TO_CHAR(A.TREND_SEQ) = #keyWord#
+                              </isEqual>
+                          </isNotEmpty>
+                      </dynamic>
+                   ) B ON A.TREND_SEQ = B.TREND_SEQ
+          ORDER BY a.regst_dtm DESC
+    </select>
+    
+    <!-- 
+        기능 : 트랜드 공감 리스트 갯수 반환
+        작성일 : 2011. 09. 29
+    -->    
+    <select id="selectMusicTrendListCount" parameterClass="musicTrendCriteria" resultClass="int">
+        /* MusicSQL.selectMusicTrendListCount */
+        SELECT COUNT(1) AS CNT
+          FROM TB_TREND A
+         INNER JOIN (SELECT DISTINCT A.TREND_SEQ
+                       FROM TB_TREND A
+                       LEFT OUTER JOIN TB_TREND_RECORD B ON A.TREND_SEQ = B.TREND_SEQ
+                       LEFT OUTER JOIN TB_RECORD C ON C.RCRD_CD = B.RCRD_CD
+                      <dynamic prepend="WHERE">
+                          <isNotEmpty property="trendTypeCode" removeFirstPrepend="true" prepend="and">
+                              a.trend_type = #trendTypeCode#
+                          </isNotEmpty>
+                          <isNotEmpty property="searchSd">
+                              <isNotEmpty property="searchEd" removeFirstPrepend="true" prepend="and">
+                                  a.regst_dtm between to_date(#searchSd# || '000000','YYYYMMDDHH24MISS') and to_date(#searchEd# || '235959','YYYYMMDDHH24MISS')  
+                              </isNotEmpty>
+                          </isNotEmpty>
+                          <isNotEmpty property="dispYn" removeFirstPrepend="true" prepend="and">
+                              a.disp_yn = #dispYn#
+                          </isNotEmpty>
+                          <isNotEmpty property="keyWord" removeFirstPrepend="true" prepend="and">
+                              <isEqual property="keyField" compareValue="all">
+                                  (TO_CHAR(A.TREND_SEQ) = #keyWord# OR INSTR(UPPER(A.TITLE), UPPER(#keyWord#)) > 0 OR INSTR(UPPER(C.RCRD_NAME), UPPER(#keyWord#)) > 0)
+                              </isEqual>
+                              <isEqual property="keyField" compareValue="title">
+                                  INSTR(UPPER(A.TITLE), UPPER(#keyWord#)) > 0
+                              </isEqual>
+                              <isEqual property="keyField" compareValue="albumName">
+                                  INSTR(UPPER(C.RCRD_NAME), UPPER(#keyWord#)) > 0
+                              </isEqual>
+                              <isEqual property="keyField" compareValue="seq">
+                                  TO_CHAR(A.TREND_SEQ) = #keyWord#
+                              </isEqual>
+                          </isNotEmpty>
+                      </dynamic>
+                   ) B ON A.TREND_SEQ = B.TREND_SEQ
+    </select>
+    
+    <!-- 
+        기능 : 트랜드 공감 조회수 업데이트
+        작성일 : 2011. 10. 04
+    -->
+    <update id="updateTrendViewCnt" parameterClass="int">
+        /* MusicSQL.updateTrendViewCnt */
+        UPDATE TB_TREND
+           SET VIEW_CNT = VIEW_CNT + 1
+         WHERE TREND_SEQ = #trendSeq#
+    </update>
+    
+    <!-- 
+        기능 : 트랜드 공감 정보 반환
+        작성일 : 2011. 09. 29
+    -->
+    <select id="selectTrendInfo" parameterClass="musicTrendExt" resultClass="musicTrendExt">
+        /* MusicSQL.selectTrendInfo */
+        SELECT trend_seq as trendSeq
+             , title as title
+             , regst_dtm as regstDtm
+             , prev_trend_seq as prevTrendSeq
+             , prev_title as prevTitle
+             , prev_regst_dtm as prevRegstDtm
+             , next_trend_seq as nextTrendSeq
+             , next_title as nextTitle
+             , next_regst_dtm as nextRegstDtm
+             , image as image
+             , summary as summary
+             , disp_yn as dispYn
+             , contents as contents
+             , admin_id as adminId
+             , admin_name as adminName
+             , view_cnt as viewCnt
+             , trend_type as trendType
+             , concert_dt as concertDt
+             , comments_cnt as commentsCnt
+         FROM (SELECT a.trend_seq as trend_seq,
+                    a.title as title, 
+                    a.regst_dtm as regst_dtm,
+                    <isNotEqual property="trendType" compareValue="C1012">
+                        lag(a.trend_seq) over (order by a.trend_seq desc) as prev_trend_seq,
+                        lag(a.title) over (order by a.trend_seq desc) as prev_title,
+                        lag(a.regst_dtm) over (order by a.trend_seq desc) as prev_regst_dtm,
+                        lead(a.trend_seq) over (order by a.trend_seq desc) as next_trend_seq,
+                        lead(a.title) over (order by a.trend_seq desc) as next_title,
+                        lead(a.regst_dtm) over (order by a.trend_seq desc) as next_regst_dtm,
+                    </isNotEqual>
+                    <isEqual property="trendType" compareValue="C1012">
+                        lag(a.trend_seq) over (order by a.concert_dt desc) as prev_trend_seq,
+                        lag(a.title) over (order by a.concert_dt desc) as prev_title,
+                        lag(a.regst_dtm) over (order by a.concert_dt desc) as prev_regst_dtm,
+                        lead(a.trend_seq) over (order by a.concert_dt desc) as next_trend_seq,
+                        lead(a.title) over (order by a.concert_dt desc) as next_title,
+                        lead(a.regst_dtm) over (order by a.concert_dt desc) as next_regst_dtm,
+                    </isEqual>
+                    a.image as image, 
+                    a.summary as summary,
+                    a.disp_yn as disp_yn,
+                    a.contents as contents,
+                    a.admin_id as admin_id,
+                    (select admin_name from tb_admin where admin_id = a.admin_id) as admin_name,
+                    a.view_cnt as view_cnt,
+                    a.trend_type as trend_type,
+                    a.concert_dt as concert_dt,
+                    (select count(*) from tb_trend_comments t where t.trend_seq = a.trend_seq and t.use_yn = 'Y') as comments_cnt
+                FROM tb_trend a
+                <dynamic prepend="where">
+                    <isNotEmpty property="dispYn" removeFirstPrepend="true" prepend="and">
+                        a.disp_yn = #dispYn#
+                    </isNotEmpty>
+                    <isNotEmpty property="trendType" removeFirstPrepend="true" prepend="and">
+                        a.trend_type = #trendType#
+                    </isNotEmpty>
+                    <isNotEmpty property="concertDt" removeFirstPrepend="true" prepend="and">
+                        a.concert_dt = #concertDt#
+                    </isNotEmpty>
+                </dynamic>
+                <isNotEqual property="trendType" compareValue="C1012">
+                    ORDER BY a.trend_seq
+                </isNotEqual>
+                <isEqual property="trendType" compareValue="C1012">
+                    ORDER BY a.concert_dt
+                </isEqual>
+            ) a
+        WHERE trend_seq = #trendSeq#
+    </select>
+    
+    <!--
+        작성일 : 2011.11.05
+        기능 : 트랜드 공감 음반 리스트 정보 반환
+    -->
+    <select id="selectTrendRecordList" parameterClass="int" resultClass="musicTrendExt">
+        /* MusicSQL.selectTrendRecordList */
+        SELECT C.RCRD_CD            rcrdCd
+             , C.ARTI_NAME          artiName
+             , D.PRDT_NAME          prdtName
+             , (SELECT T.MAKER_NAME FROM TB_REC_MAKER T WHERE T.MAKER_CD = C.MAKER_CD)  makerName
+             , C.RLSE_DT            rlseDt
+             , C.RTNG_CODE          ratingCode
+             , C.RCRD_NAME          rcrdName
+             , D.SELL_PRDT_GBN      sellPrdtGbn
+             , D.SELL_PRDT_BCODE    sellPrdtBcode 
+          FROM TB_TREND A 
+          JOIN TB_TREND_RECORD B ON A.TREND_SEQ = B.TREND_SEQ
+          JOIN TB_RECORD C ON B.RCRD_CD = C.RCRD_CD
+          JOIN TB_SELL_PRODUCT D ON C.SELL_PRDT_BCODE = D.SELL_PRDT_BCODE
+         WHERE B.TREND_SEQ = #trendSeq#
+    </select>
+    
+    <!-- 
+        기능 : 트랜드 공감 댓글 등록
+        작성일 : 2011. 10. 10
+     -->
+    <insert id="insertTrendComments" parameterClass="musicTrendCommentsParam">
+        <selectKey keyProperty="trendCmtSeq" type="pre" resultClass="int">
+            SELECT trend_cmt_seq.nextval FROM dual
+        </selectKey>
+        INSERT INTO tb_trend_comments (trend_cmt_seq, trend_cmt_seq_up, trend_seq, user_num, comments, icon_id, regst_dtm, disp_no, use_yn, step)
+                               VALUES (  #trendCmtSeq#
+                                         <isEmpty property="trendCmtSeqUp">
+                                             , #trendCmtSeq#
+                                         </isEmpty>
+                                         <isNotEmpty property="trendCmtSeqUp">
+                                             , #trendCmtSeqUp#
+                                         </isNotEmpty>
+                                       , #trendSeq#
+                                       , #userNum#
+                                       , #comments#
+                                       , #iconId#
+                                       , sysdate
+                                       , #dispNo#
+                                       , 'Y'
+                                       , #step#
+                                      )
+    </insert>
+    
+    <!-- 
+        기능 : 트랜드 공감 댓글 리스트
+        작성일 : 2011. 10. 10
+     -->
+    <select id="selectTrendCommentsList" parameterClass="musicTrendCriteria" resultClass="musicTrendCommentsExt">
+        /* MusicSQL.selectTrendCommentsList */
+        SELECT trend_cmt_seq as trendCmtSeq
+            , trend_cmt_seq_up as trendCmtSeqUp
+            , trend_seq  as trendSeq
+            , user_num as userNum
+            , (select user_id from tb_user t where a.user_num = t.user_num) as userId
+            , comments as comments
+            , icon_id as iconId
+            , regst_dtm as regstDtm
+            , to_char(regst_dtm, 'yyyy.mm.dd hh24:mi') as strRegstDtm
+            , disp_no as dispNo
+            , use_yn as useYn
+            , step as step
+            , decode((select count(*) from tb_trend_comments t where t.trend_cmt_seq_up = a.trend_cmt_seq and t.trend_seq = a.trend_seq and t.use_yn = 'Y' and t.step &lt;&gt; 0), 0, 'N', 'Y') as subExist
+            , rank() over (partition by trend_cmt_seq_up order by trend_cmt_seq asc) rum 
+        FROM tb_trend_comments a        
+        WHERE trend_seq = #trendSeq#
+        <isNotEmpty property="useYn">
+            AND use_yn = #useYn#
+        </isNotEmpty>
+        order by trend_cmt_seq_up desc, rum asc
+    </select>   
+
+    <!-- 
+        기능 : 트랜드 공감 댓글 리스트
+        작성일 : 2011. 10. 10
+     -->
+    <select id="selectTrendCommentsListCount" parameterClass="musicTrendCriteria" resultClass="int">
+        /* MusicSQL.selectTrendCommentsListCount */
+        SELECT
+            count(*)
+        FROM tb_trend_comments a
+        WHERE trend_seq = #trendSeq#
+        <isNotEmpty property="useYn">
+            AND use_yn = #useYn#
+        </isNotEmpty>
+    </select>
+    
+    <!-- 
+        기능 : 트랜드 공감 댓글 전시순서 최대값
+        작성일 : 2011. 10. 10
+     -->
+    <select id="selectTrendCommentsMaxDispNo" parameterClass="int" resultClass="int">
+        /* MusicSQL.selectTrendCommentsMaxDispNo */
+        SELECT NVL(MAX(DISP_NO), 0) AS DISPNO
+          FROM TB_TREND_COMMENTS
+         WHERE TREND_SEQ = #trendSeq#
+    </select>
+
+    <!-- 
+        기능 : 트랜드 공감 답글 전시순서 최대값
+        작성일 : 2011. 10. 10
+     -->
+    <select id="selectTrendCommentsMaxDispNoReply" parameterClass="musicTrendCommentsParam" resultClass="int">
+        /* MusicSQL.selectTrendCommentsMaxDispNoReply */
+        SELECT NVL(MAX(DISP_NO), 0) AS DISPNO
+          FROM TB_TREND_COMMENTS
+         WHERE TREND_SEQ = #trendSeq#
+           <isNotEmpty property="trendCmtSeq">
+               AND TREND_CMT_SEQ_UP = #trendCmtSeq#
+           </isNotEmpty>
+    </select>
+    
+    <!-- 
+        기능 : 트랜드 공감 전시순서 정렬
+        작성일 : 2011. 10. 04
+    -->
+    <update id="updateTrendCommentsDispNo" parameterClass="musicTrendCommentsParam">
+        /* MusicSQL.updateTrendCommentsDispNo */
+        UPDATE TB_TREND_COMMENTS
+           SET DISP_NO = DISP_NO + 1
+         WHERE TREND_SEQ = #trendSeq#
+           AND DISP_NO &gt; #dispNo#
+    </update>
+
+    <!-- 
+        기능 : 트랜드 공감 댓글 사용여부 업데이트
+        작성일 : 2011. 10. 04
+    -->
+    <update id="updateTrendCommentsUseYn" parameterClass="musicTrendComments">
+        /* MusicSQL.updateTrendCommentsUseYn */
+        UPDATE TB_TREND_COMMENTS
+           SET USE_YN = #useYn#
+         WHERE TREND_CMT_SEQ = #trendCmtSeq#
+    </update>
+</sqlMap>

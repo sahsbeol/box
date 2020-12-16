@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+@import url(layout.css);
+
+
+
+#sidebar {
+	float: left;
+	padding: 25px 0 20px 0;
+	width: 195px;
+}
+#sidebar div.hot-recommend {
+	width: 180px;
+}
+#sidebar div.hot-recommend h2 {
+	padding: 6px 0 6px 14px;
+	border: 1px solid #eaeaea;
+}
+#sidebar div.hot-recommend ul {
+	padding: 10px 0 0 13px;
+}
+#sidebar div.hot-recommend ul li {
+	padding: 0 0 10px;
+}
+#sidebar div.hot-event {
+	width: 180px;
+}
+#sidebar div.hot-event h2 {
+	padding: 6px 0 6px 14px;
+	border: 1px solid #eaeaea;
+}
+#sidebar div.hot-event ul {
+	padding: 10px 0 0 13px;
+}
+#sidebar div.hot-event ul li {
+	padding: 0 0 10px;
+}
+#sidebar div.brand-help {
+	width: 180px;
+	border-top: 1px solid #eaeaea;
+}
+#sidebar div.brand-help ul {
+	padding: 10px 0 0 13px;
+}
+#sidebar div.brand-help ul li {
+	padding: 0 0 10px;
+}
+#sidebar div.mygift-ecard {
+	width: 180px;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+}
+#sidebar div.mygift-ecard ul {
+	padding: 10px 0 0 13px;
+}
+#sidebar div.mygift-ecard ul li {
+	padding: 0 0 10px;
+}
+#sidebar div.gift-story {
+	padding: 13px 0 0;
+}
+#sidebar div.gift-story img {
+	vertical-align: top;
+}
+#sidebar div.social {
+	margin: 16px 0 0;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/social_bar.gif") no-repeat 31px 4px;
+}
+#sidebar div.social ul li {
+	display: inline;
+	margin: 0 -1px 0 7px;
+}
+#sidebar div.social ul li img {
+	vertical-align: middle;
+}
+#contents {
+	float: left;
+	width: 755px;
+	margin: 0 -10px 0 0;
+	padding: 75px 0 60px; 
+	overflow: hidden;
+	position:static !important;
+	
+}
+#contents div.page-location {
+	position: absolute;
+	top:10px;
+	left:0;
+	margin: 0 0 20px 0 !important;
+	padding: 0 0 6px;
+	height: 30px;
+
+}
+#contents div.page-location h2 {
+	float: left;
+	width: 195px;
+}
+#contents div.page-location h2 img {
+	margin: 8px 0 0 8px;
+}	
+#contents div.page-location ul {
+	float: left;
+	margin: 10px 0 0 0;
+}

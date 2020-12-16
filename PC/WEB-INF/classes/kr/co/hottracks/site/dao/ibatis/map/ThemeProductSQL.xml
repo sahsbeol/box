@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ThemeProductSQL">
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-16
+        기능: 카테고리별 테마상품목록 반환
+    -->
+    <select id="getThemeProductForCategory" parameterClass="kr.co.hottracks.site.model.common.theme.ThemeCriteria" resultClass="kr.co.hottracks.site.model.common.sellGift.SellGiftExt">
+        /* ThemeProductSQL.getThemeProductForCategory */
+        SELECT SP.SELL_PRDT_BCODE   sellPrdtBcode
+             , SP.SELL_PRDT_GBN     sellPrdtGbn
+             , SP.PRDT_STAT_CODE    prdtStatCode
+             , SP.PRDT_SELL_PRICE   prdtSellPrice
+             , SP.DLVY_VNDR_ID      dlvyVndrId
+             , SP.PRMT_DTM          prmtDtm
+             <isEqual property="productOrderBy" compareValue="P">
+             , NVL(CNT, 0)          productCnt
+             </isEqual>
+             , FC_GET_PRDT_NAME(SP.SELL_PRDT_BCODE, #mallId#)       prdtName
+             , FC_GET_PRODUCT_IMAGE_URL(SP.SELL_PRDT_BCODE)         productImageUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(SP.SELL_PRDT_BCODE)        productImageUrl2
+             , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE, #mallId#)       lastCpnPrice
+             , FC_GET_LAST_DC_RATE(SP.SELL_PRDT_BCODE, #mallId#)    lastDcRate
+             , FC_GET_FREE_DLVY_YN(SP.SELL_PRDT_BCODE, #mallId#)    freeDlvyYn
+             , (SELECT NVL(B.BRAND_ENG_NAME, B.BRAND_NAME) FROM TB_BRAND B WHERE B.BRAND_ID = SP.BRAND_ID)    brandEngName
+             , FC_GET_PRODUCT_ICON_CODE(SP.SELL_PRDT_BCODE, #mallId#)                                         prdtIcon
+             , FC_GET_WISH_PRODUCT_COUNT(SP.SELL_PRDT_BCODE, #mallId#)                                        wishPrdtCnt
+             , FC_GET_REVIEW_PRODUCT_COUNT(SP.SELL_PRDT_BCODE, #mallId#)                                      reviewCount
+          FROM TB_SELL_PRODUCT SP
+          JOIN TB_PRODUCT_CATEGORY PC ON SP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE
+          JOIN TB_THEME_CATEGORY_MAP TCM ON PC.CTGR_ID = TCM.CTGR_ID AND TCM.THEME_CTGR_ID LIKE #themeCtgrId# || '%'
+          <isEqual property="productOrderBy" compareValue="P">
+          LEFT JOIN (SELECT DECODE(T.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE) BARCODE , SUM(SALE_QTY) CNT
+                       FROM GIFT_SALE A
+                       JOIN TB_SELL_PRODUCT T ON T.SELL_PRDT_BCODE = A.SALE_BARNO
+                      WHERE A.SALE_GUBUN = '1'
+                        AND A.SALE_MALLID = #mallId#
+                        AND A.SALE_DATE > TO_CHAR(SYSDATE -7, 'YYYYMMDD')
+                      GROUP BY DECODE(T.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE)
+                    ) GS ON SP.SELL_PRDT_BCODE = GS.BARCODE
+          </isEqual>
+          <isEqual property="benefitChk3" compareValue="true">
+          LEFT JOIN (SELECT ESP.SELL_PRDT_BCODE
+                       FROM TB_EVENT_MASTER EM
+                       JOIN TB_EVENT_SELL_PRODUCT ESP ON EM.EVENT_ID = ESP.EVENT_ID
+                      WHERE EM.PRMT_CODE = 'C0374'
+                        AND EM.EVENT_STAT_CODE = 'C0181'
+                        AND ESP.EVENT_DSCNT_RATE != 0
+                        AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN EM.EVENT_START_DT AND EM.EVENT_END_DT
+                      UNION
+                     SELECT CAP.SELL_PRDT_BCODE
+                       FROM TB_COUPON_MASTER CM
+                       JOIN TB_COUPON_APPLY_PRODUCT CAP ON CM.CPN_ID = CAP.CPN_ID
+                      WHERE CM.SCOPE_GBN = 'P'
+                        AND CM.USE_YN = 'Y'
+                        AND CM.DISP_YN = 'Y'
+                        AND CM.MALL_ID = '02'
+                        AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN CM.CPN_ISSUE_START_DT AND CM.CPN_ISSUE_END_DT
+                    ) E ON SP.SELL_PRDT_BCODE = E.SELL_PRDT_BCODE
+         </isEqual>
+         WHERE SP.SELL_PRDT_GBN IN ('P', 'G')
+           AND SP.PRMT_CODE = 'C0302'
+           AND SP.PRDT_STAT_CODE ='C0312'
+           AND NVL(SP.TEC_SIZE, 'A') != 'S'
+           AND EXISTS (SELECT * FROM TB_VENDOR_CONTRACT VC WHERE SP.VNDR_CNTRT_ID = VC.VNDR_CNTRT_ID AND VC.VNDR_CNTRT_STAT_CODE = 'C0072' AND TO_CHAR (SYSDATE, 'YYYYMMDD') BETWEEN VC.CNTRT_START_DT AND VC.CNTRT_END_DT)
+           <isEqual property="benefitChk1" compareValue="true">
+               AND (SP.FREE_DLVY_YN = 'Y' OR EXISTS(SELECT 1 FROM TB_EVENT_MASTER A JOIN TB_EVENT_SELL_PRODUCT B ON A.EVENT_ID = B.EVENT_ID  AND B.FREE_DLVY_YN = 'Y' JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId# WHERE A.PRMT_CODE = 'C0374' AND A.EVENT_STAT_CODE = 'C0181' AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT AND B.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE))
+           </isEqual>
+           <isEqual property="benefitChk2" compareValue="true">
+               AND EXISTS (SELECT 1 FROM TB_COUPON_MASTER A ,TB_COUPON_APPLY_PRODUCT B WHERE A.CPN_ID = B.CPN_ID AND B.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND A.SCOPE_GBN = 'P' AND A.USE_YN = 'Y' AND A.DISP_YN = 'Y' AND A.MALL_ID = #mallId# AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT)
+           </isEqual>
+           <isEqual property="benefitChk3" compareValue="true">
+               AND (SP.PRDT_DSCNT_RATE > 0 OR SP.PRDT_DSCNT_PRICE != SP.PRDT_SELL_PRICE OR E.SELL_PRDT_BCODE IS NOT NULL)
+           </isEqual>
+           <isEqual property="benefitChk4" compareValue="true">
+               AND SP.DLVY_VNDR_ID = '0625'
+           </isEqual>
+         GROUP BY SP.SELL_PRDT_BCODE, SP.PRDT_NAME, SP.BRAND_ID, SP.SELL_PRDT_GBN, SP.PRMT_DTM, SP.PRDT_STAT_CODE, SP.PRDT_SELL_PRICE, SP.DLVY_VNDR_ID
+         <isEqual property="productOrderBy" compareValue="P">
+         , NVL(CNT, 0)
+         </isEqual>
+         <dynamic prepend="ORDER BY">
+             <!-- R:최신순, P:인기순, L:낮은가격순, H:높은가격순 -->
+             <isEmpty property="productOrderBy">SP.PRMT_DTM DESC</isEmpty>
+             <isNotEmpty property="productOrderBy">
+                 <isEqual property="productOrderBy" compareValue="R">prmtDtm DESC</isEqual>
+                 <isEqual property="productOrderBy" compareValue="P">productCnt DESC, prmtDtm DESC</isEqual>
+                 <isEqual property="productOrderBy" compareValue="L">lastCpnPrice ASC, prmtDtm DESC</isEqual>
+                 <isEqual property="productOrderBy" compareValue="H">lastCpnPrice DESC, prmtDtm DESC</isEqual>
+                 <isEqual property="productOrderBy" compareValue="T">lastDcRate DESC, prmtDtm DESC</isEqual>
+             </isNotEmpty>
+         </dynamic>
+    </select>
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-16
+        기능: 카테고리별 테마상품목록 반환
+    -->
+    <select id="countThemeProductForCategory" parameterClass="kr.co.hottracks.site.model.common.theme.ThemeCriteria" resultClass="int">
+        /* ThemeProductSQL.countThemeProductForCategory */
+        SELECT COUNT(*)
+          FROM (SELECT SP.SELL_PRDT_BCODE 
+                  FROM TB_SELL_PRODUCT SP
+                  JOIN TB_PRODUCT_CATEGORY PC ON SP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE
+                  JOIN TB_THEME_CATEGORY_MAP TCM ON PC.CTGR_ID = TCM.CTGR_ID AND TCM.THEME_CTGR_ID LIKE #themeCtgrId# || '%'
+                  <isEqual property="benefitChk3" compareValue="true">
+                  LEFT JOIN (SELECT ESP.SELL_PRDT_BCODE
+                               FROM TB_EVENT_MASTER EM
+                               JOIN TB_EVENT_SELL_PRODUCT ESP ON EM.EVENT_ID = ESP.EVENT_ID
+                              WHERE EM.PRMT_CODE = 'C0374'
+                                AND EM.EVENT_STAT_CODE = 'C0181'
+                                AND ESP.EVENT_DSCNT_RATE != 0
+                                AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN EM.EVENT_START_DT AND EM.EVENT_END_DT
+                              UNION
+                             SELECT CAP.SELL_PRDT_BCODE
+                               FROM TB_COUPON_MASTER CM
+                               JOIN TB_COUPON_APPLY_PRODUCT CAP ON CM.CPN_ID = CAP.CPN_ID
+                              WHERE CM.SCOPE_GBN = 'P'
+                                AND CM.USE_YN = 'Y'
+                                AND CM.DISP_YN = 'Y'
+                                AND CM.MALL_ID = '02'
+                                AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN CM.CPN_ISSUE_START_DT AND CM.CPN_ISSUE_END_DT
+                            ) E ON SP.SELL_PRDT_BCODE = E.SELL_PRDT_BCODE
+                  </isEqual>
+                 WHERE SP.SELL_PRDT_GBN IN ('P', 'G')
+                   AND SP.PRMT_CODE = 'C0302'
+                   AND SP.PRDT_STAT_CODE ='C0312'
+                   AND NVL(SP.TEC_SIZE, 'A') != 'S'
+                   AND EXISTS (SELECT * FROM TB_VENDOR_CONTRACT VC WHERE SP.VNDR_CNTRT_ID = VC.VNDR_CNTRT_ID AND VC.VNDR_CNTRT_STAT_CODE = 'C0072' AND TO_CHAR (SYSDATE, 'YYYYMMDD') BETWEEN VC.CNTRT_START_DT AND VC.CNTRT_END_DT)
+                   <isEqual property="benefitChk1" compareValue="true">
+                       AND (SP.FREE_DLVY_YN = 'Y' OR EXISTS(SELECT 1 FROM TB_EVENT_MASTER A JOIN TB_EVENT_SELL_PRODUCT B ON A.EVENT_ID = B.EVENT_ID  AND B.FREE_DLVY_YN = 'Y' JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId# WHERE A.PRMT_CODE = 'C0374' AND A.EVENT_STAT_CODE = 'C0181' AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT AND B.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE))
+                   </isEqual>
+                   <isEqual property="benefitChk2" compareValue="true">
+                       AND EXISTS (SELECT 1 FROM TB_COUPON_MASTER A ,TB_COUPON_APPLY_PRODUCT B WHERE A.CPN_ID = B.CPN_ID AND B.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND A.SCOPE_GBN = 'P' AND A.USE_YN = 'Y' AND A.DISP_YN = 'Y' AND A.MALL_ID = #mallId# AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT)
+                   </isEqual>
+                   <isEqual property="benefitChk3" compareValue="true">
+                       AND (SP.PRDT_DSCNT_RATE > 0 OR SP.PRDT_DSCNT_PRICE != SP.PRDT_SELL_PRICE OR E.SELL_PRDT_BCODE IS NOT NULL)
+                   </isEqual>
+                   <isEqual property="benefitChk4" compareValue="true">
+                       AND SP.DLVY_VNDR_ID = '0625'
+                   </isEqual>
+                 GROUP BY SP.SELL_PRDT_BCODE
+               )
+         WHERE ROWNUM &lt; #topCount# + 1
+    </select>
+</sqlMap>

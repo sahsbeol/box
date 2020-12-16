@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RecordQASQL">
+    <typeAlias alias="recordQAExt" type="kr.co.hottracks.site.model.common.record.RecordQAExt"/>
+    <typeAlias alias="recordQACriteria" type="kr.co.hottracks.site.model.common.record.RecordQACriteria"/>
+
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.26
+        기능 : 
+            QA 선택 처리 - 공통 조건절
+    -->
+    <sql id="getRecordQAWhere">
+        <dynamic prepend="where">
+            <isNotEmpty property="rcrdCd" removeFirstPrepend="true" prepend="and">
+                b.rcrd_cd = #rcrdCd#
+            </isNotEmpty>
+            <isNotEmpty property="prdtArtclGbn" removeFirstPrepend="true" prepend="and">
+                a.prdt_artcl_gbn = #prdtArtclGbn#
+            </isNotEmpty>
+            <isNotEmpty property="mallId" removeFirstPrepend="true" prepend="and">
+                a.mall_id = #mallId#
+            </isNotEmpty>
+            <isNotEmpty property="openYn" removeFirstPrepend="true" prepend="and">
+                (a.open_yn = #openYn# or
+                <isNotEmpty property="userNum"> a.ask_regst_user_num = #userNum# </isNotEmpty>
+                <isEmpty property="userNum"> a.ask_regst_user_num is null </isEmpty>
+                )
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.26
+        기능 : 
+            리뷰선택 처리
+    -->
+    <select id="getRecordQA" parameterClass="recordQACriteria" resultClass="recordQAExt">
+		select
+		    a.ask_regst_user_num as askRegstUserNum, 
+		    a.prdt_qna_seq as prdtQnaSeq, 
+		    a.prdt_qna_title as prdtQnaTitle, 
+		    a.prdt_ask_cont as prdtAskCont, 
+		    a.prdt_aswr_cont as prdtAswrCont, 
+		    a.aswr_regst_dtm as aswrRegstDtm, 
+		    a.aswr_regst_admin_id as aswrRegstAdminId, 
+		    a.ask_regst_dtm as askRegstDtm, 
+		    to_char(a.ask_regst_dtm, 'YYYY.MM.DD') as askRegstDt,  
+		    a.sell_prdt_bcode as sellPrdtBcode, 
+		    a.prdt_artcl_gbn as prdtArtclGbn, 
+		    a.prdt_grade as prdtGrade, 
+		    a.disp_yn as dispYn, 
+		    a.open_yn as openYn, 
+		    a.aswr_yn as aswrYn, 
+		    a.proc_stat_gbn as procStatGbn,
+		    decode(a.proc_stat_gbn, 'C', '완료', 'R', '접수', a.proc_stat_gbn) as procStatGbnName,  
+		    a.cmnt as cmnt, 
+		    a.write_user_name as writeUserName, 
+		    a.wrtor_email_addr as wrtorEmailAddr, 
+		    a.mall_id as mallId, 
+		    a.image_url as imageUrl, 
+		    fc_get_user_id(a.ask_regst_user_num) as userId, 
+		    rpad(substr(fc_get_user_id(a.ask_regst_user_num), 0, 4), 8, '*') as userIdBlock 
+		from tb_product_qna a
+		inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode
+        <include refid="getRecordQAWhere"/>
+        order by a.prdt_qna_seq desc
+    </select>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.26
+        기능 : 
+            리뷰선택 목록 개수 처리
+    -->
+    <select id="getRecordQAListCount" parameterClass="recordQACriteria" resultClass="int">
+        select
+            count(*) as cnt 
+        from tb_product_qna a
+        inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode
+        <include refid="getRecordQAWhere"/>
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</sqlMap>

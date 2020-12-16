@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="FrontDisplaySQL">
+    <typeAlias alias="displayCriteria" type="kr.co.hottracks.site.model.common.display.DisplayCriteria"/>
+    <typeAlias alias="newMainDisplayExt" type="kr.co.hottracks.site.model.common.display.NewMainDisplayExt"/>
+    <typeAlias alias="categoryDisplayEntityExt" type="kr.co.hottracks.site.model.common.display.CategoryDisplayEntityExt"/>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2013.11.20
+        기능 : 메인 전시 이미지를 반환한다.
+    -->
+    <select id="getMainDisplayImage" parameterClass="displayCriteria" resultClass="newMainDisplayExt">
+        /*FrontDisplaySQL.getMainDisplayImage*/
+        SELECT MD.IMAGE_URL         imageUrl
+             , MD.DISP_TITLE        dispTitle
+         FROM TB_MAIN_DISPLAY MD
+        WHERE INSTR(MD.DISP_MSTR_ID, #dispMstrId#) != 0
+          AND MD.MALL_ID = #mallId#
+          <isNotEmpty property="ctgrId" prepend="AND">
+              MD.CTGR_ID = #ctgrId#
+          </isNotEmpty>
+          <isNotEmpty property="bnrCode" prepend="AND">
+              MD.BNR_CODE = #bnrCode#
+          </isNotEmpty>
+        ORDER BY MD.GROUP_ID, MD.DISP_ORDER 
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2012.01.06
+        기능 : 메인 전시 배너를 반환한다.
+    -->
+    <select id="getMainDisplayBnr" parameterClass="displayCriteria" resultClass="newMainDisplayExt">
+        /*FrontDisplaySQL.getMainDisplayBnr*/
+        SELECT MD.DISP_MSTR_ID      dispMstrId
+             , MD.MAIN_DISP_SEQ     mainDispSeq
+             , MD.IMAGE_URL         imageUrl
+             , MD.LINK_URL          linkUrl
+             , MD.ETT_GBN           ettGbn
+             , MD.SELL_PRDT_BCODE   sellPrdtBcode
+             , MD.DISP_ORDER        dispOrder
+             , MD.LAST_MOD_ADMIN_ID lastModAdminId
+             , MD.MOD_DTM           modDtm
+             , MD.BNR_SEQ           bnrSeq
+             , MD.CTGR_ID           ctgrId
+             , MD.BNR_CODE          bnrCode
+             , MD.MALL_ID           mallId
+             , MD.GROUP_ID          groupId
+             , MD.BNR_SIZE_CODE     bnrSizeCode
+             , MD.DISP_TITLE        dispTitle
+             , BM.IMAGE_URL         bnrImageUrl
+             , BM.NEW_WDW_YN        bnrNewWdwYn
+             , BM.BNR_TGT_GBN       bnrTgtGbn
+             , BM.BNR_LINK_URL      bnrLinkUrl
+             , BM.IMAGE_ALT_CONT    imageAltCont
+             , MD.DISP_TITLE        dispTitle
+             , FC_GET_CODE_NAME(MD.BNR_SIZE_CODE)    bnrSizeCodeName
+         FROM TB_MAIN_DISPLAY MD
+         LEFT OUTER JOIN TB_BANNER_MASTER BM ON MD.BNR_SEQ = BM.BNR_SEQ
+        WHERE INSTR('R|P', MD.ETT_GBN) = 0 
+          AND INSTR(MD.DISP_MSTR_ID, #dispMstrId#) != 0
+          AND MD.BNR_SEQ IS NOT NULL
+          AND MD.MALL_ID = #mallId#
+          <isNotEmpty property="ctgrId" prepend="AND">
+              MD.CTGR_ID = #ctgrId#
+          </isNotEmpty>
+          <isNotEmpty property="bnrCode" prepend="AND">
+              MD.BNR_CODE = #bnrCode#
+          </isNotEmpty>
+        ORDER BY MD.GROUP_ID, MD.DISP_ORDER 
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2012.01.06
+        기능 : 메인 전시 상품을 반환한다.
+    -->
+    <select id="getMainDisplayPrdt" parameterClass="displayCriteria" resultClass="newMainDisplayExt">
+        /*FrontDisplaySQL.getMainDisplayPrdt*/
+        SELECT DISP_MSTR_ID         dispMstrId
+             , MAIN_DISP_SEQ        mainDispSeq
+             , IMAGE_URL            imageUrl
+             , LINK_URL             linkUrl
+             , ETT_GBN              ettGbn
+             , SELL_PRDT_BCODE      sellPrdtBcode
+             , DISP_ORDER           dispOrder
+             , LAST_MOD_ADMIN_ID    lastModAdminId
+             , MOD_DTM              modDtm
+             , BNR_SEQ              bnrSeq
+             , CTGR_ID              ctgrId
+             , BNR_CODE             bnrCode
+             , MALL_ID              mallId
+             , GROUP_ID             groupId
+             , BNR_SIZE_CODE        bnrSizeCode
+             , DISP_TITLE           dispTitle
+             , PRDT_NAME            prdtName
+             , SELL_PRDT_GBN        sellPrdtGbn
+             , CTGR_ID              prdtCtgrId
+             , RCRD_CD              rcrdCd
+             , PRDT_SELL_PRICE      prdtSellPrice
+             , PRDT_SAVED_RATE      prdtSavedRate
+             , ARTI_NAME            artiName
+             , RLSE_DT              rlseDt
+             , FREE_DLVY_YN         freeDlvyYn
+             , FC_GET_PRODUCT_IMAGE_URL(SELL_PRDT_BCODE)                                    prdtImageUrl
+             , (SELECT BRAND_NAME FROM TB_BRAND WHERE BRAND_ID = V.BRAND_ID)                prdtBrandName
+             , (SELECT T.LABEL_NAME FROM TB_REC_LABEL T WHERE T.LABEL_CD = V.LABEL_CD)      labelName
+             , FC_GET_CPN_PRICE(SELL_PRDT_BCODE, '02')                                      dscntPrice
+             , FC_GET_LAST_DC_RATE(SELL_PRDT_BCODE, '02')                                   dscntRate
+          FROM (SELECT MD.*
+                     , SP.PRDT_NAME
+                     , SP.SELL_PRDT_GBN
+                     , SP.RCRD_CD
+                     , SP.PRDT_SELL_PRICE
+                     , SP.PRDT_SAVED_RATE
+                     , SP.FREE_DLVY_YN
+                     , SP.BRAND_ID
+                     , R.ARTI_NAME
+                     , R.RLSE_DT
+                     , R.LABEL_CD
+                  FROM TB_MAIN_DISPLAY MD
+                 INNER JOIN TB_SELL_PRODUCT SP ON MD.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+                  LEFT OUTER JOIN TB_RECORD R ON MD.SELL_PRDT_BCODE = R.SELL_PRDT_BCODE
+                 WHERE INSTR('R|P', MD.ETT_GBN) != 0
+                   AND INSTR(MD.DISP_MSTR_ID, #dispMstrId#) != 0
+                   AND MD.MALL_ID = #mallId#
+                   <isNotEmpty property="ctgrId" prepend="AND">
+                       MD.CTGR_ID = #ctgrId#
+                   </isNotEmpty>
+                   <isNotEmpty property="bnrCode" prepend="AND">
+                       MD.BNR_CODE = #bnrCode#
+                   </isNotEmpty>
+                   
+                 ORDER BY MD.DISP_MSTR_ID, MD.CTGR_ID, MD.GROUP_ID, MD.DISP_ORDER, R.RLSE_DT DESC, SP.PRMT_DTM DESC
+               ) V
+         <dynamic prepend="WHERE">
+             <isGreaterThan property="fixedLength" compareValue="0">
+                 ROWNUM &lt; #fixedLength#+1
+             </isGreaterThan>
+         </dynamic>
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2012.01.06
+        기능 : 메인 전시 상품을 반환한다.
+    -->
+    <select id="getMainDisplaySchedule" parameterClass="displayCriteria" resultClass="newMainDisplayExt">
+        /*FrontDisplaySQL.getMainDisplaySchedule */
+        SELECT NVL(SP.PRVD_TITLE, SP.PRDT_NAME)     prdtName
+             , MD.DISP_TITLE                        dispTitle
+             , MD.SELL_PRDT_BCODE                   sellPrdtBcode
+             , SP.RCRD_CD                           rcrdCd
+             , SP.SELL_PRDT_GBN                     sellPrdtGbn
+             , PC.CTGR_ID                           ctgrId
+         FROM TB_MAIN_DISPLAY MD
+         JOIN TB_SELL_PRODUCT SP ON MD.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+         JOIN TB_PRODUCT_CATEGORY PC ON SP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.STD_CTGR_YN = 'Y'
+        WHERE MD.DISP_MSTR_ID = #dispMstrId#
+          AND MD.BNR_CODE = #bnrCode#
+          AND MD.DISP_TITLE LIKE #dispTitle# || '%'
+          AND MD.MALL_ID = #mallId#
+        ORDER BY MD.DISP_TITLE, MD.DISP_ORDER
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2012.01.06
+        기능 : 카테고리 전시 상품을 반환한다.
+     -->
+    <select id="getCategoryDisplayEntityPrdt" parameterClass="displayCriteria" resultClass="categoryDisplayEntityExt">
+        /*FrontDisplaySQL.getCategoryDisplayEntityPrdt*/
+        SELECT *
+          FROM (SELECT CDE.DISP_ORDER                       dispOrder
+                     , CDE.CTGR_ID                          ctgrId
+                     , CDE.DISP_MSTR_ID                     dispMstrId
+                     , CDE.DGR                              dgr
+                     , CDE.DISP_ETT_GBN                     dispEttGbn
+                     , CDE.SELL_PRDT_BCODE                  sellPrdtBcode
+                     , CDE.BRAND_ID                         brandId
+                     , CDE.EVENT_ID                         eventId
+                     , CDE.DISP_YN                          dispYn
+                     , CDE.BNR_SEQ                          bnrSeq
+                     , CDE.DISP_ETT_SEQ                     dispEttSeq
+                     , CDE.MALL_ID                          mallId
+                     , CDE.GNR_ID                           gnrId
+                     , CDE.GROUP_ID                         groupId
+                     , CDE.BNR_SIZE_CODE                    bnrSizeCode
+                     , NVL(SP.PRVD_TITLE, SP.PRDT_NAME)     prdtName
+                     , SP.SELL_PRDT_GBN                     sellPrdtGbn
+                     , SP.PRDT_SELL_PRICE                   orgSellPrice
+                     , SP.RCRD_CD                           rcrdCd
+                     , SP.PRDT_SAVED_RATE                   prdtSavedRate
+                     , SP.FREE_DLVY_YN                      freeDlvyYn
+                     , PC.CTGR_ID                           prdtCtgrId
+                     , R.ARTI_NAME                          artiName
+                     , R.RLSE_DT                            rlseDt
+                     , (SELECT BRAND_NAME FROM TB_BRAND WHERE BRAND_ID = SP.BRAND_ID)           prdtBrandName
+                     , (SELECT T.LABEL_NAME FROM TB_REC_LABEL T WHERE T.LABEL_CD = R.LABEL_CD)  labelName
+                     , FC_GET_PRODUCT_IMAGE_URL(CDE.SELL_PRDT_BCODE)        prdtImageUrl
+                     , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE, #mallId#)       dscntPrice
+                     , FC_GET_LAST_DC_RATE(SP.SELL_PRDT_BCODE, #mallId#)    dscntRate
+                     , FC_GET_PRODUCT_ICON_CODE(sp.sell_prdt_bcode, #mallId#) icon
+                 FROM TB_CATEGORY_DISPLAY_ENTITY CDE
+                INNER JOIN TB_SELL_PRODUCT SP ON CDE.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+                INNER JOIN TB_PRODUCT_CATEGORY PC ON CDE.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.STD_CTGR_YN = 'Y'
+                 LEFT OUTER JOIN TB_RECORD R ON SP.SELL_PRDT_BCODE = R.SELL_PRDT_BCODE
+                WHERE INSTR('P|R', CDE.DISP_ETT_GBN) != 0
+                  AND INSTR(CDE.DISP_MSTR_ID, #dispMstrId#) != 0
+                  AND CDE.MALL_ID = #mallId#
+                  AND CDE.CTGR_ID = #ctgrId#
+                  AND CDE.DISP_YN = 'Y'
+                ORDER BY CDE.GROUP_ID, CDE.DISP_ORDER, R.RLSE_DT DESC, SP.PRMT_DTM DESC
+              )
+         <dynamic prepend="WHERE">
+            <isGreaterThan property="fixedLength" compareValue="0">
+                ROWNUM &lt; #fixedLength#+1
+            </isGreaterThan>
+         </dynamic>
+    </select>
+</sqlMap>

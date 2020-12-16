@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/m_contents.js"></script>
+<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+<script type="text/javascript" src="../../js/biz/hott.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+<script>
+// hott.js 충돌로 별도 설정
+$(document).ready(function(){
+    $('.btn_history').on('click',function () {//history open
+        $('.lastest_prd').css('display','block');
+        $('.history_inner').css('display','block');
+        setTimeout(function() {
+            TweenLite.to($('.history_inner'),0.6,{ease:Power4.easeOut,right:3});
+         }, 10);
+    });
+});
+</script>
+</head>
+
+<body>
+	<div class="top_banner" style="background-color:#7e68ff;">
+		<div class="inner">
+			<!-- 영역 -->
+            <style>
+            /* 좌에서 우로 컬러 #코드 모두 수정 필수 */
+            .top_banner {
+            background: -webkit-linear-gradient(left,  #2b44c3 0%,#2b44c3 50%,#febf3c 50%,#febf3c 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right,  #2b44c3 0%,#2b44c3 50%,#febf3c 50%,#febf3c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            }
+            </style>
+            <div class="top_banner_a type2">
+	            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/img_top_banner02.jpg" usemap="#top_map">
+        	    <map name="top_map">
+            	    <area shape="rect" coords="2,3,610,77" href="/ht/hot/eventDetail?eventId=66901" onfocus="this.blur()">
+            	    <area shape="rect" coords="651,2,1246,78" href="/ht/hot/eventDetail?eventId=66843" onfocus="this.blur()">
+	            </map>
+	            <!-- 화이트 버튼 white로 / 블랙 버튼 black로 클래스 추가 -->
+	            <a href="#none" class="btn_close black">닫기</a>
+            </div>				
+		</div>
+	</div>
+
+	<div id="wrap" class="content_new">
+		<!-- header -->
+		<div id="header">
+			<!-- util menu -->
+			<div class="util_menu">
+				<ul>
+					<li><a href="#">로그인</a></li>
+					<li><a href="#">회원가입</a></li>
+					<li><a href="#">고객센터</a></li>
+					<li><a href="#">매장안내</a></li>
+					<li><a href="#">팬사인회</a></li>
+				</ul>
+			</div>
+			<!--// util menu -->
+			<!-- gnb -->
+	        <nav id="gnb">
+				<div class="header_wrap">
+					<h1 class="g_logo"><a href="../biz/main.html">HOTTRACKS</a></h1>
+					<div class="g_search">
+						<div class="form_select">
+							<select>
+								<option>문구/기프트</option>
+								<option>option2</option>
+								<option>option3</option>
+							</select>
+						</div>
+						<div class="form_search">
+							<input type="text" placeholder="샤오미를 쓰는 이유">
+							<a href="../biz/search.html" class="btn_search"></a>
+						</div>
+						<div class="keyword_wrap">
+							<a href="#">
+								<em class="font_t">12</em>
+								<p>에어팟케이스</p>
+								<!-- ▲ up , ▼ down : class 추가 -->
+								<span class="num up">99+</span>
+							</a>
+						</div>
+					</div>
+					<div class="g_menu">
+						<ul>
+							<li class="icon_my">
+								<a href="#">
+									<img src="../../images/biz/common/icon_my.png" alt="">
+								</a>
+							</li>
+							<li class="icon_today">
+								<a href="#">
+									<img src="../../images/biz/common/icon_today.png" alt="">
+									<em>오늘,<strong>혜택</strong></em>
+								</a>
+							</li>
+							<li class="icon_cart">
+								<a href="#">
+									<img src="../../images/biz/common/icon_cart.png" alt="">
+									<em class="font_t">5</em>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="gnb_wrap">
+					<div class="inner">
+						<div class="category_wrap">
+							<div class="btn_category">
+								<a href="#">카테고리</a>
+							</div>
+							<div class="category_cont">
+								<ul>
+									<li>
+										<a href="../biz/category_list.html" class="dp1">디자인문구</a>
+										<div class="dp2">
+											<ul>
+												<li>
+													<a href="../biz/skyscraper_v2.html" class="all">전체보기</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="../biz/category_list.html" class="all">전체보기</a></li>
+															<li><a href="#">2020 날짜형 다이어리</a></li>
+															<li><a href="#">만년 다이어리</a></li>
+															<li><a href="#">2020 날짜형 스케쥴러</a></li>
+															<li><a href="#">위클리 스케쥴러</a></li>
+															<li><a href="#">먼슬리 스케쥴러</a></li>
+															<li><a href="#">캐쉬북</a></li>
+															<li><a href="#">프로젝트플래너</a></li>
+															<li><a href="#">스터디플래너</a></li>
+															<li><a href="#">여행플래너</a></li>
+															<li><a href="#">다이어트플래너</a></li>
+															<li><a href="#">임신 다이어리</a></li>
+															<li><a href="#">리필속지</a></li>
+															<li><a href="#">커버/액세서리</a></li>
+															<li><a href="#" class="more">ㄹ</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">다이어리/스케쥴러</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">비즈니스플래너/노트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">2020 캘린더/만년</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필기구</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필통/파우치</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">노트/메모</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포토앨범/스크랩북</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">스티커/스탬프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">데코/디자인 테이프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포장/데코용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">편지/카드/봉투</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">컬러링/캘리/문구세트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">화방용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">BOOK</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="dp1">디지털</a>
+										<div class="dp2">
+											<ul>
+												<li>
+													<a href="#" class="all">전체보기</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+															<li><a href="#">2020 날짜형 다이어리</a></li>
+															<li><a href="#">만년 다이어리</a></li>
+															<li><a href="#">2020 날짜형 스케쥴러</a></li>
+															<li><a href="#">위클리 스케쥴러</a></li>
+															<li><a href="#">먼슬리 스케쥴러</a></li>
+															<li><a href="#">캐쉬북</a></li>
+															<li><a href="#">프로젝트플래너</a></li>
+															<li><a href="#">스터디플래너</a></li>
+															<li><a href="#">여행플래너</a></li>
+															<li><a href="#">다이어트플래너</a></li>
+															<li><a href="#">임신 다이어리</a></li>
+															<li><a href="#">리필속지</a></li>
+															<li><a href="#">커버/액세서리</a></li>
+															<li><a href="#" class="more">더보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">다이어리/스케쥴러</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">비즈니스플래너/노트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">2020 캘린더/만년</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필기구</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필통/파우치</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">노트/메모</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포토앨범/스크랩북</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">스티커/스탬프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">데코/디자인 테이프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포장/데코용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">편지/카드/봉투</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">컬러링/캘리/문구세트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">화방용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">BOOK</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="dp1">고급필기구</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">오피스</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">리빙/생활가전</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">키친/푸드</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">가구/수납</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">패션잡화</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">뷰티/헬스</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">여행/자동차</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">취미/펫</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">유아동</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">직수입/PB</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">CD/LP</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">DVD/BLU-RAY</a>
+									</li>
+								</ul>
+								<div class="banner">
+									<a href="#"><img src="" alt=""></a>
+								</div>
+							</div>
+						</div>
+						<ul class="gnb_menu">
+							<li><a href="#">다이어리<em></em></a></li>
+							<li><a href="#">음반<em></em></a></li>
+							<li><a href="#">베스트</a></li>
+							<li><a href="#">무료배송</a></li>
+							<li><a href="#">신상품</a></li>
+							<li><a href="#">세일</a></li>
+							<li><a href="#">이벤트</a></li>
+						</ul>
+						<ul class="sub_menu">
+							<li><a href="#">개인의취향</a></li>
+							<li><a href="#">이럴 때,</a></li>
+							<li><a href="#">아지트</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!--// header -->
+
+		<!-- Container -->
+		<div id="container">
+
+			<!-- 컨텐츠 -->
+			<div class="content category_wrap" id="content">
+				<!-- 배너 -->
+				<div class="category_banner_wrap">
+					<div class="category_banner">
+						<div class="slide-item">
+							<a href="#none">
+								<img src="../../images/biz/thums/img_banner00.png" alt="">
+							</a>
+						</div>
+						<div class="slide-item">
+							<a href="#none">
+								<img src="../../images/biz/thums/img_banner00.png" alt="">
+							</a>
+						</div>
+						<div class="slide-item">
+							<a href="#none">
+								<img src="../../images/biz/thums/img_banner00.png" alt="">
+							</a>
+						</div>
+					</div>
+					<div class="custom_paging_wrap">
+						<div class="custom_paging"></div>
+
+					</div>
+				</div>
+				<!--// 배너 -->
+				<div class="lower_content">
+					<!-- location -->
+				    <div class="location_wrap">
+			            <button type="button" class="btn_home">홈으로</button>
+			            <div class="location_nav_wrap">
+			                <a href="#" class="location_1">디자인문구</a>
+			                <ul class="location_nav">
+			                    <li><a href="#">디자인문구</a></li>
+			                    <li><a href="#">디자인문구</a></li>
+			                </ul>
+			            </div>
+		                <div class="location_nav_wrap">
+		                    <!-- 해당 페이지 on 클래스 추가 -->
+		                    <a href="#" class="location_1">다이어리/스케쥴러</a>
+		                    <ul class="location_nav">
+		                        <li><a href="#">다이어리/스케쥴러</a></li>
+		                    </ul>
+		                </div>
+						<div class="location_nav_wrap">
+		                    <!-- 해당 페이지 on 클래스 추가 -->
+		                    <p class="location_1 on">소량 주문제작</p>
+		                </div>
+				    </div>
+				    <!--// location -->
+
+					<h2 class="sub_title">서브타이틀</h2>
+					<div class="category_list">
+						<ul>
+							<li><a href="#">전체보기</a></li>
+							<li><a href="#">2020 캘린더/만년</a></li>
+							<li><a href="#">노트/메모</a></li>
+							<li><a href="#">데코/디자인 테이프</a></li>
+							<li><a href="#">다이어리/스케줄러</a></li>
+						</ul>
+					</div>
+					<!-- 상품 -->
+					<div class="pd_list">
+						<ul>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste05.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_main04.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_main06.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_main26.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_main06.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_main12.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_main10.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste04.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste13.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste14.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste10.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste12.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_main01.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit16.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit13.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit14.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit07.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit06.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit05.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit13.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<!-- 품절시 sold_out : class 추가 -->
+							<li class="sold_out">
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit12.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge03">품절</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_agit13.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste04.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="thum">
+										<img src="../../images/biz/thums/img_taste05.png" alt="">
+									</div>
+								</a>
+								<!-- 클릭시 active : class 추가 -->
+								<a href="#none" class="btn_like active"><span>좋아요</span></a>
+								<a href="#none">
+									<div class="cont">
+										<p class="brand">wearinggeul</p>
+										<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+										<p class="price font_t">
+											<span class="percent">20%</span>
+											<span>999,999</span>
+											<span class="discount">999,999</span>
+										</p>
+										<div class="info">
+											<span class="reply">999+</span>
+											<span class="like">999+</span>
+										</div>
+										<div class="badge">
+											<span class="badge01">쿠폰</span>
+											<span class="badge02">사은품</span>
+											<span class="badge02">무료배송</span>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!--//상품 -->
+
+					<aside id="skyscraper" class="quick_menu">
+						<div class="bnr_wrap">
+							<a href="javascript:" class="btn_banner">
+								<img src="../../images/biz/sub/history/bnr_off.png" alt="작은 배너">
+							</a>
+							<a href="javascript:" class='btn_large'>
+								<img src="../../images/biz/sub/history/bnr_on.png" alt="큰 배너">
+							</a>
+						</div>
+						<div class="box_frame"><!-- 히스토리 없는 경우, no : class 추가-->
+							<a href="javascript:" class="btn_history">
+								<img src="../../images/biz/common/arr_L_bold.png" alt="히스토리 보기">
+								<span>히스토리</span>
+							</a>
+							<ul class="list_history no">
+								<li class="no_history">
+									<img src="../../images/biz/sub/history/no_history.png" alt="히스토리 없음">
+									<p>아직<br> 쇼핑 히스토리가<br> 없어요</p>
+								</li>
+								<li class="active">
+									<div class="hover_wrap">
+										<a href="javascript:" class='hv_recent hv_image'>
+											<span>2020 빨강머리앤 감성다이어리 (날짜형) 감성있는 다이어리</span>
+											<strong>7,000</strong>
+											<i><img src="../../images/biz/sub/test_img.jpg" alt="최근 본 상품"></i>
+										</a>
+										<a href="javascript:" class="btn_close"><img src="../../images/biz/common/btn_close_s.png" alt="닫기"></a>
+									</div>
+									<a href="javascript:" class="thumb_sky">
+										<img src="../../images/biz/sub/test_img.jpg" alt="test">
+										<p></p>
+									</a>
+								</li>
+								<li class="active ic_03 sold_out">
+									<div class="hover_wrap">
+										<a href="javascript:" class="hv_recent">
+											<em class="ic_04">이벤트</em><!-- 검색·기획전·이벤트·브랜드순 ic02 ~ 05 : class 추가 -->
+											<span>2020 빨강머리앤 감성다이어리 (날짜형) 감성있는 다이어리 빨강</span>
+										</a>
+										<a href="javascript:" class="sold_dim"></a>
+										<a href="javascript:" class="btn_close"><img src="../../images/biz/common/btn_close_s.png" alt="닫기"></a>
+									</div>
+									<a href="javascript:" class="thumb_sky">
+										<em>이벤트</em>
+										<span>2020 빨강머리앤 감성다이어리</span>
+									</a>
+								</li>
+								<li class="active">
+									<div class="hover_wrap">
+										<a href="javascript:" class="hv_recent">
+											<em class="ic_04">기획전</em>
+											<span>#LUCA 12:00</span>
+										</a>
+										<a href="javascript:" class="sold_dim"></a>
+										<a href="javascript:" class="btn_close"><img src="../../images/biz/common/btn_close_s.png" alt="닫기"></a>
+									</div>
+									<a href="javascript:" class="thumb_sky">
+										<em>기획전</em>
+										<span>LUCA <br> 12:00</span>
+									</a>
+								</li>
+							</ul>
+							<div class="pagination_wrap">
+								<span class="page_num">1</span>
+								<span class="page_sum">2</span>
+							</div>
+							<div class="slider_turn">
+								<a href="javascript:" class='btn_sky_prev'><span class='sky_prev off'></span></a>
+								<a href="javascript:" class='btn_sky_next'><span class='sky_next on'></span></a>
+							</div>
+							<div class="lastest_prd">
+								<div class="history_inner category_wrap case01"><!-- case01 · case02 : class 추가 -->
+									<div class="category_type">
+										<span class="tit_history"><i><img src="../../images/biz/sub/history/ic_history_black.png" alt="히스토리"></i>히스토리</span>
+										<div class="txt_blue">
+											<a href="javascript:" class="btn_editing"><em class="edit">편집</em></a>
+											<a href="javascript:" class="btn_cancel"><em class="cancel">취소</em></a>
+										</div>
+										<a href="javascript:" class="close_history"><img src="../../images/biz/common/btn_close_s.png" alt="히스토리 닫기"></a>
+										<p class="bott_border"></p>
+										<ul class="list_kind clear">
+											<li class="active"><!-- 활성화시, active : class 추가 -->
+												<i class="ic_01"></i><!-- 순서대로 ic_01 ~ 05 -->
+												<span>상품</span>
+												<a href="javascript:"></a>
+											</li>
+											<li class="active">
+												<i class="ic_02"></i>
+												<span>검색</span>
+												<a href="javascript:"></a>
+											</li>
+											<li class="active">
+												<i class="ic_03"></i>
+												<span>기획전</span>
+												<a href="javascript:"></a>
+											</li>
+											<li class="active">
+												<i class="ic_04"></i>
+												<span>이벤트</span>
+												<a href="javascript:"></a>
+											</li>
+											<li class="active">
+												<i class="ic_05"></i>
+												<span>브랜드</span>
+												<a href="javascript:"></a>
+											</li>
+										</ul>
+										<ul class="list_erase clear">
+											<li>
+												<img src="../../images/biz/common/chk_black.png" alt="선택삭제">
+												<span>선택삭제</span>
+												<a href="javascript:"></a>
+											</li>
+											<li>
+												<img src="../../images/biz/common/ic_delete.png" alt="선택삭제">
+												<span>전체삭제</span>
+												<a href="javascript:"></a>
+											</li>
+										</ul>
+									</div>
+									<div class="area_overflow"><!-- 히스토리 없는 경우, no : class 추가-->
+										<div class="box_history pd_list">
+											<h4 class="tdy font_t">Today</h4>
+											<ul class="catalog_history edit"><!-- 편집 비활성 -->
+												<li class="ic_01">
+													<a href="javascript:">
+														<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+														<div class="desc_type01">
+															<h2>로이텀 MASTER SLIM 121P <br>- LINE</h2>
+															<p>
+																<span class="font_t percent">20%</span>
+																<span class="font_t">999,999</span>
+															</p>
+														</div>
+													</a>
+													<a href="#none" class="btn_like active"><span>좋아요</span></a>
+												</li>
+												<li class="ic_02">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2># 에어팟 케이스</h2>
+														</div>
+													</a>
+												</li>
+												<li class="ic_03">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2>단, 하루만! 인기 키친 브랜드 특가!</h2>
+															<p>마리슈타이거 단독 3품목 초특가</p>
+														</div>
+													</a>
+												</li>
+												<li class="ic_04">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2>핫트♥프라이데이 <딱 3일간, 저 세상 혜택></h2>
+															<p>친구에게 공유하면 에어팟pro 매일 증정!</p>
+														</div>
+													</a>
+												</li>
+												<li class="ic_05">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2>Kenko 겐코</h2>
+														</div>
+													</a>
+													<a href="#none" class="btn_like"><span>좋아요</span></a>
+												</li>
+											</ul>
+											<ul class="catalog_history cancel"><!-- 편집 활성 -->
+												<li class="ic_01 chk_off sold_out"><!-- 품절 sold_out : class 추가 -->
+													<a href="javascript:" class='btn_erase'>
+														<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+														<div class="desc_type01">
+															<h2>오거나이저로 싹 정리 퍼니메이드 오거나이저</h2>
+															<p>
+																<span class="font_t percent">20%</span>
+																<span class="font_t">999,999</span>
+															</p>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<a href="#none" class="btn_like active"><span>좋아요</span></a>
+													<div class="run_out out01"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_04 chk_off chk_on"><!-- 삭제할 히스토리에 chk_on -->
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2># 에어팟 케이스</h2>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out01"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_05 chk_off sold_out">
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2>단, 하루만! 인기 키친 브랜드 특가!</h2>
+															<p>마리슈타이거 단독 3품목 초특가</p>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out03"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_03 chk_off">
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2>핫트♥프라이데이 <딱 3일간, 저 세상 혜택></h2>
+															<p>친구에게 공유하면 에어팟pro 매일 증정!</p>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out02"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_02 chk_off">
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2>Kenko 겐코</h2>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out03"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="box_history pd_list">
+											<h4 x-ms-format-detection="none" class="lst font_t"><span class="year">2020</span> 01 <em>09</em> <i class="fri"></i><!-- sun·mon·tue·wed·thur·fri·sat : class 추가 --></h4>
+											<ul class="catalog_history edit">
+												<li class="ic_01 hide"><!-- (아이콘) 상품·검색·기획전·이벤트·브랜드순 ic_01 ~ 05 -->
+													<a href="javascript:">
+														<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+														<div class="desc_type01">
+															<h2>로이텀 MASTER SLIM 121P LINE</h2>
+															<p>
+																<span class="font_t percent">20%</span>
+																<span class="font_t">999,999</span>
+															</p>
+														</div>
+													</a>
+													<a href="#none" class="btn_like active"><span>좋아요</span></a>
+												</li>
+												<li class="ic_02">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2># 에어팟 케이스</h2>
+														</div>
+													</a>
+												</li>
+												<li class="ic_03">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2>단, 하루만! 인기 키친 브랜드 특가!</h2>
+															<p>마리슈타이거 단독 3품목 초특가</p>
+														</div>
+													</a>
+												</li>
+												<li class="ic_04">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2>핫트♥프라이데이 <딱 3일간, 저 세상 혜택></h2>
+															<p>친구에게 공유하면 에어팟pro 매일 증정!</p>
+														</div>
+													</a>
+												</li>
+												<li class="ic_05">
+													<a href="javascript:">
+														<div class="desc_type02">
+															<h2>Kenko 겐코</h2>
+														</div>
+													</a>
+													<a href="#none" class="btn_like active"><span>좋아요</span></a>
+												</li>
+												<li class="ic_01">
+													<a href="javascript:">
+														<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+														<div class="desc_type01">
+															<h2>[한정수량] 드레택 스탑워치 화이트</h2>
+															<p>
+																<span class="font_t percent">20%</span>
+																<span class="font_t">999,999</span>
+															</p>
+														</div>
+													</a>
+													<a href="#none" class="btn_like"><span>좋아요</span></a>
+												</li>
+											</ul>
+											<ul class="catalog_history cancel"><!-- 편집 활성 -->
+												<li class="ic_01 chk_off sold_out"><!-- 품절 sold_out : class 추가 -->
+													<a href="javascript:" class="btn_erase">
+														<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+														<div class="desc_type01">
+															<h2>오거나이저로 싹 정리 퍼니메이드 오거나이저</h2>
+															<p>
+																<span class="font_t percent">20%</span>
+																<span class="font_t">999,999</span>
+															</p>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<a href="#none" class="btn_like active"><span>좋아요</span></a>
+													<div class="run_out out01"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_04 chk_off chk_on"><!-- 삭제할 히스토리에 chk_on -->
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2># 에어팟 케이스</h2>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out01"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_05 chk_off sold_out">
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2>단, 하루만! 인기 키친 브랜드 특가!</h2>
+															<p>마리슈타이거 단독 3품목 초특가</p>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out03"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_03 chk_off">
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2>핫트♥프라이데이 <딱 3일간, 저 세상 혜택></h2>
+															<p>친구에게 공유하면 에어팟pro 매일 증정!</p>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out02"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+												<li class="ic_02 chk_off">
+													<a href="javascript:" class="btn_erase">
+														<div class="desc_type02">
+															<h2>Kenko 겐코</h2>
+														</div>
+													</a>
+													<a href="javascript:" class="chk_delete"></a>
+													<div class="run_out out03"><!-- 품절유형 out01 ~ 03 : class 추가 -->
+														<span class="out01">일시<br>품절</span>
+														<span class="out02">품절</span>
+														<span class="out03">종료</span>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="empty_history">
+											<img src="../../images/biz/sub/history/no_history.png" alt="히스토리 없음">
+											<p><span>아직 쇼핑 히스토리가 없어요<br> 핫트랙스에는<br> 보물 같은 아이들이 많답니다</span><br><br>관심이 필요해요</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="btn_goTop">
+							<a href="javascript:"><img src="../../images/biz/common/go_top.png" alt="페이지 상단으로 가기">TOP</a>
+						</div>
+					</aside>
+					<!-- pagination -->
+					<div class="pagination_v2">
+						<a href="#none" class="arr prev first"></a>
+						<a href="#none" class="active">1</a>
+						<a href="#none">2</a>
+						<a href="#none">3</a>
+						<a href="#none">4</a>
+						<a href="#none">5</a>
+						<a href="#none" class="arr next"></a>
+					</div>
+					<!--// pagination -->
+				</div>
+			</div>
+			<!-- // 컨텐츠 -->
+		</div>
+		<!--// Container -->
+
+		<!-- footer -->
+		<div id="footer">
+			<div class="util">
+				<div class="util_cont">
+					<ul>
+						<li><a href="#">회사소개</a></li>
+						<li><a href="#">채용정보</a></li>
+						<li><a href="#">핫트합니다</a></li>
+						<li><a href="#">매장안내</a></li>
+						<li><a href="#">제휴/광고안내</a></li>
+						<li><a href="#">이용약관</a></li>
+						<li><a href="#"><strong>개인정보처리방침</strong></a></li>
+						<li><a href="#">이메일수집거부</a></li>
+					</ul>
+					<div class="family_site">
+						<p>패밀리 사이트</p>
+						<ul>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div class="cont left">
+					<div class="cs_center">
+						<strong class="font_t">1661-1112</strong>
+						<span>평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
+						<dl>
+							<dt><a href="#"><span>SOS 상담</span></a></dt>
+							<dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
+						</dl>
+					</div>
+					<h2>교보핫트랙스㈜</h2>
+					<span>대표이사 박영규</span>
+					<span>사업자등록번호 : 102-81-29258 <a href="#">사업자정보확인 &gt;</a></span>
+					<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+					<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+					<span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
+				</div>
+				<div class="cont right">
+					<ul class="sns">
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_blog.png" alt="blog"></a></li>
+					</ul>
+	                <div class="mobile">
+	                    <a href="#" target="_blank" class="font_t ios">APP STORE</a>
+						<a href="#" target="_blank" class="font_t and">PLAY STORE</a>
+	                </div>
+					<ul class="copyright">
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+					</ul>
+					<span class="payment"><em class="font_t">LGU+</em><a href="#" target="_blank">서비스 가입사실 확인 &gt;</a></span>
+					<span class="txt">고객님은 안전거래를 위해 현금 등으로 5만원 이상 결제 시 저희 쇼핑몰에서<br/>가입한 LG데이콤의 구매 안전서비스를 이용하실 수 있습니다.</span>
+				</div>
+			</div>
+		</div>
+		<!--// footer -->
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		gnb();//gnb
+		nav();//nav
+		if($('.header_wrap').length >0){
+			bodyScroll();//body scroll
+		}
+		skyScraper();//scroll
+		skyScraper02();
+		categoryFn();//category
+		historyDelete();//delete
+	})
+	</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="CategorySQL">
+    <typeAlias alias="category" type="kr.co.hottracks.site.model.common.category.Category"/>
+    <typeAlias alias="sellProductKey" type="kr.co.hottracks.site.model.common.product.SellProductKey"/>
+    <typeAlias alias="frontCategoryDisplayCriteria" type="kr.co.hottracks.site.model.common.display.FrontCategoryDisplayCriteria"/>
+    <typeAlias alias="categoryProduct" type="kr.co.hottracks.site.model.common.category.CategoryProduct"/>
+    
+    <select id="getCategoryList" resultClass="category">
+        /* CategorySQL.getCategoryList */
+        SELECT C.CTGR_ID cateId
+             , C.PARNT_CTGR_ID parentCateId
+             , C.CTGR_NAME cateName
+             , C.CTGR_DESC cateDesc
+             , C.REGST_DTM registerDtm
+             , C.REGST_ADMIN_ID registerAdminId
+             , C.USE_YN useYn
+             , C.DISP_ORDER displayOrder
+             , C.ICON_ID iconId
+             , C.SUB_MAIN_YN subMainYn
+             , C.KYOBO_CODE kyoboCode
+             , LTRIM(SYS_CONNECT_BY_PATH(C.CTGR_ID, ' > '),'> ')                cateIdPath
+             , LTRIM(SYS_CONNECT_BY_PATH(C.CTGR_NAME, ' > '),'> ')              cateNamePath
+             , FC_GET_MALLID_CATEGORY(C.CTGR_ID)            mallGubun
+             , FC_GET_MALLID_CATEGORY_ALL(C.CTGR_ID)        mallId
+             /*, FC_GET_PRDT_CNT_BY_CTGR(C.CTGR_ID, '02')     productCount*/
+          FROM TB_CATEGORY C
+         WHERE SUBSTR(C.CTGR_ID, 1, 4) IN ('00', '0000', '0003', '0004')
+         START WITH C.CTGR_ID = '00'
+       CONNECT BY PRIOR C.CTGR_ID = C.PARNT_CTGR_ID
+         ORDER SIBLINGS BY C.DISP_ORDER
+    </select>
+    
+    <select id="getCategorysByProductId" parameterClass="sellProductKey" resultClass="category">
+        /* CategorySQL.getCategorysByProductId */
+        SELECT A.CTGR_ID        cateId
+             , A.PARNT_CTGR_ID  parentCateId
+             , A.CTGR_NAME      cateName
+             , A.CTGR_DESC      cateDesc
+             , A.REGST_DTM      registerDtm
+             , A.REGST_ADMIN_ID registerAdminId
+             , A.USE_YN         useYn
+             , A.DISP_ORDER     displayOrder
+             , A.ICON_ID        iconId
+             , B.STD_CTGR_YN    standardYn
+          FROM TB_CATEGORY A
+             , TB_PRODUCT_CATEGORY B
+         WHERE B.SELL_PRDT_BCODE = #barcode#
+           AND A.CTGR_ID = B.CTGR_ID 
+    </select>
+    
+    <select id="getStandardCategoryByProductKey" parameterClass="sellProductKey" resultClass="string">
+        /* CategorySQL.getStandardCategoryByProductKey */
+        SELECT A.CTGR_ID cateId
+          FROM TB_CATEGORY A, tb_product_category B
+         WHERE B.sell_prdt_bcode = #barcode#
+           AND A.ctgr_id = B.ctgr_id
+           AND A.USE_YN = 'Y' 
+           AND B.STD_CTGR_YN = 'Y'
+           AND rownum <![CDATA[ < ]]> 2 
+    </select>
+    
+    <cacheModel type="LRU" id="prdtCntChache" readOnly="true">
+        <flushInterval hours="10"/>
+        <property name="size" value="3000"/>
+    </cacheModel>
+    
+    <select id="getProductCountEachCategoryId" cacheModel="prdtCntChache" parameterClass="frontCategoryDisplayCriteria" resultClass="category">
+        /* CategorySQL.getProductCountEachCategoryId */
+        SELECT C.CTGR_ID                                    cateId
+             , FC_GET_PRDT_CNT_BY_CTGR(C.CTGR_ID, #mallId#) productCount
+          FROM TB_CATEGORY C
+         WHERE C.USE_YN = 'Y'
+           AND C.DLT_YN = 'N'
+           AND C.PARNT_CTGR_ID LIKE #twoDepthCtgrId#||'%' 
+         ORDER BY LENGTH(C.CTGR_ID), C.CTGR_ID
+    </select>
+    
+    <select id="getChildCategoryListIncludeMyself" parameterClass="category" resultClass="category">
+        /* CategorySQL.getChildCategoryListIncludeMyself */
+        SELECT C.CTGR_ID cateId
+               , C.PARNT_CTGR_ID parentCateId
+               , C.CTGR_NAME cateName
+               , C.CTGR_DESC cateDesc
+               , C.REGST_DTM registerDtm
+               , C.REGST_ADMIN_ID registerAdminId
+               , C.USE_YN useYn
+               , C.DISP_ORDER displayOrder
+               , C.ICON_ID iconId
+               , C.SUB_MAIN_YN subMainYn
+               , C.KYOBO_CODE kyoboCode
+          FROM TB_CATEGORY C
+         WHERE C.CTGR_ID LIKE #cateId# || '%'
+    </select>
+    
+    <select id="getProductCategoryList" parameterClass="string" resultClass="categoryProduct">
+        /* CategorySQL.getProductCategoryList*/
+        SELECT CTGR_ID          categoryId
+             , SELL_PRDT_BCODE  productBarcode
+             , STD_CTGR_YN      standardCategoryYn
+             , REGST_DTM        registDatetime
+          FROM TB_PRODUCT_CATEGORY
+         WHERE SELL_PRDT_BCODE = #value#
+    </select>
+    
+    <select id="getCategoryByParntCtgrIdList" parameterClass="string" resultClass="category">
+        /* CategorySQL.getCategoryByParntCtgrIdList */
+        SELECT CTGR_ID      cateId
+             , CTGR_NAME    cateName
+          FROM TB_CATEGORY
+         WHERE PARNT_CTGR_ID = #value#
+    </select>
+    
+    <select id="getChildCategoryListIndexSearch" parameterClass="string" resultClass="category">
+        /* CategorySQL.getChildCategoryListIndexSearch */
+        SELECT CTGR_ID      cateId
+             , CTGR_NAME    cateName
+          FROM TB_CATEGORY
+         WHERE CTGR_ID = #cateId#
+    </select>
+    
+    <!-- 
+         기능 : 해당 키워드의 카테고리 목록 반환 
+         작성자 : 장진용
+         작성일 : 2012-06-11
+    -->
+    <select id="getCategoryListByKeyword" parameterClass="category" resultClass="category">
+        /* CategorySQL.getCategoryListByKeyword */
+        SELECT CTGR_ID  cateId
+          FROM (
+            SELECT RANK() OVER (PARTITION BY SUBSTR(CTGR_ID, 0, 4) ORDER BY LENGTH(CTGR_ID), CTGR_ID) NO
+                 , CTGR_ID
+              FROM TB_CATEGORY A
+            WHERE CTGR_NAME LIKE '%'||#cateName#||'%'
+                AND SUBSTR(CTGR_ID,0,4) NOT IN ('0002', '0005')
+                AND CTGR_ID LIKE #parentCateId#||'%'
+                AND LENGTH(CTGR_ID) > 4
+                AND USE_YN = 'Y'
+            ORDER BY NO, CTGR_ID
+        )
+        WHERE ROWNUM &lt;= 4
+    </select>
+    
+    <!-- 
+        기능 : 카테고리 경로를 반환한다.[교보 통계용]
+        작성자 : 장진용
+        작성일 : 2012.09.25
+    -->
+    <select id="getCategoryPathByCtgrId" parameterClass="string" resultClass="string">
+        /* CategorySQL.getCategoryPathByCtgrId */
+        SELECT LTRIM(SYS_CONNECT_BY_PATH(REPLACE(CTGR_NAME, '/', '_'), '/'),'/') cateNamePath
+          FROM TB_CATEGORY 
+         WHERE CTGR_ID = #value#
+         START WITH CTGR_ID IN ('0000', '0001', '0003', '0004')
+       CONNECT BY PRIOR  CTGR_ID = PARNT_CTGR_ID
+         ORDER SIBLINGS BY DISP_ORDER
+    </select>
+</sqlMap>

@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>메일</title>  
+</head>
+
+<body style="margin:0; padding:0;"> 
+<div style="width:100%; overflow:hidden; padding:20px 0;">
+	<div style="width:720px; margin:0 auto; text-align:left; padding:0 20px;">
+	  
+	  	<!-- header -->
+		<div style="width:720px; height:46px; border-bottom:3px solid #da2128; margin-bottom:20px;">
+			<a href="$!{host}" target="_blank"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/email/h1_logo_c.gif" alt="교보핫트랙스" border="0" /></a>
+		</div>
+		<!-- //header -->
+		
+		<!-- container -->
+		<div class="container">
+			
+			<div class="top">
+				<p style="margin:0;"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/email/title_mail01.gif" alt="고객님의 주문이 정상적으로 완료되었습니다." /></p>
+				<p style="margin:0 0 16px 20px; font-size:11px; font-family:'dotum','Dotum'; color:#707070; line-height:18px;">
+					<span style="color:#555555; font-weight:bold;">$!{buyerName}</span> 고객님 안녕하세요!<br />
+					주문이 정상적으로 완료되었습니다.<br />
+					고객님께서 결제하신 내역, 배송추적 및 주문 선택사항, 배송정보 수정, 영수증 발급은 <a href="$!{host}/ht/mypage/mypageMain" target="_blank" style="color:#da2128; font-weight:bold;">My Hottracks > 주문정보</a> 메뉴에서<br />
+					하실 수 있습니다. 
+				</p>
+			</div>
+			 
+			<div style="width:720px; overflow:hidden; margin-bottom:10px;"> 
+				<div style="width:718px; overflow:hidden; position:relative; border:1px solid #dddddd; background:#f7f7f7;"> 
+					<div style="width:710px; overflow:hidden; background:#fff; margin:4px;">
+						<p class="nb" style="margin:0; padding:10px 0 8px 0; text-align:center; font-size:14px; font-family:'dotum','Dotum'; color:#333; font-weight:bold;">주문번호 : <span style="color:#da2128; font-weight:bold;">$!{orderNum}</span></p>
+						<p style="margin:0; padding-bottom:8px; text-align:center; font-size:11px; font-family:'dotum','Dotum'; color:#666;">주문일자 : $!{orderDtmStr}</p>
+					</div>
+				</div>
+			</div>			 
+			  
+			<table cellpadding="0" cellspacing="0" border="0" style="width:720px; border-top:2px solid #a31112;"> 
+				<thead>
+					<tr> 
+						<th style="width:115px; padding:10px 0 7px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; border-bottom:1px solid #a31112; text-align:center;">상품코드</th>
+						<th style="width:70px; padding:10px 0 7px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; border-bottom:1px solid #a31112; text-align:center;">&nbsp;</th>
+						<th style="width:325px; padding:10px 0 7px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; border-bottom:1px solid #a31112; text-align:center;">상품명</th>
+						<th style="width:50px; padding:10px 0 7px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; border-bottom:1px solid #a31112; text-align:center;">수량</th> 
+						<th style="width:80px; padding:10px 0 7px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; border-bottom:1px solid #a31112; text-align:center;">가격</th>
+						<th style="width:80px; padding:10px 0 7px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; border-bottom:1px solid #a31112; text-align:center;">통합포인트</th>  
+					</tr>
+				</thead>
+				<tbody> 
+					#foreach( $product in $orderProductList )
+					    <tr> 
+							<td style="border-bottom:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; font-family:'dotum','Dotum'; line-height:14px; text-align:center; color:#666;">
+							<span style="font-size:10px; font-family:Verdana; line-height:22px;">$!{product.primeSellPrdtBcode}</span>
+							<br />#if ($product.dlvyVndrId == '0625') [핫트랙스배송] #else [업체배송] #end </td>
+							
+							<td style="border-bottom:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; font-family:'dotum','Dotum'; line-height:14px; text-align:center; color:#666;">
+							#if ($product.sellPrdtGbn == 'D' || $product.sellPrdtGbn == 'R') 
+								<a href="$!{host}/ht/record/detail/$!{product.primeSellPrdtBcode}">
+								<img src="$!{product.musicMallImgUrl}" alt="$!{product.prdtName}" style="margin:2px 0;" border="0" width="50px"/>
+								</a>
+							#elseif ($product.sellPrdtGbn == 'C') 
+							#else
+								<a href="$!{host}/p/$!{product.primeSellPrdtBcode}">
+								<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/50/$!{product.productImageUrl}" alt="$!{product.prdtName}" style="margin:2px 0;" border="0" />
+								</a>
+							#end
+							</td>
+							<td style="border-bottom:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; font-family:'dotum','Dotum'; line-height:14px; text-align:center; color:#666; text-align:left;">
+								<span style="padding-left:10px;">$!{product.prdtName} 
+									#if ($product.sellPrdtGbn == 'S') <span style="color:#da2128;">($!{product.specName})</span>#end
+								</span>
+							</td>
+							<td style="border-bottom:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; font-family:'dotum','Dotum'; line-height:14px; text-align:center; color:#666;">$!{product.prdtCount}</td>
+							<td style="border-bottom:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; font-family:'dotum','Dotum'; line-height:14px; text-align:right; color:#666;">
+							<span style="padding-right:8px;">$number.format("integer", $product.sumSellPrice)원</span></td>
+							<td style="border-bottom:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; font-family:'dotum','Dotum'; line-height:14px; text-align:right; color:#666;">
+							<span style="padding-right:18px;">$number.format("integer", $product.sumSavedPrice)원</span></td>  
+						</tr>
+						#foreach( $productFreeGift in $product.cartProductFreeGiftList )
+							<tr> 
+								<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+								<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:left; padding:9px 0 7px;">
+								<span style="padding-left:4px;">사은품 : $!{productFreeGift.freeGiftName} </span></td>
+								<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center; padding:9px 0 6px">$!{productFreeGift.prdtCount}</td>
+								<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+							</tr>
+						#end
+						#foreach( $productFreeGift in $product.cartProductSupplementList )
+							<tr> 
+								<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+								<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:left; padding:9px 0 7px;">
+								<span style="padding-left:4px;">부록 : $!{productFreeGift.title} </span></td>
+								<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center; padding:9px 0 6px">$!{product.prdtCount}</td>
+								<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+							</tr>
+						#end
+						#foreach( $productFreeGift in $product.cartProductPosterCaseList )
+							<tr> 
+								<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+								<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:left; padding:9px 0 7px;">
+								<span style="padding-left:4px;">포스터 증정</span></td>
+								<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center; padding:9px 0 6px">$!{product.prdtCount}</td>
+								<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+							</tr>
+						#end
+					#end
+				</tbody>
+				<tbody> 
+					#foreach( $gift in $orderDlvyVndrFreeGiftList )
+						<tr> 
+							<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+							<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:left; padding:9px 0 7px;">
+							<span style="padding-left:4px;">사은품 : $!{gift.freeGiftName} </span></td>
+							<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center; padding:9px 0 6px">$!{gift.prdtCount}</td>
+							<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+						</tr>
+					#end
+				</tbody>
+				<tbody>				    
+					#foreach( $gift in $cartProductFgiftList )
+						<tr> 
+							<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+							<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:left; padding:9px 0 7px;">
+							<span style="padding-left:4px;">주문사은품 : $!{gift.title} </span></td>
+							<td style="border-bottom:1px solid #cacaca; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center; padding:9px 0 6px">1</td>
+							<td colspan="2" style="border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; font-family:'dotum','Dotum'; text-align:center;">&nbsp;</td> 
+						</tr>
+					#end
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6" style="border-top:0px solid #cacaca; border-bottom:1px solid #cacaca; color:#333333; padding:10px 0 7px; background:#f5f5f5; text-align:right; font-size:11px; font-family:'dotum','Dotum';">
+							<p style="padding-right:8px; margin:0;">
+								<span style="color:#333; font-weight:bold;">주문총액 : </span> 
+								상품금액 $number.format("integer", $orderProductSum.totalPrdtAmt)원 + 배송비 $number.format("integer", $orderProductSum.totalDlvyAmt)원 = 
+								<span style="color:#da2128; font-weight:bold;">
+								#set( $ProductSumTotal = $orderProductSum.totalPrdtAmt + $orderProductSum.totalDlvyAmt )
+								$number.format("integer", $ProductSumTotal)
+								</span>원</p>
+						</td>
+					</tr>
+				</tfoot> 
+			</table> 		
+			<p style="margin:40px 0 6px 6px;"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/order/stitle_order_04.gif" alt="주문자 정보" /></p>			
+			<table cellpadding="0" cellspacing="0" border="0" style="width:720px; border-top:2px solid #a31112; border-bottom:1px solid #cacaca;">
+				<tbody> 
+					<tr> 
+						<th style="width:15%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">주문자명</span>
+						</th> 
+						<td style="width:35%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{buyerName}</span>
+						</td>   
+						<th style="width:15%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">이메일</span>
+						</th>  
+						<td style="width:35%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{buyerEmail}</span>
+						</td>  
+					</tr> 
+					<tr> 
+						<th style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">전화번호</span>
+						</th>  
+						<td style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{telePhone}</span>
+						</td> 
+						<th style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">휴대폰</span>
+						</th>   
+						<td style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{handPhone}</span>
+						</td> 
+					</tr>  
+				</tbody>  
+			</table> 
+ 
+			<p style="margin:30px 0 6px 6px;"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/order/stitle_order_05.gif" alt="배송지 정보" /></p>	
+			<table cellpadding="0" cellspacing="0" border="0" style="width:720px; border-top:2px solid #a31112; border-bottom:1px solid #cacaca;"> 
+				<tbody> 
+					#foreach( $orderDestination in $orderDestinationList )
+					<tr> 
+						<th style="width:15%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">주문자명</span>
+						</th> 
+						<td colspan="3" style="width:85%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+						<span style="padding-left:20px;">$!{orderDestination.receiverName}</span>
+						</td>  
+					</tr>  
+					<tr> 
+						<th style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">전화번호</span>
+						</th>  
+						<td style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{orderDestination.receiverTelePhone}</span>
+						</td> 
+						<th style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">휴대폰</span>
+						</th>   
+						<td style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{orderDestination.receiverHandPhone}</span>
+						</td> 
+					</tr> 
+					<tr> 
+						<th style="width:15%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">주소</span>
+						</th> 
+						<td colspan="3" style="width:85%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<p style="padding-left:20px; margin:0; color:#666;">$!{orderDestination.receiverPostNum}<br />$!{orderDestination.receiverAddress} $!{orderDestination.receiverDetailAddress}</p>
+					<tr> 
+						<th style="width:15%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">전달 메시지</span>
+						</th> 
+						<td colspan="3" style="width:85%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{orderDestination.giftMessage}</span>
+						</td>  
+					</tr>   
+					<tr> 
+						<th style="width:15%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">주문요청사항</span>
+						</th> 
+						<td colspan="3" style="width:85%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{orderDestination.orderMessage}</span>
+						</td>  
+					</tr>  
+					<tr> 
+						<th style="width:15%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">배송요청사항</span>
+						</th> 
+						<td colspan="3" style="width:85%; border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">$!{orderDestination.deliveryMessage}</span>
+						</td>  
+					</tr> 
+					#end
+				</tbody>  
+			</table> 
+		  
+			<p style="margin:30px 0 6px 6px;"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/order/stitle_order_09.gif" alt="결제정보" /></p> 
+			<table cellpadding="0" cellspacing="0" border="0" style="width:720px; border-top:2px solid #a31112; border-bottom:1px solid #cacaca;">  
+				<tbody>
+					<tr> 
+						<th style="width:15%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">주문총액</span>
+						</th> 
+						<td style="width:35%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;"><span style="color:#da2128; font-weight:bold;">
+							#set( $orderAmtHap = $orderProductSum.totalPrdtAmt + $paymentInfo.dlvyAmt )
+							$number.format("integer", $orderAmtHap)</span>원</span>
+						</td> 
+						<th style="width:15%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">적립예정금액</span>
+						</th> 
+						<td style="width:35%; border-top:0px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;"><span style="color:#666; font-weight:bold;">$number.format("integer", $paymentInfo.savedPrice)</span>원</span>
+						</td> 
+					</tr>  
+					<tr> 
+						<th rowspan="2" style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">결제상세</span>
+						</th> 
+						<td colspan="3" style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<p style="padding-left:20px; margin:0; color:#666;">상품금액: $number.format("integer", $orderProductSum.totalPrdtAmt)원<br />
+							배 송 비 : $number.format("integer", $paymentInfo.dlvyAmt)원<br />
+							(-) 할인금액: 교보핫트랙스 온라인 예치금 $number.format("integer", $paymentInfo.paymentAmtC0116)원
+							| 마일리지 $number.format("integer", $paymentInfo.paymentAmtC0115)원 
+							| 통합포인트 $number.format("integer", $paymentInfo.paymentAmtC0119)원 
+							| 쿠폰 $number.format("integer", $paymentInfo.cpnDscntAmt)원
+							| GS Point $number.format("integer", $paymentInfo.paymentAmtC0118)원
+							| Oh Point $number.format("integer", $paymentInfo.paymentAmtC011B)원
+							</p>
+						</td>  
+					</tr>  
+					<tr>  
+						<td colspan="3" style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">결제금액 : $number.format("integer", $paymentInfo.pymntAmt)원 
+							#if ($paymentInfo.pymntMeansCode == 'C0111' || $paymentInfo.pymntMeansCode == 'C0112' || $paymentInfo.pymntMeansCode == 'C0113' || $paymentInfo.pymntMeansCode == 'C0114')
+								 - $codeIndex.get($paymentInfo.pymntMeansCode).codeName
+							#end
+							#if($paymentInfo.pymntMeansCode == 'C0111')
+								($!{cardName}카드/
+								#if($paymentInfo.itrstFreeYn) 무이자 #end
+								#if($paymentInfo.mitpCount > 0) $!{paymentInfo.mitpCount}개월 할부 #end
+								#if($paymentInfo.mitpCount == 0) 일시불 #end)
+							#elseif($paymentInfo.pymntMeansCode == 'C0112')
+								($!{bankName}은행)
+							#elseif($paymentInfo.pymntMeansCode == 'C0113')
+								($!{paymentInfo.lgupPymntHdphnNum})
+							#end
+							#if($paymentInfo.pymntMeansCode == 'C0111')
+								<span style="padding-left:25px;">승인번호 : $!{paymentInfo.prmtNum}</span>
+							#end
+							</span>
+						</td>  
+					</tr> 
+					<tr> 
+						<th style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#333; font-size:11px; font-family:'dotum','Dotum'; font-weight:normal; text-align:left; background:#f5f5f5;">
+							<span style="padding-left:25px;">결제일시</span>
+						</th>  
+						<td colspan="3" style="border-top:1px solid #e4e4e4; padding:7px 0 4px; color:#666; font-size:11px; font-family:'dotum','Dotum'; line-height:18px; text-align:left;">
+							<span style="padding-left:20px;">${pymntDtmStr}</span>
+						</td>  
+					</tr>  
+				</tbody>  
+			</table>  
+			<div style="width:720px; overflow:hidden; text-align:left;">
+				<ul style="margin:10px 0 0 2px; padding:0;">
+					<li style="list-style-type:none; height:16px; font-size:11px; font-family:'dotum','Dotum'; color:#707070; padding-left:4px; margin:0; vertical-align:top;">
+						<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/email/dot.gif" alt="." />구매에 따른 통합포인트는 주문하신 상품의 출고완료 이후 적립됩니다.
+					</li>				
+					<li style="list-style-type:none; height:16px; font-size:11px; font-family:'dotum','Dotum'; color:#707070; padding-left:4px; margin:0; vertical-align:top;">
+						<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/email/dot.gif" alt="." />본 메일은 발신 전용으로 회신되지 않습니다.
+					</li> 
+					<li style="list-style-type:none; height:16px; font-size:11px; font-family:'dotum','Dotum'; color:#707070; padding-left:14px; margin:0; vertical-align:top;">
+						기타 주문관련 문의사항에 대해서는 <a href="$!{host}/ht/help/createCounselForm" target="_blank" style="color:#da2128; font-weight:bold; letter-spacing:-1px;">[고객센터 > SOS 상담]</a> 메뉴를 이용하시거나 고객센터(1661-1112)를 이용해 주시기 바랍니다.
+					</li> 
+				</ul>
+			</div>
+  	
+			<div style="text-align:center; padding-top:30px;"> 
+				<a href="$!{host}/ht/mypage/orderDelivery"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/email/btn_email01.gif" alt="주문결제/배송 상태 확인하기" border="0" /></a> 
+			</div>
+			
+		</div>
+		<!-- //container -->
+		
+		<!-- footer -->
+		<div style="width:720px; height:90px; border-top:3px solid #c7c7c7; margin-top:50px;">  
+			<table width="720" cellpadding="0" cellspacing="0" border="0">  
+				<tr>
+					<td width="200">
+						<p style="padding-left:20px;">
+							<a href="$!{host}" target="_blank"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/email/h1_logo_g.gif" alt="교보핫트랙스" border="0"  /></a>
+						</p>
+					</td>
+					<td width="520" style="padding:0; vertical-align:top;">
+						<p style="margin:15px 0 0 0; color:#7d7d7d; font-size:11px; font-family:'dotum','Dotum'; line-height:14px;">
+							고객센터 : 1661-1112(발신자 부담전화)<br />
+							상호명 : 교보핫트랙스(주)  대표이사 : 박영규  사업자등록번호 : 102-81-29258<br />
+							서울특별시 통신판매업신고번호 : 제 01-102호<br />
+							사업자소재지 : 10881 경기도 파주시 회동길 78 (출판단지내)<br />
+							Copyrighr ⓒ  2011 Kyobo Hottracks.  All right reserved.
+						</p> 
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!-- //footer -->		 
+ 
+	</div>
+</div>	
+</body>
+</html>

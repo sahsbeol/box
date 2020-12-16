@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핫트랙스 가이드문서</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(function(){
+            $('.tab-btn-wrap li').click(function(){
+                $('.tab-btn-wrap li ,.tab-content-wrap > div').removeClass('active')
+                if(!$(this).is('.active')){
+                    $(this).addClass('active')
+                    $('#' + $(this).data('id')).addClass('active')
+                }
+            })
+
+            $('.l-style .list-wrap li').each(function(i,e){
+                $(e).find('.color-wrap').css('background', $(e).find('.color-hex').text())
+            })
+        })
+    </script>
+    <style>
+        /* reset */
+        *{
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            list-style: none;
+        }
+        ol{
+            padding-left: 30px;
+            list-style: unset;
+        }
+        code{
+            white-space: pre-wrap;
+        }
+
+/* --- webfont --- */
+/* 국문 */
+@font-face {
+  font-family:font_ns; font-style:normal; font-weight:100;
+  src:local('Noto Sans KR Thin'), local('NotoSansKR-Thin'),
+  url('./font/NotoSansKR-Thin.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+@font-face {
+  font-family:font_ns; font-style:normal; font-weight:300;
+  src:local('Noto Sans KR Light'), local('NotoSansKR-Light'),
+  url('./font/NotoSansKR-Light.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+@font-face {
+  font-family:font_ns; font-style:normal; font-weight:normal;
+  src:local('Noto Sans KR Regular'), local('NotoSansKR-Regular'),
+  url('./font/NotoSansKR-Regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+@font-face {
+  font-family:font_ns; font-style:normal; font-weight:bold;
+  src:local('Noto Sans KR Bold'), local('NotoSansKR-Bold'),
+  url('./font/NotoSansKR-Bold.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* 영문/숫자 */
+@font-face {
+  font-family:font_gs; font-style:normal; font-weight:300;
+  src:local('Gmarket Sans Light'), local('GmarketSans-Light'),
+  url('./font/GmarketSansLight.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+@font-face {
+  font-family:font_gs; font-style:normal; font-weight:normal;
+  src:local('Gmarket Sans Medium'), local('GmarketSans-Medium'),
+  url('./font/GmarketSansMedium.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+@font-face {
+  font-family:font_gs; font-style: normal; font-weight:bold;
+  src:local('Gmarket Sans Bold'), local('GmarketSans-Bold'),
+  url('./font/GmarketSansBold.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+        /* top tab title part */
+        .tab-btn-wrap{
+            padding: 200px 0 30px;
+        }
+        .tab-btn-wrap ul{
+            font-size: 0;
+            text-align: center;
+        }
+        .tab-btn-wrap li{
+            display: inline-block;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 900;
+        }
+        .tab-btn-wrap li + li{
+            margin-left: 20px;
+        }
+        .tab-btn-wrap li.active{
+            background: #000;
+            border-color: #000;
+            color: #fff;
+        }
+
+        /* tab content part */
+        .tab-content-wrap > div{
+            display: none;
+            border-top: 2px solid;
+            padding: 20px;
+        }
+        .tab-content-wrap > div.active{
+            display: block;
+        }
+        .title-wrap{
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 35px;
+            font-weight: 900;
+        }
+        .title-wrap:after{
+            content: '';
+            display: block;
+        }
+        .l-conv.active .title-wrap:after{
+            content: 'Convention';
+        }
+        .l-comp.active .title-wrap:after{
+            content: 'Components';
+        }
+        .l-style.active .title-wrap:after{
+            content: 'Style Guide';
+        }
+        .sub-title{
+            padding: 10px 0 5px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            border-bottom: 2px solid;
+            position: relative;
+        }
+        .sub-title p{
+            font-size: 13px;
+            padding-top: 5px;
+        }
+        .sub-depth-title{
+            padding: 20px 0 5px;
+            font-size: 18px;
+        }
+        .sub-title:before{
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: -23px;
+            width: 15px;
+            height: 15px;
+            background: url(./images/biz/main/icon_simbol.png) no-repeat center / 100%;
+        }
+        section{
+            padding-bottom: 60px;
+        }
+        .l-conv section p:before{
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: orange;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        /* style part */
+        .l-style .list-wrap ul{
+            overflow: hidden;
+            padding-top: 20px;
+        }
+        .l-style .list-wrap li{
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+        .l-style .list-wrap .color-wrap{
+            width: 150px;
+            height: 150px;
+        }
+        .l-style .list-wrap .color-name{
+            padding: 5px 0;
+            font-weight: bold;
+        }
+        .l-style .list-wrap .color-hex{
+            padding-bottom: 5px;
+        }
+        .l-style .logo-list{
+            padding-top: 20px;
+        }
+        .l-style .logo-list img,
+        .l-style .logo-list strong{
+            display: block;
+            padding-bottom: 5px;
+        }
+        .l-style .logo-list li{
+            display: block;
+            margin-bottom: 20px;
+        }
+        .l-style .ex-font > span{
+            font-size: 0;
+            margin-right: 20px;
+        }
+        .l-style .ex-font > span > span {
+            font-size: 40px;
+        }
+        .l-style .ns-b{ font-family:'font_ns', 'AppleGothic', sans-serif; font-weight: bold;}
+        .l-style .ns-r{ font-family:'font_ns', 'AppleGothic', sans-serif; font-weight: normal;}
+        .l-style .ns-l{ font-family:'font_ns', 'AppleGothic', sans-serif; font-weight: lighter;}
+        .l-style .gs-b{ font-family:'font_gs', 'AppleGothic', sans-serif; font-weight: bold;}
+        .l-style .gs-l{ font-family:'font_gs', 'AppleGothic', sans-serif; font-weight: lighter;}
+        .l-style .font-ns-wrap p,
+        .l-style .font-gs-wrap p,
+        .l-style .font-size-wrap p{
+            padding-top: 10px;
+            font-size: 20px;
+            font-family:'font_gs', 'AppleGothic', sans-serif;
+        }
+        .l-style .icon-list{
+            overflow: hidden;
+        }
+        .l-style .icon-list li{
+            float: left;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-btn-wrap">
+        <ul>
+            <li data-id="l-conv" class="active">Convention</li>
+            <li data-id="l-style">Style Guide</li>
+        </ul>
+    </div>
+    <div class="tab-content-wrap">
+        
+        <div id="l-conv" class="l-conv active">
+            <div class="title-wrap">
+                <img src="./images/biz/common/logo_hott.png">
+            </div>
+            <!-- content -->
+            <div class="content">
+                
+                <section>
+                    <div class="sub-title">
+                        <strong>환경</strong>
+                    </div>
+                    <p>적응형 웹: PC / MOBILE 두벌 작업</p>
+                    <P>PC max-width 950px</P>
+                    <P>html: Raw</P>
+                    <P>CSS: Pure</P>
+                    <P>Javascript: Jquery</P>
+                    <p>Spring 3.0.5 JSP</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>문서 규칙</strong>
+                    </div>
+                    <p>문서의 이름은 영문소문자 케밥으로 작성한다. ex) example-name</p>
+                    <p>클래스 네임은 영문소문자 케밥으로 작성한다. ex) example-name</p>
+                    <p>스크립트 변수 및 고유값은 카멜로 작성한다. ex) exampleName</p>
+                    <p>마크업시 개발팀에서 확인이 용이하게끔 주석으로 구분을 지어 표기한다.</p>
+                    <p>네이밍 생성시 3단계를 초과하여 사용하는 방법은 지양한다. ex) example-more-longer-name X</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>경로 안내</strong>
+                    </div>
+                    <p>실서버 = hottracks.co.kr</p>
+                    <p>개발서버 = dev.hottracks.co.kr</p>
+                    <p>모바일서버 = m.hottracks.co.kr</p>
+                    <p>개발모바일서버 = devm.hottracks.co.kr</p>
+                    <p>교보기프트 개발서버 = devgift.kyobobook.co.kr/ht/giftMain</p>
+                    <p>교보음반 개발서버 = devmusic.kyobobook.co.kr/ht/recordMain</p>
+                    <p>이미지 서버 = http://image.kyobobook.co.kr/newimages/giftshop_new/work/</p>
+                    <p>핫트랙스 테스트 관리자 = devadmin.hottracks.co.kr ( 아이디 : admin / 비밀번호 : hotqwer )</p>
+                    <p>핫트랙스 관리자 = admin.hottracks.co.kr ( 관리자 계정(사번) 요청 / IT팀 서국영과장님 02-3700-6539 / 010-2990-7461 )</p>
+                    <p>디자인 서버 = Y:\★서비스기획\1.핫트랙스몰 개편\4.구현\1.디자인</p>
+                    <p>퍼블리싱 서버 = Y:\★서비스기획\1.핫트랙스몰 개편\4.구현\2.퍼블리싱</p>
+                    <p>핫트랙스 퍼블리싱 로컬 = D:\workspace</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>파일 경로 안내</strong>
+                    </div>
+                    <p>biz 폴더 내 파일 외 구버전 파일임으로 biz내의 파일을 수정 및 개발 할 것.</p>
+                    <p>hotFrontofficeWeb = 힛트랙스 문구</p>
+                    <p>frontmusicWeb = 힛트랙스 음반</p>
+                    <p>mFrontoffice = 힛트랙스 모바일</p>
+                    <p>frontofficeWeb = 교보문고 기프트</p>
+                    <p>frontmusicWeb = 교보문고 음반</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>퍼블리싱 경로 안내</strong>
+                    </div>
+                    <p>가이드 = <a href="http://dev.hottracks.co.kr/guide.html">링크</a></p>
+                    <p>핫트랙스 WEB = <a href="http://dev.hottracks.co.kr/status.html">링크</a></p>
+                    <p>핫트랙스 MOBILE = <a href="http://devm.hottracks.co.kr/status.html">링크</a></p>
+                    <p>핫트랙스 구버전 WEB = <a href="http://dev.hottracks.co.kr/css_status_html.html">링크</a></p>
+                    <p>핫트랙스 구버전 MOBILE = <a href="http://devm.hottracks.co.kr/css_status_html.html">링크</a></p>
+                    <p>디버깅 = <a href="https://docs.google.com/spreadsheets/d/1o0Ted25_DA7xCxdsX3qwzM1N61SCzArQsyRRAK-V_Ww/edit#gid=162963543">링크</a></p>
+                    <p>이벤트 경로 = /e/</p>
+                    <p>상품코드 경로 = /p/</p>
+                    <p>브랜드샵 경로 = /b/</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>스타일 선언 순서</strong>
+                    </div>
+                    <p>모든 속성은 소문자로 작성하며 마지막 속성값의도 세미콜론을 작성한다.</p>
+                    <ol>
+                        <li>display</li>
+                        <li>float</li>
+                        <li>position</li>
+                        <li>z-index</li>
+                        <li>padding</li>
+                        <li>margin</li>
+                        <li>border</li>
+                        <li>font</li>
+                        <li>background</li>
+                        <li>overflow</li>
+                        <li>etc</li>
+                    </ol>
+                    <p>position 방향 선언은 항시 상하, 좌우가 우선시 된다</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>접근성</strong>
+                    </div>
+                    <p>이곳은 특이하게 접근성에 대한 부분을 무시한다.</p>
+                    <p>때문에 대체텍스트를 작성하지 않는다.</p>
+                    <p>필자도 이해할수없지만 외부인력이라 클라이언트의 요청임으로 진행한다.</p>
+                    <code>
+                        <span>&lt;<span>img</span> <span>src</span>=<span>"/example"</span> <span>alt</span>=<span">"대체텍스트"</span>&gt;</span> X
+                        <span>&lt;<span>img</span> <span>src</span>=<span>"/example"</span>&gt;</span> O
+                    </code>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>방법론</strong>
+                    </div>
+                    <p>이곳은 소스 정리가 안되어있으며 각종 외부 유입으로 인한 코드가 제각각이다 때문에 이 가이드문서를 작성한다.</p>
+                    <p>기본적으로 SMACSS를 지향하나 .l-text 방식으로 최초 영역을 구분짓고</p>
+                    <p>기존의 소스와 충돌이 나지 않도록 cascading level을 올려준다.</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>크로스 브라우징</strong>
+                    </div>
+                    <p>IE 10 이상 (오프라인 매대 환경이 모두 IE10 혹은 IE11로 되어있음)</p>
+                    <p>Chrome, Safari 메이저 브라우저</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>축약어</strong>
+                    </div>
+                    <p>.clear = clearfix</p>
+                    <p>.noscroll = scroll overflow hidden</p>
+                    <p>.pd_list = max-widht 950px, margin 0 auto 80px</p>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>글씨체</strong>
+                    </div>
+                    <p>한글 = Noto sans</p>
+                    <p>font-family:font_ns, sans-serif;</p>
+                    <p>영문 = Gmarket sans</p>
+                    <p>font-family:font_gs, sans-serif;</p>
+                </section>
+
+            </div>
+        </div>
+
+        <div id="l-style" class="l-style">
+            <div class="title-wrap">
+                <img src="./images/biz/common/logo_hott.png">
+            </div>
+            <!-- content -->
+            <div class="content">
+
+                <section>
+                    <div class="sub-title">
+                        <strong>Color Guide</strong>
+                    </div>
+
+                    <div>
+                        <div class="sub-depth-title">
+                            <strong>문구/기프트</strong>
+                        </div>
+                        <div class="list-wrap">
+                            <ul>
+    
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">Base COLOR</p>
+                                        <p class="color-rgb">
+                                            <b>R</b><span>255</span>
+                                            <b>G</b><span>255</span>
+                                            <b>B</b><span>255</span>
+                                        </p>
+                                        <p class="color-hex">#000</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">SIGNATURE COLOR</p>
+                                        <p class="color-rgb">
+                                            <b>R</b><span>255</span>
+                                            <b>G</b><span>106</span>
+                                            <b>B</b><span>91</span>
+                                        </p>
+                                        <p class="color-hex">#DA2128</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">SUB COLOR</p>
+                                        <p class="color-rgb">
+                                            <b>R</b><span>255</span>
+                                            <b>G</b><span>106</span>
+                                            <b>B</b><span>91</span>
+                                        </p>
+                                        <p class="color-hex">#FF6A5B</p>
+                                    </div>
+                                </li>
+    
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sub-depth-title">
+                            <strong>음반</strong>
+                        </div>
+                        <div class="list-wrap">
+                            <ul>
+    
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">Base COLOR</p>
+                                        <p class="color-rgb">
+                                            <b>R</b><span>43</span>
+                                            <b>G</b><span>46</span>
+                                            <b>B</b><span>61</span>
+                                        </p>
+                                        <p class="color-hex">#2B2E3D</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">SIGNATURE COLOR</p>
+                                        <p class="color-rgb">
+                                            <b>R</b><span>58</span>
+                                            <b>G</b><span>65</span>
+                                            <b>B</b><span>82</span>
+                                        </p>
+                                        <p class="color-hex">#3A4152</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">SUB COLOR</p>
+                                        <p class="color-rgb">
+                                            <b>R</b><span>255</span>
+                                            <b>G</b><span>106</span>
+                                            <b>B</b><span>91</span>
+                                        </p>
+                                        <p class="color-hex">#FF6A5B</p>
+                                    </div>
+                                </li>
+    
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sub-depth-title">
+                            <strong>아지트</strong>
+                        </div>
+                        <div class="list-wrap">
+                            <ul>
+    
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">SIGNATURE COLOR</p>
+                                        <p class="color-rgb">
+                                            <b>R</b><span>45</span>
+                                            <b>G</b><span>200</span>
+                                            <b>B</b><span>196</span>
+                                        </p>
+                                        <p class="color-hex">#2DC8C4</p>
+                                    </div>
+                                </li>
+    
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sub-depth-title">
+                            <strong>ETC</strong>
+                        </div>
+                        <div class="list-wrap">
+                            <ul>
+    
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-hex">#419BF9</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-hex">#DFE6F8</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-hex">#FF945B</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-hex">#FFD800</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-hex">#eee</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-hex">#777</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-hex">#000</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">line</p>
+                                        <p class="color-hex">#dbdbdb</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="color-wrap"></div>
+                                    <div class="text-wrap">
+                                        <p class="color-name">background</p>
+                                        <p class="color-hex">#fcfcfc</p>
+                                    </div>
+                                </li>
+    
+                            </ul>
+                        </div>
+                    </div>
+
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>Logotype</strong>
+                        <p>핫트랙스는 트렌디한 아이템을 만나는 재미와 다양한 공간이 제공하는 즐거움이 가득찬, 나를 표현하는 공간으로 고객들의 즐거움의 기대치를 충족시키는 기쁨 충만한 경험을 제공합니다.</p>
+                    <p>국문 로고타입은 핫트랙스의 일관된 이미지와 가독성을 고려하여 모던하고 심플한 이미지로 제작된 로고타입으로 국문타입을 기본으로 사용한다.</p>
+                    </div>
+                    <div class="logo-list">
+                        <li>
+                            <strong>Korean Logotype</strong>
+                            <img src="./images/biz/guide/hottracks-logo.png" alt="">
+                        </li>
+                        <li>
+                            <strong>Minimum Size</strong>
+                            <img src="./images/biz/guide/hottracks-mini.png" alt="">
+                            <p>세로길이가 3em 미만의 작은 크기로의 사용은 금지한다.</p>
+                        </li>
+                        <li>
+                            <img src="./images/biz/guide/hottracks-grid.png" alt="">
+                        </li>
+                        <li>
+                            <strong>Clear Space</strong>
+                            <img src="./images/biz/guide/hottracks-space.png" alt="">
+                            <p>국문 로고타입 적용 시 공간규정에 따른 충분한 공간을 확보해야 한다. 핫트랙스 국문 로고 타입의 높이를 X라고 가정할 때, X를 기준으로 사방으로 0.5X 만큼의 최소공간이 확보되어야 한다.</p>
+                        </li>
+                    </div>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>TYPOGRAPHY</strong>
+                    </div>
+                    <div class="ex-font">
+                        <span>
+                            <span class="ns-b">가</span>
+                            <span class="gs-b">a</span>
+                        </span>
+                        <span>
+                            <span class="ns-r">가</span>
+                        </span>
+                        <span>
+                            <span class="ns-l">가</span>
+                            <span class="gs-l">a</span>
+                        </span>
+                    </div>
+                    <div>
+                        <div class="sub-depth-title">
+                            <strong>국문</strong>
+                        </div>
+                        <div class="font-ns-wrap">
+                            <p class="ns-b">Noto Sans KR Bold</p>
+                            <p class="ns-r">Noto Sans KR Regular</p>
+                            <p class="ns-l">Noto Sans KR Light</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sub-depth-title">
+                            <strong>영문/숫자</strong>
+                        </div>
+                        <div class="font-gs-wrap">
+                            <p class="gs-b">G market Sans Bold</p>
+                            <p class="gs-l">G market Sans Light</p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>FONT SIZE GUIDE</strong>
+                        <p>국문과 영문/숫자의 서체를 분리하여 사용하며 사이즈는 2의 배수로 사용한다.</p>
+                    </div>
+                    <div class="font-size-wrap">
+                        <div class="sub-depth-title">
+                            <strong>PC</strong>
+                        </div>
+                        <div class="sub-depth-title">
+                            <strong>타이틀</strong>
+                        </div>
+                        <p style="font-size: 45px; font-weight: bold">Noto Sans KR Bold / G market Sans Bold&Light / 45px</p>
+                        <p style="font-size: 32px;">Noto Sans KR Bold / G market Sans Bold&Light / 32px</p>
+                        <div class="sub-depth-title">
+                            <strong>본문</strong>
+                        </div>
+                        <p style="font-size: 16px;">Noto Sans KR Ragular 16px</p>
+                        <div class="sub-depth-title">
+                            <strong>최소폰트</strong>
+                        </div>
+                        <p style="font-size: 12px;">Noto Sans KR Ragular 12px</p>
+                    </div>
+                    <div class="font-size-wrap">
+                        <div class="sub-depth-title">
+                            <strong>Mobile</strong>
+                        </div>
+                        <div class="sub-depth-title">
+                            <strong>타이틀</strong>
+                        </div>
+                        <p style="font-size: 45px; font-weight: bold">Noto Sans KR Bold / G market Sans Bold&Light / 54px</p>
+                        <p style="font-size: 32px;">Noto Sans KR Bold / G market Sans Bold&Light / 32px~48px</p>
+                        <div class="sub-depth-title">
+                            <strong>본문</strong>
+                        </div>
+                        <p style="font-size: 16px;">Noto Sans KR Ragular 28px</p>
+                        <div class="sub-depth-title">
+                            <strong>최소폰트</strong>
+                        </div>
+                        <p style="font-size: 12px;">Noto Sans KR Ragular 24px</p>
+                    </div>
+                </section>
+                <section>
+                    <div class="sub-title">
+                        <strong>ICON GUIDE</strong>
+                        <p>라인두께 & 사이즈는 2의배수로 디자인하여 라인컬러#000 2컬러 이상 사용시 시그니처 컬러로 사용한다</p>
+                    </div>
+                    <div class="font-size-wrap">
+                        <div class="sub-depth-title">
+                            <strong>PC</strong>
+                        </div>
+                        <div class="sub-depth-title">
+                            <strong>54x54</strong>
+                        </div>
+                        <div class="icon-list">
+                            <ul>
+
+                                <li>
+                                    <img src="./images/biz/guide/ic_history_black.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/ic_cart.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/ic_loInfo.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/ic_member.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/ic_box.png" alt="">
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="font-size-wrap">
+                        <div class="sub-depth-title">
+                            <strong>Mobile</strong>
+                        </div>
+                        <div class="sub-depth-title">
+                            <strong>48x48</strong>
+                        </div>
+                        <div class="icon-list">
+                            <ul>
+
+                                <li>
+                                    <img src="./images/biz/guide/btn_back.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/Symbol_ic_serch.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/btn_menu.png" alt="">
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="sub-depth-title">
+                            <strong>54x54</strong>
+                        </div>
+                        <div class="icon-list">
+                            <ul>
+
+                                <li>
+                                    <img src="./images/biz/guide/ic_history_black.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/ic_view.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="./images/biz/guide/ic_top.png" alt="">
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

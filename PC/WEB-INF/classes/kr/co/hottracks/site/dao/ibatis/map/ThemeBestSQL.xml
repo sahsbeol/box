@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ThemeBestSQL">
+    <typeAlias alias="dispPrdtExt" type="kr.co.hottracks.site.model.common.disp.DispPrdtExt"/>
+    
+    <!--  
+        작성자: 장진용
+        작성일 : 2015.09.16
+        기능 : 신규 테마상품 목록 반환
+    -->
+    <select id="getNewThemeProduct" parameterClass="kr.co.hottracks.site.model.common.theme.ThemeCriteria" resultClass="kr.co.hottracks.site.model.common.disp.DispPrdtExt">
+        /* ThemeBestSQL.getNewThemeProduct */
+        select sellPrdtBcode
+             , basePrdtSellPrice
+             , brandEngName
+             , prdtDtm
+             , prdtName
+             , prdtImgUrl
+             , productImageUrl2
+             , lastCpnPrice
+             , prdtIcon
+             , wishPrdtCnt
+             , reviewCount
+          from (
+        SELECT DP.SELL_PRDT_BCODE                                                                                       sellPrdtBcode
+             , DP.PRDT_SELL_PRICE                                                                                       basePrdtSellPrice
+             , (SELECT NVL (B.BRAND_ENG_NAME, B.BRAND_NAME) FROM TB_BRAND B WHERE DP.BRAND_ID = B.BRAND_ID)             brandEngName
+             , DP.PRMT_DTM                                                                                              prdtDtm
+             , FC_GET_PRDT_NAME(DP.SELL_PRDT_BCODE, #mallId#)                                                           prdtName
+             , FC_GET_PRODUCT_IMAGE_URL(DP.SELL_PRDT_BCODE)                                                             prdtImgUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(DP.SELL_PRDT_BCODE)                                                            productImageUrl2
+             , FC_GET_CPN_PRICE(DP.SELL_PRDT_BCODE, #mallId#)                                                           lastCpnPrice
+             , FC_GET_PRODUCT_ICON_CODE(DP.SELL_PRDT_BCODE, #mallId#)                                                   prdtIcon
+             , FC_GET_WISH_PRODUCT_COUNT(DP.SELL_PRDT_BCODE, '02')                                                      wishPrdtCnt
+             , FC_GET_REVIEW_PRODUCT_COUNT(DP.SELL_PRDT_BCODE, '02')                                                    reviewCount
+          FROM TB_DISPLAY_PRODUCT DP
+         WHERE DP.SELL_PRDT_BCODE in (
+                                      select DP1.SELL_PRDT_BCODE 
+                                        FROM TB_DISPLAY_PRODUCT DP1
+                                        JOIN TB_PRODUCT_CATEGORY PC ON DP1.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE
+                                        JOIN TB_SELL_PRODUCT SP on DP1.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE 
+                                        LEFT JOIN (SELECT ESP.SELL_PRDT_BCODE, event_dscnt_rate rate, free_dlvy_yn
+                                                     FROM TB_EVENT_MASTER EM
+                                                     JOIN TB_EVENT_SELL_PRODUCT ESP ON EM.EVENT_ID = ESP.EVENT_ID
+                                                    WHERE EM.PRMT_CODE = 'C0374'
+                                                      AND EM.EVENT_STAT_CODE = 'C0181'
+                                                      AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN EM.EVENT_START_DT AND EM.EVENT_END_DT
+                                                    UNION
+                                                   SELECT CAP.SELL_PRDT_BCODE, -1 rate, 'N' free_dlvy_yn 
+                                                     FROM TB_COUPON_MASTER CM
+                                                     JOIN TB_COUPON_APPLY_PRODUCT CAP ON CM.CPN_ID = CAP.CPN_ID
+                                                    WHERE CM.SCOPE_GBN = 'P'
+                                                      AND CM.USE_YN = 'Y'
+                                                      AND CM.DISP_YN = 'Y'
+                                                      AND CM.MALL_ID = '02'
+                                                      AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN CM.CPN_ISSUE_START_DT AND CM.CPN_ISSUE_END_DT
+                                                  ) E ON DP1.SELL_PRDT_BCODE = E.SELL_PRDT_BCODE
+                                         WHERE DP1.SELL_PRDT_GBN IN ('P', 'G')
+                                           AND DP1.PRMT_DTM > TO_DATE('20180618000000','YYYYMMDDHH24MISS')
+                                       <isEqual property="themeCtgrId" compareValue="AL">
+                                           and substr(PC.CTGR_ID,1,10) in ('0000200011','0000200010','0000200002','0000200003','0000200000')
+                                           and (PC.CTGR_ID LIKE '0000200011%' or PC.CTGR_ID LIKE '0000200010%' or PC.CTGR_ID LIKE '0000200002%' or PC.CTGR_ID LIKE '0000200003%' or PC.CTGR_ID LIKE '0000200000%')
+                                       </isEqual>
+                                       <isEqual property="themeCtgrId" compareValue="000000">
+                                           and (PC.CTGR_ID LIKE '0000200011%' or PC.CTGR_ID LIKE '0000200010%')
+                                       </isEqual>
+                                       <isEqual property="themeCtgrId" compareValue="000001">
+                                           and (PC.CTGR_ID LIKE '0000200000%')
+                                       </isEqual>
+                                       <isEqual property="themeCtgrId" compareValue="00000102">
+                                           and (PC.CTGR_ID LIKE '0000200003%')
+                                       </isEqual>
+                                       <isEqual property="themeCtgrId" compareValue="00000101">
+                                           and (PC.CTGR_ID LIKE '0000200002%')
+                                       </isEqual>
+                                       <isEqual property="chkYn" compareValue="true">
+                                           and (
+                                                1=2 
+                                           <isEqual property="benefitChk1" compareValue="true">
+                                               or (SP.free_dlvy_yn = 'Y' or E.free_dlvy_yn = 'Y')
+                                           </isEqual>
+                                           <isEqual property="benefitChk2" compareValue="true">
+                                               or E.rate = -1
+                                           </isEqual>
+                                           <isEqual property="benefitChk3" compareValue="true">
+                                               or (SP.PRDT_DSCNT_PRICE != SP.PRDT_SELL_PRICE or (E.rate > 0 and E.rate != -1))
+                                           </isEqual>
+                                           <isEqual property="benefitChk4" compareValue="true">
+                                               or DP1.DLVY_VNDR_ID = '0625'
+                                           </isEqual>
+                                               )
+                                       </isEqual>
+                                    )
+         GROUP BY DP.SELL_PRDT_BCODE, DP.PRDT_SELL_PRICE, DP.BRAND_ID, DP.PRMT_DTM
+         )
+         <isEqual property="ulProductOrderBy1" compareValue="true">
+            ORDER BY prdtDtm desc
+         </isEqual>
+         <isEqual property="ulProductOrderBy2" compareValue="true">
+            ORDER BY lastCpnPrice 
+         </isEqual>
+         <isEqual property="ulProductOrderBy3" compareValue="true">
+            ORDER BY lastCpnPrice desc
+         </isEqual>
+    </select>
+    
+    
+    
+    <!--  
+        작성자: 장진용
+        작성일 : 2015.09.16
+        기능 : 신규 테마상품 목록 수 반환
+    -->
+    <select id="countNewThemeProduct" parameterClass="kr.co.hottracks.site.model.common.theme.ThemeCriteria" resultClass="int">
+        /* ThemeBestSQL.countNewThemeProduct */
+        SELECT NVL(COUNT(*), 0) AS CNT
+          FROM (SELECT DP.SELL_PRDT_BCODE                                                                                       sellPrdtBcode
+                  FROM TB_DISPLAY_PRODUCT DP
+                 WHERE DP.SELL_PRDT_BCODE in (
+                                              select DP1.SELL_PRDT_BCODE 
+                                                FROM TB_DISPLAY_PRODUCT DP1
+                                                JOIN TB_PRODUCT_CATEGORY PC ON DP1.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE
+                                                JOIN TB_SELL_PRODUCT SP on DP1.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE 
+                                                LEFT JOIN (SELECT ESP.SELL_PRDT_BCODE, event_dscnt_rate rate, free_dlvy_yn
+                                                             FROM TB_EVENT_MASTER EM
+                                                             JOIN TB_EVENT_SELL_PRODUCT ESP ON EM.EVENT_ID = ESP.EVENT_ID
+                                                            WHERE EM.PRMT_CODE = 'C0374'
+                                                              AND EM.EVENT_STAT_CODE = 'C0181'
+                                                              AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN EM.EVENT_START_DT AND EM.EVENT_END_DT
+                                                            UNION
+                                                           SELECT CAP.SELL_PRDT_BCODE, -1 rate, 'N' free_dlvy_yn 
+                                                             FROM TB_COUPON_MASTER CM
+                                                             JOIN TB_COUPON_APPLY_PRODUCT CAP ON CM.CPN_ID = CAP.CPN_ID
+                                                            WHERE CM.SCOPE_GBN = 'P'
+                                                              AND CM.USE_YN = 'Y'
+                                                              AND CM.DISP_YN = 'Y'
+                                                              AND CM.MALL_ID = '02'
+                                                              AND TO_CHAR(SYSDATE, 'yyyyMMdd') BETWEEN CM.CPN_ISSUE_START_DT AND CM.CPN_ISSUE_END_DT
+                                                          ) E ON DP1.SELL_PRDT_BCODE = E.SELL_PRDT_BCODE
+                                                 WHERE DP1.SELL_PRDT_GBN IN ('P', 'G')
+                                                   AND DP1.PRMT_DTM > TO_DATE('20180618000000','YYYYMMDDHH24MISS')
+                                               <isEqual property="themeCtgrId" compareValue="AL">
+                                                   and substr(PC.CTGR_ID,1,10) in ('0000200011','0000200010','0000200002','0000200003','0000200000')
+                                                   and (PC.CTGR_ID LIKE '0000200011%' or PC.CTGR_ID LIKE '0000200010%' or PC.CTGR_ID LIKE '0000200002%' or PC.CTGR_ID LIKE '0000200003%' or PC.CTGR_ID LIKE '0000200000%')
+                                               </isEqual>
+                                               <isEqual property="themeCtgrId" compareValue="000000">
+                                                   and (PC.CTGR_ID LIKE '0000200011%' or PC.CTGR_ID LIKE '0000200010%')
+                                               </isEqual>
+                                               <isEqual property="themeCtgrId" compareValue="000001">
+                                                   and (PC.CTGR_ID LIKE '0000200000%')
+                                               </isEqual>
+                                               <isEqual property="themeCtgrId" compareValue="00000102">
+                                                   and (PC.CTGR_ID LIKE '0000200003%')
+                                               </isEqual>
+                                               <isEqual property="themeCtgrId" compareValue="00000101">
+                                                   and (PC.CTGR_ID LIKE '0000200002%')
+                                               </isEqual>
+                                               <isEqual property="chkYn" compareValue="true">
+                                                   and (
+                                                        1=2 
+                                                   <isEqual property="benefitChk1" compareValue="true">
+                                                       or (SP.free_dlvy_yn = 'Y' or E.free_dlvy_yn = 'Y')
+                                                   </isEqual>
+                                                   <isEqual property="benefitChk2" compareValue="true">
+                                                       or E.rate = -1
+                                                   </isEqual>
+                                                   <isEqual property="benefitChk3" compareValue="true">
+                                                       or (SP.PRDT_DSCNT_PRICE != SP.PRDT_SELL_PRICE or (E.rate > 0 and E.rate != -1))
+                                                   </isEqual>
+                                                   <isEqual property="benefitChk4" compareValue="true">
+                                                       or DP1.DLVY_VNDR_ID = '0625'
+                                                   </isEqual>
+                                                       )
+                                               </isEqual>
+                                            )
+                 GROUP BY DP.SELL_PRDT_BCODE, DP.PRDT_SELL_PRICE, DP.BRAND_ID, DP.PRMT_DTM
+               )
+         WHERE ROWNUM &lt; #topCount# + 1
+    </select>
+    
+     <!-- 
+    기능 : 다이어리 페이지 필요한 것만 압축
+    생성일 : 2018-11-02
+     -->
+    <select id="getDispPrdtDiary" parameterClass="dispCriteria" resultClass="dispPrdtExt">
+        /* FrontDispSQL.getDispPrdtDiary */
+        SELECT A.DISP_SEQ                                               dispSeq
+             , A.DISP_ORDER                                             dispOrder
+             , A.SELL_PRDT_BCODE                                        sellPrdtBcode
+             , NVL(A.PRDT_NAME, B.PRDT_NAME)                            prdtName
+             , B.PRDT_SELL_PRICE                                        prdtSellPrice
+             , B.PRDT_STAT_CODE                                         prdtStatCode
+             , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)              productImageUrl
+             , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, A.MALL_ID)            lastDcPrice
+             , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, A.MALL_ID)           lastCpnPrice
+             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)                      brandEngName
+             , substr(PQ.PRDT_QNA_TITLE, 0,60)                          title
+             , nvl(PQ.PRDT_GRADE,0)                                     prdtGrade
+          FROM TD_DISP_PRDT A
+          JOIN TB_DISPLAY_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE 
+          LEFT JOIN TB_PRODUCT_QNA PQ ON A.PRDT_QNA_SEQ = PQ.PRDT_QNA_SEQ
+          LEFT JOIN TB_BRAND D ON B.BRAND_ID = D.BRAND_ID
+         WHERE A.DISP_YN = 'Y'
+           AND DISP_MSTR_ID =#dispMstrId#
+           AND A.MALL_ID =#mallId#
+           <isNotEmpty property="ctgrId" prepend="AND">
+               A.CTGR_ID = #ctgrId#
+           </isNotEmpty>
+         ORDER BY A.DISP_MSTR_ID, A.DISP_ORDER, B.PRMT_DTM DESC 
+    </select>
+    
+    <!-- 
+    기능 : 다이어리 리뷰 top20
+    생성일 : 2018-11-02
+     -->
+    <select id="getlistReviewDiary" resultClass="dispPrdtExt" parameterClass="int">
+        /* FrontDispSQL.getlistReviewDiary */
+        select sellPrdtBcode
+             , fc_Get_brand_name(brandId,'Y')                                  brandEngName
+             , FC_GET_PRDT_NAME(sellPrdtBcode, '02')                           prdtName
+             , FC_GET_PRODUCT_IMAGE_URL(sellPrdtBcode)                         prdtImgUrl
+             , basePrdtSellPrice
+             , FC_GET_CPN_PRICE(sellPrdtBcode, '02')                           lastCpnPrice
+             , FC_GET_PRODUCT_ICON_CODE(sellPrdtBcode, '02')                   prdtIcon
+             , wishPrdtCnt
+             , reviewCount
+             , prmtDtm
+        from (
+                SELECT sellPrdtBcode                                                            sellPrdtBcode
+                     , brandId                                                                  brandId
+                     , reviewCount                                                              reviewCount
+                     , basePrdtSellPrice                                                        basePrdtSellPrice
+                     , wishPrdtCnt                                                              wishPrdtCnt
+                     , prmtDtm
+                  FROM ( 
+                    SELECT DP.SELL_PRDT_BCODE                                                   sellPrdtBcode
+                         , DP.BRAND_ID                                                          brandId
+                         , DP.PRDT_SELL_PRICE                                                   basePrdtSellPrice
+                         , FC_GET_REVIEW_PRODUCT_COUNT(DP.SELL_PRDT_BCODE, '02')                reviewCount
+                         , FC_GET_WISH_PRODUCT_COUNT(DP.SELL_PRDT_BCODE, '02')                  wishPrdtCnt
+                         , DP.PRMT_DTM                                                          prmtDtm 
+                     FROM TB_DISPLAY_PRODUCT DP
+                     JOIN TB_PRODUCT_CATEGORY PC ON DP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.STD_CTGR_YN='Y'
+                    WHERE DP.SELL_PRDT_GBN IN ('P', 'G')
+                      AND DP.PRMT_DTM > TO_DATE('20180618000000','YYYYMMDDHH24MISS')
+                      AND PC.CTGR_ID LIKE '000020%'
+                      AND ( PC.CTGR_ID LIKE '0000200011%' OR
+                            PC.CTGR_ID LIKE '0000200000%' OR
+                            PC.CTGR_ID LIKE '0000200010%' OR
+                            PC.CTGR_ID LIKE '0000200002%' OR
+                            PC.CTGR_ID LIKE '0000200003%' OR
+                            PC.CTGR_ID LIKE '000020040005%' OR
+                            PC.CTGR_ID LIKE '000020040105%' OR
+                            PC.CTGR_ID LIKE '000020040204%' OR
+                            PC.CTGR_ID LIKE '0000200412%' OR
+                            PC.CTGR_ID LIKE '00002011%' 
+                           )
+                )order by reviewCount desc, wishPrdtCnt desc, prmtDtm desc
+        )where rownum <![CDATA[ <= ]]> #num#
+          and reviewCount <![CDATA[ > ]]> 0
+    </select>
+    
+    
+    <!-- 
+    기능 : 다이어리 좋아요 top20
+    생성일 : 2018-11-02
+     -->
+    <select id="getlistLikeDiary" resultClass="dispPrdtExt" parameterClass="int">
+        /* FrontDispSQL.getlistLikeDiary */
+         select sellPrdtBcode
+             , fc_Get_brand_name(brandId,'Y')                                  brandEngName
+             , FC_GET_PRDT_NAME(sellPrdtBcode, '02')                           prdtName
+             , FC_GET_PRODUCT_IMAGE_URL(sellPrdtBcode)                         prdtImgUrl
+             , basePrdtSellPrice
+             , FC_GET_CPN_PRICE(sellPrdtBcode, '02')                           lastCpnPrice
+             , FC_GET_PRODUCT_ICON_CODE(sellPrdtBcode, '02')                   prdtIcon
+             , reviewCount
+             , wishPrdtCnt
+             , prmtDtm
+        from (
+                SELECT sellPrdtBcode                                                            sellPrdtBcode
+                     , brandId                                                                  brandId
+                     , wishPrdtCnt                                                              wishPrdtCnt
+                     , basePrdtSellPrice                                                        basePrdtSellPrice
+                     , reviewCount
+                     , prmtDtm                                              
+                  FROM ( 
+                    SELECT C.SELL_PRDT_BCODE                                                   sellPrdtBcode
+                         , C.BRAND_ID                                                          brandId
+                         , C.PRDT_SELL_PRICE                                                   basePrdtSellPrice
+                         , FC_GET_WISH_PRODUCT_COUNT(C.SELL_PRDT_BCODE, '02')                  wishPrdtCnt
+                         , C.PRMT_DTM                                                           prmtDtm
+                         , FC_GET_REVIEW_PRODUCT_COUNT(C.SELL_PRDT_BCODE, '02')                reviewCount
+                     FROM TB_WISH_PRODUCT A
+                     JOIN TB_PRODUCT_CATEGORY B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND STD_CTGR_YN='Y'
+                     JOIN TB_DISPLAY_PRODUCT C ON B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE  
+                    WHERE SELL_PRDT_GBN IN ('P', 'G')
+                      AND C.PRMT_DTM > TO_DATE('20180618000000','YYYYMMDDHH24MISS')
+                      AND A.MALL_ID ='02'
+                      AND B.CTGR_ID LIKE '000020%'
+                      AND ( B.CTGR_ID LIKE '0000200011%' OR
+                            B.CTGR_ID LIKE '0000200000%' OR
+                            B.CTGR_ID LIKE '0000200010%' OR
+                            B.CTGR_ID LIKE '0000200002%' OR
+                            B.CTGR_ID LIKE '0000200003%' OR
+                            B.CTGR_ID LIKE '000020040005%' OR
+                            B.CTGR_ID LIKE '000020040105%' OR
+                            B.CTGR_ID LIKE '000020040204%' OR
+                            B.CTGR_ID LIKE '0000200412%' OR
+                            B.CTGR_ID LIKE '00002011%' 
+                           )
+                           GROUP BY C.SELL_PRDT_BCODE, C.BRAND_ID, C.PRDT_SELL_PRICE, C.PRMT_DTM 
+                )order by wishPrdtCnt desc, reviewCount desc, prmtDtm desc
+        )where rownum <![CDATA[ <= ]]> #num#
+    </select>
+    
+</sqlMap>

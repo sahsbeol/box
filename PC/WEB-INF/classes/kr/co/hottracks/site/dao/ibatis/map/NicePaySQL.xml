@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="NicePaySQL">
+	<typeAlias alias="nicePay" type="kr.co.hottracks.site.model.frontoffice.order.NicePay"/>
+    <insert id="insNicePayInfo" parameterClass="nicePay">
+        insert into TB_NICEPAY_INFO ( ORDER_NUM , PYMNT_INSEQ   , RESULTCODE, RESULTMSG     , AUTHDATE
+                                    , AUTHCODE  , BUYERNAME     , MALLUSERID, GOODSNAME     , MID
+                                    , TID       , MOID          , AMT       , CARDCODE      , CARDNAME
+                                    , CARDQUOTA , BANKCODE      , BANKNAME  , RCPTTYPE      , RCPTAUTHCODE
+                                    , RCPTTID   , CARRIER       , DSTADDR   , VBANKBANKCODE , VBANKBANKNAME
+                                    , VBANKNUM  , VBANKEXPDATE  , IN_DATE)
+                              values(
+                                      #orderNum#    , #pymntInseq#  , #oresultCode# , #oresultMsg#      , #oauthDate#
+                                    , #oauthCode#   , #obuyerName#  , #omallUserID# , #ogoodsName#      , #omid#
+                                    , #otid#        , #omoid#       , #oamt#        , #ocardCode#       , #ocardName#
+                                    , #ocardQuota#  , #obankCode#   , #obankName#   , #orcptType#       , #orcptAuthCode#
+                                    , #orcptTID#    , #ocarrier#    , #odstAddr#    , #ovbankBankCode#  , #ovbankBankName#
+                                    , #ovbankNum#   , #ovbankExpDate#, sysdate
+                                    ) 
+    </insert>
+</sqlMap>

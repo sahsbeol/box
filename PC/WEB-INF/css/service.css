@@ -1,0 +1,413 @@
+@charset "utf-8";
+
+@import url(base.css);
+
+/*service*/
+
+#wrap{
+	margin: 0 auto;
+	width: 715px;
+}
+#service-head {
+	position: relative;
+	width: 715px;
+	height: 60px;
+}
+#service-head h1 {
+	position: absolute;
+	left: 8px;
+	top: 32px;
+}
+#service-head ul {
+	position: absolute;
+	left: 304px;
+	top: 36px;
+}
+#service-head ul li {
+	float: left;
+	padding: 0 0 0 12px;
+}
+#body-service h2 {
+	float: left;
+	padding: 21px 0 0 18px;
+	width: 182px;
+	height: 79px;
+	background: #9b1717;
+}
+#body-service div.guide-word {
+	float: left;
+	padding: 0 0 0 14px;
+	width: 501px;
+	height: 100px;
+	background: #e1e1e1;
+}
+#body-service div.guide-word p {
+	padding: 42px 0 6px;
+}
+#body-service div.guide-word p.lines {
+	padding: 49px 0 6px;
+}
+#body-service div.guide-word p.btn-faq {
+	padding: 0;
+}
+div.details-area {
+	clear: both;
+	padding: 24px 0 0;
+}
+div.details-area {
+	*margin: -12px 0 0;
+}
+div.details-area ul.menu {
+	float: left;
+	margin: 0 0 29px;
+	padding: 0 4px 1px;
+	width: 711px;
+	background: url("${imageServer}/images/service/brand_menu_bg.gif")  repeat-x 0 26px;
+}
+div.details-area ul.type02 {
+	float: left;
+	margin: 0;
+	padding: 0 3px 1px;
+	width: 342px;
+	background: url("${imageServer}/images/service/brand_menu_bg.gif")  repeat-x 0 26px;
+}
+div.details-area ul.menu li {
+	float: left;
+	margin: 0 -1px 0 0;
+	border: 1px solid #eaeaea;
+	border-bottom: 0;
+	background: #f7f7f7;
+}
+div.details-area ul.menu li a {
+	float: left;
+	display: block;
+	padding: 7px 9px 0;
+	height: 18px;
+}
+div.details-area ul.type01 li a {
+	padding: 7px 0 0;
+	width: 98px;
+	text-align: center;
+}
+div.details-area ul.type02 li a {
+	padding: 7px 8px 0;
+	width: 153px;
+	text-align: center;
+}
+div.details-area ul.menu li.selected {
+	background: none;
+}
+div.details-area ul.menu li.selected a {
+	height: 19px;
+	background: #fff;
+}
+div.brand-name img ,
+div.brand-explain01 img,
+div.brand-explain02 img,
+div.brand-explain03 img ,
+div.brand-explain04 img ,
+div.brand-explain05 img {
+	vertical-align: top;
+}
+div.brand-explain02 ,
+div.brand-explain03 ,
+div.brand-explain04 {
+	border-top: 1px solid #eaeaea;
+}
+div.brands-explain ul li {
+	margin: 0;
+	padding: 0;
+}
+div.brands-explain ul li img {
+	vertical-align: top;
+}
+div.instructions-explain {
+	clear: both;
+}
+
+/*fap*/
+
+div.faq-line h3 {
+	padding: 0 0 7px 11px;
+}
+div.faq-line ul.faq-list {
+	float: left;
+	margin: 0 0 82px;
+	border-top: 2px solid #a31112;
+}
+div.faq-line ul.faq-list li {
+	floaT: left;
+	padding: 0 15px 0 87px;
+	border-bottom: 1px solid #eaeaea;
+}
+div.faq-line ul.faq-list li dl {
+	float: left;
+	padding: 17px 0 0;
+}
+div.faq-line ul.faq-list li dl dt ,
+div.faq-line ul.faq-list li dl dd {
+	float: left;
+}
+div.faq-line ul.faq-list li dl dt {
+	width: 25px;
+}
+div.faq-line ul.faq-list li dl dd {
+	width: 588px;
+}
+div.faq-line ul.faq-list li dl dt.question {
+	padding: 0 0 23px;
+}
+div.faq-line ul.faq-list li dl dd.question {
+	padding: 0 0 27px 6px;
+	width: 582px;
+	font-weight: bold;
+}
+div.faq-line ul.faq-list li dl dd.answer {
+	padding: 0 0 10px 10px;
+	width: 578px;
+	text-indent: -10px;
+	line-height: 18px;
+	vertical-align: top;
+	font-size: 0.9em;
+
+}
+div.faq-line ul.faq-list li dl dd.answer ul {
+	margin: -2px 0 0;
+	padding: 0;
+}
+div.faq-line ul.faq-list li dl dd.answer ul li {
+	padding: 0;
+	float: none;
+	border: 0;
+}
+
+/*carving-guide*/
+
+div.carving-guide {
+	float: left;
+	padding: 32px 0 29px;
+}
+div.carving-guide dl {
+	padding: 0 0 25px 44px;
+}
+div.carving-guide dl dt,
+div.carving-guide dl dd {
+	float: left;
+}
+div.carving-guide dl dt {
+	width: 174px;
+}
+div.carving-guide dl dd {
+	padding: 1px 0 0;
+}
+div.carving-guide dl dd ul.main li {
+	padding: 0 0 14px;
+}
+div.carving-guide dl dd ul.sub {
+	padding: 0 0 0 23px;
+}
+div.carving-guide dl dd ul.sub li {
+	padding:  3px 0 0;
+}
+div.details-area h4 {
+	clear: both;
+	padding: 0 0 9px;
+}
+div.typeface {
+	float: left;
+	position: relative;
+	margin: 0 0 25px;
+	padding: 17px 6px 16px;
+	width: 701px;
+	height: auto;
+	border: 1px solid #eaeaea;
+	background: #fbfbfb;
+}
+div.english {
+	float: left;
+	margin: 0 5px 0 0;
+	width: 348px;
+	min-height: 300px;
+}
+div.english h5,
+div.multi-lan h5 {
+	padding: 0 0 11px;
+	text-align: center;
+}
+div.face {
+	display: none;
+	clear: both;
+	width: 346px;
+	height: 228px;
+}
+div.face img {
+	margin: 0;
+	vertical-align: middle;
+	border-top: 0;
+}
+div.face ul {
+	float: left;
+	margin: -2px 0 0;
+	padding: 10px;
+	width: 326px;
+	border: 1px solid #eaeaea;
+	border-top: 0;
+}
+div.face ul li {
+	float: left;
+	padding: 3px 0 0 10px;
+	width: 290px;
+	height: 25px;
+}
+div.face ul li input {
+	margin: 0 4px 0 0;
+	vertical-align: middle;
+}
+div.multi-lan {
+	float: left;
+	width: 348px
+	min-height: 300px;
+}
+div.carving-form fieldset legend {
+	width: 0;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	visibility: hidden;
+}
+div.carving-form fieldset dl {
+	float: left;
+	padding: 16px 186px 11px 129px;
+	width: 398px;
+	border: 1px solid #eaeaea;
+	background: #fbfbfb;
+}
+div.carving-form fieldset dl dt ,
+div.carving-form fieldset dl dd {
+	float: left;
+}
+div.carving-form fieldset dl dt {
+	clear: both;
+	padding: 7px 0 0;
+	width: 50px;
+}
+div.carving-form fieldset dl dd {
+	padding: 0 0 7px;
+	width: 348px;
+
+}
+div.carving-form fieldset dl dd input  {
+	padding: 1px;
+	width: 344px;
+	height:19px;
+	border: 1px solid #eaeaea;
+}
+div.btn-set {
+	clear: both;
+	padding: 18px 0 51px;
+	text-align: center;
+}
+#initials ,
+#korea {
+	display: block;
+}
+
+/*instructions-explain*/
+
+div.instructions-explain {
+	padding: 25px 0 0;
+}
+div.instructions-explain h3 {
+	padding: 0 0 18px;
+}
+div.instructions-explain h3.title01 {
+	padding: 0 0 31px;
+}
+div.define {
+	padding: 0 367px 0 0;
+	width: 348px;
+	border-bottom: 1px solid #eaeaea;
+	background: url("${imageServer}/images/service/fountainPen01_bg.gif") no-repeat 368px 0;
+}
+div.define p {
+	padding: 0 0 20px;
+}
+div.instructions-explain ul.explain-list li {
+	padding: 26px 0 31px;
+	border-bottom: 1px solid #eaeaea;
+}
+div.instructions-explain ul.explain-list li h4 {
+	padding: 0 0 5px 5px;
+}
+div.instructions-explain ul.explain-list li h4.point {
+	padding: 0 0 5px;
+}
+div.instructions-explain ul.explain-list li p {
+	padding: 0 0 27px;
+}
+div.part-function {
+	padding: 0 0 197px;
+}
+div.part-function img,
+div.construction-plan img,
+div.use-guide pan-plan img,
+div.construction-plan img {
+	vertical-align: top;
+}
+div.instructions-explain ul.dictionary ,
+div.instructions-explain ul.dictionary li  {
+	float: left;
+	width: 715px;
+}
+div.instructions-explain ul.dictionary {
+	padding: 0 0 115px;
+	border-top: 1px solid #eaeaea;
+}
+div.instructions-explain ul.dictionary li {
+	padding: 21px 0 8px;
+	border-bottom: 1px solid #eaeaea;
+}
+div.instructions-explain ul.dictionary li dl.term dt  {
+	float: left;
+	padding: 0 0 0 7px;
+	width: 58px;
+}
+div.instructions-explain ul.dictionary li dl.term dd {
+	float: left;
+	width: 650px;
+}
+div.instructions-explain ul.dictionary li dl.words {
+	float: left;
+	margin: -1px 0 0;
+	width: 650px;
+}
+div.instructions-explain ul.dictionary li dl.words dt,
+div.instructions-explain ul.dictionary li dl.words dd {
+	float: none;
+	width: 650px;
+	font-size: 0.9em;
+}
+div.instructions-explain ul.dictionary li dl.words dt {
+	padding: 0 0 8px 0;
+	font-weight: bold;
+	color: #666;
+}
+div.instructions-explain ul.dictionary li dl.words dd {
+	padding: 0 0 18px;
+	line-height: 18px;
+}
+
+/*packing*/
+
+
+div.packing ul {
+	float: left;
+	padding: 36px 0 74px;
+	width: 715px;
+}
+div.packing ul li {
+	float: left;
+	padding: 0 2px 30px 0;
+	width: 236px;
+	height: 153px;
+}

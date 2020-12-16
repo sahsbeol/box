@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BizSellProductSQL">
+    <typeAlias alias="sellGift" type="kr.co.hottracks.site.model.common.sellGift.SellGift"/>
+    <typeAlias alias="sellGiftDesc" type="kr.co.hottracks.site.model.common.sellGift.SellGiftDesc"/>
+    <typeAlias alias="sellGiftPrice" type="kr.co.hottracks.site.model.common.sellGift.SellGiftPrice"/>
+    <typeAlias alias="sellGiftCriteria" type="kr.co.hottracks.site.model.common.sellGift.SellGiftCriteria"/>
+    <typeAlias alias="sellGiftExt" type="kr.co.hottracks.site.model.common.sellGift.SellGiftExt"/>
+    <typeAlias alias="productImage" type="kr.co.hottracks.site.model.common.product.ProductImage"/>
+    <typeAlias alias="optionTemp" type="kr.co.hottracks.site.model.backoffice.product.OptionTemp"/>
+
+    <select id="getSellGiftForBrand" parameterClass="sellGiftCriteria" resultClass="sellGiftExt">
+        /* BizSellProductSQL.getSellGiftForBrand */
+        SELECT V.SELL_PRDT_BCODE        sellPrdtBcode
+             , V.PRDT_NAME              prdtName
+             , V.PRDT_SELL_PRICE        prdtSellPrice
+             , V.PRDT_STAT_CODE         prdtStatCode
+             , NVL(REVIEW_CNT, 0)                                   reviewCnt 
+             , FC_GET_PRODUCT_IMAGE_URL(V.SELL_PRDT_BCODE)          productImageUrl
+             , FC_GET_CPN_PRICE(V.SELL_PRDT_BCODE, '02')            lastCpnPrice
+             , FC_GET_PRODUCT_ICON_CODE(V.SELL_PRDT_BCODE, '02')    prdtIcon
+             , FC_GET_REVIEW_PRODUCT_COUNT(V.SELL_PRDT_BCODE, '02') reviewCount
+             , FC_GET_WISH_PRODUCT_COUNT(V.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+             , (SELECT NVL(BRAND_ENG_NAME, BRAND_NAME) FROM TB_BRAND B WHERE B.BRAND_ID = V.BRAND_ID)    brandName
+             , listSize
+             , NVL((SELECT COUNT(1) 
+             		FROM TB_WISH_PRODUCT T 
+             		WHERE T.WISH_GBN = 'P' 
+             		AND T.SELL_PRDT_BCODE = V.SELL_PRDT_BCODE
+             		AND T.MALL_ID = '02' 
+             		AND T.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+          FROM (SELECT T.*
+                     , ROWNUM NO
+                     , SUM(CASE WHEN ROWNUM &lt; #topCount#+1 THEN 1 ELSE 0 END) OVER() listSize
+                  FROM (SELECT SELL_PRDT_BCODE
+                             , PRDT_NAME
+                             , BRAND_ID
+                             , VNDR_CNTRT_ID
+                             , PRDT_SELL_PRICE
+                             , PRDT_STAT_CODE
+                             , COUNT(*) OVER() TOTAL_CNT
+                          FROM TB_SELL_PRODUCT SP
+                          <isEqual property="productOrderBy" compareValue="P">
+                              LEFT OUTER JOIN (SELECT DECODE(T.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE) BARCODE , SUM(SALE_QTY) CNT FROM GIFT_SALE A INNER JOIN TB_SELL_PRODUCT T ON T.SELL_PRDT_BCODE = A.SALE_BARNO WHERE SALE_MALLID = '02' AND TO_DATE(SALE_DATE, 'YYYYMMDD') > SYSDATE -7 AND SALE_GUBUN = '1' GROUP BY DECODE(T.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE)) GS ON SP.SELL_PRDT_BCODE = GS.BARCODE
+                          </isEqual>
+                         WHERE SP.SELL_PRDT_GBN != 'S'
+                           AND SP.PRMT_CODE = 'C0302'
+                           AND SP.PRDT_STAT_CODE IN ('C0312', 'C0313')
+                           AND SP.SELL_PRDT_BCODE NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+                           <isNotEmpty property="ctgrId" prepend="AND">
+                               EXISTS (SELECT * FROM TB_PRODUCT_CATEGORY PC INNER JOIN TB_MALL_CATEGORY MC ON PC.CTGR_ID = MC.CTGR_ID WHERE PC.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND MC.MALL_ID = '02' AND SUBSTR(PC.CTGR_ID, 0, LENGTH(#ctgrId#)) = #ctgrId#)
+                           </isNotEmpty>
+                           AND SP.BRAND_ID = #brandId#
+                         <dynamic prepend="ORDER BY">
+                             <!-- R:최신순, P:인기순, L:낮은가격순, H:높은가격순 -->
+                             <isEmpty property="productOrderBy">PRMT_DTM DESC</isEmpty>
+                             <isNotEmpty property="productOrderBy">
+                                 <isEqual property="productOrderBy" compareValue="R">PRMT_DTM DESC</isEqual>
+                                 <isEqual property="productOrderBy" compareValue="P">NVL(GS.CNT, 0) DESC, PRMT_DTM DESC</isEqual>
+                                 <isEqual property="productOrderBy" compareValue="L">FC_GET_CPN_PRICE(DECODE(SP.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE), '02') ASC, PRMT_DTM DESC</isEqual>
+                                 <isEqual property="productOrderBy" compareValue="H">FC_GET_CPN_PRICE(DECODE(SP.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE), '02') DESC, PRMT_DTM DESC</isEqual>
+                                 <isEqual property="productOrderBy" compareValue="T">FC_GET_LAST_DC_RATE(SP.SELL_PRDT_BCODE, '02') DESC,PRMT_DTM DESC</isEqual>
+                             </isNotEmpty>
+                         </dynamic>
+                       ) T
+                 WHERE 1 = 1
+                   AND EXISTS (SELECT * FROM TB_VENDOR_CONTRACT VC WHERE T.VNDR_CNTRT_ID = VC.VNDR_CNTRT_ID AND VC.VNDR_CNTRT_STAT_CODE = 'C0072' AND TO_CHAR (SYSDATE, 'YYYYMMDD') BETWEEN VC.CNTRT_START_DT AND VC.CNTRT_END_DT)
+                   AND EXISTS (SELECT * FROM TB_MALL_PRODUCT MP WHERE T.SELL_PRDT_BCODE = MP.SELL_PRDT_BCODE AND MP.MALL_ID = '02')
+                   AND EXISTS (SELECT * FROM TB_MALL_BRAND MB WHERE T.BRAND_ID = MB.BRAND_ID AND MB.MALL_ID = '02')
+              ) V
+         INNER JOIN TB_BRAND B ON V.BRAND_ID = B.BRAND_ID
+          LEFT OUTER JOIN TB_PRODUCT_IMAGE PI ON V.SELL_PRDT_BCODE = PI.SELL_PRDT_BCODE AND PI.DISP_ORDER = 0
+          LEFT OUTER JOIN (SELECT SELL_PRDT_BCODE, COUNT(*) REVIEW_CNT FROM TB_PRODUCT_QNA WHERE MALL_ID = '02' AND PRDT_ARTCL_GBN   = 'C' AND DISP_YN = 'Y' AND OPEN_YN = 'Y' GROUP BY SELL_PRDT_BCODE) QNA ON QNA.SELL_PRDT_BCODE = V.SELL_PRDT_BCODE
+         WHERE NO BETWEEN #fetchScale# + 1 AND #maxRownum#
+         ORDER BY NO
+    </select>
+    
+    <select id="getSellGiftForBrandBest" parameterClass="sellGiftCriteria" resultClass="sellGiftExt">
+        /* BizSellProductSQL.getSellGiftForBrandBest */
+        SELECT V.SELL_PRDT_BCODE        sellPrdtBcode
+             , V.PRDT_SELL_PRICE        prdtSellPrice
+             , V.PRDT_STAT_CODE         prdtStatCode
+             , FC_GET_PRODUCT_IMAGE_URL (V.SELL_PRDT_BCODE)         productImageUrl
+             , FC_GET_CPN_PRICE (V.SELL_PRDT_BCODE, '02')           lastCpnPrice
+             , (SELECT PRDT_NAME FROM TB_SELL_PRODUCT SP WHERE SP.SELL_PRDT_BCODE = V.SELL_PRDT_BCODE)   prdtName
+             , (SELECT NVL(BRAND_ENG_NAME, BRAND_NAME) FROM TB_BRAND B WHERE B.BRAND_ID = V.BRAND_ID)    brandName
+             , FC_GET_WISH_PRODUCT_COUNT(V.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+             , FC_GET_PRODUCT_ICON_CODE(V.SELL_PRDT_BCODE, '02')    prdtIcon
+             , FC_GET_REVIEW_PRODUCT_COUNT(V.SELL_PRDT_BCODE, '02') reviewCount
+          FROM (SELECT T.*
+                     , ROWNUM NO
+                  FROM (SELECT DECODE(SP.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE) SELL_PRDT_BCODE
+                             , BRAND_ID
+                             , VNDR_CNTRT_ID
+                             , PRDT_SELL_PRICE
+                             , PRDT_STAT_CODE
+                          FROM TB_SELL_PRODUCT SP
+                          LEFT OUTER JOIN (SELECT DECODE(T.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE) BARCODE , SUM(SALE_QTY) CNT FROM GIFT_SALE A INNER JOIN TB_SELL_PRODUCT T ON T.SELL_PRDT_BCODE = A.SALE_BARNO WHERE SALE_MALLID = '02' AND TO_DATE(SALE_DATE, 'YYYYMMDD') > SYSDATE -7 AND SALE_GUBUN = '1' GROUP BY DECODE(T.SELL_PRDT_GBN, 'S', PRIME_SELL_PRDT_BCODE, SELL_PRDT_BCODE)) GS ON SP.SELL_PRDT_BCODE = GS.BARCODE
+                         WHERE SP.SELL_PRDT_GBN != 'S'
+                           AND SP.PRMT_CODE = 'C0302'
+                           AND SP.PRDT_STAT_CODE = 'C0312'
+                           AND SP.BRAND_ID = #brandId#
+                           AND SP.SELL_PRDT_BCODE NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+                         ORDER BY NVL(CNT, 0) DESC, SP.PRMT_DTM DESC
+                       ) T
+                   WHERE 1 = 1
+                     AND EXISTS (SELECT * FROM TB_VENDOR_CONTRACT VC WHERE T.VNDR_CNTRT_ID = VC.VNDR_CNTRT_ID AND VC.VNDR_CNTRT_STAT_CODE = 'C0072' AND TO_CHAR (SYSDATE, 'YYYYMMDD') BETWEEN VC.CNTRT_START_DT AND VC.CNTRT_END_DT)
+                     AND EXISTS (SELECT * FROM TB_MALL_PRODUCT MP WHERE T.SELL_PRDT_BCODE = MP.SELL_PRDT_BCODE AND MP.MALL_ID = '02')
+                     AND EXISTS (SELECT * FROM TB_MALL_BRAND MB WHERE T.BRAND_ID = MB.BRAND_ID AND MB.MALL_ID = '02')
+               ) V
+         WHERE NO BETWEEN #fetchScale# + 1 AND #maxRownum#
+         ORDER BY NO
+    </select>
+</sqlMap>

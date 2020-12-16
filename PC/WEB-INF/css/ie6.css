@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+
+#contents {
+	overflow: hidden;
+}
+
+#contents div.relation-brand-view div.relation-brand-content ul {
+	width: 105px;
+}
+#contents div.main-search div.office-search input.button,
+#contents div.main-event-search fieldset input.button {
+	margin: 0 -3px 0 0;
+}
+div.my-gift-register div.register-form table {
+	border-top: 2px solid #a31112 ;
+}
+#contents div.category-mds-pick div.category-mds-pick-content ul li.type03 , 
+#contents div.category-mds-pick div.category-mds-pick-content ul li.type04 , 
+#contents div.category-mds-pick div.category-mds-pick-content ul li.type05 , 
+#contents div.category-mds-pick div.category-mds-pick-content ul li.type06 {
+	height: 170px;
+}
+#contents div.fun-loving div.main-best div.main-best-content {
+	margin: 0 -3px 0 0;
+}
+#contents div.fun-loving div.main-best div.main-best-content ul {
+		
+}
+#contents div.fun-loving div.main-best div.main-best-content ul li img { 
+	width: 50px;
+	height: 50px;
+}
+#contents div.main-info {
+	margin: 0 -3px 0 0;
+}
+#sidebar div.office-menu ul li { 
+	height: 11px;
+}
+#contents div.main-social ul {
+	position: relative;
+}
+#contents div.main-social ul li.news-letter {
+	position: absolute;
+	left: 60px;
+	top: 0;
+}
+
+#gift-head div.hottracks-gift div.view-all {
+	width: 915px !important;
+}
+#contents div.main-event-banner div.main-event-banner-scroll ul.items li {
+	margin: -30px 0 0;
+}
+div.details-area {
+	clear: both;
+	padding: 24px 0 0;
+}
+div.instructions-explain h3 {
+	padding: 0 0 18px;
+}

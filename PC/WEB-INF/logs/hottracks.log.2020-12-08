@@ -1,0 +1,37 @@
+2020-12-08 00:12:42,777 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70332]
+2020-12-08 00:22:10,916 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70927]
+2020-12-08 01:18:58,812 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70153]
+2020-12-08 01:56:50,899 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=69476]
+2020-12-08 02:18:27,036 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 02:18:27,037 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
+2020-12-08 02:18:27,527 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 02:18:27,527 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt
+2020-12-08 04:03:27,861 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 04:03:27,862 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt
+2020-12-08 05:06:11,096 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70589]
+2020-12-08 05:44:03,133 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70321]
+2020-12-08 08:15:31,299 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=67025]
+2020-12-08 08:20:23,306 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 08:20:23,307 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
+2020-12-08 09:06:11,492 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=68610]
+2020-12-08 09:06:24,724 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=66793]
+2020-12-08 09:06:36,062 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 09:06:36,063 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/user/logout
+2020-12-08 09:06:42,435 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=66764]
+2020-12-08 09:06:53,060 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=68933]
+2020-12-08 10:09:09,700 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70317]
+2020-12-08 11:34:19,521 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70219]
+2020-12-08 12:13:42,783 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 12:13:42,784 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
+2020-12-08 12:13:45,388 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 12:13:45,389 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
+2020-12-08 12:31:07,455 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=69535]
+2020-12-08 13:14:54,063 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 13:14:54,065 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/biz/jquery/maps/swiper.min.js.map
+2020-12-08 13:57:16,336 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 13:57:16,338 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/font/NotoSansKR-Regular.woff2
+2020-12-08 15:13:06,481 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70371]
+2020-12-08 16:04:15,622 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70751]
+2020-12-08 22:56:07,182 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-12-08 22:56:07,184 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
+2020-12-08 23:52:55,075 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=70416]

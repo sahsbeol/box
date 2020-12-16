@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="MailSQL">
+    <typeAlias alias="mailQueue" type="kr.co.hottracks.site.model.common.MailQueue"/>
+    <typeAlias alias="mailReceiver" type="kr.co.hottracks.site.model.common.MailReceiver"/>
+    
+    <insert id="createMailQueue" parameterClass="mailQueue">
+        <selectKey keyProperty="queueSeq" resultClass="int" type="pre">SELECT EMAIL_QUEUE_SEQ.NEXTVAL FROM DUAL</selectKey>
+        INSERT INTO TB_EMAIL_QUEUE (EMAIL_QUEUE_SEQ, EMAIL_TITLE, SNDR_EMAIL_ADDR, EMAIL_CONT, REGST_DTM, SEND_YN, SNDR_NAME, USER_NUM, MALL_ID)
+                            VALUES (#queueSeq#, #title#, #senderEmail#, #content#, SYSDATE, 'N', #sndrName#, #userNum#, #mallId#)
+    </insert>
+    
+    <insert id="createMailReceiver" parameterClass="mailReceiver">
+        <selectKey keyProperty="receiverSeq" resultClass="int" type="pre">SELECT EMAIL_RCVR_SEQ.NEXTVAL FROM DUAL</selectKey>
+        INSERT INTO TB_EMAIL_RECEIVER (EMAIL_QUEUE_SEQ, EMAIL_RCVR_SEQ, RCVR_EMAIL_ADDR, RCVR_NAME)
+                               VALUES (#queueSeq#, #receiverSeq#, #receiverEmail#, #rcvrName#)
+    </insert>
+</sqlMap>

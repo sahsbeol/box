@@ -1,0 +1,1627 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<!-- 태그 라이브러리 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+<!-- 태그 라이브러리 -->
+<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="/images/ico_app.png">
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/contents.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/shop.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/swiper-5.1.0.min.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/slick.css">
+
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906210101"></script>
+<script type="text/javascript" src="/scripts/common?201906210101"></script>
+<script type="text/javascript" src="/js/m_contents.js?201807031321"></script>
+<script type="text/javascript" src="/js/biz/common_v2.js"></script>
+<script type="text/javascript" src="/js/biz/hott.js"></script>
+<script type="text/javascript" src="/js/biz/jquery/TweenMax.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.form.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/jquery.timers-1.2.js"></script>
+<script type="text/javascript" src="/js/jquery.blockUI.js"></script>
+
+
+
+<script type="text/javascript">
+jQuery(function($){
+    $(".paymentCashRepArea").hide();
+    $(".cashRepCodeCl02").hide();
+    $(".cashRepCodeCl03").hide();
+    
+    $("input[name=pymntMeansCode]").click(function() {
+        var index = $("input[name=pymntMeansCode]").index(this) + 1;
+        mainPaySel = index;
+        var pymntMeansCode = $(this).val();
+        
+        $(".paymentArea").hide();
+        
+        // 결제권 안내 창 표현
+        if (pymntMeansCode == "C0111") {$(".list01").show();$(".paymentCashRepArea").hide();}
+        if (pymntMeansCode == "C0112") {$(".list02").show();$(".paymentCashRepArea").hide();}
+        if (pymntMeansCode == "C011D") {$(".list03").show();mainPaySel=3;$(".paymentCashRepArea").hide();}  // 휴대폰 결제
+        if (pymntMeansCode == "C0114") {$(".list04").show();$(".paymentCashRepArea").hide();}
+        if (pymntMeansCode == "C0117") {$(".list05").show();$(".paymentCashRepArea").hide();}
+        if (pymntMeansCode == "C011E") {$(".list06").show();mainPaySel=6;$(".paymentCashRepArea").show();}  // 네이버N페이
+        if (pymntMeansCode == "C011H") {$(".list07").show();mainPaySel=8;$(".paymentCashRepArea").hide();}  // 직카카오페이
+        if (pymntMeansCode == "C011I") {$(".list08").show();mainPaySel=9;$(".paymentCashRepArea").hide();}  // 스마일페이
+        if (pymntMeansCode == "C011J") {$(".list01").show();$(".paymentCashRepArea").hide();}
+        // 에스크로 영역 처리
+        checkEscrow();
+    });
+    
+    
+    $("input[name=cashRepCode]").click(function() {
+        var index = $("input[name=cashRepCode]").index(this) + 1;
+        var pymntMeansCode = $(this).val();
+        if (pymntMeansCode == "01") {
+            var selKi = $("select[name=cashRepCodeKi]").val();
+            if (selKi == "01") {$(".cashRepCodeKi").show();$(".cashRepCodeCl01").show();$(".cashRepCodeCl02").hide();$(".cashRepCodeCl03").hide();}
+            if (selKi == "02") {$(".cashRepCodeKi").show();$(".cashRepCodeCl01").hide();$(".cashRepCodeCl02").hide();$(".cashRepCodeCl03").show();}
+        }
+        if (pymntMeansCode == "02") {$(".cashRepCodeKi").hide();$(".cashRepCodeCl01").hide();$(".cashRepCodeCl02").show();$(".cashRepCodeCl03").hide();}
+        if (pymntMeansCode == "03") {$(".cashRepCodeKi").hide();$(".cashRepCodeCl01").hide();$(".cashRepCodeCl02").hide();$(".cashRepCodeCl03").hide();}
+    });
+    
+    
+    $("select[name=cashRepCodeKi]").change(function() {
+        var selKi = $(this).val();
+        if (selKi == "01") {$(".cashRepCodeCl01").show();$(".cashRepCodeCl02").hide();$(".cashRepCodeCl03").hide();}
+        if (selKi == "02") {$(".cashRepCodeCl01").hide();$(".cashRepCodeCl02").hide();$(".cashRepCodeCl03").show();}
+    });
+    
+    function fnFocusEm(chkTarget, bgTarget, msg){
+        $(".chk_required").removeClass("chk_required");
+        
+        alert(msg);
+        chkTarget.focus();
+        bgTarget.addClass("chk_required");
+        return false;
+    }
+    
+    // 제휴할인 선택 창 표시
+    $("input[name=allyCash]").change(function(){
+        //allyCashInit();  // 제휴선택값 초기화
+        $(this).attr("checked", true);
+        $(".allyContent").hide();
+        $(this).next().next().show();
+    });
+    
+    // 제휴할인 선택 창 닫기
+    $(".allyContent .btn_close a").click(function(event){
+        event.preventDefault(); // # 링크 이동 중지
+        
+        //allyCashInit();  // 제휴선택값 초기화
+        $(".chkallyCash").attr("checked", false);
+        $(".allyContent").hide();
+    });
+        
+});
+
+function openCouponPopup() {
+    if($("input[name=usableCpnCount]").val() != 0){
+        window.open('', 'popupCouponList', 'width=800,height=930');
+        $("form#orderSheetForm").attr("action", "/pages/html/popupCouponList.html");
+        $("form#orderSheetForm").attr("target", "popupCouponList");
+        $("form#orderSheetForm").submit();
+    } else {
+        alert("사용 가능하신 쿠폰이 없습니다.");
+    }
+}
+</script>
+
+<!-- 다음 우편번호API -->
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                $('[name=receiverAddress]').val(addr);
+                $('[name=addr1]').val(addr);
+                
+                $('[name=receiverPostNum1]').val(data.zonecode.substring(0,3));
+                $('[name=receiverPostNum2]').val(data.zonecode.substring(3,6));
+                $('[name=postNum1]').val(data.zonecode.substring(0,3));
+                $('[name=postNum2]').val(data.zonecode.substring(3,6));
+                
+                $('[name=receiverDetailAddress]').focus();
+            }
+        }).open();
+    }
+</script>
+<!-- // 다음 우편번호API -->
+
+<style type="text/css">    
+.allyCash {
+    position: relative;
+}
+.allyCash li {
+    float: left;
+    padding: 5px 10px;
+}
+.allyCash li.txt_list {
+    padding: 5px 10px 5px 0px;
+}
+.allyCash li .allyContent {
+    display: none;
+    position: absolute;
+    top: 26px;
+    left: 0;
+    width: 635px;
+    min-height: 187px;
+    border: 1px solid #000;
+    background-color: #FFF;
+    margin-top: 10px;
+    z-index: 99;
+}
+.allyCash li .allyContent h5 {
+    background-color: #000;
+    color: #FFF;
+    padding: 10px;
+}
+.allyCash li .allyContent h5 .btn_close {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.allyCash li .allyContent .inner-table {
+    width: 300px;
+    float: left;
+}
+.allyCash li .allyContent .point-info {
+    padding: 10px;
+    float: right;
+    width: 314px;
+    border-left: 1px solid #dbdbdb;
+    height:220px;
+    color: #777;
+}
+.allyCash li .allyContent .point-info li {
+    text-indent: -10px;
+}
+.allyCash li .allyContent .point-info .point-site {
+    text-indent: 0;
+}
+.allyCash li .allyContent .point-info .point-site a {
+    color: #000;
+}
+.allyCash li .allyContent .confirm {
+    display: block;
+    margin: 10px auto;
+    font-size: 18px;
+    width: 133px;
+}
+.help_box {
+    padding: 15px;
+    border: 1px solid #dbdbdb;
+    font-size: 12px;
+    background: #f5f5f1;
+    line-height: 18px;
+}
+.order_list h3 {margin-top:30px;}
+#slideToggle_a .order_list h3 {margin-top:50px;}
+
+#paymentArea .evt_tag {
+    position: absolute;
+    left: 553px;
+    margin-top: 37px;
+}
+#paymentArea .evt_tag img{
+    width: auto;
+    height: 20px;
+}
+_:-ms-fullscreen, :root #paymentArea .evt_tag {
+    position: absolute;
+    left: 543px;
+    margin-top: 39px;
+}
+</style>
+
+
+</head>
+<body>
+
+
+<div id="wrap" class="content_new">
+    
+<div id="header">
+	<!-- util menu -->
+	<div class="util_menu">
+		<ul>
+			
+					<li><a href="#n" __onclick="login()">로그인</a></li>
+					<li><a href="#n" __onclick="goMemJoin()">회원가입</a></li>
+				
+			<li><a href="#n">고객센터</a></li>
+			<li><a href="#n">매장안내</a></li>
+			<li><a href="#n">팬사인회</a></li>
+		</ul>
+	</div>
+	<!--// util menu -->
+	<!-- gnb -->
+       <nav id="gnb">
+		<div class="header_wrap">
+			<h1 class="g_logo"><a href="#n">HOTTRACKS</a></h1>
+			<div class="g_search">
+				<form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+					<div class="form_select">
+						<select id="gnbSearchMenu" name="gnbSearchMenu">
+							<option value='GIFT'>문구/기프트</option>
+							<option value='RECORD'>음반</option>						
+						</select>
+					</div>				
+					<div class="form_search">
+						<input type="text" placeholder="샤오미를 쓰는 이유" name="searchTerm" value="">
+						<a href="#" class="btn_search" __onclick="gnbSrchFrm();return false;"></a>
+					</div>
+				</form>
+				<div class="keyword_wrap" id="ticker">
+					<a href="#n" __onclick="gnbSrchKerword('카드 지갑');return false;">
+						<em class="font_t">1</em>
+						<p>카드 지갑</p>
+						<!-- ▲ up , ▼ down : class 추가 -->
+						
+								<span class="txt"><strong>NEW</strong></span>
+							
+					</a>
+				</div>
+			</div>
+			<div class="g_menu">
+				<ul>
+					<li class="icon_my">
+						
+								<a href="#n" __onclick="login()"><img src="/images/biz/common/icon_my.png" alt=""></a>
+																															
+					</li>
+					<li class="icon_today">
+						<a href="#n">
+							<img src="/images/biz/common/icon_today.png" alt="">
+							<em>오늘,<strong>혜택</strong></em>
+						</a>
+					</li>
+					<li class="icon_cart">
+						<a href="#n">
+							<img src="/images/biz/common/icon_cart.png" alt="">
+							<em class="font_t bizCartCount"></em>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="gnb_wrap">
+			<div class="inner">
+				<div class="category_wrap">
+					<div class="btn_category">
+						<a href="#">카테고리</a>
+					</div>
+				</div>
+				<ul class="gnb_menu">
+					<li><a href="#n">다이어리<em></em></a></li>
+					<li><a href="#n">음반<em></em></a></li>
+
+					<li><a id="gnbBest" href="#n">베스트</a></li>
+					<li><a id="gnbFree" href="#n">무료배송</a></li>
+					<li><a id="gnbNew" href="#n">신상품</a></li>
+					<li><a id="gnbSale" href="#n">세일</a></li>
+					<li><a href="#n">이벤트</a></li>
+				</ul>
+				<ul class="sub_menu">
+					<li><a href="#n">개인의취향</a></li>
+					<li><a href="#n">이럴 때,</a></li>
+					<li><a href="#n">아지트</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>
+
+    
+    <!-- Container -->
+    <div id="container">
+        <!-- 컨텐츠 -->
+        <div class="content">
+            
+<!-- sub top -->
+<div class="title_a">
+    <h2 class="title">주문결제</h2>
+</div>
+<!-- / sub top -->
+
+
+
+<div class="title_box mgt40">
+    <h3 class="tit01 f_left">주문자 정보</h3>
+</div>
+<form id="orderSheetForm" action="#" method="post">
+    <input type="hidden" name="linkTmsYn" value=""/>
+    <input type="hidden" name="orderNum" value=""/>
+    <input type="hidden" name="prdtName" value=""/>
+    <input type="hidden" name="productClassCount" value="7"/>
+    <input type="hidden" name="orderCount" value="7"/>
+   <input type="hidden" name="orderAmt" value="268800"/>
+    <table class="table02_v1">
+        <caption>주문자 정보 상세</caption>
+        <colgroup>
+            <col style="width:12%">
+            <col style="width:30%">
+			<col style="width:*%">
+            <col style="width:12%">
+            <col style="width:45%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th scope="row"><label for="buyerName">이름<span class="s_point">&#42;</span></label></th>
+                <td><input type="text" name="buyerName" id="buyerName" value="" maxlength="30" class="input_txt" title="주문자명" style="width:162px;"/></td>
+                <td></td>
+                <th scope="row"><label for="buyerEmail1">이메일<span class="s_point">&#42;</span></label></th>
+                <td>
+                    <input type="text" name="buyerEmail1" value="" id="buyerEmail1" maxlength="30" class="input_txt" title="이메일 아이디 입력" style="width:110px;"/><span class="c_gray"> @ </span>
+                    <input type="text" name="buyerEmail2" value="" id="buyerEmail2" maxlength="30" class="input_txt email2" title="이메일 회사 입력" style="width:110px;"/>
+                    <select name="emailSelect" class="select" title="이메일 회사 선택" >
+                        <option value="">직접입력</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="yahoo.co.kr">yahoo.co.kr</option>
+                        <option value="empas.com">empas.com</option>
+                        <option value="dreamwiz.com">dreamwiz.com</option>
+                        <option value="freechal.com">freechal.com</option>
+                        <option value="lycos.co.kr">lycos.co.kr</option>
+                        <option value="korea.com">korea.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmir.com">hanmir.com</option>
+                        <option value="paran.com">paran.com</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+            <th scope="row">휴대폰<span class="s_point">&#42;</span></th>
+                <td>
+                    <input type="text" name="handPhone1" class="input_txt inputNumberText" maxlength="4" value="" title="휴대폰 지역번호 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="handPhone2" class="input_txt inputNumberText" maxlength="4" value="" title="휴대폰 중간자리 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="handPhone3" class="input_txt inputNumberText" maxlength="4" value="" title="휴대폰 뒷자리 입력" style="width:40px;ime-mode:disabled;" />
+                </td>
+                <td></td>
+                <th scope="row">전화번호</th>
+                <td>
+                    <input type="text" name="telephone1" class="input_txt inputNumberText" maxlength="4" value="" title="전화번호 지역번호 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="telephone2" class="input_txt inputNumberText" maxlength="4" value="" title="전화번호 중간자리 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="telephone3" class="input_txt inputNumberText" maxlength="4" value="" title="전화번호 뒷자리 입력" style="width:40px;ime-mode:disabled;" />
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">SMS수신</th>
+                <td colspan="4">
+                    <span><input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="checked" /> <label for="orderInfoSmsY">주문배송정보 수신</label></span>
+                    <span class="mgl10"><input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N" /> <label for="orderInfoSmsN">수신하지 않음</label></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <ul class="list_type02_v2 mgt10">
+	    <li class="c_black"><span class="s_point">&#42;</span>표시는 필수 입력 항목입니다.</li>
+	    <li>주문자 정보를 수정해도 회원정보는 변경되지 않습니다. </li>
+	    <li>회원정보 변경은 '교보문고 &gt; 마이룸 &gt; 회원정보수정'에서 가능합니다.</li>
+    </ul>
+    
+    <div class="title_box mgt40">
+        <h3 class="tit01 f_left">배송지 정보</h3>
+        <div class="f_left fs14" style="margin-left:39px;">
+            <span><input name="dlvyInfoSelect" id="dlvyInfoSelect1" type="radio" value="01" class="radios"/><label for="dlvyInfoSelect1" style="margin-left:5px;">주문자 정보</label></span>
+            <span class="mgl10"><input name="dlvyInfoSelect" id="dlvyInfoSelect2" type="radio" value="02" class="radios"/><label for="dlvyInfoSelect2" style="margin-left:5px;">새로운 주소</label></span>
+        </div>
+    </div>
+    <table class="table02_v1" id="receiverInfotable">
+        <caption>배송지 정보 상세</caption>
+        <colgroup>
+            <col style="width:12%">
+            <col style="width:30%">
+			<col style="width:*%">
+            <col style="width:12%">
+            <col style="width:45%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th scope="row">이름<span class="s_point">&#42;</span></th>
+                <td><input type="text" name="receiverName" maxlength="30" class="input_txt" title="수령인명" style="width:162px;"/></td>
+                <td></td>
+                <th scope="row">이메일<span class="s_point">&#42;</span></th>
+                <td>
+                    <input type="text" name="receiverEmail1" maxlength="30" class="input_txt" title="수령인 이메일 아이디 입력" style="width:110px;"/><span class="c_gray"> @ </span>
+                    <input type="text" name="receiverEmail2" class="input_txt email2" title="수령인 이메일 서버 입력" style="width:110px;"/>
+                    <select name="emailSelect" class="select" title="수령인 이메일 서버 선택">
+                        <option value="">직접입력</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="yahoo.co.kr">yahoo.co.kr</option>
+                        <option value="empas.com">empas.com</option>
+                        <option value="dreamwiz.com">dreamwiz.com</option>
+                        <option value="freechal.com">freechal.com</option>
+                        <option value="lycos.co.kr">lycos.co.kr</option>
+                        <option value="korea.com">korea.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmir.com">hanmir.com</option>
+                        <option value="paran.com">paran.com</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+            	<th scope="row">휴대폰<span class="s_point">&#42;</span></th>
+                <td>
+                    <input type="text" name="receiverHandPhone1" class="input_txt inputNumberText" maxlength="4" title="수령인 휴대폰 지역번호 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="receiverHandPhone2" class="input_txt inputNumberText" maxlength="4" title="수령인 휴대폰 중간자리 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="receiverHandPhone3" class="input_txt inputNumberText" maxlength="4" title="수령인 휴대폰 뒷자리 입력" style="width:40px;ime-mode:disabled;" />
+                </td>
+                <td></td>
+                <th scope="row">전화번호</th>
+                <td>
+                    <input type="text" name="receiverTelePhone1" class="input_txt inputNumberText" maxlength="4" title="수령인 전화번호 지역번호 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="receiverTelePhone2" class="input_txt inputNumberText" maxlength="4" title="수령인 전화번호 중간자리 입력" style="width:40px;ime-mode:disabled;" /><span class="c_ccc"> - </span>
+                    <input type="text" name="receiverTelePhone3" class="input_txt inputNumberText" maxlength="4" title="수령인 전화번호 뒷자리 입력" style="width:40px;ime-mode:disabled;" />
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">주소<span class="s_point">&#42;</span></th>
+                <td colspan="4">
+                    
+                        <input type="hidden" name="addr1" value="" class="userInfo"/>
+                        <input type="hidden" name="addr2" value="" class="userInfo"/>
+                        <input type="hidden" name="postNum1" value="" class="userInfo"/>
+                        <input type="hidden" name="postNum2" value="" class="userInfo"/>
+                    
+                    <input type="text" class="input_txt" name="receiverPostNum1" readonly="readonly" title="수령인 우편번호 앞자리" style="width:40px;" /><span class="c_ccc"> - </span>
+                    <input type="text" class="input_txt" name="receiverPostNum2" readonly="readonly" title="수령인 우편번호 뒷자리" style="width:40px;" />
+                    <a href="#n" onclick="execDaumPostcode()" class="btn_type01_v2" style="margin-left:2px; width:73px;">우편번호 검색</a>
+                    <div class="br">
+                        <input name="receiverAddress" type="text" class="input_txt" title="수령인 기본주소" readonly="readonly" style="width:201px;" />
+                        <input name="receiverDetailAddress" maxlength="50" type="text" class="input_txt" title="수령인 상세주소" style="width:201px;" />
+                        <span id="receiverDetailAddressView3" name="receiverDetailAddressView3"></span>
+                        <span id="receiverDetailAddressView4" name="receiverDetailAddressView4"></span>
+                        <input name="receiverDetailAddress3" maxlength="50" type="hidden" class="input_txt" title="수령인 상세주소" style="width:188px;" />
+                        <input name="receiverDetailAddress4" maxlength="50" type="hidden" class="input_txt" title="수령인 상세주소" style="width:188px;" />
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <th>주문 요청사항</th>
+                <td colspan="4">
+                    <input placeholder="상품 주문 시 업체에게 전달되는 메시지입니다. 요청사항을 입력해주세요." name="orderMessage" maxlength="100" type="text" class="input_txt userInfo" title="주문 요청사항 입력" style="width:781px;"/>
+                </td>
+            </tr>
+            <tr>
+                <th>배송 요청사항</th>
+                <td colspan="4">
+                    <input placeholder="택배 배송 시 요청사항을 입력해주세요." name="deliveryMessage" maxlength="100" type="text" class="input_txt userInfo" title="배송 요청사항 입력" style="width:781px;"/>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+    <ul class="list_type02_v2 mgt10">
+	    <li class="c_black"><span class="s_point">&#42;</span>표시는 필수 입력 항목입니다.</li>
+    </ul>
+    
+    <h2 class="tit01 mgt50 fs18 bb_line">주문 상품 / 총 7개</h2>
+    
+    <!-- 주문상품 2개 이상은 접힘 -->
+    
+    
+    
+    <div class="order_list" id="hid_order">
+    <h3 class="tit01">핫트랙스 배송</h3>
+    <table class="bbs_list_v2">
+        <caption>핫트랙스 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+        </caption>
+        <colgroup>
+                <col style="width:11%">
+                <col style="width:14%">
+                <col style="width:35%">
+                <col style="width:10%">                
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:10%">
+            </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">상품코드</th>
+                <th scope="col">상품</th>
+                <th scope="col">상품명</th>
+                <th scope="col">판매가</th>
+                <th scope="col">수량</th>
+                <th scope="col">가격</th>
+                <th scope="col">통합포인트</th>
+            </tr>
+        </thead>
+       
+        <tbody>
+            
+                
+                <tr>
+                    <td>2310040795247</td>
+                    <td>
+                        
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1883/hot1569470438060.jpg" alt="로이텀 미디엄 노트 뮤트 데님" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="로이텀 미디엄 노트 뮤트 데님"/>
+                        로이텀 미디엄 노트 뮤트 데님
+                        <p class="txt_option">LINE</p>
+                        
+                        
+                        
+                    </td>
+                    <td>23,400원<BR>[10%↓]</td>
+                    <td>1</td>
+                    <td>23,400원</td>
+                    <td>
+                        0원
+                        
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    </div>
+    
+        <div id="slideToggle_a" style="display:none;">
+        
+        
+           <div class="order_list">
+    <h3 class="tit01">핫트랙스 배송</h3>
+    <table class="bbs_list_v2">
+        <caption>핫트랙스 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+        </caption>
+        <colgroup>
+                <col style="width:11%">
+                <col style="width:14%">
+                <col style="width:35%">
+                <col style="width:10%">                
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:10%">
+            </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">상품코드</th>
+                <th scope="col">상품</th>
+                <th scope="col">상품명</th>
+                <th scope="col">판매가</th>
+                <th scope="col">수량</th>
+                <th scope="col">가격</th>
+                <th scope="col">통합포인트</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                		상품금액 <strong>87,400</strong>원 + 
+                    	배송비 <strong>0</strong>원 =
+                    <strong>87,400</strong>원
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+                
+                <tr>
+                    <td>2310040795247</td>
+                    <td>
+                        
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1883/hot1569470438060.jpg" alt="로이텀 미디엄 노트 뮤트 데님" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="로이텀 미디엄 노트 뮤트 데님"/>
+                        로이텀 미디엄 노트 뮤트 데님
+                        <p class="txt_option">LINE</p>
+                        
+                        
+                        
+                    </td>
+                    <td>23,400원<BR>[10%↓]</td>
+                    <td>1</td>
+                    <td>23,400원</td>
+                    <td>
+                        0원
+                        
+                    </td>
+                </tr>
+                
+            
+                
+                <tr>
+                    <td>8809440339266</td>
+                    <td>
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/music/midi/6525/2525615.jpg" alt="GOT7 MINI ALBUM" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                        
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="GOT7 MINI ALBUM"/>
+                        GOT7 MINI ALBUM
+                        
+                        
+                        
+                        
+                    </td>
+                    <td>16,300원<BR>[18%↓]</td>
+                    <td>1</td>
+                    <td>16,300원</td>
+                    <td>
+                        170원
+                        
+                    </td>
+                </tr>
+                
+            
+                
+                <tr>
+                    <td>2310003345595</td>
+                    <td>
+                        
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1600/A201205021124545442.jpg" alt="파버카스텔 룸 피아노 만년필 (화이트 / 블랙)" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="파버카스텔 룸 피아노 만년필 (화이트 / 블랙)"/>
+                        파버카스텔 룸 피아노 만년필 (화이트 / 블랙)
+                        <p class="txt_option">피아노 블랙 - EF촉</p>
+                        
+                        
+                            <p class="txt_option">
+                                무료각인 : 양재난초체 최강 ( + 0)
+                            </p>
+                        
+                        
+                    </td>
+                    <td>47,700원<BR>[10%↓]</td>
+                    <td>1</td>
+                    <td>47,700원</td>
+                    <td>
+                        480원
+                        
+                    </td>
+                </tr>
+                
+            
+            
+            
+        </tbody>
+    </table>
+    </div>
+    
+    
+
+    <div>
+    <h3 class="tit01">업체개별 배송</h3>
+    <table class="bbs_list_v2">
+        <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+        </caption>
+        <colgroup>
+                <col style="width:11%">
+                <col style="width:14%">
+                <col style="width:35%">
+                <col style="width:10%">                
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:10%">
+            </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">상품코드</th>
+                <th scope="col">상품</th>
+                <th scope="col">상품명</th>
+                <th scope="col">판매가</th>
+                <th scope="col">수량</th>
+                <th scope="col">가격</th>
+                <th scope="col">통합포인트</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                		상품금액 <strong>156,000</strong>원 + 
+                    	배송비 <strong>0</strong>원 =
+                    <strong>156,000</strong>원
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+                
+                <tr>
+                    <td>2310040307839</td>
+                    <td>
+                        
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1690/hot1553670797576.jpg" alt="[삼성전자] 갤럭시버즈 블루투스 이어폰" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="[삼성전자] 갤럭시버즈 블루투스 이어폰"/>
+                        [삼성전자] 갤럭시버즈 블루투스 이어폰
+                        <p class="txt_option">블랙</p>
+                        
+                        
+                        
+                    </td>
+                    <td>156,000원<BR>[2%↓]</td>
+                    <td>1</td>
+                    <td>156,000원</td>
+                    <td>
+                        0원
+                        
+                    </td>
+                </tr>
+                
+            
+            
+            
+        </tbody>
+    </table>
+    </div>
+    
+    
+
+    <div>
+    <h3 class="tit01">업체개별 배송</h3>
+    <table class="bbs_list_v2">
+        <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+        </caption>
+        <colgroup>
+                <col style="width:11%">
+                <col style="width:14%">
+                <col style="width:35%">
+                <col style="width:10%">                
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:10%">
+            </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">상품코드</th>
+                <th scope="col">상품</th>
+                <th scope="col">상품명</th>
+                <th scope="col">판매가</th>
+                <th scope="col">수량</th>
+                <th scope="col">가격</th>
+                <th scope="col">통합포인트</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                		상품금액 <strong>12,200</strong>원 + 
+                    	배송비 <strong>2,500</strong>원 =
+                    <strong>14,700</strong>원
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+                
+                <tr>
+                    <td>2310040093039</td>
+                    <td>
+                        
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1453/hot1546565085235.jpg" alt="슈즈용네임스티커냥냥이" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="슈즈용네임스티커냥냥이"/>
+                        슈즈용네임스티커냥냥이
+                        
+                        
+                            <p class="txt_option"><strong>사이즈</strong> : 소형<span class="one_line"></span><strong>폰트</strong> : 한글3<span class="one_line"></span></span></p>
+                        
+                        
+                        
+                            <p class="txt_option">기타정보 : 안녕</p>
+                        
+                    </td>
+                    <td>5,000원<BR>[0%↓]</td>
+                    <td>1</td>
+                    <td>5,000원</td>
+                    <td>
+                        50원
+                        
+                    </td>
+                </tr>
+                
+            
+                
+                <tr>
+                    <td>2310036611216</td>
+                    <td>
+                        
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1829/hot1531981621277.jpg" alt="[주문제작]자수네임택쪼꼬미" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="[주문제작]자수네임택쪼꼬미"/>
+                        [주문제작]자수네임택쪼꼬미
+                        
+                        
+                            <p class="txt_option"><strong>색상</strong> : 3 Pink 리본<span class="one_line"></span></span></p>
+                        
+                        
+                        
+                            <p class="txt_option">기타정보 : 은유</p>
+                        
+                    </td>
+                    <td>7,200원<BR>[20%↓]</td>
+                    <td>1</td>
+                    <td>7,200원</td>
+                    <td>
+                        80원
+                        
+                    </td>
+                </tr>
+                
+            
+            
+            
+        </tbody>
+    </table>
+    </div>
+    
+    
+
+    <div>
+    <h3 class="tit01">업체개별 배송</h3>
+    <table class="bbs_list_v2">
+        <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+        </caption>
+        <colgroup>
+                <col style="width:11%">
+                <col style="width:14%">
+                <col style="width:35%">
+                <col style="width:10%">                
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:10%">
+            </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">상품코드</th>
+                <th scope="col">상품</th>
+                <th scope="col">상품명</th>
+                <th scope="col">판매가</th>
+                <th scope="col">수량</th>
+                <th scope="col">가격</th>
+                <th scope="col">통합포인트</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                		상품금액 <strong>8,000</strong>원 + 
+                    	배송비 <strong>2,700</strong>원 =
+                    <strong>10,700</strong>원
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+                
+                <tr>
+                    <td>8807333795496</td>
+                    <td>
+                        
+                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1576/hot1477977956729.jpg" alt="웍스 S스케줄러 1년 라임그린 미디에스" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                    </td>
+                    <td class="t_left">
+                        <input type="hidden" name="prdtName" value="웍스 S스케줄러 1년 라임그린 미디에스"/>
+                        웍스 S스케줄러 1년 라임그린 미디에스
+                        
+                        
+                        
+                        
+                    </td>
+                    <td>8,000원<BR>[0%↓]</td>
+                    <td>1</td>
+                    <td>8,000원</td>
+                    <td>
+                        80원
+                        
+                    </td>
+                </tr>
+                
+            
+            
+            
+        </tbody>
+    </table>
+    </div>
+    
+    
+        </div>
+    
+
+
+     
+	     <div class="mgt20">
+	       <p name="toggle-control" class="fs14 c_black t_center cursor">주문 상품 전체 보기<span class="bg_arrowdown"></span></p>
+	       <p name="toggle-control" class="fs14 c_black t_center cursor" style="display:none;">주문 상품 간략 보기<span class="bg_arrowup"></span></p>
+	     </div>
+     
+     
+     
+    <!-- 예약 상품 주문 시 -->
+    <div class="help_box fs14 mgt50" id="preOrderLayer" style="display:block;">              
+        <p class="c_red">주문 상품 목록에 발매 예정인 예약 상품이 포함되어 있습니다.</p>
+        <p>예약 상품 발매 후 배송이 진행됩니다.</p>
+        <p>기 출시 상품을 먼저 받아보시려면 예약 상품과 별도로 주문하시기 바랍니다.</p>
+    </div>
+     
+	<script>
+	$("p[name='toggle-control']").click(function(){
+	    $('#slideToggle_a').slideToggle();
+	    $("p[name='toggle-control']").toggle();
+        if($("#hid_order").css("display") == "none"){   
+            jQuery('#hid_order').show();  
+        } else {  
+            jQuery('#hid_order').hide();  
+        }  
+        
+	});
+	</script>
+         
+    
+        <div class="c_both">
+            <div class="f_left">
+                <h3 class="tit01">할인 정보</h3>
+                <table class="table02_v1">
+                    <caption>할인적용 상세</caption>
+                    <colgroup>
+                        <col style="width:15%" />
+                        <col style="width:*" />
+                    </colgroup>
+                    <tbody>
+                         <!-- 공동구매가 아니면 -->
+                        <tr >
+                            <th scope="row">쿠폰</th>
+                            <td>
+                                <input type="text" name="cpnDscntPrice" id="cpnDscntPrice" class="input_txt t_right" title="쿠폰 입력" style="width:90px" value="0" disabled="disabled" /> 원 
+                                <a href="#n" onclick="openCouponPopup()" class="btn_type01_v2 mgl10">조회/적용</a>
+                                <dl class="p_desc f_right">
+                                    <dt>사용가능/전체쿠폰</dt>
+                                    <dd>1/1장
+                                        <input type="hidden" name="usableCpnCount" value="1" />
+                                    </dd>
+                                </dl>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <th scope="row">통합포인트</th>
+                            <td>
+                                <input name="totmileage" value="0" maxlength="10" id="totmileage" type="text" class="input_txt inputNumberText t_right" title="통합포인트 입력" style="width:90px;ime-mode:disabled;" /> 원 
+                                <label class="mgl10"><input name="allUseTotMileage" id="allUseTotMileage" type="checkbox" class="checkbox checkboxs" title="모두사용" /> <span>모두사용</span></label>
+                                <dl class="p_desc f_right">
+                                    <dt>보유 통합포인트</dt>
+                                    <dd>
+                                        0원
+                                        <input type="hidden" name="userTotPoint" value="0"/>
+                                    </dd>
+                                </dl>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">마일리지</th>
+                            <td>
+                                <input name="mileage" value="0" maxlength="10" id="mileage" type="text" class="input_txt inputNumberText t_right" title="마일리지 입력" style="width:90px;ime-mode:disabled;" /> 원 
+                                <label class="mgl10"><input name="allUseMileage" id="allUseMileage"  type="checkbox" class="checkbox" title="모두사용" /> <span>모두사용</span></label>
+                                <dl class="p_desc f_right">
+                                    <dt>보유 마일리지</dt>
+                                    <dd>
+                                        0원
+                                        <input type="hidden" name="userMileage" value="0"/>
+                                    </dd>
+                                </dl>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">예치금
+                                <div class="tooltip_wrap">
+                                    <a href="#tooltip" class="tooltip">?</a>
+                                    <div class="layer_pop_wrap" id="tooltip" style="display: none;top:-2px;left:-2px">
+                                        <div class=" layer_pop_container " style="width:643px;height:150px;">
+                                            <h1>교보핫트랙스 온라인 예치금 안내</h1>
+                                            <div class="layer_pop_cont">
+                                                <ul>
+                                                    <li>· 교보핫트랙스 온라인 예치금은 결제 후 환불, 배송비 정산 등으로 발생한 금액입니다.</li>
+                                                    <li class="mgt5">· 개인 정보 보호를 위해 회원님께서 직접 환불 접수해주실 때까지 환불 금액을 임시로 보관해드리고 있습니다.</li>
+                                                    <li class="mgt5">· 예치금은 핫트랙스 온라인몰에서만 사용 가능하며, 은행 계좌로 환불받으실 수 있습니다.</li>
+                                                    <li class="mgt5">· 휴대폰, 신용카드 등으로 결제 시 입금 확인 시간이 소요되어 환불 처리가 다소 지연될 수 있습니다.</li>
+                                                </ul>
+                                            </div>
+                                            <a href="#n" class="cls_btn" title="레이어팝업 닫기"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/btn_cls.gif" alt="닫기"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                            <td>
+                                <input name="deposit" value="0" maxlength="10" id="deposit" type="text" class="input_txt inputNumberText t_right" title="예치금 입력" style="width:90px;ime-mode:disabled;" /> 원 
+                                <label class="mgl10"><input name="allUseDeposit" id="allUseDeposit" type="checkbox" class="checkbox" title="모두사용" /> <span>모두사용</span></label>
+                                <dl class="p_desc f_right">
+                                    <dt>보유 예치금</dt>
+                                    <dd>
+                                        89,367,900원
+                                        <input type="hidden" name="userDeposit" value="89367900"/>
+                                    </dd>
+                                </dl>
+                            </td>
+                        </tr>
+                         <!-- 공동구매가 아니면 -->
+                        <tr >
+                            <th scope="row" class="pd1015">제휴포인트<br/>사용/적립</th>
+                            <td>
+                                <ul class="allyCash">
+                                    <li class="txt_list">
+                                        <input name="allyCash" id="allyCashGs" type="radio" value="01" class="chkallyCash"/><label for="allyCashGs" style="margin-left:5px;">GS&amp;POINT</label>
+                                        <div class="allyContent" id="allyCashGsLayer">
+                                            <h5>GS&amp;POINT<span class="btn_close"><a href="#"><img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_layer_cls.png" style="width:40px;" alt="닫기"></a></span></h5>
+                                            <table class="inner-table">
+                                                <colgroup>
+                                                    <col width="100px"/>
+                                                    <col width="*"/>
+                                                </colgroup>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="gsIdInput">GS 아이디</label></th>
+                                                    <td class="pd10"><input class="input_txt" type="text" name="gsIdInput" id="gsIdInput" style="width:129px;" class="input userInfo" maxlength="20"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="gsPwInput">비밀번호</label></th>
+                                                    <td class="pd10">
+                                                        <input class="input_txt" type="password" name="gsPwInput" style="width:80px;" class="input userInfo"/>
+                                                        <button type="button" _onclick="gsPointSearch();" class="btn_type01_v2" style="height:22px;">조회</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row">보유 포인트</th>
+                                                    <td class="pd10"><span id="gsGetPoint" name="gsGetPoint">0 P</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="gsPointUse">사용 포인트</label></th>
+                                                    <td class="pd10">
+                                                        <input type="hidden" name="userGsPoint" value=""/>
+                                                        <input type="hidden" name="userGsCardNo" value=""/>
+                                                        <input type="text" id="gsPointUse" name="gsPointUse" style="width:129px;ime-mode:disabled;" class="input_txt usePoint input inputNumberText right" value="0" maxlength="10"/> P
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pd10 no_line" colspan="2" class="no_line">
+                                                        <input type="checkbox" name="gsPointSave" id="gsPointSave" class="v_bottom mgt15 savePoint checkboxs" /><label class="mgl5 fs14 c_black" for="gsPointSave">GS&POINT 적립 신청하기</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <ul class="point-info">
+                                                <li>- GS&amp;POINT는 1,000원 이상부터 10원 단위로 사용 가능합니다.</li>
+					                            <li>- GS&amp;POINT 사용, 적립을 위해 GS&amp;POINT 아이디와 비밀번호를 정확히 입력해주세요.</li>
+					                            <li>- GS&amp;POINT 비밀번호를 분실한 경우 'GS&amp;POINT 홈페이지 &#62; 비밀번호 찾기'에서 확인할 수 있습니다.</li>
+                            					<li class="point-site"><a href="#n">[GS&amp;POINT 홈페이지 바로가기]</a></li>
+                                            </ul>
+                                            <div class="c_both bt_line"></div>
+                                            <a href="#n" class="btn_type04_v1 confirm">
+	                                            <p>
+	                                                <span class="button">확인</span>
+	                                            </p>
+                                            </a>
+                                        </div>
+                                    </li>
+ 
+                                    <li>
+                                        <input name="allyCash" id="allyCashL" type="radio" value="02" class="chkallyCash"/><label for="allyCashL" style="margin-left:5px;">L.POINT</label>
+                                        <div class="allyContent" id="allyCashLLayer" style="display:none;">
+                                            <h5>L.POINT<span class="btn_close"><a href="#"><img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_layer_cls.png" style="width:40px;" alt="닫기"></a></span></h5>
+                                            <table class="inner-table">
+                                                <colgroup>
+                                                    <col width="100px"/>
+                                                    <col width="*"/>
+                                                </colgroup>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="lCardInput">카드번호</label></th>
+                                                    <td class="pd10"><input type="text" name="lCardInput" id="lCardInput" style="width:129px;" class="input_txt input userInfo" maxlength="20"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="lPwInput">비밀번호</label></th>
+                                                    <td class="pd10">
+                                                        <input type="password" name="lPwInput" style="width:80px;" class="input_txt input userInfo"/>
+                                                        <button type="button" _onclick="fnLPointSearch();" class="btn_type01_v2" style="height:22px;">조회</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row">보유 포인트</th>
+                                                    <td class="pd10"><span id="lGetPoint" name="lGetPoint">0 P</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="lPointUse">사용 포인트</label></th>
+                                                    <td class="pd10">
+                                                        <input type="hidden" name="userlPoint"/>
+                                                        <input type="hidden" name="userlCardNo"/>
+                                                        <input type="hidden" name="userlPw"/>
+                                                        <input type="text" id="lPointUse" name="lPointUse" style="width:129px;ime-mode:disabled;" class="input_txt usePoint inputNumberText right" value="0" maxlength="10"/> P
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pd10 no_line" colspan="2">
+                                                        <input type="checkbox" name="lPointSave" id="lPointSave" class="v_bottom mgt15 savePoint checkboxs" /><label class="mgl5 fs14 c_black" for="lPointSave">L.POINT 적립 신청하기</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <ul class="point-info">
+                                                <li>- L.POINT는 10원 단위로 사용 가능하며 보유하고 있는 잔액 내에서 제한 없이 사용 가능합니다.</li>
+                            					<li>- L.POINT 비밀번호는 L.POINT 홈페이지에서 설정 가능하며, 5회 이상 비밀번호 입력 오류 시 새로운 비밀번호를 등록하셔야 합니다.</li>
+                           						<li class="point-site"><a href="#n">[L.POINT 비밀번호 설정하기]</a></li>
+                                            </ul>
+                                            <div class="c_both bt_line"></div>
+                                            <a href="#n" class="btn_type04_v1 confirm">
+	                                            <p>
+	                                                <span class="button">확인</span>
+	                                            </p>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <input name="allyCash" id="allyCashOk" type="radio" value="03" class="chkallyCash"/><label for="allyCashOk" style="margin-left:5px;">OK캐쉬백</label>
+                                        <div class="allyContent" id="allyCashOkLayer">
+                                            <h5>OK캐쉬백<span class="btn_close"><a href="#"><img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_layer_cls.png" style="width:40px;" alt="닫기"></a></span></h5>
+                                            <table class="inner-table">
+                                                <colgroup>
+                                                    <col width="100px"/>
+                                                    <col width="*"/>
+                                                </colgroup>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="okIdInput">카드번호</label></th>
+                                                    <td class="pd10"><input type="text" name="okIdInput" id="okIdInput" style="width:129px;" class="input_txt input userInfo" maxlength="20"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="okPwInput">비밀번호</label></th>
+                                                    <td class="pd10">
+                                                        <input type="password" name="okPwInput" id="okPwInput" style="width:80px;" class="input_txt input userInfo" maxlength="20"/>
+                                                        <button type="button" _onclick="okPointSearch();" class="btn_type01_v2" style="height:22px;">조회</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row">보유 포인트</th>
+                                                    <td class="pd10"><span id="okGetPoint" name="okGetPoint">0P</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="pd10" scope="row"><label for="okPointUse">사용 포인트</label></th>
+                                                    <td class="pd10">
+                                                        <input type="hidden" name="userokPoint" value=""/>
+                                                        <input type="hidden" name="userokCardNo" value=""/>
+                                                        <input type="hidden" name="userokCardPw" value=""/>
+                                                        <input type="text" id="okPointUse" name="okPointUse" style="width:129px;ime-mode:disabled;" class="input_txt usePoint inputNumberText right" value="0" maxlength="10"/> P
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pd10 no_line" colspan="2">
+                                                        <input type="checkbox" name="okPointSave" id="okPointSave" class="v_bottom mgt15 savePoint checkboxs" /><label class="mgl5 fs14 c_black" for="okPointSave">OK캐쉬백 적립 신청하기</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <ul class="point-info">
+                                               <li>- OK캐쉬백은 10원 단위로 사용이 가능하며 보유하고 있는 잔액 내에서 제한 없이 사용하실 수 있습니다.</li>
+					                           <li>- OK캐쉬백 웹회원 비밀번호는 OK캐쉬백 홈페이지에서 조회/변경이 가능합니다.</li>
+					                           <li>- 카드번호가 잘못 입력되거나 유효하지 않을 경우 OK캐쉬백 잔액 확인이 불가할 수 있습니다.</li>
+					                           <li class="point-site"><a href="#n">[OK캐쉬백 홈페이지 바로가기]</a></li>
+                                            </ul>
+                                            <div class="c_both bt_line"></div>
+                                            <a href="#n" class="btn_type04_v1 confirm">
+	                                            <p>
+	                                                <span class="button">확인</span>
+	                                            </p>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+	            <ul class="list_type02_v2 mgt10">
+	              <li>쿠폰 또는 통합포인트 사용 시 예상 적립 통합포인트가 변동될 수 있습니다.</li>
+	              <li>통합포인트/마일리지는 10원 단위로 사용 가능합니다.</li>
+	              <li>예치금 확인 및 환불 신청은 '마이핫트랙스'에서 가능합니다.</li>
+	            </ul>
+            </div>
+           
+        </div>
+    
+    
+    <div id="paymentArea" class="f_left" style="width:640px;">
+        <h3 class="tit01">결제 선택</h3>
+         <!-- 행사 태그 -->
+         <div class="evt_tag">
+        	<img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/order/tool_dc_m2.png" alt="15% 적립">
+         </div>
+         
+        <table class="table02_v1">
+            <caption>결제금액 상세</caption>
+            <colgroup>
+                <col style="width:*" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    
+                    <th style="padding:10px 0 10px 15px;">
+                        <span><input name="pymntMeansCode" value="C011J" id="pymntMeansCodeC011J" type="radio" checked="checked"> <label for="pymntMeansCodeC011J">신용카드</label></span>
+                        <span class="mgl7"><input name="pymntMeansCode" value="C011K" id="pymntMeansCodeC011K" type="radio"> <label for="pymntMeansCodeC011K">실시간 계좌이체</label></span>
+                        <span class="mgl7 payPhone"><input name="pymntMeansCode" value="C011D" id="pymntMeansCodeC011D" type="radio"> <label for="pymntMeansCodeC011D">휴대폰</label></span>
+                        <span class="mgl7"><input name="pymntMeansCode" value="C011L" id="pymntMeansCodeC011L" type="radio"> <label for="pymntMeansCodeC011L">무통장</label></span>
+                        <span class="mgl7">
+                            <input name="pymntMeansCode" value="C011E" id="pymntMeansCodeC011E" type="radio">
+                            <label for="pymntMeansCodeC011E"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/order/txt_npay.png" alt="네이버페이"/></label>
+                        </span>
+                        <span class="mgl7">
+                            <input name="pymntMeansCode" value="C011H" id="pymntMeansCodeC011H" type="radio">
+                            <label for="pymntMeansCodeC011H"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/order/txt_kakao.png" alt="카카오페이"/></label>
+                        </span>
+                        <span class="mgl7">
+                            <input name="pymntMeansCode" value="C011I" id="pymntMeansCodeC011I" type="radio">
+                            <label for="pymntMeansCodeC011I"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/order/txt_smile.png" alt="스마일페이"/></label>
+                        </span>
+                        <span class="mgl7" id="escrowUseYnArea" style="display:none;"><input type="checkbox" name="escrowUseYn" id="escrowUseYn" class="checkboxs" value="Y" disabled="disabled"/><label for="escrowUseYn">에스크로 신청</label></span>
+                    </th>
+                </tr>
+                <tr class="paymentArea list01">
+                    <td>
+                        <div class="tab_wrap">
+                            <div class="tab_pannels">
+                                <div id="card01" class="cont pannel p_lineh">
+                                	<h3 class="pdt10"><strong class="c_black">신용카드 할인 안내</strong></h3>
+                                    <!-- 신한카드 -->
+                                    <div class="c_tit mgt10 c_red bold">신한카드</div>
+                                    <p>· 2~6개월, 12개월(부분) 무이자</p>
+                                    
+                                    <!-- 하나카드 -->
+                                    <div class="c_tit mgt10 c_red bold">하나카드</div>
+                                    <p>· 2~3개월 무이자 </p>
+                                    
+                                    <!-- 국민카드 -->
+                                    <div class="c_tit mgt10 c_red bold">국민카드</div>
+                                    <p>· 2~5개월 무이자 </p>
+                                    
+                                    <!-- 비씨카드,NH농협카드,현대카드,삼성카드-->
+                                    <div class="c_tit mgt10 c_red bold">비씨카드, NH농협카드, 현대카드, 삼성카드</div>
+                                    <p>· 2~6개월 무이자 </p>
+                                  
+                                 	<!-- 공통 사항  -->
+                                 	<h3 class="mgt20 pdb10"><strong class="c_black">유의사항</strong></h3>
+                                    <p>· 행사 제외 카드 : 법인, 체크, 선불, 기프트, 하이브리드 등</p>
+                                    <p>· 무이자 적용 최소 결제 금액 등 상세 내용은 결제 팝업창에서 확인해 주시기 바랍니다.</p>
+                                </div>
+                            </div>
+                            <h3 class="mgt20 pdb10"><span class="normal c_black">기타 문의나 더 자세한 내용이 알고 싶으시면 고객센터 &gt; 주문 FAQ 를 이용해 주시기 바랍니다.</span></h3>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="paymentArea list02" style="display:none;">
+                    <td class="t_right v_top"><strong class="point04 mgt10 d_block">실시간 계좌이체안내</strong></td>
+                    <td>
+                        <div>
+                            <span class="point02 bold">이용가능은행</span><br />
+                            경남, 광주, 국민, 기업, 농협, 대구, 부산, 산업, 새마을금고, 수협, 신한, 신협, 외환, 우리, 우체국,<br />
+                            전북, 제주, 하나, 한국씨티, SC제일, 동양증권, 신한금융투자, 삼성증권, 미래에셋증권, 한국투자증권, 한화증권<br />
+                            <br />
+                            
+                            에스크로 시행령에 따라 고객님의 결제대금을 보호받으실 수 있습니다.<br /> 
+                            '실시간 계좌이체'를 통해 결제하시면 ''LG U+'를 통해 결제대금을 보호 받으실 수 있습니다. <br /> 
+                            결제금액 5만원 이상 에스크로 서비스 선택시 적용됩니다. <br /><br /> 
+                            <p class="mgt30"><a href="#n" _onclick="goValidEscrow('')" class="btn_type06 mgl10"><span>서비스 가입 사실확인</span></a></p>
+                            <p class="mgt30">기타 문의나 더 자세한 내용이 알고 싶으시면 고객센터 &gt; 주문 FAQ를 이용해 주시기 바랍니다..<a href="#n" _onclick="goOrderFaq()" class="btn_type06 mgl10"><span>주문 FAQ 바로가기</span></a></p> 
+                        </div> 
+                    </td>
+                </tr>
+                <tr class="paymentArea list03" style="display:none;">
+                    <td>
+                    	 <div class="p_lineh">
+                        	<h3 class="pdt10 pdb10"><strong class="c_black">휴대폰 결제 안내</strong></h3>
+                            <p>· 교보핫트랙스에서 휴대폰으로 결제 가능한 최대 금액은 월 30만원이지만</p>
+                            <p style="margin-left:8px;">개인별 한도 금액은 통신사 및 개인 설정에 따라 다를 수 있습니다.</p>
+                            <p>· 휴대폰으로 결제하신 금액은 익월 휴대폰 요금에 함께 청구됩니다.</p>
+                            <p>· 휴대폰 소액 결제로 구매하실 경우 세금계산서 및 현금영수증이 발급되지 않습니다.</p>
+                            <p>· 휴대폰 소액 결제로 결제하신 상품을 취소할 경우 결제하신 당월 말까지 가능합니다.</p>
+                            <p class="pdb10">· 휴대폰 결제로 별도의 수수료 부과는 없습니다.</p>
+                        </div> 
+                    </td>
+                </tr>
+                <tr class="paymentArea list04" style="display:none;">
+                    <td class="t_right v_top"><strong class="point04 mgt10 d_block">상품권 결제안내</strong></td>
+                    <td>
+                        <div>
+                            <p>▶ 사용가능 상품권 : 컬쳐랜드 문화상품권 (로그인 방식)</p>
+                            <p class="mgt30">기타 문의나 더 자세한 내용이 알고 싶으시면 고객센터 &gt; 주문 FAQ를 이용해 주시기 바랍니다..<a href="#n" _onclick="goOrderFaq()" class="btn_type06 mgl10"><span>주문 FAQ 바로가기</span></a></p> 
+                        </div> 
+                    </td>
+                </tr>
+                <tr class="paymentArea list05" style="display:none;">
+                    <td class="t_right v_top"><strong class="point04 mgt10 d_block">무통장 입금안내</strong></td>
+                    <td>
+                        <div>
+                            <p>1) 가상계좌는 일회성 계좌이므로 재사용시(다시 그 계좌로 입금하시는 경우) 타인의 계좌로 입금될 가능성이 있습니다. 이 경우는 고객의 책임이므로 사용에 주의하시기 바랍니다.</p>
+                            <p>2) 가상계좌의 경우 CD 기에서 현금입금 하실 수 없습니다. CD 기에서 이체는 가능합니다</p>
+                        </div> 
+                    </td>
+                </tr>
+                <tr class="paymentArea list06" style="display:none;">
+                    <td>
+                        <div class="p_lineh">
+                        	<h3 class="pdt10 pdb10"><strong class="c_black">네이버페이 안내</strong></h3>
+                            <p>· 주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.</p> 
+                            <p>· 네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행 계좌 정보를 등록하여</p> 
+                            <p style="margin-left:8px;">네이버페이 비밀번호로 결제할 수 있는 간편결제 서비스입니다.</p> 
+                            <p>· 결제 가능한 신용카드 : 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티</p> 
+                            <p>· 결제 가능한 은행 : NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국</p>
+                            <p>· 네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 무이자, 청구할인 혜택을</p>
+                            <p class="pdb10" style="margin-left:8px;">받을 수 있습니다.</p>
+                        </div> 
+                    </td>
+                </tr>
+                <tr class="paymentArea list07" style="display:none;">
+                    <td>
+                    	<div class="p_lineh">
+                    	  <h3 class="pdt10 pdb10"><strong class="c_black">카카오페이 안내</strong></h3>
+		                  <p>· 카카오페이는 개인 신용카드를 카카오톡 앱에 등록/인증하여 결제하는 방식입니다.</p>
+		                  <p>· 최초 1회 결제 정보만 입력하여 간편하게 결제하실 수 있는 모바일 결제 서비스입니다.</p>
+		                  <p style="margin-left:7px;">본인 명의 휴대폰에서 본인 명의의 카드 등록 후 사용 가능합니다.</p>
+		                  <p>· 카카오톡 앱 미설치 시 앱스토어에서 앱 설치후 회원가입을 하셔야 합니다.</p>
+		                  <p class="pdb10">· 카카오톡 앱 내에서 카카오페이 가입 시 카드사 등록/인증을 하셔야 결제가 가능합니다.</p>
+	               	  	</div>
+                  	</td>
+                </tr>
+                <tr class="paymentArea list08" style="display:none;">
+                    <td>
+                    	<div class="p_lineh">
+                    	  <h3 class="pdt10 pdb10"><strong class="c_black">스마일페이 안내</strong></h3>
+		                    <p>· 앱 설치 없이 G마켓/옥션 ID 로그인 또는 회원가입 후 간편 결제</p>
+                            <p>· 국내 신용/체크 카드 등록 후 이용 가능(은행 계좌이체 불가)</p>
+                            <p>· 실 결제 금액의 0.5% 스마일캐시 적립(1회 최대 5천 원)</p>
+                            <p>· 스마일캐시는 교보핫트랙스 및 G마켓, 옥션, G9 등에서 사용 가능</p>
+                  	      	<h3 class="mgt20 pdb10">※ 스마일페이 결제 시 15% 캐시백</h3>
+                         	<ul>
+                         		<li>· 1만원 이상 스마일페이 (삼성카드) 결제 시 15% 캐시백 (최대 3만원)</li>
+                         		<li>· 기간 : 2019년 12월 9일(월) ~ 31일(화)</li>
+                         		<li>· 결제금액 기준: 쿠폰 할인금액,적립금,스마일캐시 사용금액 등을 제외한 스마일페이 실 결제금액</li>
+                         		<li>· 적립일: 익월 말일</li>
+                         		<li>· 1회 결제금액 기준 1만원 이상(무이자할부 건 포함) / 스마일페이 회원ID 기준 1회 적립</li>
+                         		<li>· 결제 건을 전체 취소할 경우 차후 재 결제 시 적용</li>
+                         		<li class="pdb10">· 적립된 스마일캐시는 유효기간(적립일로부터 90일) 내 미사용 및 구매 취소, 반품 시 자동 회수</li>
+                         	</ul>
+		                </div>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="f_right" style="width:270px">
+          <h3 class="tit01 f_left">결제 금액</h3>
+          <table class="table02_v1 fs14">
+              <caption>결제금액 상세</caption>
+              <colgroup>
+                  <col style="width:50%" />
+                  <col style="width:*" />
+              </colgroup>
+              <tbody>
+                  <tr>
+                      <td class="pd1510 c_gray">총 상품금액</td>
+                      <td class="pd1510 t_right">
+                          <span>282,500</span>원
+                          <input type="hidden" name="totalPrdtAmt" value="282500"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="pd1510 c_gray">총 배송비</td>
+                      <td class="pd1510 t_right">
+                          <span id="totalDlvyAmt">7,700</span>원
+                          <input type="hidden" name="totalDlvyAmt" value="7700"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="pd1510 c_gray">총 주문금액</td>
+                      <td class="pd1510 t_right">
+                          <span id="totalDlvyAmt">290,200</span>원
+                          <input type="hidden" name="totalDlvyAmt" value="290200"/>
+                      </td>
+                  </tr>                  
+                  <tr>
+                      <td class="pd1510 c_gray">총 할인금액</td>
+                      <td class="pd1510 t_right">
+                          <strong class="c_red" id="discountPrice">0</strong>원
+                          <input type="hidden" name="discountPrice" value="0"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="pd1510"><span class="fs18">총 결제금액</span></td>
+                      <td class="pd1510 t_right"><strong class="point02 fs20" id="orderAmt">290,200</strong>원</td>
+                  </tr>
+                  <tr>
+                      <td class="pd1510 c_gray">통합포인트 적립</td>
+                      <td class="pd1510 t_right"><span class="">842</span>원</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    
+    <div id="paymentCashRepArea" class="f_left" style="width:640px;">
+        <table class="paymentCashRepArea bt_line table02_v1" style="border-top: none !important;">
+            <caption>현금영수증 선택</caption>
+            <colgroup>
+                <col style="width:*" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td>
+                    	<h3 class="pdb10"><strong class="c_black">현금영수증 선택</strong></h3>
+                        <span class=""><input name="cashRepCode" value="01" id="cashRepCode01" type="radio" checked="checked"> <label for="cashRepCode01">개인소득공제용</label></span>
+                        <span class="mgl10"><input name="cashRepCode" value="02" id="cashRepCode02" type="radio"> <label for="cashRepCode02">사업자증빙용</label></span>
+                        <span class="mgl10"><input name="cashRepCode" value="03" id="cashRepCode03" type="radio"> <label for="cashRepCode03">미신청</label></span>
+                        
+                        <select name="cashRepCodeKi" class="cashRepCodeKi select mgl10" title="개인 현금영수증  인증선택" >
+                            <option value="01">휴대폰</option>
+                            <option value="02">카드번호</option>
+                        </select>
+                        <input type="text" name="cashRepHp1" class="cashRepCodeCl01 input_txt inputNumberText" maxlength="4" value="" title="휴대폰 지역번호 입력" style="width:34px;ime-mode:disabled;" />
+                        <input type="text" name="cashRepHp2" class="cashRepCodeCl01 input_txt inputNumberText" maxlength="4" value="" title="휴대폰 중간자리 입력" style="width:34px;ime-mode:disabled;" />
+                        <input type="text" name="cashRepHp3" class="cashRepCodeCl01 input_txt inputNumberText" maxlength="4" value="" title="휴대폰 뒷자리 입력" style="width:34px;ime-mode:disabled;" />
+                        
+                        <input type="text" name="cashRepCd1" class="cashRepCodeCl03 input_txt inputNumberText" maxlength="4" title="카드번호 입력" style="width:34px;ime-mode:disabled;" />
+                        <input type="password" name="cashRepCd2" class="cashRepCodeCl03 input_txt inputNumberText" maxlength="4" title="카드번호 입력" style="width:34px;ime-mode:disabled;" />
+                        <input type="password" name="cashRepCd3" class="cashRepCodeCl03 input_txt inputNumberText" maxlength="4" title="카드번호 입력" style="width:34px;ime-mode:disabled;" />
+                        <input type="text" name="cashRepCd4" class="cashRepCodeCl03 input_txt inputNumberText" maxlength="4" title="카드번호 입력" style="width:34px;ime-mode:disabled;" />
+                        <select class="cashRepCodeCl02 select mgl10" title="선택" >
+                            <option value="01">사업자등록번호</option>
+                        </select>
+                        <input type="text" name="cashRepbizNum1" class="cashRepCodeCl02 input_txt inputNumberText" maxlength="3" title="사업자등록번호입력" style="width:40px;ime-mode:disabled;" />
+                        <input type="text" name="cashRepbizNum2" class="cashRepCodeCl02 input_txt inputNumberText" maxlength="2" title="사업자등록번호 입력" style="width:20px;ime-mode:disabled;" />
+                        <input type="text" name="cashRepbizNum3" class="cashRepCodeCl02 input_txt inputNumberText" maxlength="5" title="사업자등록번호 입력" style="width:50px;ime-mode:disabled;" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="c_both"></div>
+    
+    <div class="price_agree mgt30">
+    	<div>
+    		<label>
+    			<input name="agreeCheck" id="agreeCheck" value="Y" type="checkbox" class="checkbox" title="동의" style="width:20px; height:20px; vertical-align:text-bottom;"/>
+    			<span class="c_black fs18"> 주문 상품의 상품명, 가격, 배송 정보에 동의합니다.</span>
+    		</label>
+    	<p style="margin:5px 23px;">(전자상거래법 제8조 2항)</p>
+    	</div>
+    </div>
+    
+    <div class="f_right mgt30">
+        <a href="#n" id="btnPayment" class="btn_360 f_right" style="width:268px;">결제하기</a>
+    </div>
+</form>
+<form id="gsPoint" action="#" method="post" style="hegiht:0">
+    <input type="hidden" name="gsId" value=""/>
+    <input type="hidden" name="gsPw" value=""/>
+</form>
+<form id="lPoint" action="#" method="post" style="hegiht:0">
+    <input type="hidden" name="lCard" value=""/>
+    <input type="hidden" name="lPw" value=""/>
+</form>
+<form id="okPoint" action="#" method="post" style="hegiht:0">
+    <input type="hidden" name="okId" value=""/>
+    <input type="hidden" name="okPw" value=""/>
+</form>
+<iframe id="pay_frame" name="pay_frame" style="border:0;width:0;height:0;display:" src=""></iframe>
+<div id="payReqDiv" name="payReqDiv"></div>
+<script type="text/javascript">
+payinit();
+</script>
+
+        </div>
+        <!-- //컨텐츠 -->
+    </div>
+    <!-- //Container -->
+
+<!-- footer -->
+<div id="footer">
+	<div class="util">
+		<div class="util_cont">
+			<ul>
+				<li><a href="#n">회사소개</a></li>
+				<li><a href="#n">채용정보</a></li>
+				<li><a href="#n">핫트합니다</a></li>
+				<li><a href="#n">매장안내</a></li>
+				<li><a href="#n">제휴/광고안내</a></li>
+				<li><a href="#n">이용약관</a></li>
+				<li><a href="#n"><strong>개인정보처리방침</strong></a></li>
+				<li><a href="#n" __onclick="window.open(this.href,'popupPrizewinner','width=400,height=365');return false;" title="새 창으로 열림">이메일수집거부</a></li>
+			</ul>
+			<div class="family_site">
+				<p>패밀리 사이트</p>
+				<ul>
+                    <li><a href="#n" title="새 창 열림">교보생명</a></li>
+                    <li><a href="#n" title="새 창 열림">교보문고</a></li>
+                    <li><a href="#n" title="새 창 열림">교보증권</a></li>
+                    <li><a href="#n" title="새 창 열림">교보정보통신</a></li>
+                    <li><a href="#n" title="새 창 열림">교보리얼코</a></li>
+                    <li><a href="#n" title="새 창 열림">교보악사자산운용</a></li>
+                    <li><a href="#n" title="새 창 열림">교보라이프플래닛생명</a></li>
+                    <li><a href="#n" title="새 창 열림">KCA 손해사정</a></li>
+                    <li><a href="#n" title="새 창 열림">생보부동산신탁</a></li>
+                    <li><a href="#n" title="새 창 열림">대산문화재단</a></li>
+                    <li><a href="#n" title="새 창 열림">교보생명교육문화재단</a></li>
+                    <li><a href="#n" title="새 창 열림">대산농촌문화재단</a></li>
+                    <li><a href="#n" title="새 창 열림">교보아카데미</a></li>
+                    <li><a href="#n" title="새 창 열림">독서진단리드</a></li>
+                    <li><a href="#n" title="새 창 열림">에듀교보문고</a></li>					
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="inner">
+		<div class="cont left">
+			<div class="cs_center">
+				<strong class="font_t">1661-1112</strong>
+				<span>고객센터: 평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
+				<dl>
+					<dt><a href="#n"><span>SOS 상담</span></a></dt>
+					<dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
+				</dl>
+			</div>
+			<h2>교보핫트랙스㈜</h2>
+			<span>대표이사 박영규</span>
+			<span>사업자등록번호 : 102-81-29258 <a href="#n" __onclick="window.open('http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1028129258', 'communicationViewPopup', 'width=750, height=700;');return false;" title="새 창으로 열림">사업자정보확인 &gt;</a></span>
+			<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+			<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+			<span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
+		</div>
+		<div class="cont right">
+			<ul class="sns">
+				<li><a href="#n"><img src="/images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+			</ul>
+               <div class="mobile">
+               		<a href="#n" class="font_t ios">APP STORE</a>
+					<a href="#n" class="font_t and">PLAY STORE</a>
+               </div>
+			<ul class="copyright">
+				<li><a href="#n"><img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+			</ul>
+			<span class="payment"><em class="font_t">LGU+</em><a href="#n" __onclick="goValidEscrow('hottracks');">서비스 가입사실 확인 &gt;</a></span>
+			<span class="txt">고객님은 안전거래를 위해 현금 등으로 5만원 이상 결제 시 저희 쇼핑몰에서<br/>가입한 LG데이콤의 구매 안전서비스를 이용하실 수 있습니다.</span>
+		</div>
+	</div>
+</div>
+<!--// footer -->
+</div>
+</body>
+</html>

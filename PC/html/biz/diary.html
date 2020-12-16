@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=950">
+<title>다이어리 - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/diary.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="../../js/m_contents.js"></script>
+<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+<script>
+    // 2020.09.22 김지우 커밋
+    $(function(){
+        $('.main_sec1 .slide_view').bxSlider({
+            auto: true,
+            autoHover: true,
+            touchEnabled: false,
+            infniiteLoop: true,
+            hideControlOnEnd: true,
+            speed: 2000,
+            pause: 3000,
+            moveSlides: 1,
+            pager: true,
+            pagerType: 'full',
+            pagerShortSeparator: '',
+            onSlideBefore: function($slideElement, currentIndex) {
+                $(".bx-pager-item").removeClass("active");
+                $(".bx-pager-item").eq(currentIndex + 1).addClass("active");
+                console.log(currentIndex)
+                if(currentIndex + 1 == 7){
+                    $(".bx-pager-item").eq(0).addClass('active')
+                }
+            },
+            onSliderLoad: function () {
+                $(".bx-pager-item").eq(0).addClass('active')
+            }
+        })
+        $(window).scroll(function(){
+            var sct = $(window).scrollTop()
+            var winY = sct + $(window).height()
+            
+            sectionSpot = []
+
+            $('.tit_today_box').each(function(i,e){
+                sectionSpot.push($(e).offset().top)
+                if(winY > sectionSpot[i] && !$(e).is('.active')){
+                    $(this).addClass('active')
+                } else if(winY < sectionSpot[i] && $(e).is('.active')){
+                    $(this).removeClass('active')
+                }
+            })
+        })
+        $('.diary-page .spot-btn-wrap span:first-child').click(function(){
+            var realtimeTop = $('.diary-page .today_box').offset().top - 50
+            $('html,body').animate({scrollTop: realtimeTop},700)
+        })
+        $('.diary-page .spot-btn-wrap span+span').click(function(){
+            var filterTop = $('.diary-page .diarycloud_a').offset().top - 50
+            $('html,body').animate({scrollTop: filterTop},700)
+        })
+        $('.today_box .btn_more_a').click(function(){
+            if(!$(this).is('.active')){
+                var realtimeTop = $('.diary-page .today_box').offset().top - 50
+                $(this).addClass('active')
+                $('.diary-page .today_box li:nth-child(n+13)').slideDown()
+                $('html,body').animate({scrollTop: realtimeTop},700)
+            } else if($(this).is('.active')){
+                $(this).removeClass('active')
+                $('.diary-page .today_box li:nth-child(n+13)').slideUp()
+            }
+        })
+        $('.bestevent_a .btn_more_a').click(function(){
+            if(!$(this).is('.active')){
+                var bestTop = $('.diary-page .bestevent_a').offset().top - 50
+                $(this).addClass('active')
+                $('.diary-page .bestevent_a li:nth-child(n+8)').slideDown()
+                $('.diary-page .bestevent_a li:nth-child(n+8)').css('display','inline-block')
+                $('html,body').animate({scrollTop: bestTop},700)
+            } else if($(this).is('.active')){
+                $(this).removeClass('active')
+                $('.diary-page .bestevent_a li:nth-child(n+8)').slideUp()
+            }
+        })
+    })
+    // 2020.09.22 김지우 커밋 끝
+</script>
+</head>
+
+<body class="">
+    <!-- 탑 텍스트 배너 -->
+    <div class="top_txtbnr">
+       <ul class="inner">
+           <li><a href="#n">#NU`EST(뉴이스트) - THE NOCTURNE</a></li>
+           <li><a href="#n">물류배송 인기베스트!</a></li>
+           <li><a href="#n">모바일 최초구매 3천원 쿠폰!</a></li>
+           <li><a href="#n">2월 출석체크는 여기서!</a></li>
+       </ul>
+    </div>
+
+	<div class="top_banner" style="background-color:#7e68ff;">
+		<div class="inner">
+			<!-- 영역 -->
+            <style>
+            /* 좌에서 우로 컬러 #코드 모두 수정 필수 */
+            .top_banner {
+            background: -webkit-linear-gradient(left,  #2b44c3 0%,#2b44c3 50%,#febf3c 50%,#febf3c 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right,  #2b44c3 0%,#2b44c3 50%,#febf3c 50%,#febf3c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            }
+            </style>
+            <div class="top_banner_a type2">
+	            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/img_top_banner02.jpg" usemap="#top_map">
+        	    <map name="top_map">
+            	    <area shape="rect" coords="2,3,610,77" href="/ht/hot/eventDetail?eventId=66901" onfocus="this.blur()">
+            	    <area shape="rect" coords="651,2,1246,78" href="/ht/hot/eventDetail?eventId=66843" onfocus="this.blur()">
+	            </map>
+	            <!-- 화이트 버튼 white로 / 블랙 버튼 black로 클래스 추가 -->
+	            <a href="#none" class="btn_close black">닫기</a>
+            </div>				
+		</div>
+	</div>
+
+	<div id="wrap" class="content_new">
+		<!-- header -->
+		<div id="header">
+			<!-- util menu -->
+			<div class="util_menu"><!-- 로그인 된 상태의 경우, login : class 추가 -->
+				<ul>
+					<li><a href="../biz/login.html" class="login">로그인</a></li>
+					
+					<li>
+						<a href="../biz/login.html" class="logout">로그아웃</a>
+						<a href="../biz/login.html" class="login">주문조회</a>
+					</li>
+					<li><a href="#" class="logout">마이핫트랙스</a></li>
+					<li class="icon_topcart"><a href="#">장바구니<em class="font_t">4</em></a></li>
+					<li><a href="#">팬사인회</a></li>
+					<li><a href="#" class="logout">매장안내</a></li>
+				</ul>
+			</div>
+			<!--// util menu -->
+			<!-- gnb -->
+	        <nav id="gnb">
+				<div class="header_wrap">
+					<h1 class="g_logo"><a href="../biz/main.html">HOTTRACKS</a></h1>
+					
+					<!-- 신규 수정추가 -->
+					<ul class="gnb_bmenu">
+                        <li><a href="#"><img src="../../images/biz/test/sticker-btn.png" alt=""></a></li>
+                        <li><a href="#">다이어리</a></li>
+                        <li><a href="#">음반</a></li>
+                    </ul>
+                    
+					<div class="g_search">
+						<div class="form_search">
+							<input type="text" placeholder="샤오미를 쓰는 이유">
+							<a href="../biz/search.html" class="btn_search"></a>
+						</div>
+						<div class="keyword_wrap">
+							<a href="#">
+								<em class="font_t">12</em>
+								<p>에어팟케이스</p>
+								<!-- ▲ up , ▼ down : class 추가 -->
+								<span class="num up">99+</span>
+							</a>
+						</div>
+					</div>
+					
+					<!-- 인기검색레이어 -->
+					<script>
+                    $(document).ready(function(){
+                      $(".keyword_wrap").mouseover(function(){
+                        $(".keyword_list_v2").show();
+                      });
+                      $(".keyword_list_v2").mouseover(function(){
+                        $(".keyword_list_v2").show();
+                      });
+                      $(".keyword_list_v2").mouseout(function(){
+                        $(".keyword_list_v2").hide();
+                      });
+                      $('.keyword_close').click(function(){
+                        $('.keyword_list_v2').hide();
+                      });
+                    });
+                    </script>
+					
+                    <div class="keyword_list_v2">
+                    <h5>인기 검색어</h5>
+                    <p class="txt"><strong>2020.03.31 11:00</strong> 기준</p>
+                    <a href="#none" class="keyword_close">닫기</a>
+                    <ul>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">1.</em>
+                                <p>필통</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span class="num up">99+</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">2.</em>
+                                <p>스티커</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span class="num down">1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">3.</em>
+                                <p>모트모트</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span class="new">NEW</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">4.</em>
+                                <p>노트북파우치</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span>-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">5.</em>
+                                <p>노트</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span>-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">6.</em>
+                                <p>마스크</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span>-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">7.</em>
+                                <p>다이어리</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span>-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">8.</em>
+                                <p>마스킹테이프</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span>-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">9.</em>
+                                <p>모나미</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span>-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#none">
+                                <em class="font_t">10.</em>
+                                <p>러브미모어</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                <span>-</span>
+                            </a>
+                        </li>
+                    </ul>
+                    </div>
+
+					<div class="g_menu">
+						<ul>
+							<li class="icon_my">
+								<a href="#">
+									<img src="../../images/biz/common/ic_my_s.png" alt="">
+								</a>
+							</li>
+							<li class="icon_today">
+								<a href="../biz/benefit.html">
+									<img src="../../images/biz/common/ic_today_s.png" alt="">
+									<em>오늘,<strong>혜택</strong></em>
+								</a>
+							</li>
+							<li class="icon_cart">
+								<a href="#">
+									<img src="../../images/biz/common/ic_cart_s.png" alt="">
+									<em class="font_t">4</em>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="gnb_wrap">
+					<div class="inner">
+						<div class="category_wrap">
+							<div class="btn_category">
+								<a href="#">카테고리</a>
+							</div>
+							<div class="category_cont">
+								<ul>
+									<li>
+										<a href="../biz/category_list.html" class="dp1">디자인문구</a>
+										<div class="dp2">
+											<ul>
+												<li>
+													<a href="../biz/skyscraper_v2.html" class="all">전체보기</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="../biz/category_list02.html" class="all">전체보기</a></li>
+															<li><a href="#">2020 날짜형 다이어리</a></li>
+															<li><a href="#">만년 다이어리</a></li>
+															<li><a href="#">2020 날짜형 스케쥴러</a></li>
+															<li><a href="#">위클리 스케쥴러</a></li>
+															<li><a href="#">먼슬리 스케쥴러</a></li>
+															<li><a href="#">캐쉬북</a></li>
+															<li><a href="#">프로젝트플래너</a></li>
+															<li><a href="#">스터디플래너</a></li>
+															<li><a href="#">여행플래너</a></li>
+															<li><a href="#">다이어트플래너</a></li>
+															<li><a href="#">임신 다이어리</a></li>
+															<li><a href="#">리필속지</a></li>
+															<li><a href="#">커버/액세서리</a></li>
+															<li><a href="#" class="more">더보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">다이어리/스케쥴러</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="../biz/category_list.html" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">비즈니스플래너/노트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">2020 캘린더/만년</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필기구</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필통/파우치</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">노트/메모</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포토앨범/스크랩북</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">스티커/스탬프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">데코/디자인 테이프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포장/데코용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">편지/카드/봉투</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">컬러링/캘리/문구세트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">화방용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">BOOK</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="dp1">디지털</a>
+										<div class="dp2">
+											<ul>
+												<li>
+													<a href="#" class="all">전체보기</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+															<li><a href="#">2020 날짜형 다이어리</a></li>
+															<li><a href="#">만년 다이어리</a></li>
+															<li><a href="#">2020 날짜형 스케쥴러</a></li>
+															<li><a href="#">위클리 스케쥴러</a></li>
+															<li><a href="#">먼슬리 스케쥴러</a></li>
+															<li><a href="#">캐쉬북</a></li>
+															<li><a href="#">프로젝트플래너</a></li>
+															<li><a href="#">스터디플래너</a></li>
+															<li><a href="#">여행플래너</a></li>
+															<li><a href="#">다이어트플래너</a></li>
+															<li><a href="#">임신 다이어리</a></li>
+															<li><a href="#">리필속지</a></li>
+															<li><a href="#">커버/액세서리</a></li>
+															<li><a href="#" class="more">더보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">다이어리/스케쥴러</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">비즈니스플래너/노트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">2020 캘린더/만년</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필기구</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필통/파우치</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">노트/메모</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포토앨범/스크랩북</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">스티커/스탬프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">데코/디자인 테이프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포장/데코용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">편지/카드/봉투</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">컬러링/캘리/문구세트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">화방용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">BOOK</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="dp1">고급필기구</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">오피스</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">리빙/생활가전</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">키친/푸드</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">가구/수납</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">패션잡화</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">뷰티/헬스</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">여행/자동차</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">취미/펫</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">유아동</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">직수입/PB</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">CD/LP</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">DVD/BLU-RAY</a>
+									</li>
+								</ul>
+								<div class="banner">
+									<a href="#"><img src="" alt=""></a>
+								</div>
+							</div>
+						</div>
+						<ul class="gnb_menu">
+						    <!-- 활성화 시 on 클래스 추가 -->
+							<li><a href="#n">이벤트</a></li>
+							<li><a href="#n" class="">쿠폰&amp;혜택</a></li>
+							<li><a href="#n">추천</a></li>
+							<li><a href="#n">베스트</a></li>
+							<li><a href="#n">무료배송</a></li>
+							<li><a href="#n">신상</a></li>
+							<li><a href="#n">할인</a></li>
+						</ul>
+						<ul class="sub_menu">
+							<li><a href="#n">이럴 때,</a></li>
+							<li><a href="#n">아지트</a></li>
+							<li><a href="#n">뮤직매거진</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!--// header -->
+
+		<!-- Container -->
+<div id="container">
+    <!-- 컨텐츠 -->
+    <div class="diary-page">
+        <div class="diary-title clear">
+            <div class="title-wrap">
+                <p>매일매일나의이야기</p>
+                <h2>2021 DIARY</h2>
+            </div>
+            <div class="spot-btn-wrap">
+                <span>실시간 추천</span>
+                <span>다이어리 필터</span>
+            </div>
+        </div>
+    <div id="m_diary" class="c_both">
+    <!-- 메인 슬라이드 -->
+    <div id="diary_mspot">
+        <div class="main_sec1">
+            <ul class="main_slide_btn slide_view">
+                
+                    <li class="main_slide_img">
+                        <a href="/ht/hot/eventDetail?eventId=65887">
+                            <img src="../../images/biz/diary/dummy-bnr1.png" alt="10%"/>
+                            <div class="text-wrap">
+                                <div class="imgAlt">10%</div>
+                                <div class="bnrTitle">1더 유쾌하고 다정하게<br/>일상 기록하기</div>
+                                <div class="bnrSubTitle">리훈 메모생활 그래픽 런칭</div>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="main_slide_img">
+                        <a href="/ht/hot/eventDetail?eventId=65869">
+                            <img src="../../images/biz/diary/dummy-bnr1.png" alt="~15%"/>
+                            <div class="text-wrap">
+                                <div class="imgAlt ">~15%</div>
+                                <div class="bnrTitle ">2아무일 없으면 어때?<br/>평범하지만 편안한 하루</div>
+                                <div class="bnrSubTitle ">2020 인디고 </div>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="main_slide_img">
+                        <a href="/ht/hot/eventDetail?eventId=65868">
+                            <img src="../../images/biz/diary/dummy-bnr1.png" alt="10%"/>
+                            <div class="text-wrap">
+                                <div class="imgAlt ">10%</div>
+                                <div class="bnrTitle ">3매일매일이<br/>인생의 시그니처</div>
+                                <div class="bnrSubTitle ">썸무드디자인 시그니처 라인</div>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="main_slide_img">
+                        <a href="/ht/hot/eventDetail?eventId=65867">
+                            <img src="../../images/biz/diary/dummy-bnr1.png" alt="~20%"/>
+                            <div class="text-wrap">
+                                <div class="imgAlt ">~20%</div>
+                                <div class="bnrTitle ">4윤동주의 모든것을<br/>기억하다</div>
+                                <div class="bnrSubTitle ">글입다 윤동자 필사 다이어리</div>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="main_slide_img">
+                        <a href="/ht/hot/eventDetail?eventId=65874">
+                            <img src="../../images/biz/diary/dummy-bnr1.png" alt="~33%"/>
+                            <div class="text-wrap">
+                                <div class="imgAlt ">~33%</div>
+                                <div class="bnrTitle ">5누구나<br/>예쁘게 오래오래!</div>
+                                <div class="bnrSubTitle ">미뉴잇 다이어리와 함께!</div>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="main_slide_img">
+                        <a href="/ht/hot/eventDetail?eventId=65865">
+                            <img src="../../images/biz/diary/dummy-bnr1.png" alt="10%"/>
+                            <div class="text-wrap">
+                                <div class="imgAlt ">10%</div>
+                                <div class="bnrTitle ">6사랑하지 않을수 없어!<br/>러브미모어</div>
+                                <div class="bnrSubTitle ">씰스티커 맛집, 러브미모어</div>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="main_slide_img">
+                        <a href="/ht/hot/eventDetail?eventId=65780">
+                            <img src="../../images/biz/diary/dummy-bnr1.png" alt="~15%"/>
+                            <div class="text-wrap">
+                                <div class="imgAlt ">~15%</div>
+                                <div class="bnrTitle ">7일상의 귀염뽀짝템<br/>브런치브라더</div>
+                                <div class="bnrSubTitle ">로마네 다이어리 1+1증정!</div>
+                            </div>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 오늘만 1+1 증정 -->
+    <a href="#" class="plus-stuff">
+        <div class="plus-title-wrap">
+            <strong>오늘만 1+1증정</strong>
+        </div>
+        <div class="clear-wrap clear">
+            <div class="left">
+                <div class="time-count-wrap">
+                    <div>
+                        <b>23</b><strong>HOUR</strong>
+                    </div>
+                    <div>
+                        <b>45</b><strong>MIN</strong>
+                    </div>
+                    <div>
+                        <b>59</b><strong>SEC</strong>
+                    </div>
+                </div>
+                <div class="plus-info">
+                    <div class="free-ship">
+                        <img src="../../images/biz/diary/ic-freeship.png"><b>무료배송</b>
+                    </div>
+                    <div class="plus-text">
+                        <p class="plus-title">로이텀 MASTER SLIM 121P 어쩌구 저쩌구 이름이 길다</p>
+                         <b class="discount-pay">28,800</b><b class="sale-pay">28,800</b>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="img-wrap">
+                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg" alt="1+1 증정 아이템 이미지">
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <div class="cgift">
+        <div class="gift-title-wrap">
+            <strong>GIFT EVENT</strong>
+        </div>
+        <a href="#">
+            <img src="../../images/biz/diary/dummy-bnr2.png"/>
+        </a>
+    </div>
+    
+    <!-- 오늘의 추천 -->
+    <div class="today_box max-width">
+        <div class="tit_today_box">
+            <span class="txtline_name">실시간 추천</span>
+            <p>당신만을 위한</p>
+        </div>
+        <ul class="today_a" id="recobellMenu">
+            <li class="ic_today on" recType="p001">
+                <img/>
+                <p>맞춤추천순</p>
+            </li>
+            <li class="ic_cbest" recType="m002">
+                <img/>
+                <p>인기순</p>
+            </li>
+            <li class="ic_cartbest" recType="m012">
+                <img/>
+                <p>장바구니인기</p>
+            </li>
+        </ul>
+        
+        <div class="prod_list_normal c_both">
+                <!-- 이건 어때요 -->
+                <div class="pannel1">
+                    <ul class="tlist_a" id="recobellList">
+
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                    <span class="pc">30%</span>
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="img mt31">			
+                                <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1981/hot1581996816407.jpg" alt="[모트모트] 플래너 커버 (풀커버형/플립형)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>
+                            </span>		
+                            <a href="/ht/product/detail?barcode=2310041371006&amp;foo=bar&amp;rccode=pc_d_person">		
+                                <span class="make txt_line1">motemote</span>			
+                                <span class="name">[모트모트] 플래너 커버 (풀커버형/플립형)</span>				
+                                <span class="price">					
+                                    <span class="sale">1,500</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">69</span>		    
+                                    <span class="ico_like">298</span>			
+                                </span>		
+                            </a>	
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- / 이건 어때요 -->
+        </div>
+        
+        <div class="btn_more_a" id="recobellMore">
+            <a href="#" onclick="javacript:event.preventDefault();"></a>
+        </div>
+        
+    </div>
+    
+    <!-- 많이 보고 있는 이벤트  -->
+    <div class="bestevent_a max-width">
+        <div class="bestevent">
+            <div class="event_list_a">
+                <div class="tit_today_box">
+                    <span class="txtline_name">많이 보고 있는 이벤트</span>
+                    <p>인기 급상승</p>
+                </div>
+                <div class="event-text-deco">
+                    <p class="stroke-text">Rapid Rise In</p>
+                    <p class="popular-text">Popularity</p>
+                </div>
+                <div class="event_list">
+                    <ul class="list" id="bestEvent">
+                          
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="img-wrap">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1459/1578278052450_main_banner_m_23.jpg">
+                                </div>
+                                <div class="text-wrap">
+                                    <strong class="title-text">일상의 시그니처가 되다.</strong>
+                                    <b class="description-text">썸무드디자인 신상품 런칭 19%</b>
+                                </div>
+                                <span class="during-date">
+                                    <b>2020.08.20</b>
+                                    <b>2029.08.31</b>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="btn_more_a" id="bestEventMore">
+                    <a href="#" onclick="javacript:event.preventDefault();"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 다이어리 클라우드 -->
+    <div class="diarycloud_a" id="diary_area">
+        <div class="diarycloud">
+            <div class="tit_today_box">
+                <span class="txtline_name">다이어리 필터</span>
+                <p>내가 찾던 다이어리</p>
+            </div>
+            <ul class="diarycloud_tab"  id="diaryCategory">
+                <li class="diaryc00 btn on" ctgrNum="0">
+                    <span>ALL</span>
+                    <p>전체</p>
+                </li>
+                <li class="diaryc01 btn on" ctgrNum="1">
+                    <img src="../../images/biz/diary/filter-img1.png"/>
+                    <p>심플</p>
+                </li>
+                <li class="diaryc02 btn" ctgrNum="2">
+                    <img src="../../images/biz/diary/filter-img2.png"/>
+                    <p>일러스트</p>
+                </li>
+                <li class="diaryc03 btn" ctgrNum="3">
+                    <img src="../../images/biz/diary/filter-img3.png"/>
+                    <p>6공</p>
+                </li>
+                <li class="diaryc04 btn" ctgrNum="4">
+                    <img src="../../images/biz/diary/filter-img4.png"/>
+                    <p>스케줄러</p>
+                </li>
+                <li class="diaryc05 btn" ctgrNum="5">
+                    <img src="../../images/biz/diary/filter-img5.png"/>
+                    <p>날짜형</p>
+                </li>
+                <li class="diaryc06 btn" ctgrNum="6">
+                    <img src="../../images/biz/diary/filter-img6.png"/>
+                    <p>만년형</p>
+                </li>
+                <li class="diaryc07 btn" ctgrNum="7">
+                    <img src="../../images/biz/diary/filter-img7.png"/>
+                    <p>캘린더</p>
+                </li>
+            </ul>
+            
+            <ul class="snb_a" id="diarySort">
+                <li class="btn on" sortNum="0">
+                    <p>베스트순</p>
+                </li>
+                <li class="btn" sortNum="1">
+                    <p>최신순</p>
+                </li>
+                <li class="btn" sortNum="2">
+                    <p>높은할인율순</p>
+                </li>
+                <li class="btn" sortNum="3" >
+                    <p>후기순</p>
+                </li>
+            </ul>
+            
+            <div class="prod_list_normal c_both">
+                <div class="pannel1">
+                    <!-- TOP3 -->
+                    <ul class="tlist_a top3 active clear" id="diaryCloudList_top">
+
+                        <li>		
+                            <span class="ic_tagnum"></span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+
+                    </ul>
+                    <ul class="tlist_a clear" id="diaryCloudList">
+
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+                        <li>		
+                            <span class="ic_tagnum">1</span>		
+                            <span class="img">			
+                                <a href="#">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1666/hot1597817274876.jpg" alt="로이텀 2021 위클리 플래너 (포켓)" class="photo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';">
+                                </a>		
+                            </span>		
+                            <a href="#">		
+                                <span class="make txt_line1">LEUCHTTURM</span>			
+                                <span class="name">로이텀 2021 위클리 플래너 (포켓)</span>				
+                                <span class="price">					
+                                    <span class="sale">18,200</span>					
+                                    <span class="pc">30%</span>			
+                                </span>			
+                                <span class="icon">  		    
+                                    <span class="ico_review">2</span>		    
+                                    <span class="ico_like">13</span>			
+                                </span>		
+                            </a>	
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="paging" id="diaryPaging">
+                    <a href="#" class="prev"></a>
+                    <ul>
+                        <li class="on"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                    </ul>
+                    <a href="#" class="next"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스티커 배너 영역 -->
+    <div class="cgift">
+        <a href="#">
+            <img src="../../images/biz/diary/dummy-bnr3.png"/>
+        </a>
+    </div>
+
+    <!-- 다꾸존 -->
+    <div class="diarydeco_a">
+        <div class="diarydeco">
+            <div class="tit_today_box">
+                <span class="txtline_name">다꾸 X다꾸</span>
+                <p>다꾸 세상으로</p>
+            </div>
+            <div class="decolist_p">
+                <div class="deco_p01">			
+                    <a href="/ht/gift/giftCategorySub?ctgrId=00002003" >
+                        <img class="deco-bg" src="../../images/biz/diary/dakku-pen-bg.png">
+                        <img class="deco-item" src="../../images/biz/diary/dakku-pen.png">
+                    </a>
+                </div>
+                <div class="deco_p02">			
+                    <a href="/ht/gift/giftCategorySub?ctgrId=0000200505" >
+                        <img class="deco-bg" src="../../images/biz/diary/dakku-memo1.png">
+                        <img class="deco-item" src="../../images/biz/diary/dakku-memo.png">
+                        <img class="deco-bg2" src="../../images/biz/diary/dakku-memo2.png">
+                    </a>
+                </div>
+                <div class="deco_p03">			
+                    <a href="/ht/gift/giftCategorySub?ctgrId=00002006" >
+                        <img class="deco-bg" src="../../images/biz/diary/dakku-case1.png">
+                        <img class="deco-item" src="../../images/biz/diary/dakku-case.png">
+                        <img class="deco-bg2" src="../../images/biz/diary/dakku-case2.png">
+                    </a>
+                </div>
+                <div class="deco_p04">			
+                    <a href="/ht/gift/giftCategorySub?ctgrId=00002013" >
+                        <img class="deco-bg" src="../../images/biz/diary/dakku-tape1.png">
+                        <img class="deco-item" src="../../images/biz/diary/dakku-tape.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 이벤트 리스트 -->
+    <div class="diaryevent_a" id="event_area">
+        <div class="diaryevent">
+            <div class="event_list_a">
+                <div class="tit_today_box">
+                    <span class="txtline_name">DIARY EVENT</span>
+                    <p>혜택을 누리자</p>
+                </div>
+                <div class="event_list">
+                    <ul class="list" id="diaryEventList">
+
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <em class="discount">10%</em>
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <em class="discount">10%</em>
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <em class="discount">10%</em>
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <em class="discount">10%</em>
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+                        <li> 	
+                            <a href="/e/64654"> 	
+                                <div class="img-wrap">		
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1091/1571892809833_640.jpg" alt="일상의 시그니처가 되다." onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';">	
+                                </div> 	
+                                <div class="text-wrap">   	
+                                    <strong class="item-title">2021 테스트 2 오늘만 플레플레 슈슈다이어리 증정종료</strong>   	
+                                    <p class="description">즉시결제고객기준 선착순 증정종료되었습니다!</p> 	
+                                    <span class="during-date">2020.09.17 ~ 2030.10.31</span> 	
+                                </div> 	
+                            </a> 
+                        </li>
+
+                    </ul>
+                    <div class="paging" id="eventPaging">
+                        <a href="#" class="prev"></a>
+                        <ul>
+                            <li class="on"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                        <a href="#" class="next"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- //컨텐츠 -->
+    </div>
+    <!-- //Container -->
+
+		<!-- footer -->
+		<div id="footer">
+			<div class="util">
+				<div class="util_cont">
+					<ul>
+						<li><a href="#">회사소개</a></li>
+						<li><a href="#">채용정보</a></li>
+						<li><a href="#">핫트합니다</a></li>
+						<li><a href="#">매장안내</a></li>
+						<li><a href="#">제휴/광고안내</a></li>
+						<li><a href="#">이용약관</a></li>
+						<li><a href="#"><strong>개인정보처리방침</strong></a></li>
+						<li><a href="#">이메일수집거부</a></li>
+					</ul>
+					<div class="family_site">
+						<p>패밀리 사이트</p>
+						<ul>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div class="cont left">
+					<div class="cs_center">
+						<strong class="font_t">1661-1112</strong>
+						<span>평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
+						<dl>
+							<dt><a href="#"><span>SOS 상담</span></a></dt>
+							<dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
+						</dl>
+					</div>
+					<h2>교보핫트랙스㈜</h2>
+					<span>대표이사 박영규</span>
+					<span>사업자등록번호 : 102-81-29258 <a href="#">사업자정보확인 &gt;</a></span>
+					<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+					<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+					<span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
+				</div>
+				<div class="cont right">
+					<ul class="sns">
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_blog.png" alt="blog"></a></li>
+					</ul>
+	                <div class="mobile">
+	                    <a href="#" target="_blank" class="font_t ios">APP STORE</a>
+						<a href="#" target="_blank" class="font_t and">PLAY STORE</a>
+	                </div>
+					<ul class="copyright">
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+					</ul>
+					<span class="payment"><em class="font_t">LGU+</em><a href="#" target="_blank">서비스 가입사실 확인 &gt;</a></span>
+					<span class="txt">고객님은 안전거래를 위해 현금 등으로 5만원 이상 결제 시 저희 쇼핑몰에서<br/>가입한 LG데이콤의 구매 안전서비스를 이용하실 수 있습니다.</span>
+				</div>
+			</div>
+		</div>
+		<!--// footer -->
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		gnb();//gnb
+		nav();//nav
+		if($('.header_wrap').length >0){
+			bodyScroll();//body scroll
+		}
+		mainFn();//main
+	})
+    </script>
+</body>
+</html>

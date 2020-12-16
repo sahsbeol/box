@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/pages/decorators">
+    <excludes>
+        <pattern>/html/*</pattern>
+        <pattern>/styles/*</pattern>
+        <pattern>/scripts/*</pattern>
+        <pattern>/css/*</pattern>
+        <pattern>/js/*</pattern>
+        <pattern>/images/*</pattern>
+        <pattern>/WEB-INF/template/*</pattern>
+    </excludes>
+    <decorator name="popup" page="popup.jsp"></decorator>
+    <decorator name="popupSsl" page="popupSsl.jsp"></decorator>
+    <decorator name="popupRecord" page="popupRecord.jsp"></decorator>
+    <decorator name="order" page="order.jsp"></decorator>
+    <decorator name="orderSheet" page="orderSheet.jsp"></decorator>
+    <decorator name="urlimport" page="urlimport.jsp"></decorator>
+    <decorator name="bizSimpleHt" page="biz/simpleHt.jsp"></decorator>
+    
+    <!-- 마더몰 -->
+    <decorator name="welcomeMain" page="welcomeMain.jsp"></decorator>
+    <decorator name="bizWelcomeMain" page="biz/welcomeMain.jsp"></decorator>
+    <decorator name="recordMain" page="recordMain.jsp"></decorator>    
+    <decorator name="diary" page="diary.jsp"></decorator>
+    <decorator name="bizDiary" page="biz/diary.jsp"></decorator>
+    <decorator name="bizSticker" page="biz/sticker.jsp"></decorator>
+    <decorator name="htNoQuick" page="biz/ht_noQuick.jsp"></decorator>
+    <decorator name="bizHt" page="biz/bizHt.jsp">
+        <pattern>/ht/biz/*</pattern>
+    </decorator>
+    <decorator name="ht" page="biz/ht.jsp">
+        <pattern>/ht/*</pattern>
+    </decorator>
+    
+    <!-- 홈페이지 -->
+    <decorator name="company" page="company.jsp">
+        <pattern>/company/*</pattern>
+    </decorator>
+</decorators>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BatchSQL">
+    <typeAlias alias="history" type="kr.co.hottracks.site.model.common.BatchHistory"/>
+    
+    <insert id="createBatachHistory" parameterClass="history">
+        /* BatchSQL.createBatachHistory */
+        INSERT INTO TB_BATCH_HISTORY (BATCH_ID, BATCH_HIST_SEQ, BATCH_START_DTM, BATCH_STATUS_GBN)
+                              VALUES (#batchId#, #seq#, SYSDATE, #statusGubun#)
+    </insert>
+    
+    <update id="updateBatchHistory" parameterClass="history">
+        /* BatchSQL.updateBatchHistory */
+        UPDATE TB_BATCH_HISTORY
+           SET BATCH_END_DTM = SYSDATE
+             , BATCH_STATUS_GBN = #statusGubun#
+             , BATCH_EXE_FAIL_RSN = #failReason#
+         WHERE BATCH_ID = #batchId#
+           AND BATCH_HIST_SEQ = #seq#
+    </update>
+</sqlMap>

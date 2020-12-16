@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="LPointSQL">
+    <typeAlias alias="lPointParam" type="kr.co.hottracks.site.model.frontoffice.order.LPointParam"/>
+
+    <select id="getFlwno" parameterClass="string" resultClass="string">
+        select trim(to_char(nvl((select NUM from TB_LPOINT_NUMBER where GUBUN = #value# and DT = to_char(sysdate,'yyyymmdd')),0)+1,'000000'))
+          from dual
+    </select>
+    
+    <update id="upFlwno" parameterClass="string">
+        MERGE INTO TB_LPOINT_NUMBER A
+        USING (SELECT #value# GUBUN
+                    , to_char(sysdate,'yyyymmdd')     DT
+                 FROM DUAL
+              ) B ON (A.GUBUN = B.GUBUN and A.DT = B.DT)
+         WHEN MATCHED THEN
+             UPDATE SET A.NUM = A.NUM + 1
+         WHEN NOT MATCHED THEN 
+             INSERT (A.GUBUN, A.DT, A.NUM) 
+             VALUES (B.GUBUN, B.DT, 1)  
+     </update>
+     
+     <select id="getlotteVar" parameterClass="string" resultClass="lPointParam">
+        select to_char(sysdate,'yyyymmdd') dt
+              , to_char(sysdate,'HH24MISS') hr
+          from dual 
+     </select>
+     
+    <insert id="insertLPoint" parameterClass="lPointParam">
+        insert into TB_LPOINT ( USER_NUM
+                                    , SEQ
+                                    , CHNG_DT
+                                    , CHNG_RES
+                                    , LAMT
+                                    , ORDER_NUM
+                                    , ORDER_PRDT_INSEQ
+                                    , LYN
+                                    , LDT
+                                    , REGDT
+                                    , APRNO
+                                    , APRDT
+                                    , LCARDNUM)
+                        values ( #userNum#
+                                 , (select nvl(max(SEQ),0)+1 from TB_LPOINT where USER_NUM = #userNum#)
+                                 , to_char(sysdate,'yyyymmdd')
+                                 , #chngRes#
+                                 , #ttnUPt#
+                                 , #orderNum#
+                                 , ''
+                                 , 'Y'
+                                 , to_char(sysdate,'yyyymmdd')
+                                 , sysdate
+                                 , #aprno#
+                                 , #aprDt#
+                                 , #lCard#)
+    </insert>
+    
+    <procedure id="lPointSave" parameterClass="lPointParam">
+        { call PR_LPOINTSAVE(#orderNum#,#lCard#) }
+    </procedure>
+    
+    <select id="getLPointOrderUse" parameterClass="lPointParam" resultClass="lPointParam">
+		select USER_NUM userNum
+		     , LAMT     ttnUPt
+		     , ORDER_NUM    orderNum
+		     , APRNO    aprno
+		     , APRDT    aprDt
+		     , LCARDNUM lCard
+		  from TB_LPOINT
+		 where 1=1
+		   and USER_NUM = #userNum#
+		   and ORDER_NUM = #orderNum#
+		   and CHNG_RES = '01'
+    </select>
+</sqlMap>

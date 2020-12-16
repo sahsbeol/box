@@ -1,0 +1,127 @@
+@charset "utf-8";
+
+@import url(layout.css);
+
+
+#body {
+	margin: -15 10px 0 60px;
+	padding: 20px 0;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/page_location_bg.gif") repeat-x 0 56px;
+}
+
+
+#sidebar {
+	float: left;
+	margin: -15px 0 0;
+	width: 195px;
+}
+#sidebar h2 {
+	padding: 6px 0 15px 7px;
+}
+#sidebar div.product-menu {
+	padding: 23px 0 0 3px;
+	width: 174px;
+}
+#sidebar div.product-menu ul {
+	border-bottom: 1px solid #eaeaea;
+}
+#sidebar div.product-menu ul li {
+	position: relative;
+	padding: 0 1px;
+	border-top: 1px solid #eaeaea;
+}
+#sidebar div.product-menu ul li img {
+	vertical-align: top;
+}
+#sidebar div.product-menu ul li ul {
+	display: none;
+	position: absolute;
+	left: 150px;
+	top: 0;
+	z-index: 2;
+	padding: 10px 10px 5px;
+	background: #fff;
+	border: 1px solid #999;
+}
+#sidebar div.product-menu ul li ul li {
+	padding: 0 0 5px;
+	font-size: 0.9em;
+	white-space: nowrap;
+}
+
+#contents {
+	float: left;
+	width: 950px;
+	min-height: 600px;
+}
+#contents div.page-location {
+	position: relative;
+	z-index: 2;
+	margin-left: 0;
+	padding: 10px 0 20px;
+	height: 30px;
+	background: none;
+
+}
+#contents div.page-location ul {
+	position: relative;
+	z-index: 10;
+	margin: -5px 0 0 13px;
+	padding: 0 0 0 15px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/page_location_dot.gif") no-repeat 0 6px;
+}
+#contents div.page-location ul li {
+	position: relative;
+	z-index: 2;
+	vertical-align: middle;
+}
+#contents div.page-location ul li a {
+	margin: 0 0 1px;
+	vertical-align: middle;
+}
+#contents div.page-location ul li.sub {
+	cursor: pointer;
+}
+#contents div.page-location ul li.sub a {
+	display: inline-block;
+	padding: 3px 0 0 3px;
+	width: 130px;
+	height: 16px;
+	font-size: 0.9em;
+	white-space: nowrap;
+	overflow: hidden;
+	border: 1px solid #b11111;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/icon_page_location_select.gif") no-repeat right 8px;
+	vertical-align: middle;
+}
+#contents div.page-location ul li.sub a strong {
+	font-size: 1em;
+	color:#555555;
+	
+}
+#contents div.page-location ul li.sub ul {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 16px;
+	*top: 21px;
+	z-index: 8;
+	margin: 0;
+	padding: 0;
+	width: 133px;
+	font-size: 12px;
+	border: 1px solid #b11111;
+	background: #fff;
+}
+#contents div.page-location ul li.sub ul li a {
+	margin: 0;
+	padding: 3px 0 3px 3px;
+	border: 0;
+	background: none;
+	overflow: hidden;
+	font-size: 0.9em;
+}
+#contents h3.title {
+	padding: 0 0 8px;
+	border-bottom: 1px solid #e7e7e7;
+}

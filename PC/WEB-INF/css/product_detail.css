@@ -1,0 +1,591 @@
+@charset "utf-8";
+
+div.detail-content div.product-image {
+	float: left;
+	width: 416px;
+}
+div.detail-content div.product-image p.photo {
+	width: 400px;
+	height: 400px;
+}
+div.detail-content div.product-image p.photo img {
+	width: 400px;
+	height: 400px;
+}
+div.detail-content div.product-image ul {
+	padding: 30px 0 0;
+	text-align: center;
+}
+div.detail-content div.product-image ul li {
+	display: inline;
+}
+div.detail-content div.product-image ul li img {
+	width: 50px;
+	height: 50px;
+	border: 1px solid #eaeaea;
+}
+div.detail-content div.product-basic-info {
+	position: relative;
+	float: left;
+	margin: -25px 16px 0 0;
+	width: 326px;
+	overflow: hidden;
+}
+div.detail-content div.product-basic-info p.icon-sale {
+	position: relative;
+	z-index: 1;
+	height: 33px;
+}
+div.detail-content div.product-basic-info p.icon-sale img {
+	vertical-align: top;
+}
+div.detail-content div.product-basic-info p.subject {
+	padding: 10px 0;
+	color: #363636;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+div.detail-content div.product-basic-info p.subject-sub {
+	padding: 0 0 10px;
+	color: #9c7a62;
+	font-size: 1em;
+	font-weight: bold;
+}
+div.detail-content div.product-basic-info p.subject-option {
+	padding: 0 0 10px;
+	color: #b11111;
+	font-size: 1em;
+}
+div.detail-content div.product-basic-info p.subject-option a {
+	color: #b11111;
+}
+div.detail-content div.product-basic-info div.freebie {
+	display: none;
+	position: absolute;
+	left: 62px;
+	top: 115px;
+	z-index: 5;
+	padding: 5px 0 0;
+	width: auto;
+	text-align: center;
+	background: #fff;
+	border: 1px solid #d8d8d8;
+}
+div.detail-content div.product-basic-info div.freebie p.period {
+	display:inline-block;
+	width: 100%;
+	font-size: 0.9em;
+	font-weight: bold;
+}
+div.detail-content div.product-basic-info div.freebie p.period span {
+	padding: 0 6px 0 0;
+	color: #ff3b0f;
+}
+div.detail-content div.product-basic-info div.freebie ul {
+	display: inline-block;
+	padding: 0 10px 0;
+}
+div.detail-content div.product-basic-info div.freebie ul li {
+	float: left;
+	padding: 5px 5px 0;
+}
+div.detail-content div.product-basic-info div.freebie p.photo ,
+div.detail-content div.product-basic-info div.freebie p.product-name {
+	text-align: center;
+}
+div.detail-content div.product-basic-info div.freebie p.photo {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	font-size: 0.8em;
+}
+div.detail-content div.product-basic-info div.freebie p.product-name {
+	padding: 5px 0 5px;
+	width: 50px;
+	overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+	font-size: 0.8em;
+}
+div.detail-content div.product-basic-info div.freebie p.photo img{
+	border: 1px solid #ccc;
+	width: 50px;
+	height: 50px;
+	vertical-align: middle;
+}
+div.detail-content div.product-basic-info dl.price {
+	float: left;
+	display: inline;
+	padding: 13px 0 0;
+	width: 326px;
+	border-top: 1px solid #eaeaea;
+}
+div.detail-content div.product-basic-info dl.price dt {
+	float: left;
+	width: 90px;
+}
+div.detail-content div.product-basic-info dl.price dd {
+	float: left;
+	display: inline;
+	padding: 0 0 13px;
+	width: 236px;
+}
+div.detail-content div.product-basic-info dl.price dd.discount-price strong span {
+	font-size: 1.3em;
+	color: #f7051d;
+}
+div.detail-content div.product-basic-info dl.price dd.mileage {
+	font-weight: normal;
+	color: #898989;
+	font-size: 0.9em;
+}
+div.detail-content div.product-basic-info dl.price dd.mileage strong {
+	color: #509ae5;
+	font-size: 1.2em;
+}
+div.detail-content div.product-basic-info dl.price dt.discount-coupon {
+	display: none;
+}
+div.detail-content div.product-basic-info dl.price dd.discount-coupon {
+	margin: 0 0 8px;
+	padding: 5px 0;
+	width: 324px;
+	border: 1px solid #e2e2e2;
+	background: #f9f9f9;
+}
+div.detail-content div.product-basic-info dl.price dd.discount-coupon p.photo {
+	float: left;
+	padding: 0 0 0 6px;
+	width: 112px;
+}
+div.detail-content div.product-basic-info dl.price dd.discount-coupon p.photo img {
+	width: 98px;
+	height: 26px;
+	border: 1px solid #d8d8d8;
+}
+div.detail-content div.product-basic-info dl.price dd.discount-coupon p.title {
+	float: left;
+	padding: 1px 0 3px;
+	width: 200px;
+	color: #ff3b0f;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+div.detail-content div.product-basic-info dl.price dd.discount-coupon p.date {
+	float: left;
+	display: inline;
+	width: 200px;
+	color: #464646;
+	font-size: 0.9em;
+}
+div.detail-content div.product-basic-info dl.brand {
+	float: left;
+	padding: 13px 0 0;
+	width: 326px;
+	border-top: 1px solid #eaeaea;
+}
+div.detail-content div.product-basic-info dl.brand dt {
+	float: left;
+	width: 90px;
+}
+div.detail-content div.product-basic-info dl.brand dd {
+	float: left;
+	padding: 0 0 13px;
+	width: 236px;
+}
+div.detail-content div.product-basic-info dl.brand dd.manufacture,
+div.detail-content div.product-basic-info dl.brand dd.product-code {
+	font-weight: bold;
+	font-size: 0.9em;
+}
+div.detail-content div.product-basic-info dl.brand dd img {
+	vertical-align: middle;
+}
+div.detail-content div.product-basic-info dl.delivery {
+	float: left;
+	padding: 13px 0 0;
+	width: 326px;
+	border-top: 1px solid #eaeaea;
+}
+div.detail-content div.product-basic-info dl.delivery dt {
+	float: left;
+	width: 90px;
+}
+div.detail-content div.product-basic-info dl.delivery dd {
+	float: left;
+	padding: 0 0 13px;
+	width: 236px;
+	font-size: 0.9em;
+}
+div.detail-content div.product-basic-info dl.delivery dd img {
+	vertical-align: middle;
+}
+div.detail-content div.product-basic-info dl.delivery dd.delivery-info img {
+	margin: 2px 0;
+}
+div.detail-content div.product-basic-info dl.option {
+	float: left;
+	padding: 13px 0 0;
+	width: 326px;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+}
+div.detail-content div.product-basic-info dl.option dt {
+	float: left;
+	width: 90px;
+}
+div.detail-content div.product-basic-info dl.option dd {
+	display: block !important;
+	float: left;
+	padding: 0 0 5px;
+	width: 236px;
+}
+div.detail-content div.product-basic-info dl.option dd.words input {
+	padding: 2px 2px 0 0;
+	width: 220px;
+	height: 13px;
+	border: 1px solid #dedede;
+}
+div.detail-content div.product-basic-info dl.option dd.option select {
+	margin: 0 0 4px;
+	width: 180px;
+	height: 19px;
+}
+div.detail-content div.product-basic-info dl.option dd.quantity input {
+	padding: 2px 2px 0 0;
+	width: 26px;
+	height: 13px;
+	text-align: right;
+	border: 1px solid #dedede;
+}
+div.detail-content div.product-basic-info div.sale-stop {
+	clear: both;
+	padding: 10px 0 0 10px;
+	border-top: 1px solid #eaeaea;
+}
+div.detail-content div.product-basic-info div.sale-stop p {
+	color: #da2128;
+	font-weight: bold;
+}
+div.detail-content div.product-basic-info div.detail-button {
+	clear: both;
+	padding: 26px 0 0;
+	width: 330px;
+	overflow: hidden;
+}
+div.detail-content div.product-basic-info div.detail-button img {
+	float: left;
+	margin: 0 6px 2px 0;
+	vertical-align: top;
+}
+div.detail-content div.product-basic-info div.stop {
+	opacity : 0.30 ; /* firefox, opera, safari, chrome */
+	-ms-filter : "progid:DXImageTransform.Microsoft.Alpha(opacity=30)" ; /* IE 8 */
+	filter : alpha ( opacity = 30 ) ; /* IE 4, 5, 6 and 7 */
+	zoom : 1 /* so the element "hasLayout" */
+}
+div.detail-content div.product-add-info {
+	float: left;
+	margin: -17px 0 0;
+	padding: 8px 0 0 11px;
+	width: 180px;
+	border-left: 1px solid #eaeaea;
+}
+div.detail-content div.product-add-info div.product-event-banner {
+
+}
+div.detail-content div.product-add-info div.product-event-banner ul li {
+	padding: 0 0 6px;
+}
+div.detail-content div.product-add-info div.product-event-banner ul li img {
+	vertical-align: top;
+}
+div.detail-content div.product-add-info div.detail-scrap {
+	position: relative;
+	z-index: 3;
+	padding: 60px 0 0;
+	height: auto;
+}
+div.detail-content div.product-add-info div.detail-scrap h3 {
+	height: 15px;
+	border-bottom: 1px solid #eaeaea;
+}
+div.detail-content div.product-add-info div.detail-scrap p.info {
+	padding: 10px 0 0;
+	height: 22px;
+}
+div.detail-content div.product-add-info div.detail-scrap ul li {
+	display: inline;
+	padding: 0 0 0 3px;
+}
+div.detail-content div.product-add-info div.detail-scrap div.copy-layer {
+	display: none;
+	position: absolute;
+	z-index: 10;
+	margin: 0 0 0 -240px;
+	padding: 10px;
+	width: 398px;
+	border: 1px solid #d8d8d8;
+	background: #efefef;
+}
+div.detail-content div.product-add-info div.detail-scrap div.copy-layer div.view-source {
+	margin: 0 0 10px;
+	width: 388px;
+	height: 100px;
+	overflow: auto;
+	background: #fff;
+	bordeR: 1px solid #eaeaea;
+}
+div.detail-content div.product-add-info div.detail-scrap div.copy-layer p {
+	padding: 8px 0 8px 15px;
+	font-size: 0.9em;
+	color: #eb6d20;
+	border: 1px solid #d8d8d8;
+	background: #fff;
+}
+div.detail-content div.product-add-info div.detail-product-comment {
+	padding: 30px 0 0;
+}
+div.detail-content div.product-add-info div.detail-product-comment h3 {
+	height: 16px;
+}
+div.detail-content div.product-add-info div.detail-product-comment p.comment-count {
+	margin: -16px 0 0 36px;
+	height: 16px;
+	font-size: 0.9em;
+	color: #555;
+	font-weight: bold;
+}
+div.detail-content div.product-add-info div.detail-product-comment p.estimation {
+	margin: -16px 0 0 0;
+	height: 16px;
+	text-align: right;
+}
+div.detail-content div.product-add-info div.detail-product-comment ul {
+	padding: 7px 0 0;
+	border-top: 1px solid #eaeaea;
+}
+div.detail-content div.product-add-info div.detail-product-comment ul li {
+	padding: 0 0 7px 7px;
+	font-size: 0.9em;
+	background: url("${imageServer}/images/common/dot_list.gif") no-repeat 1px 4px;
+}
+div.promotion-banner {
+	clear: both;
+	padding: 20px 0 10px;
+	width: 950px;
+}
+div.detail-menu-content {
+	clear: both;
+	padding: 15px 0 0;
+}
+div.detail-menu-content ul.detail-menu {
+	clear: both;
+	float: left;
+	width: 950px;
+	margin: 20px 0 0;
+	padding: 7px 0 8px;
+	border-top: 2px solid #dbdbdb;
+	border-bottom: 1px solid #dbdbdb;
+}
+div.detail-menu-content ul.detail-menu li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 142px;
+	text-align: center;
+	background: url("${imageServer}/images/product/detail_menu_bar.gif") no-repeat 0 4px;
+}
+div.detail-menu-content ul.detail-menu li.first-child,
+div.detail-menu-content ul.detail-menu li:first-child {
+	background: none;
+}
+div.detail-menu-content ul.detail-menu li img {
+	vertical-align: middle;
+}
+div.detail-menu-content ul.detail-menu li a.link {
+	position: relative;
+	top: 2px;
+	color: #f0336c;
+	font-weight: bold;
+}
+div.detail-menu-content ul.detail-menu li span.product-estimation,
+div.detail-menu-content ul.detail-menu li span.product-qna,
+div.detail-menu-content ul.detail-menu li span.product-review {
+	position: relative;
+	top: 2px;
+	color: #f0336c;
+	font-weight: bold;
+}
+#contents div.board-detail table tbody tr td.detail-content {
+	padding-left: 155px !important;
+	line-height: 18px;
+}
+#contents div.board-detail table tbody tr td.content {
+	padding-left: 155px !important;
+	line-height: 18px;
+}
+div.detail-menu-content div.prodcuct-explain-content {
+	float: left;
+	padding: 40px 13px 30px 0;
+	width: 745px;
+	overflow: hidden;
+}
+div.detail-menu-content div.prodcuct-explain-content iframe {
+	width: 744px !important;
+	overflow: hidden;
+}
+div.detail-menu-content div.mds-pick {
+	float: left;
+	width: 190px;
+	border: 1px solid #eaeaea;
+}
+div.detail-menu-content div.mds-pick h3 {
+	padding: 8px 0 0 11px;
+	height: 19px;
+}
+div.detail-menu-content div.mds-pick ul li {
+	padding: 20px 0 0;
+	border-top: 1px solid #eaeaea;
+}
+div.detail-menu-content div.mds-pick ul li p {
+	margin: 0 auto;
+	width: 150px;
+}
+div.detail-menu-content div.mds-pick ul li p.product-name {
+	padding: 10px 0 5px;
+	font-size: 0.9em;
+	text-align: center;
+}
+div.detail-menu-content div.mds-pick ul li p.price {
+	padding: 0 0 5px;
+	font-size: 0.9em;
+	text-align: center;
+	font-weight: bold;
+}
+
+div.detail-menu-content div.mds-pick ul li p.product-icon {
+    width: 150px;
+    text-align: center;
+}
+
+div.detail-menu-content div.mds-pick ul li p.origin-price span {
+    padding: 0 0 5px;
+    font-size: 0.9em;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: line-through;
+}
+div.detail-menu-content div.mds-pick ul li p.origin-price strong {
+    color:#da2128;
+}
+
+
+div.detail-menu-content div.product-estimation {
+	clear: both;
+}
+div.detail-menu-content div.product-estimation-content {
+	clear: both;
+	padding: 20px 0;
+}
+div.detail-menu-content div.product-estimation-content p.info {
+	padding: 5px 0 0 23px;
+	height: 16px;
+}
+div.detail-menu-content div.product-estimation-content p.button {
+	margin: -21px 0 0;
+	padding: 0 0 12px;
+	height: 21px;
+	text-align: right;
+}
+div.detail-menu-content div.product-re-view ,
+div.detail-menu-content div.product-qna {
+	clear: both;
+	padding: 40px 0 0;
+}
+div.detail-menu-content div.product-qna-content {
+	clear: both;
+	padding: 20px 0;
+}
+div.detail-menu-content div.product-qna-content p.info {
+	padding: 5px 0 0 23px;
+	height: 16px;
+}
+div.detail-menu-content div.product-qna-content p.button {
+	margin: -21px 0 0;
+	padding: 0 0 12px;
+	height: 21px;
+	text-align: right;
+}
+div.detail-menu-content div.delivery-exchange {
+	clear: both;
+	padding: 40px 0 0;
+	font-size: 0.9em;
+	line-height: 1.5em;
+}
+div.detail-menu-content div.delivery-exchange-content {
+	clear: both;
+	padding: 20px 20px 0 20px;
+}
+div.detail-menu-content div.delivery-exchange-content h4 {
+	padding: 15px 0 5px;
+}
+div.detail-menu-content div.delivery-exchange-content p {
+	padding: 3px 0 5px;
+	line-height: 1.5em;
+}
+div.detail-menu-content div.delivery-exchange-content p span {
+	color: #f0336c;
+}
+
+/* layer */
+
+div.product-basic-info dl dd {
+	position: relative;
+	z-index: 2;
+}
+div.product-basic-info div.explain-layer {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	margin: -70px 0  0 -90px;
+	padding: 3px;
+	width: 268px;
+	background: #efefef;
+}
+div.product-basic-info div.type00 {
+	margin: -125px 0  0 -80px;
+}
+div.product-basic-info div.type01 {
+	top: 80px;
+	margin: -115px 0  0 -90px;
+}
+div.product-basic-info div.explain-layer p ,
+div.product-basic-info div.explain-layer ul {
+	padding: 8px;
+	font-size: 1em;
+	border: 1px solid #d8d8d8;
+	background: #fff;
+}
+div.product-basic-info div.explain-layer ul li a {
+	font-size: 1em;
+}
+div.product-basic-info div.explain-layer p strong {
+	font-size: 1em !important;
+	color: #000 !important;
+	letter-spacing: -1px !important;
+}
+div.product-basic-info div.explain-layer p.notice {
+	color: #eb6d20;
+	background: #fff;
+}
+div.product-basic-info div.explain-layer p.type01 {
+	font-size: 0.9em;
+	background: #fff;
+}
+div.product-basic-info div.type02 {
+	top: 15px;
+	margin: 0 0 0 -90px;
+}

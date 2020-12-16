@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="GroupSellSQL">
+    <typeAlias alias="sellGiftCriteria" type="kr.co.hottracks.site.model.common.sellGift.SellGiftCriteria"/>
+    <typeAlias alias="optionTemp" type="kr.co.hottracks.site.model.backoffice.product.OptionTemp"/>
+    <typeAlias alias="sellGiftExt" type="kr.co.hottracks.site.model.common.sellGift.SellGiftExt" />
+    <select id="chkGroupSale" resultClass="String" parameterClass="sellGiftCriteria">
+        select nvl( (select 'Y' from TB_GROUPSALE_MASTER where GROUPNUM = #sellPrdtBcode# and to_char(sysdate,'yyyymmdd') between STARTDT and ENDDT)
+                  , 'N') chkRes 
+          from dual
+    </select>
+    
+    <select id="getGroupSaleBarcode" resultClass="String" parameterClass="String">
+        select DISP_SELL_PRDT_BCODE 
+          from TB_GROUPSALE_MASTER 
+         where GROUPNUM = #value# 
+           and to_char(sysdate,'yyyymmdd') between STARTDT and ENDDT
+    </select>
+    
+    <select id="getGroupSellInfo" resultClass="optionTemp" parameterClass="String">
+        select A.REMARK_TEXT  optionKey
+             , A.DESC_TEXT    optionDescription
+             , A.GROUPNAME    optionName
+             , (select count(SA.GROUPNUM) from TB_GROUPSALE_COMP SA where SA.GROUPNUM = A.GROUPNUM) vendorCntractId
+             , A.OFFYN        offYn
+          from TB_GROUPSALE_MASTER A
+         where A.GROUPNUM = #value# 
+           and to_char(sysdate,'yyyymmdd') between A.STARTDT and A.ENDDT
+    </select>
+    
+    <select id="getGroupSellOptionInfo" resultClass="sellGiftExt" parameterClass="String">
+        select SG.SELL_PRDT_BCODE           sellPrdtBcode
+             , FC_GET_PRDT_SALE_STAT(SG.SELL_PRDT_BCODE)            saleStat
+             , FC_GET_CPN_PRICE(SG.SELL_PRDT_BCODE, '02')           lastCpnPrice
+             , (select SA.PRDT_STAT_CODE from TB_SELL_PRODUCT SA where SA.SELL_PRDT_BCODE = SG.SELL_PRDT_BCODE) prdtStatCode
+             , SG.SPEC_NAME                 specName
+             , (select SA.LIMIT_COUNT from TB_SELL_PRODUCT SA where SA.SELL_PRDT_BCODE = SG.SELL_PRDT_BCODE) limitCount
+             , (select SA.LAVE_COUNT  from TB_SELL_PRODUCT SA where SA.SELL_PRDT_BCODE = SG.SELL_PRDT_BCODE) laveCount
+          from TB_GROUPSALE_COMP SG
+         where SG.GROUPNUM = #value#
+         order by SG.SEQ
+    </select>
+</sqlMap>

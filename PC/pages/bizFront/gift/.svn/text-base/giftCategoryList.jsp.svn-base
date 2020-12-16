@@ -1,0 +1,239 @@
+<%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8"%>
+<html>
+<head>
+	<!-- 태그 라이브러리 -->
+	<%@ include file="/pages/decorators/biz/tagHeader.jsp" %>
+	<ui:decorator name="bizFull"/>
+	
+	
+<script>
+var page = 1;
+// var validPage = true;
+var categorySwiper02 = null;
+
+$(document).ready(function(){
+	topMenu();//gnb	
+// 	sideMenu();//side menu	
+	footerFn();//footer
+			
+	$('.category_wrap .btn_all').on('click', function(){ // 전체보기버튼
+		if($(this).hasClass('on')){
+			$(this).parent('div').find('.more').attr('style','display:none;');
+			$(this).removeClass('on');
+			$(this).children('span').text("전체보기");
+		}else{
+			$(this).parent('div').find('.more').attr('style','display:block;');
+			$(this).addClass('on');
+			$(this).children('span').text("접어두기");
+		}
+	});
+	
+	$('.category_wrap .btn_like').on('click', function(){ //좋아요 버튼
+		if($(this).hasClass('active')){
+			$(this).removeClass('active');
+		}else{
+			$(this).addClass('active');
+		}
+	});
+	
+	var locationIdx = $('.category_wrap .location_nav_wrap .swiper-slide.active').index();
+	
+	var categoryNavSwiper = new Swiper('.category_wrap .location_nav_wrap .swiper-container', {
+  		 slidesPerView: 'auto',
+		 initialSlide : locationIdx,
+  		 freeMode: true
+    });
+	
+	var categorySwiper = new Swiper('.category_wrap .category_banner .swiper-container', {
+		slidesPerView: 'auto',
+		speed: 1500,
+		loop: true,
+		autoplay: 3000,
+		pagination: '.swiper-pagination',
+		paginationType: 'fraction'
+	});	
+	
+	
+	loadTemplate("recobell");	// 레코벨, 베스트, 할인 상품 조회
+	
+	$('.pd_unit .tab a').click(function(){	
+        $(this).parents('.pd_unit').find('.tab ul li').removeClass('active');
+        $(this).parents('li').addClass('active');
+	    
+	    return false;
+	});
+	
+	$('.pd_filter .tag_list li').click(function(){	        
+		$(this).toggleClass('active');        
+		
+		var strTmp = "?ctgrId=${c.ctgrId}&page=1";
+		var strId = "";
+		                
+		var len = $('div#searchcdt li').length;
+		for(var i=0; i<len; i++){
+			if($('div#searchcdt li:eq('+i+')').hasClass("active")){
+				strId = $('div#searchcdt li:eq('+i+')').attr('id');				
+		    	strTmp += "&"+strId+"=Y"; 
+		    }else{
+		    	strId = $('div#searchcdt li:eq('+i+')').attr('id');
+		    	strTmp += "&"+strId+"=N";
+		    }
+		}
+				
+		location.href=strTmp;
+		
+		return false;
+	});	
+});
+
+// 추천 / 베스트 / 할인 상품 조회
+function loadTemplate(rbsNm){
+	
+	var ctgrId = "${ctgrId}";
+	
+	$.ajax({
+        type: "POST"
+        ,url: "/m/gift/biz/category/recobellTemplate"
+        ,data: {  ctgrId : ctgrId, reqParam : rbsNm }
+        ,dataType: "html"
+        ,success : function(data){
+                    	
+      		$("#RBSList").empty();
+        	$("#RBSList").append(data);
+        	
+        	if(categorySwiper02 != null) {
+	       		//맨 앞으로 스와이퍼 이등
+				categorySwiper02.slideTo(0.1);
+	       		//스와이퍼 삭제
+				categorySwiper02.destroy();
+	       	}        	
+        	        	
+//         	categoryFn(); //category - 추천 상품 스와이프 관련 스크립트 때문에 늦게 호출함.
+        	categorySwiper02 = new Swiper('.category_wrap .pd_unit .swiper-container', {
+        		slidesPerView: 'auto',
+        		spaceBetween: 24,
+        		freeMode: true,
+        		slidesOffsetBefore: 30,
+        		scrollbar: '.swiper-scrollbar',
+        		draggable: true
+        	});        	
+        	
+        }
+        ,error: function(data) {        	
+            alert('<fmt:message key="error.common.system"/>');
+        }
+    });
+}
+
+//페이지 이동
+function goList(page){
+    location.href="?ctgrId=${c.ctgrId}&saleYn=${c.saleYn}&freeDlvYn=${c.freeDlvYn}&hotDlvYn=${c.hotDlvYn}&cpYn=${c.cpYn}&dcYn=${c.dcYn}&rsvYn=${c.rsvYn}&productOrderBy=${c.productOrderBy}&page="+page;   
+}
+</script>	
+</head>
+
+<body>
+	<!-- content -->
+	<div id="content">
+		<div class="category_wrap">
+
+			<c:if test="${not empty categoryNavList}">
+				<div class="location_nav_wrap">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<c:forEach items="${categoryNavList}" var="l" varStatus="status">
+								<div class="swiper-slide <c:if test="${status.last}">active</c:if>">
+	                        		<a href="/m/gift/biz/category/${l.ctgrId}">${l.ctgrName}</a>
+	                        	</div>	
+	                        </c:forEach>
+						</div>
+					</div>
+	            </div>
+            </c:if>
+
+			<div class="category_list">
+				<ul>
+					<li class="active" ><a href="/m/gift/biz/category/${ctgrId}">전체보기</a></li>
+					<c:forEach items="${childCategory}" var="l" varStatus="status">
+						<li class="<c:if test="${status.count > 5}">more</c:if>" <c:if test="${status.count > 5}">style="display:none"</c:if>><a href="/m/gift/biz/category/${l.ctgrId}">${l.ctgrName}</a></li>
+					</c:forEach>					
+				</ul>
+				<a href="#" class="btn_all"><span>전체보기</span></a>
+			</div>
+
+			<!-- 배너 -->
+			<c:if test="${not empty depth1BrnList}">
+			<div class="category_banner">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<c:forEach items="${depth1BrnList}" var="l" varStatus="status">
+							<div class="swiper-slide">
+								<a href="${l.bnrLinkUrl}">
+									<img src="${l.imageUrlMo}" alt="${l.imageUrlMo}">
+								</a>
+							</div>
+						</c:forEach>					
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			</c:if>
+			<!--// 배너 -->
+
+			<!-- 추천/베스트/할인 -->
+			<div class="pd_unit">
+				<div class="tab">
+					<ul>
+						<li class="active"><a href="javascript:;" onclick="loadTemplate('recobell'); return false;">추천</a></li>
+						<li><a href="javascript:;" onclick="loadTemplate('best'); return false;">베스트</a></li>
+						<li><a href="javascript:;" onclick="loadTemplate('sale'); return false;">할인</a></li>
+					</ul>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper" id="RBSList">						
+					</div>
+					<!-- 스크롤바 -->
+					<div class="swiper-scrollbar"></div>
+				</div>
+			</div>
+
+			<div class="pd_filter" id="cateProductList">
+				<div class="form_select" >
+					<c:set var="baseLink" value="?ctgrId=${c.ctgrId}&page=1&saleYn=${c.saleYn}&freeDlvYn=${c.freeDlvYn}&hotDlvYn=${c.hotDlvYn}&cpYn=${c.cpYn}&dcYn=${c.dcYn}&rsvYn=${c.rsvYn}"/>				
+					<select id="ulSort" onchange="location.href='${baseLink}&productOrderBy='+this.value+'';return false;">
+						<option value="R" <c:if test="${c.productOrderBy eq 'R'}"> selected="selected"</c:if>>신상품순</option>
+						<option value="T" <c:if test="${c.productOrderBy eq 'T'}"> selected="selected"</c:if>>높은할인률순</option>
+						<option value="P" <c:if test="${c.productOrderBy eq 'P'}"> selected="selected"</c:if>>판매량순</option>
+					</select>
+				</div>
+				<div class="tag_list" id="searchcdt">					
+					<ul>
+						<!-- 활성화 active : class 추가 -->
+<%-- 						<c:set var="baseLink" value="?ctgrId=${c.ctgrId}&page=1"/> --%>
+						<li id="saleYn" <c:if test="${c.saleYn eq 'Y'}">class="active"</c:if>><a href="javascript:;"><c:if test="${c.saleYn eq 'Y'}">품절포함</c:if><c:if test="${c.saleYn ne 'Y'}">품절제외</c:if></a></li>
+						<li id="freeDlvYn" <c:if test="${c.freeDlvYn eq 'Y'}">class="active"</c:if>><a href="javascript:;">무료배송</a></li>
+						<li id="hotDlvYn" <c:if test="${c.hotDlvYn eq 'Y'}">class="active"</c:if>><a href="javascript:;">핫트랙스배송</a></li>
+						<li id="cpYn" <c:if test="${c.cpYn eq 'Y'}">class="active"</c:if>><a href="javascript:;">쿠폰</a></li>
+						<li id="dcYn" <c:if test="${c.dcYn eq 'Y'}">class="active"</c:if>><a href="javascript:;">할인</a></li>
+						<li id="rsvYn" <c:if test="${c.rsvYn eq 'Y'}">class="active"</c:if>><a href="javascript:;">예약</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- 제품 -->
+			<p class="pd_total"><em class="font_t">${totalListCount}</em>건의 검색결과</p>
+							
+	        <!-- prod -->
+	        <c:import url="/pages/bizFront/template/bizLayerProduct.jsp" charEncoding="UTF-8">	            
+	        </c:import>
+	        <!-- //prod -->
+			<!--// 제품 -->
+
+	        <div class="pagination">	        	   
+	            <ui:bizpaginationScript name="pageHolder" scriptName="goList"/>
+	        </div>			
+		</div>
+	</div>
+	<!--// content -->
+</body>
+</html>

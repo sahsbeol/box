@@ -1,0 +1,5 @@
+2020-07-27 11:25:15,929 ERROR kr.co.hottracks.site.web.frontoffice.controller.base.FrontBaseController.auth(FrontBaseController.java:314) - 존재하지 않는 유저입니다.[jumanz2]
+2020-07-27 12:47:22,234 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-07-27 12:47:22,236 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt
+2020-07-27 12:47:22,961 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-07-27 12:47:22,961 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt

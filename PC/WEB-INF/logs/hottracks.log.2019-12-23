@@ -1,0 +1,38 @@
+2019-12-23 09:25:09,592 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 09:25:09,594 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 09:25:45,548 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 09:25:45,549 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 10:02:13,121 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 10:02:13,122 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 10:17:54,233 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 10:17:54,234 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 10:20:39,243 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 10:20:39,244 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 11:16:30,912 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 11:16:30,913 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 11:17:42,099 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 11:17:42,100 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 11:45:53,169 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 11:45:53,170 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 13:00:03,980 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 13:00:03,981 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 14:25:11,189 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 14:25:11,190 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/m/order/orderSheet
+2019-12-23 15:44:24,345 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 15:44:24,347 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 16:59:48,579 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 16:59:48,580 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-12-23 17:11:52,181 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:74) - ===== pageNotFound =====
+2019-12-23 17:11:52,183 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:75) - [요청기기]ko,106.243.217.75
+2019-12-23 17:11:52,183 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:76) - [이전URL]null
+2019-12-23 17:11:52,184 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:77) - [요청URL]/hotFrontofficeWeb/web/pages/front/gift/detail.jsp
+2019-12-23 17:11:52,185 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:83) - ===== // pageNotFound =====
+2019-12-23 17:11:53,916 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:74) - ===== pageNotFound =====
+2019-12-23 17:11:53,917 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:75) - [요청기기]ko_KR,106.243.217.75
+2019-12-23 17:11:53,918 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:76) - [이전URL]null
+2019-12-23 17:11:53,918 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:77) - [요청URL]/hotfrontofficeweb/web/pages/front/gift/detail.jsp
+2019-12-23 17:11:53,919 ERROR kr.co.hottracks.site.web.frontoffice.controller.CommonController.pageNotFound(CommonController.java:83) - ===== // pageNotFound =====
+2019-12-23 17:12:01,525 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 17:12:01,526 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/welcomemain
+2019-12-23 18:00:21,135 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-12-23 18:00:21,136 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map

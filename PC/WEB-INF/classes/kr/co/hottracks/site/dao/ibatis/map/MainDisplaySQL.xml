@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="MainDisplaySQL">
+    <typeAlias alias="mainHtml" type="kr.co.hottracks.site.model.common.display.MainHtml"/>
+    
+    <select id="getMainHtml" parameterClass="mainHtml" resultClass="string">
+        SELECT HTML
+        FROM   TB_MAIN_HTML
+        WHERE  MAIN_HTML_SEQ = (SELECT MAX(MAIN_HTML_SEQ) 
+                                  FROM TB_MAIN_HTML 
+                                 WHERE CTGR_ID = #ctgrId#
+                                       AND MALL_ID = #mallId#)
+    </select>
+</sqlMap>

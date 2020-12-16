@@ -1,0 +1,19 @@
+2020-06-29 09:25:06,981 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 09:25:06,982 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/biz/jquery/maps/swiper.min.js.map
+2020-06-29 09:50:42,451 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=68469]
+2020-06-29 09:50:56,375 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=68469]
+2020-06-29 10:12:35,854 ERROR kr.co.hottracks.site.web.frontoffice.controller.hot.BizEventController.eventDetail(BizEventController.java:125) - 존재하지 않는 이벤트입니다. [/ht/biz/eventDetail?eventId=68469]
+2020-06-29 12:52:59,574 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 12:52:59,577 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
+2020-06-29 12:53:00,256 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 12:53:00,257 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt
+2020-06-29 12:53:00,920 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 12:53:00,920 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt
+2020-06-29 14:36:50,241 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 14:36:50,242 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/biz/jquery/maps/swiper.min.js.map
+2020-06-29 14:37:31,177 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 14:37:31,178 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/biz/jquery/maps/swiper.min.js.map
+2020-06-29 14:38:40,923 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 14:38:40,924 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/biz/jquery/maps/swiper.min.js.map
+2020-06-29 16:50:10,227 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2020-06-29 16:50:10,229 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/biz/jquery/maps/swiper.min.js.map

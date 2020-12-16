@@ -1,0 +1,10 @@
+2019-11-14 10:38:22,665 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 10:38:23,817 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 10:44:29,258 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 10:44:31,049 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 10:44:32,201 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 10:44:43,337 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 10:44:45,129 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 10:45:44,521 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-14 12:54:53,843 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/css_status.html
+2019-11-14 12:54:53,844 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/orderSheet

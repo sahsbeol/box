@@ -1,0 +1,334 @@
+@charset "utf-8";
+
+div.page-title {
+	clear: both;
+	padding: 10px 0 15px 15px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/page_title_bg.gif") no-repeat 582px bottom;
+}
+div.page-title h3 {
+	padding: 0 0 1px;
+}
+div.page-title p.explain {
+	padding: 0 0 3px 3px;
+}
+div.page-title p.descript {
+	padding: 0 0 14px 2px;
+}
+div.choice-menu ul {
+	float: left;
+	margin: 28px 0 25px;
+	padding: 0 0 0 0;
+	width: 755px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/line_bg.gif") repeat-y 377px 0;
+}
+div.choice-menu ul li {
+	float: left;
+	padding: 0 0 0 0;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+}
+div.choice-menu ul li.selected {
+	border-bottom: 0;
+}
+div.choice-menu ul li a {
+	float: left;
+	display: block;
+	padding: 13px 0 14px 36px;
+	width: 341px;
+}
+div.choice-menu ul li a.menu01 {
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/menu_01_off_bg.gif") no-repeat 210px 13px;
+}
+div.choice-menu ul li.selected a.menu01 {
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/menu_01_on_bg.gif") no-repeat 210px 13px;
+}
+div.choice-menu ul li a.menu02 {
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/menu_02_off_bg.gif") no-repeat 210px 12px;
+}
+div.choice-menu ul li.selected a.menu02 {
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/menu_02_on_bg.gif") no-repeat 210px 12px;
+}
+div.choice-step {
+	clear:both;
+	width: 753px;
+}
+div.choice-step ul li {
+	float: left;
+	margin: 0 0 9px;
+	width: 753px;
+	border: 1px solid #e8e6e6;
+}
+div.step-title {
+	float: left;
+	width: 188px;
+	height: auto;
+}
+div.step-title p.step {
+	float: left;
+}
+div.step-title p.step-word {
+	float: left;
+	margin: 0 0 0 -40px;
+	display: inline;
+	padding: 65px 0 0;
+}
+div.selection-zone {
+	float: left;
+	padding: 0 0 0 47px;
+	width: 518px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/selection_zone_bg.gif") repeat-y left 0;
+}
+div.selection-zone dl {
+	padding: 20px 0 0;
+}
+div.selection-zone dl dt {
+	float: left;
+	padding: 0 0 6px 10px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/guide/question_bg.gif") no-repeat 2px 4px;
+}
+
+/*검색 폼 추가*/
+div.selection-zone dl dd fieldset {
+	float: left;
+	margin: 0;
+	padding: 0 0 10px;;
+	width: 518px;
+	text-align: left;
+}
+div.selection-zone dl dd fieldset legend {
+	width: 0;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	visibility: hidden;
+}
+div.selection-zone dl dd fieldset input {
+	margin: 0 4px 0;
+	padding: 1px;
+	width:87px;
+	height: 15px;
+	vertical-align: top;
+	border: 1px solid #b11111;
+	vertical-align: middle;
+}
+div.selection-zone dl dd fieldset label {
+	font-size: 0.9em;
+}
+div.choice-step dl dd fieldset label ,
+div.choice-step dl dd fieldset span {
+	vertical-align: middle;
+}
+div.selection-zone dl dd fieldset input.input-check {
+	padding: 0;
+	margin: 0;
+	width: auto;
+	border: 0;
+}
+div.selection-zone ul li dl dd fieldset label.limit {
+	margin: 0 20px 0 -30px;
+}
+div.selection-zone dl dd fieldset button {
+	vertical-align: middle;
+}
+
+
+div.choice-step ul li dl dd ul {
+	float: left;
+	padding: 0 0 22px;
+	width: 518px;
+}
+div.choice-step ul li dl dd ul li {
+	margin: 0;
+	padding: 0 0 1px;
+	height: 15px;
+	width: 125px;
+	border: 0;
+}
+div.choice-step ul li dl dd ul li input {
+	margin: 0 2px 0 0;
+	vertical-align: middle;
+}
+div.choice-step ul li dl dd ul li label {
+	font-size: 0.9em;
+	color: #707070;
+	vertical-align: middle;
+}
+
+div.btn-set {
+	padding: 26px 0 0;
+	text-align: center;
+}
+div.selection-zone ul.brands {
+	float:left;
+	margin: 0 0 0 -5px;
+	padding: 19px 0 0;
+	width: 523px;
+	min-height: 500px;
+	height: auto !important;
+	height: 500px;
+}
+div.selection-zone ul.brands li {
+	float: left;
+	margin: 0 14px 0 0;
+	width: 200px;
+	border: 0;
+}
+div.selection-zone ul.brands li p.photo {
+	margin: 0 0 9px;
+	padding: 17px;
+	width: 177px;
+	background: #fafafa;
+}
+div.selection-zone ul.brands li p.photo img {
+	width: 177px;
+	height: 100px;
+}
+div.selection-zone ul.brands li p.selection {
+	float: left;
+	padding: 0 0 0 50px;
+	text-indent: -25px;
+	height: 39px;
+
+}
+div.selection-zone ul.brands li p.selection label {
+	padding: 0 0 0 5px;
+	font-size: 0.9em;
+	color: #707070;
+}
+div.result-view p.releated-photo {
+	width: 755px;
+	height: 165px;
+	vertical-align: bottom;
+}
+div.result-view p.releated-photo img {
+	width: 755px;
+	height: 165px;
+}
+div.user-selected-item {
+	position: relative;
+	float: left;
+	padding: 16px 11px 10px 20px;
+	height: 72px;
+	background: #f7f7f7;
+	border: 1px solid #e8e6e6;
+}
+div.user-selected-item p.search-num {
+	padding: 0 0 0 8px;
+	height: 18px;
+	font-size: 0.9em;
+	color: #707070;
+}
+div.user-selected-item p.search-num strong {
+	color: #d12324;
+}
+div.user-selected-item ul {
+	float: left;
+	padding: 0 0 0 13px;
+	width: 694px;
+	height: 40px;
+	background: #fff;
+	border: 2px solid #d12324;
+}
+div.user-selected-item ul li {
+	float: left;
+	padding: 13px 0 14px;
+	width: 231px;
+}
+div.user-selected-item ul li p {
+	position: relative;
+	z-index: 6;
+	float: left;
+	width: 64px;
+	height: 13px;
+	vertical-align: bottom;
+}
+div.user-selected-item ul li dl ,
+div.user-selected-item ul li dl dt ,
+div.user-selected-item ul li dl dd {
+	float: left;
+}
+div.user-selected-item ul li dl {
+	width: 167px;
+	height: 13px;
+	font-size: 0.9em;
+}
+div.user-selected-item ul li dl dt {
+		padding: 3px 0 0;
+}
+div.user-selected-item ul li dl dd {
+	position: relative;
+	padding: 3px 0 0 4px;
+	font-weight: bold;
+	width: 111px;
+}
+div.user-selected-item ul li dl dd span {
+	float: left;
+	margin: 0 4px 0 0;
+}
+div.user-selected-item ul li dl dd a {
+	float: left
+	display: inline-block;
+	margin: -3px 0 0;
+	width: 17px;
+	height: 16px;
+
+}
+div.user-selected-item ul li dl dd a img {
+	width: 16px;
+	height: 17px;
+	vertical-align: top;
+}
+div.user-selected-item ul li dl dd div.when {
+	display: none;
+	position: absolute;
+	left: 0px;
+	bottom: 17px;
+	z-index: 3;
+	width: 286px;
+	min-height: 28px;
+	height: auto !important;
+	height: 28px;
+	font-weight: normal;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/word_balloon01.jpg") no-repeat 0 bottom;
+}
+div.user-selected-item ul li dl dd div.who {
+	display: none;
+	position: absolute;
+	left:0px;
+	bottom: 17px;
+	z-index: 3;
+	width: 286px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/word_balloon01.jpg") no-repeat 0 bottom;
+}
+div.user-selected-item ul li dl dd div.when-info ,
+div.user-selected-item ul li dl dd div.who-info {
+	padding: 5px 5px 0;
+	width: 276px;
+	min-height: 15px;
+	height: auto !important;
+	height: 15px;
+	line-height: 15px;
+	font-weight: normal;
+}
+div.user-selected-item ul li dl dd div.when-info ul,
+div.user-selected-item ul li dl dd div.who-info ul{
+	float: left;
+	margin: 0 0 18px -5px;
+	display: inline; 
+	width: 271px;
+	height: auto;
+	border: 1px solid #acacac;
+	border-bottom: 0;
+}
+div.user-selected-item ul li dl dd div.when-info ul li,
+div.user-selected-item ul li dl dd div.who-info ul li {
+	float: left;
+	width: auto;
+	white-space: nowrap;
+	padding: 5px 4px 0; 
+}
+div.user-selected-item p.go-prev {
+	position: absolute;
+	right: 11px;
+	top: 8px;
+}

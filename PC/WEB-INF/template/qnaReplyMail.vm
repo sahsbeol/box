@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>핫트랙스 | 상품 Q&amp;A 답변 메일</title>
+</head>
+<body  style="width: 100%; font-size: 12px; font-family: '돋움' , 'Dotum',  sans-serif; color: #898989;line-height: normal; margin:0; padding:0;">
+    <table cellspacing="0" cellpadding="0" style="padding:0; margin:0 auto; width:680px; vertical-align: top;">
+        <caption style="width:0; height:0; line-height:0; font-size:0; visibility:hidden;">상품 Q&amp;A 답변 메일</caption>
+        <tbody>
+            <tr>
+                <td style="padding:0; margin:0; vertical-align:top;">
+                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mail/qna_head_title01.gif" width="680" height="80" style="border:0; vertical-align: top;"   alt="핫트랙스 상품Q&amp;A 답변메일 HOTTRACKS" />
+                </td>
+            </tr>
+            <tr style="vertical-align:top;">
+                <td style="vertical-align: top; padding:0; margin:0; vertical-align: top; background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mail/mail_bg.gif') repeat-y 0 0;">
+                    <p style="margin: 0; padding:61px 0 0 46px; height: 40px;  vertical-align: top; font-size: 0.9em;">안녕하세요? 핫트랙스 온라인몰 상품 Q&amp;A 담당자입니다.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0; margin:0; vertical-align:top; background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mail/mail_bg.gif') repeat-y 0 0;">
+                    <div style="float: left; padding: 0 40px 41px; margin:0; background: url('http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mail/product_explain001.gif') no-repeat 0 bottom;">
+                        <dl style="float: left; width:600px; border-top: 2px solid #a31112; border-bottom: 1px solid #e7e7e7;">
+                            <dt style="float: left; margin: 0; padding: 22px 0 0; width:69px;"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mail/answer.gif" style="width:27; height:28;"  alt="A answer vertical-align:top; border:0;" /></dt>
+                            <dd style="float: left; margin: 0; padding: 20px 0 0; width: 531px;">
+                                <p style="vertical-align:top; padding:0 0 4px; margin:0; vertical-align: top; font-size:0.9em; color:#a9a9a9;">[$!{registerDateStr}] 접수된</p>
+                                <p style="margin: 0; padding: 0; height: 54px; color: #555555;">귀하의 상품문의에 대한 답변입니다.</p>
+                                <p style="margin: 0; padding: 0 0 20px;; line-height: 18px; font-size: 0.9em; color: #555;">$!{answerContent}</p>
+                                <p style="float: left; width:600px; padding: 0 0 41px; margin: 0; font-size: 0.9em; color: #555;">감사합니다.</p>
+                            </dd>
+                        </dl>
+                        <dl style="float: left; padding:0; margin:0; width: 600px; min-height: 159px; height: auto !important; height: 159px;">
+                            <dt style="float: left; padding:15px 0 0; margin: 0; width: 69px;"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mail/question.gif" style="width:25; height:35;" alt="Q question" /></dt>
+                            <dd style="float: left; padding: 19px 0 0; margin: 0; width: 531px;">
+                                <p style="padding: 0; margin: 0; line-height: 18px;"><a style="color: #a9a9a9; font-size: 0.9em;">[문의내용보기]</a></p>
+                                <p style="padding:0; margin:0; font-size: 0.9em; color:#555;">$!{title}</p>
+                            </dd>
+                        </dl>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:0; margin:0; vertical-align: top;">
+                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mail/winsGuideFoot001.gif" style="vertical-align:top;" alt="상호명 : 교보핫트랙스(주)  대표이사 : 박영규  사업자등록번호 : 102-81-29258 주소 : 10881 경기도 파주시 회동길 78 (출판단지내) TEL. 1544-1900  FAX. 1544-1900  E-MAIL. info@hottracks.co.krⓒ Kyobo Hottracks Co.LTD., All right reserved." />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

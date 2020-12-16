@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>companyInfo</comment>
+    <entry key="memID">hottracks</entry>
+    <entry key="memName">이진아</entry>
+    <entry key="email">dlwlsdk9309@hottracks.co.kr</entry>
+    <entry key="tel">02-3700-6521</entry>
+    <entry key="coRegNo">102-81-29258</entry>
+    <entry key="coName">(주)교보핫트랙스</entry>
+    <entry key="coCeo">김성룡</entry>
+    <entry key="coAddr">서울특별시 종로구 수송동 51-8 G타워</entry>
+    <entry key="coBizType">도,소매</entry>
+    <entry key="coBizSub">문구외,전자기기,음반</entry>
+</properties>

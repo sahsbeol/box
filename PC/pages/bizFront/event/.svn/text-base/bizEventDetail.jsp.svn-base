@@ -1,0 +1,761 @@
+<%@page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8"%>
+<!-- 태그 라이브러리 -->
+<%@ include file="/pages/decorators/biz/tagHeader.jsp" %>
+<html>
+<head>
+<title>${detail.eventTitle} - NEW ME HOTTRACKS</title>
+<meta property="fb:app_id" content="981386905311018" />
+<!--  SNS 공유 내용 -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="${fn:escapeXml(detail.eventTitle)}"/>
+<meta property="og:url" content="${defaultHost}/ht/biz/eventDetail?eventId=${detail.eventId}"/>
+<c:choose>
+    <c:when test="${not empty detail.eventRangeInfo}"><meta property="og:description" content="${detail.eventRangeInfo}"/></c:when>
+    <c:otherwise><meta property="og:description" content="<ui:mask pattern="####.##.##">${detail.eventStartDt}</ui:mask> ~ <ui:mask pattern="####.##.##">${detail.eventEndDt}</ui:mask>"/></c:otherwise>
+</c:choose>
+<meta property="og:image" content="http://image.kyobobook.co.kr/newimages/giftshop_new/work/${detail.thumUrl}" />
+<link rel="image_src" href="http://image.kyobobook.co.kr/newimages/giftshop_new/work/${detail.thumUrl}" />
+<!--  SNS 공유 내용 -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#content').addClass('new_event_view');
+		gnb();//gnb
+		nav();//nav
+		eventFn();//event
+		if($('.header_wrap').length >0){
+			bodyScroll();//body scroll
+		}
+        if('${skip}' == 'skipEvent'){
+            $(".ly_box_skip").addClass("active");
+            $("div.comment_box textarea[name=eventComment]").attr("disabled","disabled");
+        }
+		getCategory($('.c_select .location_1').attr('value'));
+	});
+	function getCategory(ctgrId){
+		$('.c_select .location_1').text($('li[ctgrId='+ctgrId+'] a').text()==''?'전체':$('li[ctgrId='+ctgrId+'] a').text());
+		$.ajax({
+		    type: "GET"
+		   ,url: "/ht/biz/eventCategory"
+		   ,data:{"ctgrId":ctgrId} 
+		   ,dataType: "json"
+		   ,success : function(data){
+			   if (!isEmpty(data)) {
+				   $(".e_select").attr("style","display: block;");
+				   var htmlStr = "";
+				   var list = data.listEvent;
+				   var chkempty = false;
+				   for(var i=0; i<list.length; i++){
+					   if ("${detail.eventId}"==list[i].eventId) {
+						   htmlStr += "<a href='javascript://' class='location_1'>"+list[i].eventTitle+"</a>";
+						   chkempty = true
+						};
+					   if(i+1 == list.length && !chkempty){
+						   htmlStr += "<a href='javascript://' class='location_1'>"+list[0].eventTitle+"</a>";
+					   };
+				   };
+					htmlStr += "<ul class='location_nav'>";
+				   for(var i=0; i<list.length; i++){
+					   var select= "${detail.eventId}"==list[i].eventId?"class='active'":"";
+						htmlStr += "<li><a href='javascript://' "+select+" onclick='location.href=\"/ht/biz/eventDetail?eventId="+list[i].eventId+"\";'>"+list[i].eventTitle+"</a></li>"
+				   };
+					htmlStr += "</ul>";
+					$(".e_select").empty();
+					$(".e_select").append(htmlStr);
+					nav();
+					if (list.length >= 30) {
+						$(".e_select .location_nav").attr("style","max-height:500px; overflow:auto;");
+					};
+					if(list.length==0){
+						$(".e_select").attr("style","display: none;");
+					};
+				};
+			}
+		   ,error: function(data) {
+		       alert('<fmt:message key="error.common.system"/>');
+		   }
+		});
+	}
+	function sandEventDetail(eventId){
+		if( eventId!="${detail.eventId}" && eventId!="main" && eventId!="" ){location.href="/ht/biz/eventDetail?eventId="+eventId;
+		} else if( eventId == "main" ) {location.href="/ht/biz/hotEventMain";
+		} else {};
+	}
+
+	function preValidation() {
+	    if (!isLogin) {
+	        needLogin();
+	        return false;
+	    } else if (!isEntryTerm) {
+	        alert("해당기간이 아닙니다.");
+	        $("div.comment_box textarea[name=eventComment]").attr("disabled","disabled");
+	        $("div.comment_box textarea[name=eventComment]").val();
+	        return false;
+	    }
+
+	    return true;
+	}
+
+	function save(){
+	    if (preValidation()) {
+	        $('form[name="eventCommentForm"]').ajaxSubmit({
+	            url: '/ht/hot/saveEventComment'
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                if (data.save) {
+	                    alert('<fmt:message key="message.save.success"/>'); 
+	                    $('div#commentArea').load('/ht/hot/comment/${detail.eventTypeCode}?eventId=${detail.eventId}&orderBy='+orderBy);
+	                } else {
+	                    alert(data.errorMessages);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	    return false;
+	}
+
+	/* 참여이벤트 */
+	function entryEvent(){
+	    if (preValidation()) {
+	        $.ajax({
+	            type: "GET"
+	            ,url: "/ht/hot/entryEvent"
+	            ,data: "eventId=${detail.eventId}"
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                if (data.result.save) {
+	                    alert(data.result.resultMsg);
+	                } else {
+	                    alert(data.result.errMsg);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+	/* 참여이벤트 -주문금액 */
+	function entryEventAmt(){
+	    if (preValidation()) {
+	        $.ajax({
+	            type: "GET"
+	            ,url: "/ht/hot/entryEventAmt"
+	            ,data: "eventId=${detail.eventId}"
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                if (data.result.save) {
+	                    alert(data.result.resultMsg);
+	                } else {
+	                    alert(data.result.errMsg);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+
+
+	function deleteComment(sequence) {
+	    if (preValidation()) {
+	        if (confirm('삭제하시겠습니까?')) {
+	            $.ajax({
+	                type: 'GET'
+	                ,url: '/ht/hot/deleteEventComment'
+	                ,data: 'eventId=${detail.eventId}&sequence=' + sequence
+	                ,dataType: 'json'
+	                ,success: function(data) {
+	                    if (data.save) {
+	                        alert('<fmt:message key="message.delete.success"/>');
+	                        $('div#commentArea').load('/ht/hot/comment/${detail.eventTypeCode}?eventId=${detail.eventId}&orderBy='+orderBy+'&temp='+ Math.random());
+	                    } else {
+	                        alert(data.errorMessages);
+	                    }
+	                }
+	                ,error: function(data) {
+	                    alert('<fmt:message key="error.common.system"/>');
+	                }
+	            });
+	        }
+	    }
+	}
+
+	function couponDown(couponId) {
+	    if (!isLogin) {
+	        needLogin();
+	    } else {
+	        $.ajax({
+	            type: "GET"
+	            ,url: "/ht/getCouponDown"
+	            ,data: 'couponId=' + couponId
+	            ,dataType: "json"
+	            ,success: function(data) {
+	                if (data.save) {
+	                    alert("쿠폰이 다운로드 되었습니다.");
+	                } else {
+	                    alert(data.errorMessage);
+	                }
+	            }
+	            ,error: function() {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+	function goCommentList(page) {
+	    $('div#commentArea').load('/ht/hot/comment/${detail.eventTypeCode}?eventId=${detail.eventId}&orderBy='+orderBy+'&page=' + page);
+	}
+
+	function goEventList(page) {
+	    if(page == null || page == undefined)    page = 1;
+	    location.href="/ht/biz/eventDetail?eventId=${detail.eventId}&page=" +page + "#bucketEventList";
+	}
+
+	function checkEmtcId(obj, imgSrc){
+	    $(".comment_emtc a.on").removeClass("on");
+	    obj.setAttribute("class", "on");
+	    $("input[name=emtcId]").val(imgSrc);
+	}
+
+	function toggleChildComment(seq){
+	    if($("#btnChildCmnt"+seq).hasClass("active")){
+	        $('#childComment'+seq).empty();
+	        $("#btnChildCmnt"+seq).removeClass("active");
+	    }else{
+	        loadChildComment('1', '&eventId=${detail.eventId}&parntCmntSeq='+seq);
+	        $("#btnChildCmnt"+seq).addClass("active");
+	    }
+	}
+
+	function loadChildComment(page, param){
+	    params = param.split("&");
+	    var seq = '';
+	    for(var i = 0; i<params.length; i++){
+	        if(params[i].indexOf("parntCmntSeq=") == 0){
+	            seq = params[i].replace("parntCmntSeq=", "");
+	        }
+	    }
+	    $('#childComment'+seq).load('/ht/hot/comment/child/${detail.eventTypeCode}?page=' + page + param, function (){
+	        $("html,body").scrollTop($('#childComment'+seq).offset().top-100);
+	    });
+	}
+
+	function saveChild(parntSeq){
+	    if (preValidation()) {
+	        $('form[name=eventCommentForm'+parntSeq+']').ajaxSubmit({
+	            url: '/ht/hot/saveEventComment'
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                if (data.save) {
+	                    alert('<fmt:message key="message.save.success"/>');
+	                    $('div#commentArea').load('/ht/hot/comment/${detail.eventTypeCode}?eventId=${detail.eventId}&orderBy='+orderBy+'&page=' + $("input[name=cmntPage]").val()
+	                    , function(){
+	                        loadChildComment('1', '&eventId=${detail.eventId}&parntCmntSeq='+parntSeq);
+	                    })
+	                } else {
+	                    alert(data.errorMessages);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	    return false;
+	}
+
+	function deleteChildComment(seq, parntSeq) {
+	    if (preValidation()) {
+	        if (confirm('삭제하시겠습니까?')) {
+	            $.ajax({
+	                type: 'GET'
+	                ,url: '/ht/hot/deleteEventComment'
+	                ,data: 'eventId=${detail.eventId}&sequence=' + seq
+	                ,dataType: 'json'
+	                ,success: function(data) {
+	                    if (data.save) {
+	                        alert('<fmt:message key="message.delete.success"/>');
+	                        $('div#commentArea').load('/ht/hot/comment/${detail.eventTypeCode}?eventId=${detail.eventId}&orderBy='+orderBy+'&page=' + $("input[name=cmntPage]").val()
+	                        , function(){
+	                            loadChildComment('1', '&eventId=${detail.eventId}&parntCmntSeq='+parntSeq);
+	                        })
+	                    } else {
+	                        alert(data.errorMessages);
+	                    }
+	                }
+	                ,error: function(data) {
+	                    alert('<fmt:message key="error.common.system"/>');
+	                }
+	            });
+	        }
+	    }
+	}
+
+	function likeComment(seq) {
+	    if (preValidation()) {
+	        $.ajax({
+	            type: 'GET'
+	            ,url: '/ht/hot/likeEventComment'
+	            ,data: 'eventId=${detail.eventId}&sequence=' + seq
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                if (data.save) {
+	                    alert('쪼아쪼아~♥');
+	                    goCommentList('1');
+	                } else {
+	                    alert(data.errorMessages);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+	function init() {
+	    $.ajax({
+	        type: "GET"
+	        ,url: "/ht/getSaleUserCount"
+	        ,dataType: "json"
+	        ,success: function(data) {
+	            $("#num1").attr("src","http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/" + data.cnt.cpnName + ".png");
+	            $("#num2").attr("src","http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/" + data.cnt.usest + ".png");
+	            $("#num3").attr("src","http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/" + data.cnt.useet + ".png");
+	        }
+	        ,error: function() {
+	        }
+	    });
+	}
+
+	function goEvent(){
+	    location.href = $(".e_select .e_txt a").attr("href");
+	}
+
+	function changeOrder(type){
+	    orderBy = type;
+	    goCommentList("1");
+	}
+
+	function pageC019C(target, navi){
+	    $("#"+target).find(".prod_page.active").removeClass("active");
+	    $("#"+target+"_"+navi).addClass("active");
+	    $("#"+target).find(".prod_page_navi a.active").removeClass("active");
+	    $("#"+target+"_"+navi+"_page").addClass("active");
+	}
+	function addBannerClickInfo() {
+	    if (!isLogin) {
+	        needLogin();
+	    }else{
+	        $.ajax({
+	            type: "GET"
+	            ,url: "/ht/getBannerClick"
+	            ,data: {'bannerGubun' : 'E${detail.eventId}', 'userNum' : '${loginUser.num}', 'clickDt':'TODAY'}
+	            ,dataType: "json"
+	            ,success: function (data) {
+	                if(data.list.length > 0){
+	                    alert("이미 출석체크하셨습니다.");
+	                }else{
+	                    $.ajax({
+	                        type: "GET"
+	                        ,url: "/ht/bannerClick"
+	                        ,data: {'bannerGubun' : 'E${detail.eventId}', 'userNum' : '${loginUser.num}'}
+	                        ,dataType: "json"
+	                        ,success: function (data) {
+	                            alert("짝!짝!짝! 출석체크되었습니다.");
+	                            loadBannerClickInfo();
+	                        }
+	                        ,error: function() {
+	                            alert('<fmt:message key="error.common.system"/>');
+	                        }
+	                    });
+	                }
+	            }
+	            ,error: function() {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+	function loadBannerClickInfo() {
+	    if (isLogin) {
+	        $.ajax({
+	            type: "GET"
+	            ,url: "/ht/getBannerClick"
+	            ,data: {'bannerGubun' : 'E${detail.eventId}', 'userNum' : '${loginUser.num}'}
+	            ,dataType: "json"
+	            ,success: function (data) {
+	                for(var i = 0; i<data.list.length; i++){
+	                    var id = data.list[i].clickDt;
+	                    $("#dt"+id).show();
+	                }
+	            }
+	            ,error: function() {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+	function _applyEvent(){
+	    if (!isLogin) {
+	        needLogin();
+	    } else {
+	        $.ajax({
+	            type: 'POST'
+	            ,url: '/ht/hot/saveCheckEvent'
+	            ,data: { eventId:"${detail.eventId}" }
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                alert(data.alert);
+	                if (data.save) {
+	                    location.reload(true);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('응모 중 오류가 발생하였습니다. 잠시 후 다시 이용해주세요');
+	            }
+	        });
+	    }
+	}
+
+	/* 참여이벤트 */
+	function entryEventEmtc(emtcId){
+	    if (preValidation()) {
+	        $.ajax({
+	            type: "GET"
+	            ,url: "/ht/hot/entryEventEmtc"
+	            ,data: "eventId=${detail.eventId}"
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                if (data.result.save) {
+	                    alert(data.result.resultMsg);
+	                } else {
+	                    alert(data.result.errMsg);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+	function saveOff(){
+	    if($("input[name=userName]").val() == null ||  $("input[name=userName]").val() == ""){
+	        alert("이름을 입력해주세요.");
+	    }else if($("input[name=handPhoneNum1]").val() == null ||  $("input[name=handPhoneNum1]").val() == ""
+	       ||$("input[name=handPhoneNum2]").val() == null ||  $("input[name=handPhoneNum2]").val() == ""
+	       ||$("input[name=handPhoneNum3]").val() == null ||  $("input[name=handPhoneNum3]").val() == ""
+	       ){
+	            alert("핸드폰번호를 입력해주세요.");
+	    }else if($("textarea[name=userAddr]").val() == null ||  $("textarea[name=userAddr]").val() == ""){
+	            alert("주소지를 입력해주세요.");
+	    }else if($("input[name=userDtl]").val() == null ||  $("input[name=userDtl]").val() == ""){
+	            alert("영수증번호를 입력해주세요.");
+	    }else{
+	        var userTelNum = $("input[name=handPhoneNum1]").val() + $("input[name=handPhoneNum2]").val() + $("input[name=handPhoneNum3]").val();
+	        $('form[name="eventCommentForm"]').ajaxSubmit({
+	            url: '/ht/hot/entryEventOff'
+	            ,dataType: 'json'
+	            ,data :{
+	                eventId : '${detail.eventId}',
+	                userTelNum : userTelNum
+	            }
+	            ,success: function(data) {
+	                if (data.result.save) {
+	                    alert(data.result.resultMsg);
+	                    location.href="/ht/welcomeMain";
+	                } else {
+	                    alert(data.result.errMsg);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('<fmt:message key="error.common.system"/>');
+	            }
+	        });
+	    }
+	}
+
+</script>
+</head>
+<body>
+		<!-- Container -->
+				<div class="event_top">
+					<c:if test="${ newEventDispTypeCode.newEventDispTypeCode ne 'C1532' && newEventDispTypeCode.newEventDispTypeCode ne 'C1533' && newEventDispTypeCode.newEventDispTypeCode ne 'C1534' }">
+					<div class="location_wrap">
+					<button type="button" class="btn_home" onclick="location.href='/ht/biz/welcomeMain';">홈으로</button>
+					<div class="location_nav_wrap c_select">
+						<c:forEach items="${listCtgr}" var="l">
+						<c:if test="${l.cateId eq detail.ctgrId}"><a href="javascript://" value="${l.cateId}" class="location_1">${l.cateName}</a></c:if>
+						</c:forEach>
+						<c:if test="${detail.ctgrId eq '0000'}"><a href="javascript://" value="0000" class="location_1">전체</a></c:if>
+						<ul class="location_nav">
+						<c:forEach items="${listCtgr}" var="l">
+							<li ctgrId="${l.cateId}"><a href="javascript://" onclick="javascript:getCategory('${l.cateId}');"<c:if test="${l.cateId eq detail.ctgrId}">class='active'</c:if>>${l.cateName}</a></li>
+						</c:forEach>
+						</ul>
+					</div>
+					<div class="location_nav_wrap e_select">
+					</div>
+					</div>
+					</c:if>
+					<div class="sns">
+						<ul>
+							<li class="sns01"><a href="javascript://" onclick="goTwitter('${detail.eventTitle}', '${defaultHost}/ht/biz/eventDetail?eventId=${detail.eventId}')"></a></li>
+							<li class="sns02"><a href="javascript://" onclick="goFaceBook('${detail.eventTitle}', '${defaultHost}/ht/biz/eventDetail?eventId=${detail.eventId}')"></a></li>
+							<li class="sns03"><a href="javascript://" onclick="goPinterest('${detail.eventTitle}', '${defaultHost}/ht/biz/eventDetail?eventId=${detail.eventId}')"></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="event_title">
+			        <h5>${detail.eventTitle}</h5>
+			        <p class="date font_t">
+				        <c:choose>
+	                        <c:when test="${not empty detail.eventRangeInfo}">${detail.eventRangeInfo}</c:when>
+	                        <c:otherwise><ui:mask pattern="####.##.##">${detail.eventStartDt}</ui:mask> <span>~</span> <ui:mask pattern="####.##.##">${detail.eventEndDt}</ui:mask></c:otherwise>
+	                    </c:choose>
+			        </p>
+			        <a href="javascript:layerPopup('.popup_sns');" class="share"><span>공유하기</span></a>
+			    </div>
+				<div class="event_view_cont">
+				<c:if test="${not empty detail.imageUrl}">
+					<div class="img_wrap">
+						<div class="img_area">
+							<ui:image src="${detail.imageUrl}" id="eventImageUrl" usemap="#eventImageMap" clazz="sns_img"/>
+						</div>
+					</div>
+				</c:if>
+				<div class="inner950">
+				<c:if test="${not empty eventRandom}">
+					<c:if test="${detail.eventId eq '49299'}">
+						<c:set var="num"><ui:lpad length="7" padChar="0">${eventRandom.totGiftAmt}</ui:lpad></c:set>
+						<div style="display: block;position: absolute;height: 54px;top: 875px;font-size: 0;text-align: center;margin: 0 auto;width: 950px;">
+							<c:set var="isnon" value="true"/>
+							<c:forEach begin="0" end="6" varStatus="st">
+								<c:set var="num_idx">${fn:substring(num, st.index, st.index+1)}</c:set>
+		                        <c:if test="${isnon && num_idx ne '0'}"><c:set var="isnon" value="false"/></c:if>
+		                        <c:if test="${st.index eq 1 || st.index eq 4}"><img src="${imageServer}/images/event/49299/pc/ic_num_dot.jpg" style="margin-right:6px;"/></c:if>
+		                        <c:choose>
+		                            <c:when test="${!isnon}">
+		                                <img src="${imageServer}/images/event/49299/pc/ic_num_${num_idx}.jpg" alt="${num_idx}" style="margin-right:6px;"/>
+		                            </c:when>
+		                            <c:otherwise><img src="${imageServer}/images/event/49299/pc/ic_num_no.jpg" style="margin-right:6px;"/></c:otherwise>
+		                        </c:choose>
+		                    </c:forEach>
+		                </div>
+		            </c:if>
+<!-- script -->
+<script type="text/javascript" src="/js/jQueryRotate.2.3.js"></script>
+<script type="text/javascript" src="/js/jQueryRotateCompressed.2.3.js"></script>
+<script type="text/javascript">
+    var is_rotating = false;	//룰렛 실행중 중복실행 방지
+    var is_rotated = false;		//페이지에서 1회만 실행되도록 설정
+    
+    function call_rotate(img_id, angle, msg) {
+        if(is_rotating) return;
+        is_rotating = true;
+
+        duration = 3000;  //돌리는 시간 : 1/1000초
+        rotateCnt = Math.floor(Math.random()*20) * 360;
+
+        $('#'+img_id).rotate({
+            duration: duration,
+            animateTo: (rotateCnt + angle),
+            callback: function () {
+                is_rotating = false;
+                //is_rotated = true;  
+                alert(msg);
+                // location.href = "/ht/mypage/coupon";
+            }
+        });
+    }
+    
+    function getRotateNum(eventId) {
+        if(isLogin){
+            /* if(is_rotated) {
+                alert('이미 응모하신 이벤트입니다.');   
+                return;
+            } */
+            if(is_rotating) {
+                return;			
+            }
+            
+            // 서버에서 룰렛 값을 가져옴 ( 조작 방지 위함 )
+            $.ajax({
+                url: "/ht/hot/saveRandomPoint",
+                dataType: "json",
+                data: { eventId:'${detail.eventId}' },
+                success: function(data) {
+                    if(data.save){
+                        call_rotate('roulette', data.rotateAngle, data.returnMsg);
+                    }else{
+                        alert(data.returnMsg);
+                    }
+                },
+                error:function(request,status,error){
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                   }
+            });
+        }else{
+            needLogin();
+            
+        }
+    }
+</script>
+<!-- script -->
+	            	<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/${eventRandom.imageUrlTop}" usemap="#eventImageTop"/>
+					<c:if test="${not empty eventRandom.imageMapTop}">
+					    <map name="eventImageTop">
+					        ${eventRandom.imageMapTop}
+					    </map>
+					</c:if>
+					<div style="position:relative;display:block;width:950px;height:997px;background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/work/${eventRandom.imageUrlBg}') no-repeat;">
+					    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/${eventRandom.imageUrlPin}" style="position:absolute;bottom:865px;left:calc(50% - 23px);z-index:2;"/>
+					    <a href="#" onClick="getRotateNum('${eventRandom.eventId}');return false;" id="roulette" style="position:absolute;bottom:45px;left:calc(50% - 428px);display:block;z-index:1;" >
+					        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/${eventRandom.imageUrlRlt}"/>
+					    </a>
+					</div>
+				</c:if>
+        <div class="event_img">
+            <div class="ly_box_skip" style="${isFull ne 'Y'?'height: 630px; left: 0px; top: 0px;':'left:0;'}">
+                <p>종료된 이벤트 입니다.</p>
+            </div>
+        <c:if test="${detail.stampYn}">
+            <!-- 스탬프이벤트 -->
+            <div id="divStamp"></div>
+            <script src="/js/ht.hot.eventDetail.stamp.js?201901071633" type="text/javascript"></script>
+            <script type="text/javascript">
+                _eventStamp("${detail.eventId}");
+            </script>
+            <!-- #스탬프이벤트 -->
+        </c:if>
+        <c:if test="${not empty detail.userTmplHtml}">
+            <div id="userTemplate"></div>
+            <textarea name="userTmplHtml" style="display:none;">${detail.userTmplHtml}</textarea>
+            <script src="/js/fn_htts_event_template.js?201810041520" type="text/javascript"></script>
+        </c:if>
+        <c:if test="${detail.userTmplUseYn eq 'Y'}"><div>${detail.userTmpl}</div></c:if>
+        </div>
+					<!-- //기차형바: 상품B형이 아닌경우에만 노출 -->
+			        <c:if test="${detail.eventTypeCode ne 'C019C'}">
+			            <!-- link -->
+			            <div class="event_link<c:if test="${not empty detail.offLineYn}"> event_link${detail.offLineYn}</c:if>">
+			                <c:if test="${not empty listDisplayType}">
+			                    <c:set var="isExpYn" value="false"/>
+			                    <c:forEach items="${listDisplayType}" var="l">
+			                        <c:if test="${l.titleUseYn eq 'Y' && l.titleExpsYn eq 'Y'}">
+			                            <c:set var="isExpYn" value="true"/>
+			                        </c:if>
+			                    </c:forEach>
+			                    <c:if test="${isExpYn}">
+			                        <ul>
+			                            <c:forEach items="${listDisplayType}" var="l">
+			                                <c:if test="${l.titleUseYn eq 'Y' && l.titleExpsYn eq 'Y'}">
+			                                    <li><a href="#event-link${l.eventTypeInseq}" title="${l.eventTitle}"><span>${l.eventTitle}</span></a></li>
+			                                </c:if>
+			                            </c:forEach>
+			                        </ul>
+			                    </c:if>
+			                </c:if>
+			            </div>
+			            <!-- /link -->
+			            <c:forEach items="${listDisplayType}" var="l">
+			                <c:if test="${l.titleUseYn eq 'Y'}">
+			                    <div class="image-tema-title">
+			                        <c:if test="${not empty l.titleImageUrl}">
+			                            <c:if test="${not empty l.eventLinkUrl}">
+			                                <div class="e_bar2"><a href="${l.eventLinkUrl}"><ui:image src="${l.titleImageUrl}" id="event-link${l.eventTypeInseq}"/></a></div>
+			                            </c:if>
+			                            <c:if test="${empty l.eventLinkUrl}">
+			                                <div class="e_bar2"><ui:image src="${l.titleImageUrl}" id="event-link${l.eventTypeInseq}"/></div>
+			                            </c:if>
+			                        </c:if>
+			                        <c:if test="${empty l.titleImageUrl}">
+			                            <div id="event-link${l.eventTypeInseq}" class="e_bar">
+			                                ${l.eventTitle}
+			                                <c:if test="${not empty l.eventLinkUrl}"><p class="more"><a href="${l.eventLinkUrl}">더보기</a></p></c:if>
+			                            </div>
+			                        </c:if>
+			                    </div>
+			                </c:if>
+			                <c:import url="/ht/biz/bizListEventProduct?eventTypeInseq=${l.eventTypeInseq}&eventPrdtTypeCode=${l.eventPrdtTypeCode}&prdtInfoExpsYn=${l.prdtInfoExpsYn}&eventDispTypeCode=${detail.eventTypeCode}"/>
+			            </c:forEach>
+			        </c:if>
+					<!-- Comment -->
+					<!-- //기차형바: 상품B형이 아닌경우에만 노출 -->
+			        <c:if test="${detail.eventTypeCode eq 'C019C'}">
+			            <c:forEach items="${listDisplayType}" var="l" varStatus="st">
+			                <div class="evt-list-type">
+			                    <div class="list-type0${st.index%2+1}">
+			                        <c:if test="${not empty l.eventLinkUrl}">
+			                            <div class="evt-bnr"><a href="${l.eventLinkUrl}"><ui:image src="${l.titleImageUrl}" id="event-link${l.eventTypeInseq}"/></a></div>
+			                        </c:if>
+			                        <c:if test="${empty l.eventLinkUrl}">
+			                            <div class="evt-bnr"><ui:image src="${l.titleImageUrl}" id="event-link${l.eventTypeInseq}"/></div>
+			                        </c:if>
+			                        <c:import url="/ht/biz/bizListEventProductC019C?eventTypeInseq=${l.eventTypeInseq}&eventPrdtTypeCode=${l.eventPrdtTypeCode}&prdtInfoExpsYn=${l.prdtInfoExpsYn}&eventDispTypeCode=${detail.eventTypeCode}&listSize=6"/>
+			                    </div>
+			                </div>
+			            </c:forEach>
+			        </c:if>
+			        <!-- Comment -->
+        <c:if test="${detail.eventTypeCode eq 'C0192' || detail.eventTypeCode eq 'C0193' || detail.eventTypeCode eq 'C0197'}">
+<!--             <div id="commentArea"> -->
+<!--             c-import부분  eq 'C0192' eq 'C0193' eq 'C0197' -->
+<%--                 <c:import url="/ht/hot/comment/${detail.eventTypeCode}"/> --%>
+<!--             </div> -->
+        </c:if>
+        <c:if test="${detail.eventId eq '61406'}">
+<!--             <div id="commentArea"> -->
+<!--             c-import부분 eq '61406' -->
+<%--                 <c:import url="/ht/hot/comment/${detail.eventTypeCode}"/> --%>
+<!--             </div> -->
+        </c:if>
+        <c:if test="${detail.eventTypeCode eq 'C019B'}">
+            <c:import url="/ht/hot/curateList/${detail.eventId}"/>
+        </c:if>
+        <c:if test="${detail.eventTypeCode eq 'C019A'}">
+<!--             <div id="commentArea"> -->
+<!--             c-import부분  eq 'C019A' -->
+<%--                 <c:import url="/ht/hot/comment/${detail.eventTypeCode}?orderBy=likeCntDesc"/> --%>
+<!--             </div> -->
+        </c:if>
+        <c:if test="${detail.eventDispTypeCode eq 'C0219' && not empty listEvent}">
+            <div id="bucketEventList">
+                <p style="padding:50px;">&nbsp;</p>
+                <div class="page_location" style="margin-bottom:30px;">
+                    <h2 class="title"><img id="aaaaa" src="${imageServer}/images/renewal/common/tit_contentslist.gif" alt="CONTENTS LIST"></h2>
+                </div>
+                <div class="prod_list_normal">
+                    <ul>
+                        <c:forEach items="${listEvent}" var="l">
+                            <li>
+                                <a href="/ht/biz/eventDetail?eventId=${l.eventId}">
+                                    <span class="img"><ui:image src="${l.imageUrl}" alt="${l.eventTitle}" style="width:200px;height:200px;"/></span>
+                                    <span class="name mgt10">${l.eventTitle}</span>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+                <div class="paging">
+                    <ui:paginationScript scriptName="goEventList" name="pageHolder"/>
+                </div>
+            </div>
+        </c:if>
+		        </div>
+				</div>
+
+			<!-- // 컨텐츠 -->
+
+</body>
+</html>

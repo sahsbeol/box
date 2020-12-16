@@ -1,0 +1,1342 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* //////////////////////////   img  /////////////////////// */ 
+
+/* 베스트 ten years  */
+.category_imgtype01 {margin:-10px 0 15px 0;}
+
+/* 실시간 차트 */
+.category_imgtype02 {height:175px; margin:-20px 0 0 0;}
+
+/* 이벤트 뷰 */
+.event_banner_all {width:950px; overflow:hidden; padding-top:10px;}
+
+
+/* //////////////////////////   type A  /////////////////////// */ 
+
+/* typeA_title */  
+.typeA_title {width:100%; height:30px; position:relative; margin-bottom:6px; }
+.typeA_title div {width:510px; height:20px; position:relative; padding-left:6px; }
+.typeA_title p { position:absolute; top:12px; left:3px; font-size:11px; color:#898989; }
+.typeA_title em { position:absolute; top:6px; right:0; font-size:11px; color:#555; }
+.typeA_title em .textbox {width:180px; height:19px;}
+.typeA_title em select {width:85px; height:21px;}
+.typeA_title p.title_text {width:742px; height:20px; padding-right:10px; text-align:right; color:#666;}
+.typeA_title p.title_text span {padding:0 4px; color:#d7d7d7;}
+
+/* typeA_list 레드 */  
+.typeA_list_r {width:100%; overflow:hidden; position:relative;}
+.typeA_list_r table {width:100%; border-top:2px solid #a31112; border-bottom:1px solid #a31112;}
+.typeA_list_r table thead th {padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #a31112;}
+.typeA_list_r table thead th.right {padding-right:12px;}
+.typeA_list_r table thead tr.bg {background:#f5f5f5;}
+.typeA_list_r table thead th.right_m {padding-right:22px;}
+.typeA_list_r table tbody td {border-top:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; line-height:14px; text-align:center;}
+.typeA_list_r table tbody td span.dfont {font-size:10px; font-family:Verdana; line-height:22px;}
+.typeA_list_r table tbody td.product img {margin:8px 0; }
+.typeA_list_r table tbody td.link a {text-decoration:underline; color:#666; font-size:11px;}
+.typeA_list_r table tbody td.link a span.f_red {text-decoration:underline; color:#DA2128; font-size:11px;}
+.typeA_list_r table tbody td.right {padding-right:8px; }
+.typeA_list_r table tbody td.left {padding-left:20px; text-align:left;}
+.typeA_list_r table tbody td.popleft {padding:12px 0 10px 10px; text-align:left;}
+.typeA_list_r table tbody td img.bt_m {margin:0 0 3px 0; }
+.typeA_list_r table tbody td input.input35 {width:33px; height:16px; font-size:11px; border:1px solid #ccc; color:#888; text-align:center;}
+.typeA_list_r table tbody td input.input35no {width:33px; height:16px; font-size:11px; border:1px solid #ccc; background:#f9f9f9; color:#888; text-align:center;}
+.typeA_list_r div.pager {clear:both; position:relative; margin:0 0 20px; padding:15px 0 20px; text-align: center; border-top:0px solid #a31112; }
+.typeA_list_r div.pager a, #container div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeA_list_r div.pager img { margin: 0 -6px; vertical-align: middle; }
+
+/* typeA_list 그린 */  
+.typeA_list_g {width:100%; overflow:hidden; position:relative;}
+.typeA_list_g table {width:100%; border-top:2px solid #8db313; border-bottom:1px solid #8db313;}
+.typeA_list_g table thead th {padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #8db313;}
+.typeA_list_g table thead th.right {padding-right:12px;}
+.typeA_list_g table thead tr.bg {background:#f5f5f5;}
+.typeA_list_g table thead th.right_m {padding-right:22px;}
+.typeA_list_g table tbody td {border-top:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; line-height:14px; text-align:center;}
+.typeA_list_g table tbody td span.dfont {font-size:10px; font-family:Verdana; line-height:22px;}
+.typeA_list_g table tbody td.product img {margin:8px 0; }
+.typeA_list_g table tbody td.link a {text-decoration:underline; color:#666; font-size:11px;}
+.typeA_list_g table tbody td.link a span.f_red {text-decoration:underline; color:#DA2128; font-size:11px;}
+.typeA_list_g table tbody td.right {padding-right:8px; }
+.typeA_list_g table tbody td.left {padding-left:20px; text-align:left;}
+.typeA_list_g table tbody td.popleft {padding:12px 0 10px 10px; text-align:left;}
+.typeA_list_g table tbody td img.bt_m {margin:0 0 3px 0; }
+.typeA_list_g table tbody td input.input35 {width:33px; height:16px; font-size:11px; border:1px solid #ccc; color:#888; text-align:center;}
+.typeA_list_g table tbody td input.input35no {width:33px; height:16px; font-size:11px; border:1px solid #ccc; background:#f9f9f9; color:#888; text-align:center;}
+.typeA_list_g div.pager {clear:both; position:relative; margin:0 0 20px; padding:15px 0 20px; text-align: center; border-top:0px solid #8db313 !important; }
+.typeA_list_g div.pager a, #container div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeA_list_g div.pager img { margin: 0 -6px; vertical-align: middle; }
+
+/* typeA_list 블루 */ 
+.typeA_list_b {width:100%; overflow:hidden; position:relative;}
+.typeA_list_b table {width:100%; border-top:2px solid #6288d7; border-bottom:1px solid #6288d7;}
+.typeA_list_b table thead th {padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #6288d7;}
+.typeA_list_b table thead th.right {padding-right:12px;}
+.typeA_list_b table thead tr.bg {background:#f5f5f5;}
+.typeA_list_b table thead th.right_m {padding-right:22px;}
+.typeA_list_b table tbody td {border-top:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; line-height:14px; text-align:center;}
+.typeA_list_b table tbody td span.dfont {font-size:10px; font-family:Verdana; line-height:22px;}
+.typeA_list_b table tbody td.product img {margin:8px 0; }
+.typeA_list_b table tbody td.link a {text-decoration:underline; color:#666; font-size:11px;}
+.typeA_list_b table tbody td.link a span.f_red {text-decoration:underline; color:#DA2128; font-size:11px;}
+.typeA_list_b table tbody td.right {padding-right:8px; }
+.typeA_list_b table tbody td.left {padding-left:20px; text-align:left;}
+.typeA_list_b table tbody td.popleft {padding:12px 0 10px 10px; text-align:left;}
+.typeA_list_b table tbody td img.bt_m {margin:0 0 3px 0; }
+.typeA_list_b table tbody td input.input35 {width:33px; height:16px; font-size:11px; border:1px solid #ccc; color:#888; text-align:center;}
+.typeA_list_b table tbody td input.input35no {width:33px; height:16px; font-size:11px; border:1px solid #ccc; background:#f9f9f9; color:#888; text-align:center;}
+.typeA_list_b div.pager {clear:both; position:relative; margin:0 0 20px; padding:15px 0 20px; text-align: center; border-top:0px solid #6288d7 !important; }
+.typeA_list_b div.pager a, #container div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeA_list_b div.pager img { margin: 0 -6px; vertical-align: middle; }
+
+/* typeA_list 밑 이벤트배너 */ 
+.typeA_evbanner {width:100%; overflow:hidden; border-top:1px solid #d1d1d1; border-bottom:1px solid #d1d1d1; padding:10px 0 9px 0;}
+.typeA_evbanner div.main-event-list {width:755px !important; overflow: hidden; }
+.typeA_evbanner div.main-event-list ul { float: left; width: 755px; background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/event/main_event_list_bg.gif") repeat-y 0 2px; }
+.typeA_evbanner div.main-event-list ul li { float: left; width: 255px; height: 110px !important; }
+.typeA_evbanner div.main-event-list ul li p.photo {  }
+.typeA_evbanner div.main-event-list ul li p.period { padding: 8px 0 0 15px; font-size: 0.9em; }
+
+/* typeA_view 공통 */ 
+.typeA_view {width:100%; overflow:hidden; position:relative;}
+.typeA_view table {width:100%; border-top:2px solid #5a5a5a; border-bottom:1px solid #cacaca; margin-bottom:30px;}
+.typeA_view table thead th {padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #a31112;}
+.typeA_view table tbody td {border-top:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; line-height:14px; text-align:center;}
+.typeA_view table tbody th.bo_title {font-size:12px; font-weight:bold; text-align:left; padding:11px 0 9px 12px;}
+.typeA_view table tbody td.bo_date {text-align:right; padding:6px 12px 0 0;}
+.typeA_view table tbody td.bo_date span {padding-right:15px;}
+.typeA_view table tbody td.bo_contents {padding:20px 0 15px 0; text-align:left;}
+.typeA_view table tbody td.bo_contents .imgbox {width:755px; padding-bottom:20px;}
+.typeA_view table tbody td.bo_contents .textbox {width:auto; font-size:12px; line-height:19px; padding:0 12px;}
+.typeA_view table tbody td.bo_contents .textbox .cp_infor {font-size:11px; line-height:18px;}
+.typeA_view table tbody td.bo_contents .textbox .cp_infor span {color:#d7d7d7;}
+.typeA_view table tbody td.bo_contents .inforbox {width:auto; height:60px; font-size:12px; line-height:19px; margin:20px 0 -16px 0; padding:12px 12px; border-top:1px solid #d7d7d7;}
+.typeA_view table tbody td.bo_contents .inforbox img {width:60px; height:60px; float:left; padding-right:12px;}
+.typeA_view table tbody td.bo_contents .inforbox ul {width: auto; overflow:hidden; float:left; }
+.typeA_view table tbody td.bo_contents .inforbox ul li span {color:#252525; font-weight:bold;}
+.typeA_view table tbody td.bo_contents .inforbox ul li {overflow:hidden; font-size:11px; line-height:13px;}
+	
+	.typeA_view .pager_re_s {width:755px; height:64px; margin-top:18px; position:relative; font-size:11px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/bod_list_sbg.gif") 0 0 no-repeat;}
+	.typeA_view .pager_re_s p.one {width:725px; position:absolute; top:11px; left:44px;}
+	.typeA_view .pager_re_s p.one span {padding-right:50px;}  
+	.typeA_view .pager_re_s p.one a {text-decoration:none;} 
+	.typeA_view .pager_re_s p.one em {width:60px; position:absolute; top:0; right:44px;}
+	.typeA_view .pager_re_s p.two {width:725px; position:absolute; top:41px; left:44px;}
+	.typeA_view .pager_re_s p.two span {padding-right:50px;}  
+	.typeA_view .pager_re_s p.two a {text-decoration:none;} 
+	.typeA_view .pager_re_s p.two em {width:60px; position:absolute; top:0; right:44px;}
+
+/* typeA_view 덧글 */ 
+.typeA_re p.total {padding:35px 0 15px 18px; font-size:0.9em; color: #555; }
+.typeA_re p.total img {vertical-align: middle;}  
+.typeA_re div.pager {clear:both; position:relative; margin:0 0 20px; padding:15px 0 20px; text-align: center; border-top:0px solid #a31112 !important; }
+.typeA_re div.pager a, #container div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeA_re div.pager img { margin: 0 -6px; vertical-align: middle; }
+
+.typeA_re .order_table01_re {width:100%; border-top:0px solid #a31112 !important; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/line_rebg.gif") 0 bottom repeat-x;}
+.typeA_re .order_table01_re thead th {padding:0; color:#333; font-size:11px; font-weight:normal; border-bottom:0px solid #a31112;}
+
+.typeA_re .order_table01_re .look_topbox {width:100%; overflow:hidden; position:relative;}
+.typeA_re .order_table01_re .look_topbox div.view_register {padding:15px 0 15px 19px; overflow:hidden; z-index:30; background: #f8f8f8; border:1px solid #eaeaea; margin-bottom:-1px;}
+.typeA_re .order_table01_re .look_topbox div.view_register fieldset .lookbox {width:61px; height:37px; float:left; border:1px solid #eaeaea; background:#fff; margin-right:15px;}
+.look01 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") 0 0 no-repeat;}
+.look02 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -31px 0 no-repeat;}
+.look03 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -62px 0 no-repeat;}
+.look04 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -93px 0 no-repeat;}
+.look05 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -124px 0 no-repeat;}
+.look06 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -155px 0 no-repeat;}
+.look07 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -186px 0 no-repeat;}
+.look08 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -217px 0 no-repeat;}
+.look09 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -248px 0 no-repeat;}
+.look10 {width:28px; height:28px; margin:6px 0 0 10px; _margin:6px 0 0 6px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/look_bg.gif") -279px 0 no-repeat;}
+.typeA_re .order_table01_re .look_topbox div.view_register fieldset .lookbox .chbtn {width:22px; _width:20px; height:37px; float:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/dot_alsh.gif") 7px 17px no-repeat;}
+.typeA_re .order_table01_re .look_topbox div.view_register fieldset legend {height:0; font-size:0; line-height:0; visibility: hidden; }
+.typeA_re .order_table01_re .look_topbox div.view_register fieldset textarea {float:left; margin:0 22px 0 0; padding:2px 0 0 2px; width:530px; height:35px; font-size:11px; line-height:12px; border:1px solid #eaeaea; overflow:hidden; }
+	.typeA_re .order_table01_re .look_topbox div.view_register fieldset textarea.all {float:left; margin:0 22px 0 0; padding:2px 0 0 2px; width:720px; height:35px; font-size:11px; line-height:12px; border:1px solid #eaeaea; overflow:hidden; }
+.typeA_re .order_table01_re .look_topbox div.view_register fieldset input {float:left;}
+.typeA_re .order_table01_re .look_topbox div.view_register fieldset .txt {clear:both; padding:8px 0 0 79px; color:#464646; margin-bottom:-3px; _margin-bottom:-3px;}
+:first-child + html .typeA_re .order_table01_re .look_topbox div.view_register fieldset .txt {clear:both; padding:8px 0 0 79px; color:#464646; margin-bottom:-1px;}
+
+.typeA_re .order_table01_re .look_topbox .lookallbox {width:390px; _width:355px; height:37px; position:absolute; top:16px; left:83px; z-index:40; background:#ffffff; border:1px solid #eaeaea;} 
+.typeA_re .order_table01_re tbody td.reinput .look_topbox .lookallbox {width:390px; _width:355px; height:37px; position:absolute; top:15px; left:83px; z-index:40; background:#ffffff; border:1px solid #eaeaea;} 
+.typeA_re .order_table01_re tbody td {border-top:1px solid #eaeaea; padding:10px 0 10px; font-size:11px; line-height:14px; text-align:center;  background:none;}
+.typeA_re .order_table01_re tbody td p.look {width:auto; height:26px;}
+.typeA_re .order_table01_re tbody td p.look span {margin:0 16px 0 14px;}
+.typeA_re .order_table01_re tbody td p.look em {padding-top:6px; display:inline-block;}
+.typeA_re .order_table01_re tbody td span.dfont {font-size:10px; font-family:Verdana; line-height:22px;}
+.typeA_re .order_table01_re tbody td.left {padding-left:10px; padding-right:10px; text-align:left;}
+.typeA_re .order_table01_re tbody td.re {padding:13px 10px 13px 40px; text-align:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/icon_re.gif") 15px 13px no-repeat;}
+:first-child + html .typeA_re .order_table01_re tbody td.re {padding:13px 10px 13px 40px; text-align:left; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/culturezone/icon_re.gif") 15px 16px no-repeat;}
+.typeA_re .order_table01_re tbody td.reinput {padding:0;} 
+.typeA_re .order_table01_re tbody td.reinput div.view_register {margin-top:-1px; margin-bottom:-1px;} 
+.typeA_re .order_table01_re tbody td.no {padding:33px 0 31px 0;} 
+
+
+/* //////////////////////////   type B  /////////////////////// */ 
+
+/* typeB_list */
+.typeB_list {width:100%; overflow:hidden; position:relative;}
+.typeB_list .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeB_list .list_tool span {padding-right:5px;} 
+.typeB_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB_list div.pager a, .typeB_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeB_list ul {width:100%; overflow:hidden; border-bottom:1px solid #cccccc; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB_list.gif) 0 0 repeat-y;  }
+.typeB_list ul em { color: #fe5705; }
+.typeB_list ul li { font-size: 11px; display: block; padding:24px 0 0 8px; height:161px; float: left; width:143px; }
+.typeB_list ul li p { white-space: nowrap; text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB_list ul .check { float: left; height: 24px; width: 24px; text-align: left; }
+.typeB_list ul p.album_pic { width: 87px; height: auto !important; }
+.typeB_list ul a.album_pic { height: 87px !important; }
+.typeB_list ul a.album_pic img { width: 85px; height: 85px; border: solid 1px #ececec; }
+.typeB_list ul .album_title { color: #333; margin-top: 8px; }
+.typeB_list ul .album_title a { color: #333; white-space: nowrap; width: 85px; overflow: hidden; text-overflow: ellipsis; }
+.typeB_list ul .price { margin-top: 8px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB_list ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+
+/* typeB2_list 베스트 */
+.typeB2_list {width:100%; overflow:hidden; position:relative;}
+.typeB2_list .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeB2_list .list_tool span {padding-right:5px;} 
+.typeB2_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB2_list div.pager a, .typeB2_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB2_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeB2_list ul {width:100%; overflow:hidden; border-bottom:1px solid #cccccc; position:relative; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB_list.gif) 0 0 repeat-y;  }
+.typeB2_list ul em { color: #fe5705; }
+.typeB2_list ul li {font-size: 11px; display: block; padding:24px 0 0 8px; height:161px; position:relative; float: left; width:143px; }
+.typeB2_list ul li p { white-space: nowrap; text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB2_list ul p.rank {float: left; width:30px; height:32px; padding-top:1px; vertical-align:top; text-align:center;}
+.typeB2_list ul p.rank a {width:30px; height:32px; display:block; overflow:hidden; text-indent:-5000px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/number_best_all_s.gif) 0 0 no-repeat;}
+	.typeB2_list ul p.rank span.best1 a {width:30px; height:32px; background-position:0 0;}
+	.typeB2_list ul p.rank span.best2 a {width:30px; height:32px; background-position:0 -50px;}
+	.typeB2_list ul p.rank span.best3 a {width:30px; height:32px; background-position:0 -100px;}
+	.typeB2_list ul p.rank span.best4 a {width:30px; height:32px; background-position:0 -150px;}
+	.typeB2_list ul p.rank span.best5 a {width:30px; height:32px; background-position:0 -200px;}
+	.typeB2_list ul p.rank span.best6 a {width:30px; height:32px; background-position:0 -250px;}
+	.typeB2_list ul p.rank span.best7 a {width:30px; height:32px; background-position:0 -300px;}
+	.typeB2_list ul p.rank span.best8 a {width:30px; height:32px; background-position:0 -350px;}
+	.typeB2_list ul p.rank span.best9 a {width:30px; height:32px; background-position:0 -400px;}
+	.typeB2_list ul p.rank span.best10 a {width:30px; height:32px; background-position:0 -450px;}	
+	.typeB2_list ul p.rank span.best11 a {width:30px; height:32px; background-position:-50px 0;}
+	.typeB2_list ul p.rank span.best12 a {width:30px; height:32px; background-position:-50px -50px;}
+	.typeB2_list ul p.rank span.best13 a {width:30px; height:32px; background-position:-50px -100px;}
+	.typeB2_list ul p.rank span.best14 a {width:30px; height:32px; background-position:-50px -150px;}
+	.typeB2_list ul p.rank span.best15 a {width:30px; height:32px; background-position:-50px -200px;}
+	.typeB2_list ul p.rank span.best16 a {width:30px; height:32px; background-position:-50px -250px;}
+	.typeB2_list ul p.rank span.best17 a {width:30px; height:32px; background-position:-50px -300px;}
+	.typeB2_list ul p.rank span.best18 a {width:30px; height:32px; background-position:-50px -350px;}
+	.typeB2_list ul p.rank span.best19 a {width:30px; height:32px; background-position:-50px -400px;}
+	.typeB2_list ul p.rank span.best20 a {width:30px; height:32px; background-position:-50px -450px;}	
+	.typeB2_list ul p.rank span.best21 a {width:30px; height:32px; background-position:-100px 0;}
+	.typeB2_list ul p.rank span.best22 a {width:30px; height:32px; background-position:-100px -50px;}
+	.typeB2_list ul p.rank span.best23 a {width:30px; height:32px; background-position:-100px -100px;}
+	.typeB2_list ul p.rank span.best24 a {width:30px; height:32px; background-position:-100px -150px;}
+	.typeB2_list ul p.rank span.best25 a {width:30px; height:32px; background-position:-100px -200px;}
+	.typeB2_list ul p.rank span.best26 a {width:30px; height:32px; background-position:-100px -250px;}
+	.typeB2_list ul p.rank span.best27 a {width:30px; height:32px; background-position:-100px -300px;}
+	.typeB2_list ul p.rank span.best28 a {width:30px; height:32px; background-position:-100px -350px;}
+	.typeB2_list ul p.rank span.best29 a {width:30px; height:32px; background-position:-100px -400px;}
+	.typeB2_list ul p.rank span.best30 a {width:30px; height:32px; background-position:-100px -450px;}
+	.typeB2_list ul p.rank span.best31 a {width:30px; height:32px; background-position:-150px 0;}
+	.typeB2_list ul p.rank span.best32 a {width:30px; height:32px; background-position:-150px -50px;}
+	.typeB2_list ul p.rank span.best33 a {width:30px; height:32px; background-position:-150px -100px;}
+	.typeB2_list ul p.rank span.best34 a {width:30px; height:32px; background-position:-150px -150px;}
+	.typeB2_list ul p.rank span.best35 a {width:30px; height:32px; background-position:-150px -200px;}
+	.typeB2_list ul p.rank span.best36 a {width:30px; height:32px; background-position:-150px -250px;}
+	.typeB2_list ul p.rank span.best37 a {width:30px; height:32px; background-position:-150px -300px;}
+	.typeB2_list ul p.rank span.best38 a {width:30px; height:32px; background-position:-150px -350px;}
+	.typeB2_list ul p.rank span.best39 a {width:30px; height:32px; background-position:-150px -400px;}
+	.typeB2_list ul p.rank span.best40 a {width:30px; height:32px; background-position:-150px -450px;}
+	.typeB2_list ul p.rank span.best41 a {width:30px; height:32px; background-position:-200px 0;}
+	.typeB2_list ul p.rank span.best42 a {width:30px; height:32px; background-position:-200px -50px;}
+	.typeB2_list ul p.rank span.best43 a {width:30px; height:32px; background-position:-200px -100px;}
+	.typeB2_list ul p.rank span.best44 a {width:30px; height:32px; background-position:-200px -150px;}
+	.typeB2_list ul p.rank span.best45 a {width:30px; height:32px; background-position:-200px -200px;}
+	.typeB2_list ul p.rank span.best46 a {width:30px; height:32px; background-position:-200px -250px;}
+	.typeB2_list ul p.rank span.best47 a {width:30px; height:32px; background-position:-200px -300px;}
+	.typeB2_list ul p.rank span.best48 a {width:30px; height:32px; background-position:-200px -350px;}
+	.typeB2_list ul p.rank span.best49 a {width:30px; height:32px; background-position:-200px -400px;}
+	.typeB2_list ul p.rank span.best50 a {width:30px; height:32px; background-position:-200px -450px;}	
+	.typeB2_list ul p.rank span.best51 a {width:30px; height:32px; background-position:-250px 0;}
+	.typeB2_list ul p.rank span.best52 a {width:30px; height:32px; background-position:-250px -50px;}
+	.typeB2_list ul p.rank span.best53 a {width:30px; height:32px; background-position:-250px -100px;}
+	.typeB2_list ul p.rank span.best54 a {width:30px; height:32px; background-position:-250px -150px;}
+	.typeB2_list ul p.rank span.best55 a {width:30px; height:32px; background-position:-250px -200px;}
+	.typeB2_list ul p.rank span.best56 a {width:30px; height:32px; background-position:-250px -250px;}
+	.typeB2_list ul p.rank span.best57 a {width:30px; height:32px; background-position:-250px -300px;}
+	.typeB2_list ul p.rank span.best58 a {width:30px; height:32px; background-position:-250px -350px;}
+	.typeB2_list ul p.rank span.best59 a {width:30px; height:32px; background-position:-250px -400px;}
+	.typeB2_list ul p.rank span.best60 a {width:30px; height:32px; background-position:-250px -450px;}	
+	.typeB2_list ul p.rank span.best61 a {width:30px; height:32px; background-position:-300px 0;}
+	.typeB2_list ul p.rank span.best62 a {width:30px; height:32px; background-position:-300px -50px;}
+	.typeB2_list ul p.rank span.best63 a {width:30px; height:32px; background-position:-300px -100px;}
+	.typeB2_list ul p.rank span.best64 a {width:30px; height:32px; background-position:-300px -150px;}
+	.typeB2_list ul p.rank span.best65 a {width:30px; height:32px; background-position:-300px -200px;}
+	.typeB2_list ul p.rank span.best66 a {width:30px; height:32px; background-position:-300px -250px;}
+	.typeB2_list ul p.rank span.best67 a {width:30px; height:32px; background-position:-300px -300px;}
+	.typeB2_list ul p.rank span.best68 a {width:30px; height:32px; background-position:-300px -350px;}
+	.typeB2_list ul p.rank span.best69 a {width:30px; height:32px; background-position:-300px -400px;}
+	.typeB2_list ul p.rank span.best70 a {width:30px; height:32px; background-position:-300px -450px;}	
+	.typeB2_list ul p.rank span.best71 a {width:30px; height:32px; background-position:-350px 0;}
+	.typeB2_list ul p.rank span.best72 a {width:30px; height:32px; background-position:-350px -50px;}
+	.typeB2_list ul p.rank span.best73 a {width:30px; height:32px; background-position:-350px -100px;}
+	.typeB2_list ul p.rank span.best74 a {width:30px; height:32px; background-position:-350px -150px;}
+	.typeB2_list ul p.rank span.best75 a {width:30px; height:32px; background-position:-350px -200px;}
+	.typeB2_list ul p.rank span.best76 a {width:30px; height:32px; background-position:-350px -250px;}
+	.typeB2_list ul p.rank span.best77 a {width:30px; height:32px; background-position:-350px -300px;}
+	.typeB2_list ul p.rank span.best78 a {width:30px; height:32px; background-position:-350px -350px;}
+	.typeB2_list ul p.rank span.best79 a {width:30px; height:32px; background-position:-350px -400px;}
+	.typeB2_list ul p.rank span.best80 a {width:30px; height:32px; background-position:-350px -450px;}	
+	.typeB2_list ul p.rank span.best81 a {width:30px; height:32px; background-position:-400px 0;}
+	.typeB2_list ul p.rank span.best82 a {width:30px; height:32px; background-position:-400px -50px;}
+	.typeB2_list ul p.rank span.best83 a {width:30px; height:32px; background-position:-400px -100px;}
+	.typeB2_list ul p.rank span.best84 a {width:30px; height:32px; background-position:-400px -150px;}
+	.typeB2_list ul p.rank span.best85 a {width:30px; height:32px; background-position:-400px -200px;}
+	.typeB2_list ul p.rank span.best86 a {width:30px; height:32px; background-position:-400px -250px;}
+	.typeB2_list ul p.rank span.best87 a {width:30px; height:32px; background-position:-400px -300px;}
+	.typeB2_list ul p.rank span.best88 a {width:30px; height:32px; background-position:-400px -350px;}
+	.typeB2_list ul p.rank span.best89 a {width:30px; height:32px; background-position:-400px -400px;}
+	.typeB2_list ul p.rank span.best90 a {width:30px; height:32px; background-position:-400px -450px;}	
+	.typeB2_list ul p.rank span.best91 a {width:30px; height:32px; background-position:-450px 0;}
+	.typeB2_list ul p.rank span.best92 a {width:30px; height:32px; background-position:-450px -50px;}
+	.typeB2_list ul p.rank span.best93 a {width:30px; height:32px; background-position:-450px -100px;}
+	.typeB2_list ul p.rank span.best94 a {width:30px; height:32px; background-position:-450px -150px;}
+	.typeB2_list ul p.rank span.best95 a {width:30px; height:32px; background-position:-450px -200px;}
+	.typeB2_list ul p.rank span.best96 a {width:30px; height:32px; background-position:-450px -250px;}
+	.typeB2_list ul p.rank span.best97 a {width:30px; height:32px; background-position:-450px -300px;}
+	.typeB2_list ul p.rank span.best98 a {width:30px; height:32px; background-position:-450px -350px;}
+	.typeB2_list ul p.rank span.best99 a {width:30px; height:32px; background-position:-450px -400px;}
+	.typeB2_list ul p.rank span.best100 a {width:30px; height:32px; background-position:-450px -450px;}
+.typeB2_list ul p.check input {width:15px; height:15px; position:absolute !important; top:90px !important; left:14px !important; text-align:left !important;} 
+.typeB2_list ul p.album_pic {float: left;  width: 87px; height: 87px !important; }
+.typeB2_list ul a.album_pic { height: 87px !important; }
+.typeB2_list ul a.album_pic img { width: 85px; height: 85px; border: solid 1px #ececec; }
+.typeB2_list ul .album_title { clear:both;  color: #333; padding-top: 8px; _padding-top:0px; _margin-top:-8px;  }
+.typeB2_list ul .album_title a { color: #333; white-space: nowrap; width: 85px; overflow: hidden; text-overflow: ellipsis; }
+.typeB2_list ul .price { margin-top: 8px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB2_list ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+
+
+/* typeB3_list 기획상품 */
+.typeB3_list {width:100%; overflow:hidden; position:relative;}
+.typeB3_list ul {width:100%; overflow:hidden; border-bottom:1px solid #737373; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB3_list.gif) 0 0 repeat-y;  }
+.typeB3_list ul em { color: #fe5705; }
+.typeB3_list ul li { font-size: 11px; display: block; padding:34px 0 0 8px; height:326px; float: left; width:243px; }
+.typeB3_list ul li p {text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB3_list ul .check { float: left; height: 24px; width: 24px; text-align: left; }
+.typeB3_list ul p.album_pic { width: 200px; height: auto !important; }
+.typeB3_list ul a.album_pic { height: 200px !important; }
+.typeB3_list ul a.album_pic img { width: 200px; height: 200px; border: solid 1px #ececec; }
+.typeB3_list ul .album_title {width: 200px; color: #333; overflow: hidden; margin:8px 0 1px 20px; }
+.typeB3_list ul .album_title a { color: #333;  }
+.typeB3_list ul .price { margin-top: 8px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB3_list ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+.typeB3_list ul .product-icon {margin-top:13px;}
+.typeB3_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB3_list div.pager a, .typeB3_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB3_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+
+/* typeB4_search */ 
+.typeB4_search {width:755px; overflow:hidden; padding:20px 0 20px 0; position:relative;} 
+.typeB4_search div {width:753px; overflow:hidden; padding:0; border:1px solid #c2c2c2; background:#f0f0f0;} 
+.typeB4_search div dl {width:450px; overflow:hidden; margin:0 auto; padding:10px 0;}
+.typeB4_search div dl dt {width:100px; float: left; padding: 11px 0 6px; }
+.typeB4_search div dl dt img { vertical-align: middle; }
+.typeB4_search div dl dd {width: 338px; height: 26px; float: left;  text-align: right; border: 4px solid #b11111; }
+.typeB4_search div dl dd fieldset legend { width: 0; height: 0; line-height: 0; font-size: 0; visibility: hidden; }
+.typeB4_search div dl dd fieldset input.textbox { margin: 0 -4px 0 0; padding:3px 3px 0 3px; width: 274px; height: 21px; border: 0; }
+.typeB4_search div dl dd fieldset input { vertical-align: top; }
+
+/* typeB4_list 이벤트 */
+.typeB4_list {width: 755px; overflow:hidden; position:relative;} 
+.typeB4_list ul {position:relative; width: 755px; overflow:hidden; border-bottom:1px solid #737373; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB4_list.gif) -3px 0 repeat-y; }
+.typeB4_list ul li {float: left; width: 251px; height: 200px; }
+.typeB4_list ul li p.photo {padding-top:20px;}
+.typeB4_list ul li p.photo img { width: 245px; height: 110px; } 
+.typeB4_list ul li .album_title {width: 225px; overflow: hidden; margin:8px 0 1px 10px;}
+.typeB4_list ul li .album_title a {font-size:11px; font-weight:bold; color:#333;  }
+.typeB4_list ul li .album_artist {margin:2px 0 1px 10px; line-height:18px; color:#898989;}  
+.typeB4_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB4_list div.pager a, .typeB4_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB4_list div.pager img { margin: 0 -6px; vertical-align: middle; }  
+
+/* typeB4_viewbox 구매왕 이벤트  */
+.typeB4_viewbox {width:908px; overflow:hidden; position:relative; margin:30px 0; padding:20px 20px 40px 20px; border:1px solid #ddd;}
+.typeB4_viewbox .viewbox_left {width:400px; overflow:hidden; float:left;} 
+.typeB4_viewbox .viewbox_left .title {padding:0 0 10px 4px; position:relative;}
+.typeB4_viewbox .viewbox_left .title img {vertical-align:middle;}
+.typeB4_viewbox .viewbox_left .title span {font-size:11px; color:#7d7d7d; position:absolute; right:3px; top:5px;}
+.typeB4_viewbox .viewbox_left table {width:100%; overflow:hidden; border-top:2px solid #898989;}
+.typeB4_viewbox .viewbox_left table thead tr th {padding:7px 0 7px 0; background:#f5f5f5; border-bottom:1px solid #898989; font-size:11px; font-weight:bold; color:#252525;}
+.typeB4_viewbox .viewbox_left table tbody tr td {padding:7px 0 7px 0; color:#252525; text-align:center; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/king_table_line.gif) 0 bottom repeat-x;}
+.typeB4_viewbox .viewbox_left table tbody tr td.my {padding:7px 15px 7px 0; color:#252525; text-align:right;}
+.typeB4_viewbox .viewbox_left table tbody tr td.id {padding:7px 0 7px 0; color:#7d7d7d; text-align:left;}
+.typeB4_viewbox .viewbox_left table tbody tr td span.red {width:18px; height:12px; padding:2px 0 2px 0; margin:0 auto; background:#ff3628; display:block; color:#fff; font-size:11px; font-weight:bold; text-align:center;}
+.typeB4_viewbox .viewbox_left table tbody tr td span.blue {width:18px; height:12px; padding:2px 0 2px 0; margin:0 auto; background:#1d5ad6; display:block; color:#fff; font-size:11px; font-weight:bold; text-align:center;}
+.typeB4_viewbox .viewbox_left table tfoot tr td {padding:7px 0 7px 0; border-top:1px solid #898989; border-bottom:1px solid #898989; font-size:11px; font-weight:bold; color:#252525; text-align:center;}
+.typeB4_viewbox .viewbox_left table tfoot tr td.my {padding:7px 15px 7px 0; color:#252525; text-align:right;}
+ 
+.typeB4_viewbox .viewbox_right {width:485px; overflow:hidden; float:right;}
+.typeB4_viewbox .viewbox_right .title {padding:0 0 10px 4px;}
+.typeB4_viewbox .viewbox_right .time_box {width:485px; height:157px; position:relative; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_king_time.gif) 0 0 no-repeat;}
+.typeB4_viewbox .viewbox_right .time_box ul {width:415px; position:absolute; top:35px; left:46px; border:0px solid red;}
+.typeB4_viewbox .viewbox_right .time_box ul li {float:left;}
+.typeB4_viewbox .viewbox_right .time_box ul li.number {width:48px;}
+.typeB4_viewbox .viewbox_right .time_box ul li.one {width:62px;}
+.typeB4_viewbox .viewbox_right .time_box ul li.two {width:90px;}
+.typeB4_viewbox .viewbox_right .time_box ul li.last {width:60px;}
+.typeB4_viewbox .viewbox_right .time_text {width:485px; height:55px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/text_king_time.gif) 0 0 no-repeat;}
+
+/* typeB4_viewlist 구매왕 이벤트  */
+.typeB4_viewlist {width:100%; overflow:hidden; position:relative;} 
+.typeB4_viewlist ul {width:100%; overflow:hidden;} 
+.typeB4_viewlist ul em { color: #fe5705; }
+.typeB4_viewlist ul li { font-size: 11px; display: block; float: left; width:20%; margin:0 auto; text-align:center; padding-bottom:25px;}
+.typeB4_viewlist ul li p {width: 90%; white-space: nowrap; text-overflow: ellipsis; color: #898989; text-align:center; display: block; overflow: hidden; } 
+.typeB4_viewlist ul p.album_artist {margin:6px 0 3px 0;}
+.typeB4_viewlist ul p.album_pic { width: 100%; }
+.typeB4_viewlist ul a.album_pic { display:inline-block; height: 122px !important;}
+.typeB4_viewlist ul a.album_pic img { border: solid 1px #ececec; }
+.typeB4_viewlist ul .album_title { color: #333; }
+.typeB4_viewlist ul .album_title a { color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.typeB4_viewlist ul .price { margin-top:2px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB4_viewlist ul .dis_price { margin-top:4px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+
+
+/* typeB5_list DVD */
+.typeB5_list {width:100%; overflow:hidden; position:relative;}
+.typeB5_list .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeB5_list .list_tool span {padding-right:5px;} 
+.typeB5_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB5_list div.pager a, .typeB5_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB5_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeB5_list ul {width:755px; overflow:hidden; border-bottom:1px solid #cccccc; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB5_list.gif) 0 0 repeat-y; }
+.typeB5_list ul em { color: #fe5705; }
+.typeB5_list ul li { font-size: 11px; display: block; padding:24px 0 0 18px; height:181px; float: left; width:133px; }
+.typeB5_list ul li p {text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB5_list ul .check { float: left; height: 24px; width: 24px; text-align: left; }
+.typeB5_list ul p.album_pic { width: 68px; height: auto !important; }
+.typeB5_list ul a.album_pic { height: 102px !important; }
+.typeB5_list ul a.album_pic img { width: 66px; height: 100px; border:solid 1px #ececec; }
+.typeB5_list ul .album_title { color: #333; margin:8px 25px 0 18px; width: 78px; height:25px; overflow:hidden; text-align:center; }
+.typeB5_list ul .album_title a { width:100%; color: #333; }
+.typeB5_list ul .price { margin-top: 8px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB5_list ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+
+/* typeB6_list DVD 베스트 */
+.typeB6_list {width:100%; overflow:hidden; position:relative;}
+.typeB6_list .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeB6_list .list_tool span {padding-right:5px;} 
+.typeB6_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB6_list div.pager a, .typeB6_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB6_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeB6_list ul {width:755px; overflow:hidden; border-bottom:1px solid #cccccc; position:relative; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB5_list.gif) 0 0 repeat-y; }
+.typeB6_list ul em { color: #fe5705; }
+.typeB6_list ul li { font-size: 11px; display: block; padding:24px 0 0 10px; height:181px; position:relative; float: left; width:141px; }
+.typeB6_list ul li p {text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; } 
+.typeB6_list ul .check {position:absolute; top:105px; left:14px; height: 24px; width: 30px; text-align: left; }
+.typeB6_list ul p.rank {float: left; width:30px; height:32px; padding-top:1px; vertical-align:top; text-align:center;}
+.typeB6_list ul p.rank a {width:30px; height:32px; display:block; overflow:hidden; text-indent:-5000px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/number_best_all_s.gif) 0 0 no-repeat;}
+	.typeB6_list ul p.rank span.best1 a {width:30px; height:32px; background-position:0 0;}
+	.typeB6_list ul p.rank span.best2 a {width:30px; height:32px; background-position:0 -50px;}
+	.typeB6_list ul p.rank span.best3 a {width:30px; height:32px; background-position:0 -100px;}
+	.typeB6_list ul p.rank span.best4 a {width:30px; height:32px; background-position:0 -150px;}
+	.typeB6_list ul p.rank span.best5 a {width:30px; height:32px; background-position:0 -200px;}
+	.typeB6_list ul p.rank span.best6 a {width:30px; height:32px; background-position:0 -250px;}
+	.typeB6_list ul p.rank span.best7 a {width:30px; height:32px; background-position:0 -300px;}
+	.typeB6_list ul p.rank span.best8 a {width:30px; height:32px; background-position:0 -350px;}
+	.typeB6_list ul p.rank span.best9 a {width:30px; height:32px; background-position:0 -400px;}
+	.typeB6_list ul p.rank span.best10 a {width:30px; height:32px; background-position:0 -450px;}	
+	.typeB6_list ul p.rank span.best11 a {width:30px; height:32px; background-position:-50px 0;}
+	.typeB6_list ul p.rank span.best12 a {width:30px; height:32px; background-position:-50px -50px;}
+	.typeB6_list ul p.rank span.best13 a {width:30px; height:32px; background-position:-50px -100px;}
+	.typeB6_list ul p.rank span.best14 a {width:30px; height:32px; background-position:-50px -150px;}
+	.typeB6_list ul p.rank span.best15 a {width:30px; height:32px; background-position:-50px -200px;}
+	.typeB6_list ul p.rank span.best16 a {width:30px; height:32px; background-position:-50px -250px;}
+	.typeB6_list ul p.rank span.best17 a {width:30px; height:32px; background-position:-50px -300px;}
+	.typeB6_list ul p.rank span.best18 a {width:30px; height:32px; background-position:-50px -350px;}
+	.typeB6_list ul p.rank span.best19 a {width:30px; height:32px; background-position:-50px -400px;}
+	.typeB6_list ul p.rank span.best20 a {width:30px; height:32px; background-position:-50px -450px;}	
+	.typeB6_list ul p.rank span.best21 a {width:30px; height:32px; background-position:-100px 0;}
+	.typeB6_list ul p.rank span.best22 a {width:30px; height:32px; background-position:-100px -50px;}
+	.typeB6_list ul p.rank span.best23 a {width:30px; height:32px; background-position:-100px -100px;}
+	.typeB6_list ul p.rank span.best24 a {width:30px; height:32px; background-position:-100px -150px;}
+	.typeB6_list ul p.rank span.best25 a {width:30px; height:32px; background-position:-100px -200px;}
+	.typeB6_list ul p.rank span.best26 a {width:30px; height:32px; background-position:-100px -250px;}
+	.typeB6_list ul p.rank span.best27 a {width:30px; height:32px; background-position:-100px -300px;}
+	.typeB6_list ul p.rank span.best28 a {width:30px; height:32px; background-position:-100px -350px;}
+	.typeB6_list ul p.rank span.best29 a {width:30px; height:32px; background-position:-100px -400px;}
+	.typeB6_list ul p.rank span.best30 a {width:30px; height:32px; background-position:-100px -450px;}
+	.typeB6_list ul p.rank span.best31 a {width:30px; height:32px; background-position:-150px 0;}
+	.typeB6_list ul p.rank span.best32 a {width:30px; height:32px; background-position:-150px -50px;}
+	.typeB6_list ul p.rank span.best33 a {width:30px; height:32px; background-position:-150px -100px;}
+	.typeB6_list ul p.rank span.best34 a {width:30px; height:32px; background-position:-150px -150px;}
+	.typeB6_list ul p.rank span.best35 a {width:30px; height:32px; background-position:-150px -200px;}
+	.typeB6_list ul p.rank span.best36 a {width:30px; height:32px; background-position:-150px -250px;}
+	.typeB6_list ul p.rank span.best37 a {width:30px; height:32px; background-position:-150px -300px;}
+	.typeB6_list ul p.rank span.best38 a {width:30px; height:32px; background-position:-150px -350px;}
+	.typeB6_list ul p.rank span.best39 a {width:30px; height:32px; background-position:-150px -400px;}
+	.typeB6_list ul p.rank span.best40 a {width:30px; height:32px; background-position:-150px -450px;}
+	.typeB6_list ul p.rank span.best41 a {width:30px; height:32px; background-position:-200px 0;}
+	.typeB6_list ul p.rank span.best42 a {width:30px; height:32px; background-position:-200px -50px;}
+	.typeB6_list ul p.rank span.best43 a {width:30px; height:32px; background-position:-200px -100px;}
+	.typeB6_list ul p.rank span.best44 a {width:30px; height:32px; background-position:-200px -150px;}
+	.typeB6_list ul p.rank span.best45 a {width:30px; height:32px; background-position:-200px -200px;}
+	.typeB6_list ul p.rank span.best46 a {width:30px; height:32px; background-position:-200px -250px;}
+	.typeB6_list ul p.rank span.best47 a {width:30px; height:32px; background-position:-200px -300px;}
+	.typeB6_list ul p.rank span.best48 a {width:30px; height:32px; background-position:-200px -350px;}
+	.typeB6_list ul p.rank span.best49 a {width:30px; height:32px; background-position:-200px -400px;}
+	.typeB6_list ul p.rank span.best50 a {width:30px; height:32px; background-position:-200px -450px;}	
+	.typeB6_list ul p.rank span.best51 a {width:30px; height:32px; background-position:-250px 0;}
+	.typeB6_list ul p.rank span.best52 a {width:30px; height:32px; background-position:-250px -50px;}
+	.typeB6_list ul p.rank span.best53 a {width:30px; height:32px; background-position:-250px -100px;}
+	.typeB6_list ul p.rank span.best54 a {width:30px; height:32px; background-position:-250px -150px;}
+	.typeB6_list ul p.rank span.best55 a {width:30px; height:32px; background-position:-250px -200px;}
+	.typeB6_list ul p.rank span.best56 a {width:30px; height:32px; background-position:-250px -250px;}
+	.typeB6_list ul p.rank span.best57 a {width:30px; height:32px; background-position:-250px -300px;}
+	.typeB6_list ul p.rank span.best58 a {width:30px; height:32px; background-position:-250px -350px;}
+	.typeB6_list ul p.rank span.best59 a {width:30px; height:32px; background-position:-250px -400px;}
+	.typeB6_list ul p.rank span.best60 a {width:30px; height:32px; background-position:-250px -450px;}	
+	.typeB6_list ul p.rank span.best61 a {width:30px; height:32px; background-position:-300px 0;}
+	.typeB6_list ul p.rank span.best62 a {width:30px; height:32px; background-position:-300px -50px;}
+	.typeB6_list ul p.rank span.best63 a {width:30px; height:32px; background-position:-300px -100px;}
+	.typeB6_list ul p.rank span.best64 a {width:30px; height:32px; background-position:-300px -150px;}
+	.typeB6_list ul p.rank span.best65 a {width:30px; height:32px; background-position:-300px -200px;}
+	.typeB6_list ul p.rank span.best66 a {width:30px; height:32px; background-position:-300px -250px;}
+	.typeB6_list ul p.rank span.best67 a {width:30px; height:32px; background-position:-300px -300px;}
+	.typeB6_list ul p.rank span.best68 a {width:30px; height:32px; background-position:-300px -350px;}
+	.typeB6_list ul p.rank span.best69 a {width:30px; height:32px; background-position:-300px -400px;}
+	.typeB6_list ul p.rank span.best70 a {width:30px; height:32px; background-position:-300px -450px;}	
+	.typeB6_list ul p.rank span.best71 a {width:30px; height:32px; background-position:-350px 0;}
+	.typeB6_list ul p.rank span.best72 a {width:30px; height:32px; background-position:-350px -50px;}
+	.typeB6_list ul p.rank span.best73 a {width:30px; height:32px; background-position:-350px -100px;}
+	.typeB6_list ul p.rank span.best74 a {width:30px; height:32px; background-position:-350px -150px;}
+	.typeB6_list ul p.rank span.best75 a {width:30px; height:32px; background-position:-350px -200px;}
+	.typeB6_list ul p.rank span.best76 a {width:30px; height:32px; background-position:-350px -250px;}
+	.typeB6_list ul p.rank span.best77 a {width:30px; height:32px; background-position:-350px -300px;}
+	.typeB6_list ul p.rank span.best78 a {width:30px; height:32px; background-position:-350px -350px;}
+	.typeB6_list ul p.rank span.best79 a {width:30px; height:32px; background-position:-350px -400px;}
+	.typeB6_list ul p.rank span.best80 a {width:30px; height:32px; background-position:-350px -450px;}	
+	.typeB6_list ul p.rank span.best81 a {width:30px; height:32px; background-position:-400px 0;}
+	.typeB6_list ul p.rank span.best82 a {width:30px; height:32px; background-position:-400px -50px;}
+	.typeB6_list ul p.rank span.best83 a {width:30px; height:32px; background-position:-400px -100px;}
+	.typeB6_list ul p.rank span.best84 a {width:30px; height:32px; background-position:-400px -150px;}
+	.typeB6_list ul p.rank span.best85 a {width:30px; height:32px; background-position:-400px -200px;}
+	.typeB6_list ul p.rank span.best86 a {width:30px; height:32px; background-position:-400px -250px;}
+	.typeB6_list ul p.rank span.best87 a {width:30px; height:32px; background-position:-400px -300px;}
+	.typeB6_list ul p.rank span.best88 a {width:30px; height:32px; background-position:-400px -350px;}
+	.typeB6_list ul p.rank span.best89 a {width:30px; height:32px; background-position:-400px -400px;}
+	.typeB6_list ul p.rank span.best90 a {width:30px; height:32px; background-position:-400px -450px;}	
+	.typeB6_list ul p.rank span.best91 a {width:30px; height:32px; background-position:-450px 0;}
+	.typeB6_list ul p.rank span.best92 a {width:30px; height:32px; background-position:-450px -50px;}
+	.typeB6_list ul p.rank span.best93 a {width:30px; height:32px; background-position:-450px -100px;}
+	.typeB6_list ul p.rank span.best94 a {width:30px; height:32px; background-position:-450px -150px;}
+	.typeB6_list ul p.rank span.best95 a {width:30px; height:32px; background-position:-450px -200px;}
+	.typeB6_list ul p.rank span.best96 a {width:30px; height:32px; background-position:-450px -250px;}
+	.typeB6_list ul p.rank span.best97 a {width:30px; height:32px; background-position:-450px -300px;}
+	.typeB6_list ul p.rank span.best98 a {width:30px; height:32px; background-position:-450px -350px;}
+	.typeB6_list ul p.rank span.best99 a {width:30px; height:32px; background-position:-450px -400px;}
+	.typeB6_list ul p.rank span.best100 a {width:30px; height:32px; background-position:-450px -450px;}
+.typeB6_list ul p.album_pic { width: 68px; height: auto !important; }
+.typeB6_list ul a.album_pic { height: 102px !important; }
+.typeB6_list ul a.album_pic img { width: 66px; height: 100px; border:solid 1px #ececec; }
+.typeB6_list ul .album_title { color: #333; margin:8px 25px 0 18px; width: 78px; height:25px; overflow:hidden; text-align:center; }
+.typeB6_list ul .album_title a { width:100%; color: #333; }
+.typeB6_list ul .price { margin-top: 8px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB6_list ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+
+/* typeB7_list DVD 기획상품 */
+.typeB7_list {width:100%; overflow:hidden; position:relative;}
+.typeB7_list ul {width:100%; overflow:hidden; border-top:1px solid #cccccc; border-bottom:1px solid #737373; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB7_list.gif) 0 0 repeat-y;  }
+.typeB7_list ul em { color: #fe5705; }
+.typeB7_list ul li { font-size: 11px; display: block; padding:29px 0 0 35px; height:344px; float: left; width:216px; }
+.typeB7_list ul li p {text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB7_list ul .check { float: left; height: 24px; width: 24px; text-align: left; }
+.typeB7_list ul p.album_pic { width: 150px; height: auto !important; }
+.typeB7_list ul a.album_pic { height: 150px !important; }
+.typeB7_list ul a.album_pic img { width: 145px; height: 220px; border: solid 1px #ececec; }
+.typeB7_list ul .album_title {width: 150px; color: #333; overflow: hidden; margin:8px 0 1px 20px; }
+.typeB7_list ul .album_title a { color: #333;  }
+.typeB7_list ul .price { margin-top: 8px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB7_list ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+.typeB7_list ul .product-icon {margin-top:13px;}
+.typeB7_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB7_list div.pager a, .typeB7_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB7_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+/* typeB8_list DVD 상시특가 */
+.typeB8_list {width:100%; overflow:hidden; position:relative; padding:0;} 
+.typeB8_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeB8_list div.pager a, .typeB8_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeB8_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeB8_list ul {width:100%; overflow:hidden; border-bottom:1px solid #cccccc; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB5_list.gif) 0 0 repeat-y; }
+.typeB8_list ul em { color: #fe5705; }
+.typeB8_list ul li { font-size: 11px; display: block; padding:24px 0 0 18px; height:181px; float: left; width:172px; }
+.typeB8_list ul li p {text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB8_list ul .check { float: left; height: 24px; width: 24px; text-align: left; padding-left:20px;}
+.typeB8_list ul p.album_pic { width: 68px; height: auto !important; }
+.typeB8_list ul a.album_pic { height: 102px !important; }
+.typeB8_list ul a.album_pic img { width: 66px; height:100px; border:solid 1px #ececec; }
+.typeB8_list ul .album_title { color: #333; margin:8px 25px 4px 38px; width: 78px; height:25px; overflow:hidden; text-align:center; }
+.typeB8_list ul .album_title a { width:100%; color: #333; line-height:13px !important; }
+.typeB8_list ul .price { margin-top: 6px; height: 16px; text-align: center; font-weight: bold; color: #464646; }
+.typeB8_list ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+
+/* typeB_listm 검색 뮤직 */ 
+.typeB_listm {width:100%; overflow:hidden; position:relative;}
+.typeB_listm ul {width:100%; overflow:hidden;margin-top:-1px; border-bottom:1px solid #cccccc; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB_list_M.gif) 0 0 repeat-y;}
+.typeB_listm ul em { color: #fe5705; }
+.typeB_listm ul li { font-size: 11px; display: block; padding:20px 0 0 2px; height:273px; float: left; width:149px; position:relative; }
+.typeB_listm ul li p {text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB_listm ul .check { float: left; height: 24px; width: 21px; text-align: left; padding-top:1px; }
+.typeB_listm ul p.album_pic {float:left;  width: 122px; height: 127px !important; }
+.typeB_listm ul a.album_pic { height: 122px !important; }
+.typeB_listm ul a.album_pic img { width: 120px; height: 120px; border: solid 1px #ececec; }
+.typeB_listm ul p.category_title  { clear:both; font-size:11px; color:#f50a2b; margin-top:4px; margin:0 0 0 20px; width: 124px;}
+.typeB_listm ul .album_title { color: #333; padding:3px 0 0 0; margin:0 0 0 20px; width: 124px; height:28px; overflow:hidden; text-align:center; }
+.typeB_listm ul .album_title a { color: #333; width: 124px; font-weight:bold; line-height:14px !important; }
+.typeB_listm ul .album_artist { clear:both;}
+.typeB_listm ul .price { padding-left:6px; height:25px; text-align: center; font-weight: bold; color: #464646; }
+.typeB_listm ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+.typeB_listm ul .bt_m  {width:122px; height:22px; margin:0; text-align:center; margin-left:22px;}
+.typeB_listm ul p.zoom-cart-zzim {display:none; position: absolute; left:23px; top:111px; width:120px; height:30px; white-space: nowrap; background:#fbfbfc; border: solid 1px #ececec;} 
+.typeB_listm ul p.zoom-cart-zzim a {width:30px; display:inline-block; margin-top:6px; vertical-align:middle;}
+.typeB_listm ul p.zoom-cart-zzim a.zoom_s {width:40px; height:15px; display:inline-block; text-align:center; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) right 2px no-repeat;}
+.typeB_listm ul p.zoom-cart-zzim a.new {width:25px; height:15px; display:inline-block; text-align:center; padding-top:7px;}
+.typeB_listm ul p.zoom-cart-zzim a.listen {width:40px; height:15px; display:inline-block; text-align: center; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 3px 0 no-repeat;}
+.typeB_listm .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeB_listm .list_tool span {padding-right:5px;} 
+
+/* typeB_listd 검색 DVD */
+.typeB_listd {width:100%; overflow:hidden; position:relative;}
+.typeB_listd ul {width:755px; overflow:hidden; margin-top:-1px; border-bottom:1px solid #cccccc; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB_list_D.gif) 0 0 repeat-y; }
+.typeB_listd ul em { color: #fe5705; }
+.typeB_listd ul li { font-size: 11px; display: block; padding:20px 0 0 18px; height:255px; float: left; width:133px; position:relative; }
+.typeB_listd ul li p {text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB_listd ul .check { float: left; height: 24px; width: 24px; text-align: left; }
+.typeB_listd ul p.album_pic { width: 68px; height: auto !important; }
+.typeB_listd ul a.album_pic { height: 102px !important; }
+.typeB_listd ul a.album_pic img { width: 66px; height: 100px; border:solid 1px #ececec; }
+.typeB_listd ul p.category_title  { clear:both; font-size:11px; color:#f50a2b; margin:4px 0 0 20px; width: 78px;}
+.typeB_listd ul .album_title { color: #333; margin:4px 25px 0 18px; width: 78px; height:27px; overflow:hidden; text-align:center; }
+.typeB_listd ul .album_title a { width:100%; color: #333; font-weight:bold; line-height:14px !important; }
+.typeB_listd ul .price { width:96%; margin-top:4px; height: 25px; text-align: center; font-weight: bold; color: #464646; }
+.typeB_listd ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+.typeB_listd ul .bt_m {width:104px; height:22px; margin:0; text-align:center; margin-left:5px;}
+.typeB_listd ul p.zoom-cart-zzim {display:none; position: absolute; left:42px; top:101px; width:66px; height:20px; white-space: nowrap; background:#fbfbfc; border: solid 1px #ececec;} 
+.typeB_listd ul p.zoom-cart-zzim a {width:30px; display:inline-block; margin-top:2px; vertical-align:middle;}
+.typeB_listd ul p.zoom-cart-zzim a.zoom_s {width:30px; height:15px; display:inline-block; text-align:center; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) right 2px no-repeat;}
+.typeB_listd ul p.zoom-cart-zzim a.new {width:25px; height:15px; display:inline-block; text-align:center;} 
+.typeB_listd ul p.zoom-cart-zzim a.new img {padding-top:3px;}
+.typeB_listd .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeB_listd .list_tool span {padding-right:5px;}  
+
+/* typeB_lists 검색 음원 */ 
+.typeB_lists {width:100%; overflow:hidden; position:relative;}
+.typeB_lists ul {width:100%; overflow:hidden; margin-top:-1px; border-bottom:1px solid #cccccc; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_typeB_list_S.gif) 0 0 repeat-y;  }
+.typeB_lists ul em { color: #fe5705; }
+.typeB_lists ul li { font-size: 11px; display: block; padding:18px 0 0 2px; height:238px; float: left; width:149px; position:relative; }
+.typeB_lists ul li p {  text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.typeB_lists ul .check { float: left; height: 24px; width: 21px; text-align: left; padding-top:1px; }
+.typeB_lists ul p.album_pic {float:left;  width: 122px; height: 127px !important; }
+.typeB_lists ul a.album_pic { height: 122px !important; }
+.typeB_lists ul a.album_pic img { width: 120px; height: 120px; border: solid 1px #ececec; }
+.typeB_lists ul p.category_title  { clear:both; font-size:11px; color:#f50a2b; margin-top:4px; margin:0 0 0 20px; width: 124px;}
+.typeB_lists ul .album_artist { clear:both; margin-top: 8px; width:122px; height:14px; margin:0; text-align:center; margin-left:22px; }
+.typeB_lists ul .album_title { clear:both; color: #333; width:122px; height:28px; margin:0 0 4px 0; text-align:center; margin-left:22px; }
+.typeB_lists ul .album_title a { color: #333;  width: 85px; overflow: hidden; text-overflow: ellipsis; line-height:14px !important; }
+.typeB_lists ul .price { margin-top: 8px; height:24px; text-align: center; font-weight: bold; color: #464646; }
+.typeB_lists ul .dis_price { margin-top: 8px; height: 16px; text-align: center; font-weight:bold; color:#da2729;}
+.typeB_lists ul .bt_m {width:122px; height:22px; margin:0; text-align:center; margin-left:22px;}
+.typeB_lists ul p.zoom-cart-zzim {display:none; position: absolute; left:23px; top:109px; width:120px; height:30px; white-space: nowrap; background:#fbfbfc; border: solid 1px #ececec;} 
+.typeB_lists ul p.zoom-cart-zzim a {width:30px; display:inline-block; margin-top:9px; vertical-align:middle;}
+.typeB_lists ul p.zoom-cart-zzim a.new {width:25px; height:15px; display:inline-block; text-align:center;}
+.typeB_lists ul p.zoom-cart-zzim a.listen {width:45px; height:15px; display:inline-block; text-align: center; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 3px 1px no-repeat;}
+.typeB_lists .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeB_lists .list_tool span {padding-right:5px;} 
+
+
+/* //////////////////////////   type C  /////////////////////// */ 
+
+/* typeC_title */
+.typeC_title {width:100%; overflow:hidden; position:relative;}
+.typeC_title .list_tool {margin-bottom: 10px; width:100%; overflow:hidden; position:relative; clear:both;} 
+.typeC_title .list_tool span.title {float:left; padding-right:20px; font-size:16px; font-weight:bold; color:#252525; padding-left:10px;} 
+.typeC_title .list_tool span.btn {float:right; padding-right:5px;} 
+ 
+.typeC_title .list_tool02 {margin-top:30px; margin-bottom: 10px; width:100%; overflow:hidden; position:relative; clear:both;} 
+.typeC_title .list_tool02 span.title {float:left; padding-right:20px; font-size:16px; font-weight:bold; color:#252525; padding-left:10px;} 
+.typeC_title .list_tool02 span.seperate {float:left; padding-right:20px; font-size:16px; color:#d7d7d7;}
+.typeC_title .list_tool02 span.date {float:left; font-size:12px; font-weight:bold; color:#898989; padding-top:3px;}
+.typeC_title .list_tool02 span.text {float:left; font-size:11px; color:#898989; padding-top:3px; letter-spacing:-1px;}
+.typeC_title .list_tool02 span.btn {float:right; padding-right:5px;} 
+
+	/* 실시간차트 */
+	.typeC_title .list_bg {position:relative; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_list_option.gif") repeat-x 0 61px; padding-top:21px; height: 50px; float: left; width:100%; clear:both; vertical-align:top; }
+	.typeC_title .list_bg .list_tool_02 {padding-top: 10px; margin-bottom: 10px; width:100%; overflow:hidden; position:relative; clear:both; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_list_option.gif") repeat-x 0 30px;}  
+	.typeC_title .list_bg .list_tool_02 span.btn {float:right; padding-right:5px;} 
+	.typeC_title .list_bg .list_tool_02 .select_month { float: left; width: 300px; display: block; margin: 0 0px; }
+	.typeC_title .list_bg .list_tool_02 .select_month li { display: inline; }
+	.typeC_title .list_bg .list_tool_02 .select_month select { font-size: 11px;}
+	.typeC_title .list_bg .list_tool_02 .select_month select option { margin-right:15px; }
+
+.typeC_title .list_option {position:relative; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_list_option.gif") repeat-x 0 top; padding-top: 21px; height: 30px; float: left; width:100%; clear:both; vertical-align:top; } 
+.typeC_title .list_option .national {float: right; height: 30px; font-size: 11px; color: #464646; height: 14px;  }
+.typeC_title .list_option .national input {padding:0 2px; margin:0;}
+.typeC_title .list_option .national label {margin:0 8px 0 0;}
+.typeC_title .list_option .list_sort { float: left; line-height: 16px;}
+.typeC_title .list_option .list_sort span {width:55px; border-right: 1px solid #ccc; padding: 0px 15px; float: left; height: 14px; overflow: hidden; }
+.typeC_title .list_option .list_sort span.one {width:85px; border-right: none; }
+.typeC_title .list_option .list_sort span.end {border-right: none; }
+.typeC_title .list_option .list_sort a { width: 97px; height: 14px; overflow:hidden; float: left; }
+.typeC_title .list_option .list_sort img { margin-top: -14px; }
+.typeC_title .list_option .list_sort .on img { margin-top: 0px; }
+.typeC_title .list_option .list_sort a.dn img {width:18px; height:18px; position:absolute; top:20px; left:76px; margin-top: 0px; }
+.typeC_title .list_option .list_sort a.up img {width:18px; height:18px; position:absolute; top:20px; left:93px; margin-top: 0px; }
+.typeC_title .list_option .list_type { float: right; margin-left:30px; }
+.typeC_title .list_option .list_type a { margin-right: 10px; height: 14px; width: 57px; float: left; overflow: hidden; }
+.typeC_title .list_option .list_type .on img { margin-top: -16px; }
+.typeC_title .list_option .list_type select { width:58px; font-size: 11px; }
+.typeC_title .list_option .head_title { font-size: 11px; font-weight: bold; padding:2px 0 0 10px; color: #252525; float: left; }
+.typeC_title .list_option .sort_title {float: left; padding:2px 0 0 10px; line-height:18px; font-size:11px; color:#898989; } 
+.typeC_title .list_option .sort_title .on {font-weight:bold; color:#252525;}
+.typeC_title .list_option .sort_title .seperate { color: #d7d7d7; margin:0 10px; }
+
+.typeC_title .list_option .list_tool {width:250px; height:22px; position: absolute; top:20px; left:275px; }  
+.typeC_title .list_option .list_tool span.btn {float:left; padding-right:5px;} 
+.typeC_title .list_option .list_tool span.btn a {width:57px; height:16px; display:inline-block; padding-top:4px; background:#f9f9f9; border:1px solid #d0d0d0; font-size:11px; font-weight:bold; text-align:center; text-decoration:none; color:#252525;}
+.typeC_title .list_option .list_tool span.year-moth { text-align:left; font-size:16px; font-weight:bold; color:#252525; width:206px; display:inline-block;}
+.typeC_title .list_option .list_tool span.year-moth span { width:150px; display:inline-block; padding: 0 10px; position:absolute; top:0px; left:18px; text-align:center;} 
+.typeC_title .list_option .list_tool span.year-moth a.btn_right {position:absolute; top:0px; left:194px; text-align:center;} 
+.typeC_title .list_option .list_tool span.year-moth span.date { width:15px; position:absolute; top:2px; left:210px;}
+.typeC_title .list_option .btn_box {width:738px; height:31px; padding:9px 0 0 15px; margin-bottom:20px; background:#f5f5f5; border:1px solid #e4e4e4;}
+.typeC_title .list_option .btn_box a {padding:0 1px;}
+
+/* 품절상품 제외 옵션, 소팅 개수 지정 셀렉트 박스 추가 */
+.pager {width:100%; height:20px;}
+.pager .list_option { position:absolute; top:9px; right:0px;  width:auto; height:auto; border:0; background:none; }
+.pager .list_option .list_type1 { float: right; margin-left:10px; width:auto; height:auto; padding:0;}
+.pager .list_option .list_type1 a { margin-right: 10px; height: 14px; width: 57px; float: left; overflow: hidden; } 
+.pager .list_option .list_type1 select { width:100px; font-size: 11px; }
+.pager .list_option .list_type2 { float: right; margin-left:10px;  width:auto; height:auto;  padding:0;}
+.pager .list_option .list_type2 a { margin-right: 10px; height: 14px; width: 57px; float: left; overflow: hidden; } 
+.pager .list_option .list_type2 select { width:58px; font-size: 11px; }
+
+ 
+/* typeC_list */
+.typeC_list {width:100%; overflow:hidden; position:relative;}
+.typeC_list .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeC_list .list_tool span {padding-right:5px;} 
+.typeC_list div.pager_top {clear:both; position:relative; margin:0 !important; padding:0 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeC_list div.pager_top a, .typeC_list div.pager_top strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeC_list div.pager_top img { margin: 0 -6px; vertical-align: middle; } 
+.typeC_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeC_list div.pager a, .typeC_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeC_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeC_list table {width:100%; border-top:1px solid #cccccc; border-bottom:1px solid #cacaca;}
+.typeC_list table tbody td {border-top:1px solid #e4e4e4; padding:5px 0 5px; font-size:11px; line-height:14px; text-align:center;}
+.typeC_list table tbody td.check {padding-left:8px;}
+.typeC_list table tbody td.product .album_pic img {margin:10px 0 8px; border:1px solid #ececec;} 
+.typeC_list table tbody td.product .album_zoom {width:85px; overflow:hidden; display:inline-block; padding-bottom:4px;}
+.typeC_list table tbody td.product .album_zoom a.zoom_s {width:25px; height:15px; display:inline-block; text-align:left; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 21px 2px no-repeat;}
+.typeC_list table tbody td.product .album_zoom a.listen {width:24px; height:15px; display:inline-block; text-align:right; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 3px 0 no-repeat;}
+.typeC_list table tbody td.infor {padding:19px 0 0 0; text-align:left; vertical-align:top;}
+.typeC_list table tbody td.infor .category_title {font-size:11px; color:#f50a2b; margin-bottom:6px;}
+.typeC_list table tbody td.infor .album_title {font-weight: bold; color: #333; margin-bottom:4px; padding-right:20px;}
+.typeC_list table tbody td.infor .album_title a { color: #333;  }
+.typeC_list table tbody td.infor .album_artist {margin-bottom: 4px; padding-right:10px;}
+.typeC_list table tbody td.infor .seperate {color: #d7d7d7;}
+.typeC_list table tbody td.infor .price {margin-top:20px; float: left; width: 500px; height: 16px; }
+.typeC_list table tbody td.infor .price .ori_price {color:#363636; text-decoration:line-through; }
+.typeC_list table tbody td.infor .price .dis_price {font-weight:bold; color:#da2729; }
+.typeC_list table tbody td.infor .price .save_price {color:#363636; padding-right:10px;}
+.typeC_list table tbody td.infor .price .text {color:#898989; padding-left:9px;}
+.typeC_list table tbody td.infor em {color:#FE5705;}
+.typeC_list table tbody td.down {padding:18px 14px 0 0; text-align:right; vertical-align:top;} 
+.typeC_list table tbody td.down p {float:right; position:relative; width:97px; height:25px;}
+.typeC_list table tbody td.down p input {float:left; margin:2px 0 0 0; display:inline;}
+.typeC_list table tbody td.down p .count {float:right; width:60px; display:inline-block;}
+.typeC_list table tbody td.down p .count img {float:left; vertical-align:middle; padding:3px 5px 0 0;}
+.typeC_list table tbody td.down p .count .album_count {width:25px; float:right; margin:0 2px 0 0; padding-right:2px; text-align: right; border:1px solid #cacaca; height: 16px; }
+.typeC_list table tbody td.down .bt_m {margin:0 0 5px 0; }
+.typeC_list table tbody td.icon { }
+.typeC_list table tbody td.icon img {padding:0 2px;}
+.typeC_list table tbody td.review {width:100%; height:30px; position:relative; padding:0; text-align:left; border:0px solid #ccc; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/dot_line_list.gif") repeat-x 0 top;}
+.typeC_list table tbody td.review .album_review {width:100%; height:30px; position:relative; }
+.typeC_list table tbody td.review .album_review .left {position:absolute; top:10px; left:20px;}
+.typeC_list table tbody td.review .album_review .point {position:absolute; top:10px; right:135px;}
+.typeC_list table tbody td.review .album_review .point img { margin-bottom: 2px; margin-left: 2px; }
+.typeC_list table tbody td.review .album_review .seperate {margin-left:10px; color: #d7d7d7;}
+.typeC_list table tbody td.review .album_review .text {position:absolute; top:10px; right:10px; width:110px;} 
+.typeC_list table tbody td.review .album_review .left_sh {position:absolute; top:10px; left:2px; color:#898989;}
+.typeC_list table tbody td.review .album_review em {color:#FE5705;}
+.typeC_list table tbody td.no {padding:46px 0 44px 0;} 
+
+/* typeC2_list 베스트 */
+.typeC2_list {width:100%; overflow:hidden; position:relative;}
+.typeC2_list .list_tool {margin-top:10px; text-align: right; padding-bottom:8px; width:100%; border-bottom:1px solid #737373;} 
+.typeC2_list .list_tool span {padding-right:5px;} 
+.typeC2_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #A31112 !important;}
+.typeC2_list div.pager a, .typeC2_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeC2_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeC2_list table {width:100%; border-top:1px solid #cccccc; border-bottom:1px solid #cacaca;}
+.typeC2_list table tbody td {border-top:1px solid #e4e4e4; padding:5px 0 5px; font-size:11px; line-height:14px; text-align:center;}
+.typeC2_list table tbody td.check {padding-left:8px;}
+.typeC2_list table tbody td.rank {padding-top:15px; vertical-align:top; text-align:center;}
+.typeC2_list table tbody td.rank a {width:50px; height:50px; display:block; overflow:hidden; text-indent:-5000px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/number_best_all.gif) 0 0 no-repeat;}
+	.typeC2_list table tbody td.rank p.best1 a {width:50px; height:50px; background-position:0 0;}
+	.typeC2_list table tbody td.rank p.best2 a {width:50px; height:50px; background-position:0 -50px;}
+	.typeC2_list table tbody td.rank p.best3 a {width:50px; height:50px; background-position:0 -100px;}
+	.typeC2_list table tbody td.rank p.best4 a {width:50px; height:50px; background-position:0 -150px;}
+	.typeC2_list table tbody td.rank p.best5 a {width:50px; height:50px; background-position:0 -200px;}
+	.typeC2_list table tbody td.rank p.best6 a {width:50px; height:50px; background-position:0 -250px;}
+	.typeC2_list table tbody td.rank p.best7 a {width:50px; height:50px; background-position:0 -300px;}
+	.typeC2_list table tbody td.rank p.best8 a {width:50px; height:50px; background-position:0 -350px;}
+	.typeC2_list table tbody td.rank p.best9 a {width:50px; height:50px; background-position:0 -400px;}
+	.typeC2_list table tbody td.rank p.best10 a {width:50px; height:50px; background-position:0 -450px;}	
+	.typeC2_list table tbody td.rank p.best11 a {width:50px; height:50px; background-position:-50px 0;}
+	.typeC2_list table tbody td.rank p.best12 a {width:50px; height:50px; background-position:-50px -50px;}
+	.typeC2_list table tbody td.rank p.best13 a {width:50px; height:50px; background-position:-50px -100px;}
+	.typeC2_list table tbody td.rank p.best14 a {width:50px; height:50px; background-position:-50px -150px;}
+	.typeC2_list table tbody td.rank p.best15 a {width:50px; height:50px; background-position:-50px -200px;}
+	.typeC2_list table tbody td.rank p.best16 a {width:50px; height:50px; background-position:-50px -250px;}
+	.typeC2_list table tbody td.rank p.best17 a {width:50px; height:50px; background-position:-50px -300px;}
+	.typeC2_list table tbody td.rank p.best18 a {width:50px; height:50px; background-position:-50px -350px;}
+	.typeC2_list table tbody td.rank p.best19 a {width:50px; height:50px; background-position:-50px -400px;}
+	.typeC2_list table tbody td.rank p.best20 a {width:50px; height:50px; background-position:-50px -450px;}	
+	.typeC2_list table tbody td.rank p.best21 a {width:50px; height:50px; background-position:-100px 0;}
+	.typeC2_list table tbody td.rank p.best22 a {width:50px; height:50px; background-position:-100px -50px;}
+	.typeC2_list table tbody td.rank p.best23 a {width:50px; height:50px; background-position:-100px -100px;}
+	.typeC2_list table tbody td.rank p.best24 a {width:50px; height:50px; background-position:-100px -150px;}
+	.typeC2_list table tbody td.rank p.best25 a {width:50px; height:50px; background-position:-100px -200px;}
+	.typeC2_list table tbody td.rank p.best26 a {width:50px; height:50px; background-position:-100px -250px;}
+	.typeC2_list table tbody td.rank p.best27 a {width:50px; height:50px; background-position:-100px -300px;}
+	.typeC2_list table tbody td.rank p.best28 a {width:50px; height:50px; background-position:-100px -350px;}
+	.typeC2_list table tbody td.rank p.best29 a {width:50px; height:50px; background-position:-100px -400px;}
+	.typeC2_list table tbody td.rank p.best30 a {width:50px; height:50px; background-position:-100px -450px;}
+	.typeC2_list table tbody td.rank p.best31 a {width:50px; height:50px; background-position:-150px 0;}
+	.typeC2_list table tbody td.rank p.best32 a {width:50px; height:50px; background-position:-150px -50px;}
+	.typeC2_list table tbody td.rank p.best33 a {width:50px; height:50px; background-position:-150px -100px;}
+	.typeC2_list table tbody td.rank p.best34 a {width:50px; height:50px; background-position:-150px -150px;}
+	.typeC2_list table tbody td.rank p.best35 a {width:50px; height:50px; background-position:-150px -200px;}
+	.typeC2_list table tbody td.rank p.best36 a {width:50px; height:50px; background-position:-150px -250px;}
+	.typeC2_list table tbody td.rank p.best37 a {width:50px; height:50px; background-position:-150px -300px;}
+	.typeC2_list table tbody td.rank p.best38 a {width:50px; height:50px; background-position:-150px -350px;}
+	.typeC2_list table tbody td.rank p.best39 a {width:50px; height:50px; background-position:-150px -400px;}
+	.typeC2_list table tbody td.rank p.best40 a {width:50px; height:50px; background-position:-150px -450px;}
+	.typeC2_list table tbody td.rank p.best41 a {width:50px; height:50px; background-position:-200px 0;}
+	.typeC2_list table tbody td.rank p.best42 a {width:50px; height:50px; background-position:-200px -50px;}
+	.typeC2_list table tbody td.rank p.best43 a {width:50px; height:50px; background-position:-200px -100px;}
+	.typeC2_list table tbody td.rank p.best44 a {width:50px; height:50px; background-position:-200px -150px;}
+	.typeC2_list table tbody td.rank p.best45 a {width:50px; height:50px; background-position:-200px -200px;}
+	.typeC2_list table tbody td.rank p.best46 a {width:50px; height:50px; background-position:-200px -250px;}
+	.typeC2_list table tbody td.rank p.best47 a {width:50px; height:50px; background-position:-200px -300px;}
+	.typeC2_list table tbody td.rank p.best48 a {width:50px; height:50px; background-position:-200px -350px;}
+	.typeC2_list table tbody td.rank p.best49 a {width:50px; height:50px; background-position:-200px -400px;}
+	.typeC2_list table tbody td.rank p.best50 a {width:50px; height:50px; background-position:-200px -450px;}	
+	.typeC2_list table tbody td.rank p.best51 a {width:50px; height:50px; background-position:-250px 0;}
+	.typeC2_list table tbody td.rank p.best52 a {width:50px; height:50px; background-position:-250px -50px;}
+	.typeC2_list table tbody td.rank p.best53 a {width:50px; height:50px; background-position:-250px -100px;}
+	.typeC2_list table tbody td.rank p.best54 a {width:50px; height:50px; background-position:-250px -150px;}
+	.typeC2_list table tbody td.rank p.best55 a {width:50px; height:50px; background-position:-250px -200px;}
+	.typeC2_list table tbody td.rank p.best56 a {width:50px; height:50px; background-position:-250px -250px;}
+	.typeC2_list table tbody td.rank p.best57 a {width:50px; height:50px; background-position:-250px -300px;}
+	.typeC2_list table tbody td.rank p.best58 a {width:50px; height:50px; background-position:-250px -350px;}
+	.typeC2_list table tbody td.rank p.best59 a {width:50px; height:50px; background-position:-250px -400px;}
+	.typeC2_list table tbody td.rank p.best60 a {width:50px; height:50px; background-position:-250px -450px;}	
+	.typeC2_list table tbody td.rank p.best61 a {width:50px; height:50px; background-position:-300px 0;}
+	.typeC2_list table tbody td.rank p.best62 a {width:50px; height:50px; background-position:-300px -50px;}
+	.typeC2_list table tbody td.rank p.best63 a {width:50px; height:50px; background-position:-300px -100px;}
+	.typeC2_list table tbody td.rank p.best64 a {width:50px; height:50px; background-position:-300px -150px;}
+	.typeC2_list table tbody td.rank p.best65 a {width:50px; height:50px; background-position:-300px -200px;}
+	.typeC2_list table tbody td.rank p.best66 a {width:50px; height:50px; background-position:-300px -250px;}
+	.typeC2_list table tbody td.rank p.best67 a {width:50px; height:50px; background-position:-300px -300px;}
+	.typeC2_list table tbody td.rank p.best68 a {width:50px; height:50px; background-position:-300px -350px;}
+	.typeC2_list table tbody td.rank p.best69 a {width:50px; height:50px; background-position:-300px -400px;}
+	.typeC2_list table tbody td.rank p.best70 a {width:50px; height:50px; background-position:-300px -450px;}	
+	.typeC2_list table tbody td.rank p.best71 a {width:50px; height:50px; background-position:-350px 0;}
+	.typeC2_list table tbody td.rank p.best72 a {width:50px; height:50px; background-position:-350px -50px;}
+	.typeC2_list table tbody td.rank p.best73 a {width:50px; height:50px; background-position:-350px -100px;}
+	.typeC2_list table tbody td.rank p.best74 a {width:50px; height:50px; background-position:-350px -150px;}
+	.typeC2_list table tbody td.rank p.best75 a {width:50px; height:50px; background-position:-350px -200px;}
+	.typeC2_list table tbody td.rank p.best76 a {width:50px; height:50px; background-position:-350px -250px;}
+	.typeC2_list table tbody td.rank p.best77 a {width:50px; height:50px; background-position:-350px -300px;}
+	.typeC2_list table tbody td.rank p.best78 a {width:50px; height:50px; background-position:-350px -350px;}
+	.typeC2_list table tbody td.rank p.best79 a {width:50px; height:50px; background-position:-350px -400px;}
+	.typeC2_list table tbody td.rank p.best80 a {width:50px; height:50px; background-position:-350px -450px;}	
+	.typeC2_list table tbody td.rank p.best81 a {width:50px; height:50px; background-position:-400px 0;}
+	.typeC2_list table tbody td.rank p.best82 a {width:50px; height:50px; background-position:-400px -50px;}
+	.typeC2_list table tbody td.rank p.best83 a {width:50px; height:50px; background-position:-400px -100px;}
+	.typeC2_list table tbody td.rank p.best84 a {width:50px; height:50px; background-position:-400px -150px;}
+	.typeC2_list table tbody td.rank p.best85 a {width:50px; height:50px; background-position:-400px -200px;}
+	.typeC2_list table tbody td.rank p.best86 a {width:50px; height:50px; background-position:-400px -250px;}
+	.typeC2_list table tbody td.rank p.best87 a {width:50px; height:50px; background-position:-400px -300px;}
+	.typeC2_list table tbody td.rank p.best88 a {width:50px; height:50px; background-position:-400px -350px;}
+	.typeC2_list table tbody td.rank p.best89 a {width:50px; height:50px; background-position:-400px -400px;}
+	.typeC2_list table tbody td.rank p.best90 a {width:50px; height:50px; background-position:-400px -450px;}	
+	.typeC2_list table tbody td.rank p.best91 a {width:50px; height:50px; background-position:-450px 0;}
+	.typeC2_list table tbody td.rank p.best92 a {width:50px; height:50px; background-position:-450px -50px;}
+	.typeC2_list table tbody td.rank p.best93 a {width:50px; height:50px; background-position:-450px -100px;}
+	.typeC2_list table tbody td.rank p.best94 a {width:50px; height:50px; background-position:-450px -150px;}
+	.typeC2_list table tbody td.rank p.best95 a {width:50px; height:50px; background-position:-450px -200px;}
+	.typeC2_list table tbody td.rank p.best96 a {width:50px; height:50px; background-position:-450px -250px;}
+	.typeC2_list table tbody td.rank p.best97 a {width:50px; height:50px; background-position:-450px -300px;}
+	.typeC2_list table tbody td.rank p.best98 a {width:50px; height:50px; background-position:-450px -350px;}
+	.typeC2_list table tbody td.rank p.best99 a {width:50px; height:50px; background-position:-450px -400px;}
+	.typeC2_list table tbody td.rank p.best100 a {width:50px; height:50px; background-position:-450px -450px;}	 
+.typeC2_list table tbody td.product .album_pic img {margin:10px 0 8px; border:1px solid #ececec;} 
+.typeC2_list table tbody td.product .album_zoom {width:85px; overflow:hidden; display:inline-block; padding-bottom:4px;}
+.typeC2_list table tbody td.product .album_zoom a.zoom_s {width:25px; height:15px; display:inline-block; text-align:left; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 21px 2px no-repeat;}
+.typeC2_list table tbody td.product .album_zoom a.listen {width:24px; height:15px; display:inline-block; text-align:right; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 3px 0 no-repeat;}
+.typeC2_list table tbody td.infor {padding:19px 0 0 15px; text-align:left; vertical-align:top;}
+.typeC2_list table tbody td.infor .category_title {font-size:11px; color:#f50a2b; margin-bottom:6px;}
+.typeC2_list table tbody td.infor .album_title {font-weight: bold; color: #333; margin-bottom:4px; padding-right:20px;}
+.typeC2_list table tbody td.infor .album_title a { color: #333;  }
+.typeC2_list table tbody td.infor .album_artist {margin-bottom: 4px;}
+.typeC2_list table tbody td.infor .seperate {color: #d7d7d7;}
+.typeC2_list table tbody td.infor .price {margin-top:20px; float: left; width: 450px; height: 16px; }
+.typeC2_list table tbody td.infor .price .ori_price {color:#363636; text-decoration:line-through; }
+.typeC2_list table tbody td.infor .price .dis_price {font-weight:bold; color:#da2729; }
+.typeC2_list table tbody td.infor .price .save_price {color:#363636; padding-right:10px;}
+.typeC2_list table tbody td.infor em {color:#FE5705;}
+.typeC2_list table tbody td.down {padding:18px 14px 0 0; text-align:right; vertical-align:top;} 
+.typeC2_list table tbody td.down p {float:right; position:relative; width:97px; height:25px;}
+.typeC2_list table tbody td.down p input {float:left; margin:2px 0 0 0; display:inline;}
+.typeC2_list table tbody td.down p .count {float:right; width:60px; display:inline-block;}
+.typeC2_list table tbody td.down p .count img {float:left; vertical-align:middle; padding:3px 5px 0 0;}
+.typeC2_list table tbody td.down p .count .album_count {width:25px; float:right; margin:0 2px 0 0; padding-right:2px; text-align: right; border:1px solid #cacaca; height: 16px; }
+.typeC2_list table tbody td.down .bt_m {margin:0 0 5px 0; }
+.typeC2_list table tbody td.review {width:100%; height:30px; position:relative; padding:0; text-align:left; border:0px solid #ccc; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/dot_line_list.gif") repeat-x 0 top;}
+.typeC2_list table tbody td.review .album_review {width:100%; height:30px; position:relative; }
+.typeC2_list table tbody td.review .album_review .left {position:absolute; top:10px; left:20px;}
+.typeC2_list table tbody td.review .album_review .point {position:absolute; top:10px; right:140px;}
+.typeC2_list table tbody td.review .album_review .point img { margin-bottom: 2px; margin-left: 2px; }
+.typeC2_list table tbody td.review .album_review .seperate {margin-left:10px; color: #d7d7d7;}
+.typeC2_list table tbody td.review .album_review .text {position:absolute; top:10px; right:10px; width:120px;}
+.typeC2_list table tbody td.review .album_review em {color:#f58220;}
+.typeC2_list table tbody td.no {padding:46px 0 44px 0;} 
+  
+  
+/* //////////////////////////   type D  /////////////////////// */ 
+  
+/* typeD_list 레드 */
+.typeD_list_r {width:100%; overflow:hidden; position:relative;} 
+.typeD_list_r div.pager {clear:both; position:relative; margin:-1px 0 !important; padding:15px 0 8px !important; text-align: center; border-top:1px solid #a31112 !important;}
+.typeD_list_r div.pager a, .typeD_list_r div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeD_list_r div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeD_list_r table {width:100%; border-top:2px solid #a31112; border-bottom:1px solid #a31112;}
+.typeD_list_r table tbody td.one {border-bottom:1px solid #a31112; padding:15px 0 10px; font-size:11px; line-height:14px; text-align:center;} 
+.typeD_list_r table tbody td.one ul {width:100%; overflow:hidden; position:relative;}
+.typeD_list_r table tbody td.one ul li.product {width:290px; height:150px; float:left; text-align:center;}
+.typeD_list_r table tbody td.one ul li.product img {width:250px; height:140px;}  
+.typeD_list_r table tbody td.one ul li.infor {width:450px; height:95px; float:left; padding-right:10px;} 
+.typeD_list_r table tbody td.one ul li.infor .album_title {font-weight: bold; color: #f50a2b; padding:4px 0;}
+.typeD_list_r table tbody td.one ul li.infor .album_title a {color: #f50a2b;}
+.typeD_list_r table tbody td.one ul li.infor .album_artist {margin-bottom: 4px; line-height:18px;}  
+.typeD_list_r table tbody td.one ul li.infor .track { position:absolute; right:10px; bottom:0; color:#707070; width:auto; height: 16px; } 
+.typeD_list_r table tbody td.one ul li.infor .track .seperate {color:#d7d7d7; padding:0 4px;}
+.typeD_list_r table tbody td.one ul li.infor .track em {color:#f50a2b;} 
+.typeD_list_r table tbody td {border-bottom:1px solid #e4e4e4; padding:15px 0 10px; font-size:11px; line-height:14px; text-align:center;} 
+.typeD_list_r table tbody td ul {width:100%; overflow:hidden; position:relative;}
+.typeD_list_r table tbody td ul li.product {width:200px; height:95px; float:left; text-align:center;}
+.typeD_list_r table tbody td ul li.product img {width:160px; height:89px;}  
+.typeD_list_r table tbody td ul li.infor {width:540px; height:95px; float:left; padding-right:10px;} 
+.typeD_list_r table tbody td ul li.infor .album_title {font-weight: bold; color: #333; padding:4px 0;}
+.typeD_list_r table tbody td ul li.infor .album_title a {color: #333;}
+.typeD_list_r table tbody td ul li.infor .album_artist {margin-bottom: 4px; line-height:18px; height:50px; overflow:hidden;}  
+.typeD_list_r table tbody td ul li.infor .track { position:absolute; right:10px; bottom:0; color:#707070; width:auto; height: 16px; } 
+.typeD_list_r table tbody td ul li.infor .track .seperate {color:#d7d7d7; padding:0 4px;}
+.typeD_list_r table tbody td ul li.infor .track em {color:#f50a2b;} 
+.typeD_list_r table tbody td.no {padding:50px 0 48px 0;} 
+
+/* typeD_list 그린 */
+.typeD_list_g {width:100%; overflow:hidden; position:relative;} 
+.typeD_list_g div.pager {clear:both; position:relative; margin:-1px 0 !important; padding:15px 0 8px !important; text-align: center; border-top:1px solid #8db313 !important;}
+.typeD_list_g div.pager a, .typeD_list_g div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeD_list_g div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+.typeD_list_g table {width:100%; border-top:2px solid #8db313; border-bottom:1px solid #8db313;}
+.typeD_list_g table tbody td.one {border-bottom:1px solid #8db313; padding:15px 0 10px; font-size:11px; line-height:14px; text-align:center;} 
+.typeD_list_g table tbody td.one ul {width:100%; overflow:hidden; position:relative;}
+.typeD_list_g table tbody td.one ul li.product {width:290px; height:150px; float:left; text-align:center;}
+.typeD_list_g table tbody td.one ul li.product img {width:250px; height:140px;}  
+.typeD_list_g table tbody td.one ul li.infor {width:450px; height:95px; float:left; padding-right:10px;} 
+.typeD_list_g table tbody td.one ul li.infor .album_title {font-weight: bold; color: #8db313; padding:4px 0;}
+.typeD_list_g table tbody td.one ul li.infor .album_title a {color: #8db313;}
+.typeD_list_g table tbody td.one ul li.infor .album_artist {margin-bottom: 4px; line-height:18px;}  
+.typeD_list_g table tbody td.one ul li.infor .track { position:absolute; right:10px; bottom:0; color:#707070; width:auto; height: 16px; } 
+.typeD_list_g table tbody td.one ul li.infor .track .seperate {color:#d7d7d7; padding:0 4px;}
+.typeD_list_g table tbody td.one ul li.infor .track em {color:#8db313;} 
+.typeD_list_g table tbody td {border-bottom:1px solid #e4e4e4; padding:15px 0 10px; font-size:11px; line-height:14px; text-align:center;} 
+.typeD_list_g table tbody td ul {width:100%; overflow:hidden; position:relative;}
+.typeD_list_g table tbody td ul li.product {width:200px; height:95px; float:left; text-align:center;}
+.typeD_list_g table tbody td ul li.product img {width:160px; height:89px;}  
+.typeD_list_g table tbody td ul li.infor {width:540px; height:95px; float:left; padding-right:10px;} 
+.typeD_list_g table tbody td ul li.infor .album_title {font-weight: bold; color: #333; padding:4px 0;}
+.typeD_list_g table tbody td ul li.infor .album_title a {color: #333;}
+.typeD_list_g table tbody td ul li.infor .album_artist {margin-bottom: 4px; line-height:18px; height:50px; overflow:hidden;}   
+.typeD_list_g table tbody td ul li.infor .track { position:absolute; right:10px; bottom:0; color:#707070; width:auto; height: 16px; } 
+.typeD_list_g table tbody td ul li.infor .track .seperate {color:#d7d7d7; padding:0 4px;}
+.typeD_list_g table tbody td ul li.infor .track em {color:#8db313;} 
+.typeD_list_g table tbody td.no {padding:50px 0 48px 0;} 
+
+/* typeD2_list */
+.typeD2_list {width:100%; overflow:hidden; position:relative;}
+.typeD2_list .list_tool {margin-top:10px; text-align: right; height:50px; width:100%;} 
+.typeD2_list .list_tool span {padding-right:5px;} 
+
+.typeD2_list table {width:100%; border-bottom:1px solid #afafaf; }
+.typeD2_list table tbody td {height:200px; vertical-align:top;}
+.typeD2_list table tbody td.check {padding-left:2px; }
+.typeD2_list table tbody td ul {width:100%; overflow:hidden; position:relative;}
+.typeD2_list table tbody td ul li.product {width:720px; height:160px;}
+.typeD2_list table tbody td ul li.product img {width:720px; height:150px;}  
+.typeD2_list table tbody td ul li.btn {width:720px; height:25px; text-align:right;}  
+.typeD2_list table tbody td p.no {border-top:1px solid #afafaf; padding-top:95px; text-align:center;} 
+
+
+/* //////////////////////////   type E  /////////////////////// */ 
+
+.typeE_calendar {padding:5px 0 45px 0; }
+.typeE_calendar p.year-moth { padding: 0 0 20px; text-align: center; }
+.typeE_calendar p.year-moth span { padding: 0 20px; } 
+.typeE_calendar div.calendar-list { width: 755px; }
+.typeE_calendar div.calendar-list table { width: 100%; }
+.typeE_calendar div.calendar-list table caption { height: 0; font-size: 0; line-height: 0; visibility: hidden; }
+.typeE_calendar div.calendar-list table thead tr th { width: 106px; height: 27px; border: 1px solid #eaeaea; }
+.typeE_calendar div.calendar-list table tbody tr td {border: 1px solid #eaeaea; height:75px; vertical-align:top;}
+.typeE_calendar div.calendar-list table tbody tr td p.date { padding: 5px 10px 8px 0; font-size: 0.9em; text-align: right; }
+.typeE_calendar div.calendar-list table tbody tr td.sun p.date { color: #f26d7d; }
+.typeE_calendar div.calendar-list table tbody tr td p.photo {text-align: left; padding-left:30px; } 
+.typeE_calendar div.calendar-list table tbody tr td p.button { padding: 0 0 7px; text-align: center; }
+
+
+
+/* //////////////////////////   type F  /////////////////////// */ 
+
+/* typeF2_title */
+.typeF_title {width:auto; overflow:hidden; position:relative; padding:8px 0 6px 0; margin:-18px 0 0 0; border-bottom:1px solid #c4c4c4; color:#555555; vertical-align:middle; }
+.typeF_title span.left {width:720px; padding-left:20px; display:inline-block; line-height:18px; }
+.typeF_title span.left a.on {font-weight:bold; text-decoration:none; color:#333;}
+.typeF_title span.left a.off {font-weight:normal; text-decoration:none;}
+.typeF_title span.left em {color:#cbcbcb; margin:0 8px;} 
+
+.typeF_infor {width:100%; overflow:hidden; margin-bottom:40px;}
+.typeF_infor ul {width:100%; overflow:hidden;padding:25px 0 25px 25px; border-top:1px solid #dfdfdf; border-bottom:1px solid #dfdfdf; position:relative;}
+.typeF_infor ul li {float:left;}
+.typeF_infor ul li.img {float:left; width:155px;}
+.typeF_infor ul li .title {font-size:14px; font-weight:bold; color:#363636; padding-bottom:16px;}
+.typeF_infor ul li .text {font-size:11px; line-height:18px; color:#898989; padding-bottom:16px; width:500px;}
+.typeF_infor ul li a {margin-right:3px;}
+
+/* typeF_list */ 
+.typeF_rollinglist {width:100%; overflow:hidden; position:relative; border-bottom:1px solid #c4c4c4; margin-bottom:20px;} 
+.typeF_rollinglist ul {}
+.typeF_rollinglist ul em { color: #fe5705; } 
+.typeF_rollinglist ul li {font-size: 11px; display: block; padding:30px 0 25px 0; overflow:hidden; position:relative; float: left; width:141px; }
+.typeF_rollinglist ul li p {color: #898989; text-align: center; display: block; overflow: hidden; padding:0; }
+.typeF_rollinglist ul p.album_pic { padding-left:5px; width: 122px; height: auto !important; }
+.typeF_rollinglist ul a.album_pic { height: 122px !important; }
+.typeF_rollinglist ul a.album_pic img { width: 120px; height: 120px; border: solid 1px #ececec; }
+.typeF_rollinglist ul .album_title { clear:both; color: #333; padding-right:10px;}
+.typeF_rollinglist ul .album_title a { color: #333; white-space: nowrap; width: 85px; overflow: hidden; text-overflow: ellipsis; }  
+.typeF_rollinglist ul .album_artist {padding-top: 8px; padding-right:10px;}
+.typeF_rollinglist .btnleft {font-size: 11px; display: block;  overflow:hidden; position:absolute; width:15px; top:80px; left:10px; }
+.typeF_rollinglist .btnright {font-size: 11px; display: block;  overflow:hidden; position:absolute; width:15px; top:80px; right:5px; }
+
+.typeF_list {width:100%; overflow:hidden; position:relative;} 	
+.typeF_list .btn_box {width:738px; height:20px; padding:0; margin:10px 0;}
+.typeF_list .btn_box a {padding:0 1px;}
+.typeF_list table {width:100%; border-bottom:1px solid #999999; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/bg_sound_th.gif") 0 0 repeat-x;}
+.typeF_list table thead th {height:31px; padding:0 0 0; color:#fff; font-weight:bold; font-size:11px; border:0; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/popup/mp3rk_thline.gif") right 10px no-repeat;}
+.typeF_list table thead th input { margin-right:0;}
+.typeF_list table tbody td {border-top:1px solid #e4e4e4; height:32px; font-size:11px; line-height:14px; text-align:center; color:#464646; background:none;} 
+.typeF_list table tbody td.left {padding-left:10px; text-align:left;}
+.typeF_list table tbody td.left em {padding-left:8px;}
+.typeF_list table tbody td.check {padding-left:0;}
+.typeF_list table tbody td.rank {padding-top:9px; vertical-align:top; text-align:center;}
+.typeF_list table tbody td.rank a {width:29px; height:30px; display:block; overflow:hidden;  }
+.typeF_list div.pager {clear:both; position:relative; margin:-1px 0 0 0 !important; padding:9px 0 8px !important; text-align: center; border-top:1px solid #999999 !important;}
+.typeF_list div.pager a, .typeF_list div.pager strong {display:inline-block; padding:3px 7px; vertical-align: middle; }
+.typeF_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+.typeF_list div.pager_top {clear:both; position:relative; margin:0 0 0 !important; padding:9px 0 8px !important; text-align: center; border-bottom:0px solid #999999 !important;}
+.typeF_list div.pager_top a, .typeF_list div.pager strong {display:inline-block; padding:3px 7px; vertical-align: middle; }
+.typeF_list div.pager_top img { margin: 0 -6px; vertical-align: middle; } 
+
+
+/* typeF2_title */
+.typeF2_title {width:100%; overflow:hidden; position:relative;}
+.typeF2_title .list_tool {margin-top: 10px; margin-bottom: 10px; width:100%; height:22px; position:relative; clear:both;} 
+.typeF2_title .list_tool span.title {float:left; padding-right:20px; font-size:16px; font-weight:bold; color:#252525; padding-left:10px;} 
+.typeF2_title .list_tool span.btn {float:left; padding-right:5px;} 
+.typeF2_title .list_tool span.btn a {width:57px; height:16px; display:inline-block; padding-top:4px; background:#f9f9f9; border:1px solid #d0d0d0; font-size:11px; font-weight:bold; text-align:center; text-decoration:none; color:#252525;}
+.typeF2_title .list_tool span.year-moth { position:absolute; top:0px; left:285px; text-align:left; font-size:16px; font-weight:bold; color:#252525; width:206px; display:inline-block;}
+.typeF2_title .list_tool span.year-moth span { width:150px; display:inline-block; padding: 0 10px; position:absolute; top:0px; left:18px; text-align:center;} 
+.typeF2_title .list_tool span.year-moth a.btn_right {position:absolute; top:0px; left:194px; text-align:center;} 
+.typeF2_title .list_tool span.year-moth span.date { width:15px; position:absolute; top:2px; left:210px;}
+.typeF2_title .btn_box {width:738px; height:31px; padding:9px 0 0 15px; margin-bottom:20px; background:#f5f5f5; border:1px solid #e4e4e4;}
+.typeF2_title .btn_box a {padding:0 1px;} 
+
+
+ 
+/* typeF2_list 베스트 */
+.typeF2_list {width:100%; overflow:hidden; position:relative;} 
+.typeF2_list ul {width:100%; overflow:hidden; border-bottom:1px solid #c4c4c4; margin-bottom:30px; position:relative; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/bg_typeF2_list.gif) 0 19px no-repeat;  }
+.typeF2_list ul em { color: #fe5705; }
+.typeF2_list ul li {font-size: 11px; display: block; padding:19px 0 12px 0; overflow:hidden; position:relative; float: left; width:151px; }
+.typeF2_list ul li p {color: #898989; text-align: center; display: block; position:overflow: hidden; padding:0 15px; }
+.typeF2_list ul p.rank {width:40px; height:43px; position:absolute; top:20px; left:15px; padding:0; vertical-align:top; text-align:center;}
+.typeF2_list ul li .check {position:absolute; top:0; left:14px; height: 15px; width: 15px; text-align: left; padding:0; }
+
+.typeF2_list ul li span.up {width:19px; height:8px; position:absolute; top:2px; right:24px; color:#da2128; font-size:11px; display:inline-block; padding-left:12px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/popup/iocn_up.gif") 12px 2px no-repeat} 
+.typeF2_list ul li span.du {width:19px; height:8px; position:absolute; top:2px; right:24px; color:#da2128; font-size:11px; display:inline-block; padding-left:12px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/popup/iocn_dn.gif") 12px 2px no-repeat}  
+.typeF2_list ul li span.new {width:19px; height:6px; position:absolute; top:4px; right:36px; display:block; color:#da2128; font-size:11px; margin-left:6px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/iocn_new.gif) 0 0 no-repeat}  
+.typeF2_list ul li span.df {color:#464646; font-size:11px; position:absolute; top:0; right:14px;} 
+
+.typeF2_list ul p.album_pic { padding-left:15px; width: 122px; height: auto !important; }
+.typeF2_list ul a.album_pic { height: 122px !important; }
+.typeF2_list ul a.album_pic img { width: 120px; height: 120px; border: solid 1px #ececec; }
+.typeF2_list ul .album_title { clear:both; color: #333; padding-top: 8px; }
+.typeF2_list ul .album_title a { color: #333; white-space: nowrap; width: 85px; overflow: hidden; text-overflow: ellipsis; }  
+.typeF2_list ul p.zoom-cart-zzim {display:none; position: absolute; left:15px; top:111px; width:120px; height:28px; margin:0; padding:0; white-space: nowrap; background:#f8f8f8; border: 1px solid #eaeaea; } 
+.typeF2_list ul p.zoom-cart-zzim a {width:29px; height:28px; margin:0; border-right: 1px solid #eaeaea; float:left; }
+.typeF2_list ul p.zoom-cart-zzim a img {padding:7px 7px 5px 7px;}
+
+.typeF2_list table {width:100%; border-bottom:1px solid #999999;} 
+.typeF2_list table tbody td {height:47px; font-size:11px; line-height:14px; text-align:center; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/bg_page_bg_b.gif") 0 0 repeat-x;} 
+.typeF2_list table tbody td span.up {width:19px; height:8px; color:#da2128; font-size:11px; display:inline-block; padding-left:12px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/popup/iocn_up.gif") 12px 2px no-repeat} 
+.typeF2_list table tbody td span.du {width:19px; height:8px; color:#da2128; font-size:11px; display:inline-block; padding-left:12px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/popup/iocn_dn.gif") 12px 2px no-repeat}  
+.typeF2_list table tbody td span.new {width:19px; height:6px; display:block; color:#da2128; font-size:11px; margin-left:6px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/iocn_new.gif) 0 0 no-repeat}  
+.typeF2_list table tbody td span.df {color:#464646; font-size:11px;} 
+.typeF2_list table tbody td.left {padding-left:20px; text-align:left;}
+.typeF2_list table tbody td.check {padding-left:2px;}
+.typeF2_list table tbody td.rank {vertical-align:top; text-align:center;}
+.typeF2_list table tbody td.rank a {width:29px; height:30px; margin-top:15px; display:block; overflow:hidden; text-indent:-5000px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/g_number_best_all.gif) 0 0 no-repeat;}
+	.typeF2_list table tbody td.rank span.best1 a {width:29px; height:30px; background-position:0 0;}
+	.typeF2_list table tbody td.rank span.best2 a {width:29px; height:30px; background-position:0 -50px;}
+	.typeF2_list table tbody td.rank span.best3 a {width:29px; height:30px; background-position:0 -100px;}
+	.typeF2_list table tbody td.rank span.best4 a {width:29px; height:30px; background-position:0 -150px;}
+	.typeF2_list table tbody td.rank span.best5 a {width:29px; height:30px; background-position:0 -200px;}
+	.typeF2_list table tbody td.rank span.best6 a {width:29px; height:30px; background-position:0 -250px;}
+	.typeF2_list table tbody td.rank span.best7 a {width:29px; height:30px; background-position:0 -300px;}
+	.typeF2_list table tbody td.rank span.best8 a {width:29px; height:30px; background-position:0 -350px;}
+	.typeF2_list table tbody td.rank span.best9 a {width:29px; height:30px; background-position:0 -400px;}
+	.typeF2_list table tbody td.rank span.best10 a {width:29px; height:30px; background-position:0 -450px;}	
+	.typeF2_list table tbody td.rank span.best11 a {width:29px; height:30px; background-position:-50px 0;}
+	.typeF2_list table tbody td.rank span.best12 a {width:29px; height:30px; background-position:-50px -50px;}
+	.typeF2_list table tbody td.rank span.best13 a {width:29px; height:30px; background-position:-50px -100px;}
+	.typeF2_list table tbody td.rank span.best14 a {width:29px; height:30px; background-position:-50px -150px;}
+	.typeF2_list table tbody td.rank span.best15 a {width:29px; height:30px; background-position:-50px -200px;}
+	.typeF2_list table tbody td.rank span.best16 a {width:29px; height:30px; background-position:-50px -250px;}
+	.typeF2_list table tbody td.rank span.best17 a {width:29px; height:30px; background-position:-50px -300px;}
+	.typeF2_list table tbody td.rank span.best18 a {width:29px; height:30px; background-position:-50px -350px;}
+	.typeF2_list table tbody td.rank span.best19 a {width:29px; height:30px; background-position:-50px -400px;}
+	.typeF2_list table tbody td.rank span.best20 a {width:29px; height:30px; background-position:-50px -450px;}	
+	.typeF2_list table tbody td.rank span.best21 a {width:29px; height:30px; background-position:-100px 0;}
+	.typeF2_list table tbody td.rank span.best22 a {width:29px; height:30px; background-position:-100px -50px;}
+	.typeF2_list table tbody td.rank span.best23 a {width:29px; height:30px; background-position:-100px -100px;}
+	.typeF2_list table tbody td.rank span.best24 a {width:29px; height:30px; background-position:-100px -150px;}
+	.typeF2_list table tbody td.rank span.best25 a {width:29px; height:30px; background-position:-100px -200px;}
+	.typeF2_list table tbody td.rank span.best26 a {width:29px; height:30px; background-position:-100px -250px;}
+	.typeF2_list table tbody td.rank span.best27 a {width:29px; height:30px; background-position:-100px -300px;}
+	.typeF2_list table tbody td.rank span.best28 a {width:29px; height:30px; background-position:-100px -350px;}
+	.typeF2_list table tbody td.rank span.best29 a {width:29px; height:30px; background-position:-100px -400px;}
+	.typeF2_list table tbody td.rank span.best30 a {width:29px; height:30px; background-position:-100px -450px;}
+	.typeF2_list table tbody td.rank span.best31 a {width:29px; height:30px; background-position:-150px 0;}
+	.typeF2_list table tbody td.rank span.best32 a {width:29px; height:30px; background-position:-150px -50px;}
+	.typeF2_list table tbody td.rank span.best33 a {width:29px; height:30px; background-position:-150px -100px;}
+	.typeF2_list table tbody td.rank span.best34 a {width:29px; height:30px; background-position:-150px -150px;}
+	.typeF2_list table tbody td.rank span.best35 a {width:29px; height:30px; background-position:-150px -200px;}
+	.typeF2_list table tbody td.rank span.best36 a {width:29px; height:30px; background-position:-150px -250px;}
+	.typeF2_list table tbody td.rank span.best37 a {width:29px; height:30px; background-position:-150px -300px;}
+	.typeF2_list table tbody td.rank span.best38 a {width:29px; height:30px; background-position:-150px -350px;}
+	.typeF2_list table tbody td.rank span.best39 a {width:29px; height:30px; background-position:-150px -400px;}
+	.typeF2_list table tbody td.rank span.best40 a {width:29px; height:30px; background-position:-150px -450px;}
+	.typeF2_list table tbody td.rank span.best41 a {width:29px; height:30px; background-position:-200px 0;}
+	.typeF2_list table tbody td.rank span.best42 a {width:29px; height:30px; background-position:-200px -50px;}
+	.typeF2_list table tbody td.rank span.best43 a {width:29px; height:30px; background-position:-200px -100px;}
+	.typeF2_list table tbody td.rank span.best44 a {width:29px; height:30px; background-position:-200px -150px;}
+	.typeF2_list table tbody td.rank span.best45 a {width:29px; height:30px; background-position:-200px -200px;}
+	.typeF2_list table tbody td.rank span.best46 a {width:29px; height:30px; background-position:-200px -250px;}
+	.typeF2_list table tbody td.rank span.best47 a {width:29px; height:30px; background-position:-200px -300px;}
+	.typeF2_list table tbody td.rank span.best48 a {width:29px; height:30px; background-position:-200px -350px;}
+	.typeF2_list table tbody td.rank span.best49 a {width:29px; height:30px; background-position:-200px -400px;}
+	.typeF2_list table tbody td.rank span.best50 a {width:29px; height:30px; background-position:-200px -450px;}	
+	.typeF2_list table tbody td.rank span.best51 a {width:29px; height:30px; background-position:-250px 0;}
+	.typeF2_list table tbody td.rank span.best52 a {width:29px; height:30px; background-position:-250px -50px;}
+	.typeF2_list table tbody td.rank span.best53 a {width:29px; height:30px; background-position:-250px -100px;}
+	.typeF2_list table tbody td.rank span.best54 a {width:29px; height:30px; background-position:-250px -150px;}
+	.typeF2_list table tbody td.rank span.best55 a {width:29px; height:30px; background-position:-250px -200px;}
+	.typeF2_list table tbody td.rank span.best56 a {width:29px; height:30px; background-position:-250px -250px;}
+	.typeF2_list table tbody td.rank span.best57 a {width:29px; height:30px; background-position:-250px -300px;}
+	.typeF2_list table tbody td.rank span.best58 a {width:29px; height:30px; background-position:-250px -350px;}
+	.typeF2_list table tbody td.rank span.best59 a {width:29px; height:30px; background-position:-250px -400px;}
+	.typeF2_list table tbody td.rank span.best60 a {width:29px; height:30px; background-position:-250px -450px;}	
+	.typeF2_list table tbody td.rank span.best61 a {width:29px; height:30px; background-position:-300px 0;}
+	.typeF2_list table tbody td.rank span.best62 a {width:29px; height:30px; background-position:-300px -50px;}
+	.typeF2_list table tbody td.rank span.best63 a {width:29px; height:30px; background-position:-300px -100px;}
+	.typeF2_list table tbody td.rank span.best64 a {width:29px; height:30px; background-position:-300px -150px;}
+	.typeF2_list table tbody td.rank span.best65 a {width:29px; height:30px; background-position:-300px -200px;}
+	.typeF2_list table tbody td.rank span.best66 a {width:29px; height:30px; background-position:-300px -250px;}
+	.typeF2_list table tbody td.rank span.best67 a {width:29px; height:30px; background-position:-300px -300px;}
+	.typeF2_list table tbody td.rank span.best68 a {width:29px; height:30px; background-position:-300px -350px;}
+	.typeF2_list table tbody td.rank span.best69 a {width:29px; height:30px; background-position:-300px -400px;}
+	.typeF2_list table tbody td.rank span.best70 a {width:29px; height:30px; background-position:-300px -450px;}	
+	.typeF2_list table tbody td.rank span.best71 a {width:29px; height:30px; background-position:-350px 0;}
+	.typeF2_list table tbody td.rank span.best72 a {width:29px; height:30px; background-position:-350px -50px;}
+	.typeF2_list table tbody td.rank span.best73 a {width:29px; height:30px; background-position:-350px -100px;}
+	.typeF2_list table tbody td.rank span.best74 a {width:29px; height:30px; background-position:-350px -150px;}
+	.typeF2_list table tbody td.rank span.best75 a {width:29px; height:30px; background-position:-350px -200px;}
+	.typeF2_list table tbody td.rank span.best76 a {width:29px; height:30px; background-position:-350px -250px;}
+	.typeF2_list table tbody td.rank span.best77 a {width:29px; height:30px; background-position:-350px -300px;}
+	.typeF2_list table tbody td.rank span.best78 a {width:29px; height:30px; background-position:-350px -350px;}
+	.typeF2_list table tbody td.rank span.best79 a {width:29px; height:30px; background-position:-350px -400px;}
+	.typeF2_list table tbody td.rank span.best80 a {width:29px; height:30px; background-position:-350px -450px;}	
+	.typeF2_list table tbody td.rank span.best81 a {width:29px; height:30px; background-position:-400px 0;}
+	.typeF2_list table tbody td.rank span.best82 a {width:29px; height:30px; background-position:-400px -50px;}
+	.typeF2_list table tbody td.rank span.best83 a {width:29px; height:30px; background-position:-400px -100px;}
+	.typeF2_list table tbody td.rank span.best84 a {width:29px; height:30px; background-position:-400px -150px;}
+	.typeF2_list table tbody td.rank span.best85 a {width:29px; height:30px; background-position:-400px -200px;}
+	.typeF2_list table tbody td.rank span.best86 a {width:29px; height:30px; background-position:-400px -250px;}
+	.typeF2_list table tbody td.rank span.best87 a {width:29px; height:30px; background-position:-400px -300px;}
+	.typeF2_list table tbody td.rank span.best88 a {width:29px; height:30px; background-position:-400px -350px;}
+	.typeF2_list table tbody td.rank span.best89 a {width:29px; height:30px; background-position:-400px -400px;}
+	.typeF2_list table tbody td.rank span.best90 a {width:29px; height:30px; background-position:-400px -450px;}	
+	.typeF2_list table tbody td.rank span.best91 a {width:29px; height:30px; background-position:-450px 0;}
+	.typeF2_list table tbody td.rank span.best92 a {width:29px; height:30px; background-position:-450px -50px;}
+	.typeF2_list table tbody td.rank span.best93 a {width:29px; height:30px; background-position:-450px -100px;}
+	.typeF2_list table tbody td.rank span.best94 a {width:29px; height:30px; background-position:-450px -150px;}
+	.typeF2_list table tbody td.rank span.best95 a {width:29px; height:30px; background-position:-450px -200px;}
+	.typeF2_list table tbody td.rank span.best96 a {width:29px; height:30px; background-position:-450px -250px;}
+	.typeF2_list table tbody td.rank span.best97 a {width:29px; height:30px; background-position:-450px -300px;}
+	.typeF2_list table tbody td.rank span.best98 a {width:29px; height:30px; background-position:-450px -350px;}
+	.typeF2_list table tbody td.rank span.best99 a {width:29px; height:30px; background-position:-450px -400px;}
+	.typeF2_list table tbody td.rank span.best100 a {width:29px; height:30px; background-position:-450px -450px;}
+.typeF2_list .btn_box {width:738px; height:31px; padding:9px 0 0 15px; margin:20px 0; background:#f5f5f5; border:1px solid #e4e4e4;}
+.typeF2_list .btn_box a {padding:0 1px;}
+.typeF2_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:1px solid #999999 !important;}
+.typeF2_list div.pager a, .typeF2_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeF2_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+
+/* //////////////////////////   type G  /////////////////////// */ 
+
+/* typeG_list */ 
+.typeG_list {width:100%; overflow:hidden; position:relative;} 
+.typeG_list div.pager_top {clear:both; position:relative; margin:0 !important; padding:0 0 8px !important; text-align: center; border-top:0px solid #DA2128 !important;}
+.typeG_list div.pager_top a, .typeG_list div.pager_top strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeG_list div.pager_top img { margin: 0 -6px; vertical-align: middle; } 
+.typeG_list ul {width:100%; overflow:hidden; border-top:1px solid #e1e1e1; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/bg_typeG_list.gif) 0 0 repeat-y;  } 
+.typeG_list ul li {position:relative; font-size: 11px; display: block; padding:15px 0 0 0; height:145px; float: left; width:377px; }
+.typeG_list ul li p {text-overflow: ellipsis; color: #898989;  display: block; overflow: hidden; } 
+.typeG_list ul p.album_pic { width: 150px; height: auto !important; float:left; text-align: center;}
+.typeG_list ul a.album_pic { height: 122px !important; }
+.typeG_list ul a.album_pic img { width:120px; height: 120px; border: solid 1px #ececec;  }
+.typeG_list ul .alarm_son {width: 200px; font-weight:bold; color: #464646; padding:4px 0 0 0; letter-spacing:-1px;}
+.typeG_list ul .album_title {width: 200px; color: #707070; overflow: hidden; padding:16px 0 10px 0; letter-spacing:-1px;}
+.typeG_list ul .album_title a {line-height:16px ; color: #707070; line-height:14px !important; } 
+.typeG_list ul .album_artist {color: #898989; padding-top:18px;}
+.typeG_list ul .album_zoom {width:85px; overflow:hidden; display:inline-block; position:absolute; left:152px; top:122px;}
+.typeG_list ul .album_zoom a {width:15px; height:15px; display:inline-block; }
+.typeG_list ul .album_zoom a.zoom_s {width:26px; height:15px; display:inline-block; text-align:left; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 21px 0 no-repeat;}
+.typeG_list ul .album_zoom a.listen {width:26px; height:15px; display:inline-block; text-align:right; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/product_zoom_li.gif) 3px 1px no-repeat;}
+.typeG_list div.pager {clear:both; position:relative; margin:-1px 0 !important; padding:9px 0 8px !important; text-align: center; border-top:1px solid #999999 !important;}
+.typeG_list div.pager a, .typeG_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeG_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+ 
+/* typeG2_title */
+.typeG_title {width:auto; overflow:hidden; position:relative; color:#555555; vertical-align:middle; }
+.typeG_title .list_tool {margin-bottom: 10px; margin-top:45px; width:100%; overflow:hidden; position:relative; clear:both;} 
+.typeG_title .list_tool span.title {float:left; padding-right:10px; font-size:16px; font-weight:bold; color:#252525; padding-left:10px;}  
+.typeG_title .list_tool span.nb {float:left; font-size:12px; color:#707070; padding-top:2px; letter-spacing:-1px;}
+.typeG_title .list_tool span.btn {float:right; padding-right:5px;} 
+
+.typeG_title .list_tool02 {margin-bottom: 10px; margin-top:35px; width:100%; overflow:hidden; position:relative; clear:both;} 
+.typeG_title .list_tool02 span.title {float:left; padding-right:10px; font-size:16px; font-weight:bold; color:#252525; padding-left:10px;} 
+.typeG_title .list_tool02 span.seperate {float:left; padding-right:10px; font-size:12px; color:#d7d7d7; padding-top:2px;} 
+.typeG_title .list_tool02 span.text {float:left; padding-right:10px; font-size:12px; color:#333333; padding-top:2px; width:auto; }
+.typeG_title .list_tool02 span.nb {float:left; font-size:12px; color:#707070; padding-top:2px; letter-spacing:-1px;}
+.typeG_title .list_tool02 span.btn {float:right; padding-right:5px;} 
+
+.typeG_title .typeG_box {width:780px; height:165px; position:relative; padding-top:7px; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/bg_keebox.gif) 0 0 no-repeat;}
+.typeG_title .typeG_box .boxh {width:768px; height:137px; overflow:hidden; margin-left:6px; position:relative; overflow-y:auto;}
+ 
+.typeG_title .typeG_box ul {width:740px; overflow:hidden; position:absolute; top:8px; left:15px; padding-bottom:4px;}
+.typeG_title .typeG_box ul li {width:370px; height:15px; overflow:hidden; float:left; margin:5px 0;}
+.typeG_title .typeG_box ul li a {width:280px; display:inline-block; font-size:11px; text-decoration:none; float:left;}
+.typeG_title .typeG_box ul li a.on {color:#DA2128; font-weight:bold;}
+.typeG_title .typeG_box ul li a span { width:40px; height:24px; display:inline-block; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/bg_keebox_line.gif) -5px 0 no-repeat;}
+.typeG_title .typeG_box ul li span {float:left;}
+
+/* typeG2_list */
+.typeG2_list {width:100%; overflow:hidden; position:relative;}
+.typeG2_list ul {width:100%; overflow:hidden; position:relative; border-top:2px solid #DA2128; border-bottom:1px solid #DA2128; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/bg_typeG2_list.gif) 0 0 repeat-y;  }
+.typeG2_list ul em { color: #fe5705; }
+.typeG2_list ul li {position:relative; font-size: 11px; display: block; padding:30px 0 0 0; height:183px; float: left; width:390px; }
+.typeG2_list ul li p {text-overflow: ellipsis; float:right; width:185px; color: #898989;  display: block; overflow: hidden; } 
+.typeG2_list ul p.album_pic { width: 190px; height: auto !important; float:left; text-align: center;}
+.typeG2_list ul a.album_pic { height: 152px !important; }
+.typeG2_list ul a.album_pic img { width:150px; height: 150px; border: solid 1px #ececec; }
+.typeG2_list ul .alarm_son { font-weight:bold;  color: #464646; padding:14px 0 10px 0;}
+.typeG2_list ul .album_title {width: 185px; height:60px; color: #464646; overflow: hidden; padding:14px 0 1px 0; }
+.typeG2_list ul .album_title a {line-height:16px !important; color: #464646; } 
+.typeG2_list ul .album_artist {color: #898989; padding-top:3px; margin-bottom:17px;}
+.typeG2_list ul .album_btn {width:184px; height:27px; overflow:hidden; }
+.typeG2_list ul .album_btn .btn01 {width:63px; height:27px; float:left; text-indent:-5000px;   overflow:hidden; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/btn_fall.gif) 0 0 no-repeat;}
+.typeG2_list ul .album_btn .btn02 {width:61px; height:27px; float:left; text-indent:-5000px; overflow:hidden; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/btn_fall.gif) -63px 0 no-repeat;}
+.typeG2_list ul .album_btn .btn03 {width:60px; height:27px; float:left; text-indent:-5000px; overflow:hidden; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/btn_fall.gif) -124px 0 no-repeat;}
+.typeG2_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #DA2128 !important;}
+.typeG2_list div.pager a, .typeG2_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeG2_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+/* typeG3_list */
+.typeG3_list {width:100%; overflow:hidden; position:relative;}
+.typeG3_list ul {width:100%; overflow:hidden; border-top:2px solid #DA2128; border-bottom:1px solid #DA2128; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/bg_typeG3_list.gif) 0 0 repeat-y;  }
+.typeG3_list ul em { color: #fe5705; }
+.typeG3_list ul li {position:relative; font-size: 11px; display: block; padding:20px 0 0 0; height:242px; float: left; width:390px; }
+.typeG3_list ul li p {text-overflow: ellipsis; color: #898989;  display: block; overflow: hidden; } 
+.typeG3_list ul p.album_pic { width: 190px; height: auto !important; float:left; text-align: center;}
+.typeG3_list ul a.album_pic { height: 150px !important; }
+.typeG3_list ul a.album_pic img { width:145px; height: 220px; border: solid 1px #ececec; }
+.typeG3_list ul .album_title {width: 185px; height:49px; color: #464646; overflow: hidden; padding:80px 0 1px 0; }
+.typeG3_list ul .album_title a {line-height:16px !important; color: #464646; } 
+.typeG3_list ul .album_artist {height:30px; overflow: hidden;color: #898989;}
+.typeG3_list ul .album_btn {width:184px; height:27px; overflow:hidden; }
+.typeG3_list ul .album_btn .btn01 {width:63px; height:27px; float:left; text-indent:-5000px;   overflow:hidden; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/btn_fall.gif) 0 0 no-repeat;}
+.typeG3_list ul .album_btn .btn02 {width:61px; height:27px; float:left; text-indent:-5000px; overflow:hidden; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/btn_fall.gif) -63px 0 no-repeat;}
+.typeG3_list ul .album_btn .btn03 {width:60px; height:27px; float:left; text-indent:-5000px; overflow:hidden; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/btn_fall.gif) -124px 0 no-repeat;}
+.typeG3_list div.pager {clear:both; position:relative; margin:0 !important; padding:9px 0 8px !important; text-align: center; border-top:0px solid #DA2128 !important;}
+.typeG3_list div.pager a, .typeG3_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeG3_list div.pager img { margin: 0 -6px; vertical-align: middle; } 
+
+
+/* //////////////////////////   type H  /////////////////////// */ 
+
+/* typeH_list */ 
+.typeH_list {width:100%; overflow:hidden; position:relative;} 
+.typeH_list div.pager_top {clear:both; position:relative; margin:0 !important; padding:0 0 8px !important; text-align: center; border-top:0px solid #DA2128 !important;}
+.typeH_list div.pager_top a, .typeH_list div.pager_top strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeH_list div.pager_top img { margin: 0 -6px; vertical-align: middle; } 
+.typeH_list ul {width:100%; overflow:hidden; border-top:1px solid #e1e1e1; background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/sound/bg_typeG_list.gif) 0 0 repeat-y;  } 
+.typeH_list ul li {position:relative; font-size: 11px; display: block; padding:15px 0 0 0; height:145px; float: left; width:377px; }
+.typeH_list ul li p {text-overflow: ellipsis; color: #898989;  display: block; overflow: hidden; } 
+.typeH_list ul p.album_pic { width: 150px; height: auto !important; float:left; text-align: center;}
+.typeH_list ul a.album_pic { height: 122px !important; }
+.typeH_list ul a.album_pic img { width:120px; height: 120px; border: solid 1px #ececec;  }
+.typeH_list ul .alarm_son {width: 200px; font-weight:bold; color: #464646; padding:4px 0 0 0; letter-spacing:-1px;} 
+.typeH_list ul .album_artist {width: 200px; height:90px; overflow:hidden; color: #7d7d7d; padding-top:16px; line-height:15px ;} 
+.typeH_list ul .album_artist span {color:#363636;}
+.typeH_list div.pager {clear:both; position:relative; margin:-1px 0 !important; padding:9px 0 30px !important; text-align: center; border-top:1px solid #999999 !important;}
+.typeH_list div.pager a, .typeH_list div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+.typeH_list div.pager img { margin: 0 -6px; vertical-align: middle; } 

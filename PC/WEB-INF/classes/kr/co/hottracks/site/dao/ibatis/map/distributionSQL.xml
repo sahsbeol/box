@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="DistributionSQL">
+    <typeAlias alias="orderDeliveryProductParam" type="kr.co.hottracks.site.model.backoffice.distribution.OrderDeliveryProductParam"/>
+    <typeAlias alias="orderDeliveryProduct" type="kr.co.hottracks.site.model.backoffice.distribution.OrderDeliveryProduct"/>
+    
+    <select id="getListOfOrderDeliveryProductByDeliveryIdWithoutCenter" parameterClass="string" resultClass="orderDeliveryProductParam">
+        /*DistributionSQL.getListOfOrderDeliveryProductByDeliveryIdWithoutCenter*/
+        SELECT A.ORDER_NUM                          orderNum
+             , A.ORDER_DEST_INSEQ                   orderDestinationInseq
+             , A.DLVY_VNDR_ID                       deliveryVendorId 
+             , C.ORDER_PRDT_INSEQ                   orderProductInseq
+             , C.SELL_PRDT_BCODE                    productBarcode
+             , C.ORDER_COUNT                        orderCount
+             , C.CANC_COUNT                         calcelCount
+             , C.SNGL_PRDT_SELL_PRICE               singleProductSellPrice
+             , C.ORDER_PRDT_STAT_CODE               orderProductStatusCode
+             , D.PRDT_NAME                          productName
+             , D.spec_name                          specName
+             , F.dlvy_id                            deliveryId
+             , F.SEND_NO                            sendNo
+             , F.tcb_id                             tacbaeId
+             , F.DLVY_METHD_CODE                    deliveryMethodCode
+             , G.ORDER_DLVY_PRDT_SEQ                orderDeliveryProductSeq
+             , G.ORDER_DLVY_PRDT_STAT_CODE          orderDeliveryProductStatusCode
+             , G.ORDER_DLVY_PRDT_SHIP_STAT_CODE     shippingStatusCode
+             , NVL(G.DLVY_STBY_COUNT, 0)            deliveryStandbyCount
+             , NVL(G.DLVY_COUNT, 0)                 deliveryCount
+             , F.DLVY_GBN_CODE                      deliveryGubunCode
+             , FC_GET_PRODUCT_IMAGE_URL(C.SELL_PRDT_BCODE)              imageUrl
+             , (A.ORDER_NUM || A.ORDER_DEST_INSEQ || A.DLVY_VNDR_ID)    reqKey
+             , FC_GET_SEL_OPT_IN_SINGLE_LINE (C.ORDER_NUM, C.ORDER_PRDT_INSEQ)      optionString
+             , (SELECT VNDR_NAME FROM TB_VENDOR WHERE VNDR_ID = A.DLVY_VNDR_ID)     deliveryVendorName
+             , (SELECT PRDT_NAME FROM TB_SELL_PRODUCT WHERE SELL_PRDT_BCODE = FC_GET_BARCODE(C.SELL_PRDT_BCODE))    primeProductName
+          FROM TB_ORDER_DELIVERY_REQUEST A
+          JOIN TB_ORDER_DESTINATION B ON B.ORDER_NUM = A.ORDER_NUM AND B.ORDER_DEST_INSEQ = A.ORDER_DEST_INSEQ
+          JOIN TB_ORDER_PRODUCT C ON C.ORDER_NUM = B.ORDER_NUM AND C.ORDER_DEST_INSEQ = B.ORDER_DEST_INSEQ AND C.DLVY_VNDR_ID = A.DLVY_VNDR_ID
+          JOIN TB_SELL_PRODUCT D ON D.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+          JOIN TB_DELIVERY F ON F.ORDER_NUM = A.ORDER_NUM AND F.ORDER_DEST_INSEQ = A.ORDER_DEST_INSEQ AND F.DLVY_VNDR_ID = A.DLVY_VNDR_ID
+          JOIN TB_ORDER_DELIVERY_PRODUCT G ON G.DLVY_ID = F.DLVY_ID AND G.ORDER_NUM = C.ORDER_NUM AND G.ORDER_PRDT_INSEQ = C.ORDER_PRDT_INSEQ
+         WHERE F.dlvy_id = #deliveryId#
+         ORDER BY C.SELL_PRDT_BCODE
+    </select>
+    
+    <update id="updateDeliveryProduct" parameterClass="orderDeliveryProduct">
+        /* DistributionSQL.updateDeliveryProduct */
+        UPDATE TB_ORDER_DELIVERY_PRODUCT
+           SET ORDER_DLVY_PRDT_STAT_CODE        = #orderDeliveryProductStatusCode#
+             , DLVY_PROC_DTM                    = #deliveryProcessDate#
+             , DLVY_ID                          = #deliveryId#
+             , DLVY_COUNT                       = #deliveryCount#
+             , ORDER_DLVY_PRDT_SEQ              = #orderDeliveryProductSeq#
+             , ORDER_NUM                        = #orderNum#
+             , ORDER_PRDT_INSEQ                 = #orderProductInseq#
+             , ORDER_DLVY_PRDT_SHIP_STAT_CODE   = #shippingStatusCode#
+             , DLVY_STBY_COUNT                  = #deliveryStandbyCount#
+             , CSMT_SEND_NO                     = #cosmeticSendNo#
+         WHERE ORDER_DLVY_PRDT_SEQ = #orderDeliveryProductSeq#
+    </update>
+</sqlMap>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BizFrontDisplaySQL">
+    <typeAlias alias="bizDisplayCriteria" type="kr.co.hottracks.site.model.common.display.BizDisplayCriteria"/>
+    <typeAlias alias="bizNewMainDisplayExt" type="kr.co.hottracks.site.model.common.display.BizNewMainDisplayExt"/>    
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2012.01.06
+        기능 : 메인 전시 상품을 반환한다.
+    -->
+    <select id="getMainDisplayPrdt" parameterClass="bizDisplayCriteria" resultClass="bizNewMainDisplayExt">
+        /*BizFrontDisplaySQL.getMainDisplayPrdt*/
+        SELECT * 
+        FROM (SELECT DISP_MSTR_ID         dispMstrId
+				   , MAIN_DISP_SEQ        mainDispSeq
+				   , IMAGE_URL            imageUrl
+				   , LINK_URL             linkUrl
+				   , ETT_GBN              ettGbn
+				   , SELL_PRDT_BCODE      sellPrdtBcode
+				   , DISP_ORDER           dispOrder
+				   , LAST_MOD_ADMIN_ID    lastModAdminId
+				   , MOD_DTM              modDtm
+				   , BNR_SEQ              bnrSeq
+				   , CTGR_ID              ctgrId
+				   , BNR_CODE             bnrCode
+				   , MALL_ID              mallId
+				   , GROUP_ID             groupId
+				   , BNR_SIZE_CODE        bnrSizeCode
+				   , DISP_TITLE           dispTitle
+				   , PRDT_NAME            prdtName
+				   , SELL_PRDT_GBN        sellPrdtGbn
+				   , CTGR_ID              prdtCtgrId
+				   , RCRD_CD              rcrdCd
+				   , PRDT_SELL_PRICE      prdtSellPrice
+				   , PRDT_SAVED_RATE      prdtSavedRate
+				   , ARTI_NAME            artiName
+				   , RLSE_DT              rlseDt
+				   , FREE_DLVY_YN         freeDlvyYn
+				   , FC_GET_PRODUCT_IMAGE_URL(SELL_PRDT_BCODE)                                    prdtImageUrl
+				   , (SELECT BRAND_NAME FROM TB_BRAND WHERE BRAND_ID = V.BRAND_ID)                prdtBrandName
+				   , (SELECT T.LABEL_NAME FROM TB_REC_LABEL T WHERE T.LABEL_CD = V.LABEL_CD)      labelName
+				   , FC_GET_CPN_PRICE(SELL_PRDT_BCODE, '02')                                      dscntPrice
+				   , FC_GET_LAST_DC_RATE(SELL_PRDT_BCODE, '02')                                   dscntRate             
+				   , PRDT_STAT_CODE		prdtStatCode          
+				   , RCRD_STAT			rcrdStat
+				   , IMP_YN 				impYn 
+				   , nvl((SELECT COUNT(1) FROM TB_WISH_PRODUCT TP WHERE TP.WISH_GBN = 'P' AND TP.SELL_PRDT_BCODE = V.SELL_PRDT_BCODE AND TP.MALL_ID = '02' AND TP.USER_NUM = #userNum#), 0) as wishUserPrdtCnt
+				   , FC_GET_PRODUCT_ICON_CODE(SELL_PRDT_BCODE, '02') as prdtIcon
+				   , DECODE((SELECT COUNT(*) FROM TB_POSTER_CASE PC WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN PC.PRSNT_START_DAY AND PRSNT_END_DAY AND PC.SELL_PRDT_BCODE = V.SELL_PRDT_BCODE), '0', 'N', 'Y') as hasPosterCaseYn
+				   , nvl(D_DAY, 0) as preDay
+				   , MEDIA_NAME 			mediaName  
+				   , ROWNUM
+			    FROM (SELECT MD.*
+                     	   , SP.PRDT_NAME
+                     	   , SP.SELL_PRDT_GBN
+                     	   , SP.RCRD_CD
+                     	   , SP.PRDT_SELL_PRICE
+                     	   , SP.PRDT_SAVED_RATE
+                     	   , SP.FREE_DLVY_YN
+                     	   , SP.BRAND_ID
+                     	   , R.ARTI_NAME
+                     	   , R.RLSE_DT
+                     	   , R.LABEL_CD                     
+                     	   , SP.PRDT_STAT_CODE
+                     	   , SP.RCRD_STAT
+                     	   , R.IMP_YN
+                     	   , (SELECT TRUNC(TO_DATE(R.RLSE_DT,'yyyymmdd') - SYSDATE, 0)  FROM DUAL) as D_DAY
+                     	   , RM.MEDIA_NAME
+                     	FROM TB_MAIN_DISPLAY MD
+                 INNER JOIN TB_SELL_PRODUCT SP ON MD.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+                  LEFT OUTER JOIN TB_RECORD R ON MD.SELL_PRDT_BCODE = R.SELL_PRDT_BCODE
+                  LEFT OUTER JOIN TB_REC_MEDIA RM ON R.MEDIA_CD = RM.MEDIA_CD
+                 WHERE INSTR('R|P', MD.ETT_GBN) != 0                   
+                   AND MD.MALL_ID IN ('00', #mallId#)                   
+                   <isNotEmpty property="dispMstrId" prepend="AND">
+                       MD.DISP_MSTR_ID = #dispMstrId#
+                   </isNotEmpty> 
+                 ORDER BY MD.DISP_ORDER, SP.PRMT_DTM DESC, R.RLSE_DT DESC, MD.DISP_MSTR_ID, MD.CTGR_ID, MD.GROUP_ID
+               ) V)
+         <dynamic prepend="WHERE">
+             <isGreaterThan property="fixedLength" compareValue="0">
+                 ROWNUM &lt;= #fixedLength#
+             </isGreaterThan>
+         </dynamic>
+    </select>
+</sqlMap>

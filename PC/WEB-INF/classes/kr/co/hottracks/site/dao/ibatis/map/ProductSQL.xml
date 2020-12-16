@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ProductSQL">
+    <typeAlias alias="icon" type="kr.co.hottracks.site.model.common.Icon"/>
+    <typeAlias alias="sellProductKey" type="kr.co.hottracks.site.model.common.product.SellProductKey"/>
+    <typeAlias alias="sellProduct" type="kr.co.hottracks.site.model.common.product.SellProduct"/>
+    <typeAlias alias="productImage" type="kr.co.hottracks.site.model.common.product.ProductImage"/>
+    <typeAlias alias="optionTemp" type="kr.co.hottracks.site.model.backoffice.product.OptionTemp"/>
+    <typeAlias alias="reviewCriteria" type="kr.co.hottracks.site.model.frontoffice.product.ReviewCriteria"/>
+    <typeAlias alias="kyoboReview" type="kr.co.hottracks.site.model.common.product.KyoboReview"/>
+    <typeAlias alias="mallProduct" type="kr.co.hottracks.site.model.common.product.MallProduct"/>
+    <typeAlias alias="prdtNotiInfo" type="kr.co.hottracks.site.model.common.product.PrdtNotiInfo"/>
+    
+    <cacheModel type="LRU" id="iconChache" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="size" value="100"/>
+    </cacheModel>
+    
+    <!-- 
+        기능: 아이콘목록 반환
+     -->
+    <select id="getIcons" resultClass="icon" cacheModel="iconChache" parameterClass="string">
+        /* ProductSQL.getIcons */
+        SELECT ICON_ID      id
+             , ICON_URL     url
+             , ICON_NAME    name
+          FROM TB_ICON
+         WHERE 1 = 1
+            <isNotEmpty property="value" prepend="AND">
+               ICON_GBN = #value#
+            </isNotEmpty>
+    </select>
+    
+    <!-- 
+        기능: 상품정보 반환
+     -->
+    <select id="getProduct" resultClass="sellProduct" parameterClass="sellProductKey">
+        /* ProductSQL.getProduct */
+        SELECT  sell_prdt_bcode             barcode,
+                prime_sell_prdt_bcode       primeBarcode,
+                prdt_name                   name,
+                prmt_deny_rsn               permitDenyReason,
+                dlvy_delay_dtcnt            deliveryDelayCount,
+                limit_count                 limitCount,
+                sell_count                  sellCount,
+                regst_dtm                   registDatetime,
+                regst_admin_id              adminId,
+                max_order_alw_count         maxOrderAllowCount,
+                prdt_srch_word              searchWord,
+                prdt_sell_price             sellPrice,
+                100 - prdt_chge_rate        chargeRate,
+                prdt_buy_price              buyPrice,
+                kyobo_chge_rate             kyoboChargeRate,
+                prdt_dscnt_rate             discountRate,
+                prdt_dscnt_price            discountPrice,
+                prdt_saved_rate             savedRate,
+                prdt_saved_price            savedPrice,
+                prmt_code                   permitCode,
+                prdt_stat_code              statusCode,
+                dlvy_vndr_id                deliveryVendorId,
+                prdt_bcode                  productBarcode,
+                disp_yn                     displayYn,
+                brand_id                    brandId,
+                vndr_cntrt_id               vendorCntractId,
+                nyo_sell_ban_yn             ban19Yn,
+                disp_order                  displayOrder,
+                sell_prdt_gbn               gbn,
+                prvd_title                  provideTitle,
+                mnftr                       manufacturer,
+                plorg                       placeOfOrigin,
+                imp_yn                      importYn,
+                order_make_yn               orderMakeYn,
+                ssn_prdt_yn                 seasonProductYn,
+                cvsl_yn                     carvedSealYn,
+                dlvy_area                   deliveryArea,
+                store_recv_yn               storeReceiveYn,
+                area_dlvy_yn                areaDeliveryYn,
+                prdt_dtl_info               productDetailInfomation,
+                spec_name                   productSpecName,
+                spec_group_name             productSpecGroupName,
+                free_dlvy_yn                freeDeliveryYn,
+                lave_count                  laveCount,
+                cod_dlvy_amt_yn             codDeliveryAmountYn,
+                mod_dtm                     modifyDatetime,
+                mod_admin_id                modifyAdminId,
+                prmt_dtm                    permitDatetime,
+                htrs_bcode                  hottracksCode,
+                khm_yn                      khmYn,
+                #mallId#                    mallId,
+                FC_GET_DC_PRICE(sell_prdt_bcode, #mallId#) lastDiscountPrice,
+                FC_GET_FREE_DLVY_YN(sell_prdt_bcode, #mallId#) lastFreeDeliveryYn,
+                FC_IS_VALID_PRODUCT(sell_prdt_bcode, #mallId#) valid,
+                SPEC_AMT_APPLY              specAmtApply,
+                FC_IS_PRINT_DATE_YN(sell_prdt_bcode) prntDateYn,
+                decode((select t.sell_prdt_bcode from tb_sell_prdt_rec_ex_price t where t.sell_prdt_bcode = sp.sell_prdt_bcode), null, 'Y', 'N') as rcrdPriceUpdateYn,
+                rcrd_cd                     rcrdCd,
+                FC_GET_LAST_DC_RATE(SELL_PRDT_BCODE, #mallId#)  lastDscntRate,
+                FC_GET_PRDT_SALE_STAT(SELL_PRDT_BCODE)  saleStat,
+                FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE, #mallId#) lastCpnPrice
+          FROM  tb_sell_product sp
+         WHERE  sell_prdt_bcode = #barcode#
+    </select>
+    
+    <!-- 
+        기능: 상품이미지목록 반환
+     -->
+    <select id="getProductImages" parameterClass="sellProductKey" resultClass="productImage">
+        /* ProductSQL.getProductImages */
+        SELECT SELL_PRDT_BCODE  barcode
+             , PRDT_IMAGE_SEQ   sequence
+             , PRDT_IMAGE_URL   imageUrl
+             , DISP_ORDER       displayOrder
+          FROM TB_PRODUCT_IMAGE
+         WHERE SELL_PRDT_BCODE = #barcode#
+         ORDER BY DISP_ORDER
+    </select>
+    
+    <!-- 
+        기능: 상품이중옵션목록 반환
+    -->
+    <select id="getOptionTemp" parameterClass="sellProductKey" resultClass="optionTemp">
+        /* ProductSQL.getOptionTemp */
+        SELECT SELL_PRDT_BCODE  barcode
+             , OPTN_SEQ         sequence
+             , OPTN_NAME        optionName
+             , OPTN_DESC        optionDescription
+          FROM TB_TEMP_OPTION
+         WHERE SELL_PRDT_BCODE = #barcode#
+         ORDER BY OPTN_SEQ
+    </select>
+    
+    <!-- 
+        기능: 상품아이콘 정보 반환
+    -->
+    <select id="getIconKey" parameterClass="sellProductKey" resultClass="string">
+        /* ProductSQL.getIconKey */
+        SELECT FC_GET_PRODUCT_ICON_CODE(#barcode#, #mallId#) FROM DUAL
+    </select>
+    
+    <!-- 
+        기능: 사양(옵션)상품 목록 반환
+    -->
+    <select id="getSpectProductListByPrimeProduct" resultClass="sellProduct" parameterClass="sellProductKey">
+        /* ProductSQL.getSpectProductListByPrimeProduct */
+        SELECT 
+                sell_prdt_bcode             barcode,
+                prime_sell_prdt_bcode       primeBarcode,
+                prdt_name                   name,
+                prmt_deny_rsn               permitDenyReason,
+                dlvy_delay_dtcnt            deliveryDelayCount,
+                limit_count                 limitCount,
+                sell_count                  sellCount,
+                regst_dtm                   registDatetime,
+                regst_admin_id              adminId,
+                max_order_alw_count         maxOrderAllowCount,
+                prdt_srch_word              searchWord,
+                prdt_sell_price             sellPrice,
+                100 - prdt_chge_rate        chargeRate,
+                prdt_buy_price              buyPrice,
+                kyobo_chge_rate             kyoboChargeRate,
+                prdt_dscnt_rate             discountRate,
+                prdt_dscnt_price            discountPrice,
+                prdt_saved_rate             savedRate,
+                prdt_saved_price            savedPrice,
+                prmt_code                   permitCode,
+                prdt_stat_code              statusCode,
+                dlvy_vndr_id                deliveryVendorId,
+                prdt_bcode                  productBarcode,
+                disp_yn                     displayYn,
+                brand_id                    brandId,
+                vndr_cntrt_id               vendorCntractId,
+                nyo_sell_ban_yn             ban19Yn,
+                disp_order                  displayOrder,
+                sell_prdt_gbn               gbn,
+                prvd_title                  provideTitle,
+                mnftr                       manufacturer,
+                plorg                       placeOfOrigin,
+                imp_yn                      importYn,
+                order_make_yn               orderMakeYn,
+                ssn_prdt_yn                 seasonProductYn,
+                cvsl_yn                     carvedSealYn,
+                dlvy_area                   deliveryArea,
+                store_recv_yn               storeReceiveYn,
+                area_dlvy_yn                areaDeliveryYn,
+                prdt_dtl_info               productDetailInfomation,
+                spec_name                   productSpecName,
+                spec_group_name             productSpecGroupName,
+                free_dlvy_yn                freeDeliveryYn,
+                lave_count                  laveCount,
+                cod_dlvy_amt_yn             codDeliveryAmountYn,
+                mod_dtm                     modifyDatetime,
+                mod_admin_id                modifyAdminId,
+                prmt_dtm                    permitDatetime,
+                htrs_bcode                  hottracksCode,
+                khm_yn                      khmYn,
+                FC_GET_DC_PRICE(sell_prdt_bcode, #mallId#) lastDiscountPrice,
+                NVL(FC_GET_PRODUCT_STOCK(sell_prdt_bcode), 0) qty
+          FROM  tb_sell_product
+         WHERE  prime_sell_prdt_bcode = #barcode#
+         order  by spec_name  
+    </select>
+    
+    <!-- 
+        기능: 진행중인 이벤트의 매입율 반환
+    -->
+    <select id="getEventBuyRateByBarcode" resultClass="double" parameterClass="sellProductKey">
+        /* ProductSQL.getEventBuyRateByBarcode */
+        SELECT NVL(MIN(B.CHGE_RATE), 0)
+          FROM TB_EVENT_MASTER A 
+          JOIN TB_EVENT_SELL_PRODUCT B ON A.EVENT_ID = B.EVENT_ID AND B.sell_prdt_bcode = FC_GET_BARCODE(#barcode#) AND B.CHGE_RATE != 0
+          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.mall_id = #mallId#
+         WHERE A.PRMT_CODE = 'C0374'
+           AND A.EVENT_STAT_CODE = 'C0181'
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+    </select>
+    
+    <!-- 
+        기능: 상품별 리뷰목록 반환
+    -->
+    <select id="selectReviewListByBarcode" parameterClass="reviewCriteria" resultClass="kyoboReview" >
+        /* ProductSQL.selectReviewListByBarcode */
+        SELECT SELL_PRDT_BCODE      barcode
+             , RVW_SEQ              reviewSequence
+             , RVW_TITLE            reviewTitle
+             , RVW_CONT             reviewContents
+             , DISP_YN              displayYn
+             , DSN_POINT            designPoint
+             , PRDT_POINT           productPoint
+             , BKLOG_ID             bookLogId
+             , REGST_DTM            registDatetime
+             , USER_ID              userId
+             , TO_CHAR(REGST_DTM, 'YYYY-MM-DD')     regstDt
+             , RPAD(SUBSTR(USER_ID, 0, 4), 8, '*')  rpadUserId
+             , ROUND((PRDT_POINT + DSN_POINT)/2)    rvwAvg
+          FROM TB_KYOBO_REVIEW
+         WHERE SELL_PRDT_BCODE = #barcode#
+           AND DISP_YN = 'Y'
+         ORDER BY REGST_DTM DESC
+    </select>
+    
+    <!-- 
+        기능: 상품별 리뷰목록 수 반환
+    -->
+    <select id="selectReviewListSizeByBarcode" parameterClass="reviewCriteria" resultClass="Integer" >
+        /* ProductSQL.selectReviewListSizeByBarcode */
+        SELECT COUNT(SELL_PRDT_BCODE)
+          FROM TB_KYOBO_REVIEW
+         WHERE SELL_PRDT_BCODE = #barcode#
+           AND DISP_YN = 'Y'
+    </select>
+    
+    <!-- 
+        기능: 몰상품목록 반환
+     -->
+    <select id="getMallProductListByBarcode" parameterClass="string" resultClass="mallProduct">
+        /* ProductSQL.getMallProductListByBarcode */
+        SELECT MALL_ID          mallId
+             , SELL_PRDT_BCODE  barcode
+          FROM TB_MALL_PRODUCT
+         WHERE SELL_PRDT_BCODE = #barcode#
+    </select>
+    
+    <!-- 
+        기능: 상품 간단정보 반환
+     -->
+    <select id="selectProductInfo" resultClass="sellProduct" parameterClass="sellProductKey">
+        /* ProductSQL.selectProductInfo */
+        SELECT SELL_PRDT_BCODE      barcode
+             , PRDT_SELL_PRICE      sellPrice
+             , FC_GET_DC_PRICE(SELL_PRDT_BCODE, #mallId#)   lastDiscountPrice
+             , FC_GET_CHGE_RATE(SELL_PRDT_BCODE, #mallId#)  chargeRate
+          FROM TB_SELL_PRODUCT
+         WHERE SELL_PRDT_BCODE = #barcode#
+    </select>
+    
+    <!-- 
+        기능: 상품고시 정보 반환
+    -->
+    <select id="getPrdtNotiInfo" parameterClass="string" resultClass="prdtNotiInfo">
+        /* ProductSQL.getPrdtNotiInfo */
+        SELECT PNI.SELL_PRDT_BCODE  sellPrdtBcode
+             , NVL(PNI.MAKE_COMP, SP.MNFTR)        mnftr
+             , NVL(PNI.MAKE_NAT, SP.PLORG)         plorg
+             , SP.IMP_YN            impYn
+             , PNI.GBN_CODE         gbnCode
+             , PNI.CERTIFY          certify
+             , PNI.ITEM_NAME        itemName
+             , PNI.MATERIAL         material
+             , PNI.COMPONENTS       components
+             , PNI.SIZE1            size1
+             , PNI.SIZE2            size2
+             , PNI.CAUTION          caution
+             , PNI.MAIN_POINT       mainPoint
+             , PNI.DT_INFO          dtInfo
+             , PNI.WRNT_POLICY      wrntPolicy
+             , PNI.AS_MNGR_NAME     asMngrName
+             , PNI.AS_TEL_NUM       asTelNum
+             , PNI.USE_METHD        useMethd
+             , PNI.ADD_PRICE        addPrice
+             , PNI.ETC1             etc1
+             , PNI.ETC2             etc2
+             , PNI.ETC3             etc3
+          FROM TB_SELL_PRODUCT SP
+         INNER JOIN TB_PRDT_NOTI_INFO PNI ON SP.SELL_PRDT_BCODE = PNI.SELL_PRDT_BCODE
+         WHERE SP.SELL_PRDT_BCODE = #value#
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018.12.03
+        기능: 최근 본 상품 등록
+     -->
+    <delete id="deleteRecentProduct" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProduct">
+        /* ProductSQL.deleteRecentProduct */
+        DELETE
+          FROM TB_RECENT_PRODUCT
+         WHERE MALL_ID = #mallId#
+           AND INSTR(#sellPrdtBcode#, SELL_PRDT_BCODE) > 0
+           <isNotEmpty property="userNum">
+               AND USER_NUM = #userNum#
+           </isNotEmpty>
+           <isNotEmpty property="sesnHashKey">
+               AND USER_NUM IS NULL
+               AND SESN_HASH_KEY = #sesnHashKey#
+           </isNotEmpty>
+           <isEmpty property="userNum">
+               <isEmpty property="sesnHashKey">
+                   AND 1 != 1
+               </isEmpty>
+           </isEmpty>
+    </delete>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018.12.03
+        기능: 최근 본 상품 등록
+     -->
+    <insert id="insertRecentProduct" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProduct">
+        /* ProductSQL.insertRecentProduct */
+        INSERT INTO TB_RECENT_PRODUCT (RCNT_PRDT_SEQ, SELL_PRDT_BCODE, SESN_HASH_KEY, USER_NUM, MALL_ID, REGST_DTM)
+                                    VALUES (RCNT_PRDT_SEQ.NEXTVAL, #sellPrdtBcode#, #sesnHashKey#, #userNum#, #mallId#, SYSDATE)
+    </insert>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018.12.03
+        기능: 기존 최근 본 상품 갱신[비로그인 -> 로그인 시]
+     -->
+    <delete id="deleteRecentProduct4Convert" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProduct">
+        /* ProductSQL.deleteRecentProduct4Convert */
+        DELETE
+          FROM TB_RECENT_PRODUCT
+         WHERE USER_NUM = #userNum#
+           AND MALL_ID = #mallId#
+           AND SELL_PRDT_BCODE IN (SELECT SELL_PRDT_BCODE FROM TB_RECENT_PRODUCT WHERE USER_NUM IS NULL AND SESN_HASH_KEY = #sesnHashKey# AND MALL_ID = #mallId#)
+    </delete>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018.12.03
+        기능: 최근 본 상품 갱신[비로그인 -> 로그인 시]
+     -->
+    <update id="updateRecentProduct4Convert" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProduct">
+        /* ProductSQL.updateRecentProduct4Convert */
+        UPDATE TB_RECENT_PRODUCT
+           SET USER_NUM = #userNum#
+             , SESN_HASH_KEY = NULL
+             , REGST_DTM = SYSDATE
+         WHERE USER_NUM IS NULL
+           AND SESN_HASH_KEY = #sesnHashKey#
+           AND MALL_ID = #mallId#
+           AND SELL_PRDT_BCODE NOT IN (SELECT SELL_PRDT_BCODE FROM TB_RECENT_PRODUCT WHERE USER_NUM = #userNum# AND MALL_ID = #mallId#)
+    </update>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018.12.03
+        기능: 기존 최근 본 상품 갱신[세션 변경시]
+     -->
+    <delete id="deleteRecentProduct4Sesn" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProductExt">
+        /* ProductSQL.deleteRecentProduct4Sesn */
+        DELETE
+          FROM TB_RECENT_PRODUCT
+         WHERE USER_NUM IS NULL
+           AND USER_NUM = #preSesnHashKey#
+           AND MALL_ID = #mallId#
+           AND SELL_PRDT_BCODE IN (SELECT SELL_PRDT_BCODE FROM TB_RECENT_PRODUCT WHERE USER_NUM IS NULL AND SESN_HASH_KEY = #sesnHashKey# AND MALL_ID = #mallId#)
+    </delete>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018.12.03
+        기능: 최근 본 상품 갱신[세션 변경시]
+     -->
+    <update id="updateRecentProduct4Sesn" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProductExt">
+        /* ProductSQL.updateRecentProduct4Sesn */
+        UPDATE TB_RECENT_PRODUCT
+           SET SESN_HASH_KEY = #sesnHashKey#
+         WHERE USER_NUM IS NULL
+           AND SESN_HASH_KEY = #preSesnHashKey#
+           AND MALL_ID = #mallId#
+    </update>
+    
+    <!--  
+        작성자: 장진용
+        작성일: 2018.12.03 
+        기능 : 최근 본 상품목록 반환  
+    -->
+    <select id="getRecentProduct" resultClass="kr.co.hottracks.site.model.frontoffice.product.RecentProductExt" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProductCriteria">
+        /* ProductSQL.getRecentProduct */
+        SELECT SP.SELL_PRDT_BCODE       sellPrdtBcode
+             , FC_GET_PRODUCT_IMAGE_URL(SP.SELL_PRDT_BCODE)                             productImageUrl
+             , FC_GET_PRDT_NAME(SP.SELL_PRDT_BCODE, '02')                               prdtName
+             , (SELECT BRAND_NAME FROM TB_BRAND B WHERE B.BRAND_ID = SP.BRAND_ID)       brandName
+             , (SELECT BRAND_ENG_NAME FROM TB_BRAND B WHERE B.BRAND_ID = SP.BRAND_ID)   brandEngName
+             , SP.PRDT_SELL_PRICE       prdtSellPrice
+             , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE,'02')                                lastCpnPrice
+             , SP.SELL_PRDT_GBN         sellPrdtGbn
+             , R.RCRD_CD                rcrdCd
+             , RP.REGST_DTM             regstDtm
+          FROM TB_RECENT_PRODUCT RP
+          JOIN TB_SELL_PRODUCT SP ON RP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+          LEFT JOIN TB_RECORD R ON SP.SELL_PRDT_BCODE = R.SELL_PRDT_BCODE
+         WHERE RP.MALL_ID = #mallId#
+           <isNotEmpty property="userNum">
+               AND RP.USER_NUM = #userNum#
+           </isNotEmpty>
+           <isNotEmpty property="sesnHashKey">
+               AND RP.USER_NUM IS NULL
+               AND RP.SESN_HASH_KEY = #sesnHashKey#
+           </isNotEmpty>
+           <isEmpty property="userNum">
+               <isEmpty property="sesnHashKey">
+                   AND 1 != 1
+               </isEmpty>
+           </isEmpty>
+         ORDER BY RP.REGST_DTM DESC
+    </select>
+    
+    <!--  
+        작성자: 장진용
+        작성일: 2018.12.03
+        기능 : 최근 본 상품목록 수 반환  
+    -->
+    <select id="countRecentProduct" resultClass="int" parameterClass="kr.co.hottracks.site.model.frontoffice.product.RecentProductCriteria">
+        /* ProductSQL.countRecentProduct */
+        SELECT COUNT(*)
+          FROM TB_RECENT_PRODUCT RP
+          JOIN TB_SELL_PRODUCT SP ON RP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+         WHERE RP.MALL_ID = #mallId#
+           <isNotEmpty property="userNum">
+               AND RP.USER_NUM = #userNum#
+           </isNotEmpty>
+           <isNotEmpty property="sesnHashKey">
+               AND RP.USER_NUM IS NULL
+               AND RP.SESN_HASH_KEY = #sesnHashKey#
+           </isNotEmpty>
+           <isEmpty property="userNum">
+               <isEmpty property="sesnHashKey">
+                   AND 1 != 1
+               </isEmpty>
+           </isEmpty>
+    </select>
+</sqlMap>

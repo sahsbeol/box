@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="UbPaySQL">
+    <typeAlias alias="ubPayParam" type="kr.co.hottracks.site.model.frontoffice.order.UbPayParam"/>
+
+    <parameterMap id="sendReqPayInput" class="java.util.Map">
+        <parameter property="V_PROTO_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SALE_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_H_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_PASSWD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_MEDIA_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_VERSION" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_TRACE_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_CONFIRM_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_CONFIRM_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_DATA_LEN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SHOP_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_PG_BIZ_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_CUST_NAME" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_PERSID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_ALERT_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_TRADE_SEQ" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_UB_TID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_APP_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_REQ_AMT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SVC_AMT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_TAX" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_INS_MM" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_ISS_CD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_POINT_YN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_POINT_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_REQ_STP_CNT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_RTN_CD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_RTN_MSG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_EXPIRE_DT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_REQ_SEND_DT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_HAREX_SEND_DT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SALE_INFO_CNT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SALE_INFO_LEN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SALE_INFO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SHOP_ADD_LEN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SHOP_ADD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+    </parameterMap>
+
+    <procedure id="sendReqPay" parameterMap="sendReqPayInput">
+        { call PR_UBPAYSENDREQ( ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?) }
+    </procedure>
+    
+    <procedure id="sendReqPayRes" parameterMap="sendReqPayInput">
+        { call PR_UBPAYSENDREQRES( ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?) }
+    </procedure>
+    
+    <parameterMap id="sendReqConfirmCancelInput" class="java.util.Map">
+		<parameter property="V_PROTO_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />             
+		<parameter property="V_SALE_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_H_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />         
+		<parameter property="V_PASSWD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />           
+		<parameter property="V_MEDIA_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />             
+		<parameter property="V_VERSION" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />          
+		<parameter property="V_TRACE_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />             
+		<parameter property="V_CONFIRM_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />           
+		<parameter property="V_CONFIRM_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />           
+		<parameter property="V_DATA_LEN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />             
+		<parameter property="V_SHOP_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />          
+		<parameter property="V_PG_BIZ_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />            
+		<parameter property="V_CUST_NAME" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />            
+		<parameter property="V_ORG_APP_UB_TID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />   
+		<parameter property="V_UB_TID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_V_CARD_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_PAY_AMT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_SVC_AMT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_TAX" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_INS_MM" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_POINT_YN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />             
+		<parameter property="V_POINT_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_POINT_AMT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_RTN_CD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_RTN_MSG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_ISS_CD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_ISS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_ACO_CD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_ACO_NM" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_ORG_DATE" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_APP_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_PART_CAN_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_CAN_DATE" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_REQ_SEND_DT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_HAREX_SEND_DT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="V_FILLER" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+    </parameterMap>
+    
+    
+    <procedure id="sendReqConfirmCancelRes" parameterMap="sendReqConfirmCancelInput">
+        { call PR_UBPAYCONFIRMCANCELRES( ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?) }
+    </procedure>
+    
+    
+    <procedure id="sendReqConfirmCancel" parameterMap="sendReqConfirmCancelInput">
+        { call PR_UBPAYCONFIRMCANCEL( ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?) }
+    </procedure>
+    
+    
+    <parameterMap id="sendReqCancelInput" class="java.util.Map">
+        <parameter property="V_PROTO_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SALE_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_H_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_PASSWD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_MEDIA_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_VERSION" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_TRACE_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_CONFIRM_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_CONFIRM_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_DATA_LEN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SHOP_ID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_PG_BIZ_NO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_CUST_NAME" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_ORG_UB_TID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_UB_TID" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_REQ_AMT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_SVC_AMT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_TAX" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_INS_MM" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_POINT_YN" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_POINT_FG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_RTN_CD" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_RTN_MSG" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_ORG_REQ_DATE" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_REQ_SEND_DT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_HAREX_SEND_DT" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_FILLER" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+    </parameterMap>
+
+    <procedure id="sendReqPayCancel" parameterMap="sendReqCancelInput">
+        { call PR_UBPAYSENDREQCANCEL( ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?) }
+    </procedure>
+    
+    <procedure id="sendReqPayCancelRes" parameterMap="sendReqCancelInput">
+        { call PR_UBPAYSENDREQCANCELRES( ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?,?,?,?
+                              , ?,?) }
+    </procedure>
+    
+    <select id="ubPayInfo" resultClass="ubPayParam">
+        select to_char(sysdate,'yyyymmddHH24MISS')      nDt
+             , to_char(sysdate + 14,'yyyymmddHH24MISS') eDt
+             , nvl((select substrb(USER_NAME || '        ',1,8) from TB_USER where USER_ID = #userId#),'비회원  ') userName 
+          from dual
+    </select>
+    
+    <select id="ubPayReqInfo" resultClass="ubPayParam">
+        select SALE_FG      sale_fg
+             , MEDIA_FG     media_fg
+             , TRACE_NO     trace_no
+             , CONFIRM_FG   confirm_fg
+             , CONFIRM_ID   confirm_id
+             , SHOP_ID      shop_id
+             , PG_BIZ_NO    pg_biz_no
+             , CUST_NAME    cust_name
+             , UB_TID       ub_tid
+             , REQ_AMT      req_amt
+             , SVC_AMT      svc_amt
+             , TAX          tax
+             , INS_MM       ins_mm
+             , POINT_YN     point_yn
+             , POINT_FG     point_fg
+             , RTN_CD       rtn_cd
+             , RTN_MSG      rtn_msg
+             , substr(REQ_SEND_DT,1,8) req_send_dt
+             , to_char(sysdate,'yyyymmddHH24MISS') dt 
+          from TB_UBPAYREQ
+         where TRACE_NO = #userOrderId#
+    </select>
+    
+    <select id="ubPayConfirmInfo" resultClass="ubPayParam">
+        select SALE_FG      sale_fg
+             , MEDIA_FG     media_fg
+             , TRACE_NO     trace_no
+             , CONFIRM_FG   confirm_fg
+             , CONFIRM_ID   confirm_id
+             , SHOP_ID      shop_id
+             , CUST_NAME    cust_name
+             , UB_TID       ub_tid
+             , REQ_AMT      req_amt
+             , SVC_AMT      svc_amt
+             , TAX          tax
+             , INS_MM       ins_mm
+             , POINT_YN     point_yn
+             , POINT_FG     point_fg
+             , RTN_CD       rtn_cd
+             , RTN_MSG      rtn_msg
+             , to_char(sysdate,'yyyymmddHH24MISS') dt
+             , V_CARD_NO    v_card_no 
+             , substr(APP_TIME,1,8) org_date
+             , APP_NO app_no
+          from TB_UBPAYCHECK
+         where TRACE_NO = #userOrderId#
+    </select>
+    
+</sqlMap>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="CalculateSQL">
+    <typeAlias alias="pgPayment" type="kr.co.hottracks.site.model.backoffice.order.PgPayment"/>
+    
+    <update id="updatePgPayment" parameterClass="pgPayment">
+        /* CalculateSQL.updatePgPayment */
+        UPDATE tb_pg_payment_info
+           SET store_id         = #storeId#
+             , pymnt_code       = #paymentCode#
+             , trsn_num         = #transactionNum#
+             , pymnt_organ_code = #paymentOrganCode#
+             , pymnt_organ_name = #paymentOrganName#
+             , buyer_id         = #buyerId#
+             , trsn_amt         = #transferAmount#
+             , escr_yn          = #escrYn#
+             , pymnt_dth        = #paymentDth#
+             , prmt_num         = #permitNum#
+             , stat             = #status#
+             , canc_gbn         = #cancelGbn#
+             , canc_yn          = #cancelYn#
+             , admin_id         = #adminId#
+             , mod_dtm          = sysdate
+         WHERE seq = #sequence#
+    </update>
+</sqlMap>

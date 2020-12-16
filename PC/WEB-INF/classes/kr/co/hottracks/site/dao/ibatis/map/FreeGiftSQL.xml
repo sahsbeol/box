@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="FreeGiftSQL">
+    <typeAlias alias="freeGift" type="kr.co.hottracks.site.model.common.product.FreeGift"/>
+    <typeAlias alias="sellProductKey" type="kr.co.hottracks.site.model.common.product.SellProductKey"/>
+    
+    <select id="getFreeGiftById" resultClass="freeGift" parameterClass="string">
+        /* FreeGiftSQL.getFreeGiftById */
+        SELECT FREE_GIFT_ID                id
+             , FREE_GIFT_NAME              name
+             , FREE_GIFT_BCODE             freeGiftBarcode
+             , FREE_GIFT_IMAGE_URL         imageUrl
+             , REGST_ADMIN_ID              registAdminId
+             , GIFT_PRDT_PRSNT_START_DT    presentStartDate
+             , GIFT_PRDT_PRSNT_END_DT      presentEndDate
+             , LIMIT_COUNT                 limitCount
+             , GIFT_PRDT_STAT_CODE         statusCode
+             , CNSM_COUNT                  consumeCount
+             , LAVE_COUNT                  laveCount
+             , FREE_GIFT_LIST_IMAGE_URL    listImageUrl
+             , FREE_GIFT_DESC              freeGiftDescription
+             , VNDR_ID                     vendorId
+             , REGST_DTM                   registDatetime
+             , PRDT_FREE_GIFT_YN           productFreeGiftYn
+             , BRAND_ID                    brandId
+             , STD_START_AMT               standardStartAmount
+             , STD_END_AMT                 standardEndAmount
+          FROM TB_FREE_GIFT_MASTER
+         WHERE FREE_GIFT_ID = #value#
+    </select>
+    
+    <update id="updateFreeGift" parameterClass="freeGift">
+        /* FreeGiftSQL.updateFreeGift */
+        UPDATE TB_FREE_GIFT_MASTER
+           SET FREE_GIFT_NAME           = #name#
+             , FREE_GIFT_BCODE          = #freeGiftBarcode#
+             , FREE_GIFT_IMAGE_URL      = #imageUrl#
+             , GIFT_PRDT_PRSNT_START_DT = #presentStartDate#
+             , GIFT_PRDT_PRSNT_END_DT   = #presentEndDate#
+             , LIMIT_COUNT              = #limitCount#
+             , GIFT_PRDT_STAT_CODE      = #statusCode#
+             , CNSM_COUNT               = #consumeCount#
+             , LAVE_COUNT               = #laveCount#
+             , FREE_GIFT_LIST_IMAGE_URL = #listImageUrl#
+             , FREE_GIFT_DESC           = #freeGiftDescription#
+             , VNDR_ID                  = #vendorId#
+             , PRDT_FREE_GIFT_YN        = #productFreeGiftYn#
+             , BRAND_ID                 = #brandId#
+             , STD_START_AMT            = #standardStartAmount#
+             , STD_END_AMT              = #standardEndAmount#
+         WHERE FREE_GIFT_ID = #id#
+    </update>
+    
+    <select id="getFreeGiftListByProductKey" resultClass="freeGift" parameterClass="sellProductKey">
+        /* FreeGiftSQL.getFreeGiftListByProductKey */
+        SELECT B.free_gift_id               id
+             , B.free_gift_name             name
+             , B.free_gift_bcode            freeGiftBarcode
+             , B.free_gift_image_url        imageUrl
+             , B.regst_admin_id             registAdminId
+             , B.gift_prdt_prsnt_start_dt   presentStartDate
+             , B.gift_prdt_prsnt_end_dt     presentEndDate
+             , B.limit_count                limitCount
+             , B.gift_prdt_stat_code        statusCode
+             , B.cnsm_count                 consumeCount
+             , B.lave_count                 laveCount
+             , B.free_gift_list_image_url   listImageUrl
+             , B.free_gift_desc             freeGiftDescription
+             , B.vndr_id                    vendorId
+             , B.regst_dtm                  registDatetime
+             , B.prdt_free_gift_yn          productFreeGiftYn
+             , B.brand_id                   brandId
+             , B.std_start_amt              standardStartAmount
+             , B.std_end_amt                standardEndAmount
+             , B.LINK_URL                   linkUrl
+          FROM TB_SELL_PRODUCT_GIFT_PRODUCT A
+          JOIN TB_FREE_GIFT_MASTER B ON A.FREE_GIFT_ID = B.FREE_GIFT_ID
+                                    AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN B.GIFT_PRDT_PRSNT_START_DT AND B.GIFT_PRDT_PRSNT_END_DT
+                                    AND B.GIFT_PRDT_STAT_CODE = 'C0331'
+                                    AND B.LAVE_COUNT > 0 
+         WHERE A.SELL_PRDT_BCODE = #barcode#
+         UNION
+        SELECT E.free_gift_id               id
+             , E.free_gift_name             name
+             , E.free_gift_bcode            freeGiftBarcode
+             , E.free_gift_image_url        imageUrl
+             , E.regst_admin_id             registAdminId
+             , E.gift_prdt_prsnt_start_dt   presentStartDate
+             , E.gift_prdt_prsnt_end_dt     presentEndDate
+             , E.limit_count                limitCount
+             , E.gift_prdt_stat_code         statusCode
+             , E.cnsm_count                 consumeCount
+             , E.lave_count                 laveCount
+             , E.free_gift_list_image_url   listImageUrl
+             , E.free_gift_desc             freeGiftDescription
+             , E.vndr_id                    vendorId
+             , E.regst_dtm                  registDatetime
+             , E.prdt_free_gift_yn          productFreeGiftYn
+             , E.brand_id                   brandId
+             , E.std_start_amt              standardStartAmount
+             , E.std_end_amt                standardEndAmount
+             , E.LINK_URL                   linkUrl
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_SELL_PRODUCT B ON A.EVENT_ID = B.EVENT_ID
+          JOIN TB_EVENT_PRODUCT_FREE_GIFT C ON B.EVENT_ID = C.EVENT_ID AND B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+          JOIN TB_EVENT_FREE_GIFT D ON C.EVENT_ID = D.EVENT_ID AND C.FREE_GIFT_ID = D.FREE_GIFT_ID
+          JOIN TB_FREE_GIFT_MASTER E ON D.FREE_GIFT_ID = E.FREE_GIFT_ID
+                                    AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN E.GIFT_PRDT_PRSNT_START_DT AND E.GIFT_PRDT_PRSNT_END_DT
+                                    AND E.GIFT_PRDT_STAT_CODE = 'C0331'
+                                    AND E.LAVE_COUNT > 0
+         WHERE A.PRMT_CODE = 'C0374'
+           AND A.EVENT_STAT_CODE = 'C0181'
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND B.SELL_PRDT_BCODE = #barcode#
+    </select>
+    
+    <update id="decreaseOne" parameterClass="string">
+        /* FreeGiftSQL.decreaseOne */
+        UPDATE TB_FREE_GIFT_MASTER 
+           SET LAVE_COUNT = LAVE_COUNT - 1,
+               CNSM_COUNT = CNSM_COUNT + 1
+         WHERE FREE_GIFT_ID = #value#
+           AND LAVE_COUNT > 0
+    </update>
+</sqlMap>

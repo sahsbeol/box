@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BrandMainSQL">
+    <typeAlias alias="brandMainCriteria" type="kr.co.hottracks.site.model.frontoffice.brand.BrandMainCriteria"/>
+    <typeAlias alias="simpleBrandDto" type="kr.co.hottracks.site.model.frontoffice.brand.SimpleBrandDto"/>
+    <typeAlias alias="simpleProductDto" type="kr.co.hottracks.site.model.common.faq.SimpleProductDto" />
+    <typeAlias alias="productsPerCategoryDto" type="kr.co.hottracks.site.model.frontoffice.brand.ProductsPerCategoryDto" />
+    <typeAlias alias="eventImage" type="kr.co.hottracks.site.model.common.event.EventImage"/>
+    
+    <select id="selectSimpleBrandListByDisplayId" parameterClass="brandMainCriteria" resultClass="simpleBrandDto">
+        /* BrandMainSQL.selectSimpleBrandListByDisplayId*/
+        SELECT V.brand_id           id
+             , V.brand_name         koreanName
+             , V.brand_eng_name     englishName
+             , V.brand_image_url    imageUrl
+          FROM (SELECT Z.*
+                     , ROWNUM num 
+                  FROM (SELECT display.brand_id
+                             , display.disp_order
+                             , brand.brand_name 
+                             , brand.brand_eng_name 
+                             , brandImage.brand_image_url 
+                          FROM tb_category_display_entity display
+                             , tb_brand brand
+                             , tb_brand_image brandImage
+                             , tb_mall_brand mallBrand
+                         WHERE display.brand_id = brand.brand_id
+                           AND brandImage.brand_id(+) = brand.brand_id
+                           AND mallBrand.brand_id = brand.brand_id
+                           AND display.ctgr_id = #categoryCode#
+                           AND display.disp_mstr_id = #displayId#
+                           AND display.disp_yn = 'Y'
+                           AND brandImage.brand_image_code(+) = #brandImageCode#
+                           AND mallBrand.mall_id = #mallId#
+                           AND display.mall_id = #mallId#
+                         ORDER BY display.dgr, display.disp_order
+                        ) Z
+               ) V
+             , (SELECT num FROM tb_number WHERE num &lt;=  #brandListSize# ) N
+         WHERE V.num(+) = N.num
+         ORDER BY V.disp_order
+    </select>
+    
+    <select id="isBrandInDisplayEntityOfMaxDegree" parameterClass="brandMainCriteria" resultClass="String">
+        SELECT display.disp_mstr_id  str
+          FROM tb_category_display_entity display 
+         WHERE display.dgr = (SELECT Max(dgr) FROM tb_category_display_entity WHERE disp_mstr_id = #displayId#) 
+           AND display.brand_id = #brandId#
+           AND display.mall_id = #mallId#
+           AND ROWNUM &lt; '2'
+    </select>
+    
+    <select id="selectProductsPerCategoryByBrandId" parameterClass="brandMainCriteria" resultClass="productsPerCategoryDto">
+        /*brandMainSQL.selectproductsPerCategoryByBrandId*/
+        WITH v_temp as(
+              SELECT brand.brand_id brandId
+                   , cate_detail.ctgr_id  categoryId
+                   , count(product.sell_prdt_bcode) productId
+                FROM tb_product_category cate_detail
+                   , tb_sell_product product
+                   , tb_brand brand
+                   , tb_vendor_contract vendor_con
+               WHERE cate_detail.sell_prdt_bcode = product.sell_prdt_bcode
+                 AND product.brand_id = brand.brand_id
+                 AND product.vndr_cntrt_id         = vendor_con.vndr_cntrt_id
+                 AND product.SELL_PRDT_GBN           in ('P', 'G') 
+                 AND cate_detail.std_ctgr_yn         = 'Y'
+                 AND product.prmt_code               = 'C0302'
+                 AND product.prdt_stat_code         IN ('C0312', 'C0313')
+                 AND vendor_con.vndr_cntrt_stat_code = 'C0072'  
+                 AND TO_CHAR(sysdate,'YYYYMMDD') between vendor_con.cntrt_start_dt AND vendor_con.cntrt_end_dt
+                 AND product.brand_id = #brandId#
+                 AND FC_IS_VALID_PRODUCT(product.sell_prdt_bcode, #mallId#) = 'Y'
+               GROUP BY brand.brand_id, cate_detail.ctgr_id
+        )
+        SELECT v.brandId               brandId
+             , cate.ctgr_id            categoryId
+             , cate.ctgr_name          categoryName
+             , SUM(v.productId)        productCount
+          FROM tb_category cate
+             , v_temp v
+         WHERE cate.ctgr_id = SUBSTR(v.categoryId,0,6) 
+         GROUP BY v.brandId, cate.ctgr_id, cate.ctgr_name    
+    </select>
+    
+    <sql id="where_MaxRowSize">
+        <isNotEmpty property="topCount">
+                AND  ROWNUM &lt; #topCount# + 1
+        </isNotEmpty>
+    </sql>
+    
+    <sql id="productList_where">
+        WHERE product.brand_id                  = brand.brand_id
+            AND product.vndr_cntrt_id         = vendor_con.vndr_cntrt_id
+            AND cate_detail.sell_prdt_bcode = product.sell_prdt_bcode
+            AND product.SELL_PRDT_GBN            in ('P', 'G')
+            AND cate_detail.std_ctgr_yn         = 'Y'
+            AND product.prmt_code               = 'C0302'
+            AND product.prdt_stat_code         IN ('C0312', 'C0313')
+            AND vendor_con.vndr_cntrt_stat_code = 'C0072'
+            AND TO_CHAR(sysdate,'YYYYMMDD') between vendor_con.cntrt_start_dt AND vendor_con.cntrt_end_dt
+            AND product.brand_id = #brandId#
+            <isNotEmpty property="categoryCode">
+                AND cate_detail.ctgr_id LIKE #categoryCode#||'%'
+            </isNotEmpty>
+            AND FC_IS_VALID_PRODUCT(product.sell_prdt_bcode, #mallId#) = 'Y'
+    </sql>
+    
+    <select id="selectSimpleProductListByOrderCondition" parameterClass="brandMainCriteria" resultClass="simpleProductDto">
+        /*selectSimpleProductListByOrderCondition*/
+        WITH v_temp as (
+            SELECT brand.brand_id           brandId
+                 , brand.brand_name         brandName
+                 , product.prdt_name        productName
+                 , product.sell_prdt_bcode  barcode
+                 , product.prmt_dtm         approvedDate
+                 , product.prdt_saved_rate  productSavingRate
+                 , product.prdt_saved_price productSavingPrice
+                 , product.prdt_sell_price  productPrice
+              FROM tb_sell_product product
+                 , tb_brand brand
+                 , tb_vendor_contract vendor_con
+                 , tb_product_category cate_detail
+             <include refid="productList_where"/>
+        )
+        SELECT v.brandName          brandName
+             , v.productName        productName
+             , v.barcode            barcode
+             , v.productSavingPrice productSavingPrice
+             , v.productPrice       productPrice
+             , v.productSavingRate  productSavingRate
+             , FC_GET_PRODUCT_IMAGE_URL(v.barcode)  productImageUrl
+             , FC_GET_DC_PRICE(v.barcode, #mallId#) productSellingPrice
+             , FC_GET_PRODUCT_ICON_CODE(v.barcode, #mallId#) icons 
+          FROM v_temp v
+         WHERE 'dumyConidtion' = 'dumyConidtion'
+         <isNotEmpty property="productListSize">
+           AND ROWNUM &lt; #productListSize# + 1
+        </isNotEmpty>
+        <isEqual property="orderCondition" compareValue="low_price" >
+            ORDER BY productSellingPrice ASC
+        </isEqual>
+        <isEqual property="orderCondition" compareValue="expensive_price">
+            ORDER BY productSellingPrice DESC
+        </isEqual>
+        <isEqual property="orderCondition" compareValue="prmt_dtm">
+            ORDER BY approvedDate DESC
+        </isEqual>
+    </select>
+    
+    <select id="selectTotalRowSizeOfOrderCondition" parameterClass="brandMainCriteria" resultClass="Integer">
+        /*selectTotalRowSizeOfOrderCondition*/
+        WITH v_temp as (
+            SELECT product.sell_prdt_bcode barcode
+              FROM tb_sell_product product
+                 , tb_brand brand
+                 , tb_vendor_contract vendor_con
+                 , tb_product_category cate_detail
+             WHERE product.brand_id                  = brand.brand_id
+               AND product.vndr_cntrt_id         = vendor_con.vndr_cntrt_id
+               AND cate_detail.sell_prdt_bcode = product.sell_prdt_bcode
+               AND product.SELL_PRDT_GBN          in ('P', 'G')
+               AND cate_detail.std_ctgr_yn         = 'Y'
+               AND product.prmt_code               = 'C0302'
+               AND product.prdt_stat_code         IN ('C0312', 'C0313')
+               AND vendor_con.vndr_cntrt_stat_code = 'C0072'
+               AND TO_CHAR(sysdate,'YYYYMMDD') between vendor_con.cntrt_start_dt AND vendor_con.cntrt_end_dt
+               AND product.brand_id = #brandId#
+               <isNotEmpty property="categoryCode">
+                   AND cate_detail.ctgr_id LIKE #categoryCode#||'%'
+               </isNotEmpty>
+               AND FC_IS_VALID_PRODUCT(product.sell_prdt_bcode, #mallId#) = 'Y'
+        )
+        SELECT count(v.barcode) 
+          FROM v_temp v
+         WHERE 'dumyCondition' = 'dumyCondition'
+          <isNotEmpty property="topCount">
+              AND  ROWNUM &lt; #topCount# + 1
+          </isNotEmpty>
+    </select>
+    
+    <select id="selectSimpleProductListBySelledAmount" parameterClass="brandMainCriteria" resultClass="simpleProductDto">
+        /*selectSimpleProductListBySelledAmount*/
+        WITH v_temp as (
+            SELECT SP.SELL_PRDT_BCODE
+                 , SP.PRDT_NAME
+                 , SP.PRDT_SAVED_RATE
+                 , SP.PRDT_SAVED_PRICE
+                 , SP.PRDT_SELL_PRICE
+                 , B.BRAND_NAME
+                 , NVL(T.CNT, 0) CNT
+                FROM TB_SELL_PRODUCT SP
+               INNER JOIN TB_VENDOR_CONTRACT VC ON SP.VNDR_CNTRT_ID = VC.VNDR_CNTRT_ID
+               INNER JOIN TB_BRAND B ON VC.BRAND_ID = B.BRAND_ID
+               INNER JOIN TB_PRODUCT_CATEGORY PC ON SP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.STD_CTGR_YN = 'Y'
+               LEFT OUTER JOIN (SELECT DECODE(PRDT.SELL_PRDT_GBN, 'S', PRDT.PRIME_SELL_PRDT_BCODE, PRDT.SELL_PRDT_BCODE) SELL_PRDT_BCODE
+                                     , NVL(SUM(OP.ORDER_COUNT-OP.CANC_COUNT),0) CNT
+                                  FROM TB_ORDER O
+                                 INNER JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM
+                                 INNER JOIN TB_SELL_PRODUCT PRDT ON PRDT.SELL_PRDT_BCODE = OP.SELL_PRDT_BCODE 
+                                 WHERE O.MALL_ID = #mallId#
+                                   AND O.ORDER_STATUS_CODE != 'C0281'
+                                   AND OP.ORDER_PRDT_STAT_CODE = 'C0171'
+                                   AND TO_CHAR(O.ORDER_DTM, 'yyyyMMdd') > TO_CHAR(SYSDATE -7, 'yyyyMMdd')
+                                 GROUP BY DECODE(PRDT.SELL_PRDT_GBN, 'S', PRDT.PRIME_SELL_PRDT_BCODE, PRDT.SELL_PRDT_BCODE)
+                               ) T ON SP.SELL_PRDT_BCODE = T.SELL_PRDT_BCODE
+               WHERE SP.BRAND_ID = #brandId#
+                 AND SP.SELL_PRDT_GBN IN ('P', 'G')
+                 AND SP.PRMT_CODE = 'C0302'
+                 AND SP.PRDT_STAT_CODE IN ('C0312', 'C0313')
+                 AND VC.VNDR_CNTRT_STAT_CODE = 'C0072'
+                 AND VC.CNTRT_START_DT &lt;= TO_CHAR(SYSDATE,'YYYYMMDD')
+                 AND VC.CNTRT_END_DT >= TO_CHAR(SYSDATE,'YYYYMMDD')
+                 AND FC_IS_VALID_PRODUCT(SP.SELL_PRDT_BCODE, #mallId#) = 'Y'
+                 <isNotEmpty property="categoryCode" prepend="AND">
+                     PC.CTGR_ID LIKE #categoryCode#||'%'
+                 </isNotEmpty>
+             <isEqual property="orderCondition" compareValue="order_count">
+                 ORDER BY CNT DESC, SP.PRMT_DTM DESC, SP.REGST_DTM DESC
+             </isEqual>
+            )
+            SELECT BRAND_NAME           brandName
+                 , PRDT_NAME            productName
+                 , SELL_PRDT_BCODE      barcode
+                 , CNT                  productSelledAmount 
+                 , FC_GET_PRODUCT_IMAGE_URL(SELL_PRDT_BCODE) productImageUrl
+                 , PRDT_SAVED_PRICE     productSavingPrice
+                 , PRDT_SELL_PRICE      productPrice
+                 , FC_GET_DC_PRICE(SELL_PRDT_BCODE, #mallId#) productSellingPrice
+                 , PRDT_SAVED_RATE      productSavingRate
+                 , FC_GET_PRODUCT_ICON_CODE(SELL_PRDT_BCODE, #mallId#) icons
+              FROM V_TEMP
+            <dynamic prepend="WHERE">
+                <isNotEmpty property="productListSize">
+                    ROWNUM &lt; #productListSize# + 1
+                </isNotEmpty>
+            </dynamic>
+    </select>
+    
+    <select id="selectTotalRowSizeOfSelledAmount" parameterClass="brandMainCriteria" resultClass="Integer">
+        /*selectTotalRowSizeOfSelledAmount*/
+        WITH v_temp as (
+            SELECT SP.SELL_PRDT_BCODE
+                FROM TB_SELL_PRODUCT SP
+               INNER JOIN TB_VENDOR_CONTRACT VC ON SP.VNDR_CNTRT_ID = VC.VNDR_CNTRT_ID
+               INNER JOIN TB_BRAND B ON VC.BRAND_ID = B.BRAND_ID
+               INNER JOIN TB_PRODUCT_CATEGORY PC ON SP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.STD_CTGR_YN = 'Y'
+               WHERE SP.BRAND_ID = #brandId#
+                 AND SP.SELL_PRDT_GBN IN ('P', 'G')
+                 AND SP.PRMT_CODE = 'C0302'
+                 AND SP.PRDT_STAT_CODE IN ('C0312', 'C0313')
+                 AND VC.VNDR_CNTRT_STAT_CODE = 'C0072'
+                 AND TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN VC.CNTRT_START_DT AND VC.CNTRT_END_DT
+                 AND FC_IS_VALID_PRODUCT(SP.SELL_PRDT_BCODE, #mallId#) = 'Y'
+                 <isNotEmpty property="categoryCode" prepend="AND">
+                     PC.CTGR_ID LIKE #categoryCode#||'%'
+                 </isNotEmpty>
+            )
+            SELECT COUNT(*) AS CNT
+              FROM V_TEMP
+            <dynamic prepend="WHERE">
+                <isNotEmpty property="productListSize">
+                    ROWNUM &lt; #productListSize# + 1
+                </isNotEmpty>
+            </dynamic>
+    </select>
+    
+    <select id="selectEventImageListByBrandId" parameterClass="brandMainCriteria" resultClass="eventImage">
+        /*brandMainSQL.selectEventImageListByBrandId*/
+        SELECT E.event_id            eventId
+             , EI.image_url      imageUrl
+         FROM (SELECT VC.vndr_id
+                 FROM tb_vendor_contract VC
+                    , tb_vendor V
+                WHERE VC.vndr_id = V.vndr_id
+                  AND VC.brand_id  = #brandId#
+                GROUP BY VC.vndr_id
+              ) A 
+            , tb_event_vendor E
+            , tb_event_master EM
+            , tb_event_image EI
+        WHERE a.vndr_id = E.vndr_id
+          AND E.event_id = EI.event_id
+          AND EM.event_id = E.event_id
+          AND TO_CHAR(sysdate,'YYYYMMDD') between EM.event_start_dt AND EM.event_end_dt
+          AND EI.event_image_code = #eventImageCode#
+          AND EM.prmt_code = 'C0374'
+          AND EM.event_stat_code = 'C0181'
+          AND EM.event_type_code not in ('C0196', 'C0198')
+          AND EM.DISP_YN = 'Y'
+          AND ROWNUM &lt; #eventListSize# + 1
+    </select>
+
+    <select id="selectEventImageListByAllVendor" parameterClass="brandMainCriteria" resultClass="eventImage">
+        /*brandMainSQL.selectEventImageListByAllVendor*/
+        SELECT EM.EVENT_ID   eventId
+             , EI.IMAGE_URL imageUrl
+          FROM TB_EVENT_MASTER EM
+          JOIN TB_EVENT_IMAGE EI ON (EM.EVENT_ID = EI.EVENT_ID)
+         WHERE TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN EM.EVENT_START_DT AND EM.EVENT_END_DT
+           AND EI.EVENT_IMAGE_CODE = #eventImageCode#
+           AND EM.PRMT_CODE        = 'C0374'
+           AND EM.EVENT_STAT_CODE  = 'C0181'
+           AND EM.EVENT_CRI_CODE   = 'C0222'
+           AND EM.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')
+           AND EM.CTGR_ID LIKE (SELECT SUBSTR(DISP_CTGR_ID, 0, 4) FROM TB_BRAND WHERE BRAND_ID = #brandId#) || '%'
+           AND EM.VNDR_ALL_YN = 'Y'
+           AND EM.DISP_YN = 'Y'
+           AND ROWNUM &lt; #eventListSize# + 1
+         ORDER BY EM.REGST_DTM DESC
+    </select>
+    
+    <select id="isValidBrand" parameterClass="brandMainCriteria" resultClass="string">
+        SELECT  brand_id brandId
+          FROM  tb_mall_brand
+         WHERE  brand_id = #brandId#
+           AND  mall_id = #mallId#
+    </select>
+</sqlMap>

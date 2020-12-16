@@ -1,0 +1,258 @@
+@charset "utf-8";
+/* CSS Document */   
+/* base css */
+* { margin: 0; padding: 0; }
+html { width: 100%; }
+body { width: 100%; font-size: 12px; font-family: "돋움", "Dotum", sans-serif; color: #464646; line-height: normal; }
+table { border-collapse: collapse; border-spacing: 1px; font-size: 1em; }
+img, input.type-image { border: 0; }
+input[type=checkbox], input[type=radio] { border: 0 !important; }
+fieldset, legend { border: 0; }
+form, h1, h2, h3, h4, h5, h6, p, div, th, td, table, select, address { margin: 0; padding: 0; line-height: normal; color: #666666; }
+h1 { font-size: 2em; }
+h2 { font-size: 1.6em; }
+h3 { font-size: 1.2em; }
+h4, h5, h6 { font-size: 1em; }
+hr { display: none; }
+ul, li, ol, dl, dt, dd { margin: 0; padding: 0; list-style: none; }
+button { margin: 0; border: 0; background: none; cursor: pointer; }
+select { padding: 0; margin: 0; vertical-align: middle; font-size: 1em; border: 1px solid #ccc; background: #fff; font-family: "돋움", "Dotum", sans-serif; }
+textarea { padding: 0; margin: 0; vertical-align: middle; font-size: 1em; border: 1px solid #ccc; background: #fff; font-family: "돋움", "Dotum", sans-serif; line-height: 1.4em; color: #5a5a5a; }
+input { padding: 0; margin: 0; vertical-align: middle; font-size: 1em; line-height: 1.2em; color: #5a5a5a; font-family: "돋움", "Dotum", sans-serif; }
+input.checkbox { padding: 0; border: none; }
+a:link, a:visited { color: #666666; text-decoration: none; line-height: normal !important; }
+a:hover, a:active { color: #f58220; text-decoration: underline; line-height: normal !important; }
+#contents div.pager { clear: both; position: relative; margin: 0 0 -60px; padding: 13px 0 20px; text-align: center; }
+#contents div.pager a, #contents div.pager strong { display: inline-block; padding: 3px 7px; vertical-align: middle; }
+#contents div.pager img { margin: 0 -6px; vertical-align: middle; }
+  
+/* Reset */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, big, cite, code, del, dfn, em, font, img, ins, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin:0; padding:0; border:none 0; }
+html, body { width:100%; height:100%; }
+body { background-color:#fff; }
+body, input, button, textarea { font-size:12px; line-height:1.5em; font-family: "돋움", Dotum, Helvetica, AppleGothic, Sans-serif; color:#666666; }
+h1, h2, h3, h4, h5, h6 { font-size:12px; text-align:left; }
+img, fieldset, iframe { border:0 none; }
+table, div { border-collapse: collapse; }
+select, textarea { border: 1px solid #B7B6B6; background: #FFFFFF; color:#666666; font-size: 12px; vertical-align: middle; }
+textarea { overflow:auto; }
+select, input, img, li { vertical-align: middle; text-align:left; }
+address, caption, cite, code, dfn, em, th, var { font-style : normal; font-weight : normal; } /* strong */
+ul, li, ol { list-style-type: none; }
+legend, caption { display: none; }
+hr { border-collapse:collapse; display:none; }
+a:link, a:visited { text-decoration:none; color: #636363; }
+a:hover { text-decoration:underline; cursor:pointer; }
+
+ 
+	
+/* //////////////////////////   global class  /////////////////////// */ 
+
+/* align 시리즈 속성 정의 */
+.left { text-align:left !important; }
+.center { text-align:center !important; }
+.right { text-align:right !important; }
+
+/* none 시리즈 속성 정의 */
+.bor_none { border:none !important; }
+.bg_none { background:none !important; }
+.dp_none { display:none !important; }
+.ma_none { margin:0px !important; }
+.pa_none { padding:0px !important; }
+.clear { clear:both !important; }
+ 
+/* font style 시리즈 속성 정의 */
+.bold { font-weight:bold !important; }
+.underline { text-decoration:underline !important; }
+.f11 { font-size:11px !important; }
+
+/* font color 시리즈 속성 정의 */
+.f_red {color:#da2128 !important; }
+.f_red_b {color:#da2128 !important; font-weight:bold !important; }
+.f_black {color:#333333 !important; }
+.f_black_b {color:#333333 !important; font-weight:bold !important; }
+.f_gray {color:#b7b7b7 !important;}
+.f_bl66_b {color:#666666 !important; font-weight:bold !important; }
+.f_bl46 {color:#464646 !important; }
+.f_bl89 {color:#898989 !important; }
+.f_orange {color:#ff790d !important;}
+.f_orange_b {color:#ff790d !important; font-weight:bold !important; }
+
+/* form 시리즈 속성 정의 */
+input[type="text"] { height:18px; border:1px solid #CCCCCC; }
+input.radio { display:block; }
+input.check { display:block; }
+select { height:20px; }
+
+/* IR 시리즈 속성 정의 */
+.ir {text-indent:-5000px !important; overflow:hidden !important; display:inline-block;}
+
+/* 여백 정의 */
+
+.h20 {width:auto; height:20px !important;}
+.h30 {width:auto; height:30px !important;}
+.h15_top {width:auto; margin-top:15px !important;}
+.h30_top {width:auto; margin-top:30px !important;}
+.h50_top {width:auto; margin-top:50px !important;}
+.h25_bottom {width:auto; margin-bottom:25px !important;}
+.h30_bottom {width:auto; margin-bottom:30px !important;}
+.h40_bottom {width:auto; margin-bottom:40px !important;}
+.h45_bottom {width:auto; margin-bottom:45px !important;}
+ 
+  
+/* btn class */  
+.newbtn_052 {width:91px; height:22px; display:inline-block; background:url("https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/order/btn_order.gif") -97px -120px no-repeat; }
+.newbtn_052 button {width:91px; height:22px; float:left;}
+.newbtn_084 {width:88px; height:20px; display:inline-block; background:url("https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/order/btn_order.gif") -226px -210px no-repeat; }
+.newbtn_084 button {width:88px; height:20px; float:left;}
+  
+/* 상품 리스트 */
+.order_table01 {width:100%; border-top:2px solid #a31112; border-bottom:1px solid #cacaca;}
+.order_table01 thead th {padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #a31112;}
+.order_table01 thead th.right {padding-right:12px;}
+.order_table01 thead th.right_m {padding-right:22px;}
+.order_table01 tbody td {border-top:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; line-height:14px; text-align:center;}
+.order_table01 tbody td span.dfont {font-size:10px; font-family:Verdana; line-height:22px;}
+.order_table01 tbody td.product img {margin:8px 0; }
+.order_table01 tbody td.link a {text-decoration:underline; color:#666; font-size:11px;}
+.order_table01 tbody td.link a span.f_red {text-decoration:underline; color:#DA2128; font-size:11px;}
+.order_table01 tbody td.right {padding-right:8px; }
+.order_table01 tbody td.left {padding-left:20px; text-align:left;}
+.order_table01 tbody td.popleft {padding:12px 0 10px 10px; text-align:left;}
+.order_table01 tbody td img.bt_m {margin:0 0 3px 0; }
+.order_table01 tbody td input.input35 {width:33px; height:16px; font-size:11px; border:1px solid #ccc; color:#888; text-align:center;}
+.order_table01 tbody td input.input35no {width:33px; height:16px; font-size:11px; border:1px solid #ccc; background:#f9f9f9; color:#888; text-align:center;}
+.order_table01 tbody td select {font-size:11px; color:#555; border:1px solid #CCCCCC;}
+.order_table01 tbody.gift td { border-bottom:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; text-align:center;}
+.order_table01 tbody.gift td.left { padding-left:10px; text-align:left;}
+.order_table01 tbody.gift02 td { border-top:1px solid #cacaca; padding:9px 0 6px; color:#585858; font-size:11px; text-align:center;}
+.order_table01 tbody.gift02 td.right { padding-right:15px; text-align:left; color:#333333;}
+.order_table01 tfoot td { border-top:1px solid #cacaca; color:#333333; padding:10px 15px 6px; background:#f5f5f5; text-align:right; font-size:11px;}
+
+
+/* popup */
+#popup { width: 100%; }
+div.pop-head { padding: 7px 0 0; height: 53px; background: url("https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/popup/popup_head_bg.gif") repeat-x 0 0; }
+div.pop-head h1 { padding: 0 20px 8px 0; text-align: right; }
+div.pop-head h2 { padding: 0 0 13px 21px; text-align: left; }
+div.pop-body { padding: 0 20px 0; font-size: 0.9em; }
+
+div.pop_body .popup_infor { width:100%; overflow:hidden; position:relative; }
+.popup_title { width:100%; overflow:hidden; position:relative; margin-bottom:6px; }
+.popup_title p { font-size:11px; padding:0 0 4px 8px; color:#898989; }
+.popup_title p.dt { font-size:11px; padding:0 0 4px 2px; line-height:16px;}
+
+.popup_title_mp { width:100%; overflow:hidden; position:relative; margin:5px 0 3px 0; }
+.popup_title_mp p { font-size:11px; padding:0 0 4px 4px; color:#898989; } 
+
+.popup_title p .newbtn_037 { position:absolute; bottom:0; right:0;}
+div.pop_body {width:auto; padding:30px 20px 0 20px; position:relative; font-size: 0.9em; overflow:auto; overflow-x:hidden;}
+/*div.pop_body {width:auto; padding:30px 20px 35px 20px; font-size: 0.9em; min-height:123px; }*/
+
+.order_btn { width:100%; overflow:hidden; position:relative; text-align:center; }
+ 
+	/* 쿠폰조회/적용 */
+	div.pop_body .order_table03 {width:100%; border-top:2px solid #a31112; border-bottom:1px solid #898989;}
+	div.pop_body .order_table03 thead th {padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #a31112;}
+	div.pop_body .order_table03 tbody td {border-top:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; line-height:14px; text-align:center;}  
+	div.pop_body .order_table03 tbody td.right {padding-right:8px; }
+	div.pop_body .order_table03 tbody td.left {padding-left:20px; text-align:left;}
+	div.pop_body .order_table03 tbody td.popleft {padding:12px 0 10px 10px; text-align:left;} 
+	div.pop_body .order_table03 tbody td select {font-size:11px; color:#555; border:1px solid #CCCCCC;}
+
+div.pop_body .popbbox { width:auto; overflow:hidden; padding:5px 0; background:#f5f5f5; border:1px solid #ddd; color:#333; vertical-align: middle; }
+div.pop_body .popbbox span { margin:0 33px 0 33px; }
+div.pop_body .popbbox input.input { font-size:11px; color:#555; padding-left:6px; height:18px; border:1px solid #CCCCCC; }
+
+div.pop_body p.title {padding-bottom:10px;}
+div.pop_body .txtbox {width:100%; overflow:hidden; border:1px solid #ebeaea;}
+div.pop_body .txtbox p {padding:15px 20px 12px 20px; line-height:18px;}
+
+div.pop_body .txtbox_sl {width:auto; height:200px; padding:15px 10px 14px 20px; margin-bottom:15px; overflow:auto; overflow-x:hidden; border:1px solid #ebeaea; line-height:16px;}
+
+div.pop_body .newbtn_084 {margin:10px 0 0 10px;}
+div.pop_body .newbtn_083 {margin:10px 0 0 10px;}
+div.pop_body .newbtn_056 {margin-right:10px;}
+div.pop_body .order_btn .newbtn_056 {margin-right:0px;}
+
+div.pop_body .newbtn_015 {vertical-align:middle;}
+
+div.pop_body .txt_infor {width:auto; height:93px; border:1px solid #e1e1e1; padding:15px 10px 10px 20px; margin-bottom:15px; overflow:auto; overflow-x:hidden;}
+div.pop_body .txt_infor div {font-size:11px; line-height:16px;}
+div.pop_body div.infor_box p {font-weight:bold; color:#898989; line-height:20px;}
+div.pop_body div.infor_box p.top {margin-top:25px; line-height:20px;}  
+
+div.pop_body .line {width:auto; height:10px; border-top:1px solid #e1e1e1; margin-bottom:5px;}
+div.pop_body .line2 {width:auto; height:10px; border-bottom:2px solid #e1e1e1; margin-bottom:15px;}
+
+div.popup-foot {padding: 9px 0 8px 0; width: 100%; background: #ebebeb; text-align:right; position:absolute; left:0; bottom:0;}
+div.popup-foot button { margin: 0 20px 0 0; } 
+div.popup-foot_02 {padding: 9px 0 10px 0; width: 100%; background: #ebebeb; text-align: right; }
+div.popup-foot_02 button { margin: 0 20px 0 0; }
+
+
+div.popup-zipcode { padding: 0 0 25px; width: 360px; }
+div.popup-zipcode p.zipcode-info-text { padding: 24px 0 0; height: 26px; text-align: center; }
+div.popup-zipcode p.exercise { height: 29px; text-align: center; }
+div.popup-zipcode div.region-name { padding: 15px 0; text-align: center; border: 1px solid #eaeaea; background: #f8f8f8; }
+div.popup-zipcode div.region-name label { margin: 0 5px 0 0; }
+div.popup-zipcode div.region-name input.textbox { padding: 2px 0 0 2px; width: 150px; height: 16px; border: 1px solid #d2d2d2; }
+div.popup-zipcode div.zipcode-list { margin: 25px 0 0; height: 99px; overflow: auto; }
+div.popup-zipcode div.zipcode-list table { width: 100%; border-top: 2px solid #a31112; border-bottom: 1px solid #eaeaea; }
+div.popup-zipcode div.zipcode-list table caption { height: 0; font-size: 0; line-height: 0; visibility: hidden; }
+div.popup-zipcode div.zipcode-list table thead tr th { padding: 6px 0; font-weight: normal; }
+div.popup-zipcode div.zipcode-list table tbody tr td { padding: 6px 0; border-top: 1px solid #eaeaea; }
+div.popup-zipcode div.zipcode-list table tbody tr td.zipcode { width: 94px; text-align: center; }
+
+
+
+/* 음원 구매 테이블 */
+.order_table04 { width:100%; border-top:2px solid #a31112; border-bottom:1px solid #898989; }
+.order_table04 thead th {padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #a31112; background:#f5f5f5; }
+.order_table04 tbody td { border-top:1px solid #e4e4e4; padding:6px 0 6px; font-size:11px; line-height:14px; text-align:center; color: #555; }
+.order_table04 tbody td.left { padding-left:10px; }
+.order_table04 tbody td.right { padding-right:10px; }
+.order_table04 tbody td strong { color: #252525; }
+.order_table04 tbody th { border-top:1px solid #e4e4e4; padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal;  background:#f5f5f5; }
+.order_table04 tbody.left td, .order_table04 tbody.left th { text-align:left; padding-left: 20px; }
+
+/* 페이지 타이틀 */
+.popup_massage { padding: 10px 10px 0px; font-size: 11px; color: #7d7d7d; line-height: 170%; }
+.popup_massage ol { display: block; margin-bottom: 15px; }
+.popup_massage strong { color: #252525; }
+.popup_massage em { color: #fe5705; }
+
+/* order_infort */
+.order_infor {width:100%; overflow:hidden; position:relative; }
+.order_infor  p.f_bl89 { font-size:11px; line-height:14px; margin:8px 0 0 4px; padding-left:12px; clear:both; background:url("https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot_list.gif") no-repeat 4px 5px; }
+.order_infor  p.f_red { font-size:11px; line-height:14px; margin:2px 0 0 4px; padding-left:12px; clear:both; background:url("https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot_list.gif") no-repeat 4px 5px; }
+.order_infor_title2 {width:100%; height:20px; position:relative; margin-bottom:6px; }
+.order_infor_title2 div {width:510px; height:20px; position:relative; padding-left:6px; }
+.order_infor_title2 div img { margin-top:5px; }
+
+/* 정보 입력 */
+.order_table02 {width:100%; border-top:2px solid #a31112; border-bottom:1px solid #cacaca;}
+.order_table02 thead th { padding:10px 0 7px; color:#333; font-size:11px; font-weight:normal; border-bottom:1px solid #a31112; }
+.order_table02 tbody th { border-top:1px solid #e4e4e4; padding:7px 0 4px 25px; color:#333; font-size:11px; text-align:left; background:#f5f5f5; }
+.order_table02 tbody td { border-top:1px solid #e4e4e4; padding:5px 0 4px 20px; font-size:11px; line-height:18px; text-align:left; }
+.order_table02 tbody td.txt { border-top:1px solid #e4e4e4; padding:7px 0 4px 20px; font-size:11px; line-height:18px; text-align:left; }
+.order_table02 tbody td.bg { background:#f5f5f5; padding:7px 0 4px 20px; }
+.order_table02 tbody td input.input { font-size:11px; color:#555; padding-left:6px; height:18px; border:1px solid #CCCCCC; }
+.order_table02 tbody td select { font-size:11px; color:#555; border:1px solid #CCCCCC; }
+	.order_table02 tbody td .box_radios {width:650px; height:15px; position:absolute; top:36px; left:230px;}
+	.order_table02 tbody td .radios_ml { margin:0 4px 2px 30px;}
+	.order_table02 tbody td .checkboxs_ml { margin:0 4px 2px 30px; }
+.order_table02 tbody td .radios { margin:0 4px 2px 0; }
+.order_table02 tbody td .checkboxs { margin:0 4px 2px 0; }
+.order_table02 tbody td label.t01 { margin-right:60px; }
+.order_table02 tbody td label.t02 { margin-right:30px; }
+.order_table02 tbody td span.tmline2 { padding-top:4px; display:block; }
+.order_table02 tbody td.right { padding-right:20px; }
+.order_table02 tbody td span.all { margin:0 10px 0 4px; }
+.order_table02 tbody.sbox th { border-top:1px solid #e4e4e4; padding:7px 0 4px 25px; color:#333; font-size:11px; text-align:left; background:none; }
+.order_table02 tbody.sbox td { border-top:1px solid #e4e4e4; padding:7px 0 4px 20px; font-size:11px; line-height:20px; text-align:left; }
+.order_table02 tbody.sbox td.right { padding-right:20px; }
+.order_table02 tbody td.no {padding:33px 0 31px 0;}
+
+/* 하단 버튼 */
+.popup_foot_btn { border-top: 1px solid #e4e4e4; padding: 15px 0; text-align: center; margin-top: 15px; clear: both; }

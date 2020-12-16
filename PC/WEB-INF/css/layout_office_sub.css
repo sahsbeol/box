@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+@import "layout.css";
+
+#contents div.page-location {
+	margin: 3px 0 20px -190px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/office/page_location_bg.gif") repeat-x 0 bottom;
+}
+#contents div.page-location ul {
+	margin: 0 0 0 200px;
+}
+#quick_menu {
+	position: absolute;
+	left: 960px;
+	top: 0pt !important;
+	width: 112px;
+}

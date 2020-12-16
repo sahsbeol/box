@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/m_contents.js"></script>
+<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+</head>
+
+<body>
+	<div class="top_banner" style="background-color:#7e68ff;">
+		<div class="inner">
+			<!-- 영역 -->
+            <style>
+            /* 좌에서 우로 컬러 #코드 모두 수정 필수 */
+            .top_banner {
+            background: -webkit-linear-gradient(left,  #2b44c3 0%,#2b44c3 50%,#febf3c 50%,#febf3c 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right,  #2b44c3 0%,#2b44c3 50%,#febf3c 50%,#febf3c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            }
+            </style>
+            <div class="top_banner_a type2">
+	            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/img_top_banner02.jpg" usemap="#top_map">
+        	    <map name="top_map">
+            	    <area shape="rect" coords="2,3,610,77" href="/ht/hot/eventDetail?eventId=66901" onfocus="this.blur()">
+            	    <area shape="rect" coords="651,2,1246,78" href="/ht/hot/eventDetail?eventId=66843" onfocus="this.blur()">
+	            </map>
+	            <!-- 화이트 버튼 white로 / 블랙 버튼 black로 클래스 추가 -->
+	            <a href="#none" class="btn_close black">닫기</a>
+            </div>				
+		</div>
+	</div>
+
+	<div id="wrap" class="content_new">
+		<!-- header -->
+		<div id="header">
+			<!-- util menu -->
+			<div class="util_menu">
+				<ul>
+					<li><a href="#">로그인</a></li>
+					<li><a href="#">회원가입</a></li>
+					<li><a href="#">고객센터</a></li>
+					<li><a href="#">매장안내</a></li>
+					<li><a href="#">팬사인회</a></li>
+				</ul>
+			</div>
+			<!--// util menu -->
+			<!-- gnb -->
+	        <nav id="gnb">
+				<div class="header_wrap">
+					<h1 class="g_logo"><a href="../biz/main.html">HOTTRACKS</a></h1>
+					<div class="g_search">
+						<div class="form_select">
+							<select>
+								<option>문구/기프트</option>
+								<option>option2</option>
+								<option>option3</option>
+							</select>
+						</div>
+						<div class="form_search">
+							<input type="text" placeholder="샤오미를 쓰는 이유">
+							<a href="../biz/search.html" class="btn_search"></a>
+						</div>
+						<div class="keyword_wrap">
+							<a href="#">
+								<em class="font_t">12</em>
+								<p>에어팟케이스</p>
+								<!-- ▲ up , ▼ down : class 추가 -->
+								<span class="num up">99+</span>
+							</a>
+						</div>
+					</div>
+					<div class="g_menu">
+						<ul>
+							<li class="icon_my">
+								<a href="#">
+									<img src="../../images/biz/common/icon_my.png" alt="">
+								</a>
+							</li>
+							<li class="icon_today">
+								<a href="#">
+									<img src="../../images/biz/common/icon_today.png" alt="">
+									<em>오늘,<strong>혜택</strong></em>
+								</a>
+							</li>
+							<li class="icon_cart">
+								<a href="#">
+									<img src="../../images/biz/common/icon_cart.png" alt="">
+									<em class="font_t">5</em>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="gnb_wrap">
+					<div class="inner">
+						<div class="category_wrap">
+							<div class="btn_category">
+								<a href="#">카테고리</a>
+							</div>
+							<div class="category_cont">
+								<ul>
+									<li>
+										<a href="#none" class="dp1">디자인문구</a>
+										<div class="dp2">
+											<ul>
+												<li>
+													<a href="../biz/category_list.html" class="all">전체보기</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="../biz/category_list.html" class="all">전체보기</a></li>
+															<li><a href="#">2020 날짜형 다이어리</a></li>
+															<li><a href="#">만년 다이어리</a></li>
+															<li><a href="#">2020 날짜형 스케쥴러</a></li>
+															<li><a href="#">위클리 스케쥴러</a></li>
+															<li><a href="#">먼슬리 스케쥴러</a></li>
+															<li><a href="#">캐쉬북</a></li>
+															<li><a href="#">프로젝트플래너</a></li>
+															<li><a href="#">스터디플래너</a></li>
+															<li><a href="#">여행플래너</a></li>
+															<li><a href="#">다이어트플래너</a></li>
+															<li><a href="#">임신 다이어리</a></li>
+															<li><a href="#">리필속지</a></li>
+															<li><a href="#">커버/액세서리</a></li>
+															<li><a href="#" class="more">ㄹ</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">다이어리/스케쥴러</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">비즈니스플래너/노트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">2020 캘린더/만년</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필기구</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필통/파우치</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">노트/메모</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포토앨범/스크랩북</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">스티커/스탬프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">데코/디자인 테이프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포장/데코용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">편지/카드/봉투</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">컬러링/캘리/문구세트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">화방용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">BOOK</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="dp1">디지털</a>
+										<div class="dp2">
+											<ul>
+												<li>
+													<a href="#" class="all">전체보기</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+															<li><a href="#">2020 날짜형 다이어리</a></li>
+															<li><a href="#">만년 다이어리</a></li>
+															<li><a href="#">2020 날짜형 스케쥴러</a></li>
+															<li><a href="#">위클리 스케쥴러</a></li>
+															<li><a href="#">먼슬리 스케쥴러</a></li>
+															<li><a href="#">캐쉬북</a></li>
+															<li><a href="#">프로젝트플래너</a></li>
+															<li><a href="#">스터디플래너</a></li>
+															<li><a href="#">여행플래너</a></li>
+															<li><a href="#">다이어트플래너</a></li>
+															<li><a href="#">임신 다이어리</a></li>
+															<li><a href="#">리필속지</a></li>
+															<li><a href="#">커버/액세서리</a></li>
+															<li><a href="#" class="more">더보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">다이어리/스케쥴러</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">비즈니스플래너/노트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">2020 캘린더/만년</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필기구</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">필통/파우치</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">노트/메모</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포토앨범/스크랩북</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">스티커/스탬프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">데코/디자인 테이프</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">포장/데코용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">편지/카드/봉투</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">컬러링/캘리/문구세트</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">화방용품</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+												<li>
+													<a href="#">BOOK</a>
+													<div class="dp3">
+														<ul>
+															<li><a href="#" class="all">전체보기</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="dp1">고급필기구</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">오피스</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">리빙/생활가전</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">키친/푸드</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">가구/수납</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">패션잡화</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">뷰티/헬스</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">여행/자동차</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">취미/펫</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">유아동</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">직수입/PB</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">CD/LP</a>
+									</li>
+									<li>
+										<a href="#none" class="dp1">DVD/BLU-RAY</a>
+									</li>
+								</ul>
+								<div class="banner">
+									<a href="#"><img src="" alt=""></a>
+								</div>
+							</div>
+						</div>
+						<ul class="gnb_menu">
+							<li><a href="#">다이어리<em></em></a></li>
+							<li><a href="#">음반<em></em></a></li>
+							<li><a href="#">베스트</a></li>
+							<li><a href="#">무료배송</a></li>
+							<li><a href="#">신상품</a></li>
+							<li><a href="#">세일</a></li>
+							<li><a href="#">이벤트</a></li>
+						</ul>
+						<ul class="sub_menu">
+							<li><a href="#">개인의취향</a></li>
+							<li><a href="#">이럴 때,</a></li>
+							<li><a href="#">아지트</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!--// header -->
+
+		<!-- Container -->
+		<div id="container">
+
+			<!-- 컨텐츠 -->
+				
+<div class="content category_wrap" id="content">
+ 
+ <!-- 배너 -->
+ <div class="category_banner_wrap">
+    <div class="category_banner">
+        <!-- 시스템배너 -->
+        <div class="slide-item type02">
+            <a href="#n">
+                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1977/1584668090110_겨울왕국_웹배너(950x500).jpg" alt="">
+                <div class="desc">
+                    <p class="tit">겨울왕국2 DVD/BD 발매</p>
+                    <p class="txt">홀로그램 엽서북 추첨증정(10명)</p>
+                </div>
+            </a>
+        </div>
+        <!--// 시스템배너 -->
+        <!-- 통배너 -->
+        <div class="slide-item type01">
+            <a href="#n">
+                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1220/1586740634911_950x500.jpg" alt="">
+            </a>
+        </div>
+        <!--// 통배너 -->
+    </div>
+    <div class="custom_paging_wrap">
+        <div class="custom_paging"></div>
+
+    </div>
+</div>
+<!--// 배너 -->
+ 
+  <div class="lower_content">
+    <!-- location -->
+    <div class="location_wrap">
+      <button type="button" class="btn_home">홈으로</button>
+      <div class="location_nav_wrap"> <a href="#n" class="location_1">DVD/BLU-RAY</a>
+        <ul class="location_nav">
+          <li><a href="#n">디자인문구</a></li>
+          <li><a href="#n">디지털</a></li>
+          <li><a href="#n">고급필기구</a></li>
+          <li><a href="#n">오피스</a></li>
+          <li><a href="#n">리빙/생활가전</a></li>
+          <li><a href="#n">키친/푸드</a></li>
+          <li><a href="#n">가구/수납</a></li>
+          <li><a href="#n">패션잡화</a></li>
+          <li><a href="#n">뷰티/헬스</a></li>
+          <li><a href="#n">여행/자동차</a></li>
+          <li><a href="#n">취미/펫</a></li>
+          <li><a href="#n">유아동</a></li>
+          <li><a href="#n">CD/LP</a></li>
+          <li><a href="#n">직수입/PB</a></li>
+          <li><a href="#n">DVD/BLU-RAY</a></li>
+        </ul>
+      </div>
+      <div class="location_nav_wrap"> <a href="#n" class="location_1 on">BLU-RAY</a>
+        <ul class="location_nav">
+          <li><a href="#n">Blu-Ray </a></li>
+          <li><a href="#n"> DVD</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--// location -->
+    <div class="sub_tab">
+      <ul>
+        <li><a href="/html/biz/category_list03.html">DVD</a></li>
+        <li class="active"><a href="/html/biz/category_list04.html">BLU-RAY</a></li>
+      </ul>
+    </div>
+    <div class="category_list">
+      <ul>
+        <li><a href="#n" class="all" style="color:#DA2128;">전체보기</a></li>
+        <li><a href="#n">드라마/로맨스 </a></li>
+        <li><a href="#n">애니메이션 </a></li>
+        <li><a href="#n">TV시리즈 </a></li>
+        <li><a href="#n">SF/판타지 </a></li>
+        <li><a href="#n">액션/모험 </a></li>
+        <li><a href="#n">공포/스릴러 </a></li>
+        <li><a href="#n">코메디 </a></li>
+        <li><a href="#n">뮤지컬영화 </a></li>
+        <li><a href="#n">다큐멘터리 </a></li>
+        <li><a href="#n">MUSIC BLU-RAY </a></li>
+        <li><a href="#n">3D BLU-RAY </a></li>
+      </ul>
+      <div class="type02">
+        <ul>
+          <li><a href="#n" target="_blank">베스트</a></li>
+          <li><a href="#n" target="_blank">새로나온상품</a></li>
+          <li><a href="#n" target="_blank">예약상품</a></li>
+          <li><a href="#n" target="_blank">DVD / BLU-RAY 상세 검색</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- 예약상품 -->
+    <div class="pd_unit pd_unit02">
+      <h3 class="category_tit">예약상품</h3>
+      <div class="category_slide dvd">
+            <ul>
+              <li>
+                <a href=#n" title="마스크 오브 조로 4K UHD+BD [슬립케이스 한정판] [THE MASK OF ZORRO]<슬립케이스 한정판 2DISC>">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/0135/2531019.jpg" alt="마스크 오브 조로 4K UHD+BD [슬립케이스 한정판] [THE MASK OF ZORRO]<슬립케이스 한정판 2DISC>" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/0135/2531019.jpg');"> <span class="font_t">D-26</span> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">마스크 오브 조로 4K UHD+BD [슬립케이스 한정판] [THE MASK OF ZORRO]&lt;슬립케이스 한정판 2DISC&gt;</p>
+                  <p class="price font_t"> 41,800 </p>
+                  <div class="badge"> <span class="badge02">예약</span> </div>
+                  <p class="date">발매일 <strong class="mgl5 font_t">2020.05.13</strong></p>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="미들 스쿨: 꼰대 길들이기 [MIDDLE SCHOOL: THE WORST YEARS OF MY LIFE]">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/9035/2530987.jpg" alt="미들 스쿨: 꼰대 길들이기 [MIDDLE SCHOOL: THE WORST YEARS OF MY LIFE]" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/9035/2530987.jpg');"> <span class="font_t">D-12</span> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">DVD</p>
+                  <p class="tit">미들 스쿨: 꼰대 길들이기 [MIDDLE SCHOOL: THE WORST YEARS OF MY LIFE]</p>
+                  <p class="price font_t"> <span class="percent">5%</span> 24,000 <span class="discount">25,300</span> </p>
+                  <div class="badge"> <span class="badge02">예약</span> </div>
+                  <p class="date">발매일 <strong class="mgl5 font_t">2020.04.29</strong></p>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="TWICELIGHTS: WORLD TOUR 2019 IN SEOUL">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/8035/2530829.jpg" alt="TWICELIGHTS: WORLD TOUR 2019 IN SEOUL" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/8035/2530829.jpg');"> <span class="font_t">D-20</span> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                 <div class="cont">
+                  <p class="brand">TWICE(트와이스)</p>
+                  <p class="tit">TWICELIGHTS: WORLD TOUR 2019 IN SEOUL</p>
+                  <p class="price font_t"> 45,000 </p>
+                  <div class="badge"> <span class="badge01">포스터</span> <span class="badge02">예약</span> </div>
+                  <p class="date">발매일 <strong class="mgl5 font_t">2020.05.07</strong></p>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="TWICELIGHTS: WORLD TOUR 2019 IN SEOUL">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/8035/2530830.jpg" alt="TWICELIGHTS: WORLD TOUR 2019 IN SEOUL" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/8035/2530830.jpg');"> <span class="font_t">D-49</span> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                 <div class="cont">
+                  <p class="brand">TWICE(트와이스)</p>
+                  <p class="tit">TWICELIGHTS: WORLD TOUR 2019 IN SEOUL</p>
+                  <p class="price font_t"> 55,000 </p>
+                  <div class="badge"> <span class="badge01">포스터</span> <span class="badge02">예약</span> </div>
+                  <p class="date">발매일 <strong class="mgl5 font_t">2020.06.05</strong></p>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="6IXENSE: 1ST WORLD TOUR  IN SEOUL">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/6035/2530691.jpg" alt="6IXENSE: 1ST WORLD TOUR  IN SEOUL" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/6035/2530691.jpg');"> <span class="font_t">D-20</span> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                 <div class="cont">
+                  <p class="brand">AB6IX(에이비식스)</p>
+                  <p class="tit">6IXENSE: 1ST WORLD TOUR  IN SEOUL</p>
+                  <p class="price font_t"> 42,000 </p>
+                  <div class="badge"> <span class="badge01">포스터</span> <span class="badge02">예약</span> </div>
+                  <p class="date">발매일 <strong class="mgl5 font_t">2020.05.07</strong></p>
+                </div>
+                </a> </li>
+              <li> 
+                <a href="#n" title="6IXENSE: 1ST WORLD TOUR  IN SEOUL">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/6035/2530692.jpg" alt="6IXENSE: 1ST WORLD TOUR  IN SEOUL" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/6035/2530692.jpg');"> <span class="font_t">D-54</span> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                 <div class="cont">
+                  <p class="brand">AB6IX(에이비식스)</p>
+                  <p class="tit">6IXENSE: 1ST WORLD TOUR  IN SEOUL</p>
+                  <p class="price font_t"> 55,000 </p>
+                  <div class="badge"> <span class="badge01">포스터</span> <span class="badge02">예약</span> </div>
+                  <p class="date">발매일 <strong class="mgl5 font_t">2020.06.10</strong></p>
+                </div>
+                </a> </li>
+            </ul>
+       
+
+      </div>
+    </div>
+    <!--// 예약상품 -->
+    <!-- 최근발매 -->
+    <div class="pd_unit pd_unit03">
+      <h3 class="category_tit">새로 나온 상품</h3>
+      <div class="category_slide dvd">
+            <ul>
+              <li>
+                <a href="#n" title="겨울왕국 2 [FROZEN 2]">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/2035/2530299.jpg" alt="겨울왕국 2 [FROZEN 2]" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/2035/2530299.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">DVD</p>
+                  <p class="tit">겨울왕국 2 [FROZEN 2]</p>
+                  <p class="price font_t"> 22,000 </p>
+                  <div class="badge"> </div>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="겨울왕국 2 [FROZEN 2]">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/3035/2530302.jpg" alt="겨울왕국 2 [FROZEN 2]" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/3035/2530302.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">겨울왕국 2 [FROZEN 2]</p>
+                  <p class="price font_t"> 29,700 </p>
+                  <div class="badge"> </div>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="나쁜 녀석들: 더 무비">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/4035/2530452.jpg" alt="나쁜 녀석들: 더 무비" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/4035/2530452.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">DVD</p>
+                  <p class="tit">나쁜 녀석들: 더 무비</p>
+                  <p class="price font_t"> <span class="percent">7%</span> 23,500 <span class="discount">25,300</span> </p>
+                  <div class="badge"> </div>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="오블리비언 [오링케이스 한정판] [OBLIVION]">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/4035/2530478.jpg" alt="오블리비언 [오링케이스 한정판] [OBLIVION]" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/4035/2530478.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">오블리비언 [오링케이스 한정판] [OBLIVION]</p>
+                  <p class="price font_t"> 24,200 </p>
+                  <div class="badge"> </div>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="기방도령">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/5035/2530566.jpg" alt="기방도령" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/5035/2530566.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">DVD</p>
+                  <p class="tit">기방도령</p>
+                  <p class="price font_t"> <span class="percent">7%</span> 23,500 <span class="discount">25,300</span> </p>
+                  <div class="badge"> </div>
+                </div>
+                </a> </li>
+              <li>
+                <a href="#n" title="람보: 라스트 워 [RAMBO: LAST BLOOD]">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/3035/2530307.jpg" alt="람보: 라스트 워 [RAMBO: LAST BLOOD]" width="87" height="132" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/3035/2530307.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">DVD</p>
+                  <p class="tit">람보: 라스트 워 [RAMBO: LAST BLOOD]</p>
+                  <p class="price font_t"> <span class="percent">10%</span> 22,700 <span class="discount">25,300</span> </p>
+                  <div class="badge"> </div>
+                </div>
+                </a> </li>
+              
+            </ul>
+      </div>
+    </div>
+    <!--// 최근발매 -->
+    <!-- 베스트 -->
+    <div class="pd_unit pd_unit04">
+      <h3 class="category_tit"><span class="mgr10">BLU-RAY</span>베스트</h3>
+      <div class="category_slide dvd">
+            <ul>
+              <!-- 이미지 원형인 경우 round : class 추가 -->
+              <li>
+                <a href="#n">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/6035/2530692.jpg" alt="" width="95" height="144" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/6035/2530692.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">AB6IX(에이비식스)</p>
+                  <p class="tit">6IXENSE: 1ST WORLD TOUR  IN SEOUL</p>
+                  <p class="price font_t"> 55,000 </p>
+                  <div class="badge"> <span class="badge02">블루레이</span> <span class="badge01">포스터</span> <span class="badge02">예약</span> </div>
+                </div>
+                </a> </li>
+              <!-- 이미지 원형인 경우 round : class 추가 -->
+              <li>
+                <a href="#n">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/3035/2530302.jpg" alt="" width="95" height="144" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/3035/2530302.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">겨울왕국 2 [FROZEN 2]</p>
+                  <p class="price font_t"> 29,700 </p>
+                  <div class="badge"> <span class="badge02">블루레이</span> </div>
+                </div>
+                </a> </li>
+              <!-- 이미지 원형인 경우 round : class 추가 -->
+              <li>
+                <a href="#n">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/5035/2530578.jpg" alt="" width="95" height="144" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/5035/2530578.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">포드 V 페라리 [슬립케이스 한정판] [FORD V FERRARI]</p>
+                  <p class="price font_t"> 31,900 </p>
+                  <div class="badge"> <span class="badge02">블루레이</span> <span class="badge02">예약</span> <span class="badge03">일시품절</span> </div>
+                </div>
+                </a> </li>
+              <!-- 이미지 원형인 경우 round : class 추가 -->
+              <li>
+                <a href="#n">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/3035/2530301.jpg" alt="" width="95" height="144" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/3035/2530301.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">겨울왕국 2 [스틸북 한정판] [FROZEN 2]</p>
+                  <p class="price font_t"> 44,000 </p>
+                  <div class="badge"> <span class="badge02">블루레이</span> <span class="badge03">일시품절</span> </div>
+                </div>
+                </a> </li>
+              <!-- 이미지 원형인 경우 round : class 추가 -->
+              <li>
+                <a href="#n">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/6404/2404617.jpg" alt="" width="95" height="144" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/6404/2404617.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">레미제라블: 25주년 라이브 공연 [LES MISERABLES: IN CONCERT 25TH ANNIVERSARY]</p>
+                  <p class="price font_t"> 17,600 </p>
+                  <div class="badge"> <span class="badge02">블루레이</span> </div>
+                </div>
+                </a> </li>
+              <!-- 이미지 원형인 경우 round : class 추가 -->
+              <li>
+                <a href="#n">
+                <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/6293/2392618.jpg" alt="" width="95" height="144" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/6293/2392618.jpg');"> </div>
+                </a>
+                <!-- 클릭시 active : class 추가 -->
+                <a href="#n" class="btn_like"><span>좋아요</span></a>
+                <a href="#n">
+                <div class="cont">
+                  <p class="brand">BLU-RAY DISC</p>
+                  <p class="tit">오만과 편견 [PRIDE &amp; PREJUDICE]</p>
+                  <p class="price font_t"> 17,600 </p>
+                  <div class="badge"> <span class="badge02">블루레이</span> <span class="badge03">일시품절</span> </div>
+                </div>
+                </a> </li>
+            </ul>
+      </div>
+    </div>
+    <!--// 베스트 -->
+    <div class="tab">
+      <ul class="col05">
+        <li class="active"><a href="#n">신상품순</a></li>
+        <li><a href="#n">판매량순</a></li>
+      </ul>
+    </div>
+    <div class="pd_filter">
+      <p class="pd_total">
+        <!-- <em class="font_t"></em>건의 검색결과 -->
+      </p>
+      <div class="tag_list" id="searchcdt">
+        <ul>
+          <li id="saleYn">
+            <label class="form_checkbox">
+              <input type="checkbox">
+              <span class="icon">품절포함</span> </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 상품 -->
+    <div class="pd_list dvd">
+      <ul>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/0135/2531019.jpg" alt="마스크 오브 조로 4K UHD+BD [슬립케이스 한정판] [THE MASK OF ZORRO]<슬립케이스 한정판 2DISC>" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/0135/2531019.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+          <div class="cont">
+            <p class="brand">BLU-RAY DISC</p>
+            <p class="tit">마스크 오브 조로 4K UHD+BD [슬립케이스 한정판] [THE MASK OF ZORRO]&lt;슬립케이스 한정판 2DISC&gt;</p>
+            <p class="price font_t"> 41,800 </p>
+            <div class="badge"> <span class="badge02">블루레이</span> <span class="badge02">예약</span> </div>
+          </div>
+          </a> </li>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/9035/2530980.jpg" alt="캣츠 [오링케이스 한정판] [CATS]" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/9035/2530980.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+          <div class="cont">
+            <p class="brand">BLU-RAY DISC</p>
+            <p class="tit">캣츠 [오링케이스 한정판] [CATS]</p>
+            <p class="price font_t"> 31,900 </p>
+            <div class="badge"> <span class="badge02">블루레이</span> <span class="badge02">예약</span> </div>
+          </div>
+          </a> </li>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/dvd/img_19product.jpg" alt="퀸 &amp; 슬림 [QUEEN &amp; SLIM]" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/dvd/img_19product.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+          <div class="cont">
+            <p class="brand">BLU-RAY DISC</p>
+            <p class="tit">퀸 &amp; 슬림 [QUEEN &amp; SLIM]</p>
+            <p class="price font_t"> 31,900 </p>
+            <div class="badge"> <span class="badge02">블루레이</span> <span class="badge02">예약</span> </div>
+          </div>
+          </a> </li>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/8035/2530830.jpg" alt="TWICELIGHTS: WORLD TOUR 2019 IN SEOUL" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/8035/2530830.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+           <div class="cont">
+            <p class="brand">TWICE(트와이스)</p>
+            <p class="tit">TWICELIGHTS: WORLD TOUR 2019 IN SEOUL</p>
+            <p class="price font_t"> 55,000 </p>
+            <div class="badge"> <span class="badge02">블루레이</span> <span class="badge01">포스터</span> <span class="badge02">예약</span> </div>
+          </div>
+          </a> </li>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/7035/2530786.jpg" alt="BIRTH OF THE COOL: A FILM BY STANLEY NELSON [BD+DVD] [DELUXE] [한정반]" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/7035/2530786.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+          <div class="cont">
+            <p class="brand">MILES DAVIS</p>
+            <p class="tit">BIRTH OF THE COOL: A FILM BY STANLEY NELSON [BD+DVD] [DELUXE] [한정반]</p>
+            <p class="price font_t"> <span class="percent">8%</span> 40,100 <span class="discount">44,000</span> </p>
+            <div class="badge"> <span class="badge02">블루레이</span> <span class="badge02">수입</span> </div>
+          </div>
+          </a> </li>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/7035/2530783.jpg" alt="스타 이즈 본 4K UHD+BD [A STAR IS BORN]" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/7035/2530783.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+          <div class="cont">
+            <p class="brand">BLU-RAY DISC</p>
+            <p class="tit">스타 이즈 본 4K UHD+BD [A STAR IS BORN]</p>
+            <p class="price font_t"> 44,000 </p>
+            <div class="badge"> <span class="badge02">블루레이</span> </div>
+          </div>
+          </a> </li>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/7035/2530761.jpg" alt="LES CONTES D`HOFFMANN/ CARLO RIZZI [오펜바흐: 호프만 이야기 - 카를로 리치] [한글자막]" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/7035/2530761.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+          <div class="cont">
+            <p class="brand">JACQUES OFFENBACH</p>
+            <p class="tit">LES CONTES D`HOFFMANN/ CARLO RIZZI [오펜바흐: 호프만 이야기 - 카를로 리치] [한글자막]</p>
+            <p class="price font_t"> <span class="percent">10%</span> 42,300 <span class="discount">47,000</span> </p>
+            <div class="badge"> <span class="badge02">블루레이</span> <span class="badge02">수입</span> </div>
+          </div>
+          </a> </li>
+        <li> <a href="#n" title="새창열림">
+          <div class="thum"> <img src="http://image.kyobobook.co.kr/newimages/music/large/7035/2530763.jpg" alt="ROMEO AND JULIET/ PAVEL KLINICHEV [프로코피에프: 로미오와 줄리엣 - 우랄 오페라 발레]" height="96" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/7035/2530763.jpg');"> </div>
+          </a>
+          <!-- 클릭시 active : class 추가 -->
+          <a href="#n" class="btn_like"><span>좋아요</span></a>
+          <a href="#n">
+          <div class="cont">
+            <p class="brand">SERGEI PROKOFIEV</p>
+            <p class="tit">ROMEO AND JULIET/ PAVEL KLINICHEV [프로코피에프: 로미오와 줄리엣 - 우랄 오페라 발레]</p>
+            <p class="price font_t"> <span class="percent">10%</span> 39,600 <span class="discount">44,000</span> </p>
+            <div class="badge"> <span class="badge02">블루레이</span> <span class="badge02">수입</span> </div>
+          </div>
+          </a> </li>
+
+        
+      </ul>
+    </div>
+    <!--//상품 -->
+    <div class="pagination_v2"> <a title="" href="javascript:" class="arr prev first"></a> <a href="#n" class="active">1</a> <a title="2페이지로 이동" href="#n">2</a> <a title="3페이지로 이동" href="#n">3</a> <a title="4페이지로 이동" href="#n">4</a> <a title="5페이지로 이동" href="#n">5</a> <a title="6페이지로 이동" href="#n" class="arr next"></a> </div>
+   
+  </div>
+</div>
+
+			<!-- // 컨텐츠 -->
+		</div>
+		<!--// Container -->
+
+		<!-- footer -->
+		<div id="footer">
+			<div class="util">
+				<div class="util_cont">
+					<ul>
+						<li><a href="#">회사소개</a></li>
+						<li><a href="#">채용정보</a></li>
+						<li><a href="#">핫트합니다</a></li>
+						<li><a href="#">매장안내</a></li>
+						<li><a href="#">제휴/광고안내</a></li>
+						<li><a href="#">이용약관</a></li>
+						<li><a href="#"><strong>개인정보처리방침</strong></a></li>
+						<li><a href="#">이메일수집거부</a></li>
+					</ul>
+					<div class="family_site">
+						<p>패밀리 사이트</p>
+						<ul>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+							<li><a href="#" target="_blank">패밀리 사이트</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="inner">
+				<div class="cont left">
+					<div class="cs_center">
+						<strong class="font_t">1661-1112</strong>
+						<span>평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
+						<dl>
+							<dt><a href="#"><span>SOS 상담</span></a></dt>
+							<dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
+						</dl>
+					</div>
+					<h2>교보핫트랙스㈜</h2>
+					<span>대표이사 박영규</span>
+					<span>사업자등록번호 : 102-81-29258 <a href="#">사업자정보확인 &gt;</a></span>
+					<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+					<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+					<span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
+				</div>
+				<div class="cont right">
+					<ul class="sns">
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/icon_blog.png" alt="blog"></a></li>
+					</ul>
+	                <div class="mobile">
+	                    <a href="#" target="_blank" class="font_t ios">APP STORE</a>
+						<a href="#" target="_blank" class="font_t and">PLAY STORE</a>
+	                </div>
+					<ul class="copyright">
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+						<li><a href="#" target="_blank"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+					</ul>
+					<span class="payment"><em class="font_t">LGU+</em><a href="#" target="_blank">서비스 가입사실 확인 &gt;</a></span>
+					<span class="txt">고객님은 안전거래를 위해 현금 등으로 5만원 이상 결제 시 저희 쇼핑몰에서<br/>가입한 LG데이콤의 구매 안전서비스를 이용하실 수 있습니다.</span>
+				</div>
+			</div>
+		</div>
+		<!--// footer -->
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		gnb();//gnb
+		nav();//nav
+		if($('.header_wrap').length >0){
+			bodyScroll();//body scroll
+		}
+		categoryFn();//category
+	})
+	</script>
+</body>
+</html>

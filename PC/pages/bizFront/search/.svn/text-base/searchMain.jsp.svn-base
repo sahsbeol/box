@@ -1,0 +1,1276 @@
+<%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8"%>
+<html>
+<head>
+	<!-- 태그 라이브러리 -->
+	<%@ include file="/pages/decorators/biz/tagHeader.jsp" %>
+	<c:import url="/pages/decorators/biz/importHeader.jsp"/>
+	<!-- 데코레이터 메뉴,푸터 없음 -->
+	<ui:decorator name="bizSimpleHot"/>	
+<!-- 레코벨 스크립트 -->
+<script type="text/javascript">
+	var userId= getCookie("UserCookieKey");
+
+	window._rblq = window._rblq || [];
+	_rblq.push(['setVar','cuid','e15e978e-3623-4892-bf0a-485b9f8196ee']);
+	_rblq.push(['setVar','device','MW']);
+	_rblq.push(['setVar','userId',SHA256(userId)]); // optional
+	_rblq.push(['setVar','searchTerm','${c.searchTerm}']);
+	_rblq.push(['track','search']);
+	(function(s,x){s=document.createElement('script');s.type='text/javascript';
+	s.async=true;s.defer=true;s.src=(('https:'==document.location.protocol)?'https':'http')+'://assets.recobell.io/rblc/js/rblc-apne1.min.js';
+	x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();
+</script>
+<!-- 레코벨 스크립트 끝 -->
+
+<script type="text/javascript">
+var swiper2;
+var recobellSwiper;
+var _data;
+var _cond = {
+    listSize:"${c.listSize}"
+  , searchMenu:"${c.searchMenu}"
+  , categoryGroup:"${c.categoryGroup}"
+  , brandGroup:"${c.brandGroup}"
+  , ctgr_id_1d:"${c.ctgr_id_1d}"
+  , ctgr_id_2d:"${c.ctgr_id_2d}"
+  , page:"1"
+  , searchTerm:"${c.searchTerm}"
+  , saleYn:"${c.saleYn}"
+  , sort:"${c.sort}"
+  , freeDeliveryYn:"${c.freeDeliveryYn}"
+  , deliveryVendorId:"${c.deliveryVendorId}"
+  , discountYn:"${c.discountYn}"
+  , couponYn:"${c.couponYn}"
+  , minPrice:"${c.minPrice}"
+  , maxPrice:"${c.maxPrice}"
+  , viewType:"${c.viewType}"
+  , plusKeywords:"${c.plusKeywords}"
+  , minusKeywords:"${c.minusKeywords}"
+};
+
+window.onpopstate = function(e) {
+	console.log(e.state);
+	if(e.state){
+        _cond = e.state;
+        _searchProduct(false, true);
+    }else{
+        history.back();
+    }
+};
+
+jQuery(function($){
+    $(document).ready(function(){
+			categoryFn(); //category
+			searchFn(); //search
+        $("[type=checkbox]").change(function(){
+            if($(this).is(":checked"))    $(this).parents(".chk_wrap").addClass("active");
+            else                          $(this).parents(".chk_wrap").removeClass("active");
+        });
+        
+        _searchProduct(false, false);
+        
+        $("#footer").hide();
+    });
+    
+    $(".ns_body").scroll(function(){
+        if($("#_listLinked").find("a").length > 0){
+            var height = 35;
+            if($(this).scrollTop() > height)    $(".ns_related").height(0);
+            else                                $(".ns_related").height(height - $(".ns_body").scrollTop());
+        }else{
+            $(".ns_related").height(0);
+        }
+        
+        if($(this).scrollTop() > 0)    $(".ns_head").addClass("scroll");
+        else                           $(".ns_head").removeClass("scroll");
+        
+        // 뒤로가기/위로가기 버튼 노출
+        var timeCheck01;
+        if($("#btnBack").is(":hidden")){
+            $("#btnBack,#btnTop").fadeIn("fast");
+            $("#btnBack,#btnTop").addClass("moved");
+            moveCheck();
+        }
+        function moveCheck(){
+            clearTimeout(timeCheck01);
+            timeCheck01 = setTimeout(function(){
+                if($("#btnBack").hasClass("moved")){
+                    $("#btnBack,#btnTop,#btnDown").removeClass("moved");
+                    moveCheck();
+                } else{
+                    $("#btnBack,#btnTop,#btnDown").fadeOut("slow");
+                } 
+            }, 2000);
+        }
+    });
+    
+    
+    $("[name=searchTerm]").keypress(function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            
+            _cond.searchTerm = $(this).val();
+            _search();
+        }
+    });
+    
+    $("[name=searchTerm]").change(function() {
+        _cond.searchTerm = $(this).val();
+    });
+    
+    $("input[name=sort]").change(function(){
+        _reSearch("sort", $(this).val());
+        layer_close();
+    });
+    $("select[name=sort]").change(function(){
+        _reSearch("sort", $(this).val());
+        layer_close();
+    });
+    $("[name=saleYn]").change(function(){
+        _reSearch("saleYn", $(this).val());
+        layer_close();
+    });
+    $("#choiceBnft input[type=checkbox]").click(function(){
+    	if( $(this).parents(".form_checkbox").hasClass("checked") && $(this).attr("name") != 'saleYn' ){
+    		$(this).parents(".form_checkbox").removeClass("checked");
+    		$(this).prop("checked",false);
+    		_reSearch($(this).attr("name"), "");
+    	} else {
+    		$(this).parents(".form_checkbox").addClass("checked");
+    		$(this).prop("checked",true);
+    	} 
+    });
+    $("#choiceBnft input[type=checkbox]").change(function(){
+       	_reSearch($(this).attr("name"), $(this).val());
+    });
+    
+    $("[name=minPrice],[name=maxPrice]").focus(function(){
+        $("#searchFilter .gbn_box").animate({scrollTop:$(document).height()});
+    });
+    
+    $("[name=minPrice],[name=maxPrice]").change(function(){
+        _reSearch($(this).attr("name"), $(this).val());
+    });
+    
+    $(".layer_lbox").click(function(e){
+        if($(e.target).hasClass("layer_lbox") && !$(e.target).hasClass("gbn_box")) closeFilter();
+    });
+    
+    $(".ly_keybox .side_menu li a").click(function(){
+        if(!$(this).hasClass("active")){
+            $(".ly_keybox .side_menu li a.active").removeClass("active");
+            $(".ly_keybox .srch_list_item.active").removeClass("active");
+            
+            $(this).addClass("active");
+            $(".ly_keybox .srch_list_item").eq($(".ly_keybox .side_menu li").index($(this).parent())).addClass("active");
+        }
+    });
+    $(".keyword_list ul li a").click(function(){
+        _search($(this).attr("title"));
+    });
+});
+
+function openFilter() {
+    $("#searchFilter").addClass("active");
+    $("html,body").addClass("freezed");
+}
+
+function closeFilter(){
+    $("#searchFilter").removeClass("active");
+    $("html,body").removeClass("freezed");
+};
+
+function _reset(){
+    _cond = { searchMenu:_cond["searchMenu"], searchTerm:_cond["searchTerm"] };
+    _reSearch();
+}
+
+function setSrchPrice(minPrice, maxPrice){
+    _cond["minPrice"] = minPrice;
+    _cond["maxPrice"] = maxPrice;
+    
+    _reSearch();
+}
+
+function _addKeywords(){
+    _reSearch("plusKeywords", $("[name=plusKeywords]").val());
+}
+
+function layer_close(){
+    $(".layer_box").hide();
+}
+
+function _clearTerm(){
+    $("[name=searchTerm]").val("").focus();
+}
+
+function tglLayer(obj, id){
+    if(obj.classList.contains("active")){
+        obj.classList.remove("active");
+        $(id).hide();
+        
+        if(id == "#choiceCtgr")    $(".gbn_box").scrollTop(0);
+    }else{
+        obj.classList.add("active");
+        $(id).show();
+        if(id == "#choiceCtgr")    $(".gbn_box").scrollTop($("#optnCtgr").offset().top);
+    }
+}
+
+// 단순 검색
+function _search(searchTerm){
+    if(searchTerm){
+        _cond.searchTerm = searchTerm;
+        $("[name=searchTerm]").val(searchTerm);
+    }
+    
+    if($.trim(_cond.searchTerm) == ""){
+        alert("검색어를 입력해주세요");
+        $("[name=searchTerm]").focus();
+        return false;
+    }
+    _cond = { searchMenu:_cond["searchMenu"], viewType:_cond["viewType"], searchTerm:_cond["searchTerm"], page:"1" };
+    _searchProduct(false, false);
+	$.ajax({
+	    type: "POST"
+	   ,url: "/m/biz/bizSearchTemplate"
+	   ,data: {searchTerm : $("[name=searchTerm]").val() , searchMenu : _cond["searchMenu"]}
+	   ,dataType: "html"
+	   ,success : function(htmlStr){
+			//실시간 인기&베스트
+			$(".cont02").empty();
+			$(".cont02").append(htmlStr);
+	   		var listChoiceCnt = parseInt($("#listChoiceCnt").val());
+	   		var listCnt = parseInt($("#listCnt").val());
+			if ((listCnt+listChoiceCnt)==1) {
+				$(".cont02").removeClass("case2");
+				$(".cont02").removeClass("case1");
+				$(".cont02").addClass("case1");
+			}else{
+				$(".cont02").removeClass("case1");
+				$(".cont02").removeClass("case2");
+				$(".cont02").addClass("case2");
+				var searchSwiper03 = new Swiper('.search_view .cont02 .swiper-container', {
+					slidesPerView: 'auto',
+					spaceBetween: 20,
+					slidesOffsetBefore: 30,
+					freeMode: true,
+					scrollbar: '.swiper-scrollbar',
+					pagination: '.swiper-pagination',
+					paginationType: 'fraction',
+					draggable: true
+				});
+			}
+	       	$("#loading").hide();
+	   }
+	   ,error: function(data) {
+	       alert('<fmt:message key="error.common.system"/>');
+	       $("#loading").hide();
+	   }
+	});
+};
+
+// 결과내 재검색
+function _reSearch(key, value){
+    if(key)    _cond[key] = value;
+    if(key == "searchTerm")    $("[name=searchTerm]").val(value);
+    if(key != "brandGroup")    _cond.brandGroup = "";
+    if(key != "ctgr_id_1d" && key != "ctgr_id_2d" && key != "brandGroup"){
+        _cond.ctgr_id_1d = "";
+        _cond.ctgr_id_2d = "";
+    }
+    _cond.page = "1";
+    _searchProduct(true, false);
+    $("#_bizListPager").empty();
+    var pager = _getPager(_data.pageHolder);
+    $("#_bizListPager").append(pager);
+};
+
+// 페이징처리
+function _moveToPage(page){
+    if(page)    _cond.page = page;
+    else        _cond.page = "1";
+    _searchProduct(true, false);
+};
+//카테고리토글
+function _tglSearchMenu(value){
+    _reSearch("searchMenu", value);
+}
+
+// 카테고리토글
+function _tglCtgrId(ctgrId){
+    if(ctgrId == "0003" || (ctgrId.substring(0, 4) != "0003" && ctgrId.length == 6)){
+        // 1뎁스 토글
+        if(_cond.ctgr_id_1d != ctgrId)    _cond.ctgr_id_1d = ctgrId;
+        else                              _cond.ctgr_id_1d = "";
+        
+        _cond.ctgr_id_2d = "";
+        
+        _reSearch("ctgr_id_1d", _cond.ctgr_id_1d);
+    }else{
+        // 2뎁스 토글
+        if(_cond.ctgr_id_2d != ctgrId)    _cond.ctgr_id_2d = ctgrId;
+        else                              _cond.ctgr_id_2d = "";
+        
+        _reSearch("ctgr_id_2d", _cond.ctgr_id_2d);
+    }
+}
+
+// 브랜드토글
+function _tglBrand(obj, brandName){
+    var brandGroup = "";
+    if(_isEmpty(_cond.brandGroup))            _cond.brandGroup = brandName;
+    else if(_cond.brandGroup == brandName)    _cond.brandGroup = "";
+    else{
+        var arr = _cond.brandGroup.split(",");
+        if($.inArray(brandName, _cond.brandGroup.split(",")) <  0)    arr.push(brandName);
+        else                                                          arr.pop(brandName);
+        _cond.brandGroup = arr.join(",");
+    }
+    _reSearch("brandGroup", _cond.brandGroup);
+}
+
+
+
+function _searchProduct(filterYn, skipHist){
+    _cond.filterYn = filterYn;
+    
+    $.ajax({
+        url:"/m/biz/search/ajaxSearchProduct"
+      , async:false
+      , data: JSON.stringify(_cond)
+      , type:"POST"
+      , headers: {
+           "Accept": "application/json"
+         , "Content-Type": "application/json"
+        }
+      , dataType:"json"
+      , success:function(data){
+            _data = data;
+            
+            if(data){
+                //console.log(_data);
+                // STEP01: 레코벨처리
+                _mkRecobell();
+                
+                // STEP04: 카테고리처리
+                _mkCategory();
+                
+                // STEP05: 브랜드처리
+                _mkBrand();
+                
+                if(!filterYn){
+                    // STEP02: 연관검색어
+                    _mkLinked();
+                    
+                    // STEP06: 가격처리
+                    _mkPrice();
+                }
+                
+                // STEP03: 이벤트처리
+                _mkEvent();
+                
+                // STEP07: 상품로드
+                _mkProduct();
+                
+                // STEP08: 기타조건처리
+                _mkEtc();
+                
+                if(_data.c && history.pushState && !skipHist){
+                     var state = _cond;
+                     var title = '검색결과 - NEW ME HOTTRACKS';
+                     var url = '/m/biz/search/searchMain' + _data.c.query;
+                     history.pushState(state, title, url);
+                }
+            }
+            
+            // $(".s_cont").css("marginTop", $(".s_result").outerHeight());
+            
+            if(filterYn)    $(".ns_body").scrollTop(0);
+            setTimeout(function(){
+                $(".ns_body").css("padding-top", $(".ns_head").outerHeight());
+                $(".ns_body").css("height", $(window).height() - $(".ns_head").outerHeight() - $(".ns_foot").outerHeight());
+            }, 500);
+        }
+      ,error: function(request, status, error) {
+            alert("검색 중 오류가 발생하였습니다. 잠시 후 다시 이용해주세요");
+            // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+    });
+}
+
+//상품처리
+function _mkRecobell(){
+    // 상품 로드
+    if(_data && _data.result && _data.result.listRecobell && _data.result.listRecobell.length >= 3){
+        var listRecobell = _data.result.listRecobell;
+    	var strHtml = '';
+        var size = 0;
+        var listLen = 0;
+    	
+        if(_data.result.listRecobell.length >= 15){
+        	listLen = 5;
+        }else{
+        	listLen = parseInt(_data.result.listRecobell.length / 3);
+        }
+
+        for(var i = 0; i < listLen; i++){
+        	var recobell = listRecobell[i];
+        	 strHtml += '<div class="swiper-slide">';
+             strHtml += '<a href="/p/'+recobell.sellPrdtBcode+'?foo=bar&rccode=mo_search1">';
+             strHtml += '<div class="thum">';
+     		if(recobell.sellPrdtGbn == "R")         strHtml += '<img src="' + _imgRecordUrl(recobell.rcrdCd, "R", "large", (recobell.rtngCode == "C0845"?"Y":"N"), "N") + '" alt="' + recobell.prdtName + '"/>';
+            else if(recobell.sellPrdtGbn == "D")    strHtml += '<img src="' + _imgRecordUrl(recobell.rcrdCd, "D", "large", (recobell.rtngCode == "C0845"?"Y":"N"), "N") + '" alt="' + recobell.prdtName + '" style="width:77px;"/>';
+            else                                    strHtml += '<img src="' + _imgUrl(recobell.productImageUrl, "product", "400") + '" alt="' + recobell.prdtName + '"/>';
+             strHtml += '</div>';
+             strHtml += '<div class="desc">';
+             strHtml += '<p class="tit">'+recobell.prdtName+'</p>';
+             strHtml += '<p class="price font_t">'+price_format(recobell.lastCpnPrice);
+             if(recobell.prdtSellPrice != recobell.lastCpnPrice){
+            	 strHtml += '<span class="percent">' + Math.round(_calDscntRate(recobell.prdtSellPrice, recobell.lastCpnPrice, false)) + '%</span>';
+             }
+             strHtml += '</p>';
+             strHtml += '</div>';
+             strHtml += '</a>';
+             strHtml += '</div>';
+             strHtml += '</div>';
+        }
+
+       	$("#_listRecobell").html(strHtml);
+       	$("#_listRecobell").show();
+    	recobellSwiper = new Swiper('.search_view .cont01 .swiper-container', {
+    		slidesPerView: 'auto',
+    		spaceBetween: 8,
+    		slidesOffsetBefore: 30,
+    		freeMode: true,
+    	});
+    }else{
+    	$("#_listRecobell").hide();
+    }
+}
+
+// 연관검색어
+function _mkLinked(){
+    if(_data && _data.result && _data.result.listLinked && _data.result.listLinked.length > 0){
+        var listLinked = _data.result.listLinked;
+        
+        var strHtml = '';
+        for(var i = 0;i < listLinked.length; i++){
+            var linked = listLinked[i];
+            strHtml += '<div class="swiper-slide"><a href="javascript:" onclick="_search(\'' + linked + '\');return false;">' + linked + '</a></div>';
+        }
+        $("#_listLinked").html(strHtml).show().scrollLeft(0);
+    	var searchTagSwiper = new Swiper('.search_view .top_tag .swiper-container', {
+    		slidesPerView: 'auto',
+    		spaceBetween: 10,
+    		slidesOffsetBefore: 30,
+    		freeMode: true
+        });
+    }else{
+        $("#_listLinked").html("").hide();
+    }
+}
+
+// 이벤트처리
+function _mkEvent(){
+    if(_data && _data.listEvent && _data.listEvent.length > 0 && _data.c.page == 1){
+        var listEvent = _data.listEvent;
+        
+        var strHtml = '';
+        strHtml += '<div class="visual">';
+        strHtml += '<div class="swiper-container">';
+        strHtml += '<ul class="swiper-wrapper">';
+        
+        for(var i = 0; i < listEvent.length && i < 5; i++){
+            var event = listEvent[i];
+            strHtml += '<li class="swiper-slide">';
+            strHtml += '<a href="/m/biz/eventDetail?eventId=' + event.eventId + '">';
+            strHtml += '<p><img src="' + _imgUrl(event.imageUrl) + '" alt="' + event.eventTitle + '" class="prdt-photo"/></p>';
+            strHtml += '<p class="tit">' + event.eventTitle + '</p>';
+            strHtml += '<p class="txt">' + _isEmpty(event.eventDtlCont)?'':event.eventDtlCont + '</p>';
+            strHtml += '</a>';
+            strHtml += '</li>';
+        }
+        
+        strHtml += '</ul>';
+        strHtml += '</div>';
+        strHtml += '<div class="pagination"></div>';
+        strHtml += '</div>';
+        $("#listEvent").html(strHtml);
+        $("#listEvent").show();
+        
+        swiper2 = new Swiper('.ns_evt .swiper-container',{
+            pagination: '.ns_evt div.pagination',
+            loop:true,
+            grabCursor: true,
+            paginationClickable: true
+        });
+    }else{
+        $("#listEvent").hide();
+    }
+}
+
+// 카테고리 로드
+function _mkCategory(){
+    if(_data && _data.result && _data.result.listCategory && _data.result.listCategory.length > 0){
+        var listCategory = _data.result.listCategory;
+        
+        var strHtml = '';
+        for(var i = 0; i < listCategory.length;i++){
+            var cate01 = listCategory[i];
+            
+            if(   (_data.c.searchMenu == "GIFT" && cate01.ctgrId.substring(0, 4) == "0000")
+                    || (_data.c.searchMenu == "RECORD" && cate01.ctgrId.substring(0, 4) != "0000")
+                   ){
+            	if(_data.c.ctgr_id_1d == cate01.ctgrId){
+            		strHtml += '<li class="active">';
+            	}else{
+    	        	strHtml += '<li>';
+            	}
+        		strHtml += '<a href="javascript:" class="btn_dp2">' + cate01.ctgrName + '</a>';
+        		strHtml += '<div class="dp3" id="choiceCtgr' + cate01.ctgrId + '">';
+        		strHtml += '<ul>';
+        		for(var j = 0;j < cate01.listChild.length; j++){
+        			var cate02 = cate01.listChild[j];
+    	    		strHtml += '<li>';
+    	    		strHtml += '<a href="#' + cate02.ctgrId + '" onclick="_tglCtgrId(\'' + cate02.ctgrId + '\');return false;">';
+    	    		strHtml += '<label class="form_checkbox">';
+    	    		
+    	    		if(_data.c.ctgr_id_2d == cate02.ctgrId) {
+    	    			strHtml += '<input name="' + cate02.ctgrId + '" type="checkbox" checked>';
+    	    		} else {
+    	    			strHtml += '<input name="' + cate02.ctgrId + '" type="checkbox">';
+    	    		}
+    	    		strHtml += '<span class="icon"></span>' + cate02.ctgrName;	
+    	    		strHtml += '</label>';
+    	    		strHtml += '</a>';
+    	    		strHtml += '</li>';
+        		}
+        		strHtml += '</ul>';
+        		strHtml += '</div>';
+        		strHtml += '</li>';
+            }
+        }
+        $("#choiceCtgr").html(strHtml);
+    }else{
+        $("#choiceCtgr").html("");
+    }
+}
+
+// 브랜드 로드
+function _mkBrand(){
+    if(_data && _data.c && _data.c.searchMenu == "GIFT"){
+        if(_data && _data.result && _data.result.listBrandByCnt && _data.result.listBrandByCnt.length > 0){
+            var listBrandByCnt = _data.result.listBrandByCnt;
+            
+            var strHtml = '';
+            for(var i = 0; i < listBrandByCnt.length;i++){
+                var brand = listBrandByCnt[i];
+				strHtml +='<li>';
+				strHtml += '<a href="javascript:' + brand.brandName + '" onclick="_tglBrand(this, \'' + brand.brandName + '\');return false;">';
+				strHtml += '<label class="form_checkbox">';
+                if(_isEmpty(_data.c.brandGroup) || $.inArray(brand.brandName, _data.c.brandGroup.split(",")) <  0){
+                    strHtml += '<input type="checkbox">';
+                }else{
+					strHtml += '<input type="checkbox" checked>';
+                }
+				strHtml += '<span class="icon"></span>' + brand.brandName + '';												
+				strHtml += '</label>';
+				strHtml += '</a>';
+				strHtml += '</li>';
+            }
+			
+            $("#choiceBrand").html(strHtml);
+        }else{
+            $("#choiceBrand").html("");
+        }
+        $("#optnBrand").show();
+    }else{
+        $("#optnBrand").hide();
+    }
+}
+
+// 가격대
+function _mkPrice(){
+    if(_data && _data.priceRange){
+        var priceRange = _data.priceRange;
+        var strHtml = '';
+        strHtml +='<li>';
+		strHtml += '<a href="javascript:" onclick="setSrchPrice(\'\', \'\');return false;">';
+		strHtml += '<label class="form_radio">';
+		strHtml += '<input type="radio" name="chk_prices">';
+		strHtml += '<span id="price__">전체</span>';
+		strHtml += '</label>';
+		strHtml += '</a>';
+		strHtml +='</li>';
+		for(var i = 0; i < priceRange.length; i++){
+			var price = priceRange[i];
+			strHtml +='<li>';
+			strHtml += '<a href="javascript:" onclick="setSrchPrice(\'' + price.MIN + '\', \'' + price.MAX + '\');return false;">';
+			strHtml += '<label class="form_radio">';
+			strHtml += '<input type="radio" name="chk_prices">';
+			strHtml += '<span id="price_' + price.MIN + '_' + price.MAX + '">' + price.TXT + '</span>'
+			strHtml += '</label>';
+			strHtml += '</a>';
+			strHtml +='</li>';
+        }
+        $("#_priceRange").html(strHtml);
+    }
+}
+
+// 상품처리
+function _mkProduct(){
+    // 상품 로드
+    if(_data && _data.result && _data.result.listProduct && _data.result.listProduct.length > 0){
+        var listProduct = _data.result.listProduct;
+        var bizListWish = _data.bizListWish;
+        var strHtml = '';
+        	strHtml += '<ul>';
+        for(var i = 0; i < listProduct.length;i++){
+        	var product = listProduct[i];
+        	var wishUserCount = bizListWish[i].wishUserCount;
+        	var impYn = bizListWish[i].impYn;
+        	var hasPosterCaseYn = bizListWish[i].hasPosterCaseYn;
+        	var rcrdStat = bizListWish[i].rcrdStat;
+        	var rlseDt = bizListWish[i].rlseDt;
+        	if(product.saleYn == 'Y'){
+        		strHtml += '<li>';
+        	}else{
+        		strHtml += '<li class="sold_out">';       		
+        	}
+        	strHtml += '<a href="/p/' + product.sellPrdtBcode + '">';
+        	strHtml += '<div class="thum">';
+        	// 7개 이상일때 후 로딩 처리
+            if(product.ctgrId){
+                if(product.ctgrId.substring(0, 4) == "0003")         strHtml += '<img src="' + _imgRecordUrl(product.rcrdCd, "R", "large", (product.rtngCode == "C0845"?"Y":"N"), "N") + '" alt="' + product.prdtName + '"/>';
+                else if(product.ctgrId.substring(0, 4) == "0004")    strHtml += '<img src="' + _imgRecordUrl(product.rcrdCd, "D", "large", (product.rtngCode == "C0845"?"Y":"N"), "N") + '" alt="' + product.prdtName + '"/>';
+                else                                                 strHtml += '<img src="' + _imgUrl(product.prdtImgUrl, "product", "400") + '" alt="' + product.prdtName + '"/>';
+            }else{
+                strHtml += '<img src="' + _imgUrl(product.prdtImgUrl, "product", "400") + '" alt="' + product.prdtName + '"/>';
+            }
+        	strHtml += '</div>';
+        	strHtml += '</a>';
+        	if (wishUserCount == '1') {
+        		strHtml += '<a href="javascript:" onclick="addBizWishProduct(this);return false;" class="btn_like active" prdtId="$'+product.sellPrdtBcode+'"><span>좋아요</span></a>';
+			} else {
+				strHtml += '<a href="javascript:" onclick="addBizWishProduct(this);return false;" class="btn_like" prdtId="'+product.sellPrdtBcode+'"><span>좋아요</span></a>';
+			}
+        	strHtml += '<a href="/p/' + product.sellPrdtBcode + '">';
+        	strHtml += '<div class="cont">';
+            if(product.ctgrId){
+                if(product.ctgrId.substring(0, 4) == "0003" || product.ctgrId.substring(0, 4) == "0004"){
+                    strHtml += '<p class="brand">' + product.labelName + '</p>';
+                }else{
+                    strHtml += '<p class="brand">' + product.brandName + '</p>';
+                }
+            }else{
+                strHtml += '<p class="brand">' + product.brandName + '</p>';
+            }
+            strHtml += '<p class="tit">' + product.prdtName + '</p>';
+        	strHtml += '<p class="price font_t">';
+        	if(product.prdtSellPrice != product.prdtDscntPrice)    strHtml += ' <span class="percent">' + _calDscntRate(product.prdtSellPrice, product.prdtDscntPrice,false) + '%</span>';
+        	strHtml += ' <span>' + price_format(product.prdtDscntPrice) + '</span>';
+        	if(product.prdtSellPrice != product.prdtDscntPrice)    strHtml += ' <span class="discount">' + price_format(product.prdtSellPrice) + '</span>';
+        	strHtml += '</p>';
+        	strHtml += '<div class="info">';
+            if(product.reviewCount > 999)      strHtml += '<span class="reply">999+</span>';
+            else if(product.reviewCount >= 0)  strHtml += '<span class="reply">' + product.reviewCount + '</span>';
+            if(product.wishCount > 999)        strHtml += '<span class="like">999+</span>';
+            else if(product.wishCount >= 0)    strHtml += '<span class="like">' + product.wishCount + '</span>';
+        	strHtml += '</div>';
+        	strHtml += '<div class="badge">';
+        	if(product.saleYn != 'Y')          strHtml += ' <span class="badge03">품절</span>';
+            if(hasPosterCaseYn == 'Y')         strHtml += ' <span class="badge01">포스터</span>';
+            if(product.cpnYn == 'Y')           strHtml += ' <span class="badge01">쿠폰</span>';
+            if(impYn == 'Y')                   strHtml += ' <span class="badge02">수입</span>';
+            if(rcrdStat == '9')                strHtml += ' <span class="badge02">예약</span>';
+            if(product.freeDlvyYn == 'Y')      strHtml += ' <span class="badge02">무료배송</span>';
+            if(product.freeGiftYn == 'Y')      strHtml += ' <span class="badge02">사은품</span>';
+        	strHtml += '</div>';
+        	strHtml += '</div>';
+        	if(rcrdStat == '9')                strHtml += ' <p class="date">발매일 <em class="font_t">'+rlseDt.substring(4, 6)+'월'+rlseDt.substring(6, 8)+'일'+'</em></p>';
+        	strHtml += '</a>';
+        	strHtml += '</li>';
+        	}
+       	strHtml += '</ul>';
+        $("#_listProduct").html(strHtml);
+    }
+}
+
+function _mkEtc(){
+    var criteria = _data.c;
+    if(_data.result){
+        var result = _data.result;
+        $("#_totalSize").text(price_format(result.giftSize + result.recordSize));
+        $("#_giftSize").text("(" + price_format(result.giftSize) + ")");
+        $("#_recordSize").text("(" + price_format(result.recordSize) + ")");
+    }
+    
+    // 조건 처리
+    if(criteria){
+        if(   !_isEmpty(criteria.categoryGroup)
+           || !_isEmpty(criteria.brandGroup)
+           || !_isEmpty(criteria.ctgr_id_1d)
+           || !_isEmpty(criteria.ctgr_id_2d)
+           || criteria.freeDeliveryYn == "Y"
+           || !_isEmpty(criteria.deliveryVendorId)
+           || criteria.discountYn == "Y"
+           || criteria.couponYn == "Y"
+           || !_isEmpty(criteria.minPrice)
+           || !_isEmpty(criteria.maxPrice)
+          ){
+            $(".btn_reset").show();
+            $(".btn_filter").addClass("active");
+        }else{
+            $(".btn_reset").hide();
+            $(".btn_filter").removeClass("active");
+        }
+        $("[name=searchTerm]").val(criteria.searchTerm);
+        $(".search_tab ul li").removeClass("active");
+        $(".search_tab ul li#tab" + criteria.searchMenu).addClass("active");
+        
+        // 품절여부
+        if(criteria.saleYn != 'Y'){
+			criteria.saleYn = "N";
+			$("[name=saleYn]").attr("checked","checked");
+        }
+        
+        // 정렬순서
+        $("input[name=sort]").each(function(){
+        	if ($(this).val()==criteria.sort) {
+        		$(this).prop("checked",true);
+        		$("#orderByTitle").text($(this).parents(".form_radio").find("span").text());
+			} else {
+				$(this).prop("checked",false);
+			}
+        });
+        $("select[name=sort]").val(criteria.sort);
+        // 상세검색
+        // 혜택
+        var bnfStr = "";
+        $("#choiceBnft input[type=checkbox]").each(function(){
+//         	console.log($(this).attr("name")+" , "+$(this).attr("value"));
+            if(!criteria[$(this).attr("name")] || criteria[$(this).attr("name")] == 'N'){
+               	if( $(this).attr("name") == 'saleYn' && $(this).attr("value") == 'N'){
+               		if (bnfStr == "") bnfStr += $(this).parents(".form_checkbox").find("span").text();	
+					else bnfStr += ","+$(this).parents(".form_checkbox").find("span").text();
+               		$(this).parents(".form_checkbox").addClass("checked");
+	                $(this).prop("checked", true);
+               	}else{
+               		$(this).prop("checked",false);
+               	}
+            }else{
+            	if($(this).attr("name") == 'saleYn'&&$(this).attr("value") != 'Y'){
+            		$(this).prop("checked",false);
+            	}else{
+            		if (bnfStr == "") bnfStr += $(this).parents(".form_checkbox").find("span").text();	
+					else bnfStr += ","+$(this).parents(".form_checkbox").find("span").text();
+            		$(this).parents(".form_checkbox").addClass("checked");
+	                $(this).prop("checked", true);
+            	}
+            }
+        });
+        $("#benTitle").text(bnfStr);
+        if (criteria.ctgr_id_1d||criteria.ctgr_id_2d) $("#cateTitle").text($("input[name="+criteria.ctgr_id_2d+"]").parents(".form_checkbox").text());
+        else                                          $("#cateTitle").text("");
+        // 브랜드체크
+        if(criteria.brandGroup)    $("#brandTitle").text(criteria.brandGroup);
+        else                       $("#brandTitle").text("");
+        
+        // 가격조건 수정
+        $("[name=minPrice]").val(criteria.minPrice);
+        $("[name=maxPrice]").val(criteria.maxPrice);
+        if ( criteria.minPrice || criteria.maxPrice ){
+        	$("#priceRangeTitle").text(numberWithCommas(criteria.minPrice)+'~'+numberWithCommas(criteria.maxPrice));
+       	}
+        $(".chk_prices").removeClass("active");
+        var radioPrice;
+        if(criteria.minPrice || criteria.maxPrice)    radioPrice = document.getElementById("price_" + criteria.minPrice + "_" + criteria.maxPrice);
+        else                                          radioPrice = document.getElementById("price__");
+        if(radioPrice)    radioPrice.classList.add("active");
+    }
+}
+//페이지 이동 스크립트
+function goList(page){
+	_moveToPage(page);
+	$("html,body").scrollTop(0);
+// 	_data.pageHolder
+	$("#_bizListPager").empty();
+    var pager = _getPager(_data.pageHolder);
+    $("#_bizListPager").append(pager);
+}
+function _getPager(pageHolder){
+    var obj = "";
+    if(pageHolder && pageHolder.totalPages > 0){
+        // prev
+        var page = pageHolder.currentPage;
+        var pageSize = pageHolder.pageSize;
+        var startPage = parseInt(Math.ceil(parseFloat(page) / parseFloat(pageSize) - 1)) * pageSize + 1;
+        
+        if (startPage > 1) {
+ 	    	// arr prev
+	        var anchorP = '<a title="' + (startPage - pageHolder.pageSize) + '페이지로 이동" href="javascript:goList(\'' + (startPage - pageHolder.pageSize) + '\')" class="arr prev"></a>';
+	        obj += anchorP;
+	        
+		}else{
+			// arr prev first
+	        var anchorP = '<a title="" href="javascript:" class="arr prev first"></a>';
+	        obj += anchorP;
+	        
+		}
+        var i = startPage;
+        for(; i < startPage + pageHolder.pageSize && i <= pageHolder.totalPages; i++){
+        	var anchorNum ='';
+            if(i == page){
+            	anchorNum = '<a href="javascript://" class="active">'+i+'</a>';
+            } else {
+            	anchorNum = '<a title="' + i + '페이지로 이동" href="javascript:goList(\'' + i + '\')">'+i+'</a>';
+            }
+            obj += anchorNum;
+        }
+        
+        if(i <= pageHolder.totalPages){
+       		var anchorN = '<a href="javascript:goList(\'' + i + '\')" class="arr next"></a>';
+       		obj += anchorN;
+        } else {
+			var anchorN = '<a href="javascript:" class="arr next last"></a>';
+            obj += anchorN;
+		}
+    }
+    return obj;
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+</script>
+</head>
+<body>
+	<div class="top_banner" style="background:#8971ff;">
+		${curtainBnr.bnrCont}
+	</div>
+	<div class="search_top">
+	<form name="gnbSearchFrm" action="${defaultHost}/m/biz/search/searchMain" method="post">
+	    <div class="inner">
+	    	<input type="hidden" name="viewType"/>
+            <input type="hidden" name="searchMenu"/>
+			<div class="input_wrap">
+				<input type="text" class="s_input" name="searchTerm" placeholder="검색어를 입력하세요" title="검색어를 입력하세요" autocomplete="off"/>
+				<span class="input_clear" onclick="_clearTerm();return false;">삭제</span>
+			</div>
+	    </div>
+		<a href="javascript:history.back();" class="btn_back">뒤로가기</a>
+		<a href="javascript:" class="btn_search" onclick="_search();return false;"><span>검색</span></a>
+	</form>
+	</div>
+
+	<!-- content -->
+	<div id="content">
+		<div class="search_wrap">
+			<div class="search_view">
+ 				<!-- empty result.listProduct -->
+				<c:if test="${empty result.listProduct}">
+					<p class="none_txt">일치되는 검색결과를 찾을 수 없습니다</p>
+					<h5 class="search_tit">혹시,<br/>이 키워드는 어떠세요?</h5>
+					<div class="keyword_list">
+						<ul>
+							<c:forEach items="${keyWordListRecobell}" var="l" varStatus="st">
+							<li><a href="javascript://" title="${l}">${l}</a></li>
+							</c:forEach>
+						</ul>
+					</div>
+					<h5 class="search_tit">가끔은,<br/>베스트셀러도 좋아요</h5>
+					<div class="goods_wrap category_wrap">
+						<div class="pd_list pd_best">
+						<ul>
+							<c:forEach items="${bestListRecobell}" var="l" varStatus="st" begin="0" end="9">
+							<li <c:if test="${l.prdtStatCode ne 'C0312'}">class="sold_out"</c:if>>
+								<a href="/P/${l.sellPrdtBcode}?foo=bar&rccode=mo_search1">
+									<div class="thum">
+									<c:if test="${l.sellPrdtGbn eq 'R' || l.sellPrdtGbn eq 'D'}">
+										<ui:image rcrdCd="${l.rcrdCd}" prdtGbn="${l.sellPrdtGbn}" ratingCode="A" rcrdImgType="large" width="${l.sellPrdtGbn eq 'R'?'150':'99'}" clazz="photo" alt="${fn:escapeXml(l.prdtName)}"/>
+									</c:if>
+									<c:if test="${l.sellPrdtGbn eq 'P' || l.sellPrdtGbn eq 'G' || l.sellPrdtGbn eq 'S'}">
+										<ui:image src="${l.productImageUrl}" src2="${l.productImageUrl2}" size="400" server="product" clazz="photo" alt="${fn:escapeXml(l.prdtName)}"/>
+									</c:if>
+									</div>
+									<div class="cont">
+										<p class="brand">${l.brandEngName}</p>
+										<p class="tit">${fn:escapeXml(l.prdtName)}</p>
+										<p class="price font_t">
+											<c:if test="${l.prdtSellPrice ne l.lastCpnPrice}">
+												<span class="percent"><fmt:formatNumber value="${hfn:rate(l.prdtSellPrice,l.lastCpnPrice)}" pattern=",###"/>%</span></span>
+											</c:if>
+											<span><fmt:formatNumber type="number">${l.lastCpnPrice}</fmt:formatNumber></span>
+											<c:if test="${l.prdtSellPrice ne l.lastCpnPrice}">
+			                                    <span class="discount"><fmt:formatNumber type="number">${l.prdtSellPrice}</fmt:formatNumber></span>
+			                                </c:if>
+										</p>
+										<!-- 뱃지 활성화시 on : class 추가 -->
+										<div class="badge">
+												<c:if test="${l.prdtStatCode ne 'C0312'}"><span class="badge03">품절</span></c:if>
+												<c:if test="${fn:substring(l.prdtIcon,0,1) eq '1'}"><span class="badge01">쿠폰</span></c:if>
+												<c:if test="${fn:substring(l.prdtIcon,2,3) eq '1'}"><span class="badge02">사은품</span></c:if>
+												<c:if test="${fn:substring(l.prdtIcon,8,9) eq '1'}"><span class="badge02">무료배송</span></c:if>
+										</div>
+										<div class="info">
+											<span class="reply">${l.reviewCount}</span>
+											<span class="like">${l.wishPrdtCnt}</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							</c:forEach>
+						</ul>
+					</div>
+					</div>
+				</c:if>
+				<!--not empty result.listProduct -->
+				<c:if test="${not empty result.listProduct}">
+				<div class="top_tag">
+					<div class="swiper-container">
+						<div class="swiper-wrapper" id="_listLinked">
+						</div>
+					</div>
+				</div>
+				<div class="cont01">
+					<div class="swiper-container">
+						<div class="swiper-wrapper" id="_listRecobell">
+ 						<!--rp -->
+						<!--rp -->
+						</div>
+					</div>
+				</div>
+				<c:set value="${fn:length(listEvent)}" var="listCnt"/>
+				<c:set value="${fn:length(listEventChoice)}" var="listChoiceCnt"/>
+				<div class="cont02 <c:if test="${(listCnt+listChoiceCnt)==1}">case1</c:if><c:if test="${(listCnt+listChoiceCnt)!=1}">case2</c:if>">
+				<c:if test="${(listCnt+listChoiceCnt)!=1}">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+						<c:forEach items="${listEvent}" varStatus="s1" step="3">
+							<c:forEach items="${listEvent}" var="l" varStatus="st" begin="${s1.index}" end="${s1.index + 2}">
+							<div class="swiper-slide">
+								<a href="/m/biz/eventDetail?eventId=${l.eventId}">
+									<c:if test="${not empty listEventChoice}"><span class="badge badge01">관련이벤트</span></c:if>
+									<div class="thum">
+										<ui:image src="${l.imageUrl}" alt="${fn:escapeXml(l.eventTitle)}"/>
+									</div>
+									<strong>${l.eventTitle}</strong>
+									<p>${l.eventDtlCont} </p>
+								</a>
+							</div>
+		                    </c:forEach>
+							<c:if test="${s1.first && not empty listEventChoice}">
+								<div class="swiper-slide">
+		                         <c:forEach items="${listEventChoice}" var="l" varStatus="st">
+		                              <a href="/m/biz/eventDetail?eventId=${l.eventId}">
+											<span class="badge badge02">인기이벤트</span>
+											<div class="thum">
+												<ui:image src="${l.imageUrl}" alt="${fn:escapeXml(l.eventTitle)}"/>
+											</div>
+											<strong>${l.eventTitle}</strong>
+											<p>${l.eventDtlCont} </p>
+										</a>
+								</c:forEach>
+								</div>
+							</c:if>
+						</c:forEach>
+						<c:if test="${empty listEvent}">
+							<c:forEach items="${listEventChoice}" var="l" varStatus="st">
+							<!--TODO:롤링해야함 -->
+							<div class="swiper-slide">
+								<a href="/m/biz/eventDetail?eventId=${l.eventId}">
+									<span class="badge badge02">인기이벤트</span>
+									<div class="thum">
+										<ui:image src="${l.imageUrl}" alt="${fn:escapeXml(l.eventTitle)}"/>
+									</div>
+									<strong>${l.eventTitle}</strong>
+									<p>${l.eventDtlCont} </p>
+								</a>
+							</div>
+							</c:forEach>
+						</c:if>
+						</div>
+						<!-- 스크롤바 -->
+						<div class="swiper-scrollbar"></div>
+						<!-- swiper-pagination -->
+						<div class="pagination_wrap">
+							<div class="swiper-pagination"></div>
+						</div>
+					</div>
+					</c:if>
+					<c:if test="${(listCnt+listChoiceCnt)==1}">
+					<div class="event_banner"><!-- 이미지가 1개인 경우 -->
+						<ul>
+							<li>
+							<c:if test="${not empty listEvent}">
+							<c:forEach items="${listEvent}" var="l"> 
+								<a href="/m/biz/eventDetail?eventId=${l.eventId}">
+									<span class="badge badge01">관련이벤트</span>
+									<div class="img_wrap">
+										<ui:image src="${l.imageUrl}" alt="${fn:escapeXml(l.eventTitle)}"/>
+									</div>
+									<strong>${l.eventTitle}</strong>
+									<p>${l.eventDtlCont} </p>
+								</a>
+							</c:forEach>
+							</c:if>
+							<c:if test="${empty listEvent}">
+							<c:forEach items="${listEventChoice}" var="l" varStatus="st">
+							<!--TODO:롤링해야함 -->
+								<a href="/m/biz/eventDetail?eventId=${l.eventId}">
+									<span class="badge badge02">인기이벤트</span>
+									<div class="img_wrap">
+										<ui:image src="${l.imageUrl}" alt="${fn:escapeXml(l.eventTitle)}"/>
+									</div>
+									<strong>${l.eventTitle}</strong>
+									<p>${l.eventDtlCont} </p>
+								</a>
+							</c:forEach>
+							</c:if>
+							</li>
+						</ul>
+					</div>
+					</c:if>
+				</div>
+				<div class="category_wrap cont03">
+					<div class="pd_filter">
+						<div class="form_select">
+							<select name="sort" class="resize_select">
+								<option value="ODC">인기상품순</option>
+								<option value="DAT">신상품순</option>
+								<option value="LOP">낮은가격순</option>
+					            <option value="HIP">높은가격순</option>
+					            <option value="DCR">높은할인율순</option>
+					            <option value="LIK">좋아요순</option>
+					            <option value="RVW">리뷰순</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- 제품 -->
+					<p class="pd_total">
+						<em class="font_t" id="_totalSize">0</em>건의 검색결과
+						<!-- 활성화시 active : class 추가 -->
+						<a href="javascript:" class="btn_search_detail">상세조건</a>
+					</p>
+					<div class="search_tab">
+						<ul>
+							<li id="tabGIFT"><a href="javascript:" onclick="_tglSearchMenu('GIFT');return false;">문구/기프트<span class="font_t" id="_giftSize">(0)</span></a></li>
+							<li id="tabRECORD"><a href="javascript:" onclick="_tglSearchMenu('RECORD');return false;">음반<span class="font_t" id="_recordSize">(0)</span></a></li>
+						</ul>
+					</div>
+					<!--// 제품 -->
+					<div class="pd_list" id="_listProduct"></div>
+					<!--// 제품 -->
+					<div class="pagination_v2" id="_bizListPager">
+						<ui:bizpaginationScript name="pageHolder" scriptName="goList"/>
+					</div>
+				</div>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<!--// content -->
+
+	<!-- 상세조건 -->
+	<div id="search_detail">
+		<div class="search_detail_cont">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="hd">
+		                    <h2>상세조건<a href="javascript:" class="btn_reset" onclick="_reset();return false;">초기화</a></h2>
+		                </div>
+						<div class="cont">
+							<ul>
+								<li>
+									<a href="javascript:" class="dp1">정렬<span id="orderByTitle"></span></a>
+									<div class="dp2">
+										<ul>
+											<li>
+												<a href="javascript:">
+													<label class="form_radio">
+	                                                    <input type="radio" name="sort" value="ODC">
+	                                                    <span>인기순</span>
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_radio">
+	                                                    <input type="radio" name="sort" value="DAT">
+	                                                    <span>신상품순</span>
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_radio">
+	                                                    <input type="radio" name="sort" value="LOP">
+	                                                    <span>낮은가격순</span>
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_radio">
+	                                                    <input type="radio" name="sort" value="HIP">
+	                                                    <span>높은가격순</span>
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_radio">
+	                                                    <input type="radio" name="sort" value="DCR">
+	                                                    <span>높은할인율순</span>
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_radio">
+	                                                    <input type="radio" name="sort" value="LIK">
+	                                                    <span>좋아요순</span>
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_radio">
+	                                                    <input type="radio" name="sort" value="RVW">
+	                                                    <span>리뷰순</span>
+	                                                </label>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li id="choiceBnft">
+									<a href="javascript:" class="dp1">혜택/상세<span id="benTitle"></span></a>
+									<div class="dp2">
+										<ul>
+											<li>
+												<a href="javascript:">
+													<label class="form_checkbox">
+	                                                    <input type="checkbox" name="saleYn" value="N">
+	                                                    <span class="icon"></span>품절포함
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_checkbox">
+	                                                    <input type="checkbox" name="saleYn" value="Y">
+	                                                    <span class="icon"></span>품절제외
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_checkbox">
+	                                                    <input type="checkbox" name="freeDeliveryYn" id="chkFreeDlvyYn" value="Y">
+	                                                    <span class="icon"></span>무료배송
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_checkbox">
+	                                                    <input type="checkbox" name="deliveryVendorId" id="chkHottDelivery" value="0625">
+	                                                    <span class="icon"></span>핫트랙스배송
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_checkbox">
+	                                                    <input type="checkbox" name="couponYn" id="chkCouponYn" value="Y">
+	                                                    <span class="icon"></span>쿠폰
+	                                                </label>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:">
+													<label class="form_checkbox">
+	                                                    <input type="checkbox" name="discountYn" id="chkDiscountYn" value="Y">
+	                                                    <span class="icon"></span>할인
+	                                                </label>
+												</a>
+											</li>
+											<c:if test="${c.searchMenu eq 'RECORD'}">
+											<li>
+												<a href="javascript:">
+													<label class="form_checkbox">
+	                                                    <input type="checkbox" name="radio27">
+	                                                    <span class="icon"></span>예약
+	                                                </label>
+												</a>
+											</li>
+											</c:if>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a href="javascript:" class="dp1">카테고리<span id="cateTitle"></span></a>
+									<div class="dp2">
+										<ul id="choiceCtgr">
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a href="javascript:" class="dp1">브랜드<span id="brandTitle"></span></a>
+									<div class="dp2">
+										<ul id="choiceBrand">
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a href="javascript:" class="dp1">가격대<span id="priceRangeTitle"></span></a>
+									<div class="dp2">
+										<ul id="_priceRange">
+										</ul>
+										<ul>
+											<li>
+												<div class="price">
+													<p>가격대</p>
+													<div class="form_search">
+														<div class="input_wrap">
+															<input type="number" pattern="\d*" name="minPrice"  placeholder="최저가">
+															<span class="font_t">~</span>
+															<input type="number" pattern="\d*" name="maxPrice"  placeholder="최고가">
+														</div>
+														<a href="#" class="btns" onclick="_addKeywords();return false;">입력</a>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+							<div class="research">
+								<p>결과 내 재검색</p>
+								<div class="form_search">
+									<input type="text" name="plusKeywords"/>
+									<a href="#" class="btn_search" onclick="_addKeywords();return false;">검색</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--// 상세조건 -->
+
+	<!-- app bar -->
+	<div id="app_bar">
+		<a href="javascript:" class="btn_home" onclick="location.href='${defaultHost}/';return false;">HOTTRACKS</a>
+		<a href="javascript:" class="btn_today" onclick="location.href='${defaultHost}/';return false;">오늘,혜택</a>
+		<a href="javascript:" class="btn_cart" onclick="location.href='${defaultHost}/m/order/cart';return false;" >장바구니<c:if test="${cartCount > 0}"><em class="font_t">${cartCount}</em></c:if></a>
+		<!-- 최근 본상품 있을경우 on : class 추가 -->
+		<a href="javascript:" class="btn_history <c:if test="${not empty listRecent}">on</c:if>"><img src="/images/biz/thums/img_prod.png" alt=""></a>	
+	</div>
+	<!--// app bar -->
+</body>
+</html>

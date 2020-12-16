@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="CouponSQL">
+    <typeAlias alias="coupon" type="kr.co.hottracks.site.model.common.coupon.Coupon"/>
+    <typeAlias alias="userCoupon" type="kr.co.hottracks.site.model.common.coupon.UserCoupon"/>
+    <typeAlias alias="sellProductKey" type="kr.co.hottracks.site.model.common.product.SellProductKey"/>
+    <typeAlias alias="couponParam" type="kr.co.hottracks.site.model.common.coupon.CouponParam"/>
+    <typeAlias alias="couponApplyProduct" type="kr.co.hottracks.site.model.common.coupon.CouponApplyProduct"/>
+    <typeAlias alias="couponApplyCategory" type="kr.co.hottracks.site.model.common.coupon.CouponApplyCategory"/>
+    <typeAlias alias="couponCriteria" type="kr.co.hottracks.site.model.common.coupon.CouponCriteria"/>
+    <typeAlias alias="couponApplyProductListData" type="kr.co.hottracks.site.model.common.coupon.CouponApplyProductListData"/>
+    <typeAlias alias="couponCount" type="kr.co.hottracks.site.model.common.coupon.CouponCount"/>
+    <typeAlias alias="couponLimitExt" type="kr.co.hottracks.site.model.common.coupon.CouponLimitExt"/>
+    <typeAlias alias="couponLimitCriteria" type="kr.co.hottracks.site.model.common.coupon.CouponLimitCriteria"/>
+    <typeAlias alias="trackGcardHist" type="kr.co.hottracks.site.model.frontoffice.order.TrackGcardHist"/>
+    
+    <!--
+        기능: 적용카테고리쿠폰 목록 반환
+    -->
+    <select id="selectCouponApplyCategoryList" parameterClass="couponCriteria" resultClass="couponApplyCategory">
+        /* CouponSQL.selectCouponApplyCategoryList */
+        SELECT  A.cpn_id    couponId
+              , A.ctgr_id categoryId
+              , (SELECT ctgr_name FROM tb_category WHERE ctgr_id = A.ctgr_id) categoryName
+          FROM  tb_coupon_apply_category A
+         WHERE  A.cpn_id = #couponId#
+    </select>
+    
+    <!-- 
+        기능: 상품별 쿠폰목론 반환
+     -->
+    <select id="getCouponListByProductKey" parameterClass="sellProductKey" resultClass="coupon">
+        /* CouponSQL.getCouponListByProductKey */
+        SELECT 
+              A.cpn_id couponId
+            , A.scope_gbn                   scopeGbn
+            , A.kyobo_cpn_id                kyoboCouponId
+            , A.cpn_name                    couponName
+            , A.vndr_bdn_rate               vendorBurdenRate
+            , A.rate_yn                     rateYn
+            , A.cpn_dscnt_rate              couponDiscountRate
+            , A.cpn_dscnt_amt               couponDiscountAmount
+            , A.cpn_apply_start_dt          couponApplyStartDate
+            , A.cpn_apply_end_dt            couponApplyEndDate
+            , A.cpn_issue_valid_dt_count    couponIssueValidDateCount
+            , A.cpn_issue_term_use_yn       couponIssueTermUseYn
+            , A.cpn_issue_start_dt          couponIssueStartDate
+            , A.cpn_issue_end_dt            couponIssueEndDate
+            , A.cpn_gain_limit_count        couponGainLimitCount
+            , A.cpn_std_amt                 couponStandardAmount
+            , A.use_yn                      useYn
+            , A.cpn_gain_dup_limit_count    couponGainDuplicateLimitCount
+            , A.sngl_prdt_limit_price       snglPrdtLimitPrice
+            , CASE WHEN A.RATE_YN = 'Y' then (round(FC_GET_DC_PRICE(B.SELL_PRDT_BCODE, A.MALL_ID) * A.CPN_DSCNT_RATE/1000) * 10)
+                   WHEN A.RATE_YN = 'N' then CPN_DSCNT_AMT
+                   ELSE 0
+               END                          cpnamt
+          FROM tb_coupon_master A
+          JOIN tb_coupon_apply_product B ON A.cpn_id = B.cpn_id AND B.sell_prdt_bcode = #barcode#
+          JOIN TB_SELL_PRODUCT SP ON B.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+         WHERE A.scope_gbn = 'P'
+           AND A.use_yn = 'Y'
+           AND A.disp_yn = 'Y'
+           AND A.mall_id = #mallId#
+           AND to_char(sysdate, 'yyyyMMdd') BETWEEN A.cpn_issue_start_dt AND A.cpn_issue_end_dt
+         ORDER BY cpnamt DESC
+    </select>
+    
+    <!-- 
+        기능: 교보쿠폰아이디의 쿠폰아디 반환
+     -->
+    <select id="getCouponIdByKyoboCouponId" parameterClass="string" resultClass="string">
+        /* CouponSQL.getCouponIdByKyoboCouponId */
+        SELECT MAX(couponId)
+          FROM (SELECT A.CPN_ID     couponId
+                  FROM TB_COUPON_MASTER A
+                  JOIN TB_COUPON_APPLY_PRODUCT B ON A.CPN_ID = B.CPN_ID
+                 WHERE B.KYOBO_CPN_ID = #value#
+                 UNION
+                SELECT A.CPN_ID     couponId
+                  FROM TB_COUPON_MASTER A
+                 WHERE A.KYOBO_CPN_ID = #value#
+                )
+    </select>
+    
+    <!--
+        기능: 쿠폰아이디별 쿠폰정보 반환 
+     -->
+    <select id="getCouponByCouponId" parameterClass="string" resultClass="coupon">
+        /* CouponSQL.getCouponByCouponId */
+        SELECT 
+              A.cpn_id couponId
+            , A.scope_gbn                   scopeGbn
+            , A.kyobo_cpn_id                kyoboCouponId
+            , A.cpn_name                    couponName
+            , A.vndr_bdn_rate               vendorBurdenRate
+            , A.rate_yn                     rateYn
+            , A.cpn_dscnt_rate              couponDiscountRate
+            , A.cpn_dscnt_amt               couponDiscountAmount
+            , A.cpn_apply_start_dt          couponApplyStartDate
+            , A.cpn_apply_end_dt            couponApplyEndDate
+            , A.cpn_issue_valid_dt_count    couponIssueValidDateCount
+            , A.cpn_issue_term_use_yn       couponIssueTermUseYn
+            , A.cpn_issue_start_dt          couponIssueStartDate
+            , A.cpn_issue_end_dt            couponIssueEndDate
+            , A.cpn_gain_limit_count        couponGainLimitCount
+            , A.cpn_std_amt                 couponStandardAmount
+            , A.use_yn                      useYn
+            , A.cpn_gain_dup_limit_count    couponGainDuplicateLimitCount
+            , A.sngl_prdt_limit_price        snglPrdtLimitPrice
+          FROM tb_coupon_master A
+         WHERE A.cpn_id = #value#
+    </select>
+    
+    <select id="getExistCoupon" parameterClass="userCoupon" resultClass="int">
+        SELECT count(*) 
+          from (
+		        select user_num
+		          FROM tb_user_coupon
+		         WHERE user_num = #userNum#
+		           AND mall_id = #mallId#
+		           AND kyobo_cpn_id = #kyoboCouponId#
+		           AND user_cpn_stat_code = 'C0611'
+		           AND to_char(sysdate, 'yyyyMMdd') <![CDATA[ <= ]]> cpn_valid_dt
+                   and CPN_ID not in (select CPN_ID from TB_EVENT_RANDOM_ATTEND where CPN_ID is not null)
+               )
+    </select>
+    
+    <insert id="saveUserCoupon" parameterClass="userCoupon">
+        <selectKey keyProperty="userCouponSequence" resultClass="int" type="pre">
+            SELECT nvl(max(A.user_cpn_seq) + 1, 1)
+              FROM tb_user_coupon A 
+             WHERE user_num = #userNum#
+               and mall_id = #mallId#
+        </selectKey>
+        INSERT INTO tb_user_coupon (
+            user_num,
+            mall_id,
+            user_cpn_seq,
+            cpn_gain_dtm,
+            order_num,
+            order_prdt_inseq,
+            cpn_use_dtm,
+            cpn_id,
+            cpn_valid_dt,
+            user_cpn_stat_code,
+            kyobo_cpn_id        
+        ) VALUES (
+            #userNum#,
+            #mallId#,
+            #userCouponSequence#,
+            #couponGainDatetime#,
+            #orderNum#,
+            #orderProductInnerSequence#,
+            #couponUseDatetime#,
+            #couponId#,
+            (case when #couponId# in ('8000652985','8000652983') then to_char(sysdate+7,'yyyymmdd') else #couponValidDate# end),
+            #userCouponStatusCode#,
+            #kyoboCouponId#
+        )
+    </insert>
+    
+    <update id="updateUserCoupon" parameterClass="userCoupon">
+        UPDATE tb_user_coupon 
+           SET 
+              cpn_gain_dtm = #couponGainDatetime#,
+              order_num = #orderNum#,
+              order_prdt_inseq = #orderProductInnerSequence#,
+              cpn_use_dtm = #couponUseDatetime#,
+              cpn_id = #couponId#,
+              cpn_valid_dt = #couponValidDate#,
+              user_cpn_stat_code = #userCouponStatusCode#,
+              kyobo_cpn_id = #kyoboCouponId#       
+        WHERE user_num = #userNum#
+          AND mall_id = #mallId#
+          AND user_cpn_seq = #userCouponSequence#
+    </update>
+    
+    <select id="getUserCouponByKey" parameterClass="userCoupon" resultClass="userCoupon">
+        SELECT user_num userNum,
+               mall_id mallId,
+               user_cpn_seq userCouponSequence,
+               cpn_gain_dtm couponGainDatetime,
+               order_num orderNum,
+               order_prdt_inseq orderProductInnerSequence,
+               cpn_use_dtm couponUseDatetime,
+               cpn_id couponId,
+               kyobo_cpn_id kyoboCouponId,
+               cpn_valid_dt couponValidDate,
+               user_cpn_stat_code userCouponStatusCode
+          FROM tb_user_coupon
+         WHERE user_num = #userNum#
+           AND mall_id = #mallId#
+           AND user_cpn_seq = #userCouponSequence#
+    </select>
+    
+    <select id="getUserCoupons" parameterClass="userCoupon" resultClass="userCoupon">
+        SELECT user_num userNum,
+               mall_id mallId,
+               user_cpn_seq userCouponSequence,
+               cpn_gain_dtm couponGainDatetime,
+               order_num orderNum,
+               order_prdt_inseq orderProductInnerSequence,
+               cpn_use_dtm couponUseDatetime,
+               cpn_id couponId,
+               kyobo_cpn_id kyoboCouponId,
+               cpn_valid_dt couponValidDate,
+               user_cpn_stat_code userCouponStatusCode
+          FROM tb_user_coupon
+         WHERE user_num = #userNum#
+           AND mall_id = #mallId#
+           <isNotEmpty property="userCouponStatusCode" prepend="AND">
+                user_cpn_stat_code = #userCouponStatusCode#
+           </isNotEmpty>
+           AND to_char(sysdate, 'yyyyMMdd') <![CDATA[ <= ]]> cpn_valid_dt
+    </select>
+    
+    <select id="getListCouponByPolicy" parameterClass="string" resultClass="coupon">
+     /*CouponSQL.getListCouponByPolicy*/
+     SELECT cpn_id          couponId
+          , kyobo_cpn_id  kyoboCouponId
+       FROM tb_coupon_master
+      WHERE cpn_id IN (SELECT cpn_id
+                         FROM tb_htrs_mall_user_plcy_cpn
+                        WHERE plcy_id = #policy#)
+        and USE_YN = 'Y'
+    </select>
+	
+	<select id="selectListUserCoupon" parameterClass="couponCriteria" resultClass="couponParam">
+        SELECT  A.cpn_id couponId
+              , A.kyobo_cpn_id kyoboCouponId
+              , B.SCOPE_GBN scopeGbn
+              , B.rate_yn rateYn
+              , B.CPN_NAME couponName
+              , B.CPN_DSCNT_RATE couponDiscountRate
+              , B.CPN_DSCNT_AMT couponDiscountAmount
+              , TO_CHAR(A.CPN_GAIN_DTM,'yyyy.mm.dd') cpnGainDate
+              , A.CPN_VALID_DT cpnValidDate
+              , B.SNGL_PRDT_LIMIT_PRICE snglPrdtLimitPrice
+              , B.cpn_std_amt couponStandardAmount
+          FROM  TB_USER_COUPON A
+              , TB_COUPON_MASTER B
+         WHERE  A.USER_NUM = #userNum#
+           AND  A.USER_CPN_STAT_CODE = 'C0611' 
+           AND  A.CPN_ID = B.CPN_ID
+           AND  A.CPN_VALID_DT <![CDATA[ >= ]]> TO_CHAR(SYSDATE, 'YYYYMMDD')
+         ORDER BY A.user_cpn_seq DESC
+	</select>
+	
+	<select id="selectListUserCouponCount" parameterClass="couponCriteria" resultClass="int">
+        SELECT
+          COUNT(*)
+        FROM
+          TB_USER_COUPON A
+        , TB_COUPON_MASTER B
+        WHERE
+          A.USER_NUM = #userNum#
+        AND A.USER_CPN_STAT_CODE = 'C0611' 
+        AND A.CPN_ID = B.CPN_ID
+        AND A.CPN_VALID_DT <![CDATA[ >= ]]> TO_CHAR(SYSDATE, 'YYYYMMDD')
+	</select>
+	
+	<select id="selectListDownCoupon" parameterClass="sellProductKey" resultClass="coupon">
+        SELECT A.CPN_ID couponId,
+               A.CPN_NAME couponName,
+               A.rate_yn rateYn,
+               A.CPN_DSCNT_RATE couponDiscountRate,
+               A.CPN_DSCNT_AMT couponDiscountAmount,
+               A.CPN_ISSUE_START_DT couponIssueStartDate,
+               A.CPN_ISSUE_END_DT couponIssueEndDate,
+               A.CPN_APPLY_START_DT couponApplyStartDate,
+               A.CPN_APPLY_END_DT couponApplyEndDate,
+               B.kyobo_cpn_id kyoboCouponId
+          FROM TB_COUPON_MASTER A ,
+               TB_COUPON_APPLY_PRODUCT B
+         WHERE A.CPN_ID        = B.CPN_ID
+           AND B.SELL_PRDT_BCODE = #barcode#
+           AND A.CPN_ISSUE_END_DT >= TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND A.mall_id = #mallId#
+           AND A.scope_gbn = 'P'
+           AND A.use_yn = 'Y'
+           AND A.disp_yn ='Y'
+        UNION ALL
+        SELECT A.CPN_ID couponId,
+               A.CPN_NAME couponName,
+               A.rate_yn rateYn,
+               A.CPN_DSCNT_RATE couponDiscountRate,
+               A.CPN_DSCNT_AMT couponDiscountAmount,
+               A.CPN_ISSUE_START_DT couponIssueStartDate,
+               A.CPN_ISSUE_END_DT couponIssueEndDate,
+               A.CPN_APPLY_START_DT couponApplyStartDate,
+               A.CPN_APPLY_END_DT couponApplyEndDate,
+               A.kyobo_cpn_id kyoboCouponId
+          FROM tb_coupon_master A
+         WHERE A.CPN_ISSUE_END_DT >= TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND A.mall_id = #mallId#
+           AND A.cpn_id not in (SELECT cpn_id FROM TB_HTRS_MALL_USER_PLCY_CPN)
+           AND a.scope_gbn = 'C'
+           AND use_yn = 'Y'
+           AND disp_yn ='Y'
+           AND exists (SELECT * 
+                         FROM tb_coupon_apply_category B 
+                        WHERE B.cpn_id = A.cpn_id
+                          AND b.ctgr_id in (SELECT substr(ctgr_id, 1, 6)
+                                              FROM tb_product_category
+                                             WHERE sell_prdt_bcode = FC_GET_BARCODE(#barcode#)))
+	</select>
+ 
+    <select id="getUserCouponCountByUserCoupon" resultClass="int" parameterClass="userCoupon">
+        SELECT count(*)
+          FROM tb_user_coupon
+         WHERE cpn_id = #couponId#
+           AND kyobo_cpn_id = #kyoboCouponId#
+           AND user_num = #userNum#
+    </select>
+    
+    <select id="getUserCouponCountByExistCoupon" resultClass="int" parameterClass="coupon">
+        WITH v_temp AS (
+           SELECT user_num, mall_id 
+             FROM tb_user_coupon 
+            WHERE cpn_id = #couponId# 
+              AND kyobo_cpn_id = #kyoboCouponId# 
+            GROUP BY user_num, mall_id
+        )
+        SELECT count(*) FROM v_temp       
+    </select>
+    
+    <select id="getExistUserCouponThisMonth" parameterClass="userCoupon" resultClass="int">
+        SELECT count(*)
+          FROM tb_user_coupon 
+         WHERE cpn_id = #couponId#
+           AND user_num = #userNum#
+           AND cpn_valid_dt between to_char(sysdate, 'yyyyMM') || '01' and to_char(sysdate, 'yyyyMM') || '31'         
+    </select>
+    
+    <select id="getCouponDownCheck" parameterClass="string" resultClass="string">
+        select F_GET_COUPON_CHECK(#couponId#) COUYN
+          from dual
+    </select>
+    
+    <select id="getCouponDownUseCheck" parameterClass="couponCriteria" resultClass="string">
+        select F_COUPON_USE_CHECK(#couponId#,#userNum#) COUYN
+          from dual
+    </select>
+    
+    
+    <select id="getGcardCouponId" parameterClass="string" resultClass="string">
+		select COUPON_ID couponId
+		  from TB_COUPON_GCARD_MAP
+		 where GCARD_NUM = #gcardNum#
+    </select>
+    
+    <!-- 
+        기능 : 금일 한정 쿠폰 반환
+        작성일 : 2012-04-04
+        작성자 : 장진용
+    -->
+    <select id="getCouponLimit" resultClass="couponLimitExt" parameterClass="string">
+        SELECT DT               dt
+             , COUPON_ID        couponId
+             , LIMIT_QTY        limitQty
+             , REG_DT           regDt
+             , REG_ID           regId
+             , IMAGE_ON         imageOn
+             , IMAGE_OFF        imageOff
+             , LIMIT_QTY - NVL((SELECT COUNT(UC.KYOBO_CPN_ID) FROM TB_USER_COUPON UC WHERE UC.KYOBO_CPN_ID = CL.COUPON_ID), 0) leaveCnt
+          FROM TB_COUPON_LIMIT CL
+         WHERE DT = TO_CHAR(SYSDATE, 'yyyyMMdd')
+           AND COUPON_ID = #value#
+    </select>
+    
+    <!-- 
+        기능 : 한정 쿠폰 목록 반환
+        작성일 : 2012-04-04
+        작성자 : 장진용
+    -->
+    <sql id="whereLimitCouponList">
+        <dynamic prepend="WHERE">
+            <isEqual property="listCountYn" removeFirstPrepend="true" prepend="and" compareValue="Y">
+                rownum <![CDATA[ < ]]> #topCount# + 1
+            </isEqual>
+           <isNotEmpty property="couponId" removeFirstPrepend="true" prepend="AND">
+               CL.COUPON_ID = #couponId#
+           </isNotEmpty>
+           <isNotEmpty property="cpnName" removeFirstPrepend="true" prepend="AND">
+               UPPER(C.CPN_NAME) LIKE '%'||#cpnName#||'%'
+           </isNotEmpty>
+           <isNotEmpty property="usest" removeFirstPrepend="true" prepend="AND">
+               CD.USEST = #usest#
+           </isNotEmpty>
+           <isNotEmpty property="useet" removeFirstPrepend="true" prepend="AND">
+               CD.USEET = #useet#
+           </isNotEmpty>
+       </dynamic>
+    </sql>
+    
+    <select id="getLimitCouponList" parameterClass="couponLimitCriteria" resultClass="couponLimitExt">
+        SELECT CL.COUPON_ID     couponId
+             , C.CPN_NAME       cpnName
+             , CD.USEST         usest
+             , CD.USEET         useet
+             , CL.LIMIT_QTY     limitQty
+             , CL.REG_DT        regDt
+             , IMAGE_ON         imageOn
+             , IMAGE_OFF        imageOff
+             , LIMIT_QTY - NVL((SELECT COUNT(UC.KYOBO_CPN_ID) FROM TB_USER_COUPON UC WHERE UC.KYOBO_CPN_ID = CL.COUPON_ID), 0) leaveCnt
+          FROM TB_COUPON_MASTER C
+         INNER JOIN TB_COUPON_DOWNCHECK CD ON C.KYOBO_CPN_ID = CD.COUPONID
+         INNER JOIN TB_COUPON_LIMIT CL ON CD.COUPONID = CL.COUPON_ID
+         <include refid="whereLimitCouponList"/>
+         GROUP BY CL.COUPON_ID, C.CPN_NAME, CD.USEST, CD.USEET, CL.LIMIT_QTY,CL.REG_DT,CL.IMAGE_ON,CL.IMAGE_OFF
+         ORDER BY CL.REG_DT DESC
+    </select>
+    
+    <select id="countLimitCouponList" parameterClass="couponLimitCriteria" resultClass="int">
+        SELECT COUNT(COUNT(*))
+          FROM TB_COUPON_MASTER C
+         INNER JOIN TB_COUPON_DOWNCHECK CD ON C.KYOBO_CPN_ID = CD.COUPONID
+         INNER JOIN TB_COUPON_LIMIT CL ON CD.COUPONID = CL.COUPON_ID
+         <include refid="whereLimitCouponList"/>
+         GROUP BY CL.COUPON_ID, C.CPN_NAME, CD.USEST, CD.USEET, CL.LIMIT_QTY,CL.REG_DT
+    </select>
+    
+    <!-- 
+        기능 : 쿠폰 다운로드 체크 테이블에 등록
+        작성자 : 장진용
+        작성일 : 2012-04-09
+    -->
+    <insert id="registCouponDowncheck" parameterClass="couponLimitCriteria">
+        INSERT INTO TB_COUPON_DOWNCHECK (COUPONID, USEST, USEET) VALUES (#couponId#, #usest#, #useet#)
+    </insert>
+    
+    <!-- 
+        기능 : 한정 쿠폰 테이블에 등록
+        작성자 : 장진용
+        작성일 : 2012-04-09
+    -->
+    <insert id="registCouponLimit" parameterClass="couponLimitCriteria">
+        INSERT INTO TB_COUPON_LIMIT (DT, COUPON_ID, LIMIT_QTY, REG_DT, REG_ID, IMAGE_ON, IMAGE_OFF)
+        SELECT TO_CHAR(TO_DATE(#usest#||'000000', 'yyyyMMdd HH24Miss') + LEVEL - 1, 'yyyyMMdd') DT
+             , #couponId#   COUPON_ID
+             , #limitQty#   LIMIT_QTY
+             , SYSDATE REG_DT
+             , #regId#      REG_ID
+             , #imageOn#    IMAGE_ON
+             , #imageOff#   IMAGE_OFF
+          FROM DUAL
+       CONNECT BY LEVEL &lt;= TO_DATE(#useet#||'000000', 'yyyyMMdd HH24Miss') - TO_DATE(#usest#||'000000', 'yyyyMMdd HH24Miss') + 1
+    </insert>
+    
+    <!-- 
+        기능 : 한정 쿠폰 테이블에 등록가능여부
+        작성자 : 장진용
+        작성일 : 2012-04-13
+    -->
+    <select id="chkLimitCoupon" parameterClass="couponLimitCriteria" resultClass="int">
+        SELECT CASE WHEN NOT EXISTS(SELECT * FROM TB_COUPON_MASTER WHERE KYOBO_CPN_ID = #couponId#) THEN 1
+                    WHEN EXISTS (SELECT * FROM TB_COUPON_DOWNCHECK WHERE COUPONID = #couponId#) THEN 2
+                    WHEN EXISTS (SELECT * FROM TB_COUPON_LIMIT WHERE DT BETWEEN #usest# AND #useet#) THEN 3
+                    ELSE 0
+                END AS chkCode
+            FROM DUAL
+    </select>
+
+    <select id="getCouponBookId" parameterClass="string" resultClass="string">
+		select nvl((select case when not (to_char(sysdate,'yyyymmdd') between STARTDT and ENDDT) then '쿠폰의 사용기간이 아닙니다.'
+		                    else 'OK'
+		                end CHK
+		          from TB_COUPON_BOOK
+		         where BOOKNUM = '2012050101'
+		           and BOOKID = #gcardNum#),'유효하지 않은 쿠폰 시리얼넘버 입니다.') CHK 
+		  from dual
+    </select>
+    
+    <update id="couponBookUse" parameterClass="trackGcardHist">
+        update TB_COUPON_BOOK
+           set USE_YN = 'Y'
+             , USER_NUM = #userNum#
+             , USER_DT = sysdate
+         where BOOKNUM = '2012050101'
+           and BOOKID = #trackGcardNum#
+    </update>
+    
+    <select id="getSaleUserCount" resultClass="couponLimitExt">
+        select case when count(ORDER_NUM) > 400 then '4'
+                    else substr(trim(to_char(count(ORDER_NUM),'000')),1,1) 
+                end cpnName
+             , case when count(ORDER_NUM) > 400 then '0'
+                    else substr(trim(to_char(count(ORDER_NUM),'000')),2,1) 
+                end usest
+             , case when count(ORDER_NUM) > 400 then '0'
+                    else substr(trim(to_char(count(ORDER_NUM),'000')),3,1) 
+                end useet
+          from (
+                select A.ORDER_NUM
+                     , sum(B.ORDER_PRDT_AMT) AMT
+                  from TB_ORDER A  
+                     , TB_ORDER_PRODUCT B
+                 where A.ORDER_NUM = B.ORDER_NUM
+                   and to_char(A.ORDER_DTM,'yyyymmddHH24') > '2014121218'
+                   and A.MALL_ID = '02'
+                   and A.USER_NUM is not null
+                 group by A.ORDER_NUM
+                having sum(B.ORDER_PRDT_AMT) >= 40000
+               )
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-07-26
+        기능: 쿠폰다운로드 프로시저
+     -->
+    <parameterMap class="kr.co.hottracks.site.model.common.ProcedureMap" id="couponDownMap">
+        <parameter property="V_KYOBO_CPN_ID" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="V_USER_NUM"     mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="V_MALL_ID"      mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="V_RES_CODE"     mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="V_RES_CONT"     mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </parameterMap>
+    
+    <procedure id="prCouponDown" parameterMap="couponDownMap">
+        /* CouponSQL.prCouponDown */
+        { CALL PR_COUPON_DOWN (?, ?, ?, ?, ?) }
+    </procedure>
+    
+    <parameterMap class="java.util.HashMap" id="getEventRequestMap">
+        <parameter property="eventNum" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="userNum" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="resCode" mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="resCont" mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </parameterMap>
+    
+    <procedure id="getEventRequest" parameterMap="getEventRequestMap">
+        /* EventSQL.updateEventApply */
+        { CALL PR_EVENT_REQUEST_CHECK(?, ?, ?, ?) }
+    </procedure>
+</sqlMap>

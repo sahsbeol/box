@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RecordTrackSQL">
+    <typeAlias alias="recordTrackCriteria" type="kr.co.hottracks.site.model.common.record.RecordTrackCriteria"/>
+    <typeAlias alias="recordTrackExt" type="kr.co.hottracks.site.model.common.record.RecordTrackExt"/>
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.08.30
+        기능 : 
+            음반과 음원의 매핑정보를 음반을 기준으로 반환함. - 공통 조건절
+    -->
+    <sql id="getTrackWhere">
+        <dynamic prepend="where">
+            <isEqual property="listCountYn" removeFirstPrepend="true" prepend="and" compareValue="Y">
+                rownum <![CDATA[ < ]]> #topCount# + 1
+            </isEqual>
+            <isNotEmpty property="keyWord" removeFirstPrepend="true" prepend="and">
+                <isEqual property="keyField" compareValue="artiName"> nvl(d.arti_name, a.arti_name) like '%'||#keyWord#||'%' </isEqual>
+                <isEqual property="keyField" compareValue="trkName"> d.trk_name like '%'||#keyWord#||'%' </isEqual>
+            </isNotEmpty>
+            <isNotEmpty property="rcrdCd" removeFirstPrepend="true" prepend="and">
+                a.rcrd_cd = #rcrdCd#
+            </isNotEmpty>
+            <isNotEmpty property="cdNo" removeFirstPrepend="true" prepend="and">
+                a.cd_no = #cdNo#
+            </isNotEmpty>
+            <isNotEmpty property="trkNo" removeFirstPrepend="true" prepend="and">
+                a.trk_no = #trkNo#
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.08.30
+        기능 : 
+            음반과 음원의 매핑정보를 음반을 기준으로 반환함. 
+    -->
+    <select id="getTrack" parameterClass="recordTrackCriteria" resultClass="recordTrackExt">
+        /* RecordTrackSQL.getTrack */
+        SELECT A.RCRD_CD    rcrdCd
+             , A.CD_NO      cdNo
+             , A.TRK_NO     trkNo
+             , NVL(A.ARTI_NAME, (SELECT T2.ARTI_NAME
+                                   FROM TB_REC_TRACK_ARTIST T1
+                                   JOIN TB_REC_ARTIST T2 ON T1.REC_ARTI_CD = T2.REC_ARTI_CD
+                                  WHERE T1.RCRD_CD = A.RCRD_CD
+                                    AND T1.CD_NO = A.CD_NO
+                                    AND T1.TRK_NO = A.TRK_NO
+                                    AND ROWNUM = 1
+                                )
+                  )         artiName
+             , A.TRK_NAME   trkName
+             , B.TRK_ID     trkId
+             , A.AUDIO_YN   audioYn
+          FROM TB_REC_TRACK A
+          LEFT JOIN TB_TRACK_MAP B ON A.RCRD_CD = B.RCRD_CD AND A.CD_NO = B.CD_NO AND A.TRK_NO = B.TRK_NO
+         <include refid="getTrackWhere" />
+         ORDER BY A.RCRD_CD, A.CD_NO, A.TRK_NO
+    </select>
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.08.30
+        기능 : 
+            음반과 음원의 매핑정보를 음반을 기준으로 반환하는 목록의 개수를 반환함. 
+    -->
+    <select id="getTrackListCount" parameterClass="recordTrackCriteria" resultClass="int">
+        /* RecordTrackSQL.getTrackListCount */
+        SELECT COUNT(*) AS CNT 
+          FROM TB_REC_TRACK A
+          LEFT JOIN TB_TRACK_MAP B ON A.RCRD_CD = B.RCRD_CD AND A.CD_NO = B.CD_NO AND A.TRK_NO = B.TRK_NO
+         <include refid="getTrackWhere" />
+    </select>
+</sqlMap>

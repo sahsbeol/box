@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="UserNoticeSQL">
+    <typeAlias alias="userNoticeDto" type="kr.co.hottracks.site.model.common.board.UserNoticeDto"/>
+    <typeAlias alias="userNoticeParam" type="kr.co.hottracks.site.model.common.board.UserNoticeParam"/>
+    <typeAlias alias="userNoticeCriteria" type="kr.co.hottracks.site.model.common.board.UserNoticeCriteria"/>
+    <typeAlias alias="frontMainDisplayCriteria" type="kr.co.hottracks.site.model.common.display.FrontMainDisplayCriteria"/>
+    <typeAlias alias="mallUserNotice" type="kr.co.hottracks.site.model.common.board.MallUserNotice"/>
+    
+    <update id="updateHitBySeq" parameterClass="userNoticeCriteria">
+        /* UserNoticeSQL.updateHitBySeq */
+        UPDATE TB_USER_NOTICE
+           SET HITS = HITS + 1
+         WHERE NOTI_SEQ = #notiSeq#
+    </update>
+    
+    <sql id="selectUserNotice">
+        SELECT notice.NOTI_SEQ             notiSeq
+             , notice.NOTI_TITLE         title
+             , notice.ALWY_DISP_YN       isAlwaysDisplay
+             , notice.NOTI_CONT          content
+             , notice.NOTI_CTGR_ID       categoryId
+             , notice.HITS               hit
+             , notice.REGST_ADMIN_ID registrationAdminId
+             , notice.gnr_noti_yn        isGenralNotice
+             , notice.REGST_DTM          registrationDate
+             , notice.NOTI_TGT_GBN       brandOrCategory
+             , notice.brand_id           brandId
+             , notice.alwy_disp_order    alwaysDisplayOrder
+             , notice.link_url           linkUrl
+             , brand.brand_name          brandName
+             , FC_GET_MALLID_USER_NOTICE(notice.noti_seq) mallId
+          FROM tb_user_notice notice
+             , tb_brand brand
+         WHERE notice.brand_id = brand.brand_id(+)
+    </sql>
+    
+    <select id="selectUserNoticeRowBySeq" parameterClass="userNoticeCriteria" resultClass="userNoticeDto">
+        /* UserNoticeSQL.selectUserNoticeRowBySeq */
+        <include refid="selectUserNotice"/>
+         AND notice.noti_seq = #notiSeq#
+    </select>
+    
+    <sql id="whereUserNoticeListForMotherMall">
+        <isNotEmpty property="brandOrCategory">
+           AND  A.NOTI_TGT_GBN = #brandOrCategory#
+            <isEqual property="brandOrCategory" compareValue="C">
+                AND  (A.noti_ctgr_id = '00' OR  A.noti_ctgr_id LIKE #categoryId#||'%')
+            </isEqual>
+            <isEqual property="brandOrCategory" compareValue="B">
+                <isNotEmpty property="brandId">
+                    AND  (A.brand_id IS NULL OR  A.brand_id = #brandId#)
+                </isNotEmpty>
+            </isEqual>
+        </isNotEmpty>
+        <isEmpty property="brandOrCategory">
+           AND  A.brand_id IS NULL
+        </isEmpty>
+        <isNotEmpty property="searchStr">
+           AND  (A.noti_title LIKE '%'||#searchStr#||'%' OR  A.noti_cont LIKE '%'||#searchStr#||'%')
+        </isNotEmpty>
+    </sql>
+    
+    <select id="selectUserNoticeListForMotherMall" parameterClass="userNoticeCriteria" resultClass="userNoticeDto">
+        /* UserNoticeSQL.selectUserNoticeListForMotherMall */
+        SELECT  A.noti_seq          notiSeq
+              , A.noti_title        title
+              , A.alwy_disp_yn      isAlwaysDisplay
+              , A.noti_ctgr_id      categoryId
+              , A.hits              hit
+              , A.regst_admin_id    registrationAdminId
+              , A.noti_cont         content
+              , A.gnr_noti_yn       isGenralNotice
+              , A.regst_dtm         registrationDate
+              , A.noti_tgt_gbn      brandOrCategory
+              , A.brand_id          brandId
+              , A.alwy_disp_order   alwaysDisplayOrder
+              , A.link_url          linkUrl
+              , C.brand_name        brandName
+              , CASE WHEN A.regst_dtm > SYSDATE - 30 THEN 'Y'
+                     ELSE 'N'
+                 END                newYn
+          FROM  tb_user_notice A
+              , tb_mall_user_notice B
+              , tb_brand C
+         WHERE  A.noti_seq = B.noti_seq
+           AND  C.brand_id(+) = A.brand_id
+           AND  B.mall_id = #mallId#
+           <include refid="whereUserNoticeListForMotherMall"/>
+         ORDER BY A.alwy_disp_yn DESC, A.alwy_disp_order ASC, A.noti_seq DESC
+    </select>
+    
+    <select id="selectUserNoticeListCountForMotherMall" parameterClass="userNoticeCriteria" resultClass="int">
+        /* UserNoticeSQL.selectUserNoticeListCountForMotherMall */
+        SELECT COUNT(*)
+          FROM tb_user_notice A
+             , tb_mall_user_notice B
+         WHERE A.noti_seq = B.noti_seq
+           AND B.mall_id = #mallId#
+           <include refid="whereUserNoticeListForMotherMall"/>
+           AND ROWNUM <![CDATA[ < ]]> #topCount# + 1
+    </select>
+    
+    <select id="selectUserNoticeNotiTargetGbnByNotiSeq" parameterClass="userNoticeCriteria" resultClass="string">
+        /* UserNoticeSQL.selectUserNoticeNotiTargetGbnByNotiSeq */
+        SELECT A.NOTI_TGT_GBN  brandOrCategory
+          FROM TB_USER_NOTICE A
+              ,TB_MALL_USER_NOTICE B
+         WHERE A.NOTI_SEQ = B.NOTI_SEQ
+           AND B.MALL_ID = #mallId#
+           AND A.NOTI_SEQ = #notiSeq#
+    </select>
+    
+    <!-- 
+        기능 : 고객공지사항목록반환
+    -->
+    <select id="getUserNotice" parameterClass="userNoticeCriteria" resultClass="userNoticeParam">
+        /* UserNoticeSQL.getUserNotice */
+        SELECT A.NOTI_SEQ       notiSeq
+             , A.NOTI_TITLE     title
+          FROM TB_USER_NOTICE A
+          JOIN TB_MALL_USER_NOTICE B ON A.NOTI_SEQ = B.NOTI_SEQ AND B.MALL_ID = '02'
+         <dynamic prepend="WHERE">
+            <isNotEmpty property="categoryId">
+                A.NOTI_CTGR_ID IN (#categoryId#, '00')
+            </isNotEmpty>
+            <isEmpty property="categoryId">
+                A.BRAND_ID IS NULL
+            </isEmpty>
+         </dynamic>
+         ORDER BY A.ALWY_DISP_YN DESC, A.ALWY_DISP_ORDER ASC, A.NOTI_SEQ DESC
+    </select>
+    
+    <select id="getFrontUserNoticeList" parameterClass="frontMainDisplayCriteria" resultClass="userNoticeParam">
+        /* UserNoticeSQL.getFrontUserNoticeList */
+        SELECT NOTI_SEQ     notiSeq
+             , NOTI_TITLE   title
+          FROM (SELECT UN.NOTI_SEQ
+                     , UN.NOTI_TITLE
+                  FROM TB_USER_NOTICE UN
+                  JOIN TB_MALL_USER_NOTICE MUN ON UN.NOTI_SEQ = MUN.NOTI_SEQ AND MUN.MALL_ID = #mallId#
+                 <dynamic prepend="WHERE">
+                     <isNotEmpty property="ctgrId">
+                         <isEqual property="ctgrId" compareValue="0003" prepend="AND" removeFirstPrepend="true">
+                             UN.NOTI_CTGR_ID = #ctgrId#
+                         </isEqual>
+                         <isEqual property="ctgrId" compareValue="0004" prepend="AND" removeFirstPrepend="true">
+                             UN.NOTI_CTGR_ID = #ctgrId#
+                         </isEqual>
+                         <isNotEqual property="ctgrId" compareValue="0003">
+                             <isNotEqual property="ctgrId" compareValue="0004" prepend="AND" removeFirstPrepend="true">
+                                 UN.NOTI_CTGR_ID IN (#ctgrId#, '00')
+                             </isNotEqual>
+                         </isNotEqual>
+                     </isNotEmpty>
+                     <isEmpty property="ctgrId">
+                         AND UN.NOTI_CTGR_ID IS NOT NULL
+                     </isEmpty>
+                 </dynamic>
+                 ORDER BY UN.REGST_DTM DESC
+            )
+        WHERE ROWNUM <![CDATA[ <= ]]> #dispCntUseFront#
+    </select>
+    
+    <select id="getUserNoticeForPrdtDtl" parameterClass="userNoticeCriteria" resultClass="userNoticeDto">
+        /* UserNoticeSQL.getUserNoticeForPrdtDtl */
+        SELECT  A.NOTI_SEQ          notiSeq
+              , A.NOTI_TITLE        title
+              , A.ALWY_DISP_YN      isAlwaysDisplay
+              , A.NOTI_CTGR_ID      categoryId
+              , A.HITS              hit
+              , A.REGST_ADMIN_ID    registrationAdminId
+              , A.NOTI_CONT         content
+              , A.GNR_NOTI_YN       isGenralNotice
+              , A.REGST_DTM         registrationDate
+              , A.NOTI_TGT_GBN      brandOrCategory
+              , A.BRAND_ID          brandId
+              , A.ALWY_DISP_ORDER   alwaysDisplayOrder
+              , A.LINK_URL          linkUrl
+           FROM TB_USER_NOTICE A
+           JOIN TB_MALL_USER_NOTICE B ON A.NOTI_SEQ = B.NOTI_SEQ
+           JOIN TB_VENDOR_CONTRACT C ON A.VNDR_ID = C.VNDR_ID
+           JOIN TB_SELL_PRODUCT D ON C.VNDR_CNTRT_ID = D.VNDR_CNTRT_ID
+          WHERE B.MALL_ID = #mallId#
+            and (A.BRAND_ID is null or A.BRAND_ID = D.BRAND_ID)
+            AND D.SELL_PRDT_BCODE = #sellPrdtBcode#
+            AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN NVL(A.DISP_START_DT, '19000101') AND NVL(A.DISP_END_DT, '99991231')
+         ORDER BY A.ALWY_DISP_YN DESC, A.ALWY_DISP_ORDER ASC, A.NOTI_SEQ DESC
+    </select>
+</sqlMap>

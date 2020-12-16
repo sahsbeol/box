@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ThemeCategorySQL">
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-16
+        기능: 전체카테고리목록 반환
+    -->
+    <select id="getThemeCategoryForGnb" parameterClass="string" resultClass="kr.co.hottracks.site.model.common.theme.ThemeCategoryExt">
+        /* ThemeCategorySQL.getThemeCategoryForGnb */
+        SELECT TC.CTGR_ID           ctgrId
+             , TC.PARNT_CTGR_ID     parntCtgrId
+             , TC.CTGR_NAME         ctgrName
+             , TC.CTGR_IMG_URL      ctgrImgUrl
+             , TC.REGST_DTM         regstDtm
+             , TC.REGST_ADMIN_ID    regstAdminId
+             , TC.USE_YN            useYn
+             , TC.DISP_ORDER        dispOrder
+             , TC.DISP_YN           dispYn
+             , TC.EVENT_ID          eventId
+             , TC.GNB_ORDER         gnbOrder
+          FROM TB_THEME_CATEGORY TC
+         WHERE TC.CTGR_ID LIKE #ctgrId# || '%'
+           AND TC.GNB_ORDER IS NOT NULL
+           AND TC.USE_YN = 'Y'
+           AND TC.DISP_YN = 'Y'
+         ORDER BY TC.GNB_ORDER
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-10-01
+        기능: 카테고리정보 반환
+    -->
+    <select id="getThemeCategoryByCtgrId" parameterClass="string" resultClass="kr.co.hottracks.site.model.common.theme.ThemeCategoryExt">
+        /* ThemeCategorySQL.getThemeCategoryByCtgrId */
+        SELECT TC.CTGR_ID           ctgrId
+             , TC.PARNT_CTGR_ID     parntCtgrId
+             , TC.CTGR_NAME         ctgrName
+             , TC.CTGR_IMG_URL      ctgrImgUrl
+             , TC.REGST_DTM         regstDtm
+             , TC.REGST_ADMIN_ID    regstAdminId
+             , TC.USE_YN            useYn
+             , TC.DISP_ORDER        dispOrder
+             , TC.DISP_YN           dispYn
+             , TC.EVENT_ID          eventId
+             , TC.GNB_ORDER         gnbOrder
+          FROM TB_THEME_CATEGORY TC
+         WHERE TC.CTGR_ID = #ctgrId#
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-16
+        기능: 전체카테고리목록 반환
+    -->
+    <select id="getThemeCategoryByParntCtgrId" parameterClass="string" resultClass="kr.co.hottracks.site.model.common.theme.ThemeCategoryExt">
+        /* ThemeCategorySQL.getThemeCategoryByParntCtgrId */
+        SELECT TC.CTGR_ID           ctgrId
+             , TC.PARNT_CTGR_ID     parntCtgrId
+             , TC.CTGR_NAME         ctgrName
+             , TC.CTGR_IMG_URL      ctgrImgUrl
+             , TC.REGST_DTM         regstDtm
+             , TC.REGST_ADMIN_ID    regstAdminId
+             , TC.USE_YN            useYn
+             , TC.DISP_ORDER        dispOrder
+             , TC.DISP_YN           dispYn
+             , TC.EVENT_ID          eventId
+          FROM TB_THEME_CATEGORY TC
+         WHERE TC.PARNT_CTGR_ID = #parntCtgrId#
+           AND TC.USE_YN = 'Y'
+           AND TC.DISP_YN = 'Y'
+         ORDER BY TC.DISP_ORDER
+    </select>
+</sqlMap>

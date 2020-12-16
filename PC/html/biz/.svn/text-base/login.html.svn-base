@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/m_contents.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/biz/hott.js"></script>
+
+<body>
+	<div id="wrap" class='content_new'>
+		<!-- Container (로그인은 cont_login : class 추가) -->
+		<div id="container" class='cont_login'>
+			<!-- 컨텐츠 -->
+			<div class="content" id="content">
+				<div class='loginWrap'>
+					<div class='logo_img'><img src='../../images/biz/common/logo_hott.png' alt='logo'></div>
+					<ul class='tab_login clear'>
+						<li><a href='javascript:' class='btn_member_on'>회원 로그인</a></li>
+						<li><a href='login_n.html' target='_self' class='btn_nonmember_off'>비회원 주문조회</a></li>
+					</ul>
+					<div class='box_login'>
+						<form method="post">
+						<fieldset>
+							<legend>로그인 정보 입력</legend>
+							<div class="inp_login">
+								<label for="chkId" class="lab_comment">아이디</label>
+								<input type="text" id="chkId" class="form_login" placeholder="5~10자리 영문 소문자와 숫자 가능">
+								<span class="search"><img src='../../images/biz/common/btn_close.png' alt='지우기'></span>
+							</div>
+							<div class="inp_login inp_pw">
+								<label for="chkPw" class="lab_comment">비밀번호</label>
+								<input type="password" id="chkPw" class="form_login" placeholder="8~15자리 영문,숫자,특수문자 포함">
+								<span class="searchClear"><img src='../../images/biz/common/btn_close.png' alt='지우기'></span>
+							</div>
+							<div class="opt_login">
+								<div class="auto_save">
+									<label class="inp_chk" for="saveLogin">
+										<input type="checkbox" id="saveLogin" >
+										<span>아이디 저장</span>
+									</label>
+									<label class="inp_chk" for="autoLogin">
+										<input type="checkbox" id="autoLogin" >
+										<span>자동 로그인</span>
+									</label>
+								</div>
+							</div>
+								  <!-- 모두 유효한 값일 때, btn_login on으로 클래스 변경 -->
+							<button type="submit" class="btn_login off login">로그인</button>
+							</fieldset>
+		        		</form>
+						<ul class='list_loginEtc clear'>
+							<li><a href="javascript:" class='btn_findKey'>아이디찾기</a></li>
+							<li><a href="javascript:" class='btn_findKey'>비밀번호찾기</a></li>
+							<li><a href="javascript:" class='btn_register'>회원가입</a></li>
+						</ul>
+						<div class='login_naver'>
+							<a href="javascript:" class='btn_naver'><img src='../../images/biz/sub/logo_naver.png' alt='네이버 로고'>네이버 로그인</a>
+						</div>
+						<div class='bnr_login'><a href="javascript:" class='btn_bnr'>banner 360_180</a></div>
+						<p class='txt_center'>고객센터 : 1661-1112 (평일09:00 ~ 18:00 / 점심 12:00~13:00 / 주말 및 공휴일 휴무</p>
+						<span class='bt_bar'></span>
+						<p class='copyright'>COPYRIGHT(C) KYOBO BOOK CENTRE ALL RIGHTS RESERVED.</p>
+					</div>
+				</div>
+			</div>
+			<!-- //컨텐츠 -->
+		</div>
+		<!-- //Container -->
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			loginFn();
+		})
+	</script>
+</body>
+</html>

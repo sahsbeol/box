@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="MyPageSQL">
+    <typeAlias alias="user" type="kr.co.hottracks.site.model.common.User" />
+    <typeAlias alias="wishProductParam" type="kr.co.hottracks.site.model.frontoffice.mypage.WishProductParam" />
+    <typeAlias alias="criteria" type="kr.co.hottracks.site.model.frontoffice.mypage.WishProductCriteria" />
+    <typeAlias alias="ecardDto" type="kr.co.hottracks.site.model.frontoffice.mypage.EcardDto" />
+    <typeAlias alias="ecardCriteria" type="kr.co.hottracks.site.model.frontoffice.mypage.EcardCriteria" />
+    <typeAlias alias="sendEcardDto" type="kr.co.hottracks.site.model.frontoffice.mypage.SendEcardDto" />
+    <typeAlias alias="sendEcardCriteria" type="kr.co.hottracks.site.model.frontoffice.mypage.SendEcardCriteria" />
+    <typeAlias alias="wishPrdtOrBrandDto" type="kr.co.hottracks.site.model.frontoffice.mypage.WishPrdtOrBrandDto" />
+    <typeAlias alias="returnExchangeProductListData" type="kr.co.hottracks.site.model.frontoffice.mypage.ReturnExchangeProductListData" />
+    <typeAlias alias="returnExchangeProductListKey" type="kr.co.hottracks.site.model.frontoffice.mypage.ReturnExchangeProductListKey" />
+    <typeAlias alias="deliveryInformationParam" type="kr.co.hottracks.site.model.frontoffice.mypage.DeliveryInformationParam" />
+    <typeAlias alias="returnInformation" type="kr.co.hottracks.site.model.frontoffice.mypage.ReturnInformation" />
+    <typeAlias alias="userAddressParam" type="kr.co.hottracks.site.model.common.UserAddressParam" />
+    <typeAlias alias="userAddressCriteria" type="kr.co.hottracks.site.model.common.UserAddressCriteria" />
+    <typeAlias alias="taxBillRequest" type="kr.co.hottracks.site.model.common.TaxBillRequest" />
+    <typeAlias alias="taxBillRequestParam" type="kr.co.hottracks.site.model.common.TaxBillRequestParam" />
+    <typeAlias alias="taxBillRequestCriteria" type="kr.co.hottracks.site.model.common.TaxBillRequestCriteria" />
+    <typeAlias alias="userBusinessRegistNumParam" type="kr.co.hottracks.site.model.common.UserBusinessRegistNumParam" />
+    <typeAlias alias="userBusinessRegistNumCriteria" type="kr.co.hottracks.site.model.common.UserBusinessRegistNumCriteria" />
+    <typeAlias alias="txinOrderParam" type="kr.co.hottracks.site.model.common.TxinOrderParam" />
+    <typeAlias alias="txinOrderCriteria" type="kr.co.hottracks.site.model.common.TxinOrderCriteria" />
+    <typeAlias alias="recordStockedInfoReqParam" type="kr.co.hottracks.site.model.common.record.RecordStockedInfoReqParam"/>
+    <typeAlias alias="recordStockedInfoReqExt" type="kr.co.hottracks.site.model.common.record.RecordStockedInfoReqExt"/>
+    <typeAlias alias="orderCriteria" type="kr.co.hottracks.site.model.backoffice.order.OrderCriteria"/>
+    <typeAlias alias="orderSimpleInfo" type="kr.co.hottracks.site.model.frontoffice.order.OrderSimpleInfo"/>
+
+    <sql id="where_MaxRowSize">
+        <isNotEmpty property="topCount">
+            AND ROWNUM <![CDATA[ < ]]>
+            #topCount# + 1
+        </isNotEmpty>
+    </sql>
+    <insert id="saveWishProduct" parameterClass="wishProductParam">
+        <selectKey keyProperty="wishProductSequence" resultClass="int"
+            type="pre">
+            SELECT wish_prdt_seq.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO tb_wish_product (
+        user_num,
+        regst_dtm,
+        sell_prdt_bcode,
+        brand_id,
+        wish_gbn,
+        wish_prdt_seq,
+        strg_alt_yn,
+        recv_gbn,
+        mall_id
+        ) VALUES (
+        #userNum#,
+        #registDatetime#,
+        #barcode#,
+        #brandId#,
+        #wishGbn#,
+        #wishProductSequence#,
+        #inStorageAlertYn#,
+        #receiveYn#,
+        #mallId#
+        )
+    </insert>
+
+    <insert id="insertWishPrdtOrBrand" parameterClass="wishPrdtOrBrandDto">
+        <selectKey keyProperty="wishSeq" resultClass="int" type="pre">SELECT
+            wish_prdt_seq.NEXTVAL FROM DUAL</selectKey>
+        INSERT INTO tb_wish_product (
+        user_num,
+        wish_prdt_seq,
+        regst_dtm,
+        wish_gbn,
+        brand_id,
+        sell_prdt_bcode,
+        strg_alt_yn,
+        recv_gbn,
+        mall_id
+        ) VALUES (
+        #userNum#,
+        #wishSeq#,
+        SYSDATE,
+        #wishGbn#,
+        #brandId#,
+        #barcode#,
+        #strgAltYn#,
+        #recvGbn#,
+        #mallId#
+        )
+    </insert>
+
+    <!-- 
+        기능: 찜한 상품 목록 반환
+     -->
+    <select id="getListWishProduct" resultClass="wishProductParam" parameterClass="criteria">
+        /*MyPageSQL.getListWishProduct*/
+        SELECT A.WISH_PRDT_SEQ      wishProductSequence
+             , A.REGST_DTM          registDatetime
+             , A.BRAND_ID           brandId
+             , A.SELL_PRDT_BCODE    barcode
+             , A.STRG_ALT_YN        inStorageAlertYn
+             , A.RECV_GBN           receiveYn
+             , B.PRDT_NAME          productName
+             , B.SELL_PRDT_GBN      sellPrdtGbn
+             , B.RCRD_CD            rcrdCd
+             , B.PRDT_SELL_PRICE    prdtSellPrice
+             , B.PRDT_STAT_CODE     prdtStatCode
+             , C.BRAND_NAME         productBrandName
+             , D.RTNG_CODE          rtngCode
+             , NVL(C.BRAND_ENG_NAME, C.BRAND_NAME)              brandEngName
+             , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      productImageUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     productImageUrl2
+             , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, #mallId#)     productSellPrice
+             , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, #mallId#)    lastCpnPrice
+          FROM TB_WISH_PRODUCT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE
+          JOIN TB_BRAND C ON B.BRAND_ID = C.BRAND_ID
+          LEFT JOIN TB_RECORD D ON B.RCRD_CD = D.RCRD_CD
+        WHERE A.WISH_GBN = 'P'
+          AND A.MALL_ID = #mallId# 
+          AND A.USER_NUM = #userNum#
+          AND FC_IS_VALID_PRODUCT(A.SELL_PRDT_BCODE, #mallId#) = 'Y'
+        ORDER BY A.WISH_PRDT_SEQ DESC
+    </select>
+    
+    <!-- 
+        기능: 찜한 상품 목록 수 반환
+     -->
+    <select id="getListWishProductCount" resultClass="int" parameterClass="criteria">
+        /*MyPageSQL.getListWishProductCount*/
+        SELECT COUNT(A.WISH_PRDT_SEQ)
+          FROM TB_WISH_PRODUCT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE
+          JOIN TB_BRAND C ON B.BRAND_ID = C.BRAND_ID
+        WHERE A.WISH_GBN = 'P'
+          AND A.MALL_ID = #mallId# 
+          AND A.USER_NUM = #userNum#
+          AND FC_IS_VALID_PRODUCT(A.SELL_PRDT_BCODE, #mallId#) = 'Y'
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015.07.21
+        기능: 찜한 브랜드 목록 반환. 이미지는 최근 등록된 상품이미지로
+     -->
+    <select id="getListWishBrand" resultClass="wishProductParam" parameterClass="criteria">
+        /*MyPageSQL.getListWishBrand*/
+        SELECT WP.WISH_PRDT_SEQ         wishProductSequence
+             , WP.BRAND_ID              brandId
+             , FC_GET_PRODUCT_IMAGE_URL(MAX(SP.SELL_PRDT_BCODE))                                            productImageUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(MAX(SP.SELL_PRDT_BCODE))                                           productImageUrl2
+             , (SELECT NVL(B.BRAND_ENG_NAME, B.BRAND_NAME) FROM TB_BRAND B WHERE B.BRAND_ID = WP.BRAND_ID)  brandEngName
+          FROM TB_WISH_PRODUCT WP
+          LEFT JOIN TB_SELL_PRODUCT SP ON WP.BRAND_ID = SP.BRAND_ID AND SP.PRMT_CODE = 'C0302' AND SP.PRDT_STAT_CODE IN ('C0312', 'C0313')
+         WHERE WP.WISH_GBN = 'B'
+           AND WP.USER_NUM = #userNum#
+           AND WP.MALL_ID = #mallId#
+         GROUP BY WP.USER_NUM, WP.WISH_PRDT_SEQ, WP.BRAND_ID
+         ORDER BY WP.WISH_PRDT_SEQ DESC
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015.07.21
+        기능: 찜한 브랜드 목록 수 반환.
+     -->
+    <select id="getListWishBrandCount" resultClass="int" parameterClass="criteria">
+        /*MyPageSQL.getListWishBrandCount*/
+        SELECT COUNT(WP.WISH_PRDT_SEQ)
+          FROM TB_WISH_PRODUCT WP
+         WHERE WP.WISH_GBN = 'B'
+           AND WP.USER_NUM = #userNum#
+           AND WP.MALL_ID = #mallId#
+    </select>
+
+
+    <!--  
+        작성자 : 권동희
+        작성일자 : 2027-04-11
+        기능 : 좋아요 상품 삭제
+     -->
+    <delete id="deleteWishProduct" parameterClass="wishProductParam">
+       /* MyPageSQL.deleteWishProduct */
+        DELETE FROM TB_WISH_PRODUCT
+        WHERE SELL_PRDT_BCODE = #barcode#
+        AND USER_NUM = #userNum#
+        AND MALL_ID = #mallId#
+    </delete>
+    
+    <!--  
+        작성자 : 권동희
+        작성일자 : 2027-04-11
+        기능 : 좋아요 브랜드 삭제
+     -->
+    <delete id="deleteWishBrand" parameterClass="wishProductParam">
+       /* MyPageSQL.deleteWishBrand */
+        DELETE FROM TB_WISH_PRODUCT
+        WHERE BRAND_ID =#brandId#
+          AND USER_NUM = #userNum#
+          AND WISH_GBN = 'B'
+          AND MALL_ID = #mallId#
+    </delete>
+
+    <select id="selectListWishProductOnlyOffice" parameterClass="criteria"
+        resultClass="wishProductParam">
+        WITH v_temp as (
+        SELECT
+        A.WISH_PRDT_SEQ wishProductSequence
+        , A.REGST_DTM registDatetime
+        , A.BRAND_ID brandId
+        , A.SELL_PRDT_BCODE barcode
+        , A.STRG_ALT_YN inStorageAlertYn
+        , A.RECV_GBN receiveYn
+        , B.PRDT_NAME productName
+        , C.BRAND_NAME productBrandName
+        , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE) productImageUrl
+        , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, #mallId#) productSellPrice
+        , FC_IS_OPTION_PRODUCT(A.SELL_PRDT_BCODE) optionProductYn
+        , DECODE(B.SELL_PRDT_GBN, 'P', 'Y', 'N') specProductYn
+        , D.CTGR_ID categoryId
+        , E.VAT_TAX_YN vatTaxYn
+        , B.ORDER_MAKE_YN orderMakeYn
+        , B.MAX_ORDER_ALW_COUNT maxOrderAllowCount
+        , B.LIMIT_COUNT limitCount
+        FROM TB_WISH_PRODUCT A
+        , TB_SELL_PRODUCT B
+        , TB_BRAND C
+        , tb_product_category D
+        , tb_vendor_contract E
+        WHERE A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE
+        AND B.BRAND_ID = C.BRAND_ID
+        AND A.USER_NUM = #userNum#
+        AND A.WISH_GBN = 'P'
+        AND A.MALL_ID = #mallId#
+        AND B.SELL_PRDT_BCODE = D.SELL_PRDT_BCODE
+        AND B.vndr_cntrt_id = E.vndr_cntrt_id
+        AND D.CTGR_ID like '0001' || '%'
+        AND FC_IS_VALID_PRODUCT(A.SELL_PRDT_BCODE, #mallId#) = 'Y'
+        )
+        SELECT
+        wishProductSequence
+        , registDatetime
+        , brandId
+        , barcode
+        , inStorageAlertYn
+        , receiveYn
+        , productName
+        , productBrandName
+        , productImageUrl
+        , productSellPrice
+        , optionProductYn
+        , specProductYn
+        , categoryId
+        , vatTaxYn
+        , orderMakeYn
+        , maxOrderAllowCount
+        , limitCount
+        FROM v_temp
+        GROUP BY wishProductSequence, registDatetime, brandId, barcode,
+        inStorageAlertYn, receiveYn, productName, productBrandName,
+        productImageUrl, productSellPrice, optionProductYn, specProductYn,
+        categoryId,vatTaxYn, orderMakeYn, maxOrderAllowCount, limitCount
+        ORDER BY wishProductSequence DESC
+    </select>
+
+    <select id="getWishProductByProductKey" resultClass="wishProductParam"
+        parameterClass="wishProductParam">
+        SELECT
+        user_num userNum,
+        regst_dtm registDatetime,
+        sell_prdt_bcode barcode,
+        brand_id brandId,
+        wish_gbn wishGbn,
+        wish_prdt_seq wishProductSequence,
+        strg_alt_yn inStorageAlertYn,
+        recv_gbn receiveYn
+        FROM tb_wish_product
+        WHERE user_num = #userNum#
+        AND sell_prdt_bcode = #barcode#
+        AND mall_id = #mallId#
+           
+    </select>
+    <insert id="insertEcardRow" parameterClass="ecardDto">
+        INSERT INTO
+        tb_ecard_master
+        (
+        ecard_seq
+        , ecard_image_url
+        , regst_gbn
+        , regst_dtm
+        , ecard_title
+        , user_num
+        , use_yn
+        , mall_id
+        )VALUES
+        (
+        ecard_seq.NEXTVAL
+        , #imageUrl#
+        , #division#
+        , #registrationDate#
+        , #title#
+        , #userNum#
+        , #useYn#
+        , #mallId#
+        )
+    </insert>
+    <sql id="select_Ecard">
+        SELECT
+        ecard.ecard_seq seq
+        , ecard.ecard_image_url imageUrl
+        , ecard.regst_gbn division
+        , ecard.regst_dtm registrationDate
+        , ecard.ecard_title title
+        , ecard.user_num userNum
+        , ecard.use_yn useYn
+        FROM
+        tb_ecard_master ecard
+        WHERE
+        mall_id = #mallId#
+    </sql>
+    <sql id="where_Ecard">
+        <isNotEmpty property="division">
+            AND ecard.regst_gbn = #division#
+        </isNotEmpty>
+        <isNotEmpty property="registrationDate">
+            AND ecard.regst_dtm =
+            #registrationDate#
+        </isNotEmpty>
+        <isNotEmpty property="userNum">
+            AND ecard.user_num = #userNum#
+        </isNotEmpty>
+        <isNotEmpty property="useYn">
+            AND ecard.use_Yn = #useYn#
+        </isNotEmpty>
+        <isNotEmpty property="title">
+            AND ecard.ecard_title like
+            #title#||'%'
+        </isNotEmpty>
+    </sql>
+    <select id="selectEcardTotalRowSize" resultClass="Integer">
+        SELECT
+        COUNT(ecard.ecard_seq)
+        FROM
+        tb_ecard_master ecard
+        WHERE
+        mall_id = #mallId#
+        <include refid="where_Ecard" />
+        <include refid="where_MaxRowSize" />
+    </select>
+    <select id="selectEcardList" parameterClass="ecardCriteria"
+        resultClass="ecardDto">
+        <include refid="select_Ecard" />
+        <include refid="where_Ecard" />
+        ORDER BY ecard.ecard_seq DESC
+    </select>
+
+    <select id="selectEcardRow" parameterClass="ecardCriteria"
+        resultClass="ecardDto">
+        <include refid="select_Ecard" />
+        <include refid="where_Ecard" />
+        <isNotEmpty property="seq">
+            AND ecard.ecard_seq = #seq#
+        </isNotEmpty>
+    </select>
+    <delete id="deleteEcardRow" parameterClass="ecardCriteria">
+        DELETE
+        FROM
+        tb_ecard_master
+        WHERE
+        ecard_seq = #seq#
+    </delete>
+    <insert id="insertSendEcardRow" parameterClass="sendEcardDto">
+        <selectKey keyProperty="historySeq">SELECT send_hist_seq.NEXTVAL FROM
+            dual</selectKey>
+        INSERT INTO
+        tb_ecard_send_history
+        (
+        send_hist_seq
+        , ecard_email_title
+        , sndr_email_addr
+        , rcvr_email_addr
+        , mail_cont
+        , sndr_name
+        , rcvr_name
+        , regst_dtm
+        , user_num
+        , ecard_seq
+        , mall_id
+        )VALUES(
+        #historySeq#
+        , #ecardTitle#
+        , #senderEmailAddress#
+        , #recipientEmailAddress#
+        , #ecardContent#
+        , #senderName#
+        , #recipientName#
+        , SYSDATE
+        , #userNum#
+        , #ecardSeq#
+        , #mallId#
+        )
+    </insert>
+    <sql id="select_SendEcard">
+        SELECT
+        history.send_hist_seq historySeq
+        , history.ecard_email_title ecardTitle
+        , history.sndr_email_addr senderEmailAddress
+        , history.rcvr_email_addr recipientEmailAddress
+        , history.mail_cont ecardContent
+        , history.sndr_name senderName
+        , history.rcvr_name recipientName
+        , history.regst_dtm registrationDate
+        , history.user_num userNum
+        , history.ecard_seq ecardSeq
+        , ecard.ecard_image_url imageUrl
+        , history.user_num userNum
+        , history.mall_id mallId
+        FROM
+        tb_ecard_send_history history
+        , tb_ecard_master ecard
+        WHERE
+        ecard.ecard_seq = history.ecard_seq
+        AND history.mall_id = #mallId#
+        AND ecard.mall_id = #mallId#
+    </sql>
+    <sql id="where_SendEcard">
+        <isNotEmpty property="userNum">
+            AND history.user_num = #userNum#
+        </isNotEmpty>
+        <isNotEmpty property="historySeq">
+            AND history.send_hist_seq =
+            #historySeq#
+        </isNotEmpty>
+    </sql>
+    <select id="selectSendEcardRow" parameterClass="sendEcardCriteria"
+        resultClass="sendEcardDto">
+        <include refid="select_SendEcard" />
+        <include refid="where_SendEcard" />
+    </select>
+    <select id="selectSendEcardList" parameterClass="sendEcardCriteria"
+        resultClass="sendEcardDto">
+        <include refid="select_SendEcard" />
+        <include refid="where_SendEcard" />
+        ORDER BY history.send_hist_seq DESC
+    </select>
+    <select id="selectSendEcardTotalRowSize" parameterClass="sendEcardCriteria"
+        resultClass="Integer">
+        SELECT
+        COUNT(history.send_hist_seq)
+        FROM
+        tb_ecard_send_history history
+        , tb_ecard_master ecard
+        WHERE
+        ecard.ecard_seq = history.ecard_seq
+        AND history.mall_id = #mallId#
+        AND ecard.mall_id = #mallId#
+        <include refid="where_SendEcard" />
+        <include refid="where_MaxRowSize" />
+    </select>
+    <delete id="deleteSendEcardRow" parameterClass="sendEcardCriteria">
+        DELETE
+        FROM
+        tb_ecard_send_history
+        WHERE
+        user_num = #userNum#
+        AND
+        send_hist_seq = #historySeq#
+    </delete>
+
+    <select id="selectReturnExchangeProduct" parameterClass="returnExchangeProductListKey"
+        resultClass="returnExchangeProductListData">
+        SELECT
+        a.order_num orderNum ,
+        FC_GET_BARCODE(b.sell_prdt_bcode) sellPrdtBcode ,
+        b.order_count orderCount ,
+        b.order_prdt_amt orderPrdtAmt ,
+        FC_GET_ABLE_RETURN_COUNT(b.order_num, b.order_prdt_inseq) rtnPossibleCount ,
+        b.sngl_prdt_sell_price snglPrdtSellPrice ,
+        b.order_prdt_inseq orderPrdtInseq ,
+        h.prdt_name prdtName ,
+        h.spec_name specName ,
+        f.dlvy_vndr_id dlvyVndrId ,
+        k.vndr_name vndrName
+        FROM
+        tb_order a ,
+        tb_order_product b ,
+        tb_order_destination d ,
+        tb_order_delivery_request e ,
+        tb_delivery f ,
+        tb_order_delivery_product g ,
+        tb_sell_product h ,
+        tb_vendor k
+        WHERE
+        a.order_num = b.order_num
+        <isNotEmpty property="userNum" prepend="AND">
+            a.user_num = #userNum#
+              </isNotEmpty>
+        <isEmpty property="userNum" prepend="AND">
+            a.order_num= #orderNum#
+            AND a.passwd = #password#
+              </isEmpty>
+        AND d.order_num = a.order_num
+        AND e.order_num = d.order_num
+        AND e.order_dest_inseq = d.order_dest_inseq
+        AND e.dlvy_vndr_id = b.dlvy_vndr_id
+        AND f.order_num = e.order_num
+        AND f.order_dest_inseq = e.order_dest_inseq
+        AND f.dlvy_vndr_id = e.dlvy_vndr_id
+        AND f.dlvy_gbn_code = 'C0131'
+        AND g.dlvy_id = f.dlvy_id
+        AND g.order_num = b.order_num
+        AND g.order_prdt_inseq = b.order_prdt_inseq
+        AND h.sell_prdt_bcode = b.sell_prdt_bcode
+        AND g.order_dlvy_prdt_stat_code = 'C0234'
+        AND FC_GET_ABLE_RETURN_COUNT(b.order_num, b.order_prdt_inseq) <![CDATA[ > ]]>
+        0
+        AND (trunc(sysdate) - to_date(f.dlvy_cmplt_dt, 'yyyymmdd')) <![CDATA[ < ]]>
+        7
+        AND f.dlvy_vndr_id = k.vndr_id
+        AND NOT EXISTS
+        (
+        SELECT
+        h.sell_prdt_bcode
+        FROM
+        tb_order i ,
+        tb_order_product j ,
+        tb_kyobo_select_option c ,
+        tb_order_destination d ,
+        tb_order_delivery_request e ,
+        tb_delivery f ,
+        tb_order_delivery_product g ,
+        tb_sell_product h
+        WHERE
+        i.order_num = j.order_num
+        AND j.order_num = c.order_num
+        AND j.order_prdt_inseq = c.order_prdt_inseq
+        <isNotEmpty property="userNum" prepend="AND">
+            i.user_num = #userNum#
+                       </isNotEmpty>
+        <isEmpty property="userNum" prepend="AND">
+            i.order_num= #orderNum#
+            AND i.passwd = #password#
+                       </isEmpty>
+        AND d.order_num = i.order_num
+        AND e.order_num = d.order_num
+        AND e.order_dest_inseq = d.order_dest_inseq
+        AND e.dlvy_vndr_id = j.dlvy_vndr_id
+        AND f.order_num = e.order_num
+        AND f.order_dest_inseq = e.order_dest_inseq
+        AND f.dlvy_vndr_id = e.dlvy_vndr_id
+        AND f.dlvy_gbn_code = 'C0131'
+        AND g.dlvy_id = f.dlvy_id
+        AND g.order_num = j.order_num
+        AND g.order_prdt_inseq = j.order_prdt_inseq
+        AND h.sell_prdt_bcode = j.sell_prdt_bcode
+        AND g.order_dlvy_prdt_stat_code = 'C0234'
+        AND c.optn_yn = 'N'
+        AND b.sell_prdt_bcode = j.sell_prdt_bcode
+        AND b.order_prdt_inseq = j.order_prdt_inseq
+        )
+        ORDER BY a.order_num, f.dlvy_vndr_id
+    </select>
+
+    <select id="selectAjaxGetReturnExchangeProduct" parameterClass="returnExchangeProductListKey"
+        resultClass="returnExchangeProductListData">
+        SELECT
+        a.order_num orderNum ,
+        FC_GET_BARCODE(b.sell_prdt_bcode) sellPrdtBcode ,
+        b.order_count orderCount ,
+        b.order_prdt_amt orderPrdtAmt ,
+        FC_GET_ABLE_RETURN_COUNT(b.order_num, b.order_prdt_inseq) rtnPossibleCount ,
+        b.sngl_prdt_sell_price snglPrdtSellPrice ,
+        b.order_prdt_inseq orderPrdtInseq ,
+        h.prdt_name prdtName ,
+        h.spec_name specName ,
+        #rtnCount# rtnCount ,
+        b.count_cpn_yn countCpnYn
+        FROM
+        tb_order a ,
+        tb_order_product b ,
+        tb_order_destination d ,
+        tb_order_delivery_request e ,
+        tb_delivery f ,
+        tb_order_delivery_product g ,
+        tb_sell_product h
+        WHERE
+        a.order_num = b.order_num
+        AND d.order_num = a.order_num
+        AND e.order_num = d.order_num
+        AND e.order_dest_inseq = d.order_dest_inseq
+        AND e.dlvy_vndr_id = b.dlvy_vndr_id
+        AND f.order_num = e.order_num
+        AND f.order_dest_inseq = e.order_dest_inseq
+        AND f.dlvy_vndr_id = e.dlvy_vndr_id
+        AND f.dlvy_gbn_code = 'C0131'
+        AND g.dlvy_id = f.dlvy_id
+        AND g.order_num = b.order_num
+        AND g.order_prdt_inseq = b.order_prdt_inseq
+        AND h.sell_prdt_bcode = b.sell_prdt_bcode
+        AND g.order_dlvy_prdt_stat_code = 'C0234'
+        AND b.order_num = #orderNum#
+        AND b.order_prdt_inseq = #orderPrdtInseq#
+        ORDER BY a.order_num
+    </select>
+
+    <select id="selectReturnExchangeList" parameterClass="returnExchangeProductListKey"
+        resultClass="returnExchangeProductListData">
+        SELECT
+        a.order_num orderNum
+        , a.regst_dtm registDtm
+        , d.sell_prdt_bcode sellPrdtBcode
+        , d.prdt_name prdtName
+        , a.cnsl_gbn_code counselGubunCode
+        , a.sos_cnsl_gbn sosCounselGubun
+        , a.sos_proc_gbn sosProcessGubun
+        , a.rtn_status_code returnStatusCode
+        , a.rtn_seq returnSeq
+        , a.sos_cnsl_code sosCounselCode
+        , b.rtn_count rtnCount
+        , d.spec_name specName
+        from
+        tb_return_exchange_master a
+        , tb_return_exchange_product b
+        , tb_order_product c
+        , tb_sell_product d
+        , tb_order e
+        WHERE
+        a.RTN_SEQ = b.RTN_SEQ
+        AND b.ORDER_NUM = c.ORDER_NUM
+        AND b.ORDER_PRDT_INSEQ = c.ORDER_PRDT_INSEQ
+        AND c.SELL_PRDT_BCODE = d.SELL_PRDT_BCODE
+        AND e.order_num = a.order_num
+        AND A.cnsl_gbn_code in ('C0265', 'C0266')
+        <isNotEmpty property="userNum" prepend="AND">
+            e.user_num = #userNum#
+               </isNotEmpty>
+        <isEmpty property="userNum" prepend="AND">
+            e.order_num= #orderNum#
+            AND e.passwd = #password#
+               </isEmpty>
+        ORDER BY a.regst_dtm DESC
+    </select>
+
+    <select id="selectReturnExchangeCount" parameterClass="returnExchangeProductListKey"
+        resultClass="Integer">
+        SELECT count(a.order_num)
+        FROM
+        tb_return_exchange_master a
+        , tb_return_exchange_product b
+        , tb_order_product c
+        , tb_sell_product d
+        , tb_order e
+        WHERE
+        a.RTN_SEQ = b.RTN_SEQ
+        AND b.ORDER_NUM = c.ORDER_NUM
+        AND b.ORDER_PRDT_INSEQ = c.ORDER_PRDT_INSEQ
+        AND c.SELL_PRDT_BCODE = d.SELL_PRDT_BCODE
+        AND e.order_num = a.order_num
+        AND A.cnsl_gbn_code in ('C0265', 'C0266')
+        <isNotEmpty property="userNum" prepend="AND">
+            e.user_num = #userNum#
+               </isNotEmpty>
+        <isEmpty property="userNum" prepend="AND">
+            e.order_num= #orderNum#
+            AND e.passwd = #password#
+               </isEmpty>
+    </select>
+
+    <select id="selectDeliveryInformation" parameterClass="Integer"
+        resultClass="DeliveryInformationParam">
+        SELECT
+        a.send_no sendNo ,
+        a.dlvy_status_code dlvyStatusCode ,
+        b.tcb_name tcbName ,
+        b.tcb_url tcbUrl
+        FROM
+        tb_delivery a ,
+        tb_tacbae b
+        WHERE
+        a.tcb_id = b.tcb_id(+)
+        AND rtn_seq= #returnSeq#
+    </select>
+
+    <select id="selectReturnInformation" parameterClass="Integer"
+        resultClass="ReturnInformation">
+        SELECT b.pymnt_means_code pymntMeansCode
+        , SUM(B.pymnt_amt + B.canc_rtn_amt) cancRtnAmt
+        FROM tb_order_cancel_history a
+        , tb_payment b
+        WHERE a.order_num = b.order_num
+        AND a.order_canc_inseq = b.order_canc_inseq
+        AND a.rtn_seq = #returnSeq#
+        GROUP BY B.pymnt_means_code
+    </select>
+
+    <select id="selectAddressManagement" resultClass="userAddressParam"
+        parameterClass="userAddressCriteria">
+        SELECT a.user_num userNum
+        , a.mall_id mallId
+        , a.addr_seq addrSequence
+        , a.main_addr_yn mainAddrYn
+        , a.addr_gbn addrGbn
+        , a.name name
+        , a.post_num1 postNum1
+        , a.post_num2 postNum2
+        , a.addr1 addr1
+        , a.addr2 addr2
+        , a.addr3 addr3
+        , a.addr4 addr4
+        , a.tel_num telNum
+        , a.hdphn_num handPhoneNum
+        , a.regst_dtm regstDtm
+        , a.addr_title addrTitle
+        , a.email_addr emailAddr
+        FROM
+        tb_user_address a
+        WHERE
+        user_num = #userNum#
+        AND mall_id= #mallId#
+        ORDER BY a.addr_seq DESC
+    </select>
+
+    <select id="selectAddressManagementCount" resultClass="Integer"
+        parameterClass="userAddressCriteria">
+        SELECT count(a.user_num)
+        FROM tb_user_address a
+        WHERE user_num = #userNum#
+        AND mall_id= #mallId#
+    </select>
+
+    <insert id="insertTxinRequest" parameterClass="taxBillRequestParam">
+        <selectKey keyProperty="taxBillSeq" type="pre" resultClass="int">
+            SELECT tax_bill_seq.NEXTVAL FROM dual
+        </selectKey>
+        INSERT INTO
+        tb_tax_bill_request
+        (
+        tax_bill_seq,
+        biz_reg_num,
+        vndr_name,
+        prime_name,
+        biz_type_info,
+        vndr_addr,
+        mngr_name,
+        email_addr,
+        regst_dtm,
+        biz_kind_info,
+        sscbr_name,
+        sscbr_tel_num,
+        req_dtm,
+        issue_dtm,
+        issue_yn,
+        issue_mngr_admin_id
+        )
+        VALUES
+        (
+        #taxBillSeq#,
+        #bizRegNum#,
+        #vndrName#,
+        #primeName#,
+        #bizTypeInfo#,
+        #vndrAddr#,
+        #mngrName#,
+        #emailAddr#,
+        sysdate,
+        #bizKindInfo#,
+        #sscbrName#,
+        #sscbrTelNum#,
+        sysdate,
+        #issuedtm#,
+        #issueYn#,
+        #issueMngrAdminId#
+        )
+    </insert>
+
+    <insert id="insertTaxBillRequestOrder" parameterClass="taxBillRequestParam">
+        INSERT INTO tb_tax_bill_request_order
+        (
+        tax_bill_seq
+        , order_num
+        )VALUES
+        (
+        #taxBillSeq#
+        , #orderNum#
+        )
+    </insert>
+
+    <insert id="insertUserBusinessRegistNum" parameterClass="userBusinessRegistNumParam">
+        <selectKey keyProperty="userBizRegNumSeq" resultClass="int"
+            type="pre">
+            SELECT nvl(max(user_biz_reg_num_seq),0)+1 userBizRegNumSeq
+            FROM tb_user_business_regist_num
+            WHERE USER_NUM =#userNum#
+            AND MALL_ID=#mallId#
+        </selectKey>
+        INSERT
+        INTO
+        tb_user_business_regist_num
+        (
+        user_num,
+        mall_id,
+        user_biz_reg_num_seq,
+        biz_reg_num,
+        vndr_name,
+        prime_name,
+        biz_kind_info,
+        vndr_addr,
+        mngr_name,
+        email_addr,
+        regst_dtm,
+        biz_type_info
+        )
+        VALUES
+        (
+        #userNum#,
+        #mallId#,
+        #userBizRegNumSeq#,
+        #bizRegNum#,
+        #vndrName#,
+        #primeName#,
+        #bizKindInfo#,
+        #vndrAddr#,
+        #mngrName#,
+        #emailAddr#,
+        sysdate,
+        #bizTypeInfo#
+        )
+    </insert>
+
+    <select id="selectSearchTxinRequestByYserNum" parameterClass="userBusinessRegistNumCriteria"
+        resultClass="userBusinessRegistNumParam">
+        SELECT
+        user_num userNum,
+        mall_id mallId,
+        user_biz_reg_num_seq userBizRegNumSeq,
+        biz_reg_num bizRegNum,
+        vndr_name vndrName,
+        prime_name primeName,
+        biz_kind_info bizKindInfo,
+        vndr_addr vndrAddr,
+        mngr_name mngrName,
+        email_addr emailAddr,
+        regst_dtm regstDtm,
+        biz_type_info bizTypeInfo
+        FROM
+        tb_user_business_regist_num
+        WHERE
+        user_num =#userNum#
+        AND mall_id =#mallId#
+    </select>
+
+    <select id="selectSearchTxinRequestByYserNumCount"
+        parameterClass="userBusinessRegistNumCriteria" resultClass="Integer">
+        SELECT
+        COUNT(user_num)
+        FROM
+        tb_user_business_regist_num
+        WHERE
+        user_num =#userNum#
+        AND mall_id=#mallId#
+    </select>
+
+    <select id="selectSearchTxinRequest" parameterClass="userBusinessRegistNumCriteria"
+        resultClass="userBusinessRegistNumParam">
+        SELECT
+        user_num userNum,
+        mall_id mallId,
+        user_biz_reg_num_seq userBizRegNumSeq,
+        biz_reg_num bizRegNum,
+        vndr_name vndrName,
+        prime_name primeName,
+        biz_kind_info bizKindInfo,
+        vndr_addr vndrAddr,
+        mngr_name mngrName,
+        email_addr emailAddr,
+        regst_dtm regstDtm,
+        biz_type_info bizTypeInfo
+        FROM
+        tb_user_business_regist_num
+        WHERE
+        user_num =#userNum#
+        AND mall_id =#mallId#
+        AND user_biz_reg_num_seq=#userBizRegNumSeq#
+    </select>
+
+    <select id="selectOrderHistoryList" parameterClass="txinOrderCriteria"
+        resultClass="txinOrderParam">
+        WITH v_temp AS (
+        SELECT A.order_num orderNum
+        , MAX(B.pymnt_dtm) pymnt_dtm
+        FROM tb_order A
+        , tb_payment B
+        WHERE A.order_num = B.order_num
+        AND FC_GET_ORDER_STATUS_CODE(A.order_num) IN ('C0123','C0124')
+        AND B.pymnt_stat_code = 'C0102'
+        <isNotEmpty property="userNum">
+            AND A.user_num = #userNum#
+            </isNotEmpty>
+        <isEmpty property="userNum">
+            AND A.order_num= #orderNum#
+            AND A.passwd = #passwd#
+            </isEmpty>
+        AND TO_CHAR(B.pymnt_dtm,'yyyyMMdd') BETWEEN #searchMonth#||'01' AND
+        #searchMonth#||'31'
+        AND 0 <![CDATA[<]]> (FC_GET_PYMNT_AMT_BY_MEANS_CODE(B.order_num, 'C0112') + FC_GET_PYMNT_AMT_BY_MEANS_CODE(B.order_num, 'C0116') + FC_GET_PYMNT_AMT_BY_MEANS_CODE(B.order_num, 'C0117') + FC_GET_PYMNT_AMT_BY_MEANS_CODE(B.order_num, 'C011K') + FC_GET_PYMNT_AMT_BY_MEANS_CODE(B.order_num, 'C011L'))
+        GROUP BY A.order_num
+        )
+        SELECT A.orderNum
+        , MAX(A.pymnt_dtm) pymntDtm
+        , NVL((SELECT SUM(pymnt_amt + canc_rtn_amt)
+        FROM tb_payment
+        WHERE order_num = A.orderNum),0) pymntAmt
+        , MAX(D.prdt_name) prdtName
+        , (COUNT(*)-1) prdtCount
+        FROM v_temp A
+        , tb_order B
+        , tb_order_product C
+        , tb_sell_product D
+        WHERE A.orderNum = B.order_num
+        AND B.order_num = C.order_num
+        AND C.order_count > C.canc_count
+        AND C.sell_prdt_bcode = D.sell_prdt_bcode
+        AND NOT EXISTS (SELECT order_num FROM tb_tax_bill_request_order WHERE
+        order_num = A.orderNum)
+        GROUP BY A.orderNum
+    </select>
+
+    <select id="selectTxinRequestListByUser" parameterClass="taxBillRequestCriteria"
+        resultClass="taxBillRequestParam">
+        WITH v_temp AS (
+        SELECT A.tax_bill_seq
+        FROM tb_tax_bill_request_order A
+        , tb_order B
+        WHERE A.order_num = B.order_num
+        <isEmpty prepend="AND" property="userNum">
+            B.order_num = #orderNum#
+            AND B.passwd = #passwd#
+               </isEmpty>
+        <isNotEmpty prepend="AND" property="userNum">
+            B.user_num = #userNum#
+               </isNotEmpty>
+        GROUP BY A.tax_bill_seq
+        )
+        SELECT B.tax_bill_seq taxBillSeq
+        , B.biz_reg_num bizRegNum
+        , B.vndr_name vndrName
+        , B.biz_type_info bizTypeInfo
+        , B.vndr_addr vndrAddr
+        , B.mngr_name mngrName
+        , B.email_addr emailAddr
+        , B.regst_dtm regstDtm
+        , B.biz_kind_info bizKindInfo
+        , B.sscbr_name sscbrName
+        , B.sscbr_tel_num sscbrTelNum
+        , B.req_dtm reqDtm
+        , B.issue_dtm issuedtm
+        , B.issue_yn issueYn
+        , B.issue_mngr_admin_id issueMngrAdminId
+        FROM v_temp A
+        , tb_tax_bill_request B
+        WHERE A.tax_bill_seq = B.tax_bill_seq
+        ORDER BY A.tax_bill_seq DESC
+    </select>
+
+    <select id="selectTxinRequestListCountByUser" parameterClass="taxBillRequestCriteria"
+        resultClass="int">
+        WITH v_temp AS (
+        SELECT A.tax_bill_seq
+        FROM tb_tax_bill_request_order A
+        , tb_order B
+        WHERE A.order_num = B.order_num
+        <isEmpty prepend="AND" property="userNum">
+            B.order_num = #orderNum#
+            AND B.passwd = #passwd#
+               </isEmpty>
+        <isNotEmpty prepend="AND" property="userNum">
+            B.user_num = #userNum#
+               </isNotEmpty>
+        GROUP BY A.tax_bill_seq
+        )
+        SELECT COUNT(*)
+        FROM v_temp A
+        , tb_tax_bill_request B
+        WHERE A.tax_bill_seq = B.tax_bill_seq
+        AND ROWNUM <![CDATA[ < ]]>
+        #topCount# + 1
+    </select>
+
+    <select id="selectTxinRequest" parameterClass="taxBillRequestCriteria"
+        resultClass="taxBillRequestParam">
+        WITH v_temp AS (
+        SELECT A.tax_bill_seq
+        FROM tb_tax_bill_request_order A
+        , tb_order B
+        WHERE A.order_num = B.order_num
+        <isEmpty prepend="AND" property="userNum">
+            B.order_num = #orderNum#
+            AND B.passwd = #passwd#
+               </isEmpty>
+        <isNotEmpty prepend="AND" property="userNum">
+            B.user_num = #userNum#
+               </isNotEmpty>
+        GROUP BY A.tax_bill_seq
+        )
+        SELECT A.SSCBR_NAME sscbrName
+        , A.SSCBR_TEL_NUM sscbrTelNum
+        , A.REQ_DTM reqDtm
+        , A.ISSUE_DTM issuedtm
+        , A.BIZ_REG_NUM bizRegNum
+        , A.VNDR_NAME vndrName
+        , A.PRIME_NAME primeName
+        , A.BIZ_TYPE_INFO bizTypeInfo
+        , A.BIZ_KIND_INFO bizKindInfo
+        , A.VNDR_ADDR vndrAddr
+        , A.MNGR_NAME mngrName
+        , A.EMAIL_ADDR emailAddr
+        , A.ISSUE_YN issueYn
+        , A.ISSUE_MNGR_ADMIN_ID issueMngrAdminId
+        FROM tb_tax_bill_request A
+        , v_temp B
+        WHERE A.tax_bill_seq = B.tax_bill_seq
+        AND A.tax_bill_seq = #taxBillSeq#
+    </select>
+
+    <select id="selectTxinRequestOrderByTaxBillSeq" parameterClass="taxBillRequestCriteria"
+        resultClass="string">
+        SELECT A.order_num orderNum
+        FROM tb_tax_bill_request_order A
+        WHERE A.tax_bill_seq = #taxBillSeq#
+    </select>
+    
+    <!-- 
+            음반 입고 안내 신청 중복등록 체크용 쿼리
+     -->
+    <select id="checkGiftStockedInfoReqDuplicate" parameterClass="recordStockedInfoReqParam" resultClass="recordStockedInfoReqExt">
+        SELECT
+            a.seq as recStockedInfoReqSeq 
+        FROM tb_gift_stocked_info_req a
+        WHERE
+            a.user_num = #userNum# and 
+            a.mall_id = #mallId# and 
+            a.sell_prdt_bcode = #rcrdCd# and 
+            a.mail_end_yn = #mailEndYn# and 
+            a.sms_end_yn = #smsEndYn# 
+    </select>
+    
+    <insert id="createGiftStockedInfoReq" parameterClass="recordStockedInfoReqParam">
+        INSERT INTO tb_gift_stocked_info_req(seq, sell_prdt_bcode, user_num, mall_id, mail, hp, mail_yn, sms_yn, mail_end_yn, sms_end_yn, regst_dtm) 
+        VALUES( (SELECT nvl(max(seq),0) + 1 FROM tb_gift_stocked_info_req)
+              , #rcrdCd#, #userNum#, #mallId#, #mail#, #hp#, #mailYn#, #smsYn#, #mailEndYn#, #smsEndYn#, sysdate)
+    </insert>
+    
+    <parameterMap id="coupangCheck" class="java.util.Map">
+        <parameter property="V_COUPONNUM" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_USERNUM" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_RESULT" javaType="java.lang.String" jdbcType="VARCHAR" mode="OUT" />
+    </parameterMap>
+
+    <procedure id="coupangNumCheck" parameterMap="coupangCheck">
+        { call PR_COUPANGCHECK(?,?,?) }
+    </procedure>
+    
+    <!-- 상품평쓰기 히스토리 조회 -->
+    <select id="getHistoryOfBarcode" parameterClass="kr.co.hottracks.site.model.backoffice.order.OrderProductExt" resultClass="kr.co.hottracks.site.model.backoffice.BackSearchParam">
+        /* MyPageSQL.getHistoryOfBarcode  */
+        SELECT CASE WHEN OP.ORDER_PRDT_STAT_CODE != 'C0171' THEN OP.ORDER_PRDT_STAT_CODE
+                    ELSE FC_GET_ORDER_STATUS_CODE(O.ORDER_NUM)
+               END                     stVar1
+            , count(*)   stInt1
+            , fc_get_prdt_name(OP.SELL_PRDT_BCODE, '02')   stVar2
+            , case when TO_CHAR(D.LAST_MOD_DTM + 16/24, 'YYYYMMDD hh24') &lt; TO_CHAR(sysdate, 'YYYYMMDD hh24') then 'Y' else 'N' end stVar3
+         FROM TB_ORDER O  
+         JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM
+         JOIN TB_DELIVERY D ON D.ORDER_NUM = OP.ORDER_NUM
+        WHERE O.USER_NUM = #userNum#
+          AND O.ORDER_DTM &gt;=  ADD_MONTHS(SYSDATE, -3)
+          AND FC_GET_BARCODE(OP.SELL_PRDT_BCODE) =FC_GET_BARCODE(#barcode#)
+          AND ROWNUM =1
+        group by OP.ORDER_PRDT_STAT_CODE, O.ORDER_NUM, O.ORDER_DTM, OP.SELL_PRDT_BCODE, D.LAST_MOD_DTM
+       ORDER BY O.ORDER_DTM DESC
+    </select>
+    <!-- 
+        작성자: 장진용
+        작성일: 2016.10.27
+        기능: 주문배송정보 반환
+    -->
+    <select id="countOrderDeliveryByNum" parameterClass="orderCriteria" resultClass="int">
+        /* MyPageSQL.countOrderDeliveryByNum */
+        SELECT COUNT(*)
+          FROM (SELECT O.ORDER_NUM
+                  FROM TB_ORDER O
+                  JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM
+                  JOIN TB_SELL_PRODUCT SP ON OP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND SP.SELL_PRDT_GBN IN ('P', 'G', 'S', 'R', 'D')
+                 WHERE O.MALL_ID = '02'
+                   <isNotEmpty property="userNum" prepend="AND">
+                       O.USER_NUM = #userNum#
+                   </isNotEmpty>
+                   <isEmpty property="userNum" prepend="AND">
+                       O.ORDER_NUM = #orderNo# AND O.PASSWD = #password#
+                   </isEmpty>
+                   <isEqual property="orderTermType" compareValue="0" prepend="AND">
+                       O.ORDER_DTM &gt;  ADD_MONTHS(SYSDATE, -6)
+                   </isEqual>
+                   <isEqual property="orderTermType" compareValue="1" prepend="AND">
+                       O.ORDER_DTM &lt;=  ADD_MONTHS(SYSDATE, -6)
+                   </isEqual>
+                 GROUP BY O.ORDER_NUM, O.ORDER_DTM
+               ) O
+         WHERE ROWNUM &lt; #topCount# + 1
+    </select>
+    
+    <select id="getOrderDeliveryByNum" parameterClass="orderCriteria" resultClass="orderSimpleInfo">
+        /* MyPageSQL.getOrderDeliveryByNum  */
+        select orderDtm             orderDatetime
+             , orderNum             orderNum
+             , sum(orderAmt)        orderPrdtAmt
+             , min(orderStatus)     orderStatusCode
+             , sum(priOrder)        priOrder
+         from(
+        SELECT O.ORDER_DTM                                                                          orderDtm
+             , O.ORDER_NUM                                                                          orderNum
+             , OP.ORDER_PRDT_AMT                                                                    orderAmt
+             , ORDER_STATUS_CODE                                                                    orderStatus
+             , decode(fc_get_barcode(op.sell_prdt_bcode), fc_get_barcode(#sellPrdtBcode#), 1, 0)    priOrder
+          FROM TB_ORDER O
+          JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM
+          JOIN TB_SELL_PRODUCT SP ON OP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND SP.SELL_PRDT_GBN IN ('P', 'G', 'S', 'R', 'D')
+         WHERE O.MALL_ID = '02'
+           <isNotEmpty property="userNum" prepend="AND">
+               O.USER_NUM = #userNum#
+           </isNotEmpty>
+           <isEmpty property="userNum" prepend="AND">
+               O.ORDER_NUM = #orderNo# AND O.PASSWD = #password#
+           </isEmpty>
+           <isEqual property="orderTermType" compareValue="0" prepend="AND">
+            O.ORDER_DTM &gt;  ADD_MONTHS(SYSDATE, -6)
+           </isEqual>
+           <isEqual property="orderTermType" compareValue="1" prepend="AND">
+               O.ORDER_DTM &lt;=  ADD_MONTHS(SYSDATE, -6)
+           </isEqual>
+         ) GROUP BY ORDERDTM , ORDERNUM 
+           ORDER BY PRIORDER DESC, ORDERNUM DESC, ORDERNUM
+    </select>
+    
+     <select id="getOrderProductByNum" parameterClass="orderCriteria" resultClass="orderSimpleInfo">
+        /* MyPageSQL.getOrderProductByNum  */
+        SELECT SP.SELL_PRDT_BCODE                                                                   barcode
+             , SP.PRDT_NAME                                                                         prdtName
+             , SP.RCRD_CD                                                                           rcrdCd
+             , O.USER_NUM                                                                           userNum
+             , SP.SPEC_NAME                                                                         specName
+             , OP.SNGL_PRDT_SELL_PRICE                                                              snglPrdtSellPrice
+             , OP.ORDER_COUNT                                                                       orderCount
+             , T1.SEND_NO                                                                           sendNo
+             , OP.ORDER_NUM                                                                         orderNum
+             , OP.ORDER_PRDT_INSEQ                                                                  orderPrdtInseq
+             , CASE WHEN OP.ORDER_PRDT_STAT_CODE != 'C0171' THEN OP.ORDER_PRDT_STAT_CODE
+                    ELSE FC_GET_ORDER_STATUS_CODE(O.ORDER_NUM)
+                END                                                                                 orderStatusCode
+             , CASE WHEN OP.ORDER_PRDT_STAT_CODE != 'C0171' THEN FC_GET_CODE_NAME(OP.ORDER_PRDT_STAT_CODE)
+                    ELSE FC_GET_CODE_NAME(FC_GET_ORDER_STATUS_CODE(O.ORDER_NUM)) 
+               END                                                                                  orderStatusName
+             , FC_GET_ORDER_PRODUCT_OPTION(OP.ORDER_NUM, OP.ORDER_PRDT_INSEQ)                       kyoboSelectOptionStr
+             , FC_GET_PRODUCT_IMAGE_URL(SP.SELL_PRDT_BCODE)                                         productImageUrl
+             , decode(FC_GET_ORDER_PRODUCT_REVIEW_YN(O.ORDER_NUM, OP.ORDER_PRDT_INSEQ),'N',0, 1)    reviewCnt    /* 작성 여부 */
+             , (case when ADD_MONTHS(SYSDATE, -3) &lt;= o.order_dtm then  '1' else '-1' end)        ableReview   /* 작성 기한 여부 */
+             , CASE WHEN NVL((SELECT COUNT(*) FROM TB_COMMENT_POINT CP WHERE CP.ORDER_NUM = OP.ORDER_NUM 
+                     AND CP.SELL_PRDT_BCODE =  SP.SELL_PRDT_BCODE and CP.SAVE_YN='Y' 
+                     AND NVL(CP.ORDER_PRDT_INSEQ, OP.ORDER_PRDT_INSEQ) = OP.ORDER_PRDT_INSEQ), 0) > 0 THEN 1 ELSE 0 END resultComment   /* 적립되었는지의 여부 */
+             , T1.DLVY_ID deliveryId
+             , T1.DELIVERY_COMPLETE_CHECK deliveryCompleteCheck
+          FROM TB_ORDER O
+          JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM
+          JOIN TB_SELL_PRODUCT SP ON OP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND SP.SELL_PRDT_GBN IN ('P', 'G', 'S', 'R', 'D')
+          LEFT JOIN (SELECT SD.ORDER_NUM
+                          , SD.ORDER_PRDT_INSEQ
+                          , SC.TCB_ID
+                          , SC.SEND_NO
+                          , SC.DLVY_ID
+                          , case when TO_CHAR(SC.LAST_MOD_DTM + 16/24, 'YYYYMMDD hh24') &lt; TO_CHAR(sysdate, 'YYYYMMDD hh24') then 'Y' else 'N' end DELIVERY_COMPLETE_CHECK
+                       FROM TB_ORDER_DESTINATION SA
+                       JOIN TB_ORDER_DELIVERY_REQUEST SB ON SA.ORDER_NUM = SB.ORDER_NUM AND SA.ORDER_DEST_INSEQ = SB.ORDER_DEST_INSEQ
+                       JOIN TB_DELIVERY SC ON SB.ORDER_NUM = SC.ORDER_NUM AND SB.ORDER_DEST_INSEQ =  SC.ORDER_DEST_INSEQ AND SB.DLVY_VNDR_ID = SC.DLVY_VNDR_ID AND SC.DLVY_GBN_CODE = 'C0131'
+                       JOIN TB_ORDER_DELIVERY_PRODUCT SD ON SC.DLVY_ID = SD.DLVY_ID AND SD.ORDER_DLVY_PRDT_STAT_CODE != 'C0235'
+                      WHERE SA.ORDER_DEST_INSEQ = '01'
+                    ) T1 ON OP.ORDER_NUM = T1.ORDER_NUM AND OP.ORDER_PRDT_INSEQ = T1.ORDER_PRDT_INSEQ
+          LEFT JOIN TB_TACBAE T ON T1.TCB_ID = T.TCB_ID
+         WHERE O.MALL_ID = '02'
+           AND O.ORDER_NUM = #orderNo#
+    </select>
+    
+    <update id="deliveryCompleteById" parameterClass="string">
+		/* MypageSQL.deliveryCompleteById  */
+		UPDATE tb_delivery 
+		   SET dlvy_status_code = 'C0124',
+			   last_mod_dtm = sysdate,
+			   dlvy_cmplt_dt = to_char(sysdate, 'yyyyMMdd')
+		 WHERE dlvy_id = #value#
+	</update>
+	
+	<update id="deliveryProductCompleteById" parameterClass="string">
+		/* MypageSQL.deliveryProductCompleteById  */
+		UPDATE tb_order_delivery_product
+		   SET order_dlvy_prdt_stat_code = 'C0234'
+		 WHERE order_dlvy_prdt_seq in (SELECT order_dlvy_prdt_seq 
+										 FROM tb_order_delivery_product 
+										WHERE dlvy_id = #value# and order_dlvy_prdt_stat_code != 'C0235')
+	</update>
+</sqlMap>

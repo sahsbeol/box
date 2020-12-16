@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="FrontDiarySQL">
+    <typeAlias alias="dispCriteria" type="kr.co.hottracks.site.model.common.disp.DispCriteria"/>
+    <typeAlias alias="dispPrdtExt" type="kr.co.hottracks.site.model.common.disp.DispPrdtExt"/>
+    
+    <!--  
+        작성자: 장진용
+        작성일 : 2014.09.26
+        기능 : 신규 다이어리 목록 반환
+    -->
+    <select id="getNewDiary" parameterClass="dispCriteria" resultClass="dispPrdtExt">
+        /* FrontDiarySQL.getNewDiary */
+        SELECT PC.CTGR_ID           ctgrId
+             , SP.SELL_PRDT_BCODE   sellPrdtBcode
+             , SP.PRDT_NAME         prdtName
+             , SP.PRVD_TITLE        prvdTitle
+             , FC_GET_PRODUCT_IMAGE_URL(SP.SELL_PRDT_BCODE)     prdtImgUrl
+             , FC_GET_DC_PRICE(SP.SELL_PRDT_BCODE, #mallId#)    lastDcPrice
+             , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE, #mallId#)   lastCpnPrice
+             , B.BRAND_ID           brandId
+             , B.BRAND_NAME         brandName
+             , NVL(B.BRAND_ENG_NAME, B.BRAND_NAME)              brandEngName
+          FROM TB_SELL_PRODUCT SP
+          JOIN TB_PRODUCT_CATEGORY PC ON SP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.STD_CTGR_YN = 'Y'
+          JOIN TB_BRAND B ON SP.BRAND_ID = B.BRAND_ID
+         WHERE SP.SELL_PRDT_GBN IN ('P', 'G')
+           AND SUBSTR(CTGR_ID, 1, LENGTH(#ctgrId#)) = #ctgrId#
+           AND SP.PRMT_CODE = 'C0302'
+           AND SP.PRDT_STAT_CODE IN ('C0312', 'C0313')
+           AND (SP.TEC_SIZE IS NULL OR SP.TEC_SIZE != 'S')
+         ORDER BY PRMT_DTM DESC
+    </select>
+    
+    <!--  
+        작성자: 장진용
+        작성일 : 2014.09.26
+        기능 : 신규 다이어리 목록 수 반환
+    -->
+    <select id="countNewDiary" parameterClass="dispCriteria" resultClass="int">
+        /* FrontDiarySQL.countNewDiary */
+        SELECT NVL(COUNT(*), 0) AS CNT
+          FROM TB_SELL_PRODUCT SP
+          JOIN TB_PRODUCT_CATEGORY PC ON SP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.STD_CTGR_YN = 'Y'
+          JOIN TB_BRAND B ON SP.BRAND_ID = B.BRAND_ID
+         WHERE SP.SELL_PRDT_GBN IN ('P', 'G')
+           AND SUBSTR(CTGR_ID, 1, LENGTH(#ctgrId#)) = #ctgrId#
+           AND SP.PRMT_CODE = 'C0302'
+           AND SP.PRDT_STAT_CODE IN ('C0312', 'C0313')
+           AND (SP.TEC_SIZE IS NULL OR SP.TEC_SIZE != 'S')
+    </select>
+</sqlMap>

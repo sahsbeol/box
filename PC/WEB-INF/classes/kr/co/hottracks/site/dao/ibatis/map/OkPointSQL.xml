@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="OkPointSQL">
+    <typeAlias alias="okPointParam" type="kr.co.hottracks.site.model.frontoffice.order.OkPointParam"/>
+
+    <parameterMap id="okPointSaveInput" class="java.util.Map">
+        <parameter property="V_ORDERNUM" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+        <parameter property="V_CARDNO" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+    </parameterMap>
+
+    <procedure id="okPointSave" parameterMap="okPointSaveInput">
+        { call PR_OKPOINTSAVE(?,?) }
+    </procedure>
+    
+    <select id="getOkPointOrderUse" parameterClass="okPointParam" resultClass="okPointParam">
+        select USER_NUM     userNum
+             , OHAMT        okCardAmt
+             , ORDER_NUM    orderNum
+             , MCTTRNO      sMctTrNo
+             , MCTTRDATE    sMctTrDate
+             , TXNO         sTxNo
+             , OKCARDNUM    okCardNum
+          from TB_OKPOINT
+         where USER_NUM = #userNum#
+           and ORDER_NUM = #orderNum#
+           and CHNG_RES = '01'
+    </select>
+</sqlMap>

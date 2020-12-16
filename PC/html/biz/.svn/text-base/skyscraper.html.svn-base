@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/m_contents.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/biz/hott.js"></script>
+
+<body>
+	<div id="wrap" class='content_new'>
+		<!-- Container -->
+		<div id="container">
+			<!-- 컨텐츠 -->
+			<div class="content" id="content">
+				<div class="quick_menu">
+					<div class='bnr_wrap'>
+						<a href="javascript:" class='btn_banner off'>
+							<!-- <img src="../../images/biz/sub/bnr_off.jpg" alt="작은 배너"> -->
+						</a>
+						<a href="javascript:" class='btn_banner on'>
+							<!-- <img src="../../images/biz/sub/bnr_on.jpg" alt="큰 배너"> -->
+						</a>
+					</div>
+					<div class="box_frame">
+						<a href="javascript:" class='btn_history'>
+							<img src="../../images/biz/common/arr_L_bold.png" alt="히스토리 보기">
+							<span>히스토리</span>
+						</a>
+						<div class='no_history'>
+							<img src="../../images/biz/common/ic_history_black.png" alt="쇼핑 히스토리 없음">
+							쇼핑 히스토리가<br> 없습니다
+						</div>
+					</div>
+					<div class='btn_goTop'>
+						<a href="javascript:"><img src="../../images/biz/common/go_top.png" alt="페이지 상단으로 가기">TOP</a>
+					</div>
+	            </div>
+				<!-- 히스토리 없는 case 끝. [quick_menu div의 style=right은 임시. 삭제 필]-->
+				<div class="quick_menu" style='right:250px;'>
+					<div class='bnr_wrap'>
+						<a href="javascript:" class='btn_banner off'>
+							<!-- <img src="../../images/biz/sub/bnr_off.jpg" alt="작은 배너"> -->
+						</a>
+						<a href="javascript:" class='btn_banner on'>
+							<!-- <img src="../../images/biz/sub/bnr_on.jpg" alt="큰 배너"> -->
+						</a>
+					</div>
+					<div class="box_frame">
+						<a href="javascript:" class='btn_history'>
+							<img src="../../images/biz/common/arr_L_bold.png" alt="히스토리 보기">
+							<span>히스토리</span>
+						</a>
+						<ul class="list_history">
+							<!-- next버튼 클릭시 1~3번째 li active 삭제, 4~6번째 li의 클래스에 acitve -->
+		                    <li class='active'>
+								<a href="javascript:" class='thumb_sky'>
+									<img src="../../images/biz/sub/ex.png" alt="test">
+									<p></p>
+								</a>
+							</li>
+		                    <li class='active'>
+								<a href="javascript:" class='thumb_sky'>
+									<em>이벤트</em>
+									<span>2020 빨강머리앤 감성다이어리</span>
+								</a>
+		                    </li>
+							<li>
+								<a href="javascript:" class='thumb_sky'>
+									<em>검색</em>
+									<span>에어팟케이스</span>
+								</a>
+		                    </li>
+							<li class='active'>
+								<a href="javascript:" class='thumb_sky'>
+									<em>4번째4번째4번째</em>
+									<span>LUCA <br> 12:00</span>
+								</a>
+		                    </li>
+		                </ul>
+						<div class='pagination_wrap'>
+							<span class='page_num'>1</span>
+							<span class='page_sum'>1</span>
+						</div>
+						<div class='slider_turn'>
+							<!-- 활성화시, class명 on. -->
+							<a href="javascript:" class='btn_sky_prev'><span class='sky_prev off'></span></a>
+							<a href="javascript:" class='btn_sky_next'><span class='sky_next off'></span></a>
+						</div>
+					</div>
+					<div class='btn_goTop'>
+						<a href="javascript:"><img src="../../images/biz/common/go_top.png" alt="페이지 상단으로 가기">TOP</a>
+					</div>
+			    </div>
+				<!-- 히스토리 있는 case 끝. [quick_menu div의 style=right은 임시. 삭제 필] -->
+				<div class="quick_menu" style='right:500px;'>
+					<div class='bnr_wrap'>
+						<a href="javascript:" class='btn_banner off'>
+							<img src="../../images/biz/sub/bnr_off.jpg" alt="작은 배너">
+						</a>
+						<a href="javascript:" class='btn_banner on'>
+							<img src="../../images/biz/sub/bnr_on.jpg" alt="큰 배너">
+						</a>
+					</div>
+					<div class="box_frame">
+						<a href="javascript:" class='btn_history'>
+							<img src="../../images/biz/common/arr_L_bold.png" alt="히스토리 보기">
+							<span>히스토리</span>
+						</a>
+						<ul class="list_history">
+		                    <li class='active'>
+								<div class='hover_wrap'>
+									<a href="javascript:" class='hv_recent hv_image'>
+										<span>2020 빨강머리앤 감성다이어리 (날짜형) 감성있는 다이어리</span>
+										<strong>7,000</strong>
+										<i><img src="../../images/biz/sub/test_img.jpg" alt="최근 본 상품"></i>
+									</a>
+									<a href="javascript:" class='btn_close'><img src="../../images/biz/common/btn_close_s.png" alt="닫기"></a>
+								</div>
+								<a href="javascript:" class='thumb_sky'>
+									<img src="../../images/biz/sub/test_img.jpg" alt="test">
+									<p></p>
+								</a>
+							</li>
+		                    <li class='active'>
+								<div class='hover_wrap'>
+									<a href="javascript:" class='hv_recent'>
+										<em>이벤트</em>
+										<span>2020 빨강머리앤 감성다이어리 (날짜형) 감성있는 다이어리 빨강</span>
+									</a>
+									<a href="javascript:" class='btn_close'><img src="../../images/biz/common/btn_close_s.png" alt="닫기"></a>
+								</div>
+								<a href="javascript:" class='thumb_sky'>
+									<em>이벤트</em>
+									<span>2020 빨강머리앤 감성다이어리</span>
+								</a>
+		                    </li>
+							<li class='active'>
+								<div class='hover_wrap'>
+									<a href="javascript:" class='hv_recent'>
+										<em>브랜드</em>
+										<span>#LUCA 12:00</span>
+									</a>
+									<a href="javascript:" class='btn_close'><img src="../../images/biz/common/btn_close_s.png" alt="닫기"></a>
+								</div>
+								<a href="javascript:" class='thumb_sky'>
+									<em>브랜드</em>
+									<span>LUCA <br> 12:00</span>
+								</a>
+		                    </li>
+		                </ul>
+						<div class='pagination_wrap'>
+							<span class='page_num'>1</span>
+							<span class='page_sum'>2</span>
+						</div>
+						<div class='slider_turn'>
+							<a href="javascript:" class='btn_sky_prev'><span class='sky_prev off'></span></a>
+							<a href="javascript:" class='btn_sky_next'><span class='sky_next on'></span></a>
+						</div>
+					</div>
+					<div class='btn_goTop'>
+						<a href="javascript:"><img src="../../images/biz/common/go_top.png" alt="페이지 상단으로 가기">TOP</a>
+					</div>
+			    </div>
+			</div>
+
+			<!-- //컨텐츠 -->
+		</div>
+		<!-- //Container -->
+
+	</div>
+</body>
+</html>

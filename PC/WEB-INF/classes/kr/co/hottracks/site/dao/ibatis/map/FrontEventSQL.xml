@@ -1,0 +1,1565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="FrontEventSQL">
+    <!--  
+        작성자: 장진용
+        작성일 : 2014.08.05
+        기능 : 이벤트 목록 반환
+    -->
+    <select id="getEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventList */
+        SELECT A.EVENT_ID           eventId
+             , B.IMAGE_URL          imageUrl
+             , A.CTGR_ID            ctgrId
+             , A.EVENT_TITLE        eventTitle 
+             , A.EVENT_DTL_CONT     eventDtlCont
+             , A.EVENT_START_DT     eventStartDt
+             , A.EVENT_END_DT       eventEndDt
+             , A.EVENT_RANGE_INFO   eventRangeInfo
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = #eventImageCode#
+          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.CTGR_ID LIKE #ctgrId#  || '%'
+           AND A.DISP_YN = 'Y'
+           AND FC_IS_VALID_EVENT(A.EVENT_ID, #mallId#) = 'Y'
+           <isNotEmpty property="eventDispTypeCode" prepend="AND">
+                A.EVENT_DISP_TYPE_CODE = #eventDispTypeCode#
+           </isNotEmpty>
+           <isEqual property="cultZoneYn" compareValue="true" prepend="AND">
+               A.CULT_ZONE_YN = 'Y'
+           </isEqual>
+           <isEqual property="eventId" compareValue="true" prepend="AND">
+               A.EVENT_ID = #eventId#
+           </isEqual>
+         ORDER BY A.EVENT_START_DT DESC
+    </select>
+    
+    <!--  
+        작성자: 장진용
+        작성일 : 2014.08.05
+        기능 : 이벤트 목록 수 반환
+    -->
+    <select id="countEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countEventList */
+        SELECT COUNT(*) as CNT
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = #eventImageCode#
+          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.CTGR_ID LIKE #ctgrId#  || '%'
+           AND A.DISP_YN = 'Y'
+           AND FC_IS_VALID_EVENT(A.EVENT_ID, #mallId#) = 'Y'
+           <isNotEmpty property="eventDispTypeCode" prepend="AND">
+                A.EVENT_DISP_TYPE_CODE = #eventDispTypeCode#
+           </isNotEmpty>
+           <isEqual property="cultZoneYn" compareValue="true" prepend="AND">
+               A.CULT_ZONE_YN = 'Y'
+           </isEqual>
+           <isEqual property="eventId" compareValue="true" prepend="AND">
+               A.EVENT_ID = #eventId#
+           </isEqual>
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+    <!--  
+        작성자: 권동희
+        작성일: 2016-08-01
+        기능: 출석체크 기능   
+     -->
+    <select id="getTbEventAttend" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+        /* FrontEventSQL.getTbEventAttend  */
+        SELECT EA.EVENT_ID          eventId
+             , EA.EVENT_DT          eventDt
+             , EA.GIFT_TYPE         giftType
+             , EA.GIFT_AMT          giftAmt
+             , EA.GIFT_NAME         giftName
+             , EA.LIMIT_CNT         limitCnt
+             , EA.LEAVE_CNT         leaveCnt
+             , EA.LIMIT_AMT         limitAmt
+             , EA.CPN_AMT           cpnAmt
+             , EA.CPN_ID            cpnId
+             , EA.PWNR_YN           pwnrYn
+             , EA.REGST_DTM         regstDtm
+             , EA.REGST_ADMIN_ID    regstAdminId
+             , CASE WHEN EC.EVENT_ID IS NOT NULL THEN 'Y' ELSE 'N' END checkYn
+          FROM TB_EVENT_ATTEND EA
+          LEFT JOIN TB_EVENT_COMMENT EC ON EA.EVENT_ID = EC.EVENT_ID AND EA.EVENT_DT = TO_CHAR(EC.REGST_DTM, 'YYYYMMDD') AND EC.USER_NUM = #userNum#
+         WHERE EA.EVENT_ID = #eventId#
+           <isNotEmpty property="eventDt">
+               AND EA.EVENT_DT = #eventDt#
+           </isNotEmpty>
+         ORDER BY EA.EVENT_DT
+    </select>
+    
+    <!-- 
+         기능 : 누적형 단계 이벤트 히스토리
+     -->
+    <select id="getStepHistory" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+       /* FrontEventSQL.getStepHistory */
+       SELECT  EA.EVENT_ID          eventId
+             , EA.GIFT_TYPE         giftType
+             , EA.CPN_ID            cpnId
+             , EA.STEP              step
+             , EA.IMAGE_ON          imageOn
+             , EA.IMAGE_OFF         imageOff
+             , EA.TOP_IMAGE         topImage
+             , EC.CMNT              cmnt
+             , CASE WHEN EC.EVENT_ID IS NOT NULL THEN 'Y' ELSE 'N' END                      checkYn
+             , COUNT(EC.EVENT_ID) OVER(PARTITION BY EA.EVENT_ID)                            nextStep
+             , (CASE WHEN MAX(TO_CHAR(EC.REGST_DTM,'YYYYMMDD')) OVER(PARTITION BY EA.EVENT_ID) &gt;= TO_CHAR(SYSDATE, 'YYYYMMDD') THEN 'Y' ELSE 'N' END ) maxDay
+             , CASE WHEN EA.STEP = MAX(EC.STEP) AND EC.CMNT !='0' THEN   EA.IMAGE_ON 
+                    WHEN EA.STEP = MAX(EC.STEP) AND EC.CMNT ='0'  THEN   EA.IMAGE_BOMB
+                    ELSE EA.IMAGE_OFF END                                                   setImage
+          FROM TB_EVENT_ATTEND EA
+          LEFT JOIN TB_EVENT_COMMENT EC ON EA.EVENT_ID = EC.EVENT_ID  AND EC.USER_NUM = #userNum# AND EA.STEP = EC.STEP
+         WHERE EA.EVENT_ID = #eventId#
+         GROUP BY EA.EVENT_ID, EA.GIFT_TYPE, EA.CPN_ID, EA.STEP, EA.IMAGE_ON, EA.IMAGE_OFF, EA.IMAGE_BOMB, EA.TOP_IMAGE, EC.EVENT_ID, EC.CMNT,  EC.REGST_DTM
+         ORDER BY EA.STEP
+    </select>
+    
+    <!-- 
+         기능 : 초기화형 단계 이벤트 히스토리
+         작성일 : 2017-07-18
+         작성자 : 권동희
+     -->
+    <select id="getStepHistoryC019F" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+        /* FrontEventSQL.getStepHistoryC019F */
+        SELECT  EA.EVENT_ID        eventId
+             , EA.GIFT_TYPE         giftType
+             , EA.GIFT_AMT          giftAmt
+             , EA.GIFT_NAME         giftName
+             , EA.CPN_AMT           cpnAmt
+             , EA.CPN_ID            cpnId
+             , EA.PWNR_YN           pwnrYn
+             , EA.REGST_DTM         regstDtm
+             , EA.IMAGE_ON          imageOn
+             , EA.IMAGE_OFF         imageOff
+             , EA.TOP_IMAGE         topImage
+             , EA.STEP              step
+             , (SELECT MAX(TO_CHAR(EC.REGST_DTM, 'YYYYMMDD')) FROM TB_EVENT_COMMENT EC WHERE EC.EVENT_ID = EA.EVENT_ID AND USER_NUM = #userNum#) maxDay
+          FROM TB_EVENT_ATTEND EA
+          LEFT JOIN TB_EVENT_COMMENT EC ON EA.EVENT_ID = EC.EVENT_ID AND EA.STEP = EC.STEP
+         WHERE EA.EVENT_ID = #eventId#
+         <isEqual property="step" compareValue="0">
+         ORDER BY EA.IMAGE_ON DESC
+         </isEqual>
+         <isEqual property="step" compareValue="1">
+         ORDER BY EA.IMAGE_ON
+         </isEqual>
+         <isEqual property="step" compareValue="2">
+         ORDER BY EA.IMAGE_OFF DESC
+         </isEqual>
+         <isEqual property="step" compareValue="3">
+         ORDER BY EA.IMAGE_OFF
+         </isEqual>
+    </select>
+    
+    <!--  
+        작성자: 권동희
+        작성일: 2017-08-01
+        기능: 누적 단계 이벤트 
+        특이사항:
+        1. 누적형에서 코멘트 등록일자와 단계별 획득 일자가 다르게 적용된 경우엔 STEP이 적용 안되니 일단 STEP기준으로 JOIN변경[2017.10.03] 
+        2. 1번과 같은 이유로 GROUP BY 절도 STEP기준으로 변경[2017.10.03] 
+        3. 오늘 참여한 경우는 다음 날이 될때까지 참여할 수 없도록 errMsg에 오늘 참여여부를 조건으로 추가[2017.10.03]
+        4. 해당 단계 참여가 맞는지를 위해 errMsg에 조건으로 추가 [2017.10.03]
+     -->
+    <select id="getEventAttendStep" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+        /* FrontEventSQL.getEventAttendStep  */
+        SELECT EA.EVENT_ID          eventId
+             , EA.GIFT_TYPE         giftType
+             , EA.GIFT_AMT          giftAmt
+             , EA.LEAVE_CNT         leaveCnt
+             , EA.LIMIT_CNT         limitCnt
+             , EA.GIFT_NAME         giftName
+             , EA.LIMIT_AMT         limitAmt
+             , EA.CPN_AMT           cpnAmt
+             , EA.CPN_ID            cpnId
+             , EA.PWNR_YN           pwnrYn
+             , EA.STEP              step
+             , CASE WHEN T.CHK01 > 0 THEN '오늘 이미 참여하셨습니다. 내일 또 참여해주세요.'                                       /* STEP01: 오늘 참여한 경우 */
+					WHEN T.CHK02 > 0 THEN '이미 참여하신 단계입니다.'
+                    <isNotEqual property="eventId" compareValue="66788">
+			        WHEN EA.STEP != NVL(T.STEP, 0) + 1 THEN '오늘은 ' ||  (NVL(T.STEP, 0) + 1) || '단계에 참여할 차례입니다.' /* STEP03: 참여할 단계의 순서가 아닌 경우 */
+			        </isNotEqual>
+                END                 errMsg
+             , (SELECT COUNT(*) FROM TB_EVENT_MASTER EM WHERE EA.EVENT_ID = EM.EVENT_ID AND EM.EVENT_START_DT &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD') AND EM.EVENT_END_DT &gt;= TO_CHAR(SYSDATE, 'YYYYMMDD') ) validEventYn
+             , EA.USE_VIP           useVip
+             , EA.VIP_AMT           vipAmt
+          FROM TB_EVENT_ATTEND EA
+          LEFT JOIN (SELECT EVENT_ID
+                          , MAX(STEP)       STEP
+                          , COUNT(CASE WHEN TO_CHAR(REGST_DTM, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') THEN 'Y' END)     CHK01
+                          , COUNT(CASE WHEN STEP = #step# THEN 'Y' END)                                                     CHK02
+                       FROM TB_EVENT_COMMENT V
+                      WHERE USER_NUM = #userNum#
+                        AND EVENT_ID = #eventId#
+                      GROUP BY EVENT_ID
+                    ) T ON EA.EVENT_ID = T.EVENT_ID 
+         WHERE EA.EVENT_ID = #eventId#
+           AND EA.STEP = #step#
+    </select>
+    
+    <!--  
+        작성자: 권동희
+        작성일: 2017-08-01
+        기능: 초기화형 단계 이벤트 
+     -->
+    <select id="getEventStepInit" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+        /* FrontEventSQL.getEventStepInit  */
+        SELECT EA.EVENT_ID          eventId
+             , EA.GIFT_TYPE         giftType
+             , EA.GIFT_AMT          giftAmt
+             , EA.LEAVE_CNT         leaveCnt
+             , EA.LIMIT_CNT         limitCnt
+             , EA.GIFT_NAME         giftName
+             , EA.LIMIT_AMT         limitAmt
+             , EA.CPN_AMT           cpnAmt
+             , EA.CPN_ID            cpnId
+             , EA.PWNR_YN           pwnrYn
+             , EA.STEP              step
+             , CASE WHEN T.CHK01 > 0 THEN '오늘 이미 참여하셨습니다. 내일 또 참여해주세요.'  END                 errMsg
+          FROM TB_EVENT_ATTEND EA
+          LEFT JOIN (SELECT EVENT_ID
+                          , COUNT(CASE WHEN TO_CHAR(REGST_DTM, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') THEN 'Y' END)     CHK01
+                       FROM TB_EVENT_COMMENT V
+                      WHERE USER_NUM = #userNum#
+                        AND EVENT_ID = #eventId#
+                      GROUP BY EVENT_ID
+                    ) T ON EA.EVENT_ID = T.EVENT_ID 
+         WHERE EA.EVENT_ID = #eventId#
+           AND EA.STEP = #step#
+    </select>
+    
+    
+    <!--  
+        작성자: 권동희
+        작성일: 2016-08-01
+        기능: 출석체크 기능   
+     -->
+    <select id="getEventAttendTot" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+        /* FrontEventSQL.getEventAttendTot */
+        SELECT NVL(SUM(CASE WHEN EMTC_ID = 'P' THEN CMNT END), 0)    giftAmt
+             , NVL(SUM(CASE WHEN EMTC_ID = 'C' THEN CMNT END), 0)    cpnAmt
+          FROM TB_EVENT_COMMENT EC
+         WHERE EVENT_ID = #eventId#
+           AND USER_NUM = #userNum#
+         GROUP BY EC.EVENT_ID
+    </select>
+    
+    <!--  
+        작성자: 장진용
+        작성일: 2016-08-01
+        기능: 출석체크 기능   
+     -->
+    <select id="countEventAttendByUser" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countEventAttendByUser */
+        SELECT NVL(COUNT(*), 0) atndCnt
+          FROM TB_EVENT_COMMENT EC
+         WHERE EVENT_ID = #eventId#
+           AND USER_NUM = #userNum#
+           <isNotEmpty property="eventDt" prepend="AND">
+               TO_CHAR(EC.REGST_DTM, 'YYYYMMDD') = #eventDt#
+           </isNotEmpty>
+    </select>
+    
+    <!--  
+        작성자: 권동희
+        작성일: 2016-08-01
+        기능: 출석체크 남는 수량 변경   
+     -->
+    <update id="setEventAttend" parameterClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+        /* FrontEventSQL.SetEventAttend */
+        UPDATE TB_EVENT_ATTEND
+           SET LEAVE_CNT = #leaveCnt# -1
+         WHERE EVENT_ID = #eventId#
+           AND EVENT_DT = #eventDt#
+           AND GIFT_TYPE = #giftType#
+    </update>
+    
+    <!--  
+        작성자: 권동희
+        작성일: 2016-08-01
+        기능: 출석체크 남는 수량 변경   
+     -->
+    <update id="updateEventAttendStep" parameterClass="kr.co.hottracks.site.model.common.event.EventAttendExt">
+        /* FrontEventSQL.updateEventAttendStep */
+        UPDATE TB_EVENT_ATTEND
+           SET LEAVE_CNT = LEAVE_CNT -1
+         WHERE EVENT_ID = #eventId#
+           AND STEP = #step#
+    </update>
+    
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-08-05
+        기능: 이벤트가 유효여부
+    -->
+    <select id="isValidEventYn" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="boolean">
+        /* FrontEventSQL.isValidEventYn */
+        SELECT DECODE(COUNT(*), 0, 'N', 'Y') 
+          FROM DUAL 
+         WHERE EXISTS (SELECT A.*
+                         FROM TB_EVENT_MASTER A
+                         JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = #mallId#
+                        WHERE A.EVENT_ID = #eventId#
+                          AND TO_CHAR(SYSDATE, 'yyyymmdd') &lt;= A.EVENT_END_DT
+                      )
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2016.12.22
+        기능: 이벤트 참여기간 체크
+    -->
+    <select id="isValidAttend" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="boolean">
+        /* FrontEventSQL.isValidAttend */
+        SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE 'N' END
+         FROM TB_EVENT_MASTER A
+         JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = #mallId#
+        WHERE A.EVENT_ID = #eventId#
+          AND TO_CHAR(SYSDATE, 'yyyymmdd') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2016.12.22
+        기능: 이벤트 참여수
+    -->
+    <select id="countAttend" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countAttend */
+        SELECT NVL(COUNT(*), 0) 
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_COMMENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = #mallId#
+         WHERE A.EVENT_ID = #eventId#
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2016.12.30
+        기능: 이벤트 기간 내 주문금액
+    -->
+    <select id="getOrderAmtInDt" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.getOrderAmtInDt */
+        SELECT (SELECT NVL(SUM((T2.ORDER_COUNT - T2.CANC_COUNT) * SNGL_PRDT_SELL_PRICE), 0)
+                  FROM TB_ORDER T1
+                  JOIN TB_ORDER_PRODUCT T2 ON T1.ORDER_NUM = T2.ORDER_NUM
+                 WHERE T1.MALL_ID = '02'
+                   AND T1.ORDER_STATUS_CODE != 'C0281'
+                   AND T1.USER_NUM = #userNum#
+                   AND T1.ORDER_DTM BETWEEN TO_DATE(EM.EVENT_START_DT,'YYYYMMDD HH24MISS') AND TO_DATE(EM.EVENT_END_DT || '235959','YYYYMMDD HH24MISS')  
+                ) 
+          FROM TB_EVENT_MASTER EM
+         WHERE EVENT_ID =#eventId#
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-08-05
+        기능: 이벤트 상세 정보 반환
+    -->
+    <select id="getEventDetail" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventDetail */ 
+        SELECT EVENT_ID                   eventId
+             , EVENT_TITLE                eventTitle
+             , MNGR_ADMIN_ID              mngrAdminId
+             , PWNR_RLS_YN                pwnrRlsYn
+             , EVENT_START_DT             eventStartDt
+             , EVENT_END_DT               eventEndDt
+             , DSN_REQ_CONT               dsnReqCont
+             , EVENT_DTL_CONT             eventDtlCont
+             , CTGR_ID                    ctgrId
+             , EVENT_CRI_CODE             eventCriCode
+             , EVENT_DISP_TYPE_CODE       eventDispTypeCode
+             , EVENT_STAT_CODE            eventStatCode
+             , EVENT_TYPE_CODE            eventTypeCode
+             , EVENT_CMNT_TITLE_USE_YN    eventCmntTitleUseYn
+             , EVENT_CMNT_ICON_URL        eventCmntIconUrl
+             , EVENT_DISP_SCRN_CODE       eventDispScrnCode
+             , PWNR_RLS_SCDL_DT           pwnrRlsScdlDt
+             , USER_TMPL_USE_YN           userTmplUseYn
+             , USER_TMPL                  userTmpl
+             , BRAND_ID                   brandId
+             , STD_DSCNT_RATE             stdDscntRate
+             , ICON_CLICK_COUNT           iconClickCount
+             , REGST_DTM                  regstDtm
+             , PRMT_CODE                  prmtCode
+             , ATCH_FILE_PATH             atchFilePath
+             , VNDR_ALL_YN                vndrAllYn
+             , SELL_PRDT_BCODE            sellPrdtBcode
+             , DISP_YN                    dispYn
+             , REPLY_YN                   replyYn
+             , ON_LINE_YN                 onLineYn
+             , OFF_LINE_YN                offLineYn
+             , CULT_ZONE_YN               cultZoneYn
+             , EVENT_RANGE_INFO           eventRangeInfo
+             , USER_TMPL_HTML             userTmplHtml
+             , DSN_ADMIN_ID               dsnAdminId
+             , BNR_SEQ                    bnrSeq
+             , BNR_IMG_URL                bnrImgUrl
+             , BNR_DISP_YN                bnrDispYn
+             , BNR_LNK_URL                bnrLnkUrl
+             , (SELECT B.IMAGE_URL FROM TB_EVENT_IMAGE B WHERE A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = 'C0384')        imageUrl
+             , (SELECT B.IMAGE_URL FROM TB_EVENT_IMAGE B WHERE A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = 'C038A')        imageUrl950
+             , (SELECT B.IMAGE_URL FROM TB_EVENT_IMAGE B WHERE A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = 'C0388')        thumUrl
+             , (SELECT B.BRAND_NAME FROM TB_BRAND B WHERE A.BRAND_ID = B.BRAND_ID)                                              brandName
+             , (SELECT B.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE B WHERE A.BRAND_ID = B.BRAND_ID AND B.BRAND_IMAGE_CODE = 'C029C')  brandImageUrl
+             , NVL((SELECT MAX('Y') FROM TB_EVENT_STAMP ES WHERE ES.EVENT_ID = A.EVENT_ID), 'N')                                stampYn
+          FROM TB_EVENT_MASTER A
+         WHERE EVENT_ID = #eventId#
+    </select>
+    
+     <!-- 
+        작성자: 권동희
+        작성일: 2016-07-25
+        기능: 웹 이미지 가져오기
+    -->
+    <select id="getEventImage" parameterClass="string" resultClass="kr.co.hottracks.site.model.common.event.EventImage">
+        /* FrontEventSQL.getEventImage */
+        SELECT EI.EVENT_ID                  eventId
+             , EI.EVENT_IMAGE_INSEQ         eventImageInseq
+             , EI.IMAGE_URL                 imageUrl
+             , EI.EVENT_IMAGE_CODE          eventImageCode
+             , EI.USER_TMPL_USE_YN          userTmplUseYn
+             , EI.USER_TMPL                 userTmpl
+          FROM TB_EVENT_IMAGE EI 
+         WHERE EI.EVENT_ID = #eventId#
+    </select>
+    
+    <!-- 
+        작성자 : 권동희
+        작성일 : 2016-07-25
+        기능 : 출석체크 클릭한 거 History 읽어오기
+     -->
+    <select id="getHistoryCheck" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventComment">
+        /* FrontEventSQL.getHistoryCheck */
+        SELECT EVENT_ID                 eventId
+             , USER_NUM                 userNum
+             , REGST_DTM                registDatetime
+             , MALL_ID                  mallId
+             , EMTC_ID                  emtcId
+         FROM TB_EVENT_COMMENT
+        WHERE EVENT_ID = #eventId#
+          AND USER_NUM = #userNum#
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-08-05
+        기능: 해당이벤트와 같은 전시유형의 이벤트 목록 반환
+    -->
+    <select id="getEventListByDispType" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventListByDispType */
+        SELECT A.EVENT_ID               eventId
+             , A.EVENT_TITLE            eventTitle
+             , (SELECT IMAGE_URL FROM TB_EVENT_IMAGE SA WHERE SA.EVENT_ID = A.EVENT_ID AND SA.EVENT_IMAGE_CODE = 'C0388')    imageUrl
+             , NVL(A.CTGR_Id, '00')     ctgrId
+          FROM TB_EVENT_MASTER A
+          JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.DISP_YN = 'Y'
+           AND A.EVENT_DISP_TYPE_CODE IN (SELECT SA.EVENT_DISP_TYPE_CODE FROM TB_EVENT_MASTER SA WHERE SA.EVENT_ID = #eventId#)
+         ORDER BY A.EVENT_ID DESC 
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-09-12
+        기능: 해당이벤트와 같은 전시유형의 이벤트 목록 수 반환
+    -->
+    <select id="countEventListByDispType" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countEventListByDispType */
+        SELECT NVL(COUNT(*), 0) AS CNT
+          FROM TB_EVENT_MASTER A
+          JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.DISP_YN = 'Y'
+           AND A.EVENT_DISP_TYPE_CODE IN (SELECT SA.EVENT_DISP_TYPE_CODE FROM TB_EVENT_MASTER SA WHERE SA.EVENT_ID = #eventId#)
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-08-05
+        기능: 컬처존이벤트목록반환
+    -->
+    <select id="getEventListInCultZone" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventListInCultZone */
+        SELECT A.EVENT_ID       eventId
+             , A.EVENT_TITLE    eventTitle
+          FROM TB_EVENT_MASTER A
+          JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.DISP_YN = 'Y'
+           AND A.CULT_ZONE_YN = 'Y'
+         ORDER BY A.EVENT_ID DESC 
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-08-05
+        기능: 이벤트 상품 전시 목록 반환
+    -->
+    <select id="getEventDisplayTypeList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventDisplayType">
+        /* FrontEventSQL.getEventDisplayTypeList */
+        SELECT EVENT_ID             eventId
+             , EVENT_TYPE_INSEQ     eventTypeInseq
+             , TITLE_USE_YN         titleUseYn
+             , EVENT_TITLE          eventTitle
+             , EVENT_LINK_URL       eventLinkUrl
+             , EVENT_PRDT_TYPE_CODE eventPrdtTypeCode
+             , TITLE_EXPS_YN        titleExpsYn
+             , PRDT_INFO_EXPS_YN    prdtInfoExpsYn
+             , TITLE_IMAGE_URL      titleImageUrl
+             , DISP_ORDER           dispOrder
+          FROM TB_EVENT_DISPLAY_TYPE
+         WHERE EVENT_ID = #eventId#
+         ORDER BY DISP_ORDER ASC
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-08-05
+        기능: 이벤트 상품 전시 유형별 상품목록
+    -->
+    <select id="getProductListByDisplayType" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventSellProductExt">
+        /* FrontEventSQL.getProductListByDisplayType */
+        SELECT A.EVENT_ID           eventId
+             , A.SELL_PRDT_BCODE    sellPrdtBcode
+             , A.EVENT_DSCNT_RATE   eventDscntRate
+             , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)     prdtImageUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)    productImageUrl2
+             , A.EVENT_TYPE_INSEQ   eventTypeInseq
+             , A.MAIN_YN            mainYn
+             , A.CHGE_RATE          chgeRate
+             , A.FREE_DLVY_YN       freeDlvyYn
+             , A.DISP_ORDER         dispOrder
+             , A.PRDT_QNA_SEQ       prdtQnaSeq
+             , A.EVENT_DSCNT_AMT    eventDscntAmt
+             , A.CHGE_AMT           chgeAmt
+             , B.NYO_SELL_BAN_YN    nyoSellBanYn
+             , FC_GET_PRDT_NAME(B.SELL_PRDT_BCODE, #mallId#)    prdtName
+             , B.PRDT_SELL_PRICE    prdtSellPrice
+             , B.SELL_PRDT_GBN      sellPrdtGbn
+             , CASE WHEN B.SELL_PRDT_GBN IN ('R', 'D') AND FC_REC_GET_SALE_YN(D.STOCK_CNT_PRODUCT, B.RCRD_STAT, B.RCRD_HARD_SALE_YN, B.RCRD_LSALE_START_DTH, B.RCRD_LSALE_END_DTH, B.LAVE_COUNT) != 'Y' THEN 'C0313'
+                    ELSE B.PRDT_STAT_CODE
+                END                 prdtStatCode
+             , C.RCRD_CD            rcrdCd
+             , C.RTNG_CODE          rtngCode
+             , CASE WHEN B.SELL_PRDT_GBN IN ('R', 'D')
+                    THEN C.ARTI_NAME
+                    ELSE (SELECT NVL(RA.BRAND_ENG_NAME, RA.BRAND_NAME) FROM TB_BRAND RA WHERE B.BRAND_ID = RA.BRAND_ID)
+               END                  brandName
+             , CASE WHEN B.SELL_PRDT_GBN IN ('R', 'D') THEN B.PRDT_SAVED_RATE
+                    WHEN FC_GET_CHGE_RATE(A.SELL_PRDT_BCODE, #mallId#) > 20 THEN 1
+                    ELSE 0
+               END                  savedRate
+             , FC_GET_CPN_LAST_PRICE(A.SELL_PRDT_BCODE, #mallId#,#userNum#)     lastCpnPrice
+             , FC_GET_PRODUCT_ICON_CODE(A.SELL_PRDT_BCODE, '02')                prdtIcon
+             , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02')             reviewCount
+             , FC_GET_WISH_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02')               wishPrdtCnt
+          FROM TB_EVENT_SELL_PRODUCT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND B.PRMT_CODE = 'C0302' AND B.PRDT_STAT_CODE != 'C0315'
+          LEFT JOIN TB_RECORD C ON B.RCRD_CD = C.RCRD_CD
+          LEFT JOIN TB_REC_PROD_STOCK_LAST D ON B.SELL_PRDT_BCODE = D.SELL_PRDT_BCODE
+         WHERE A.EVENT_ID = #eventId#
+           AND A.EVENT_TYPE_INSEQ = #eventTypeInseq#
+           AND FC_IS_VALID_PRODUCT(A.SELL_PRDT_BCODE, #mallId#) = 'Y'
+           <isNotEmpty property="mainYn" prepend="AND">
+               A.MAIN_YN = #mainYn#
+           </isNotEmpty>
+         ORDER BY A.DISP_ORDER, B.PRMT_DTM DESC
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-11-28
+        기능: 이벤트 상품 전시 유형별 상품목록수
+    -->
+    <select id="countProductListByDisplayType" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countProductListByDisplayType */
+        SELECT COUNT(*)
+          FROM TB_EVENT_SELL_PRODUCT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND B.PRMT_CODE = 'C0302' AND B.PRDT_STAT_CODE != 'C0315'
+         WHERE A.EVENT_ID = #eventId#
+           AND A.EVENT_TYPE_INSEQ = #eventTypeInseq#
+           AND FC_IS_VALID_PRODUCT(A.SELL_PRDT_BCODE, #mallId#) = 'Y'
+           <isNotEmpty property="mainYn" prepend="AND">
+               A.MAIN_YN = #mainYn#
+           </isNotEmpty>
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2014-08-18
+        기능 : 검색조건에 맞는 이벤트 목록 반환[검색페이지]
+    -->
+    <select id="getEventList4Search" parameterClass="kr.co.hottracks.site.model.frontoffice.search.SearchCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventList4Search */
+        SELECT A.EVENT_ID           eventId
+             , A.EVENT_TITLE        eventTitle
+             , A.EVENT_DTL_CONT     eventDtlCont
+             , B.IMAGE_URL          imageUrl
+             , A.EVENT_START_DT     eventStartDt
+             , A.EVENT_END_DT       eventEndDt
+             , A.EVENT_RANGE_INFO   eventRangeInfo
+             , CASE WHEN (#searchMenu# = 'GIFT' AND A.CTGR_ID LIKE '0000%') OR (#searchMenu# = 'RECORD' AND A.CTGR_ID NOT LIKE '0000%') THEN 1 ELSE 99 END ord1
+             , CASE WHEN UPPER(A.EVENT_SRCH_WORD) LIKE UPPER('%'||#searchTerm#||'%') THEN 1 ELSE 99 END ord2
+             , CASE WHEN UPPER(A.EVENT_TITLE) LIKE UPPER('%'||#searchTerm#||'%') THEN 1 ELSE 99 END ord3
+        FROM TB_EVENT_MASTER A
+        LEFT JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = 'C0382'
+        JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = '02'
+       WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+         AND A.PRMT_CODE = 'C0374'
+         AND A.EVENT_STAT_CODE = 'C0181'
+         AND A.DISP_YN = 'Y'
+         AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')
+         <dynamic prepend="and" open="(" close=")" >
+             <isNotEmpty property="cmpsr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#cmpsr#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="rcrd_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#rcrd_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="prfmr_kor" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#prfmr_kor#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="vocal" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#vocal#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="ocstr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#ocstr#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="istmt_kor" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#istmt_kor#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="jmcode" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#jmcode#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="trk_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#trk_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="drctr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#drctr#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="actor" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#actor#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="label_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#label_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="arti_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#arti_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="cndtr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#cndtr#||'%'
+             </isNotEmpty>
+             <isNotEqual property="searchTerm" compareValue=" " prepend="or" removeFirstPrepend="true">
+                   UPPER(A.EVENT_TITLE||' '||A.EVENT_SRCH_WORD||' '||EVENT_DTL_CONT) LIKE UPPER('%'||#searchTerm#||'%')
+             </isNotEqual>
+         </dynamic>
+        ORDER BY ord1, ord2, ord3, A.EVENT_START_DT DESC 
+    </select>
+    
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2017-10-01
+        기능 : 추천 이벤트 목록 반환[검색페이지]
+    -->
+    <select id="getEventChoice4Search" parameterClass="kr.co.hottracks.site.model.frontoffice.search.SearchCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventChoice4Search */
+        SELECT A.EVENT_ID           eventId
+             , A.EVENT_TITLE        eventTitle
+             , A.EVENT_DTL_CONT     eventDtlCont
+             , B.IMAGE_URL          imageUrl
+             , A.EVENT_START_DT     eventStartDt
+             , A.EVENT_END_DT       eventEndDt
+             , A.EVENT_RANGE_INFO   eventRangeInfo
+        FROM TB_EVENT_MASTER A
+        LEFT JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = 'C0382'
+        JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = '02'
+        JOIN TD_DISP_EVENT D ON A.EVENT_ID = D.EVENT_ID AND D.DISP_YN = 'Y' AND D.DISP_MSTR_ID = 'SRCH_EVT_PC'
+       WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+         AND A.PRMT_CODE = 'C0374'
+         AND A.EVENT_STAT_CODE = 'C0181'
+         AND A.DISP_YN = 'Y'
+         AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')
+         <dynamic prepend="AND" open=" NOT (" close=")" >
+             <isNotEmpty property="cmpsr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#cmpsr#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="rcrd_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#rcrd_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="prfmr_kor" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#prfmr_kor#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="vocal" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#vocal#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="ocstr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#ocstr#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="istmt_kor" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#istmt_kor#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="jmcode" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#jmcode#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="trk_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#trk_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="drctr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#drctr#||'%'
+             </isNotEmpty>
+              <isNotEmpty property="actor" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#actor#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="label_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#label_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="arti_name" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#arti_name#||'%'
+             </isNotEmpty>
+             <isNotEmpty property="cndtr" prepend="or" removeFirstPrepend="true">
+                 A.EVENT_TITLE LIKE '%'||#cndtr#||'%'
+             </isNotEmpty>
+             <isNotEqual property="searchTerm" compareValue=" " prepend="or" removeFirstPrepend="true">
+                   UPPER(A.EVENT_TITLE||' '||A.EVENT_SRCH_WORD||' '||EVENT_DTL_CONT) LIKE UPPER('%'||#searchTerm#||'%')
+             </isNotEqual>
+         </dynamic>
+       ORDER BY D.DISP_ORDER, A.EVENT_START_DT DESC
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2014-08-20
+        기능 : 이벤트 당첨자 목록 반환
+    -->
+    <select id="getEventPrizeList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventPrizeList */
+        SELECT EM.EVENT_ID          eventId
+             , EM.CTGR_ID           ctgrId
+             , W.TITLE              eventTitle
+             , W.REGST_DTM          regstDtm
+             , EI.IMAGE_URL         imageUrl
+             , W.CONT               prizeCont
+             , CASE WHEN NVL(TO_CHAR(W.REGST_DTM,'YYYYMMDD'), '19000101') > TO_CHAR(SYSDATE - 30, 'YYYYMMDD') THEN 'Y'
+                ELSE 'N'
+               END                 newYn
+          FROM TB_EVENT_MASTER EM
+          INNER JOIN TB_MALL_EVENT ME ON EM.EVENT_ID = ME.EVENT_ID
+          INNER JOIN TB_EVENT_WIN W ON EM.EVENT_ID = W.EVENT_ID AND W.MALL_ID = ME.MALL_ID
+          LEFT JOIN TB_EVENT_IMAGE EI ON EM.EVENT_ID = EI.EVENT_ID AND EI.EVENT_IMAGE_CODE = 'C0384'
+         WHERE PWNR_RLS_YN = 'Y'
+           AND ME.MALL_ID = #mallId#
+           AND W.DISP_YN = 'Y'
+         ORDER BY NVL(W.REGST_DTM, '19000101') DESC
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2014-08-20
+        기능 : 이벤트 당첨자 목록 반환
+    -->
+    <select id="countEventPrizeList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countEventPrizeList */
+        SELECT COUNT(*) as CNT
+          FROM TB_EVENT_MASTER EM
+          INNER JOIN TB_MALL_EVENT ME ON EM.EVENT_ID = ME.EVENT_ID
+          INNER JOIN TB_EVENT_WIN W ON EM.EVENT_ID = W.EVENT_ID AND W.MALL_ID = ME.MALL_ID
+          LEFT JOIN TB_EVENT_IMAGE EI ON EM.EVENT_ID = EI.EVENT_ID AND EI.EVENT_IMAGE_CODE = 'C0384'
+         WHERE PWNR_RLS_YN = 'Y'
+           AND ME.MALL_ID = #mallId#
+           AND W.DISP_YN = 'Y'
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2014-08-20
+        기능 : 이벤트 당첨자 목록 반환
+    -->
+    <select id="totalEventPrizeList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.totalEventPrizeList */
+        SELECT COUNT(*) as CNT
+          FROM TB_EVENT_MASTER EM
+          INNER JOIN TB_MALL_EVENT ME ON EM.EVENT_ID = ME.EVENT_ID
+          INNER JOIN TB_EVENT_WIN W ON EM.EVENT_ID = W.EVENT_ID AND W.MALL_ID = ME.MALL_ID
+          LEFT JOIN TB_EVENT_IMAGE EI ON EM.EVENT_ID = EI.EVENT_ID AND EI.EVENT_IMAGE_CODE = 'C0384'
+         WHERE PWNR_RLS_YN = 'Y'
+           AND ME.MALL_ID = #mallId#
+           AND W.DISP_YN = 'Y'
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-04-02
+        기능: 당첨자발표 - Footer용 간단 Query
+    -->
+    <select id="getEventWin4Simple" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /*FrontEventSQL.getEventWin4Simple*/
+        SELECT A.EVENT_ID           eventId
+             , A.TITLE              eventTitle
+          FROM TB_EVENT_WIN A
+          JOIN TB_EVENT_MASTER B ON A.EVENT_ID = B.EVENT_ID AND B.PWNR_RLS_YN = 'Y'
+         WHERE EXISTS (SELECT 1 FROM TB_MALL_EVENT C WHERE C.EVENT_ID = A.EVENT_ID AND C.MALL_ID = #mallId#)
+           AND A.DISP_YN = 'Y'
+           AND A.MALL_ID = #mallId#
+           AND TO_DATE(B.PWNR_RLS_SCDL_DT, 'YYYYMMDD') &lt;= SYSDATE
+         ORDER BY A.REGST_DTM DESC, B.PWNR_RLS_SCDL_DT DESC
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-06-31
+        기능: 브랜드별 이벤트목록반환
+     -->
+    <select id="getEventListByBrand" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventListByBrand */
+        SELECT 1                dispOrder
+             , EM.EVENT_ID      eventId
+             , EM.EVENT_TITLE   eventTitle
+          FROM TB_EVENT_MASTER EM
+         WHERE EM.EVENT_STAT_CODE = 'C0181'
+           AND EM.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')
+           AND EM.PRMT_CODE = 'C0374'
+           AND EM.DISP_YN = 'Y'
+           AND EM.BRAND_ID = #brandId#
+           AND EM.EVENT_START_DT &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND EM.EVENT_END_DT >= TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND EXISTS (SELECT 1 FROM TB_MALL_EVENT ME WHERE EM.EVENT_ID = ME.EVENT_ID AND ME.MALL_ID = #mallId#)
+         UNION ALL
+        SELECT 2                dispOrder
+             , EM.EVENT_ID      eventId
+             , EM.EVENT_TITLE   eventTitle
+          FROM TB_EVENT_MASTER EM
+          JOIN TB_EVENT_SELL_PRODUCT ESP ON EM.EVENT_ID = ESP.EVENT_ID
+          JOIN TB_SELL_PRODUCT SP ON ESP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND SP.BRAND_ID = #brandId#
+         WHERE EM.EVENT_STAT_CODE = 'C0181'
+           AND EM.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')
+           AND EM.PRMT_CODE = 'C0374'
+           AND EM.DISP_YN = 'Y'
+           AND EM.EVENT_START_DT &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND EM.EVENT_END_DT >= TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND EXISTS (SELECT 1 FROM TB_MALL_EVENT ME WHERE EM.EVENT_ID = ME.EVENT_ID AND ME.MALL_ID = #mallId#)
+         GROUP BY EM.EVENT_ID, EM.EVENT_TITLE
+         ORDER BY dispOrder, eventId DESC
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-09
+        기능: 큐레이트 목록 반환
+     -->
+    <select id="getCurateList" parameterClass="kr.co.hottracks.site.model.common.event.CurateCriteria" resultClass="kr.co.hottracks.site.model.common.event.CurateExt">
+        /* FrontEventSQL.getCurateList : 큐레이트 목록 반환 */
+        SELECT C.CRT_SEQ        crtSeq
+             , C.EVENT_ID       eventId
+             , C.CRT_TITLE      crtTitle
+             , C.CRT_DESC       crtDesc
+             , C.MALL_ID        mallId
+             , C.USER_NUM       userNum
+             , C.REGST_DTM      regstDtm
+             , C.DISP_YN        dispYn
+             , C.EMTC_URL       emtcUrl
+             , U.USER_ID        userId
+             , (SELECT COUNT(*) FROM TB_CURATE_COMMENT CC WHERE CC.CRT_SEQ = C.CRT_SEQ)     cntCmnt
+             , (SELECT COUNT(*) FROM TB_CURATE_LIKE CL WHERE CL.CRT_SEQ = C.CRT_SEQ)        cntLike
+          FROM TB_CURATE C
+          JOIN TB_USER U ON C.USER_NUM = U.USER_NUM
+         WHERE C.DISP_YN = 'Y'
+           AND C.EVENT_ID = #eventId#
+           AND C.MALL_ID = #mallId#
+         <dynamic>
+            <isEmpty property="orderBy">ORDER BY C.REGST_DTM DESC</isEmpty>
+            <isNotEmpty property="orderBy">
+                <isEqual property="orderBy" compareValue="regDtmDesc">ORDER BY C.REGST_DTM DESC</isEqual>
+                <isEqual property="orderBy" compareValue="likeCntDesc">ORDER BY cntLike DESC, C.REGST_DTM DESC</isEqual>
+            </isNotEmpty>
+         </dynamic>
+    </select> 
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-09
+        기능: 큐레이트 마스터 정보 반환
+     -->
+    <select id="getCurate" parameterClass="kr.co.hottracks.site.model.common.event.CurateCriteria" resultClass="kr.co.hottracks.site.model.common.event.CurateExt">
+        /* FrontEventSQL.getCurate : 큐레이트 마스터 정보 반환 */
+        SELECT C.CRT_SEQ        crtSeq
+             , C.EVENT_ID       eventId
+             , C.CRT_TITLE      crtTitle
+             , C.CRT_DESC       crtDesc
+             , C.MALL_ID        mallId
+             , C.USER_NUM       userNum
+             , C.REGST_DTM      regstDtm
+             , C.DISP_YN        dispYn
+             , C.EMTC_URL       emtcUrl
+             , U.USER_ID        userId
+             , (SELECT COUNT(*) FROM TB_CURATE_COMMENT CC WHERE CC.CRT_SEQ = C.CRT_SEQ)     cntCmnt
+             , (SELECT COUNT(*) FROM TB_CURATE_LIKE CL WHERE CL.CRT_SEQ = C.CRT_SEQ)        cntLike
+          FROM TB_CURATE C
+          JOIN TB_USER U ON C.USER_NUM = U.USER_NUM
+         WHERE C.DISP_YN = 'Y'
+           AND C.CRT_SEQ = #crtSeq#
+    </select> 
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-09
+        기능: 큐레이트 마스터 정보 등록
+     -->
+    <insert id="insertCurate" parameterClass="kr.co.hottracks.site.model.common.event.Curate">
+        <selectKey keyProperty="crtSeq" resultClass="string">SELECT CRT_SEQ.NEXTVAL FROM DUAL</selectKey>
+        /* FrontEventSQL.insertCurate : 큐레이트 마스터 정보 등록 */
+        INSERT INTO TB_CURATE (CRT_SEQ, EVENT_ID, CRT_TITLE, CRT_DESC, MALL_ID, USER_NUM, REGST_DTM, DISP_YN, EMTC_URL)
+                       VALUES (#crtSeq#, #eventId#, #crtTitle#, #crtDesc#, #mallId#, #userNum#, SYSDATE, #dispYn#, #emtcUrl#)
+    </insert> 
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-09
+        기능: 큐레이트 마스터 정보 갱신
+     -->
+    <update id="updateCurate" parameterClass="kr.co.hottracks.site.model.common.event.Curate">
+        /* FrontEventSQL.updateCurate : 큐레이트 마스터 정보 갱신 */
+        UPDATE TB_CURATE
+           SET CRT_TITLE = #crtTitle#
+             , CRT_DESC = #crtDesc#
+             , DISP_YN = #dispYn#
+             , EMTC_URL = #emtcUrl#
+         WHERE CRT_SEQ = #crtSeq#
+    </update> 
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-09
+        기능: 큐레이트 상품 정보 삭제
+     -->
+    <delete id="deleteCurateProduct" parameterClass="string">
+        /* FrontEventSQL.deleteCurateProduct : 큐레이트 상품 정보 삭제 */
+        DELETE
+          FROM TB_CURATE_PRODUCT
+         WHERE CRT_SEQ = #crtSeq#
+    </delete> 
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-09
+        기능: 큐레이트 상품 정보 등록
+     -->
+    <insert id="insertCurateProduct" parameterClass="kr.co.hottracks.site.model.common.event.CurateProduct">
+        /* FrontEventSQL.insertCurateProduct : 큐레이트 상품 정보 등록 */
+        INSERT INTO TB_CURATE_PRODUCT (CRT_SEQ, SELL_PRDT_BCODE, DISP_ORDER, REGST_DTM)
+                               VALUES (#crtSeq#, #sellPrdtBcode#, #dispOrder#, SYSDATE)
+    </insert>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-10
+        기능: 큐레이트 상품 목록 반환
+     -->
+    <select id="getCurateProductList" parameterClass="kr.co.hottracks.site.model.common.event.CurateCriteria" resultClass="kr.co.hottracks.site.model.common.event.CurateProductExt">
+        /* FrontEventSQL.getCurateProductList : 큐레이트 목록 반환 */
+        SELECT CP.CRT_SEQ           crtSeq
+             , CP.SELL_PRDT_BCODE   sellPrdtBcode
+             , CP.DISP_ORDER        dispOrder
+             , CP.REGST_DTM         regstDtm
+             , SP.PRDT_SELL_PRICE   prdtSellPrice
+             , SP.SELL_PRDT_GBN     sellPrdtGbn
+             , SP.PRDT_STAT_CODE    prdtStatCode
+             , R.RCRD_CD            rcrdCd
+             , R.RTNG_CODE          rtngCode
+             , FC_GET_PRDT_NAME(CP.SELL_PRDT_BCODE, #mallId#)                   prdtName
+             , FC_GET_PRODUCT_IMAGE_URL(CP.SELL_PRDT_BCODE)                     prdtImgUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(CP.SELL_PRDT_BCODE)                    prdtImgUrl2
+             , FC_GET_CPN_LAST_PRICE(CP.SELL_PRDT_BCODE, #mallId#,#userNum#)    lastCpnPrice
+             , CASE WHEN SP.SELL_PRDT_GBN IN ('R', 'D')
+                    THEN R.ARTI_NAME
+                    ELSE (SELECT NVL(B.BRAND_ENG_NAME, B.BRAND_NAME) FROM TB_BRAND B WHERE B.BRAND_ID = SP.BRAND_ID)
+               END                  brandName
+          FROM TB_CURATE_PRODUCT CP
+          JOIN TB_SELL_PRODUCT SP ON CP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+          LEFT JOIN TB_RECORD R ON SP.RCRD_CD = R.RCRD_CD
+         WHERE CRT_SEQ = #crtSeq#
+         ORDER BY CP.DISP_ORDER
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-10
+        기능: 큐레이트 좋아요 등록
+    -->
+    <insert id="insertCurateLike" parameterClass="kr.co.hottracks.site.model.common.event.CurateCriteria">
+        /* FrontEventSQL.insertCurateLike : 큐레이트 좋아요 등록 */
+        INSERT INTO TB_CURATE_LIKE (CRT_SEQ, USER_NUM, REGST_DTM)
+                            VALUES (#crtSeq#, #userNum#,SYSDATE)
+    </insert>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-10
+        기능: 큐레이트 댓글목록 반환
+    -->
+    <select id="getCurateComment" resultClass="kr.co.hottracks.site.model.common.event.CurateCommentExt" parameterClass="kr.co.hottracks.site.model.common.event.CurateCriteria">
+        /* FrontEventSQL.getCurateComment : 큐레이트 댓글목록 반환 */
+        SELECT /*+ FIRST_ROWS */
+               CC.CRT_CMNT_SEQ  crtCmntSeq
+             , CC.CRT_SEQ       crtSeq
+             , CC.USER_NUM      userNum
+             , CC.CMNT          cmnt
+             , CC.REGST_DTM     regstDtm
+             , U.USER_ID        userId
+          FROM TB_CURATE_COMMENT CC
+          JOIN TB_USER U ON CC.USER_NUM = U.USER_NUM
+         WHERE CC.CRT_SEQ = #crtSeq#
+         ORDER BY CC.REGST_DTM DESC
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-10
+        기능: 큐레이트 댓글목록 수 반환
+    -->
+    <select id="countCurateComment" resultClass="int" parameterClass="kr.co.hottracks.site.model.common.event.CurateCriteria">
+        /* FrontEventSQL.countCurateComment : 큐레이트 댓글목록 수 반환 */
+        SELECT COUNT(*)  
+          FROM TB_CURATE_COMMENT CC
+          JOIN TB_USER U ON CC.USER_NUM = U.USER_NUM
+         WHERE CC.CRT_SEQ = #crtSeq#
+           AND ROWNUM <![CDATA[ < ]]> #topCount# + 1
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-10
+        기능: 큐레이트 댓글 등록
+    -->
+    <insert id="insertCurateComment" parameterClass="kr.co.hottracks.site.model.common.event.CurateComment">
+        /* FrontEventSQL.insertCurateComment : 큐레이트 댓글 등록 */
+        INSERT INTO TB_CURATE_COMMENT (CRT_CMNT_SEQ, CRT_SEQ, USER_NUM, CMNT, REGST_DTM)
+                               VALUES (CRT_CMNT_SEQ.NEXTVAL, #crtSeq#, #userNum#, #cmnt#, SYSDATE)
+    </insert>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2015-09-10
+        기능: 큐레이트 댓글 삭제
+    -->
+    <delete id="deleteCurateComment" parameterClass="kr.co.hottracks.site.model.common.event.CurateComment">
+        /* FrontEventSQL.deleteCurateComment : 큐레이트 댓글 삭제 */
+        DELETE
+          FROM TB_CURATE_COMMENT
+         WHERE CRT_CMNT_SEQ = #crtCmntSeq#
+           AND CRT_SEQ = #crtSeq#
+           AND USER_NUM = #userNum#
+    </delete>
+    
+    <!-- 
+        작성자 : 권동희
+        작성일 :2017-07-18
+        기능 : 랜덤 이미지 가져오기
+     -->
+    <select id="getRandomImg" resultClass="kr.co.hottracks.site.model.common.event.RandomImage" parameterClass="kr.co.hottracks.site.model.common.event.RandomImage">
+        /* FrontEventSQL.getRandomImg  */
+        SELECT EVENT_ID             eventId
+             , SEQ                  seq
+             , RAN_IMG              ranImg
+          FROM TB_RANDOM_IMG
+         WHERE EVENT_ID = #eventId#
+       <isEqual property="seq" compareValue="0">
+         ORDER BY SEQ ASC
+       </isEqual>
+       <isEqual property="seq" compareValue="1">
+         ORDER BY SEQ DESC
+       </isEqual>
+       <isEqual property="ranImg" compareValue="2">
+         ORDER BY RAN_IMG DESC
+       </isEqual>
+       <isEqual property="ranImg" compareValue="3">
+         ORDER BY RAN_IMG ASC
+       </isEqual>
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2017-12-18
+        기능: 선택형 코멘트 이벤트의 선택항목 조회 
+     -->
+    <select id="getEventChoice" parameterClass="string" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getEventChoice */
+        SELECT EC.BNR_SEQ   bnrSeq
+             , B.TITLE      bnrTitle
+          FROM TB_EVENT_CHOICE EC
+          JOIN TM_BNR B ON EC.BNR_SEQ = B.BNR_SEQ
+         WHERE EC.EVENT_ID = #eventId#
+         ORDER BY EC.EVENT_CHOICE_SEQ
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-06-15
+        기능: 현재 하트뿅뿅 이벤트 아이디
+     -->
+    <select id="getCurrentHeartEventId" resultClass="string">
+        /* FrontEventSQL.getCurrentHeartEventId */
+        SELECT MAX(EVENT_ID)
+          FROM TB_EVENT_MASTER
+         WHERE EVENT_TYPE_CODE = 'C019H'
+           AND EVENT_STAT_CODE = 'C0181'
+           AND PRMT_CODE = 'C0374'
+           AND DISP_YN = 'Y'
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= EVENT_START_DT
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-06-15
+        기능: 하트뿅뿅 이벤트
+     -->
+    <select id="getHeartEventDetail" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getHeartEventDetail */
+        SELECT EVENT_ID             eventId
+             , EVENT_TITLE          eventTitle
+             , PWNR_RLS_YN          pwnrRlsYn
+             , EVENT_START_DT       eventStartDt
+             , EVENT_END_DT         eventEndDt
+             , DSN_REQ_CONT         dsnReqCont
+             , EVENT_DTL_CONT       eventDtlCont
+             , CTGR_ID              ctgrId
+             , USER_TMPL_USE_YN     userTmplUseYn
+             , USER_TMPL            userTmpl
+             , DISP_YN              dispYn
+             , REPLY_YN             replyYn
+             , CULT_ZONE_YN         cultZoneYn
+             , EVENT_RANGE_INFO     eventRangeInfo
+             , EVENT_TYPE_CODE      eventTypeCode
+             , EVENT_DISP_TYPE_CODE eventDispTypeCode
+             , USER_TMPL_HTML       userTmplHtml
+             , PREV_EVENT_ID        prevEventId
+             , PREV_EVENT_TITLE     prevEventTitle
+             , NEXT_EVENT_ID        nextEventId
+             , NEXT_EVENT_TITLE     nextEventTitle
+             , FC_GET_EVENT_IMAGE(V.EVENT_ID, 'C0384')  imageUrl
+          FROM (SELECT EM.*
+                     , LAG(EVENT_ID, 1) OVER (ORDER BY EVENT_ID)        PREV_EVENT_ID
+                     , LAG(EVENT_TITLE, 1) OVER (ORDER BY EVENT_ID)     PREV_EVENT_TITLE
+                     , LEAD(EVENT_ID, 1) OVER (ORDER BY EVENT_ID)       NEXT_EVENT_ID
+                     , LEAD(EVENT_TITLE, 1) OVER (ORDER BY EVENT_ID)    NEXT_EVENT_TITLE
+                  FROM TB_EVENT_MASTER EM
+                 WHERE EM.EVENT_TYPE_CODE = 'C019H'
+                   AND EM.EVENT_STAT_CODE = 'C0181'
+                   AND EM.PRMT_CODE = 'C0374'
+                   AND EM.DISP_YN = 'Y'
+               ) V
+         WHERE V.EVENT_ID = #eventId#
+    </select>
+    
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-06-15
+        기능: 하트뿅뿅 이벤트
+     -->
+    <select id="getHeartEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getHeartEventList */
+        SELECT EVENT_ID             eventId
+             , EVENT_TITLE          eventTitle
+             , EVENT_START_DT       eventStartDt
+             , EVENT_END_DT         eventEndDt
+             , EVENT_RANGE_INFO     eventRangeInfo
+             , FC_GET_EVENT_IMAGE(EM.EVENT_ID, 'C0384')     imageUrl
+             , FC_GET_EVENT_IMAGE(EM.EVENT_ID, 'C0386')     thumUrl
+             , (SELECT CASE WHEN MAX(T.EVENT_ID) = EM.EVENT_ID THEN 'Y' ELSE 'N' END
+                  FROM TB_EVENT_MASTER T
+                 WHERE T.EVENT_TYPE_CODE = EM.EVENT_TYPE_CODE
+                   AND T.EVENT_STAT_CODE = EM.EVENT_STAT_CODE
+                   AND T.PRMT_CODE = EM.PRMT_CODE
+                   AND T.ON_LINE_YN = EM.ON_LINE_YN
+                   AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= T.EVENT_START_DT)    curEventYn
+          FROM TB_EVENT_MASTER EM
+         WHERE EM.EVENT_TYPE_CODE = 'C019H'
+           AND EM.EVENT_STAT_CODE = 'C0181'
+           AND EM.PRMT_CODE = 'C0374'
+           AND EM.DISP_YN = 'Y'
+           AND EM.EVENT_ID IN (SELECT EVENT_ID FROM TB_EVENT_IMAGE WHERE EVENT_IMAGE_CODE = 'C0386')
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= EM.EVENT_START_DT
+           <isNotEmpty property="eventId">
+               AND EM.EVENT_ID != #eventId#
+           </isNotEmpty>
+         ORDER BY EM.EVENT_ID DESC
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-06-15
+        기능: 하트뿅뿅 이벤트
+     -->
+    <select id="countHeartEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countHeartEventList */
+        SELECT COUNT(*)
+          FROM TB_EVENT_MASTER EM
+         WHERE EM.EVENT_TYPE_CODE = 'C019H'
+           AND EM.EVENT_STAT_CODE = 'C0181'
+           AND EM.PRMT_CODE = 'C0374'
+           AND EM.DISP_YN = 'Y'
+           AND EM.EVENT_ID IN (SELECT EVENT_ID FROM TB_EVENT_IMAGE WHERE EVENT_IMAGE_CODE = 'C0386')
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= EM.EVENT_START_DT
+           <isNotEmpty property="eventId">
+               AND EM.EVENT_ID != #eventId#
+           </isNotEmpty>
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2019-01-05
+        기능: 이벤트 스탬프 목록
+     -->
+    <select id="getEventStamp" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventStampExt">
+        /* FrontEventSQL.getEventStamp */
+        SELECT ES.EVENT_ID              eventId
+             , ES.STAMP_TYPE_CODE       stampTypeCode
+             , ES.SALE_AMT              saleAmt
+             , ES.MAX_STAMP_CNT         maxStampCnt
+             , ES.IMG_URL_ON            imgUrlOn
+             , ES.IMG_URL_OFF           imgUrlOff
+             , FC_GET_EVENT_STAMP_CNT(#userNum#, ES.STAMP_TYPE_CODE, EM.EVENT_START_DT, EM.EVENT_END_DT, ES.SALE_AMT)   gainCnt
+          FROM TB_EVENT_MASTER EM
+          JOIN TB_EVENT_STAMP ES ON EM.EVENT_ID = ES.EVENT_ID
+         WHERE ES.EVENT_ID = #eventId#
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2019-01-05
+        기능: 이벤트 스탬프 사은품 목록
+     -->
+    <select id="getEventStampGift" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.common.event.EventStampGiftExt">
+        /* FrontEventSQL.getEventStampGift */
+        SELECT ESG.EVENT_ID         eventId
+             , ESG.GIFT_INSEQ       giftInseq
+             , ESG.GIFT_NAME        giftName
+             , ESG.IMG_URL_ON       imgUrlOn
+             , ESG.IMG_URL_OFF      imgUrlOff
+             , ESG.STD_STAMP_CNT    stdStampCnt
+             , CASE WHEN ESU.USER_NUM IS NOT NULL THEN 'Y' ELSE 'N' END applyYn
+          FROM TB_EVENT_STAMP_GIFT ESG
+          LEFT JOIN TB_EVENT_STAMP_USER ESU ON ESG.EVENT_ID = ESU.EVENT_ID AND ESG.GIFT_INSEQ = ESU.GIFT_INSEQ AND ESU.USER_NUM = #userNum#
+         WHERE ESG.EVENT_ID = #eventId#
+           AND ESG.DLT_YN = 'N'
+         ORDER BY ESG.GIFT_INSEQ
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-05-09
+        기능: 스탬프형 이벤트 참여 프로시저
+     -->
+    <parameterMap class="java.util.HashMap" id="mapEventStamp">
+        <parameter property="eventId" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="giftInseq" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="userNum" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="resCode" mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="resCont" mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <procedure id="applyEventStamp" parameterMap="mapEventStamp">
+        { CALL PR_EVENT_STAMP_APPLY(?, ?, ?, ?, ?) }
+    </procedure>
+    
+    <!-- 
+        작성자: 권동희
+        작성일: 2019-02-13
+        기능: 오프라인용 이벤트 응모 내역 넣기
+    -->
+    <parameterMap class="java.util.HashMap" id="eventCommentOffline">
+        <parameter property="vi_event_id"    mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="vi_user_name"   mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="vi_user_tel_num" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="vi_user_addr"   mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="vi_user_dtl"    mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <insert id="insertEventCommentOffline" parameterMap="eventCommentOffline">
+        /* FrontEventSQL.insertEventCommentOffline */
+        { CALL PR_EVENT_COMMENT_OFFLINE (?,?,?,?,?) }
+    </insert>
+    
+    <!-- 
+        작성자: 박민
+        작성일: 2019-05-22
+        기능: 현재 보이는이야기 이벤트 아이디
+     -->
+    <select id="getCurrentStoryEventId" resultClass="string">
+        /* FrontEventSQL.getCurrentHeartEventId */
+        SELECT MAX(EVENT_ID)
+          FROM TB_EVENT_MASTER
+         WHERE EVENT_TYPE_CODE in ('C019I','C019J','C019K')
+           AND EVENT_STAT_CODE = 'C0181'
+           AND PRMT_CODE = 'C0374'
+           AND DISP_YN = 'Y'
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= EVENT_START_DT
+    </select>
+    
+    <!-- 
+         작성자: 박민
+        작성일: 2019-05-22
+        기능: 보이는이야기 이벤트
+     -->
+    <select id="getStoryEventDetail" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getHeartEventDetail */
+        SELECT EVENT_ID             eventId
+             , EVENT_TITLE          eventTitle
+             , PWNR_RLS_YN          pwnrRlsYn
+             , EVENT_START_DT       eventStartDt
+             , EVENT_END_DT         eventEndDt
+             , DSN_REQ_CONT         dsnReqCont
+             , EVENT_DTL_CONT       eventDtlCont
+             , CTGR_ID              ctgrId
+             , USER_TMPL_USE_YN     userTmplUseYn
+             , USER_TMPL            userTmpl
+             , DISP_YN              dispYn
+             , REPLY_YN             replyYn
+             , CULT_ZONE_YN         cultZoneYn
+             , EVENT_RANGE_INFO     eventRangeInfo
+             , EVENT_TYPE_CODE      eventTypeCode
+             , EVENT_DISP_TYPE_CODE eventDispTypeCode
+             , USER_TMPL_HTML       userTmplHtml
+             , PREV_EVENT_ID        prevEventId
+             , PREV_EVENT_TITLE     prevEventTitle
+             , NEXT_EVENT_ID        nextEventId
+             , NEXT_EVENT_TITLE     nextEventTitle
+             , FC_GET_EVENT_IMAGE(V.EVENT_ID, 'C0384')  imageUrl
+          FROM (SELECT EM.*
+                     , LAG(EVENT_ID, 1) OVER (ORDER BY EVENT_ID)        PREV_EVENT_ID
+                     , LAG(EVENT_TITLE, 1) OVER (ORDER BY EVENT_ID)     PREV_EVENT_TITLE
+                     , LEAD(EVENT_ID, 1) OVER (ORDER BY EVENT_ID)       NEXT_EVENT_ID
+                     , LEAD(EVENT_TITLE, 1) OVER (ORDER BY EVENT_ID)    NEXT_EVENT_TITLE
+                  FROM TB_EVENT_MASTER EM
+                 WHERE EM.EVENT_TYPE_CODE in ('C019I','C019J','C019K')
+                   AND EM.EVENT_STAT_CODE = 'C0181'
+                   AND EM.PRMT_CODE = 'C0374'
+                   AND EM.DISP_YN = 'Y'
+               ) V
+         WHERE V.EVENT_ID = #eventId#
+    </select>
+    
+    
+    <!-- 
+        작성자: 박민
+        작성일: 2019-05-22
+        기능: 보이는이야기 이벤트
+     -->
+    <select id="getStoryEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.EventExt">
+        /* FrontEventSQL.getHeartEventList */
+        SELECT EVENT_ID             eventId
+             , EVENT_TITLE          eventTitle
+             , EVENT_START_DT       eventStartDt
+             , EVENT_END_DT         eventEndDt
+             , EVENT_RANGE_INFO     eventRangeInfo
+             , FC_GET_EVENT_IMAGE(EM.EVENT_ID, 'C0384')     imageUrl
+             , FC_GET_EVENT_IMAGE(EM.EVENT_ID, 'C0386')     thumUrl
+             , (SELECT CASE WHEN MAX(T.EVENT_ID) = EM.EVENT_ID THEN 'Y' ELSE 'N' END
+                  FROM TB_EVENT_MASTER T
+                 WHERE T.EVENT_TYPE_CODE = EM.EVENT_TYPE_CODE
+                   AND T.EVENT_STAT_CODE = EM.EVENT_STAT_CODE
+                   AND T.PRMT_CODE = EM.PRMT_CODE
+                   AND T.ON_LINE_YN = EM.ON_LINE_YN
+                   AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= T.EVENT_START_DT)    curEventYn
+          FROM TB_EVENT_MASTER EM
+         WHERE EM.EVENT_TYPE_CODE in ('C019I','C019J','C019K')
+           AND EM.EVENT_STAT_CODE = 'C0181'
+           AND EM.PRMT_CODE = 'C0374'
+           AND EM.DISP_YN = 'Y'
+           AND EM.EVENT_ID IN (SELECT EVENT_ID FROM TB_EVENT_IMAGE WHERE EVENT_IMAGE_CODE = 'C0386')
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= EM.EVENT_START_DT
+           <isNotEmpty property="eventId">
+               AND EM.EVENT_ID != #eventId#
+           </isNotEmpty>
+         ORDER BY EM.EVENT_ID DESC
+    </select>
+    
+    <!-- 
+         작성자: 박민
+        작성일: 2019-05-22
+        기능: 보이는이야기 이벤트
+     -->
+    <select id="countStoryEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.countHeartEventList */
+        SELECT COUNT(*)
+          FROM TB_EVENT_MASTER EM
+         WHERE EM.EVENT_TYPE_CODE in ('C019I','C019J','C019K')
+           AND EM.EVENT_STAT_CODE = 'C0181'
+           AND EM.PRMT_CODE = 'C0374'
+           AND EM.DISP_YN = 'Y'
+           AND EM.EVENT_ID IN (SELECT EVENT_ID FROM TB_EVENT_IMAGE WHERE EVENT_IMAGE_CODE = 'C0386')
+           AND TO_CHAR(SYSDATE, 'YYYYMMDD') >= EM.EVENT_START_DT
+           <isNotEmpty property="eventId">
+               AND EM.EVENT_ID != #eventId#
+           </isNotEmpty>
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+    
+    <select id="getBestEvent" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.BizEventExt">
+        /* FrontEventSQL.getBestEvent */
+		SELECT * FROM (
+			SELECT A.EVENT_ID           eventId
+	             , B.IMAGE_URL          imageUrl
+	             , A.CTGR_ID            ctgrId
+	             , A.DISP_DSCNT_RATE    dispDscntRate
+	             , A.EVENT_TITLE        eventTitle
+	             , A.EVENT_DTL_CONT     eventDtlCont
+	             , A.EVENT_START_DT     eventStartDt
+	             , A.EVENT_END_DT       eventEndDt
+	             , A.EVENT_RANGE_INFO   eventRangeInfo
+<!-- 	             , D.cnt -->
+	          FROM TB_EVENT_MASTER A
+	          JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = #eventImageCode#
+	          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId#
+<!-- 	          JOIN ( -->
+<!-- 	            select gubun, gubun_value, count(*) cnt from tb_sitekind_click -->
+<!-- 	            where gubun = '03' -->
+<!-- 	            and click_dt = TO_CHAR(sysdate-1, 'YYYYMMDD') -->
+<!-- 	            GROUP BY gubun, gubun_value -->
+<!-- 	          ) D on A.EVENT_ID = D.gubun_value -->
+	          WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+	           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+	           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+	           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+	           AND A.CTGR_ID LIKE '0000'  || '%'
+	           AND A.DISP_YN = 'Y'
+	           AND A.DIARY_EVENT_YN = 'Y'
+<!-- 	           AND A.CULT_ZONE_YN = 'D' -->
+	           AND FC_IS_VALID_EVENT(A.EVENT_ID, '02') = 'Y'
+<!-- 	           order by D.cnt desc -->
+           ) WHERE rownum &lt;= 7
+    </select>
+    
+    <select id="getDiaryEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.BizEventExt">
+        /* FrontEventSQL.getDiaryEventList */
+        SELECT A.EVENT_ID           eventId
+             , B.IMAGE_URL          imageUrl
+             , A.CTGR_ID            ctgrId
+             , A.DISP_DSCNT_RATE    dispDscntRate
+             , A.EVENT_TITLE        eventTitle
+             , A.EVENT_DTL_CONT     eventDtlCont
+             , A.EVENT_START_DT     eventStartDt
+             , A.EVENT_END_DT       eventEndDt
+             , A.EVENT_RANGE_INFO   eventRangeInfo
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = #eventImageCode#
+          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.CTGR_ID LIKE #ctgrId#  || '%'
+           AND A.DISP_YN = 'Y'
+           AND A.DIARY_EVENT_YN = 'Y' 
+<!--            AND A.CULT_ZONE_YN = 'D' -->
+           AND FC_IS_VALID_EVENT(A.EVENT_ID, #mallId#) = 'Y'
+           <isNotEmpty property="eventDispTypeCode" prepend="AND">
+                A.EVENT_DISP_TYPE_CODE = #eventDispTypeCode#
+           </isNotEmpty>
+         ORDER BY A.EVENT_START_DT DESC
+    </select>
+    
+    <select id="getDiaryEventListCount" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.getDiaryEventListCount */
+        SELECT COUNT(*) as CNT
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = #eventImageCode#
+          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.CTGR_ID LIKE #ctgrId#  || '%'
+           AND A.DISP_YN = 'Y'
+           AND A.DIARY_EVENT_YN = 'Y' 
+<!--            AND A.CULT_ZONE_YN = 'D' -->
+           AND FC_IS_VALID_EVENT(A.EVENT_ID, #mallId#) = 'Y'
+           <isNotEmpty property="eventDispTypeCode" prepend="AND">
+                A.EVENT_DISP_TYPE_CODE = #eventDispTypeCode#
+           </isNotEmpty>
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+    
+    <select id="countEventJoin" resultClass="int" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria">
+        /* FrontEventSQL.countEventJoin */
+        SELECT COUNT(*) as CNT 
+          FROM TB_EVENT_COMMENT EC
+         WHERE EC.EVENT_ID = #eventId#
+    </select>
+    
+    <select id="countEvent69557" resultClass="int" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria">
+        /* FrontEventSQL.countEvent69557 */
+        SELECT COUNT(*) as CNT 
+          FROM TB_EVENT_COMMENT EC
+         WHERE EC.EVENT_ID = #eventId#
+         AND EC.CMNT = '로또당첨'
+    </select>
+    
+    <select id="getStickerEventList" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="kr.co.hottracks.site.model.renewal.event.BizEventExt">
+        /* FrontEventSQL.getStickerEventList */
+        SELECT A.EVENT_ID           eventId
+             , B.IMAGE_URL          imageUrl
+             , A.CTGR_ID            ctgrId
+             , A.EVENT_TITLE        eventTitle
+             , A.EVENT_DTL_CONT     eventDtlCont
+             , A.EVENT_START_DT     eventStartDt
+             , A.EVENT_END_DT       eventEndDt
+             , A.EVENT_RANGE_INFO   eventRangeInfo
+             , A.DISP_DSCNT_RATE    dispDscntRate
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = #eventImageCode#
+          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.CTGR_ID LIKE #ctgrId#  || '%'
+           AND A.DISP_YN = 'Y'
+           AND FC_IS_VALID_EVENT(A.EVENT_ID, '02') = 'Y'
+           <isNotEmpty property="eventDispTypeCode" prepend="AND">
+                A.EVENT_DISP_TYPE_CODE = #eventDispTypeCode#
+           </isNotEmpty>
+         ORDER BY A.EVENT_START_DT DESC
+    </select>
+    
+    <select id="getStickerEventListCount" parameterClass="kr.co.hottracks.site.model.renewal.event.EventCriteria" resultClass="int">
+        /* FrontEventSQL.getStickerEventListCount */
+        SELECT COUNT(*) as CNT
+          FROM TB_EVENT_MASTER A
+          JOIN TB_EVENT_IMAGE B ON A.EVENT_ID = B.EVENT_ID AND B.EVENT_IMAGE_CODE = #eventImageCode#
+          JOIN TB_MALL_EVENT C ON A.EVENT_ID = C.EVENT_ID AND C.MALL_ID = #mallId#
+         WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+           AND A.EVENT_STAT_CODE = 'C0181'    /* 정상 */
+           AND A.PRMT_CODE = 'C0374'          /* 승인완료 */
+           AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+           AND A.CTGR_ID LIKE #ctgrId#  || '%'
+           AND A.DISP_YN = 'Y'
+           AND FC_IS_VALID_EVENT(A.EVENT_ID, '02') = 'Y'
+           <isNotEmpty property="eventDispTypeCode" prepend="AND">
+                A.EVENT_DISP_TYPE_CODE = #eventDispTypeCode#
+           </isNotEmpty>
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+</sqlMap>

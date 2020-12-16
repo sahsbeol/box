@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BizMyPageSQL">
+	<typeAlias alias="bizDispBnr" type="kr.co.hottracks.site.model.common.disp.BizDispBnr"/>
+	<typeAlias alias="sellGift" type="kr.co.hottracks.site.model.common.sellGift.SellGift"/>
+	<typeAlias alias="bizSellGiftExt" type="kr.co.hottracks.site.model.common.sellGift.BizSellGiftExt"/>
+	<typeAlias alias="bizUserNoticeCriteria" type="kr.co.hottracks.site.model.common.board.BizUserNoticeCriteria"/>
+	<typeAlias alias="bizUserNoticeExt" type="kr.co.hottracks.site.model.common.board.BizUserNotice"/>
+	
+    <!-- 
+	작성자: DD
+	작성일: 2019.11.05
+	기능: 신규 배너 리스트
+    -->
+    <select id="getBizBnrList" parameterClass="bizDispBnr" resultClass="bizDispBnr">
+        /* BizMyPageSQL.getBizBnrList */
+        SELECT 
+        	*
+        FROM (
+			SELECT 
+				 ROWNUM AS rowNumber
+				,A.BNR_MST_SEQ AS bnrMstSeq
+				,A.BNR_TYPE_CD AS bnrTypeCd
+				,A.USE_CONDI_GBN AS useCondiGbn
+				,A.BNR_SIZE_PC_W AS bnrSizePcW
+				,A.BNR_SIZE_PC_H AS bnrSizePcH
+				,A.BNR_OVER_SIZE_PC_W AS bnrOverSizePcW
+				,A.BNR_OVER_SIZE_PC_H AS bnrOverSizePcH
+				,A.BNR_SIZE_MO_W AS bnrSizeMoW
+				,A.BNR_SIZE_MO_H AS bnrSizeMoH
+				,A.MAX_REG_CNT AS maxRegCnt
+				,A.OVER_IMAGE_USE_YN AS overImageUseYn
+				,B.BNR_DETL_SEQ AS bnrDetlSeq
+				,B.DISP_YN AS dispYn
+				,B.DISP_START_DT AS dispStartDt
+				,B.DISP_END_DT AS dispEndDt
+				,B.SIGN_WAY_GBN AS signWayGbn
+				,B.IMAGE_URL_PC AS imageUrlPc
+				,B.OVER_IMAGE_URL_PC AS overImageUrlPc
+				,B.IMAGE_URL_MO AS imageUrlMo
+				,B.BNR_LINK_URL AS bnrLinkUrl
+				,B.MAIN_TEXT AS mainText
+				,B.SUB_TEXT AS subText
+				,B.DISP_ORD AS dispOrd
+				,B.IMAGE_ALT AS imageAlt
+			FROM TB_BNR_MST A
+			LEFT JOIN TB_BNR_DETL B ON A.BNR_MST_SEQ = B.BNR_MST_SEQ
+			WHERE A.BNR_TYPE_CD = #bnrTypeCd#	/* 배너 타입 코드 */
+			AND A.USE_CONDI_GBN <![CDATA[<>]]> 'C1463' /* 모바일만 제외*/
+			AND B.DISP_YN = 'Y' /* 노출여부*/
+			AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN B.DISP_START_DT AND B.DISP_END_DT
+			) T
+		<isNotEmpty property="limitSize">
+			WHERE T.rowNumber <![CDATA[<=]]> #limitSize#
+        </isNotEmpty>
+    </select>
+   	
+   <!-- 
+	작성자: DD
+	작성일: 2019.12.26
+	기능: 사용자 보유 쿠폰
+    -->
+   <select id="selectListUserCouponCount" parameterClass="bizDispCriteria" resultClass="int">
+    	/* BizMyPageSQL.selectListUserCouponCount */
+        SELECT
+          COUNT(*)
+        FROM
+          TB_USER_COUPON A
+        , TB_COUPON_MASTER B
+        WHERE A.USER_NUM = #userNum#
+        AND A.USER_CPN_STAT_CODE = 'C0611' 
+        AND A.CPN_ID = B.CPN_ID
+        AND A.CPN_VALID_DT <![CDATA[ >= ]]> TO_CHAR(SYSDATE, 'YYYYMMDD')
+	</select>
+	           
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.19
+	기능: 다운 가능한 쿠폰 수
+    -->
+    <select id="getDownloadableCpnCnt" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizMyPageSQL.getDownloadableCpnCnt */
+		SELECT 
+			COUNT(1) cnt
+		FROM(
+			SELECT 
+				A.CPN_ID couponId
+          	FROM TB_COUPON_MASTER A ,
+               	TB_COUPON_APPLY_PRODUCT B
+         	WHERE A.CPN_ID        = B.CPN_ID
+           	AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT
+           	AND A.MALL_ID = $mallId$
+           	AND A.SCOPE_GBN = 'P' /*상품쿠폰*/
+           	AND A.USE_YN = 'Y'
+           	AND A.DISP_YN ='Y'
+       		GROUP BY A.CPN_ID
+       		
+        	UNION ALL
+        	SELECT A.CPN_ID couponId
+          	FROM TB_COUPON_MASTER A
+         	WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT
+           	AND A.MALL_ID = $mallId$
+           	AND A.CPN_ID NOT IN (SELECT cpn_id FROM TB_HTRS_MALL_USER_PLCY_CPN)
+           	AND A.SCOPE_GBN IN ('C', 'O') /*주문,장바구니 쿠폰*/
+           	AND A.USE_YN = 'Y'
+           	AND A.DISP_YN ='Y'
+          	GROUP BY A.CPN_ID
+		) T
+    </select>
+    
+	<!--  
+	작성자: DD
+	작성일 : 2019.12.20
+	기능 : 작성가능한 상품평
+	-->
+    <select id="totalOrderProductForReview" resultClass="int" parameterClass="string">
+        /* BizMyPageSQL.totalOrderProductForReview */
+        SELECT COUNT(OP.SELL_PRDT_BCODE)
+          FROM TB_ORDER O
+          JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM AND OP.ORDER_PRDT_STAT_CODE = 'C0171'
+          JOIN TB_SELL_PRODUCT SP ON SP.SELL_PRDT_BCODE = OP.SELL_PRDT_BCODE
+         WHERE O.MALL_ID = '02'
+           AND O.USER_NUM = #userNum#
+           AND O.ORDER_NUM IN (SELECT SALE_ORDERNO FROM GIFT_SALE)
+           AND FC_GET_ORDER_PRODUCT_REVIEW_YN(O.ORDER_NUM, OP.ORDER_PRDT_INSEQ) = 'N'
+           AND O.ORDER_DTM &gt;= ADD_MONTHS(SYSDATE, -3)
+     </select>
+     
+     <!--  
+	작성자: DD
+	작성일 : 2019.12.20
+	기능 : 예상 적립포인트
+	-->
+    <select id="reviewExpectedPoint" resultClass="int" parameterClass="string">
+        /* BizMyPageSQL.reviewExpectedPoint */
+        SELECT
+        	point + 5000 + DECODE((SELECT O.ORDER_NUM
+								   FROM TB_ORDER O
+								   JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM AND OP.ORDER_PRDT_STAT_CODE = 'C0171'
+							 	   WHERE O.MALL_ID = '02'
+								   AND O.USER_NUM = #userNum#
+								   AND FC_GET_ORDER_PRODUCT_REVIEW_YN(O.ORDER_NUM, OP.ORDER_PRDT_INSEQ) = 'Y'
+								   AND O.ORDER_NUM IN (SELECT SALE_ORDERNO FROM GIFT_SALE)
+								   AND ROWNUM = 1), NULL, 200, 0) AS point
+		FROM(
+	        SELECT (COUNT(OP.SELL_PRDT_BCODE) * 100) AS point
+	          FROM TB_ORDER O
+	          JOIN TB_ORDER_PRODUCT OP ON O.ORDER_NUM = OP.ORDER_NUM AND OP.ORDER_PRDT_STAT_CODE = 'C0171'
+	          JOIN TB_SELL_PRODUCT SP ON SP.SELL_PRDT_BCODE = OP.SELL_PRDT_BCODE
+	         WHERE O.MALL_ID = '02'
+	           AND O.USER_NUM = #userNum#
+	           AND O.ORDER_NUM IN (SELECT SALE_ORDERNO FROM GIFT_SALE)
+	           AND FC_GET_ORDER_PRODUCT_REVIEW_YN(O.ORDER_NUM, OP.ORDER_PRDT_INSEQ) = 'N'
+	           AND O.ORDER_DTM &gt;= ADD_MONTHS(SYSDATE, -3)
+	           AND SP.RCRD_CD IS NULL /* 음반 제외 */
+	           AND OP.ORDER_PRDT_AMT &gt;= 1000 /* 1000원이상 */
+		)
+     </select>
+      
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.26
+	기능: 쿠폰존(상품)리스트
+    -->
+    <select id="getCouponZonePrdtList" parameterClass="bizDispCriteria" resultClass="bizSellGiftExt">
+        /* BizMyPageSQL.getCouponZonePrdtList */
+        SELECT 
+        	*
+        FROM(
+			SELECT 
+				ROW_NUMBER() OVER( 
+			   <dynamic prepend="ORDER BY">
+	                <isEmpty property="productOrderBy">A.PRMT_DTM DESC, A.SALE_CNT_WEEK DESC</isEmpty>
+	                <isNotEmpty property="productOrderBy">
+	                    <isEqual property="productOrderBy" compareValue="R">A.PRMT_DTM DESC, A.SALE_CNT_WEEK DESC</isEqual>
+	                    <isEqual property="productOrderBy" compareValue="P">A.SALE_CNT_WEEK DESC</isEqual>
+	                    <isEqual property="productOrderBy" compareValue="L">FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, '02') ASC, A.SALE_CNT_WEEK DESC</isEqual>
+	                    <isEqual property="productOrderBy" compareValue="H">FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, '02') DESC, A.SALE_CNT_WEEK DESC</isEqual>
+	                    <isEqual property="productOrderBy" compareValue="T">FC_GET_LAST_DC_RATE(A.SELL_PRDT_BCODE, '02') DESC, A.SALE_CNT_WEEK DESC</isEqual>
+	                </isNotEmpty>
+	                ,A.PRDT_NAME
+				</dynamic>) AS NO
+			 	, A.SELL_PRDT_BCODE    sellPrdtBcode
+	            , A.PRDT_NAME    prdtName
+	            , A.PRVD_TITLE   prdtDesc
+	            , A.PRDT_NAME          basePrdtName
+	            , A.PRVD_TITLE         basePrdtDesc
+	            , A.PRDT_SELL_PRICE    prdtSellPrice
+	            , A.RCRD_CD            rcrdCd
+	            , A.SELL_PRDT_GBN      sellPrdtGbn
+	            , A.NYO_SELL_BAN_YN    nyoSellBanYn
+	            , A.PRDT_STAT_CODE     prdtStatCode
+	            , C.ARTI_NAME          artiName
+	            , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      productImageUrl
+	            , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     productImageUrl2
+	            , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, '02')    lastDcPrice
+	            , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, '02')   lastCpnPrice
+	            , D.BRAND_ID           brandId
+	            , D.BRAND_NAME         brandName
+	            , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+	            , FC_GET_WISH_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+	            , FC_GET_PRODUCT_ICON_CODE(A.SELL_PRDT_BCODE, '02')    prdtIcon
+	            , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02') reviewCount
+	            , NVL((SELECT COUNT(1) 
+	            		FROM TB_WISH_PRODUCT TT 
+	            		WHERE TT.WISH_GBN = 'P' 
+	            		AND TT.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE 
+	            		AND TT.MALL_ID = '02' 
+	            		AND TT.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+			FROM TB_SELL_PRODUCT A
+			INNER JOIN(
+				SELECT 
+					FC_GET_BARCODE(B.SELL_PRDT_BCODE) SELL_PRDT_BCODE
+	          	FROM TB_COUPON_MASTER A ,
+	               	TB_COUPON_APPLY_PRODUCT B
+	         	WHERE A.CPN_ID        = B.CPN_ID
+	           	AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT
+	           	AND A.mall_id = $mallId$
+	           	AND A.scope_gbn = 'P' /*상품쿠폰*/
+	           	AND A.use_yn = 'Y'
+	           	AND A.disp_yn ='Y'
+	
+	       		GROUP BY FC_GET_BARCODE(B.SELL_PRDT_BCODE)
+			) T ON A.SELL_PRDT_BCODE = T.SELL_PRDT_BCODE
+			LEFT JOIN TB_RECORD C ON A.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+		    LEFT JOIN TB_BRAND D ON A.BRAND_ID = D.BRAND_ID
+			WHERE A.PRMT_CODE = 'C0302' 
+		    AND A.PRDT_STAT_CODE IN ('C0312', 'C0313')
+		    
+		    <isEqual property="tabType" compareValue="BP">
+		    	<isNotEmpty property="brandId" prepend="AND">
+		    		A.BRAND_ID = #brandId#
+		    	</isNotEmpty>
+		    </isEqual>
+		) T2
+		WHERE T2.NO BETWEEN #fetchScale# + 1 AND #maxRownum#
+    </select>
+
+   <!-- 
+	작성자: DD
+	작성일: 2019.12.26
+	기능: 쿠폰존(상품)카운트
+    -->
+    <select id="getCouponZonePrdtCnt" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizMyPageSQL.getCouponZonePrdtCnt */
+        SELECT 
+        	COUNT(*)
+		FROM (
+			SELECT 
+			 	 NVL((SELECT COUNT(1) 
+            		FROM TB_WISH_PRODUCT TT 
+            		WHERE TT.WISH_GBN = 'P' 
+            		AND TT.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE 
+            		AND TT.MALL_ID = '02' 
+            		AND TT.USER_NUM = null), 0)   					wishUserPrdtCnt
+			FROM TB_SELL_PRODUCT A
+			INNER JOIN(
+				SELECT 
+					FC_GET_BARCODE(B.SELL_PRDT_BCODE) SELL_PRDT_BCODE
+	          	FROM TB_COUPON_MASTER A ,
+	               	TB_COUPON_APPLY_PRODUCT B
+	         	WHERE A.CPN_ID        = B.CPN_ID
+	           	AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT
+	           	AND A.MALL_ID = $mallId$
+	           	AND A.SCOPE_GBN = 'P' /*상품쿠폰*/
+	           	AND A.USE_YN = 'Y'
+	           	AND A.DISP_YN ='Y'
+	       		GROUP BY FC_GET_BARCODE(B.SELL_PRDT_BCODE)
+			) T ON A.SELL_PRDT_BCODE = T.SELL_PRDT_BCODE
+			LEFT JOIN TB_RECORD C ON A.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+		    LEFT JOIN TB_BRAND D ON A.BRAND_ID = D.BRAND_ID
+			WHERE A.PRMT_CODE = 'C0302' 
+		    AND A.PRDT_STAT_CODE IN ('C0312', 'C0313')
+		    
+		    <isEqual property="tabType" compareValue="BP">
+		    	<isNotEmpty property="brandId" prepend="AND">
+		    		A.BRAND_ID = #brandId#
+		    	</isNotEmpty>
+		    </isEqual>
+		)
+    </select>
+  
+   <!-- 
+	작성자: DD
+	작성일: 2019.12.30
+	기능: 쿠폰존(브랜드)리스트
+    -->
+    <select id="getCouponZoneBrandList" parameterClass="bizDispCriteria" resultClass="kr.co.hottracks.site.model.common.brand.BizBrandExt">
+        /* BizMyPageSQL.getCouponZoneBrandList */
+        SELECT 
+        	*
+        FROM(
+	        SELECT 
+	        	 ROW_NUMBER() OVER(ORDER BY MAX(lastModDtm) DESC) AS NO
+	        	,brandId
+	           	,MAX(cpnDscntRate)  	cpnDscntRate
+	           	,MAX(cpnDscntAmt)  	cpnDscntAmt
+	           	,MAX(brandName) 		brandName
+	           	,MAX(brandEngName) 		brandEngName
+	           	,MAX(brandImageUrl)		brandImageC0292
+	           	,MIN(cpnApplyStartDt) 	cpnApplyStartDt
+           		,MAX(cpnApplyEndDt)		cpnApplyEndDt
+           		,MAX(sellPrdtBcode) KEEP(DENSE_RANK FIRST ORDER BY cpnDscntRate ASC) sellPrdtBcode
+	        FROM(
+				SELECT 
+				 	  A.SELL_PRDT_BCODE    sellPrdtBcode
+		            , A.PRDT_NAME    prdtName
+		            , A.PRVD_TITLE   prdtDesc
+		            , A.PRDT_NAME          basePrdtName
+		            , A.PRVD_TITLE         basePrdtDesc
+		            , A.PRDT_SELL_PRICE    prdtSellPrice
+		            , A.RCRD_CD            rcrdCd
+		            , A.SELL_PRDT_GBN      sellPrdtGbn
+		            , A.NYO_SELL_BAN_YN    nyoSellBanYn
+		            , A.PRDT_STAT_CODE     prdtStatCode
+		            , C.ARTI_NAME          artiName
+		            , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      productImageUrl
+		            , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     productImageUrl2
+		            , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, '02')    lastDcPrice
+		            , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, '02')   lastCpnPrice
+		            , D.BRAND_ID           brandId
+		            , D.BRAND_NAME         brandName
+		            , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+		            , FC_GET_WISH_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+		            , FC_GET_PRODUCT_ICON_CODE(A.SELL_PRDT_BCODE, '02')    prdtIcon
+		            , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02') reviewCount
+		            , NVL((SELECT COUNT(1) 
+		            		FROM TB_WISH_PRODUCT TT 
+		            		WHERE TT.WISH_GBN = 'P' 
+		            		AND TT.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE 
+		            		AND TT.MALL_ID = '02' 
+		            		AND TT.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+		      		, T.CPN_DSCNT_RATE 		cpnDscntRate
+		      		, T.CPN_DSCNT_AMT 		cpnDscntAmt
+	              	, T.LAST_MOD_DTM		lastModDtm
+	              	, T.CPN_APPLY_START_DT	cpnApplyStartDt
+	              	, T.CPN_APPLY_END_DT	cpnApplyEndDt
+	              	, BI.BRAND_IMAGE_URL	brandImageUrl
+				FROM TB_SELL_PRODUCT A
+				INNER JOIN(
+					SELECT 
+						FC_GET_BARCODE(B.SELL_PRDT_BCODE) SELL_PRDT_BCODE
+						, CPN_DSCNT_RATE, CPN_DSCNT_AMT, LAST_MOD_DTM, CPN_APPLY_START_DT, CPN_APPLY_END_DT
+		          	FROM TB_COUPON_MASTER A ,
+		               	TB_COUPON_APPLY_PRODUCT B
+		         	WHERE A.CPN_ID        = B.CPN_ID
+		           	AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT
+		           	AND A.mall_id = $mallId$
+		           	AND A.scope_gbn = 'P' /*상품쿠폰*/
+		           	AND A.use_yn = 'Y'
+		           	AND A.disp_yn ='Y'
+		
+		       		GROUP BY FC_GET_BARCODE(B.SELL_PRDT_BCODE), CPN_DSCNT_RATE, CPN_DSCNT_AMT, LAST_MOD_DTM, CPN_APPLY_START_DT, CPN_APPLY_END_DT
+				) T ON A.SELL_PRDT_BCODE = T.SELL_PRDT_BCODE
+				LEFT JOIN TB_RECORD C ON A.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+			    LEFT JOIN TB_BRAND D ON A.BRAND_ID = D.BRAND_ID
+			    LEFT JOIN TB_BRAND_IMAGE BI ON BI.BRAND_ID = A.BRAND_ID AND BI.BRAND_IMAGE_CODE = 'C0292'
+				WHERE A.PRMT_CODE = 'C0302' 
+			    AND A.PRDT_STAT_CODE IN ('C0312', 'C0313')
+			    <isEqual property="tabType" compareValue="BP">
+			    	<isNotEmpty property="brandId" prepend="AND">
+			    		A.BRAND_ID = #brandId#
+			    	</isNotEmpty>
+			    </isEqual>
+			) T2
+			GROUP BY brandId
+		) T3	
+		WHERE T3.NO BETWEEN #fetchScale# + 1 AND #maxRownum#
+    </select>
+
+   <!-- 
+	작성자: DD
+	작성일: 2019.12.30
+	기능: 쿠폰존(브랜드)카운트
+    -->
+    <select id="getCouponZoneBrandCnt" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizMyPageSQL.getCouponZoneBrandCnt */
+		SELECT 
+        	COUNT(1) cnt
+        FROM(
+	        SELECT 
+				brandId
+	        FROM(
+				SELECT 
+				 	  A.SELL_PRDT_BCODE    sellPrdtBcode
+		            , A.PRDT_NAME    prdtName
+		            , A.PRVD_TITLE   prdtDesc
+		            , A.PRDT_NAME          basePrdtName
+		            , A.PRVD_TITLE         basePrdtDesc
+		            , A.PRDT_SELL_PRICE    prdtSellPrice
+		            , A.RCRD_CD            rcrdCd
+		            , A.SELL_PRDT_GBN      sellPrdtGbn
+		            , A.NYO_SELL_BAN_YN    nyoSellBanYn
+		            , A.PRDT_STAT_CODE     prdtStatCode
+		            , C.ARTI_NAME          artiName
+		            , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      productImageUrl
+		            , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     productImageUrl2
+		            , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, '02')    lastDcPrice
+		            , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, '02')   lastCpnPrice
+		            , D.BRAND_ID           brandId
+		            , D.BRAND_NAME         brandName
+		            , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+		            , FC_GET_WISH_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+		            , FC_GET_PRODUCT_ICON_CODE(A.SELL_PRDT_BCODE, '02')    prdtIcon
+		            , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02') reviewCount
+		            , NVL((SELECT COUNT(1) 
+		            		FROM TB_WISH_PRODUCT TT 
+		            		WHERE TT.WISH_GBN = 'P' 
+		            		AND TT.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE 
+		            		AND TT.MALL_ID = '02' 
+		            		AND TT.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+		      		, T.CPN_DSCNT_RATE
+	              	, T.LAST_MOD_DTM
+	              	, BI.BRAND_IMAGE_URL	brandImageUrl
+				FROM TB_SELL_PRODUCT A
+				INNER JOIN(
+					SELECT 
+						FC_GET_BARCODE(B.SELL_PRDT_BCODE) SELL_PRDT_BCODE
+						, CPN_DSCNT_RATE, LAST_MOD_DTM, CPN_APPLY_START_DT, CPN_APPLY_END_DT
+		          	FROM TB_COUPON_MASTER A ,
+		               	TB_COUPON_APPLY_PRODUCT B
+		         	WHERE A.CPN_ID        = B.CPN_ID
+		           	AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.CPN_APPLY_START_DT AND A.CPN_APPLY_END_DT
+		           	AND A.mall_id = $mallId$
+		           	AND A.scope_gbn = 'P' /*상품쿠폰*/
+		           	AND A.use_yn = 'Y'
+		           	AND A.disp_yn ='Y'
+		
+		       		GROUP BY FC_GET_BARCODE(B.SELL_PRDT_BCODE), CPN_DSCNT_RATE, LAST_MOD_DTM, CPN_APPLY_START_DT, CPN_APPLY_END_DT
+				) T ON A.SELL_PRDT_BCODE = T.SELL_PRDT_BCODE
+				LEFT JOIN TB_RECORD C ON A.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+			    LEFT JOIN TB_BRAND D ON A.BRAND_ID = D.BRAND_ID
+			    LEFT JOIN TB_BRAND_IMAGE BI ON BI.BRAND_ID = A.BRAND_ID AND BI.BRAND_IMAGE_CODE = 'C0292'
+				WHERE A.PRMT_CODE = 'C0302' 
+			    AND A.PRDT_STAT_CODE IN ('C0312', 'C0313')
+			) T2
+			GROUP BY brandId
+		) T3
+    </select>
+
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.31
+	기능: 쿠폰존(프로모션)리스트
+    -->
+    <select id="getCouponZonePromotionList" resultClass="bizDispBnrExt">
+        /* BizMyPageSQL.getCouponZonePromotionList */
+		SELECT ROWNUM AS rowNumber
+			 , A.EVENT_TITLE    	eventTitle
+             , A.EVENT_DTL_CONT    	eventDtlCont
+             , C.IMAGE_URL      	eventImageUrl
+             , A.EVENT_START_DT		eventStartDt
+             , A.EVENT_END_DT		eventEndDt
+             , A.EVENT_RANGE_INFO   eventRangeInfo
+             , A.EVENT_ID 			eventId
+             
+		FROM TB_EVENT_MASTER A
+		JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = '02'
+		LEFT JOIN TB_EVENT_IMAGE C ON C.EVENT_ID = A.EVENT_ID AND C.EVENT_IMAGE_CODE = 'C0381'
+		WHERE A.DISP_YN = 'Y'
+		AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+		AND A.EVENT_STAT_CODE = 'C0181'	/* 상태코드:정상 */
+		AND A.PRMT_CODE = 'C0374'		/* 승인코드:승인완료 */
+		AND A.NEW_EVENT_DISP_TYPE_CODE IN ('C1532', 'C1534') /* 신규이벤트전시분류코드:쿠폰/혜택,우수고객존 */
+
+		ORDER BY A.EVENT_START_DT DESC
+    </select>
+    
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.31
+	기능: 쿠폰존(프로모션)카운트
+    -->
+    <select id="getCouponZonePromotionCnt" resultClass="int">
+        /* BizMyPageSQL.getCouponZonePromotionCnt */
+		SELECT COUNT(A.EVENT_ID) AS cnt
+		FROM TB_EVENT_MASTER A
+		JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = '02'
+		LEFT JOIN TB_EVENT_IMAGE C ON C.EVENT_ID = A.EVENT_ID AND C.EVENT_IMAGE_CODE = 'C0381'
+		WHERE A.DISP_YN = 'Y'
+		AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+		AND A.EVENT_STAT_CODE = 'C0181'	/* 상태코드:정상 */
+		AND A.PRMT_CODE = 'C0374'		/* 승인코드:승인완료 */
+		AND A.NEW_EVENT_DISP_TYPE_CODE IN ('C1532', 'C1534') /* 신규이벤트전시분류코드:쿠폰/혜택,우수고객존 */
+    </select>
+    
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.24
+	기능: 구매사은품 상품
+    -->
+    <select id="getPayGiftPrdtList" parameterClass="bizDispCriteria" resultClass="bizSellGiftExt">
+        /* BizMyPageSQL.getPayGiftPrdtList */
+        SELECT 
+        	*
+        FROM(
+	        SELECT
+	        	ROW_NUMBER() OVER( 
+				   <dynamic prepend="ORDER BY">
+		                <isEmpty property="productOrderBy">T.PRMT_DTM DESC, T.SALE_CNT_WEEK DESC</isEmpty>
+		                <isNotEmpty property="productOrderBy">
+		                    <isEqual property="productOrderBy" compareValue="R">T.PRMT_DTM DESC, T.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="P">T.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="L">FC_GET_DC_PRICE(T.SELL_PRDT_BCODE, '02') ASC, T.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="H">FC_GET_DC_PRICE(T.SELL_PRDT_BCODE, '02') DESC, T.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="T">FC_GET_LAST_DC_RATE(T.SELL_PRDT_BCODE, '02') DESC, T.SALE_CNT_WEEK DESC</isEqual>
+		                </isNotEmpty>
+		                ,T.PRDT_NAME
+					</dynamic>) AS NO
+				 , T.SELL_PRDT_BCODE    sellPrdtBcode
+	             , T.PRDT_NAME    prdtName
+	             , T.PRVD_TITLE   prdtDesc
+	             , T.PRDT_NAME          basePrdtName
+	             , T.PRVD_TITLE         basePrdtDesc
+	             , T.PRDT_SELL_PRICE    prdtSellPrice
+	             , T.RCRD_CD            rcrdCd
+	             , T.SELL_PRDT_GBN      sellPrdtGbn
+	             , T.NYO_SELL_BAN_YN    nyoSellBanYn
+	             , T.PRDT_STAT_CODE     prdtStatCode
+	             , C.ARTI_NAME          artiName
+	             , FC_GET_PRODUCT_IMAGE_URL(T.SELL_PRDT_BCODE)      productImageUrl
+	             , FC_GET_PRODUCT_IMAGE_URL2(T.SELL_PRDT_BCODE)     productImageUrl2
+	             , FC_GET_DC_PRICE(T.SELL_PRDT_BCODE, '02')    lastDcPrice
+	             , FC_GET_CPN_PRICE(T.SELL_PRDT_BCODE, '02')   lastCpnPrice
+	             , D.BRAND_ID           brandId
+	             , D.BRAND_NAME         brandName
+	             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+	             , FC_GET_WISH_PRODUCT_COUNT(T.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+	             , FC_GET_PRODUCT_ICON_CODE(T.SELL_PRDT_BCODE, '02')    prdtIcon
+	             , FC_GET_REVIEW_PRODUCT_COUNT(T.SELL_PRDT_BCODE, '02') reviewCount
+	             , NVL((SELECT COUNT(1) 
+	             		FROM TB_WISH_PRODUCT T2 
+	             		WHERE T2.WISH_GBN = 'P' 
+	             		AND T2.SELL_PRDT_BCODE = T.SELL_PRDT_BCODE 
+	             		AND T2.MALL_ID = '02' 
+	             		AND T2.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+	        FROM(
+				SELECT 
+					   C.SELL_PRDT_BCODE    
+				     , C.PRDT_NAME    
+				     , C.PRVD_TITLE                 
+				     , C.PRDT_SELL_PRICE    
+				     , C.RCRD_CD            
+				     , C.SELL_PRDT_GBN      
+				     , C.NYO_SELL_BAN_YN    
+				     , C.PRDT_STAT_CODE  
+				     , C.PRMT_CODE   
+				     , C.PRMT_DTM 
+				     , C.SALE_CNT_WEEK  
+				     , C.BRAND_ID  
+		          FROM TB_SELL_PRODUCT C
+		          INNER JOIN(SELECT 
+  								FREE_GIFT_ID, 
+  								FC_GET_BARCODE(SELL_PRDT_BCODE)  SELL_PRDT_BCODE
+							 FROM TB_SELL_PRODUCT_GIFT_PRODUCT
+							 GROUP BY FREE_GIFT_ID, FC_GET_BARCODE(SELL_PRDT_BCODE)) A ON A.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+		          JOIN TB_FREE_GIFT_MASTER B ON A.FREE_GIFT_ID = B.FREE_GIFT_ID
+	                  AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN B.GIFT_PRDT_PRSNT_START_DT AND B.GIFT_PRDT_PRSNT_END_DT
+	                  AND B.GIFT_PRDT_STAT_CODE = 'C0331'
+	                  AND B.LAVE_COUNT > 0 
+                  
+		        UNION SELECT 
+				 	   F.SELL_PRDT_BCODE    
+				     , F.PRDT_NAME    
+				     , F.PRVD_TITLE             
+				     , F.PRDT_SELL_PRICE    
+				     , F.RCRD_CD            
+				     , F.SELL_PRDT_GBN      
+				     , F.NYO_SELL_BAN_YN    
+				     , F.PRDT_STAT_CODE 
+				     , F.PRMT_CODE   
+				     , F.PRMT_DTM 
+				     , F.SALE_CNT_WEEK 
+				     , F.BRAND_ID
+		          FROM TB_EVENT_MASTER A
+		          JOIN TB_EVENT_SELL_PRODUCT B ON A.EVENT_ID = B.EVENT_ID
+		          JOIN (SELECT 
+						 	 EVENT_ID
+						 	,FREE_GIFT_ID
+							,FC_GET_BARCODE(SELL_PRDT_BCODE) SELL_PRDT_BCODE
+						FROM TB_EVENT_PRODUCT_FREE_GIFT
+						GROUP BY EVENT_ID, FREE_GIFT_ID, FC_GET_BARCODE(SELL_PRDT_BCODE)) C ON B.EVENT_ID = C.EVENT_ID AND B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+		          JOIN TB_EVENT_FREE_GIFT D ON C.EVENT_ID = D.EVENT_ID AND C.FREE_GIFT_ID = D.FREE_GIFT_ID
+		          JOIN TB_FREE_GIFT_MASTER E ON D.FREE_GIFT_ID = E.FREE_GIFT_ID
+                      AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN E.GIFT_PRDT_PRSNT_START_DT AND E.GIFT_PRDT_PRSNT_END_DT
+                      AND E.GIFT_PRDT_STAT_CODE = 'C0331'
+                      AND E.LAVE_COUNT > 0
+		          JOIN TB_SELL_PRODUCT F ON F.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE            
+		         WHERE A.PRMT_CODE = 'C0374'
+		           AND A.EVENT_STAT_CODE = 'C0181'
+		           AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+			) T
+			LEFT JOIN TB_RECORD C ON T.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+	       	LEFT JOIN TB_BRAND D ON T.BRAND_ID = D.BRAND_ID	       
+	        WHERE T.PRMT_CODE = 'C0302' 
+	        AND T.PRDT_STAT_CODE IN ('C0312', 'C0313')
+		) TT
+		WHERE TT.NO BETWEEN #fetchScale# + 1 AND #maxRownum#
+    </select>
+     
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.24
+	기능: 구매사은품 상품 갯수
+    -->
+    <select id="getPayGiftPrdtCnt" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizMyPageSQL.getPayGiftPrdtCnt */
+		SELECT COUNT(1) AS cnt
+		FROM(
+			SELECT C.SELL_PRDT_BCODE
+	          FROM TB_SELL_PRODUCT C
+	          INNER JOIN(SELECT 
+ 							FREE_GIFT_ID, 
+ 							FC_GET_BARCODE(SELL_PRDT_BCODE)  SELL_PRDT_BCODE
+						 FROM TB_SELL_PRODUCT_GIFT_PRODUCT
+						 GROUP BY FREE_GIFT_ID, FC_GET_BARCODE(SELL_PRDT_BCODE)) A ON A.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+	          JOIN TB_FREE_GIFT_MASTER B ON A.FREE_GIFT_ID = B.FREE_GIFT_ID
+	                                   AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN B.GIFT_PRDT_PRSNT_START_DT AND B.GIFT_PRDT_PRSNT_END_DT
+	                                    AND B.GIFT_PRDT_STAT_CODE = 'C0331'
+	                                    AND B.LAVE_COUNT > 0 
+	         WHERE C.PRMT_CODE = 'C0302' 
+	    	 AND C.PRDT_STAT_CODE IN ('C0312', 'C0313')
+	    	                            
+	         UNION
+	        SELECT F.SELL_PRDT_BCODE
+	          FROM TB_EVENT_MASTER A
+	          JOIN TB_EVENT_SELL_PRODUCT B ON A.EVENT_ID = B.EVENT_ID
+	          JOIN (SELECT 
+					 	 EVENT_ID
+					 	,FREE_GIFT_ID
+						,FC_GET_BARCODE(SELL_PRDT_BCODE) SELL_PRDT_BCODE
+					FROM TB_EVENT_PRODUCT_FREE_GIFT
+					GROUP BY EVENT_ID, FREE_GIFT_ID, FC_GET_BARCODE(SELL_PRDT_BCODE)) C ON B.EVENT_ID = C.EVENT_ID AND B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+	          JOIN TB_EVENT_FREE_GIFT D ON C.EVENT_ID = D.EVENT_ID AND C.FREE_GIFT_ID = D.FREE_GIFT_ID
+	          JOIN TB_FREE_GIFT_MASTER E ON D.FREE_GIFT_ID = E.FREE_GIFT_ID
+	                                    AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN E.GIFT_PRDT_PRSNT_START_DT AND E.GIFT_PRDT_PRSNT_END_DT
+	                                    AND E.GIFT_PRDT_STAT_CODE = 'C0331'
+	                                    AND E.LAVE_COUNT > 0
+	          JOIN TB_SELL_PRODUCT F ON F.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE            
+	         WHERE A.PRMT_CODE = 'C0374'
+	           AND A.EVENT_STAT_CODE = 'C0181'
+	           AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+	           AND F.PRMT_CODE = 'C0302' 
+	    	   AND F.PRDT_STAT_CODE IN ('C0312', 'C0313')
+		)
+    </select>
+  
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.23
+	기능: 오늘 세일/무료배송 상품
+    -->
+    <select id="getTodayPrdtList" parameterClass="bizDispCriteria" resultClass="bizSellGiftExt">
+        /* BizMyPageSQL.getTodayPrdtList */
+        SELECT 
+        	*
+        FROM(
+			SELECT 
+				   ROW_NUMBER() OVER( 
+				   <dynamic prepend="ORDER BY">
+		                <isEmpty property="productOrderBy">B.PRMT_DTM DESC, B.SALE_CNT_WEEK DESC</isEmpty>
+		                <isNotEmpty property="productOrderBy">
+		                    <isEqual property="productOrderBy" compareValue="R">B.PRMT_DTM DESC, B.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="P">B.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="L">FC_GET_DC_PRICE(B.SELL_PRDT_BCODE, '02') ASC, B.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="H">FC_GET_DC_PRICE(B.SELL_PRDT_BCODE, '02') DESC, B.SALE_CNT_WEEK DESC</isEqual>
+		                    <isEqual property="productOrderBy" compareValue="T">FC_GET_LAST_DC_RATE(B.SELL_PRDT_BCODE, '02') DESC, B.SALE_CNT_WEEK DESC</isEqual>
+		                </isNotEmpty>
+		                ,B.PRDT_NAME
+					</dynamic>) AS NO
+				 , B.SELL_PRDT_BCODE    sellPrdtBcode
+	             , B.PRDT_NAME    prdtName
+	             , B.PRVD_TITLE   prdtDesc
+	             , B.PRDT_NAME          basePrdtName
+	             , B.PRVD_TITLE         basePrdtDesc
+	             , B.PRDT_SELL_PRICE    prdtSellPrice
+	             , B.RCRD_CD            rcrdCd
+	             , B.SELL_PRDT_GBN      sellPrdtGbn
+	             , B.NYO_SELL_BAN_YN    nyoSellBanYn
+	             , B.PRDT_STAT_CODE     prdtStatCode
+	             , C.ARTI_NAME          artiName
+	             , FC_GET_PRODUCT_IMAGE_URL(B.SELL_PRDT_BCODE)      productImageUrl
+	             , FC_GET_PRODUCT_IMAGE_URL2(B.SELL_PRDT_BCODE)     productImageUrl2
+	             , FC_GET_DC_PRICE(B.SELL_PRDT_BCODE, '02')    lastDcPrice
+	             , FC_GET_CPN_PRICE(B.SELL_PRDT_BCODE, '02')   lastCpnPrice
+	             , D.BRAND_ID           brandId
+	             , D.BRAND_NAME         brandName
+	             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+	             , FC_GET_WISH_PRODUCT_COUNT(B.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+	             , FC_GET_PRODUCT_ICON_CODE(B.SELL_PRDT_BCODE, '02')    prdtIcon
+	             , FC_GET_REVIEW_PRODUCT_COUNT(B.SELL_PRDT_BCODE, '02') reviewCount
+	             , NVL((SELECT COUNT(1) 
+	             		FROM TB_WISH_PRODUCT T 
+	             		WHERE T.WISH_GBN = 'P' 
+	             		AND T.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE 
+	             		AND T.MALL_ID = '02' 
+	             		AND T.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+	          FROM TB_SELL_PRODUCT B
+	          <isNotEmpty property="ctgrId">
+	          JOIN TB_PRODUCT_CATEGORY PC ON B.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.CTGR_ID LIKE #ctgrId# || '%'
+	          </isNotEmpty>
+	          LEFT JOIN TB_RECORD C ON B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+	          LEFT JOIN TB_BRAND D ON B.BRAND_ID = D.BRAND_ID
+	         WHERE B.PRMT_CODE = 'C0302' 
+	           AND B.PRDT_STAT_CODE IN ('C0312', 'C0313')
+			   AND TO_CHAR(B.MOD_DTM, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+			   <isNotEmpty property="dcYn">
+			   		<isEqual property="dcYn" compareValue="Y">
+			   			AND B.PRDT_DSCNT_RATE > 0
+			   		</isEqual>
+			   </isNotEmpty>
+			   
+			   <isNotEmpty property="freeDlvYn">
+			   		<isEqual property="freeDlvYn" compareValue="Y">
+			   			AND B.FREE_DLVY_YN = 'Y'
+			   		</isEqual>
+			   </isNotEmpty>
+		) T
+		WHERE T.NO BETWEEN #fetchScale# + 1 AND #maxRownum#
+    </select>
+     
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.23
+	기능: 오늘 세일/무료배송 상품 갯수
+    -->
+    <select id="getTodayPrdtCnt" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizMyPageSQL.getTodayPrdtCnt */
+		SELECT COUNT(B.SELL_PRDT_BCODE) AS cnt
+          FROM TB_SELL_PRODUCT B
+          <isNotEmpty property="ctgrId">
+          JOIN TB_PRODUCT_CATEGORY PC ON B.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.CTGR_ID LIKE #ctgrId# || '%'
+          </isNotEmpty>
+         WHERE B.PRMT_CODE = 'C0302' 
+           AND B.PRDT_STAT_CODE IN ('C0312', 'C0313')
+		   AND TO_CHAR(B.MOD_DTM, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		   
+		   <isNotEmpty property="dcYn">
+		   		<isEqual property="dcYn" compareValue="Y">
+		   			AND B.PRDT_DSCNT_RATE > 0
+		   		</isEqual>
+		   </isNotEmpty>
+		   
+		   <isNotEmpty property="freeDlvYn">
+		   		<isEqual property="freeDlvYn" compareValue="Y">
+		   			AND B.FREE_DLVY_YN = 'Y'
+		   		</isEqual>
+		   </isNotEmpty>
+    </select>
+         
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.23
+	기능: 오늘 이벤트 리스트(등록일 기준 최근 등록된 이벤트 3개 노출)
+    -->
+    <select id="getTodayEventList" resultClass="bizDispBnrExt">
+        /* BizMyPageSQL.getTodayEventList */
+        SELECT * 
+        FROM(SELECT ROWNUM rownumber
+                  , T.*
+               FROM (SELECT A.EVENT_TITLE    	eventTitle
+						  , A.EVENT_DTL_CONT    	eventDtlCont
+						  , FC_GET_EVENT_IMAGE(a.event_id, 'C0381') eventImageUrl
+						  , A.EVENT_START_DT		eventStartDt
+						  , A.EVENT_END_DT		eventEndDt
+						  , A.EVENT_RANGE_INFO   eventRangeInfo
+						  , A.EVENT_ID 			eventId
+						  , A.CULT_ZONE_YN    	cultZoneYn
+					   FROM TB_EVENT_MASTER A
+					   JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = '02'
+					  WHERE A.EVENT_STAT_CODE = 'C0181'	/* 상태코드:정상 */
+					    AND A.PRMT_CODE = 'C0374'		/* 승인코드:승인완료 */
+					    AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+					    AND A.CTGR_ID LIKE '0000'  || '%'
+					    AND A.ON_LINE_YN = 'Y'
+					    AND FC_GET_EVENT_IMAGE(A.EVENT_ID, 'C0382') IS NOT NULL
+					    AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+					  ORDER BY A.EVENT_START_DT DESC, REGST_DTM  
+					) T
+            )
+		WHERE rownumber <![CDATA[<=]]> 3
+    </select>
+    
+    <!-- 
+	작성자: DD
+	작성일: 2019.12.23
+	기능: 오늘 이벤트 리스트 갯수
+    -->
+    <select id="getTodayEventCnt" resultClass="int">
+        /* BizMyPageSQL.getTodayEventCnt */
+		SELECT COUNT(A.EVENT_ID) AS cnt
+		FROM TB_EVENT_MASTER A
+		JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = '02'
+		LEFT JOIN TB_EVENT_IMAGE C ON C.EVENT_ID = A.EVENT_ID AND C.EVENT_IMAGE_CODE = 'C0381'
+		WHERE A.DISP_YN = 'Y'
+		AND A.EVENT_STAT_CODE = 'C0181'	/* 상태코드:정상 */
+		AND A.PRMT_CODE = 'C0374'		/* 승인코드:승인완료 */
+		AND C.EVENT_IMAGE_CODE = 'C0381'
+        AND A.EVENT_START_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+    </select>
+    
+    	<!-- 
+	작성자: DD
+	작성일: 2019.11.04
+	기능: 고객 공지사항목록 반환
+    -->
+    <select id="getUserNotice" parameterClass="bizUserNoticeCriteria" resultClass="bizUserNoticeExt">
+        /* BizMyPageSQL.getUserNotice */
+        SELECT * FROM 
+		(
+	        SELECT UN.NOTI_SEQ          notiSeq
+	             , UN.NOTI_TITLE        notiTitle
+	             , UN.ALWY_DISP_YN      alwyDispYn
+	             , UN.NOTI_CTGR_ID      notiCtgrId
+	             , UN.HITS              hits
+	             , UN.REGST_ADMIN_ID    regstAdminId
+	             , UN.NOTI_CONT         notiCont
+	             , UN.GNR_NOTI_YN       gnrNotiYn
+	             , UN.REGST_DTM         regstDtm
+	             , UN.NOTI_TGT_GBN      notiTgtGbn
+	             , UN.BRAND_ID          brandId
+	             , UN.ALWY_DISP_ORDER   alwyDispOrder
+	             , UN.LINK_URL          linkUrl
+	             , B.BRAND_NAME         brandName
+	          FROM TB_USER_NOTICE UN
+	          JOIN TB_MALL_USER_NOTICE MUN ON UN.NOTI_SEQ = MUN.NOTI_SEQ AND MUN.MALL_ID = #mallId#
+	          LEFT JOIN TB_BRAND B ON UN.BRAND_ID = B.BRAND_ID
+	         WHERE 1 = 1
+	           <isNotEmpty property="notiTgtGbn" prepend="AND">
+	               UN.NOTI_TGT_GBN = #notiTgtGbn#
+	               <isEqual property="notiTgtGbn" compareValue="C" prepend="AND">
+	                   (UN.NOTI_CTGR_ID = '00' OR  UN.NOTI_CTGR_ID LIKE #notiCtgrId#||'%')
+	               </isEqual>
+	           </isNotEmpty>
+	         ORDER BY UN.ALWY_DISP_YN DESC, UN.ALWY_DISP_ORDER ASC, UN.NOTI_SEQ DESC
+         )
+    </select>
+</sqlMap>

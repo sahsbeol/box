@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RecordReviewSQL">
+    <typeAlias alias="recordReviewExt" type="kr.co.hottracks.site.model.common.record.RecordReviewExt"/>
+    <typeAlias alias="recordReviewParam" type="kr.co.hottracks.site.model.common.record.RecordReviewParam"/>
+    <typeAlias alias="recordReviewCriteria" type="kr.co.hottracks.site.model.common.record.RecordReviewCriteria"/>
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.22
+        기능 : 
+            리뷰등록 처리
+    -->
+    <insert id="createRecordReview" parameterClass="recordReviewParam">
+        <selectKey keyProperty="rcrdReviewSeq" resultClass="int" type="pre">select rcrd_review_seq.nextval from dual</selectKey>
+        /* RecordReviewSQL.createRecordReview */
+        insert into tb_record_review(rcrd_review_seq, rcrd_cd, user_num, mall_id, review, grade, regst_dtm, use_yn) 
+        values(#rcrdReviewSeq#, #rcrdCd#, #userNum#, #mallId#, #review#, #grade#, sysdate, #useYn#)
+    </insert>
+    
+    <sql id="getRecordReviewWhere">
+        <dynamic prepend="where">
+            <isNotEmpty property="mallId" removeFirstPrepend="true" prepend="and">
+                a.mall_id = #mallId#
+            </isNotEmpty>
+            <isNotEmpty property="rcrdCd" removeFirstPrepend="true" prepend="and">
+                a.rcrd_cd = #rcrdCd#
+            </isNotEmpty>
+            <isNotEmpty property="useYn" removeFirstPrepend="true" prepend="and">
+                a.use_yn = #useYn#
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.22
+        기능 : 
+            리뷰선택 처리
+    -->
+    <select id="getRecordReview" parameterClass="recordReviewCriteria" resultClass="recordReviewExt">
+        /* RecordReviewSQL.getRecordReview */
+        select
+			a.rcrd_review_seq as rcrdReviewSeq, 
+			a.rcrd_cd as rcrdCd, 
+			a.user_num as userNum, 
+			a.mall_id as mallId, 
+			a.review as review, 
+			a.grade as grade, 
+			a.regst_dtm as regstDtm,
+			to_char(a.regst_dtm, 'YYYY.MM.DD') as regstDt,  
+			a.use_yn as useYn, 
+			b.user_name as userName, 
+			(select rpad(substr(t.user_id, 0, 4), 8, '*') from tb_user t where t.user_num = b.user_num) as userId
+        from tb_record_review a
+        inner join tb_mall_user_detail b on a.user_num = b.user_num and a.mall_id = b.mall_id 
+        <include refid="getRecordReviewWhere"/>
+        order by a.rcrd_review_seq desc
+    </select>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.22
+        기능 : 
+            리뷰목록 개수 처리
+    -->
+    <select id="getRecordReviewListCount" parameterClass="recordReviewCriteria" resultClass="int">
+        /* RecordReviewSQL.getRecordReviewListCount */
+        select
+            count(*) as cnt
+        from tb_record_review a
+        <include refid="getRecordReviewWhere"/>
+    </select>
+    
+    
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.22
+        기능 : 
+            해당 리뷰 사용여부 업데이트 처리
+    -->
+    <update id="updateRecordReviewUseYn" parameterClass="recordReviewParam">
+        /* RecordReviewSQL.updateRecordReviewUseYn */ 
+        update tb_record_review set
+            use_yn = #useYn#
+        where
+            rcrd_review_seq = #rcrdReviewSeq# and 
+            user_num = #userNum# and 
+            mall_id = #mallId#
+    </update>
+</sqlMap>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BizSearchSQL">
+    <select id="getWishCount" parameterClass="kr.co.hottracks.site.model.frontoffice.search.BizSearchCriteria" resultClass="kr.co.hottracks.site.model.frontoffice.search.BizResultProduct">
+    /* BizSearchSQL.getWishCount */
+	SELECT NVL ((SELECT COUNT (1)
+				   FROM TB_WISH_PRODUCT B
+				  WHERE B.WISH_GBN = 'P'
+				    AND B.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE
+				    AND B.MALL_ID = '02'
+				    AND B.USER_NUM = #userNum# ),0) wishUserCount
+		 , A.NYO_SELL_BAN_YN nyoSellBanYn
+      FROM TB_SELL_PRODUCT A
+      LEFT JOIN TB_RECORD C on A.RCRD_CD = C.RCRD_CD
+     WHERE A.SELL_PRDT_BCODE = #sellPrdtBcode#
+	</select>
+</sqlMap> 

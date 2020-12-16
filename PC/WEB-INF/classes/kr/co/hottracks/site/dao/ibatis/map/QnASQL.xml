@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="QnASQL">
+    <typeAlias alias="qnADomain" type="kr.co.hottracks.site.model.common.faq.QnADomain" />
+    <typeAlias alias="qnACriteria" type="kr.co.hottracks.site.model.common.faq.QnACriteria" />
+    <typeAlias alias="simpleProductDto" type="kr.co.hottracks.site.model.common.faq.SimpleProductDto" />
+    <typeAlias alias="qnAStatsDto" type="kr.co.hottracks.site.model.common.faq.QnAStatsDto" />
+    <typeAlias alias="backofficeMainCriteria" type="kr.co.hottracks.site.model.common.faq.BackofficeMainCriteria" />
+    <typeAlias alias="qnAVendorInfo" type="kr.co.hottracks.site.model.common.faq.QnAVendorInfo" />
+    <typeAlias alias="qnaReplyMailTemplate" type="kr.co.hottracks.site.web.taglib.QnaReplyMailTemplate" />
+    
+    <!-- 
+        기능: 상품QNA 등록
+     -->
+    <insert id="insertArticle" parameterClass="qnADomain">
+        <selectKey resultClass="Integer" type="pre" keyProperty="prdtQnaSeq">
+        select prdt_qna_seq.nextval from dual
+        </selectKey>
+        /* QnASQL.insertArticle */
+        INSERT INTO TB_PRODUCT_QNA (PRDT_ARTCL_GBN, ASK_REGST_USER_NUM, WRITE_USER_NAME, WRTOR_EMAIL_ADDR, PRDT_QNA_SEQ, PRDT_QNA_TITLE, PRDT_ASK_CONT, ASK_REGST_DTM, PRDT_ASWR_CONT, ASWR_REGST_ADMIN_ID, ASWR_REGST_DTM, ASWR_YN, SELL_PRDT_BCODE, PRDT_GRADE, DISP_YN, OPEN_YN, PROC_STAT_GBN, CMNT, MALL_ID, IMAGE_URL, QNA_GBN, ORDER_NUM)
+                            VALUES (#division#, #userNum#, #userName#, #userEmail#, #prdtQnaSeq#, #title#, #content#, #registerDate#, #answerContent#, #answerAdminId#, #answerRegisterDate#, #answerYn#, #barcode#, #grade#, #displayYn#, #publicYn#, #procStatGbn#, #commentContent#, #mallId#, #imageUrl#, #qnaGbn#, #orderNum#)
+    </insert>
+    
+    <sql id="selectList">
+        /* QnASQL.selectList */
+        SELECT qna.PRDT_QNA_SEQ           seq
+             , qna.PRDT_ARTCL_GBN         division
+             , qna.ASK_REGST_USER_NUM     userNum
+             , qna.PRDT_QNA_TITLE         title
+             , qna.PRDT_ASK_CONT          content
+             , qna.ASK_REGST_DTM          registerDate
+             , qna.ASWR_REGST_DTM         answerRegisterDate
+             , qna.ASWR_YN                answerYn
+             , qna.SELL_PRDT_BCODE        barcode
+             , product.VNDR_CNTRT_ID      vid
+             , qna.DISP_YN                displayYn
+             , qna.PRDT_GRADE             grade
+             , qna.PROC_STAT_GBN          procStatGbn
+             , tb_user.USER_ID            userId
+             , product.PRDT_NAME          productName
+          FROM TB_USER                    tb_user
+             , TB_PRODUCT_QNA             qna
+             , TB_SELL_PRODUCT            product
+    </sql>
+    
+    <sql id="whereWithSearchCondition">
+        WHERE qna.ask_regst_USER_NUM = tb_user.USER_NUM
+          AND qna.sell_prdt_bcode = product.sell_prdt_bcode
+        <isNotEmpty property="displayYn" prepend="AND">
+            qna.disp_yn =
+            #displayYn#
+        </isNotEmpty>
+        <isNotEmpty property="publicYn" prepend="AND">
+            qna.open_yn =
+            #publicYn#
+        </isNotEmpty>
+        <isNotEmpty property="userNum" prepend="AND">
+            qna.ASK_REGST_USER_NUM = #userNum#
+        </isNotEmpty>
+        <isNotEmpty property="division" prepend="AND">
+            qna.PRDT_ARTCL_GBN
+            = #division#
+        </isNotEmpty>
+        <isNotEmpty property="title" prepend="AND">
+            qna.PRDT_QNA_TITLE
+            LIKE #title#||'%'
+        </isNotEmpty>
+        <isNotEmpty property="startDate" prepend="AND">
+            TO_CHAR(qna.ASK_REGST_DTM, 'YYYYMMDD')    <![CDATA[ >= ]]>
+            #startDate#
+        </isNotEmpty>
+        <isNotEmpty property="endDate" prepend="AND">
+            TO_CHAR(qna.ASK_REGST_DTM, 'YYYYMMDD')    <![CDATA[ <=]]>
+            #endDate#
+        </isNotEmpty>
+        <isNotEmpty property="answerYn" prepend="AND">
+            qna.ASWR_YN =
+            #answerYn#
+        </isNotEmpty>
+        <isNotEmpty property="barcode" prepend="AND">
+            qna.SELL_PRDT_BCODE = #barcode#
+        </isNotEmpty>
+        <isNotEmpty property="userId" prepend="AND">
+            tb_user.USER_ID =
+            #userId#
+        </isNotEmpty>
+        <isNotEmpty property="productName" prepend="AND">
+            product.PRDT_NAME = #productName#
+        </isNotEmpty>
+        <isNotEmpty property="vid" prepend="AND">
+            product.VNDR_CNTRT_ID = #vid#
+        </isNotEmpty>
+        ORDER BY qna.ASK_REGST_DTM DESC
+    </sql>
+    <select id="selectListWithImageUrl" parameterClass="qnACriteria" resultClass="qnADomain">
+        /* QnASQL.selectListWithImageUrl */
+        SELECT * 
+        FROM (
+            SELECT
+                qna.PRDT_QNA_SEQ             seq
+                , qna.PRDT_ARTCL_GBN         division
+                , qna.ASK_REGST_USER_NUM     userNum
+                , qna.PRDT_QNA_TITLE         title
+                , qna.PRDT_ASK_CONT         content
+                , qna.ASK_REGST_DTM         registerDate
+                , qna.ASWR_REGST_DTM         answerRegisterDate
+                , qna.PRDT_ASWR_CONT        answerContent
+                , qna.ASWR_YN                 answerYn
+                , qna.SELL_PRDT_BCODE         barcode
+                , product.VNDR_CNTRT_ID     vid
+                , qna.DISP_YN                 displayYn
+                , qna.PROC_STAT_GBN            procStatGbn
+                , qna.prdt_grade            grade
+                , qna.OPEN_YN               publicYn
+                , tb_user.USER_ID             userId
+                , product.PRDT_NAME         productName
+                , FC_GET_PRODUCT_IMAGE_URL(product.sell_prdt_bcode)     productImageUrl
+                , qna.image_url                imageUrl
+                , product.sell_prdt_gbn     sellPrdtGbn
+                , product.rcrd_cd            rcrdCd
+                , record.rtng_code             rtngCode
+                , 'H'                        commentGbn
+            FROM
+                TB_USER                     tb_user
+                , TB_PRODUCT_QNA             qna
+                , TB_SELL_PRODUCT             product
+                , TB_RECORD                 record
+            WHERE
+                qna.ask_regst_USER_NUM = tb_user.USER_NUM
+            AND
+                qna.sell_prdt_bcode = product.sell_prdt_bcode
+            AND
+                product.rcrd_cd = record.rcrd_cd(+)
+            <isNotEmpty property="displayYn" prepend="AND">
+                qna.disp_yn =
+                #displayYn#
+            </isNotEmpty>
+            <isNotEmpty property="publicYn" prepend="AND">
+                qna.open_yn =
+                #publicYn#
+            </isNotEmpty>
+            <isNotEmpty property="userNum" prepend="AND">
+                qna.ASK_REGST_USER_NUM = #userNum#
+            </isNotEmpty>
+            <isNotEmpty property="division" prepend="AND">
+                qna.PRDT_ARTCL_GBN
+                = #division#
+            </isNotEmpty>
+            <isNotEmpty property="title" prepend="AND">
+                qna.PRDT_QNA_TITLE
+                LIKE #title#||'%'
+            </isNotEmpty>
+            <isNotEmpty property="startDate" prepend="AND">
+                TO_CHAR(qna.ASK_REGST_DTM, 'YYYYMMDD')    <![CDATA[ >= ]]>
+                #startDate#
+            </isNotEmpty>
+            <isNotEmpty property="endDate" prepend="AND">
+                TO_CHAR(qna.ASK_REGST_DTM, 'YYYYMMDD')    <![CDATA[ <=]]>
+                #endDate#
+            </isNotEmpty>
+            <isNotEmpty property="answerYn" prepend="AND">
+                qna.ASWR_YN =
+                #answerYn#
+            </isNotEmpty>
+            <isNotEmpty property="barcode" prepend="AND">
+                qna.SELL_PRDT_BCODE = #barcode#
+            </isNotEmpty>
+            <isNotEmpty property="userId" prepend="AND">
+                tb_user.USER_ID =
+                #userId#
+            </isNotEmpty>
+            <isNotEmpty property="productName" prepend="AND">
+                product.PRDT_NAME = #productName#
+            </isNotEmpty>
+            <isNotEmpty property="vid" prepend="AND">
+                product.VNDR_CNTRT_ID = #vid#
+            </isNotEmpty>
+            <isEqual property="division" compareValue="C">
+                UNION ALL
+                SELECT
+                    a.rcrd_review_seq             seq
+                    , 'C'                         division
+                    , a.user_num                userNum
+                    , a.review                    title
+                    , to_clob('')                content
+                    , a.regst_dtm                registerDate
+                    , sysdate                    answerRegisterDate
+                    , to_clob('')                answerContent
+                    , 'N'                        answerYn
+                    , c.SELL_PRDT_BCODE         barcode
+                    , c.VNDR_CNTRT_ID             vid
+                    , 'Y'                         displayYn
+                    , 'R'                        procStatGbn
+                    , a.grade                    grade
+                    , a.use_yn                  publicYn
+                    , d.USER_ID                 userId
+                    , c.PRDT_NAME                 productName
+                    , FC_GET_PRODUCT_IMAGE_URL(c.sell_prdt_bcode)     productImageUrl
+                    , ''                        imageUrl
+                    , c.sell_prdt_gbn             sellPrdtGbn
+                    , c.rcrd_cd                    rcrdCd
+                    , b.rtng_code                 rtngCode
+                    , 'M'                        commentGbn
+                FROM tb_record_review a
+                INNER JOIN tb_record b on a.rcrd_cd = b.rcrd_cd
+                INNER JOIN tb_sell_product c on b.sell_prdt_bcode = c.sell_prdt_bcode
+                INNER JOIN tb_user d on d.user_num = a.user_num
+                where
+                    a.use_yn = 'Y'
+                <isNotEmpty property="userNum" prepend="AND">
+                    d.USER_NUM = #userNum#
+                </isNotEmpty>
+            </isEqual>
+        )
+        ORDER BY registerDate DESC
+    </select>
+    <select id="selectList" parameterClass="qnACriteria"
+        resultClass="qnADomain">
+        <include refid="selectList" />
+        <include refid="whereWithSearchCondition" />
+    </select>
+
+     <select  id="selectFrontList" parameterClass="qnACriteria" resultClass="qnADomain">
+        /* QnASQL.selectFrontList */
+         SELECT PRDT_QNA_SEQ seq
+              , ASK_REGST_USER_NUM     userNum
+              , PRDT_QNA_TITLE         title
+              , PRDT_ASK_CONT         content
+              , ASK_REGST_DTM         registerDate
+              , ASWR_YN             answerYn
+              , PRDT_ASWR_CONT         answerContent
+              , OPEN_YN             openYn
+              , USER_ID             userId
+              , PRDT_GRADE             grade
+              , SELL_PRDT_BCODE     barcode
+              , PROC_STAT_GBN         procStatGbn
+              , IMAGE_URL            imageUrl
+          FROM (SELECT QNA.PRDT_QNA_SEQ
+                      , QNA.ASK_REGST_USER_NUM
+                      , QNA.PRDT_QNA_TITLE
+                      , QNA.PRDT_ASK_CONT
+                      , QNA.ASK_REGST_DTM
+                      , QNA.ASWR_YN
+                      , QNA.PRDT_ASWR_CONT
+                      , QNA.OPEN_YN
+                      , TB_USER.USER_ID
+                      , QNA.PRDT_GRADE
+                      , QNA.SELL_PRDT_BCODE
+                      , QNA.PROC_STAT_GBN
+                      , QNA.IMAGE_URL
+                  FROM TB_PRODUCT_QNA QNA
+                  join TB_SELL_PRODUCT AA on QNA.SELL_PRDT_BCODE = AA.SELL_PRDT_BCODE
+                  JOIN TB_MALL_USER_DETAIL MALL ON  MALL.MALL_ID  = QNA.MALL_ID AND QNA.ASK_REGST_USER_NUM = MALL.USER_NUM
+                  JOIN TB_USER TB_USER ON TB_USER.USER_NUM = MALL.USER_NUM
+                 WHERE 1 = 1 
+                   <isNotEqual property="mallId" compareValue="00" prepend="AND">
+                       MALL.MALL_ID         = #mallId#
+                   </isNotEqual>
+                   AND QNA.PRDT_ARTCL_GBN   = #division#
+                   AND (AA.SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#) or AA.PRIME_SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#))
+                   AND QNA.DISP_YN             = 'Y'
+                   AND QNA.OPEN_YN             = 'Y'
+        <isNotEmpty property="userNum">
+                UNION ALL
+                SELECT QNA.PRDT_QNA_SEQ
+                      , QNA.ASK_REGST_USER_NUM
+                      , QNA.PRDT_QNA_TITLE
+                      , QNA.PRDT_ASK_CONT
+                      , QNA.ASK_REGST_DTM
+                      , QNA.ASWR_YN
+                      , QNA.PRDT_ASWR_CONT
+                      , QNA.OPEN_YN
+                      , TB_USER.USER_ID
+                      , QNA.PRDT_GRADE
+                      , QNA.SELL_PRDT_BCODE
+                      , QNA.PROC_STAT_GBN
+                      , QNA.IMAGE_URL
+                 FROM TB_PRODUCT_QNA QNA
+                 join TB_SELL_PRODUCT AA on QNA.SELL_PRDT_BCODE = AA.SELL_PRDT_BCODE
+                  JOIN TB_MALL_USER_DETAIL MALL ON  MALL.MALL_ID  = QNA.MALL_ID AND QNA.ASK_REGST_USER_NUM = MALL.USER_NUM
+                  JOIN TB_USER TB_USER ON TB_USER.USER_NUM = MALL.USER_NUM
+                 WHERE 1 = 1
+                   <isNotEqual property="mallId" compareValue="00" prepend="AND">
+                       MALL.MALL_ID         = #mallId#
+                   </isNotEqual>
+                   AND QNA.PRDT_ARTCL_GBN   = #division#
+                   AND (AA.SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#) or AA.PRIME_SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#))
+                   and QNA.ASK_REGST_USER_NUM = #userNum#
+                   AND QNA.DISP_YN             = 'Y'
+                   AND QNA.OPEN_YN             = 'N'
+        </isNotEmpty>
+          )
+        ORDER BY PRDT_QNA_SEQ DESC
+     </select>
+      
+    <select id="selectFrontListSize" parameterClass="qnACriteria" resultClass="Integer">
+         /* QnASQL.selectFrontListSize */
+         SELECT sum(cnt)
+           FROM
+        (     
+                SELECT COUNT(QNA.PRDT_QNA_SEQ) cnt
+                  FROM TB_PRODUCT_QNA QNA
+                  join TB_SELL_PRODUCT AA on QNA.SELL_PRDT_BCODE = AA.SELL_PRDT_BCODE
+                  JOIN TB_MALL_USER_DETAIL MALL ON  MALL.MALL_ID  = QNA.MALL_ID AND QNA.ASK_REGST_USER_NUM = MALL.USER_NUM
+                  JOIN TB_USER TB_USER ON TB_USER.USER_NUM = MALL.USER_NUM
+                 WHERE 1 = 1 
+                   AND MALL.MALL_ID         = #mallId#
+                   AND QNA.PRDT_ARTCL_GBN   = #division#
+                   AND (AA.SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#) or AA.PRIME_SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#))
+                   AND QNA.DISP_YN          = 'Y'
+                   AND QNA.OPEN_YN          = 'Y'
+          <isNotEmpty property="userNum">
+              UNION ALL
+                  SELECT COUNT(PRDT_QNA_SEQ) cnt
+                 FROM TB_PRODUCT_QNA QNA
+                  join TB_SELL_PRODUCT AA on QNA.SELL_PRDT_BCODE = AA.SELL_PRDT_BCODE
+                  JOIN TB_MALL_USER_DETAIL MALL ON  MALL.MALL_ID  = QNA.MALL_ID AND QNA.ASK_REGST_USER_NUM = MALL.USER_NUM
+                  JOIN TB_USER TB_USER ON TB_USER.USER_NUM = MALL.USER_NUM
+                 WHERE MALL.MALL_ID         = #mallId#
+                   AND QNA.PRDT_ARTCL_GBN   = #division#
+                   AND (AA.SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#) or AA.PRIME_SELL_PRDT_BCODE = FC_GET_BARCODE(#barcode#))
+                   and QNA.ASK_REGST_USER_NUM = #userNum#
+                   AND QNA.DISP_YN          = 'Y'
+                   AND QNA.OPEN_YN          = 'N'
+      </isNotEmpty>
+      )
+    </select>
+    
+    <select id="selectArticleBySeq" parameterClass="Integer" resultClass="qnADomain">
+        /* QnASQL.selectArticleBySeq */
+        SELECT
+            qna.PRDT_ARTCL_GBN             division
+            , user_tb.USER_ID             userId
+            , qna.ASK_REGST_USER_NUM     userNum
+            , qna.WRITE_USER_NAME         userName
+            , qna.WRTOR_EMAIL_ADDR         userEmail
+            , qna.PRDT_QNA_SEQ             seq
+            , qna.PRDT_QNA_TITLE         title
+            , qna.PRDT_ASK_CONT         content
+            , qna.ASK_REGST_DTM         registerDate
+            , qna.PRDT_ASWR_CONT         answerContent
+            , nvl(qna.ASWR_REGST_ADMIN_ID,'md')     answerAdminId
+            , qna.ASWR_REGST_DTM         answerRegisterDate
+            , qna.ASWR_YN                 answerYn
+            , qna.SELL_PRDT_BCODE         barcode
+            , product.PRDT_NAME         productName
+            , vendor.VNDR_NAME             vendorName
+            , product.VNDR_CNTRT_ID     vid
+            , qna.PRDT_GRADE             grade
+            , qna.DISP_YN                 displayYn
+            , qna.OPEN_YN                 publicYn
+            , qna.PROC_STAT_GBN         procStatGbn
+            , qna.CMNT                     commentContent
+            , A.admin_name                mdName
+            , vendor.prime_tel_num        mainNumber
+            , qna.mall_id                 mallId
+            , qna.image_url                imageUrl
+        FROM
+            TB_PRODUCT_QNA             qna
+            , TB_VENDOR             vendor
+            , TB_SELL_PRODUCT         product
+            , TB_VENDOR_CONTRACT     contract
+            , TB_USER                 user_tb
+            , tb_admin    A
+        WHERE 
+            qna.PRDT_QNA_SEQ = #Integer#
+        AND qna.SELL_PRDT_BCODE = product.SELL_PRDT_BCODE
+        AND product.VNDR_CNTRT_ID = contract.VNDR_CNTRT_ID
+        AND contract.VNDR_ID = vendor.VNDR_ID
+        AND qna.ASK_REGST_USER_NUM = user_tb.USER_NUM
+        AND A.admin_id = vendor.mngr_md_id
+    </select>
+    
+    <select id="selectListSize" parameterClass="qnACriteria" resultClass="Integer">
+        /* QnASQL.selectListSize */    
+        SELECT count(*)
+        FROM (
+            SELECT
+                qna.PRDT_QNA_SEQ             seq
+                , qna.PRDT_ARTCL_GBN         division
+                , qna.ASK_REGST_USER_NUM     userNum
+                , qna.PRDT_QNA_TITLE         title
+                , qna.PRDT_ASK_CONT         content
+                , qna.ASK_REGST_DTM         registerDate
+                , qna.ASWR_REGST_DTM         answerRegisterDate
+                , qna.PRDT_ASWR_CONT        answerContent
+                , qna.ASWR_YN                 answerYn
+                , qna.SELL_PRDT_BCODE         barcode
+                , product.VNDR_CNTRT_ID     vid
+                , qna.DISP_YN                 displayYn
+                , qna.PROC_STAT_GBN            procStatGbn
+                , qna.prdt_grade            grade
+                , qna.OPEN_YN               publicYn
+                , tb_user.USER_ID             userId
+                , product.PRDT_NAME         productName
+                , FC_GET_PRODUCT_IMAGE_URL(product.sell_prdt_bcode)     productImageUrl
+                , qna.image_url                imageUrl
+                , product.sell_prdt_gbn     sellPrdtGbn
+                , product.rcrd_cd            rcrdCd
+                , record.rtng_code             rtngCode
+            FROM
+                TB_USER                     tb_user
+                , TB_PRODUCT_QNA             qna
+                , TB_SELL_PRODUCT             product
+                , TB_RECORD                 record
+            WHERE
+                qna.ask_regst_USER_NUM = tb_user.USER_NUM
+            AND
+                qna.sell_prdt_bcode = product.sell_prdt_bcode
+            AND
+                product.rcrd_cd = record.rcrd_cd(+)
+            <isNotEmpty property="displayYn" prepend="AND">
+                qna.disp_yn =
+                #displayYn#
+            </isNotEmpty>
+            <isNotEmpty property="publicYn" prepend="AND">
+                qna.open_yn =
+                #publicYn#
+            </isNotEmpty>
+            <isNotEmpty property="userNum" prepend="AND">
+                qna.ASK_REGST_USER_NUM = #userNum#
+            </isNotEmpty>
+            <isNotEmpty property="division" prepend="AND">
+                qna.PRDT_ARTCL_GBN
+                = #division#
+            </isNotEmpty>
+            <isNotEmpty property="title" prepend="AND">
+                qna.PRDT_QNA_TITLE
+                LIKE #title#||'%'
+            </isNotEmpty>
+            <isNotEmpty property="startDate" prepend="AND">
+                TO_CHAR(qna.ASK_REGST_DTM, 'YYYYMMDD')    <![CDATA[ >= ]]>
+                #startDate#
+            </isNotEmpty>
+            <isNotEmpty property="endDate" prepend="AND">
+                TO_CHAR(qna.ASK_REGST_DTM, 'YYYYMMDD')    <![CDATA[ <=]]>
+                #endDate#
+            </isNotEmpty>
+            <isNotEmpty property="answerYn" prepend="AND">
+                qna.ASWR_YN =
+                #answerYn#
+            </isNotEmpty>
+            <isNotEmpty property="barcode" prepend="AND">
+                qna.SELL_PRDT_BCODE = #barcode#
+            </isNotEmpty>
+            <isNotEmpty property="userId" prepend="AND">
+                tb_user.USER_ID =
+                #userId#
+            </isNotEmpty>
+            <isNotEmpty property="productName" prepend="AND">
+                product.PRDT_NAME = #productName#
+            </isNotEmpty>
+            <isNotEmpty property="vid" prepend="AND">
+                product.VNDR_CNTRT_ID = #vid#
+            </isNotEmpty>
+            <isEqual property="division" compareValue="C">
+                UNION ALL
+                SELECT
+                    a.rcrd_review_seq             seq
+                    , 'C'                         division
+                    , a.user_num                userNum
+                    , a.review                    title
+                    , to_clob('')                content
+                    , a.regst_dtm                registerDate
+                    , sysdate                    answerRegisterDate
+                    , to_clob('')                answerContent
+                    , 'N'                        answerYn
+                    , c.SELL_PRDT_BCODE         barcode
+                    , c.VNDR_CNTRT_ID             vid
+                    , 'Y'                         displayYn
+                    , 'R'                        procStatGbn
+                    , a.grade                    grade
+                    , a.use_yn                  publicYn
+                    , d.USER_ID                 userId
+                    , c.PRDT_NAME                 productName
+                    , FC_GET_PRODUCT_IMAGE_URL(c.sell_prdt_bcode)     productImageUrl
+                    , ''                        imageUrl
+                    , c.sell_prdt_gbn             sellPrdtGbn
+                    , c.rcrd_cd                    rcrdCd
+                    , b.rtng_code                 rtngCode
+                FROM tb_record_review a
+                INNER JOIN tb_record b on a.rcrd_cd = b.rcrd_cd
+                INNER JOIN tb_sell_product c on b.sell_prdt_bcode = c.sell_prdt_bcode
+                INNER JOIN tb_user d on d.user_num = a.user_num
+                where
+                    a.use_yn = 'Y'
+                <isNotEmpty property="userNum" prepend="AND">
+                    d.USER_NUM = #userNum#
+                </isNotEmpty>
+            </isEqual>
+        )
+    </select>
+    
+    <!-- 
+    <select id="selectListSize" parameterClass="qnACriteria" resultClass="Integer">
+        SELECT
+        COUNT(qna.PRDT_QNA_SEQ)
+        FROM
+        TB_USER tb_user
+        , TB_PRODUCT_QNA qna
+        , TB_SELL_PRODUCT product
+        <include refid="whereWithSearchCondition" />
+    </select>
+     -->
+     
+    <select id="selectSimpleProduct" parameterClass="qnADomain" resultClass="simpleProductDto">
+        /* QnASQL.selectSimpleProduct */
+        SELECT
+            product.sell_prdt_bcode                    barcode
+            , product.vndr_cntrt_id                    vid
+            , product.prdt_name                        productName
+            , FC_GET_DC_PRICE(product.sell_prdt_bcode, #mallId#)    productPrice
+            , FC_GET_PRODUCT_IMAGE_URL(product.sell_prdt_bcode)     productImageUrl
+            , brand.disp_ctgr_id                    categoryId
+            , brand.brand_id                         brandId
+            , brand.brand_name                         brandName
+            , sell_prdt_gbn                         sellPrdtGbn 
+            , rcrd_cd                               rcrdCd
+        FROM
+            tb_brand brand
+            , tb_sell_product         product
+        WHERE
+            product.brand_id         = brand.brand_id
+        AND
+            product.sell_prdt_bcode = #barcode#
+
+    </select>
+    <select id="selectAverageGrade" parameterClass="qnACriteria" resultClass="Integer">
+        /* QnASQL.selectAverageGrade */
+        SELECT
+             SUM(prdt_grade)/COUNT(prdt_grade)  
+        FROM
+             tb_product_qna 
+        WHERE 
+            prdt_artcl_gbn = 'C'
+        AND
+            SELL_PRDT_BCODE = #barcode#
+    </select>
+    <select id="selectStatsByDate" parameterClass="qnAStatsDto" resultClass="qnAStatsDto">
+        WITH v_temp AS (
+            SELECT
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#yesterday# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END yesterdaySum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#yesterday# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END yesterdayNotAnswerSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#twoDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END twoDaysAgoSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#twoDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END twoDaysAgoNotAnswerSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#sevenDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END sevenDaysAgoSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#sevenDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END sevenDaysAgoNotAnswerSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#thisMonthFirstDay# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END thisMonthSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#thisMonthFirstDay# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END thisMonthNotAnswerSum
+            FROM
+                tb_product_qna A
+        )
+        SELECT 
+            NVL(SUM(yesterdaySum), 0)               yesterdaySum,
+            NVL(SUM(yesterdayNotAnswerSum), 0)      yesterdayNotAnswerSum,
+            NVL(SUM(twoDaysAgoSum), 0)              twoDaysAgoSum,
+            NVL(SUM(twoDaysAgoNotAnswerSum), 0)     twoDaysAgoNotAnswerSum,
+            NVL(SUM(sevenDaysAgoSum), 0)            sevenDaysAgoSum,
+            NVL(SUM(sevenDaysAgoNotAnswerSum), 0)   sevenDaysAgoNotAnswerSum,
+            NVL(SUM(thisMonthSum), 0)               thisMonthSum,
+            NVL(SUM(thisMonthNotAnswerSum), 0)      thisMonthNotAnswerSum
+        FROM
+            v_temp
+    </select>
+    
+    <select id="selectStatsByDateForVendor" parameterClass="qnAStatsDto" resultClass="qnAStatsDto">
+        /* QnASQL.selectStatsByDateForVendor */
+        WITH v_temp AS (
+            SELECT
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#yesterday# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END yesterdaySum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#yesterday# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END yesterdayNotAnswerSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#twoDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END twoDaysAgoSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#twoDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END twoDaysAgoNotAnswerSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#sevenDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END sevenDaysAgoSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#sevenDaysAgo# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END sevenDaysAgoNotAnswerSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#thisMonthFirstDay# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', 1, 0) ELSE 0 END thisMonthSum,
+                CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#thisMonthFirstDay# || '000000', 'yyyymmddhh24miss') AND SYSDATE THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END thisMonthNotAnswerSum
+             FROM tb_product_qna A, tb_sell_product B, tb_vendor_contract C 
+            WHERE A.sell_prdt_bcode = B.sell_prdt_bcode
+              AND B.vndr_cntrt_id = C.vndr_cntrt_id
+              AND C.vndr_id = #vendorId#
+        )
+        SELECT 
+            NVL(SUM(yesterdaySum), 0)               yesterdaySum,
+            NVL(SUM(yesterdayNotAnswerSum), 0)      yesterdayNotAnswerSum,
+            NVL(SUM(twoDaysAgoSum), 0)              twoDaysAgoSum,
+            NVL(SUM(twoDaysAgoNotAnswerSum), 0)     twoDaysAgoNotAnswerSum,
+            NVL(SUM(sevenDaysAgoSum), 0)            sevenDaysAgoSum,
+            NVL(SUM(sevenDaysAgoNotAnswerSum), 0)   sevenDaysAgoNotAnswerSum,
+            NVL(SUM(thisMonthSum), 0)               thisMonthSum,
+            NVL(SUM(thisMonthNotAnswerSum), 0)      thisMonthNotAnswerSum
+        FROM 
+            v_temp
+    </select>
+    
+    
+    <sql id="selectQnAListByVendorWhere">
+        WHERE  A.sell_prdt_bcode = C.sell_prdt_bcode
+          AND  C.vndr_cntrt_id = D.vndr_cntrt_id
+          AND  D.vndr_id = B.vndr_id
+          AND  A.ask_regst_user_num = E.user_num
+          <isNotEmpty property="vendorId" prepend="AND">
+            B.vndr_id = #vendorId#
+          </isNotEmpty>
+          <isNotEmpty property="startDate">
+            <isNotEmpty property="endDate" prepend="AND">
+              A.ask_regst_dtm BETWEEN TO_DATE(#startDate# || '000000', 'yyyymmddhh24miss') AND TO_DATE(#endDate# || '235959', 'yyyymmddhh24miss')
+            </isNotEmpty>
+          </isNotEmpty>
+          <isNotEmpty property="division" prepend="AND">
+            A.prdt_artcl_gbn = #division#
+          </isNotEmpty>
+          <isNotEmpty property="title" prepend="AND">
+            A.prdt_qna_title LIKE #title#||'%'
+          </isNotEmpty>
+          <isNotEmpty property="userId" prepend="AND">
+            E.user_id LIKE #userId# || '%'
+          </isNotEmpty>
+          <isNotEmpty property="barcode" prepend="AND">
+            A.sell_prdt_bcode = #barcode#
+          </isNotEmpty>
+          <isNotEmpty property="productName" prepend="AND">
+            C.prdt_name LIKE #productName# || '%'
+          </isNotEmpty>
+          <isNotEmpty property="answerYn" prepend="AND">
+            A.aswr_yn = #answerYn#
+          </isNotEmpty>
+          <isNotEmpty property="displayYn" prepend="AND">
+            A.disp_yn = #displayYn#
+          </isNotEmpty>
+          <isNotEmpty property="publicYn" prepend="AND">
+            A.open_yn = #publicYn#
+          </isNotEmpty>
+          <isNotEmpty property="userNum" prepend="AND">
+            A.ask_regst_user_num = #userNum#
+          </isNotEmpty>
+          <isNotEmpty property="vid" prepend="AND">
+            B.vndr_cntrt_id = #vid#
+          </isNotEmpty>
+          <isNotEmpty property="procStatGbn" prepend="AND">
+            A.proc_stat_gbn = #procStatGbn#
+          </isNotEmpty>
+          <isNotEmpty property="mallIdForSql" prepend="AND">
+            A.mall_id IN ($mallIdForSql$) 
+          </isNotEmpty>
+    </sql>
+    
+    <select id="selectVendorListForQnA" parameterClass="qnACriteria" resultClass="qnAVendorInfo">
+        /* QnASQL.selectVendorListForQnA */
+        WITH v_temp AS (
+            SELECT  B.vndr_id     vendorId
+                  , B.vndr_name   vendorName
+                  , 1             totalCount
+                  <isNotEmpty property="startDate">
+                  , CASE WHEN A.ask_regst_dtm BETWEEN TO_DATE(#startDate# || '000000', 'yyyymmddhh24miss') AND TO_DATE(#endDate# || '235959', 'yyyymmddhh24miss') THEN DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) ELSE 0 END notAnswerCount
+                  </isNotEmpty>
+                  <isEmpty property="startDate">
+                  , DECODE(A.prdt_artcl_gbn, 'Q', DECODE(A.proc_stat_gbn, 'C', 0, 1), 0) notAnswerCount
+                  </isEmpty>
+              FROM  tb_product_qna A
+                  , tb_vendor B
+                  , tb_sell_product C
+                  , tb_vendor_contract D
+                  , tb_user E
+             <include refid="selectQnAListByVendorWhere" />
+        )
+        SELECT  vendorId
+              , vendorName
+              , SUM(totalCount)     totalCount
+              , SUM(notAnswerCount) notAnswerCount
+          FROM  v_temp
+         GROUP  BY vendorId, vendorName
+    </select>
+    
+    <select id="selectQnAListByVendor" parameterClass="qnACriteria" resultClass="qnADomain">
+        /* QnASQL.selectQnAListByVendor */
+        SELECT  A.prdt_artcl_gbn        division
+              , E.user_id               userId
+              , A.ask_regst_user_num    userNum
+              , A.write_user_name       userName
+              , A.wrtor_email_addr      userEmail
+              , A.prdt_qna_seq          seq
+              , A.prdt_qna_title        title
+              , A.prdt_ask_cont         content
+              , A.ask_regst_dtm         registerDate
+              , A.prdt_aswr_cont        answerContent
+              , A.aswr_regst_admin_id   answerAdminId
+              , A.aswr_regst_dtm        answerRegisterDate
+              , A.aswr_yn               answerYn
+              , A.sell_prdt_bcode       barcode
+              , C.prdt_name             productName
+              , B.vndr_name             vendorName
+              , C.vndr_cntrt_id         vid
+              , A.prdt_grade            grade
+              , A.disp_yn               displayYn
+              , A.open_yn               publicYn
+              , A.proc_stat_gbn         procStatGbn
+              , A.cmnt                  commentContent
+              , A.mall_Id                 mallId
+          FROM  tb_product_qna A
+              , tb_vendor B
+              , tb_sell_product C
+              , tb_vendor_contract D
+              , tb_user E
+        <include refid="selectQnAListByVendorWhere"/>
+         ORDER  BY A.prdt_qna_seq DESC, A.ask_regst_dtm DESC
+    </select>
+    
+    <select id="selectQnAListCountByVendor" parameterClass="qnACriteria" resultClass="int">
+        /* QnASQL.selectQnAListCountByVendor */
+        SELECT
+                COUNT(A.prdt_qna_seq) cnt
+          FROM  tb_product_qna A
+              , tb_vendor B
+              , tb_sell_product C
+              , tb_vendor_contract D
+              , tb_user E
+        <include refid="selectQnAListByVendorWhere"/>
+    </select>
+    
+    <update id="updateArticle" parameterClass="qnADomain">
+        /* QnASQL.updateArticle */
+        UPDATE
+            TB_PRODUCT_QNA
+        SET
+            PRDT_QNA_TITLE             = #title#
+            , PRDT_ASK_CONT         = #content#
+            , PRDT_ASWR_CONT         = #answerContent#
+            , ASWR_REGST_ADMIN_ID     = #answerAdminId#
+            , ASWR_REGST_DTM         = #answerRegisterDate#
+            , ASWR_YN                 = #answerYn#
+            , PRDT_GRADE             = #grade#
+            , DISP_YN                 = #displayYn#
+            , OPEN_YN                 = #publicYn#
+            , PROC_STAT_GBN            = #procStatGbn#
+            , CMNT                     = #commentContent#
+            , IMAGE_URL                = #imageUrl#
+        WHERE
+            PRDT_ARTCL_GBN             = #division#
+        AND
+            PRDT_QNA_SEQ             = #seq#
+        AND
+            ASK_REGST_USER_NUM        = #userNum#
+    </update>
+    
+    <update id="updateArticle4Back" parameterClass="qnADomain">
+        /* QnASQL.updateArticle4Back */
+        UPDATE
+            TB_PRODUCT_QNA
+        SET
+            PRDT_QNA_TITLE             = #title#
+            , PRDT_ASK_CONT         = #content#
+            , PRDT_ASWR_CONT         = #answerContent#
+            , ASWR_REGST_ADMIN_ID     = #answerAdminId#
+            , ASWR_REGST_DTM         = #answerRegisterDate#
+            , ASWR_YN                 = #answerYn#
+            , PRDT_GRADE             = #grade#
+            , DISP_YN                 = #displayYn#
+            , OPEN_YN                 = #publicYn#
+            , PROC_STAT_GBN            = #procStatGbn#
+            , CMNT                     = #commentContent#
+
+        WHERE
+            PRDT_ARTCL_GBN             = #division#
+        AND
+            PRDT_QNA_SEQ             = #seq#
+    </update>
+    
+    <delete id="deleteArticle" parameterClass="qnADomain">
+        /* QnASQL.deleteArticle */
+        DELETE
+        FROM
+            tb_product_qna
+        WHERE
+            prdt_qna_seq        = #seq#
+        AND
+            ASK_REGST_USER_NUM     = #userNum#
+    </delete>
+    
+    <delete id="deleteOrderPrdtQna" parameterClass="qnADomain">
+        /* QnASQL.deleteOrderPrdtQna */
+        DELETE FROM TB_ORDER_PRODUCT_QNA
+        WHERE prdt_qna_seq        = #seq#
+    </delete>
+    
+    <update id="updateQnADisplayYn" parameterClass="qnADomain">
+        /* QnASQL.updateQnADisplayYn */
+        UPDATE TB_PRODUCT_QNA
+        SET
+            DISP_YN         = #displayYn#
+        WHERE
+            PRDT_QNA_SEQ    = #seq#
+    </update>
+    
+    <select id="getProductQnaListForMain" parameterClass="backofficeMainCriteria" resultClass="qnADomain">
+        /* QnASQL.getProductQnaListForMain */
+        WITH V_TEMP AS (
+            SELECT PQ.PRDT_QNA_SEQ
+                   , SP.PRDT_NAME
+                   , PQ.PRDT_QNA_TITLE
+                   , PQ.PROC_STAT_GBN
+                   , PQ.WRITE_USER_NAME
+                   , PQ.ASK_REGST_DTM
+                   , V.VNDR_NAME
+                   , V.VNDR_ID
+                   , V.prime_tel_num
+                   , PQ.MALL_ID
+              FROM TB_PRODUCT_QNA PQ
+                   , TB_SELL_PRODUCT SP
+                   , TB_VENDOR_CONTRACT VC
+                   , TB_VENDOR V
+             WHERE PQ.PRDT_ARTCL_GBN = 'Q'
+                   AND PQ.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+                   AND SP.VNDR_CNTRT_ID = VC.VNDR_CNTRT_ID
+                   AND VC.VNDR_ID = V.VNDR_ID
+                   AND PQ.PROC_STAT_GBN != 'C'
+                   <isNotEmpty property="vndrId">
+                   AND SP.VNDR_CNTRT_ID IN (SELECT VC.VNDR_CNTRT_ID 
+                                              FROM TB_VENDOR_CONTRACT VC 
+                                             WHERE VC.VNDR_ID = #vndrId#)
+                   </isNotEmpty>
+          ORDER BY PQ.PROC_STAT_GBN DESC
+                   , PQ.ASK_REGST_DTM ASC
+        )
+        SELECT V.PRDT_QNA_SEQ seq
+               , V.PRDT_NAME productName
+               , DECODE(SIGN(V.ASK_REGST_DTM - (sysdate-8))
+                             , 1
+                             , '<![CDATA[<]]>IMG SRC=/images/i_new.gif>'
+                       )
+                  || V.PRDT_QNA_TITLE title               
+               , V.PROC_STAT_GBN procStatGbn
+               , V.WRITE_USER_NAME userName
+               , V.ASK_REGST_DTM registerDate
+               , V.VNDR_NAME vendorName
+               , V.VNDR_ID vendorId
+               , V.PRIME_TEL_NUM mainNumber
+               , V.MALL_ID mallId
+          FROM V_TEMP V
+         WHERE ROWNUM <![CDATA[ <= ]]> #dispCnt#
+         order by V.ASK_REGST_DTM desc
+    </select>
+
+    <select id="getUnprocessedProductQnaCount" parameterClass="backofficeMainCriteria" resultClass="int">
+        /* QnASQL.getUnprocessedProductQnaCount */
+        SELECT COUNT(PQ.PRDT_QNA_SEQ)
+          FROM TB_PRODUCT_QNA PQ
+               , TB_SELL_PRODUCT SP
+         WHERE PQ.PRDT_ARTCL_GBN = 'Q'
+               AND PQ.PROC_STAT_GBN != 'C'
+               AND PQ.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE  
+               <isNotEmpty property="vndrId">
+               AND SP.VNDR_CNTRT_ID IN (SELECT VC.VNDR_CNTRT_ID 
+                                          FROM TB_VENDOR_CONTRACT VC 
+                                         WHERE VC.VNDR_ID = #vndrId#)
+               </isNotEmpty>
+    </select>
+
+    <select id="selectQnAForEMail" parameterClass="int" resultClass="qnaReplyMailTemplate">
+        /* QnASQL.selectQnAForEMail */
+        SELECT  C.ctgr_id           ctgrId
+              , A.ask_regst_dtm     registerDate
+              , A.prdt_qna_title    title
+              , a.prdt_ask_cont     content
+          FROM  tb_product_qna A
+              , tb_sell_product B
+              , tb_product_category C
+         WHERE  A.sell_prdt_bcode = B.sell_prdt_bcode
+           AND  B.sell_prdt_bcode = C.sell_prdt_bcode
+           AND  A.prdt_qna_seq = #seq#
+           AND  C.std_ctgr_yn = 'Y'
+    </select>
+    
+    <select id="getQnaMailSendList" resultClass="qnADomain">
+        /* QnASQL.getQnaMailSendList */
+        select PRDT_QNA_SEQ    seq
+          from TB_PRODUCT_QNA
+         where PRDT_ARTCL_GBN = 'Q'
+           and MAIL_SEND_YN is null
+    </select>
+    
+    <update id="setQnaMailSend" parameterClass="qnADomain">
+        /* QnASQL.setQnaMailSend */
+        UPDATE TB_PRODUCT_QNA
+           SET MAIL_SEND_YN = 'Y'
+         WHERE PRDT_QNA_SEQ = #seq#
+    </update>
+    
+    <select id="selectQnaMailBySeq" parameterClass="Integer" resultClass="qnADomain">
+        /* QnASQL.selectQnaMailBySeq */
+        select D.ADMIN_NAME  userName
+             , D.ADMIN_EMAIL userEmail
+             , substr(B.PRDT_NAME,1,20) mdName
+             , B.PRDT_NAME productName
+             , A.PRDT_QNA_TITLE title
+             , A.PRDT_ASK_CONT content
+          from TB_PRODUCT_QNA A
+             , TB_SELL_PRODUCT B
+             , TB_VENDOR C
+             , TB_ADMIN D
+         where A.PRDT_QNA_SEQ = #seq#
+           and A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE
+           and substr(B.VNDR_CNTRT_ID,1,4) = C.VNDR_ID
+           and C.MNGR_VNDR_ADMIN_ID = D.ADMIN_ID
+    </select>
+</sqlMap>

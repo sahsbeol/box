@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>customerSmsTemplate</comment>
+	<entry key="deliveryDelay1">배송지연안내|[핫트랙스온라인]주문하신 상품 입고지연. X/XX일 해당업체에서 발송예정입니다.</entry>
+	<entry key="soldInfo">품절안내|[핫트랙스온라인]주문상품 품절로 연락드렸습니다. 통화가능하실때 연락부탁드립니다.</entry>
+	<entry key="confirmDelay">확인지연안내|[핫트랙스온라인]문의내용 확인이 지연되고 있습니다. 빠른 확인후 연락드리겠습니다.</entry>
+    <entry key="deliveryDelay">배송지연관리시|[핫트랙스온라인]주문하신 상품이 당일출고되어 1~2일내 수령가능합니다.</entry>
+    <entry key="orderInfo">주문안내|[핫트랙스온라인]주문완료되었습니다. 이용해주셔서 감사합니다.</entry>
+    <entry key="deliveryInfo">배송안내|[핫트랙스온라인]주문상품이 발송되었습니다. 감사합니다. (택배사명:송장번호)</entry>
+    <entry key="OrderCancelOfCard">주문취소안내(카드)|[핫트랙스온라인]주문취소 및 카드결제 승인취소 완료되었습니다.</entry>
+    <entry key="OrderCancelOfCash">주문취소안내(현금)|[핫트랙스온라인]주문취소 및 환불금액 예치금으로 전환 완료되었습니다.</entry>
+</properties>

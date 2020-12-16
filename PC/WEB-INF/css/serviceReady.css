@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+@import "base.css";
+
+
+div.ready {
+	margin: 100px auto;
+	width: 636px;
+}
+div.ready div.go-back-page {
+	padding: 16px 0 0;
+	text-align: center;
+}
+div.ready div.go-back-page a {
+	margin: 0 16px 0 0;
+}

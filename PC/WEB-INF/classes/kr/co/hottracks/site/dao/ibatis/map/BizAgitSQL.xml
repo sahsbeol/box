@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BizAgitSQL">
+   	<typeAlias alias="bizSvcAgit" type="kr.co.hottracks.site.model.common.banner.BizSvcAgit"/>
+   	
+   	<!--  
+		작성자: 임종진
+		작성일 : 2020.01.02
+		기능 : 아지트 리스트
+		수정 : 박민 (2020.05.26)
+    -->
+    <select id="getAgitList" parameterClass="bizSvcAgit" resultClass="bizSvcAgit">
+        /* BizAgitSQL.getAgitList */
+        SELECT SVC_SEQ			svcSeq,
+        	   AGIT_TYPE_CD 	agitTypeCd,
+        	   DISP_YN 			dispYn,
+        	   DISP_START_DT 	dispStartDt,
+        	   DISP_START_CLOCK dispStartClock,
+        	   DISP_END_DT 		dispEndDt,
+        	   DISP_END_CLOCK 	dispEndClock,
+        	   IMAGE_URL 		imageUrl,
+        	   YOUTUBE_URL 		youtubeUrl,
+        	   MAIN_TEXT 		mainText,
+        	   SUB_TEXT 		subText,
+        	   LINK_URL			linkUrl,
+        	   IMAGE_ALT 		imageAlt,
+        	   DISP_ORD 		dispOrder,
+        	   REG_ID 			regId,
+        	   REG_DATE 		regDate,
+        	   MOD_ID 			modId,
+        	   MOD_DATE 		modDate,
+        	   CASE WHEN DISP_START_DT >= TO_CHAR(SYSDATE-1, 'YYYYMMDD') THEN 'Y' ELSE 'N' END newVidio
+          FROM TB_SVC_AGIT
+		 WHERE DISP_YN = 'Y'
+           AND TO_DATE(DISP_START_DT || DISP_START_CLOCK, 'YYYYMMDD hh24') <![CDATA[ <= ]]> SYSDATE
+   		   AND TO_DATE(DISP_END_DT || DISP_END_CLOCK, 'YYYYMMDD hh24') <![CDATA[ >= ]]> SYSDATE  
+			<isNotEmpty prepend="AND" property="agitTypeCd">
+				AGIT_TYPE_CD = #agitTypeCd#
+			</isNotEmpty>        
+         ORDER BY DISP_ORD, DISP_START_DT DESC, DISP_START_CLOCK DESC
+    </select>
+
+   	<!--  
+		작성자: 박민
+		작성일 : 2020.05.26
+		기능 : 아지트 리스트 카운트
+    -->
+    <select id="getAgitListCount" parameterClass="bizSvcAgit" resultClass="Integer">
+        /* BizAgitSQL.getAgitListCount */
+        SELECT count(*)
+          FROM TB_SVC_AGIT
+		 WHERE DISP_YN = 'Y'
+           AND TO_DATE(DISP_START_DT || DISP_START_CLOCK, 'YYYYMMDD hh24') <![CDATA[ <= ]]> SYSDATE
+   		   AND TO_DATE(DISP_END_DT || DISP_END_CLOCK, 'YYYYMMDD hh24') <![CDATA[ >= ]]> SYSDATE  
+			<isNotEmpty prepend="AND" property="agitTypeCd">
+				AGIT_TYPE_CD = #agitTypeCd#
+			</isNotEmpty>        
+         ORDER BY DISP_ORD, REG_DATE
+    </select>
+</sqlMap>

@@ -1,0 +1,63 @@
+2019-11-18 11:31:31,042 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:31:31,044 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/orderSheet
+2019-11-18 11:31:38,431 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/css_status.html
+2019-11-18 11:31:38,432 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/orderSheet
+2019-11-18 11:45:20,337 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:45:20,338 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/welcomemain
+2019-11-18 11:46:01,314 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:46:01,315 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/mypage/wishprdtpop?sellprdtbcode=2315000781865
+2019-11-18 11:46:01,315 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]sellprdtbcode:2315000781865
+2019-11-18 11:52:51,214 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:52:51,215 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/temp/loginForm?totMileAmt=0
+2019-11-18 11:52:51,216 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]totMileAmt:0
+2019-11-18 11:52:51,266 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:52:51,266 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/temp/loginForm?totMileAmt=0
+2019-11-18 11:52:51,267 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]totMileAmt:0
+2019-11-18 11:52:51,731 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:52:51,732 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/temp/loginForm?totMileAmt=0
+2019-11-18 11:52:51,732 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]totMileAmt:0
+2019-11-18 11:52:51,899 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:52:51,900 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/temp/loginForm?totMileAmt=0
+2019-11-18 11:52:51,900 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]totMileAmt:0
+2019-11-18 11:52:54,889 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 11:52:54,890 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/temp/loginForm?totMileAmt=0
+2019-11-18 11:52:54,890 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]totMileAmt:0
+2019-11-18 14:52:30,830 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 14:52:30,831 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/orderSheet
+2019-11-18 15:01:28,777 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 15:01:36,073 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:07:20,657 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/css_status.html
+2019-11-18 16:07:20,659 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/orderSheet
+2019-11-18 16:15:08,489 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:15:12,329 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:15:13,865 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:15:14,121 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:15:14,249 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:15:15,529 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:15:59,049 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:16:01,353 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:16:01,993 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:16:02,377 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:16:02,889 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:27:29,866 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:27:30,889 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:27:31,401 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:27:31,785 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:27:32,169 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:27:32,553 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:44:29,769 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:44:35,017 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:44:36,041 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:46:39,049 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:46:40,457 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:47:07,721 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:47:11,561 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:47:13,225 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:53:37,609 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 16:53:38,633 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-18 18:23:13,818 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 18:23:13,819 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-18 18:25:12,976 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-18 18:25:12,977 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-18 23:42:40,971 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]https://www.google.com/
+2019-11-18 23:42:40,971 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/echo.php

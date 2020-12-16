@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<!-- 태그 라이브러리 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+<!-- 태그 라이브러리 -->
+<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="/images/ico_app.png">
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/contents.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/shop.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/swiper-5.1.0.min.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/slick.css">
+
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906210101"></script>
+<script type="text/javascript" src="/scripts/common?201906210101"></script>
+<script type="text/javascript" src="/js/biz/common_v2.js"></script>
+<script type="text/javascript" src="/js/biz/hott.js"></script>
+<script type="text/javascript" src="/js/biz/jquery/TweenMax.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	gnb();//gnb
+	nav();//nav	
+	if($('.header_wrap').length >0){
+		bodyScroll();//body scroll	
+	}
+})	
+</script>
+</head>
+<body>
+<div id="wrap" class="content_new">
+
+<!-- header -->
+<div id="header">
+	<!-- util menu -->
+	<div class="util_menu">
+		<ul>
+			
+					<li><a href="#n" _onclick="login()">로그인</a></li>
+					<li><a href="#n" _onclick="goMemJoin()">회원가입</a></li>
+				
+			<li><a href="#n">고객센터</a></li>
+			<li><a href="#n">매장안내</a></li>
+			<li><a href="#n">팬사인회</a></li>
+		</ul>
+	</div>
+	<!--// util menu -->
+	<!-- gnb -->
+       <nav id="gnb">
+		<div class="header_wrap">
+			<h1 class="g_logo"><a href="#n">HOTTRACKS</a></h1>
+			<div class="g_search">
+				<form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+					<div class="form_select">
+						<select id="gnbSearchMenu" name="gnbSearchMenu">
+							<option value='GIFT'>문구/기프트</option>
+							<option value='RECORD'>음반</option>						
+						</select>
+					</div>				
+					<div class="form_search">
+						<input type="text" placeholder="샤오미를 쓰는 이유" name="searchTerm" value="">
+						<a href="#" class="btn_search" _onclick="gnbSrchFrm();return false;"></a>
+					</div>
+				</form>
+				<div class="keyword_wrap" id="ticker">
+					<a href="#n" _onclick="gnbSrchKerword('카드 지갑');return false;">
+						<em class="font_t">1</em>
+						<p>카드 지갑</p>
+						<!-- ▲ up , ▼ down : class 추가 -->
+						
+								<span class="txt"><strong>NEW</strong></span>
+							
+					</a>
+				</div>
+			</div>
+			<div class="g_menu">
+				<ul>
+					<li class="icon_my">
+						
+								<a href="#n" _onclick="login()"><img src="/images/biz/common/icon_my.png" alt=""></a>
+																															
+					</li>
+					<li class="icon_today">
+						<a href="#n">
+							<img src="/images/biz/common/icon_today.png" alt="">
+							<em>오늘,<strong>혜택</strong></em>
+						</a>
+					</li>
+					<li class="icon_cart">
+						<a href="#n">
+							<img src="/images/biz/common/icon_cart.png" alt="">
+							<em class="font_t bizCartCount"></em>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="gnb_wrap">
+			<div class="inner">
+				<div class="category_wrap">
+					<div class="btn_category">
+						<a href="#">카테고리</a>
+					</div>
+				</div>
+				<ul class="gnb_menu">
+					<li><a href="#n">다이어리<em></em></a></li>
+					<li><a href="#n">음반<em></em></a></li>
+
+					<li><a id="gnbBest" href="#n">베스트</a></li>
+					<li><a id="gnbFree" href="#n">무료배송</a></li>
+					<li><a id="gnbNew" href="#n">신상품</a></li>
+					<li><a id="gnbSale" href="#n">세일</a></li>
+					<li><a href="#n">이벤트</a></li>
+				</ul>
+				<ul class="sub_menu">
+					<li><a href="#n">개인의취향</a></li>
+					<li><a href="#n">이럴 때,</a></li>
+					<li><a href="#n">아지트</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>
+<!--// header -->    
+    <!-- Container -->
+    <div id="container">   
+        <!-- 컨텐츠 -->
+        <div class="content" id="content">
+            
+<!-- sub top -->
+<div class="title_a">
+    <h2 class="title">장바구니</h2>
+    
+</div>
+<!-- / sub top -->
+
+<div class="mgt20 c_both">
+    <ul class="list_type02_v2 fs14">
+        <li>로그인 시 장바구니는 <strong class="normal">14일</strong> 동안 보관됩니다.
+        <li>더 오래 보관하고 싶은 상품은 <strong class="">♡ </strong>버튼을 눌러주세요.</li>
+        <li><strong class="">♡ </strong>상품은 '마이핫트랙스'에서 확인 가능합니다.</li>
+        <li>쿠폰 적용 제외 상품은 쿠폰 적용이 되지 않습니다.</li>
+    </ul>
+</div>
+
+<h2 class="hidden_obj">장바구니</h2>
+
+<!-- 이벤트 배너 영역 -->
+<div class="mgt10" id="evnetBannerArea" style="display: none;">
+    <a href="#n">
+    	<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/banner_20190830_950.jpg" alt="ban_event">
+    </a>
+</div>
+
+<!-- 장바구니 상품이 없을 때 -->
+	<h2 class="tit01 normal pdt60 mgt20 fs20 bt_line t_center"><span>장바구니에 담은 상품이 없습니다.</span></h2>
+	<div class="t_center mgt40">
+		<a href="#n" class="btn_360">계속 쇼핑하기</a>
+	</div>
+
+
+
+<!-- 레코벨 추천 리스트 -->
+	<div class="recobell_cart swiper-container">
+	    
+    	<h1 class="tit fs24">인기 베스트 추천 상품</h1>
+	    <div class="swiper-wrapper">
+	        
+	            <ul id="recobell01" class="swiper-slide">
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1173/hot1570776018313.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1059/hot1570776125767.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1173/hot1570776018313.jpg'" alt="2020 시그니쳐 데스크 캘린더 (모니터 캘린더)" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">2020 시그니쳐 데스크 캘린더 (모니터 캘린더)</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">7,500</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1286/hot1565228309182.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1594/hot1565228332845.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1286/hot1565228309182.jpg'" alt="로이텀 2020 데일리 플래너 미디엄" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">로이텀 2020 데일리 플래너 미디엄</span>
+	                            <em class="price">
+	                            	 
+	                                    
+	                                    <span class="pc">10%</span>
+	                                
+	                                <span class="sale">29,700</span>
+	                                 
+	                                    <span class="dc">33,000</span>
+	                                
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1866/hot1568699290371.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1559/hot1568699307531.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1866/hot1568699290371.jpg'" alt="미리 욕실 스프레이건 변기샤워기 변기 화장실 청소" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">미리 욕실 스프레이건 변기샤워기 변기 화장실 청소</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">29,800</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1433/hot1497855315968.jpg" alt="[메모렛] 소프티 64G 플래티넘 실리콘 USB메모리" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">[메모렛] 소프티 64G 플래티넘 실리콘 USB메모리</span>
+	                            <em class="price">
+	                            	 
+	                                    
+	                                    <span class="pc">74%</span>
+	                                
+	                                <span class="sale">13,800</span>
+	                                 
+	                                    <span class="dc">53,900</span>
+	                                
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1234/hot1554717817356.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1423/hot1554717827224.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1234/hot1554717817356.jpg'" alt="짱구는못말려 메모지 세트 " class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">짱구는못말려 메모지 세트 </span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">3,800</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	            </ul>
+	        
+	            <ul id="recobell02" class="swiper-slide">
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1006/hot1545978523562.png" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1792/hot1565239697944.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1006/hot1545978523562.png'" alt="세종 여권케이스+네임택" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">세종 여권케이스+네임택</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">49,000</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1037/hot1566544681357.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1221/hot1566544693994.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1037/hot1566544681357.jpg'" alt="[모트모트] 태스크 매니저 100DAYS - 화이트 " class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">[모트모트] 태스크 매니저 100DAYS - 화이트 </span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">6,000</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1051/hot1566971199298.png" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1569/hot1567052637258.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1051/hot1566971199298.png'" alt="로이텀 불렛저널 미디엄 아시아 한정판" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">로이텀 불렛저널 미디엄 아시아 한정판</span>
+	                            <em class="price">
+	                            	 
+	                                    
+	                                    <span class="pc">10%</span>
+	                                
+	                                <span class="sale">23,400</span>
+	                                 
+	                                    <span class="dc">26,000</span>
+	                                
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/music/large/8525/2525825.jpg" alt="MIN:D [THE FIRST FANMEETING PHOTOBOOK] [포토북+DVD]" class="photo" width="150" height="150" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/8525/2525825.jpg');"/></a>
+	                            
+	                        </span>
+	                        <a href="#n">
+	                        
+	                            <span class="name txt_line1">MIN:D [THE FIRST FANMEETING PHOTOBOOK] [포토북+DVD]</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">35,000</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1866/hot1568982900327.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1114/hot1568982907212.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1866/hot1568982900327.jpg'" alt="[날짜형/만년형]2020이야기다이어리_그란데(데일리)" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">[날짜형/만년형]2020이야기다이어리_그란데(데일리)</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">15,000</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	            </ul>
+	        
+	            <ul id="recobell03" class="swiper-slide">
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1167/hot1564107293834.jpg" alt="모나미 FX ZETA 볼펜" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">모나미 FX ZETA 볼펜</span>
+	                            <em class="price">
+	                            	 
+	                                    
+	                                    <span class="pc">20%</span>
+	                                
+	                                <span class="sale">800</span>
+	                                 
+	                                    <span class="dc">1,000</span>
+	                                
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1822/hot1572239096811.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1960/hot1567558671131.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1822/hot1572239096811.jpg'" alt="2020 별별일상 다이어리" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">2020 별별일상 다이어리</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">8,800</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/music/large/5425/2524587.jpg" alt="더 킹 [얼티밋 컬렉터스 박스 한정판]" class="photo" width="99" height="150" onerror="checkRecordImage(this, 'http://image.kyobobook.co.kr/newimages/music/midi/5425/2524587.jpg');"/></a>
+	                            
+	                        </span>
+	                        <a href="#n">
+	                        
+	                            <span class="name txt_line1">더 킹 [얼티밋 컬렉터스 박스 한정판]</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">53,900</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1440/hot1569824882683.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1036/hot1569824895920.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1440/hot1569824882683.jpg'" alt="슬리핑피스 다이어리 (만년형)" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">슬리핑피스 다이어리 (만년형)</span>
+	                            <em class="price">
+	                            	 
+	                                <span class="sale">14,800</span>
+	                                 
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	                    <li class="PC_RECO">
+	                        <span class="img_a">
+	                            
+	                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1937/hot1515048978153.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1134/hot1515048992174.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1937/hot1515048978153.jpg'" alt="방수네임스티커초소형 쪼꼬미_이름만" class="photo" width="150" height="150" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+	                        </span>
+	                        
+	                        <a href="#n">
+	                            <span class="name txt_line1">방수네임스티커초소형 쪼꼬미_이름만</span>
+	                            <em class="price">
+	                            	 
+	                                    
+	                                    <span class="pc">49%</span>
+	                                
+	                                <span class="sale">920</span>
+	                                 
+	                                    <span class="dc">1,800</span>
+	                                
+	                            </em>
+	                        </a>
+	                    </li>
+	                
+	            </ul>
+	        
+	    </div>
+	    <!-- Add Pagination -->
+	    <div class="swiper-pagination"></div>
+	    <!-- Add Arrows -->
+	    <div class="swiper-button-area">
+	    	<div class="swiper-button-next"></div>
+	    	<div class="swiper-button-prev"></div>
+	    </div>
+	</div>
+
+<!-- / 레코벨 추천 리스트 -->
+  
+<script type="text/javascript" src="/js/swiper-5.1.0.min.js?"></script>
+<script>
+ var swiper = new Swiper('.swiper-container', {
+   speed: 1000,
+   pagination: {
+     el: '.swiper-pagination',
+     type: 'fraction',
+   },
+   navigation: {
+     nextEl: '.swiper-button-next',
+     prevEl: '.swiper-button-prev',
+   },
+ });
+
+ $('.swiper-pagination-fraction').each(function() {
+	 var text = $(this).html();
+	 $(this).html(text.replace(' / ', ' '));
+
+ });
+</script>
+
+<style>
+.recobell_cart .tit {border:none;}
+.recobell_cart ul li a em.price {font-family: font_gs, sans-serif; display: block;overflow:hidden;padding-top:15px;font-size: 14px;line-height: 20px;}
+.recobell_cart ul li a em.price span.dc{color: #777;text-decoration: line-through;float: left; font-size:12px;}
+.recobell_cart ul li a em.price span.sale{font-weight:bold;color: #000000;font-size: 14px;float: left;margin-right: 5px;}
+.recobell_cart ul li a em.price span.pc{float: left;font-weight: bold;color: #da2128;font-size: 14px;margin-right: 5px;}
+_:-ms-fullscreen, :root .recobell_cart.swiper-container .swiper-button-area{top:auto;}
+_:-ms-fullscreen, :root .recobell_cart.swiper-container .swiper-button-next{top:auto;}
+_:-ms-fullscreen, :root .recobell_cart.swiper-container .swiper-button-prev{top:auto;}
+.recobell_cart.swiper-container .swiper-pagination {font-size:18px; line-height:20px;}
+.recobell_cart.swiper-container .swiper-pagination span.swiper-pagination-current {font-family: font_gs, sans-serif; font-weight:bold; color: #000; margin-right: 8px;}
+.recobell_cart.swiper-container .swiper-pagination span.swiper-pagination-total {font-family: font_gs, sans-serif; font-weight:normal; color: #777;}
+.recobell_cart.swiper-container .swiper-button-area {position:absolute;width:232px;left:50%;margin-left:-116px;bottom:0;height:44px;}
+.recobell_cart.swiper-container .swiper-button-next {position:absolute; width:44px; height:44px; background:url('https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/icon_swiper_arr03.png') no-repeat; background-position:-88px 0; overflow:hidden; font-size:0; line-height:0px; text-indent:-9999px; opacity: 1;}
+.recobell_cart.swiper-container .swiper-button-prev {position:absolute; width:44px; height:44px; background:url('https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/icon_swiper_arr03.png') no-repeat; background-position:-44px 0; overflow:hidden; font-size:0; line-height:0px; text-indent:-9999px; opacity: 1;}
+.recobell_cart.swiper-container .swiper-button-next.swiper-button-disabled {position:absolute; width:44px; height:44px; background-position:100% 0; overflow:hidden; font-size:0; line-height:0px; text-indent:-9999px; opacity: 1;}
+.recobell_cart.swiper-container .swiper-button-prev.swiper-button-disabled {position:absolute; width:44px; height:44px; background-position:0 0; overflow:hidden; font-size:0; line-height:0px; text-indent:-9999px; opacity: 1;}
+.recobell_cart.swiper-container .swiper-button-next, .swiper-button-prev {display: inline-flex;}
+</style>
+
+<form id="checkOrderProductForm" name="checkOrderProductForm" action="/ht/order/checkOrderSheetProduct"></form>
+
+
+        </div>
+        <!-- //컨텐츠 -->
+    </div>
+    <!-- //Container -->
+    
+
+<!-- footer -->
+<div id="footer">
+	<div class="util">
+		<div class="util_cont">
+			<ul>
+				<li><a href="#n">회사소개</a></li>
+				<li><a href="#n">채용정보</a></li>
+				<li><a href="#n">핫트합니다</a></li>
+				<li><a href="#n">매장안내</a></li>
+				<li><a href="#n">제휴/광고안내</a></li>
+				<li><a href="#n">이용약관</a></li>
+				<li><a href="#n"><strong>개인정보처리방침</strong></a></li>
+				<li><a href="#n" _onclick="window.open(this.href,'popupPrizewinner','width=400,height=365');return false;" title="새 창으로 열림">이메일수집거부</a></li>
+			</ul>
+			<div class="family_site">
+				<p>패밀리 사이트</p>
+				<ul>
+                    <li><a href="#n" title="새 창 열림">교보생명</a></li>
+                    <li><a href="#n" title="새 창 열림">교보문고</a></li>
+                    <li><a href="#n" title="새 창 열림">교보증권</a></li>
+                    <li><a href="#n" title="새 창 열림">교보정보통신</a></li>
+                    <li><a href="#n" title="새 창 열림">교보리얼코</a></li>
+                    <li><a href="#n" title="새 창 열림">교보악사자산운용</a></li>
+                    <li><a href="#n" title="새 창 열림">교보라이프플래닛생명</a></li>
+                    <li><a href="#n" title="새 창 열림">KCA 손해사정</a></li>
+                    <li><a href="#n" title="새 창 열림">생보부동산신탁</a></li>
+                    <li><a href="#n" title="새 창 열림">대산문화재단</a></li>
+                    <li><a href="#n" title="새 창 열림">교보생명교육문화재단</a></li>
+                    <li><a href="#n" title="새 창 열림">대산농촌문화재단</a></li>
+                    <li><a href="#n" title="새 창 열림">교보아카데미</a></li>
+                    <li><a href="#n" title="새 창 열림">독서진단리드</a></li>
+                    <li><a href="#n" title="새 창 열림">에듀교보문고</a></li>					
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="inner">
+		<div class="cont left">
+			<div class="cs_center">
+				<strong class="font_t">1661-1112</strong>
+				<span>고객센터: 평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
+				<dl>
+					<dt><a href="#n"><span>SOS 상담</span></a></dt>
+					<dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
+				</dl>
+			</div>
+			<h2>교보핫트랙스㈜</h2>
+			<span>대표이사 박영규</span>
+			<span>사업자등록번호 : 102-81-29258 <a href="#n" _onclick="window.open('http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1028129258', 'communicationViewPopup', 'width=750, height=700;');return false;" title="새 창으로 열림">사업자정보확인 &gt;</a></span>
+			<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+			<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+			<span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
+		</div>
+		<div class="cont right">
+			<ul class="sns">
+				<li><a href="#n"><img src="/images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+			</ul>
+               <div class="mobile">
+               		<a href="#n" class="font_t ios">APP STORE</a>
+					<a href="#n" class="font_t and">PLAY STORE</a>
+               </div>
+			<ul class="copyright">
+				<li><a href="#n"><img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+				<li><a href="#n"><img src="/images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+			</ul>
+			<span class="payment"><em class="font_t">LGU+</em><a href="#n" _onclick="goValidEscrow('hottracks');">서비스 가입사실 확인 &gt;</a></span>
+			<span class="txt">고객님은 안전거래를 위해 현금 등으로 5만원 이상 결제 시 저희 쇼핑몰에서<br/>가입한 LG데이콤의 구매 안전서비스를 이용하실 수 있습니다.</span>
+		</div>
+	</div>
+</div>
+<!--// footer -->
+</div>
+</body>
+</html>

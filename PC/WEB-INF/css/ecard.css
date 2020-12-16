@@ -1,0 +1,223 @@
+@charset "utf-8";
+
+div.ecard-main h3 {
+	padding: 13px 0 10px 14px;
+}
+div.ecard-main p.title-sub {
+	padding: 0 0 32px 14px;
+}
+div.card-navi {
+	float: left;
+	padding: 0 19px 0 22px;
+	width: 712px;
+	border: 1px solid #eae8e8;
+	background: #f7f7f7;
+}
+div.card-navi ul {
+	float: left;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/ecard/ecard_navi_bg.gif") no-repeat 141px 11px;
+}
+div.card-navi ul li {
+	float: left;
+	padding: 11px 32px 0 0;
+}
+div.card-navi ul li img {
+	vertical-align: top;
+}
+div.card-navi p {
+	float: right;
+	padding: 6px 0;
+}
+div.card-list {
+	float: left;
+	margin: 0 0 0 -17px;
+	display: inline;
+	padding: 11px 0 0;
+	width: 772px;
+}
+div.card-list ul {
+	float: left;
+}
+div.card-list ul li {
+	float: left;
+	padding: 30px 0 0 17px;
+	width: 240px;
+	border-bottom: 1px solid #eaeaea;
+}
+div.card-list ul li p {
+	width: 240px;
+	text-align: center;
+}
+div.card-list ul li p.photo img {
+	width: 240px;
+	height: 134px;
+	vertical-align: top;
+}
+div.card-list ul li p.card-name {
+	padding: 8px 0 15px;
+	font-size: 0.9em;
+}
+div.card-list ul li p.card-con {
+	padding: 0 0 18px;
+}
+
+/*my-card-area*/
+
+div.my-card-area {
+	float: left;
+	padding: 35px 0 0;
+	width: 755px;
+}
+div.my-card-area {
+	float: left;
+}
+div.my-card-area ul.menu {
+	float: left;
+	padding: 0 0 8px 6px;
+	width: 749px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/ecard/line_bg.gif") repeat-x 0 26px;
+}
+div.my-card-area ul.menu li {
+	float: left;
+	font-weight: bold;
+	border-top: 1px solid #eaeaea;
+	border-left: 1px solid #eaeaea;
+	background: #f7f7f7;
+}
+div.my-card-area ul.menu li a {
+	display: block;
+	text-align: center;
+	padding: 7px 0 0;
+	width: 111px;
+	height: 18px;
+	font-size: 0.9em;
+	color: #707070;
+}
+div.my-card-area ul.menu li a.end-menu {
+	border-right: 1px solid #eaeaea;
+}
+div.my-card-area ul.menu li.selected  {
+	background: none;
+}
+div.my-card-area ul.menu li.selected a {
+	height: 19px;
+	color: #a31112;
+	background: #fff;
+}
+
+/*my-card-list*/
+
+div.my-card-list {
+	clear: both;
+	padding: 0 0 100px;
+	width: 755px;
+}
+div.my-card-list table {
+	width: 100%;
+	border-bottom: #dbdbdb;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/ecard/line_bg.gif") repeat-x  0 bottom;
+}
+div.my-card-list table caption {
+	width: 0;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	visibility: hidden;
+}
+div.my-card-list table thead tr th {
+	padding: 8px 0;
+	font-size: 0.9em;
+	background: #ededed;
+	color: #363636;
+}
+div.my-card-list table tbody tr td {
+	padding: 8px 0 8px;
+	height: 23px;
+	border-top: 1px dotted #ccc;
+}
+div.my-card-list table.type01 tbody tr td {
+	padding: 12px 0 8px;
+	height: 23px;
+	border-top: 1px dotted #ccc;
+}
+div.my-card-list table tbody tr:first-child td ,
+div.my-card-list table tbody tr.first-child td {
+	border-top: 0;
+}
+div.my-card-list table thead tr th:last-child ,
+div.my-card-list table thead tr th.last-child {
+	color: #ededed;
+}
+div.my-card-list table tbody tr td {
+	text-align: center;
+	font-size: 0.9em;
+
+}
+div.my-card-list table thead tr th.card-title ,
+div.my-card-list table tbody tr td.card-title ,
+div.my-card-list table tbody tr td.del-card {
+	text-align: left;
+}
+div.my-card-list table tbody tr td.del-card a {
+	display: block;
+	margin: -3px 0 0;
+}
+div.my-card-list table thead tr th.card-title {
+	padding-left: 92px;
+	font-size: 0.9em;
+}
+div.my-card-list table tbody tr td.card-title {
+	padding-left:80px;
+}
+div.my-card-list table tbody tr td.card-title a {
+	font-size: 1em;
+}
+div.my-card-list table tbody tr td.card-sample img {
+	width: 50px;
+	height: 50px;
+}
+
+
+/*register-image*/
+
+div.register-image {
+	float: left;
+	margin: 21px 0 0;
+	width: 753px;
+	border: 1px solid #eaeaea;
+}
+div.register-image dl {
+	float: left;
+	padding: 20px 125px 23px 59px;
+}
+div.register-image dl dt ,
+div.register-image dl dd {
+	float: left;
+}
+div.register-image dl dt {
+	clear: both;
+	padding: 4px 0 0;
+	width: 97px;
+}
+div.register-image dl dd {
+	width: 472px;
+}
+div.register-image dl dd input {
+	margin: 0 0 10px;
+	padding: 1px;
+	width: 468px;
+	height: 17px;
+	border: 1px solid #d2d2d2;
+}
+div.register-image ul {
+	padding: 0 0 17px 156px;
+}
+div.register-image ul li {
+	font-size: 0.9em;
+	color: #707070;
+}
+div.btn-register {
+	clear: both;
+	padding: 15px 0 0;
+	text-align: center;
+}

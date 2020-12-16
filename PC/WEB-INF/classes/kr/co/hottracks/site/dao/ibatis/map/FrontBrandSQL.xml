@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="FrontBrandSQL">
+    <!-- 
+        작성자: 장진용
+        작성일: 2014-09-01
+        기능: 해당 시퀀스의 음반 리뷰 반환
+    -->
+    <select id="getBrandWithImage" parameterClass="kr.co.hottracks.site.model.common.sellGift.SellGiftCriteria" resultClass="kr.co.hottracks.site.model.common.brand.BrandExt">
+        /* FrontBrandSQL.getBrandWithImage */
+        SELECT BRAND_ID          brandId
+             , BRAND_NAME        brandName
+             , NVL(BRAND_ENG_NAME, BRAND_NAME)    brandEngName
+             , BRAND_SMRY        brandSmry
+             , BRAND_DESC        brandDesc
+             , BRAND_DISP_YN     brandDispYn
+             , REGST_ADMIN_ID    regstAdminId
+             , REGST_DTM         regstDtm
+             , DISP_CTGR_ID      dispCtgrId
+             , MNGR_MD_ID        mngrMdId
+             , HAN_GBN_CODE      hanGbnCode
+             , ENG_GBN_CODE      engGbnCode
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0291')    brandImageC0291
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0292')    brandImageC0292
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0293')    brandImageC0293
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0294')    brandImageC0294
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0295')    brandImageC0295
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0296')    brandImageC0296
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0297')    brandImageC0297
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0298')    brandImageC0298
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C0299')    brandImageC0299
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C029A')    brandImageC029A
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C029B')    brandImageC029B
+             , (SELECT SA.BRAND_IMAGE_URL FROM TB_BRAND_IMAGE SA WHERE SA.BRAND_ID = B.BRAND_ID AND SA.BRAND_IMAGE_CODE = 'C029C')    brandImageC029C
+             , nvl((SELECT COUNT(1) FROM TB_WISH_PRODUCT T WHERE T.WISH_GBN = 'B' AND T.BRAND_ID = #brandId# AND T.MALL_ID = #mallId#), 0)   wishBrandCnt
+             , nvl((SELECT COUNT(1) FROM TB_WISH_PRODUCT T WHERE T.WISH_GBN = 'B' AND T.BRAND_ID = #brandId# AND T.MALL_ID = #mallId# AND T.USER_NUM = #userNum#), 0)   wishUserBrandCnt
+          FROM TB_BRAND B
+         WHERE BRAND_ID = #brandId#
+    </select>
+</sqlMap>

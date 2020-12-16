@@ -1,0 +1,196 @@
+@charset "utf-8"; 
+
+/* customer */
+#customer {width:780px; overflow:hidden; float:right;}
+#customer .contents {width:780px; overflow:hidden; float:right;}   
+#customer .contents .sub_stitle {width:100%; overflow:hidden; padding:15px 0 40px 0; font-size:11px; line-height:14px;}
+#customer .contents .sub_stitle p {line-height:14px;}
+#customer .contents .sub_stitle_bg {width:100%; height:220px; padding:15px 0 0 0; font-size:11px; line-height:14px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/sinfor_titlebg.gif") -7px 16px no-repeat;}
+#customer .contents .sub_stitle_bg p {line-height:14px;}
+#customer .contents .sub_stitle_bg02 {width:100%; height:220px; padding:0; font-size:11px; line-height:14px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/sinfor_titlebg_02.gif") 0 40px no-repeat;}
+#customer .order_infor_tab {width:100%; height:28px; position:relative; margin-bottom:15px; }
+#customer .contents span.newbtn_035 {overflow:hidden; margin-bottom:6px !important;}
+#customer .contents .newbtn_016 {vertical-align:middle; margin-left:4px;}
+
+/* 서비스안내 */
+#customer .box_img04 {width:780px; height:66px; position:relative; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/sinfor_img04.gif") 0 0 no-repeat;}
+#customer .box_img04 .newbtn_017 {position:absolute; top:25px; right:35px;}
+#customer .photo_newtable04 {width:auto; border-top:0px solid #a31112; border-bottom:0px solid #a31112; }
+#customer .photo_newtable04 ul.photo {width:auto; overflow:hidden; border-top:0px solid #cacaca; padding:25px 0 10px 0;}
+#customer .photo_newtable04 ul.photo li {float:left; width:33%; overflow:hidden; text-align:center; font-size:11px;}
+#customer .photo_newtable04 ul.photo li img {width:222px; height:107px; margin:0 0 10px 0;}
+#customer .photo_newtable04 ul.photo li .download_btn {width:104px; height:16px; display:block; margin:0 auto; padding-top:4px; margin-bottom:8px; font-size:11px; color:#fff; background:#b2b2b2; text-decoration:none;}
+#customer .photo_newtable04 ul.photo li .dfont {font-size:10px; font-family:Verdana; line-height:14px; padding:2px 0 5px 0;} 
+#customer .contents .txtbox {width:auto; overflow:hidden; border:2px solid #ebeaea; background:#fff;}
+#customer .contents .txtbox p.title {font-weight:bold; padding:20px 0 0 32px;}
+#customer .contents .txtbox p.title span.tip {vertical-align:top; width:37px; height:15px; margin:3px 6px 0 0; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/icon_tip.gif") 0 0 no-repeat; float:left;}
+#customer .contents .txtbox p.title span.txt {vertical-align:top; font-size:11px; display:inline-block; padding-top:5px; color:#da2128;} 
+#customer .contents .txtbox ul { width:auto; padding:8px 0 20px 20px; } 
+#customer .contents .txtbox ul li { height:auto; font-size:11px; color:#707070; line-height:16px; padding-bottom:5px;}
+#customer .contents .txtbox .de { width:auto; padding:8px 0 20px 50px; } 
+#customer .contents .txtbox .de ul { width:auto; padding:0 0 0 20px; } 
+#customer .contents .txtbox .de ul li { height:auto; font-size:11px; color:#707070; line-height:14px; padding-bottom:2px;}
+
+#customer .contents .txtbox .box_h01 {height:460px; position:relative;}
+#customer .contents .txtbox .box_h02 {height:190px; position:relative;}
+
+#customer .contents .txtbox .one {width:370px; padding:22px 0 20px 0; float:left; }  
+#customer .contents .txtbox .one ul { width:auto; padding:0 0 0 20px; } 
+#customer .contents .txtbox .one ul li { height:auto; font-size:11px; color:#707070; line-height:14px; padding-bottom:2px;}
+#customer .contents .txtbox .two {width:380px; padding:22px 0 20px 5px;  float:left;}  
+#customer .contents .txtbox .two ul { width:auto; padding:0 0 0 20px; } 
+#customer .contents .txtbox .two ul li { height:auto; font-size:11px; color:#707070; line-height:14px; padding-bottom:2px;}
+
+#customer .contents .txtbox p.titlem {font-weight:bold; padding:6px 0 7px 3px;}
+#customer .contents .txtbox p.titlem span.tip {vertical-align:top; width:37px; height:15px; margin:3px 6px 0 0; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/icon_tip.gif") 0 0 no-repeat; float:left;}
+#customer .contents .txtbox p.titlem span.txt {vertical-align:top; font-size:11px; display:inline-block; padding-top:5px; color:#da2128;} 
+#customer .contents .txtbox ul.top { width:auto; padding:8px 0 20px 20px !important; } 
+#customer .contents .txtbox ul.top li { height:auto; font-size:11px; color:#707070; line-height:16px; padding-bottom:5px;}
+
+#customer .contents .mp_box2 {width:778px; height:60px; padding:0; position:relative; margin-bottom:35px;  border:1px solid #c2c2c2; background:#fafafa;}
+#customer .contents .mp_box2 .txt { padding:15px 0 0 30px; font-size:11px;}
+#customer .contents .mp_box2 .txt .title{color:#363636; line-height:18px;}
+
+#customer div.packing {width:780px; overflow:hidden; padding:0;} 
+#customer div.packing ul {padding: 36px 0 74px; width: 720px; position:relative; margin:0 auto;}
+#customer div.packing ul li { float: left; padding: 0 2px 30px 2px; width: 236px; height: 153px; }
+#customer div.font_box {width:780px; height:462px; position:relative; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/customer_fontbg.gif") 0 0 no-repeat;}
+#customer div.font_box .title01 {width:100px; height:20px; position:absolute; top:16px; left:25px;}
+#customer div.font_box .font_01 {width:200px; overflow:hidden; position:absolute; top:60px; left:40px;}
+#customer div.font_box .font_01 li {height:24px;}
+#customer div.font_box .title02 {width:100px; height:20px; position:absolute; top:16px; left:400px;}
+#customer div.font_box .font_02 {width:200px; overflow:hidden; position:absolute; top:60px; left:444px;}
+#customer div.font_box .font_02 li {height:24px;}
+
+#customer .order_infor_tab02 {width:100%; height:28px; position:relative; margin-bottom:10px; }
+#customer .order_infor_tab02 ul {width:100%; height:29px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/bg_tab.gif") 0 0 repeat-x;}
+#customer .order_infor_tab02 ul li {width:auto; height:29px; float:left; font-weight:bold; text-align:center; font-size:11px; letter-spacing:-1px;}
+#customer .order_infor_tab02 ul li a.on {width:126px; height:19px; float:left; padding-top:8px; color:#fff; text-decoration:none; border:1px solid #da2128; background:#da2128; }
+#customer .order_infor_tab02 ul li a.off {width:125px; height:19px; float:left; font-weight:normal; padding-top:8px; color:#707070; text-decoration:none; border:1px solid #c2c2c2; margin-right:-1px;} 
+#customer .order_infor_tab02 ul li.last a.off {width:125px; height:19px; float:left; font-weight:normal; padding-top:8px; color:#707070; text-decoration:none; border:1px solid #c2c2c2; margin-right:-1px; _margin-right:0px;}
+
+/* 공지사항 */
+#customer .order_infor_title3 {width:100%; height:30px; position:relative; margin-bottom:6px; }
+#customer .order_infor_title3 div {width:510px; height:20px; position:relative; padding-left:6px; }
+#customer .order_infor_title3 em { position:absolute; top:6px; right:0; font-size:11px; color:#555; }
+#customer .order_infor_title3 em .textbox {width:180px; height:19px;}
+#customer .order_infor_title3 em select {width:85px; height:19px;}
+
+/* 검색박스 */
+#customer .contents .mp_box {width:778px; height:110px; padding:0; position:relative; margin-bottom:35px;  border:1px solid #c2c2c2; background:#fafafa;}
+#customer .contents .mp_box_no {width:778px; overflow:hidden; padding:0; position:relative; margin-bottom:35px;  border:1px solid #c2c2c2; background:#fafafa;} 
+#customer div.faq_search {width:738px; height:45px; padding-top:25px; margin:0 auto; border-bottom:1px solid #ddd;}
+#customer div.faq_search_no {width:738px; height:45px; padding:25px 0 12px 0; margin:0 auto; border-bottom:0px solid #ddd;}
+#customer div.faq {width:450px; overflow:hidden; margin:0 auto;}
+#customer div.faq dl {width:450px; background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/help/faq_search_line_bg.gif") repeat-x 0 51px; }
+#customer div.faq dl dt {width:100px; float: left; padding: 11px 0 16px; }
+#customer div.faq dl dt img { vertical-align: middle; }
+#customer div.faq dl dd {width: 338px; height: 26px; float: left;  text-align: right; border: 4px solid #b11111; }
+#customer div.faq dl dd fieldset legend { width: 0; height: 0; line-height: 0; font-size: 0; visibility: hidden; }
+#customer div.faq dl dd fieldset input.textbox { margin: 0 -4px 0 0; padding:3px 3px 0 3px; width: 274px; height: 21px; border: 0; }
+#customer div.faq dl dd fieldset input { vertical-align: top; }
+#customer .contents .mp_box ul.search_txt {width:380px; height:15px; margin:0 auto; padding-top:10px;}
+#customer .contents .mp_box ul.search_txt li {display:inline; font-size:11px; color:#636363; padding-left:6px;} 
+#customer .contents .mp_box ul.search_txt li span {font-weight:bold;} 
+#customer .contents .mp_box ul.search_txt li a {text-decoration:none;} 
+
+#customer .contents .mp_box .search_txt {width:auto; height:15px; text-align:center; padding-top:10px;font-size:11px; color:#636363;} 
+#customer .contents .mp_box .search_txt span {font-weight:bold;} 
+#customer .contents .mp_box .search_txt a {text-decoration:none; padding-left:6px;} 
+
+/* SOS상담 */
+#customer .contents .sos_box {width:780px; height:299px; position:relative; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/sos_bg01.gif") 0 0 no-repeat; }
+#customer .contents .sos_box .boxfl {width:328px; height:290px; position:absolute; top:0; left:0; }
+#customer .contents .sos_box .boxfl .text01 {width:260px; overflow:hidden; position:absolute; top:45px; left:40px; font-size:11px; line-height:16px; }
+#customer .contents .sos_box .boxfl a.btn1 {width:142px; height:48px; display:block; position:absolute; top:92px; left:118px; }
+#customer .contents .sos_box .boxfr {width:390px; height:290px; position:absolute; top:0; left:390px;}
+#customer .contents .sos_box .boxfr .text01 { width:250px; overflow:hidden; position:absolute; top:45px; left:60px; font-size:11px; line-height:16px; }
+#customer .contents .sos_box .boxfr .btn1 { width:142px; height:48px; position:absolute; top:92px; left:123px;}
+#customer .contents .sos_box .boxfr .text02 {width:290px; overflow:hidden; position:absolute; top:210px; left:60px; font-size:11px; line-height:16px; }
+#customer .contents .sos_box .boxfr .btn2 { width:82px; height:20px; position:absolute; top:243px; left:50px;}
+
+#customer .contents .sos_box .boxfr_02 {width:390px; height:290px; position:absolute; top:0; left:390px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/sos_bg03.gif") right 0 no-repeat; }
+#customer .contents .sos_box .boxfr_02 .text01 {width:250px; overflow:hidden; position:absolute; top:45px; left:60px; font-size:11px; line-height:16px; }
+#customer .contents .sos_box .boxfr_02 .btn1_1 {width:122px; height:48px; position:absolute; top:92px; left:63px;}
+#customer .contents .sos_box .boxfr_02 .btn1_2 {width:122px; height:48px; position:absolute; top:92px; left:203px;}
+#customer .contents .sos_box .boxfr_02 .text02 {width:290px; overflow:hidden; position:absolute; top:210px; left:60px; font-size:11px; line-height:16px; }
+#customer .contents .sos_box .boxfr_02 .btn2 { width:82px; height:20px; position:absolute; top:243px; left:50px;}
+
+#customer .contents .txt_infor {width:auto; height:93px; border:1px solid #e1e1e1; padding:15px 15px 13px 20px; margin-bottom:15px; overflow:auto; overflow-x:hidden;}
+#customer .contents .txt_infor div {font-size:11px; line-height:16px;}
+#customer .contents .txt_infor div.infor_box p {font-weight:bold; color:#898989; line-height:20px;}
+#customer .contents .txt_infor div.infor_box p.top {margin-top:25px; line-height:20px;}  
+
+#customer .contents .sos_box02 {width:780px; height:174px; position:relative; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/sos_bg02.gif") 0 0 no-repeat; }
+#customer .contents .sos_box02 .box01 { width:185px; overflow:hidden; position:absolute; top:40px; left:77px;}
+#customer .contents .sos_box02 .box01 label { width:32px; height:20px; float:left; display:inline;}
+#customer .contents .sos_box02 .box01 input { width:150px; height:19px; float:left; display:inline; border:1px solid #cccccc;}
+#customer .contents .sos_box02 .box02 {width:340px; overflow:hidden; position:absolute; top:40px; left:295px;}
+#customer .contents .sos_box02 .box02 label { width:62px; height:20px; float:left; display:inline;}
+#customer .contents .sos_box02 .box02 span { width:20px; height:20px; float:left; display:inline; text-align:center; padding-top:4px;}
+#customer .contents .sos_box02 .box02 input { width:96px; height:19px; float:left; display:inline; border:1px solid #cccccc;}
+#customer .contents .sos_box02 .box02 a.btn1 { width:46px; height:22px; display:block; position:absolute; top:0; right:10px;} 
+#customer .contents .sos_box02 .box02 input.imgbtn { width:46px; height:22px; border:0;} 
+#customer .contents .sos_box02 .text01 {width:640px; overflow:hidden; position:absolute; top:109px; left:66px; font-size:11px; line-height:16px; } 
+
+#customer .contents .newbtn_082 {vertical-align:middle; margin-left:6px;}
+#customer .contents .newbtn_083 {vertical-align:middle; margin-left:6px;}
+#customer .contents textarea.in01 {width:630px; height:130px; border:1px solid #cccccc; padding:4px; font-size:11px;}
+
+
+/* 이용가이드 */
+.ms_left {width:440px; overflow:hidden; float:left;}
+.ms_right {width:315px; overflow:hidden; float:right;}
+.ms_right .topbox {padding:0 25px 45px 10px; border:0px solid #e4e4e4;}
+.ms_right .topbox li { background:none;  height: auto; padding-bottom:5px;}
+.ms_right .topbox li .nimg {vertical-align:middle; padding-right:8px;}
+.ms_right .topbox li span {font-size:11px; line-height:18px;}
+.ms_right .topbox li.top {padding-top:20px;}
+.ms_right .topbox li.m01 img {padding:0 8px 0 49px; vertical-align:middle;}
+.ms_right .topbox li.m02 img {padding:0 5px 0 30px; vertical-align:middle;}
+.ms_right .topbox li.m03 img {padding:0 14px 0 42px; vertical-align:middle;}
+.ms_right .topbox li em {color:#363636; font-weight:bold; font-size:11px; padding:0 13px 0 45px;}
+.ms_right .bu_list {width:259px; overflow:hidden; border:2px solid #e4e4e4; padding:25px 25px 15px 25px;}
+.ms_right .bu_list li {background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot.gif") no-repeat 4px 7px; _background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot.gif") no-repeat 4px 7px; padding-left:10px; font-size:11px; color:#7b7b7b; line-height:14px; padding-bottom:6px;}
+
+
+/* 다운로드 매니저 */
+.listsinfor_box {padding:25px 22px 15px 20px; margin:10px 9px 10px 0; width:410px; border: 2px solid #e4e4e4; float:left;}
+.listsinfor_box .bu_list li { background:none;  height: auto; padding-bottom:5px;}
+.listsinfor_box .bu_list li img {vertical-align:middle; padding-right:8px;}
+.listsinfor_box .bu_list li span {font-size:11px; line-height:18px;}
+
+.listsinfor_boxbg_s {padding:20px 20px 20px 22px; margin:10px 0; width:269px; float:left; border:1px solid #e4e4e4; background:#f7f7f7; font-size:11px;}
+.listsinfor_boxbg_s p {padding-bottom:10px;}
+.listsinfor_boxbg_s .hline {padding:0px; line-height:16px;}
+.listsinfor_boxbg_s .hline a {text-decoration:none !important; color:#DA2128 !important;}
+
+/* 음악상품권 */
+.minfor_table {width:100%; border-top:0px solid #a31112; position:relative;}  
+.minfor_table thead th {height:26px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/bg_customer16_01.gif") 0 0 no-repeat;} 
+.minfor_table thead th.bg02 {height:37px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/bg_customer16_02.gif") 0 bottom no-repeat;} 
+.minfor_table thead th.bg03 {height:37px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/customer/bg_customer16_03.gif") 0 bottom no-repeat;}
+.minfor_table tbody td {padding:15px 0 13px 20px; font-size:11px; line-height:14px; text-align:left; position:relative; border-right:1px solid #dedede; border-bottom:1px solid #dedede; } 
+.minfor_table tbody td.end {padding:15px 0 13px 20px; font-size:11px; line-height:14px; text-align:left; position:relative; border-right:0px solid #dedede; border-bottom:1px solid #dedede;} 
+.minfor_table tbody span {width:100px; float:left; } 
+.minfor_table tbody em {width:60px; float:left; color:#f26522; font-weight:bold;}  
+.minfor_table tbody em.tow {width:60px; float:left; color:#f26522; font-weight:bold; padding-top:6px;}  
+.minfor_table tbody em.troo {width:60px; float:left; color:#f26522; font-weight:bold; padding-top:14px;}    
+.txtline_cl {font-size:11px; padding:8px 0 0 6px; color:#f26522; position:relative; height:30px;}
+.txtline_cl a { position:absolute; top:8px; right:6px;}
+
+/* 음원다운로드방법 */
+.nor_boxs {width:780px; overflow:hidden; padding-bottom:40px;}
+.nor_boxs .mc_title {padding:0 0 20px 6px;}
+.nor_boxs .imgtm {padding:10px 0;}
+.nor_boxs .bu_list {width:100%; overflow:hidden; padding-left:6px;}
+.nor_boxs .bu_list li {height:20px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot.gif") no-repeat 4px 5px; _background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot.gif") no-repeat 4px 7px; padding-left:10px; font-size:11px; color:#7b7b7b;}
+.nor_boxs .bu_list li span {color:#f26522; font-weight:bold;}  
+.nor_boxs .bu_list li img {padding:0; margin:0; vertical-align:middle;}
+.nor_boxs .listsinfor_box {width:753px; overflow:hidden; border:1px solid #e4e4e4; padding:15px 15px 10px 10px;}
+.nor_boxs .listsinfor_box .bu_list li {height:15px; background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot.gif") no-repeat 4px 7px; _background:url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/dot.gif") no-repeat 4px 7px; padding-left:10px; font-size:11px; color:#7b7b7b;}
+
+.listsinfor_boxbg {padding:20px 20px 20px 22px; margin:10px 0;  border:1px solid #e4e4e4; background:#f7f7f7; font-size:11px; margin-top:-10px;}
+.listsinfor_boxbg p {padding-bottom:10px;}
+.listsinfor_boxbg .hline {padding:0px;}
+.listsinfor_boxbg .hline a {text-decoration:none !important; color:#DA2128 !important;}

@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RecordProductSQL">
+    <typeAlias alias="recordProductExt" type="kr.co.hottracks.site.model.common.record.RecordProductExt"/>
+    <typeAlias alias="recordProductCriteria" type="kr.co.hottracks.site.model.common.record.RecordProductCriteria"/>
+    <typeAlias alias="planProductCriteria" type="kr.co.hottracks.site.model.common.record.PlanProductCriteria"/>
+    <typeAlias alias="eventImage" type="kr.co.hottracks.site.model.common.event.EventImage"/>
+    <typeAlias alias="tempOptionExt" type="kr.co.hottracks.site.model.common.record.TempOptionExt"/>
+    <typeAlias alias="musDescript" type="kr.co.hottracks.site.model.backoffice.center.MusDescript"/>
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.10.10
+        기능 : 
+            음반코드를 기준으로 해당 음반의 상품코드를 반환함.
+    -->    
+    <select id="getSellPrdtBcodeByRcrdCd" parameterClass="string" resultClass="string">
+        select fc_rec_get_bcode_for_rcrd(#rcrdCd#) from dual
+    </select>
+    
+    
+    
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.05
+        기능 : 
+            프론트 상품 목록 공통 조건절
+        - 목록 전시에 필요한 최소한의 데이터로 구성함.
+        - 전시여부, 판매상태, 품절메일 알림 등의 공통 요소를 처리함.
+    -->
+    <sql id="commonFrontRecordSelect">
+	    select
+	        a.sell_prdt_bcode,
+	        a.rcrd_cd,
+	        c.stock_cnt_product, 
+	        fc_get_dc_price(a.sell_prdt_bcode,#mallId#) as price_real, 
+	        /* 해당 음반의 실제 프론트 전시 여부를 판단함. */  
+	        case
+	            /* 강제판매는 무조건 전시 */
+	            when a.rcrd_hard_sale_yn = 'Y' then 'Y'
+                /* 예약판매는 무조건 전시 */ 
+                when a.RCRD_STAT = '9' then 'Y'
+	            /* 한정판매는 무조건 전시 */
+	            when to_char(sysdate, 'YYYYMMDDHH24') >= nvl(a.rcrd_lsale_start_dth, '9999999999') and to_char(sysdate, 'YYYYMMDDHH24') &lt;= nvl(a.rcrd_lsale_end_dth, '0000000000') then 'Y'
+                /* 음반재고가 존재하는 경우와 존재하지 않는 경우로 분기 */
+                when c.stock_cnt_record > 0 then
+                    case
+                        when c.stock_cnt_product > 0 then 'Y'  /* 재고가 존재하면 전시 */
+                        else 'N'                               /* 재고가 존재하지 않으면 전시안함 */
+                    end
+                /* 음반 재고가 존재하지 않는 경우 마지막 상품코드를 전시함 */
+                when a.sell_prdt_bcode = b.sell_prdt_bcode then 'Y'
+                else 'N'
+            end as disp_yn 
+	    from tb_sell_product a
+	    inner join tb_record b on a.rcrd_cd = b.rcrd_cd and b.disp_yn = 'Y'
+	                          and a.sell_prdt_gbn in ('R', 'D') 
+	                          and a.disp_yn = 'Y'
+	                          and b.sell_prdt_bcode NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+	    inner join tb_rec_prod_stock_last c on a.sell_prdt_bcode = c.sell_prdt_bcode
+    </sql>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.10.11
+        기능 : 
+            프론트 카테고리별 상품 목록 정보 반환 - 공통 조건절
+    -->
+    <sql id="getFrontProductListForCategoryWhere">
+        <dynamic prepend="where">
+            <isNotEmpty property="ctgrId" removeFirstPrepend="true" prepend="and">
+                exists (
+                    select 1 from tb_product_category t1
+                    where
+                        t1.ctgr_id like #ctgrId#||'%' and 
+                        t1.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isNotEmpty>
+            <isNotEmpty property="rcrdStat" removeFirstPrepend="true" prepend="and">
+                b.rcrd_stat_code = #rcrdStat#
+            </isNotEmpty>
+            <isNotEmpty property="rcrdStatNotIn" removeFirstPrepend="true" prepend="and">
+               b.rcrd_stat_code not in (#rcrdStatNotIn#)
+            </isNotEmpty>
+            <isGreaterThan property="newStdDay" compareValue="0" removeFirstPrepend="true" prepend="and">
+               b.rlse_dt >= to_char((sysdate - #newStdDay#), 'YYYYMMDD')
+            </isGreaterThan>
+            <isNotEmpty property="impYn" removeFirstPrepend="true" prepend="and">
+               b.imp_yn = #impYn#
+            </isNotEmpty>
+            <isNotEmpty property="sellPrdtGbn" removeFirstPrepend="true" prepend="and">
+               a.sell_prdt_gbn = #sellPrdtGbn# 
+            </isNotEmpty>
+            <isGreaterThan property="searchLabelClassId" compareValue="0" removeFirstPrepend="true" prepend="and">
+                /* 레이블 입고안내 관련 검색 조건 */
+                exists (
+                    select 1 from tb_label_strg_info_prdt t1
+                    where 
+                        t1.label_class_id = #searchLabelClassId# and 
+                        t1.sell_prdt_bcode = a.sell_prdt_bcode 
+                )
+            </isGreaterThan>
+            <isEqual property="search3DBlurayYn" compareValue="Y" removeFirstPrepend="true" prepend="and">
+                /* 3D 블루레이에 대한 검색 조건 */
+                b.rcrd_name like '%3D%'
+            </isEqual>
+            <isEqual property="searchAudioLpBox" compareValue="audio" removeFirstPrepend="true" prepend="and">
+                /* AUDIO 항목에 대한 검색 조건 */
+                b.media_cd in ('C082A', 'C082B', 'C082C') 
+                <isEqual property="searchAudioLpBoxCate" compareValue="pop">
+                    and  
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '02' and t1.cate02cd != '07' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>
+                <isEqual property="searchAudioLpBoxCate" compareValue="jazz">
+                    and 
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '02' and t1.cate02cd = '07' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>
+                <isEqual property="searchAudioLpBoxCate" compareValue="classic">
+                    and 
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '03' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>
+            </isEqual>
+            <isEqual property="searchAudioLpBox" compareValue="lp" removeFirstPrepend="true" prepend="and">
+                /* LP 항목에 대한 검색 조건 */
+                b.media_cd in ('C0824')
+                <isEqual property="searchAudioLpBoxCate" compareValue="pop">
+                    and 
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '02' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>
+                <isEqual property="searchAudioLpBoxCate" compareValue="classic">
+                    and 
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '03' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>
+            </isEqual>
+            <isEqual property="searchAudioLpBox" compareValue="box" removeFirstPrepend="true" prepend="and">
+                /* BOX 항목에 대한 검색 조건 */
+                b.cd_count >= 4
+                <isEqual property="searchAudioLpBoxCate" compareValue="song">
+                    and 
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '01' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>
+                <isEqual property="searchAudioLpBoxCate" compareValue="pop">
+                    and 
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '02' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>
+                <isEqual property="searchAudioLpBoxCate" compareValue="classic">
+                    and 
+                    exists (
+                        select 
+                            1
+                        from tb_record_onoff_category_map t1
+                        inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                        where
+                            t1.cate01cd = '03' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                    )
+                </isEqual>                
+            </isEqual>
+        </dynamic>    
+    </sql>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.05
+        기능 : 
+            프론트 카테고리별 상품 목록 정보 반환 - 전시카테고리가 포함된 항목은 여기에서 가급적이면 모두 처리.
+            예약음반목록 정보도 같이 처리함. rcrdStat 파라미터로 처리함.
+            새로나온 음반도 같이 처리함.
+            => 실제 거의 대부분의 조건을 여기에서 같이 처리할 수 있을 것 같음. => exists조건절을 활용
+    -->
+    <select id="getFrontProductListForCategory" parameterClass="recordProductCriteria" resultClass="recordProductExt">
+		select
+		    a.rcrd_cd as rcrdCd, 
+		    a.sell_prdt_bcode as sellPrdtBcode, 
+            b.prvd_title as prvdTitle,  
+            CASE WHEN TO_CHAR(SYSDATE, 'YYYYMMDD') &lt;= b.SUB_COMMENTS_END_DT THEN b.RCRD_SUB_COMMENTS END as rcrdSubComments,  
+            b.sell_prdt_gbn as sellPrdtGbn,   
+            c.rcrd_name as rcrdName, 
+            nvl(b.prvd_title, b.prdt_name) as commTitle,                                            /* 일반제목 */
+            c.arti_name as artiName, 
+            (select t.maker_name from tb_rec_maker t where t.maker_cd = c.maker_cd) as makerName, 
+            c.rlse_dt as rlseDt, 
+            fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) as saleYn, 
+            fc_rec_get_stock_mail_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth) as outOfStockMailYn, 
+            b.prdt_sell_price as prdtSellPrice, 
+            fc_get_dc_price (a.sell_prdt_bcode, #mallId#) as priceReal, 
+            b.prdt_saved_rate as prdtSavedRate, 
+            b.rcrd_stat as rcrdStat, 
+            b.free_dlvy_yn as freeDlvyYn, 
+            b.rcrd_rlse_info as rcrdRlseInfo, 
+            fc_rec_get_review_count(a.rcrd_cd) as reviewCount, 
+            fc_rec_get_review_grade(a.rcrd_cd) as reviewGrade,  
+            /* (select fc_remove_html_tag(substr(t1.rcrd_desc, 0, 100)) from tb_rec_desc t1 where t1.rcrd_cd = a.rcrd_cd) as description, */     /* 상세설명 */
+            c.rtng_code as ratingCode,                                                                                  /* 연령등급 코드 */ 
+            c.imp_yn as impYn                                                                                           /* 수입여부 */ 
+		from (
+		    <include refid="commonFrontRecordSelect" />
+		    <include refid="getFrontProductListForCategoryWhere" />
+
+		    <isEmpty property="order">
+                order by a.regst_dtm desc
+		    </isEmpty>
+            <isNotEmpty property="order">
+                <isEqual property="order" compareValue="regstAsc"> order by a.regst_dtm asc </isEqual>
+                <isEqual property="order" compareValue="regstDesc"> order by a.regst_dtm desc </isEqual>
+                <isEqual property="order" compareValue="rlseAsc"> order by b.rlse_dt asc </isEqual>
+                <isEqual property="order" compareValue="rlseDesc"> order by b.rlse_dt desc </isEqual>
+                <isEqual property="order" compareValue="saleDesc"> order by a.sale_cnt_week desc </isEqual>
+            </isNotEmpty>
+		) a
+		inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode 
+		inner join tb_record c on a.rcrd_cd = c.rcrd_cd 
+		where 
+		    a.disp_yn = 'Y' 
+            <isEqual property="saleYn" compareValue="Y" removeFirstPrepend="true" prepend="and">
+               fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) = 'Y' 
+            </isEqual>          
+            <isEqual property="saleYn" compareValue="N" removeFirstPrepend="true" prepend="and">
+               fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) != 'Y' 
+            </isEqual>
+        <isNotEmpty property="order">
+            <isEqual property="order" compareValue="priceAsc"> order by a.price_real asc </isEqual>
+            <isEqual property="order" compareValue="priceDesc"> order by a.price_real desc </isEqual>
+        </isNotEmpty>
+    </select>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.05
+        기능 : 
+            프론트 카테고리별 상품 목록 개수 정보 반환
+            예약음반 목록 개수 정보 반환 => rcrdStat 조건 활용
+            새로나온 음반도 같이 처리함.
+    -->
+    <select id="getFrontProductListCountForCategory" parameterClass="recordProductCriteria" resultClass="int">
+        select
+            count(*) as cnt
+        from (
+	        select
+	            a.sell_prdt_bcode
+	        from (
+	            <include refid="commonFrontRecordSelect" />
+	            <include refid="getFrontProductListForCategoryWhere" />
+	        ) a
+	        inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode
+	        where 
+	            a.disp_yn = 'Y' 
+	            <isEqual property="saleYn" compareValue="Y" removeFirstPrepend="true" prepend="and">
+	               fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) = 'Y' 
+	            </isEqual>          
+	            <isEqual property="saleYn" compareValue="N" removeFirstPrepend="true" prepend="and">
+	               fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) != 'Y' 
+	            </isEqual>	            
+	     ) a
+	     where
+	       rownum <![CDATA[ < ]]> #topCount# + 1
+    </select>    
+    
+    
+    
+    
+    <!--
+        작성자 : 장진용
+        작성일 : 2012.03.08
+        기능 : 상품 상세
+        : 기존 RecordProductsSQL.getProduct와 분리
+        : 동호회에서 만든 dvd - [뿌리깊은나무]  위해 상품 상세와 상품목록 분리
+    -->
+    <select id="getSingleProduct" parameterClass="recordProductCriteria" resultClass="recordProductExt">
+        /* RecordProductsSQL.getSingleProduct */
+        select
+            a.rcrd_cd as rcrdCd,                                                                    /* 음반코드 */
+            a.sell_prdt_bcode as sellPrdtBcode,                                                     /* 상품코드 */
+            b.prvd_title as prvdTitle,                                                              /* 부제목 */
+            CASE WHEN TO_CHAR(SYSDATE, 'YYYYMMDD') &lt;= b.SUB_COMMENTS_END_DT THEN b.RCRD_SUB_COMMENTS END as rcrdSubComments,   /* 부가설명 */
+            b.sell_prdt_gbn as sellPrdtGbn,                                                         /* 상품구분 */
+            c.rcrd_name as rcrdName,                                                                /* 음반명, 상품명 */
+            nvl(b.prvd_title, b.prdt_name) as commTitle,                                            /* 일반제목 */
+            c.arti_name as artiName,                                                                /* 아티스트 이름 */
+            c.rec_arti_cd as artiCd,                                                                /* 아티스트 고유번호 */
+            (select t.maker_name from tb_rec_maker t where t.maker_cd = c.maker_cd) as makerName,   /* 제작사 */ 
+            (select t.label_name from tb_rec_label t where t.label_cd = c.label_cd) as labelName,   /* 레이블명 */
+            c.label_cd as labelCd,																	/* 레이블코드 */
+            (select t.media_name from tb_rec_media t where t.media_cd = c.media_cd) as mediaName,   /* 미디어명 */
+            c.rlse_dt as rlseDt,                                                                    /* 출시일 */
+            a.disp_yn as dispYn,                                                                    /* 전시여부 */
+            fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) as saleYn,   /* 판매상태 */ 
+            fc_rec_get_stock_mail_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth) as outOfStockMailYn, /* 품절안내메일 허용여부 */
+            b.prdt_sell_price as prdtSellPrice,                                                     /* 판매가 */ 
+            a.price_real as priceReal,                                                              /* 실제판매가 */
+            b.prdt_saved_rate as prdtSavedRate,                                                     /* 상품 추가 적립율 */
+            b.rcrd_stat as rcrdStat,                                                                /* 음반상태 */
+            b.free_dlvy_yn as freeDlvyYn,                                                           /* 무료배송여부 */
+            b.rcrd_rlse_info as rcrdRlseInfo,                                                       /* 출시예정정보 */
+            fc_rec_get_limit_yn(b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth) as lsaleYn,           /* 한정판매여부 */
+            b.limit_count limitCount,          														/* 한정수량 */
+            b.max_order_alw_count maxOrderAlwCount,													/* 최대 판매 수량 */
+            c.imp_yn as impYn,                                                                      /* 수입여부 */
+            c.cd_count as cdCount,                                                                  /* CD 개수 */
+            case when nvl(b.rcrd_md_memo_end_dt, '10000101') >= to_char(sysdate,'yyyymmdd') then b.rcrd_md_memo else null end as rcrdMdMemoReal,  /* MD 메모 실제 */ 
+            c.drctr as director,                                                                    /* 감독 */
+            c.actor as actor,                                                                       /* 출연자, 배우 */
+            c.lang as language,                                                                     /* 언어 */
+            c.captn as caption,                                                                     /* 캡션 */
+            c.scr as screen,                                                                        /* 화면, 스크린 */
+            c.sound as sound,                                                                       /* 음향, 사운드 */
+            c.scr_hour as screenHour,                                                               /* 상영시간 */
+            c.local_code as localCode,                                                              /* 지역코드 */
+            c.rtng_code as ratingCode,                                                              /* 등급 코드 */
+            b.rcrd_hard_sale_yn rcrdHardSaleYn,
+            c.cmpsr as composer,                                                                     /* 작곡가 */
+            c.prfmr as performer,                                                                    /* 연기자, 연주자 */
+            c.cndtr as conductor,                                                                    /* 지휘자 */
+            c.ocstr as orchestra,                                                                    /* 오케스트라 */
+            c.insmt as instrument,                                                                   /* 악기 */
+            c.vocal as vocal,                                                                         /* 보컬 */
+            c.rcrd_stat as rcrdStatus,
+            c.rcrd_year as rcrdYear
+        from (select
+                  a.sell_prdt_bcode,
+                  a.rcrd_cd,
+                  c.stock_cnt_product, 
+                  fc_get_dc_price(a.sell_prdt_bcode,#mallId#) as price_real, 
+                  /* 해당 음반의 실제 프론트 전시 여부를 판단함. */  
+                  case
+                      /* 강제판매는 무조건 전시 */
+                      when a.rcrd_hard_sale_yn = 'Y' then 'Y'
+                      /* 예약판매는 무조건 전시 */ 
+                      when a.RCRD_STAT = '9' then 'Y'
+                      /* 한정판매는 무조건 전시 */
+                      when to_char(sysdate, 'YYYYMMDDHH24') >= nvl(a.rcrd_lsale_start_dth, '9999999999') and to_char(sysdate, 'YYYYMMDDHH24') &lt;= nvl(a.rcrd_lsale_end_dth, '0000000000') then 'Y'
+                      /* 음반재고가 존재하는 경우와 존재하지 않는 경우로 분기 */
+                      when c.stock_cnt_record > 0 then
+                          case
+                              when c.stock_cnt_product > 0 then 'Y'  /* 재고가 존재하면 전시 */
+                              else 'N'                               /* 재고가 존재하지 않으면 전시안함 */
+                          end
+                      /* 음반 재고가 존재하지 않는 경우 마지막 상품코드를 전시함 */
+                      when a.sell_prdt_bcode = b.sell_prdt_bcode then 'Y'
+                      else 'N'
+                  end as disp_yn 
+              from tb_sell_product a
+              inner join tb_record b on a.rcrd_cd = b.rcrd_cd and b.disp_yn = 'Y' and a.sell_prdt_gbn in ('R', 'D') and a.disp_yn = 'Y'
+              inner join tb_rec_prod_stock_last c on a.sell_prdt_bcode = c.sell_prdt_bcode
+            <dynamic prepend="where">
+                <isNotEmpty property="sellPrdtBcode" removeFirstPrepend="true" prepend="and">
+                    a.sell_prdt_bcode = #sellPrdtBcode#
+                </isNotEmpty>
+                <isNotEmpty property="artiCd" removeFirstPrepend="true" prepend="and">
+                    b.rec_arti_cd = #artiCd#
+                </isNotEmpty>
+                <isNotEmpty property="sellPrdtGbn" removeFirstPrepend="true" prepend="and">
+                    a.sell_prdt_gbn = #sellPrdtGbn#
+                </isNotEmpty>
+            </dynamic>
+            
+            <isEmpty property="order">
+                order by a.regst_dtm desc
+            </isEmpty>
+            <isNotEmpty property="order">
+                <isEqual property="order" compareValue="regstAsc"> order by a.regst_dtm asc </isEqual>
+                <isEqual property="order" compareValue="regstDesc"> order by a.regst_dtm desc </isEqual>
+                <isEqual property="order" compareValue="saleDesc"> order by a.sale_cnt_week desc </isEqual>
+            </isNotEmpty>            
+        ) a
+        inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode 
+        inner join tb_record c on a.rcrd_cd = c.rcrd_cd
+        <dynamic prepend="where">
+            <isNotEmpty property="dispYn" removeFirstPrepend="true" prepend="and">
+                a.disp_yn = #dispYn#
+            </isNotEmpty>
+        </dynamic>
+    </select>    
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.07
+        기능 : 해당 아티스트의 상품 목록을 반환함
+    -->
+    <select id="getProductListForArtist" parameterClass="string" resultClass="recordProductExt">
+        /* RecordProductsSQL.getProductListForArtist */
+        SELECT *
+          FROM (SELECT SP.SELL_PRDT_BCODE    sellPrdtBcode   /* 상품코드 */
+                     , SP.RCRD_CD            rcrdCd          /* 음반코드 */
+                     , SP.SELL_PRDT_GBN      sellPrdtGbn     /* 상품구분 */
+                     , NVL(SP.PRVD_TITLE, SP.PRDT_NAME)   commTitle                          /* 일반제목 */
+                     , R.ARTI_NAME          artiName        /* 아티스트 이름 */
+                     , R.RTNG_CODE          ratingCode      /* 등급 코드 */
+                  FROM TB_SELL_PRODUCT SP
+                  JOIN TB_RECORD R ON SP.RCRD_CD = R.RCRD_CD AND R.DISP_YN = 'Y'
+                 WHERE R.REC_ARTI_CD = #value#
+                   AND CASE /* 강제판매는 무조건 전시 */ WHEN SP.RCRD_HARD_SALE_YN = 'Y' THEN 'Y'
+                            /* 예약판매는 무조건 전시 */ when SP.RCRD_STAT = '9' then 'Y'
+                            /* 한정판매는 무조건 전시 */ WHEN TO_CHAR(SYSDATE, 'YYYYMMDDHH24') BETWEEN NVL(SP.RCRD_LSALE_START_DTH, '9999999999') AND NVL(SP.RCRD_LSALE_END_DTH, '0000000000') THEN 'Y'
+                            /* 음반 재고가 존재하지 않는 경우 마지막 상품코드를 전시함 */ WHEN SP.SELL_PRDT_BCODE = R.SELL_PRDT_BCODE THEN 'Y'
+                            else 'N'
+                       end  = 'Y'
+                   AND SP.SELL_PRDT_GBN = 'R' 
+                   AND SP.SELL_PRDT_BCODE NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+                 ORDER BY R.RLSE_DT DESC
+               )
+           WHERE ROWNUM &lt; 6
+    </select>
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.14
+        기능 : 
+            프론트 기획 상품 목록 정보 반환
+    -->
+    <select id="getFrontProductListForPlan" parameterClass="planProductCriteria" resultClass="recordProductExt">
+        select
+            a.rcrd_cd as rcrdCd, 
+            a.sell_prdt_bcode as sellPrdtBcode, 
+            b.prvd_title as prvdTitle,  
+            CASE WHEN TO_CHAR(SYSDATE, 'YYYYMMDD') &lt;= b.SUB_COMMENTS_END_DT THEN b.RCRD_SUB_COMMENTS END as rcrdSubComments,  
+            b.sell_prdt_gbn as sellPrdtGbn,   
+            c.rcrd_name as rcrdName, 
+            nvl(b.prvd_title, b.prdt_name) as commTitle,                                            /* 일반제목 */
+            c.arti_name as artiName, 
+            (select t.maker_name from tb_rec_maker t where t.maker_cd = c.maker_cd) as makerName, 
+            c.rlse_dt as rlseDt, 
+            fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) as saleYn, 
+            fc_rec_get_stock_mail_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth) as outOfStockMailYn, 
+            b.prdt_sell_price as prdtSellPrice, 
+            a.price_real as priceReal, 
+            b.prdt_saved_rate as prdtSavedRate, 
+            b.rcrd_stat as rcrdStat, 
+            b.free_dlvy_yn as freeDlvyYn, 
+            b.rcrd_rlse_info as rcrdRlseInfo, 
+            c.rtng_code as ratingCode,                                                                                  /* 연령등급 코드 */
+            (select fc_remove_html_tag(substr(t1.rcrd_desc, 0, 100)) from tb_rec_desc t1 where t1.rcrd_cd = a.rcrd_cd) as description,      /* 상세설명 */ 
+            fc_get_review_count(#mallId#, a.rcrd_cd) as reviewCount, 
+            fc_get_review_grade(#mallId#, a.rcrd_cd) as reviewGrade 
+        from (
+            <include refid="commonFrontRecordSelect" />
+            inner join tb_plan_product z on a.sell_prdt_bcode = z.sell_prdt_bcode
+            <dynamic prepend="where">
+                <isNotEmpty property="planDispCode" removeFirstPrepend="true" prepend="and">
+                    z.plan_disp_code = #planDispCode#
+                </isNotEmpty>
+            </dynamic>
+            
+            <isEmpty property="order">
+                order by z.disp_order asc
+            </isEmpty>
+            <isNotEmpty property="order">
+                <isEqual property="order" compareValue="rlseAsc"> order by a.regst_dtm asc </isEqual>
+                <isEqual property="order" compareValue="rlseDesc"> order by a.regst_dtm desc </isEqual>
+                <isEqual property="order" compareValue="saleDesc"> order by a.sale_cnt_week desc </isEqual>
+            </isNotEmpty>       
+        ) a
+        inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode 
+        inner join tb_record c on a.rcrd_cd = c.rcrd_cd 
+        where 
+            a.disp_yn = 'Y'
+        <isEqual property="order" compareValue="priceAsc"> order by a.price_real asc </isEqual>
+        <isEqual property="order" compareValue="priceDesc"> order by a.price_real desc </isEqual>
+    </select>
+    
+    
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.14
+        기능 : 
+            프론트 기획 상품 목록 개수 정보 반환
+    -->
+    <select id="getFrontProductListCountForPlan" parameterClass="planProductCriteria" resultClass="int">
+        select
+            count(*) as cnt 
+        from (
+            <include refid="commonFrontRecordSelect" />
+            inner join tb_plan_product z on a.sell_prdt_bcode = z.sell_prdt_bcode
+            <dynamic prepend="where">
+                <isNotEmpty property="planDispCode" removeFirstPrepend="true" prepend="and">
+                    z.plan_disp_code = #planDispCode#
+                </isNotEmpty>
+            </dynamic>
+        ) a
+        inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode 
+        inner join tb_record c on a.rcrd_cd = c.rcrd_cd 
+        where 
+            a.disp_yn = 'Y' and 
+            rownum <![CDATA[ < ]]> #topCount# + 1
+    </select>    
+    
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.08.31
+        기능 : 
+            음반 상세 설명 정보를 반환함.
+    -->
+    <select id="getRecordDesc" parameterClass="string" resultClass="musDescript">
+        SELECT
+            a.rcrd_desc AS memo,
+            a.rcrd_desc_sub as subMemo
+        FROM tb_rec_desc a
+        WHERE 
+            a.rcrd_cd = #rcrdCd#
+    </select>
+
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.19
+        기능 : 
+            해당 상품의 표준 카테고리 정보를 반환함.
+    -->
+    <select id="getProductStdCateId" parameterClass="string" resultClass="string">
+        select
+            a.ctgr_id
+        from tb_product_category a
+        where
+            a.sell_prdt_bcode = #value#
+        and a.std_ctgr_yn = 'Y'
+    </select>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.21
+        기능 : 
+            해당 상품에 설정된 포스터 케이스의 개수를 반환함.
+    -->
+    <select id="getPosterCaseCountByPrdtBcode" parameterClass="string" resultClass="int">
+		select
+		    count(*) as cnt
+		from tb_poster_case a
+		where
+		    a.prsnt_start_day &lt;= to_char(sysdate, 'YYYYMMDD') and 
+		    a.prsnt_end_day >= to_char(sysdate, 'YYYYMMDD') and 
+		    a.sell_prdt_bcode = #sellPrdtBcode#    
+    </select>
+
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.22
+        기능 : 
+            해당 상품이 포함된 이벤트 이미지 목록을 반환함.
+    -->
+    <select id="getEventImageForPrdtBcode" parameterClass="map" resultClass="eventImage">
+		select
+		    a.event_id as eventId, 
+		    c.event_image_inseq as eventImageInseq, 
+		    c.image_url as imageUrl, 
+		    c.event_image_code as imageCode
+		from tb_event_master a
+		left outer join tb_event_sell_product b on a.event_id = b.event_id
+		left outer join tb_event_image c on a.event_id = c.event_id and c.event_image_code = 'C0386'
+		inner join tb_mall_event d on a.event_id = d.event_id and d.mall_id = #mallId#
+		where
+		    a.event_stat_code = 'C0181' and 
+		    a.event_type_code not in ('C0198') and 
+		    a.prmt_code = 'C0374' and 
+		    a.disp_yn = 'Y' and 
+            to_char(sysdate, 'yyyyMMdd') between a.event_start_dt and a.event_end_dt and 
+		    (b.sell_prdt_bcode = #sellPrdtBcode# or a.sell_prdt_bcode = #sellPrdtBcode#)
+    </select>
+
+
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.09.22
+        기능 : 
+            해당 상품의 이중옵션 정보를 반환함.
+    -->
+    <select id="getTempOptionListForPrdtBcode" parameterClass="string" resultClass="tempOptionExt">
+        select
+			a.sell_prdt_bcode as sellPrdtBcode, 
+			a.optn_seq as optnSeq, 
+			a.optn_name as optnName, 
+			a.optn_desc as optnDesc 
+        from tb_temp_option a
+        where
+            a.sell_prdt_bcode = #sellPrdtBcode#
+        order by a.optn_seq 
+    </select>
+
+    
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.10.15
+        기능 : 
+            해당 상품에 사은품이 존재하는지 여부를 반환함.
+    -->
+    <select id="getFreeGiftHaveYn" parameterClass="string" resultClass="string">
+		select
+		    decode(sum(a.cnt), 0, 'N', 'Y') as yn
+		from (
+		    /* 기존 이벤트에서 사은품이 적용되어 있는지 체크 */
+		    select
+		        count(a.event_id) as cnt
+		    from tb_event_master a
+		    where
+		        a.event_start_dt &lt;= to_char(sysdate, 'YYYYMMDD') and a.event_end_dt >= to_char(sysdate, 'YYYYMMDD') and 
+		        exists (
+		            select 1 from tb_event_sell_product t1 
+		            where 
+		                t1.event_id = a.event_id and t1.sell_prdt_bcode = #sellPrdtBcode#
+		        ) and 
+		        exists (
+		            select 1 from tb_event_free_gift t1
+		            where
+		                t1.event_id = a.event_id and t1.free_gift_count > t1.cnsm_count
+		        ) and 
+		        rownum &lt; 2
+		    union all 
+		    /* 뮤직샵 사은품에서 사은품이 적용되어 있는지 체크 */
+		    select
+		        count(a.fgift_master_seq) as cnt
+		    from tb_fgift_master a
+		    where
+		        a.fgift_code = 'C0981' and (
+		            (a.prsnt_start_day &lt;= to_char(sysdate, 'YYYYMMDD') and a.prsnt_end_day >= to_char(sysdate, 'YYYYMMDD')) or
+		            (a.prsnt_start_day &lt;= to_char(sysdate, 'YYYYMMDD') and a.prsnt_limit_yn = 'Y')
+		        ) and
+		        (
+		            /* 사은품 적용 카테고리에서 체크 */
+		            exists (
+		                select 1 from tb_product_category t1 
+		                where
+		                    substr(t1.ctgr_id, 0, length(a.ctgr_id)) = a.ctgr_id and 
+		                    t1.ctgr_id in (select t2.ctgr_id from tb_product_category t2 where t2.sell_prdt_bcode = #sellPrdtBcode# and t2.std_ctgr_yn = 'Y')
+		            ) or
+		            /* 사은품 적용 상품군에서 체크 */
+		            exists (
+		                select 1 from tb_fgift_product t1
+		                where
+		                    t1.fgift_master_seq = a.fgift_master_seq and t1.sell_prdt_bcode = #sellPrdtBcode#
+		            )
+		        
+		        ) and
+		        a.use_yn = 'Y' 
+		        and
+		        rownum &lt; 2
+		) a
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.11.28
+        기능 : 
+            프론트 상품 목록 공통 조건절
+        - 목록 전시에 필요한 최소한의 데이터로 구성함.
+        - 전시여부, 판매상태, 품절메일 알림 등의 공통 요소를 처리함.
+        - 기존의 쿼리에 문제가 있어서 재구성함.
+    -->
+    <sql id="commonFrontRecordListSelect">
+        select
+            a.sell_prdt_bcode,
+            a.rcrd_cd,
+            c.stock_cnt_product 
+        from tb_sell_product a
+        inner join tb_record b on a.rcrd_cd = b.rcrd_cd and b.disp_yn = 'Y' and a.sell_prdt_gbn in ('R', 'D') and a.disp_yn = 'Y'  
+        inner join tb_rec_prod_stock_last c on a.sell_prdt_bcode = c.sell_prdt_bcode
+        where
+	        (
+	            a.rcrd_hard_sale_yn = 'Y' or
+	            (to_char(sysdate, 'YYYYMMDDHH24') >= nvl(a.rcrd_lsale_start_dth, '9999999999') and to_char(sysdate, 'YYYYMMDDHH24') &lt;= nvl(a.rcrd_lsale_end_dth, '0000000000')) or 
+	            decode(c.stock_cnt_record, 0, decode(a.sell_prdt_bcode, b.sell_prdt_bcode, 'Y', 'N'), decode(c.stock_cnt_product, 0, 'N', 'Y')) = 'Y'
+	        )
+            and a.sell_prdt_bcode NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+    </sql>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.11.28
+        기능 : 
+            프론트 상품 목록 정보 반환 - 공통 조건절
+    -->
+    <sql id="getFrontRecordListWhere">
+        <isNotEmpty property="ctgrId" removeFirstPrepend="true" prepend="and">
+            exists (
+                select 1 from tb_product_category t1
+                where
+                    t1.ctgr_id like #ctgrId#||'%' and 
+                    t1.sell_prdt_bcode = a.sell_prdt_bcode
+            )
+        </isNotEmpty>
+        <isEqual property="saleYn" compareValue="Y" removeFirstPrepend="true" prepend="and">
+           fc_rec_get_sale_yn(c.stock_cnt_product, a.rcrd_stat, a.rcrd_hard_sale_yn, a.rcrd_lsale_start_dth, a.rcrd_lsale_end_dth, a.lave_count) = 'Y' 
+        </isEqual>          
+        <isEqual property="saleYn" compareValue="N" removeFirstPrepend="true" prepend="and">
+           fc_rec_get_sale_yn(c.stock_cnt_product, a.rcrd_stat, a.rcrd_hard_sale_yn, a.rcrd_lsale_start_dth, a.rcrd_lsale_end_dth, a.lave_count) != 'Y' 
+        </isEqual>        
+        <isNotEmpty property="rcrdStat" removeFirstPrepend="true" prepend="and">
+            b.rcrd_stat_code = #rcrdStat#
+        </isNotEmpty>
+        <isNotEmpty property="rcrdStatNotIn" removeFirstPrepend="true" prepend="and">
+           b.rcrd_stat_code not in (#rcrdStatNotIn#)
+        </isNotEmpty>
+        <isGreaterThan property="newStdDay" compareValue="0" removeFirstPrepend="true" prepend="and">
+           b.rlse_dt >= to_char((sysdate - #newStdDay#), 'YYYYMMDD')
+        </isGreaterThan>
+        <isNotEmpty property="impYn" removeFirstPrepend="true" prepend="and">
+           b.imp_yn = #impYn#
+        </isNotEmpty>
+        <isNotEmpty property="sellPrdtGbn" removeFirstPrepend="true" prepend="and">
+           a.sell_prdt_gbn = #sellPrdtGbn# 
+        </isNotEmpty>
+        <isGreaterThan property="searchLabelClassId" compareValue="0" removeFirstPrepend="true" prepend="and">
+            /* 레이블 입고안내 관련 검색 조건 */
+            exists (
+                select 1 from tb_label_strg_info_prdt t1
+                where 
+                    t1.label_class_id = #searchLabelClassId# and 
+                    t1.sell_prdt_bcode = a.sell_prdt_bcode 
+            )
+        </isGreaterThan>
+        <isEqual property="search3DBlurayYn" compareValue="Y" removeFirstPrepend="true" prepend="and">
+            /* 3D 블루레이에 대한 검색 조건 */
+            b.rcrd_name like '%3D%'
+        </isEqual>
+        <isEqual property="searchAudioLpBox" compareValue="audio" removeFirstPrepend="true" prepend="and">
+            /* AUDIO 항목에 대한 검색 조건 */
+            b.media_cd in ('C082A', 'C082B', 'C082C') 
+            <isEqual property="searchAudioLpBoxCate" compareValue="pop">
+                and  
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '02' and t1.cate02cd != '07' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>
+            <isEqual property="searchAudioLpBoxCate" compareValue="jazz">
+                and 
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '02' and t1.cate02cd = '07' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>
+            <isEqual property="searchAudioLpBoxCate" compareValue="classic">
+                and 
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '03' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>
+        </isEqual>
+        <isEqual property="searchAudioLpBox" compareValue="lp" removeFirstPrepend="true" prepend="and">
+            /* LP 항목에 대한 검색 조건 */
+            b.media_cd in ('C0824')
+            <isEqual property="searchAudioLpBoxCate" compareValue="pop">
+                and 
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '02' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>
+            <isEqual property="searchAudioLpBoxCate" compareValue="classic">
+                and 
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '03' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>
+        </isEqual>
+        <isEqual property="searchAudioLpBox" compareValue="box" removeFirstPrepend="true" prepend="and">
+            /* BOX 항목에 대한 검색 조건 */
+            b.cd_count >= 4
+            <isEqual property="searchAudioLpBoxCate" compareValue="song">
+                and 
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '01' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>
+            <isEqual property="searchAudioLpBoxCate" compareValue="pop">
+                and 
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '02' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>
+            <isEqual property="searchAudioLpBoxCate" compareValue="classic">
+                and 
+                exists (
+                    select 
+                        1
+                    from tb_record_onoff_category_map t1
+                    inner join tb_product_category t2 on t1.ctgr_id = t2.ctgr_id
+                    where
+                        t1.cate01cd = '03' and t2.sell_prdt_bcode = a.sell_prdt_bcode
+                )
+            </isEqual>                
+        </isEqual>        
+    </sql>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.11.28
+        기능 : 
+            프론트 카테고리별 상품 목록 정보 반환 - 전시카테고리가 포함된 항목은 여기에서 가급적이면 모두 처리.
+            예약음반목록 정보도 같이 처리함. rcrdStat 파라미터로 처리함.
+            새로나온 음반도 같이 처리함.
+            => 실제 거의 대부분의 조건을 여기에서 같이 처리할 수 있을 것 같음. => exists조건절을 활용
+    -->
+    <select id="getFrontRecordList" parameterClass="recordProductCriteria" resultClass="recordProductExt">
+        select
+            a.rcrd_cd as rcrdCd, 
+            a.sell_prdt_bcode as sellPrdtBcode, 
+            b.prvd_title as prvdTitle,  
+            CASE WHEN TO_CHAR(SYSDATE, 'YYYYMMDD') &lt;= b.SUB_COMMENTS_END_DT THEN b.RCRD_SUB_COMMENTS END as rcrdSubComments,  
+            b.sell_prdt_gbn as sellPrdtGbn,   
+            c.rcrd_name as rcrdName, 
+            nvl(b.prvd_title, b.prdt_name) as commTitle,                                            /* 일반제목 */
+            c.arti_name as artiName, 
+            (select t.maker_name from tb_rec_maker t where t.maker_cd = c.maker_cd) as makerName, 
+            c.rlse_dt as rlseDt, 
+            fc_rec_get_sale_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth, b.lave_count) as saleYn, 
+            fc_rec_get_stock_mail_yn(a.stock_cnt_product, b.rcrd_stat, b.rcrd_hard_sale_yn, b.rcrd_lsale_start_dth, b.rcrd_lsale_end_dth) as outOfStockMailYn, 
+            b.prdt_sell_price as prdtSellPrice, 
+            fc_get_dc_price (a.sell_prdt_bcode, #mallId#) as priceReal, 
+            fc_get_dc_price (a.sell_prdt_bcode, #mallId#) as lastDcPrice,
+            b.prdt_saved_rate as prdtSavedRate, 
+            b.rcrd_stat as rcrdStat, 
+            b.free_dlvy_yn as freeDlvyYn, 
+            b.rcrd_rlse_info as rcrdRlseInfo, 
+            fc_get_review_count(#mallId#, a.rcrd_cd) as reviewCount, 
+            fc_get_review_grade(#mallId#, a.rcrd_cd) as reviewGrade,  
+            /* (select fc_remove_html_tag(substr(t1.rcrd_desc, 0, 100)) from tb_rec_desc t1 where t1.rcrd_cd = a.rcrd_cd) as description, */     /* 상세설명 */
+            c.rtng_code as ratingCode,                                                                                  /* 연령등급 코드 */ 
+            c.imp_yn as impYn,                                                                                           /* 수입여부 */ 
+            nvl(b.prvd_title, b.prdt_name) as prdtName,                                            /* 일반제목 */
+            fc_get_dc_price (a.sell_prdt_bcode, #mallId#) as lastDcPrice 
+        from (
+            <include refid="commonFrontRecordListSelect" />
+            <include refid="getFrontRecordListWhere" />
+
+            <isEmpty property="order">
+                order by b.rlse_dt desc
+            </isEmpty>
+            <isNotEmpty property="order">
+                <isEqual property="order" compareValue="regstAsc"> order by a.regst_dtm asc </isEqual>
+                <isEqual property="order" compareValue="regstDesc"> order by a.regst_dtm desc </isEqual>
+                <isEqual property="order" compareValue="rlseAsc"> order by b.rlse_dt asc </isEqual>
+                <isEqual property="order" compareValue="rlseDesc"> order by b.rlse_dt desc </isEqual>
+                <isEqual property="order" compareValue="saleDesc"> order by a.sale_cnt_week desc </isEqual>
+	            <isEqual property="order" compareValue="priceAsc"> order by fc_get_dc_price(a.sell_prdt_bcode,#mallId#) asc </isEqual>
+	            <isEqual property="order" compareValue="priceDesc"> order by fc_get_dc_price(a.sell_prdt_bcode,#mallId#) desc </isEqual>                
+            </isNotEmpty>
+        ) a
+        inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode 
+        inner join tb_record c on a.rcrd_cd = c.rcrd_cd 
+        where 
+            rownum <![CDATA[ <= ]]> #maxRownum#
+            
+            
+    </select>
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.11.28
+        기능 : 
+            프론트 카테고리별 상품 목록 개수 정보 반환
+            예약음반 목록 개수 정보 반환 => rcrdStat 조건 활용
+            새로나온 음반도 같이 처리함.
+    -->
+    <select id="getFrontRecordListCount" parameterClass="recordProductCriteria" resultClass="int">
+        select
+            count(a.sell_prdt_bcode) as cnt
+        from (
+            <include refid="commonFrontRecordListSelect" />
+            <include refid="getFrontRecordListWhere" />
+        ) a
+        where 
+            rownum <![CDATA[ <= ]]> #topCount# 
+    </select>
+
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.11.30
+        기능 : 
+            예약음반 목록 처리
+            기존의 공통쿼리에서는 전체 항목에서 속도가 나오지 않아서 재고무시 전시조건을 무시하고 처리함.
+            예약음반은 마지막 항목이 1개만 존재한다는 전제로 시작함.
+    -->
+    <select id="getFrontReserveRecordList" parameterClass="recordProductCriteria" resultClass="recordProductExt">
+        select
+            a.rcrd_cd as rcrdCd, 
+            a.sell_prdt_bcode as sellPrdtBcode, 
+            b.prvd_title as prvdTitle,
+            CASE WHEN TO_CHAR(SYSDATE, 'YYYYMMDD') &lt;= b.SUB_COMMENTS_END_DT THEN b.RCRD_SUB_COMMENTS END as rcrdSubComments,  
+            b.sell_prdt_gbn as sellPrdtGbn,   
+            c.rcrd_name as rcrdName, 
+            nvl(b.prvd_title, b.prdt_name) as commTitle,                                            /* 일반제목 */
+            c.arti_name as artiName, 
+            (select t.maker_name from tb_rec_maker t where t.maker_cd = c.maker_cd) as makerName, 
+            c.rlse_dt as rlseDt, 
+            'Y' as saleYn, 
+            'N' as outOfStockMailYn, 
+            b.prdt_sell_price as prdtSellPrice, 
+            fc_get_dc_price (a.sell_prdt_bcode, #mallId#) as priceReal, 
+            b.prdt_saved_rate as prdtSavedRate, 
+            b.rcrd_stat as rcrdStat, 
+            b.free_dlvy_yn as freeDlvyYn, 
+            b.rcrd_rlse_info as rcrdRlseInfo, 
+            fc_get_review_count(#mallId#, a.rcrd_cd) as reviewCount, 
+            fc_get_review_grade(#mallId#, a.rcrd_cd) as reviewGrade,  
+            /* (select fc_remove_html_tag(substr(t1.rcrd_desc, 0, 100)) from tb_rec_desc t1 where t1.rcrd_cd = a.rcrd_cd) as description, */     /* 상세설명 */
+            c.rtng_code as ratingCode,                                                                                  /* 연령등급 코드 */ 
+            c.imp_yn as impYn,                                                                                           /* 수입여부 */ 
+            nvl(b.prvd_title, b.prdt_name) as prdtName,                                            /* 일반제목 */
+            fc_get_dc_price (a.sell_prdt_bcode, #mallId#) as lastDcPrice 
+        from (
+	        select
+	            b.sell_prdt_bcode,
+	            b.rcrd_cd
+	        from tb_record b
+	        inner join tb_sell_product a on a.sell_prdt_bcode = b.sell_prdt_bcode and b.disp_yn = 'Y' and a.disp_yn = 'Y'  
+	        where  
+	            exists (
+	                select 1 from tb_product_category t1
+	                where
+	                    t1.ctgr_id like #ctgrId#||'%' and 
+	                    t1.sell_prdt_bcode = a.sell_prdt_bcode
+	            ) and 
+	            a.rcrd_stat = '9'
+	            and a.sell_prdt_bcode NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+		        <isNotEmpty property="impYn" prepend="and">
+		           b.imp_yn = #impYn#
+		        </isNotEmpty>	            
+	          <isEmpty property="order">
+                order by a.regst_dtm desc
+            </isEmpty>
+            <isNotEmpty property="order">
+                <isEqual property="order" compareValue="regstAsc"> order by a.regst_dtm asc </isEqual>
+                <isEqual property="order" compareValue="regstDesc"> order by a.regst_dtm desc </isEqual>
+                <isEqual property="order" compareValue="rlseAsc"> order by b.rlse_dt asc </isEqual>
+                <isEqual property="order" compareValue="rlseDesc"> order by b.rlse_dt desc </isEqual>
+                <isEqual property="order" compareValue="saleDesc"> order by a.sale_cnt_week desc </isEqual>
+	            <isEqual property="order" compareValue="priceAsc"> order by fc_get_dc_price(a.sell_prdt_bcode,#mallId#) asc </isEqual>
+	            <isEqual property="order" compareValue="priceDesc"> order by fc_get_dc_price(a.sell_prdt_bcode,#mallId#) desc </isEqual>                
+            </isNotEmpty>
+        ) a
+        inner join tb_sell_product b on a.sell_prdt_bcode = b.sell_prdt_bcode 
+        inner join tb_record c on a.rcrd_cd = c.rcrd_cd 
+        where 
+            rownum <![CDATA[ <= ]]> #maxRownum#
+    </select>
+
+
+
+
+    <!--
+        작성자 : 김기석
+        작성일 : 2011.11.30
+        기능 : 
+            예약음반 목록 개수 처리
+    -->
+    <select id="getFrontReserveRecordListCount" parameterClass="recordProductCriteria" resultClass="int">
+        select
+            count(*) as cnt
+        from tb_record b
+        inner join tb_sell_product a on a.sell_prdt_bcode = b.sell_prdt_bcode and b.disp_yn = 'Y' and a.disp_yn = 'Y'  
+        where  
+            rownum <![CDATA[ <= ]]> #topCount# and 
+            exists (
+                select 1 from tb_product_category t1
+                where
+                    t1.ctgr_id like #ctgrId#||'%' and 
+                    t1.sell_prdt_bcode = a.sell_prdt_bcode
+            ) and 
+            a.rcrd_stat = '9'
+            and a.sell_prdt_bcode NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+            <isNotEmpty property="impYn" prepend="and">
+               b.imp_yn = #impYn#
+            </isNotEmpty>            
+    </select>
+
+
+
+
+	<resultMap id="descMap" class="hashmap">
+		<result property="sellPrdtBcode" column="sellPrdtBcode" javaType="string"/>
+		<result property="prdtDesc" column="prdtDesc" javaType="string" />
+	</resultMap>
+	
+	<!-- 
+		DVD 상품상세 ajax 호출용
+	 -->
+	 <select id="getProductDesc" parameterClass="map" resultMap="descMap" >
+	 	select 
+	 		a.sell_prdt_bcode sellPrdtBcode,
+	 		fc_remove_html_tag(substr(b.rcrd_desc, 0, 100)) as prdtDesc
+	 	from tb_sell_product a
+	 	inner join tb_rec_desc b on a.rcrd_cd = b.rcrd_cd
+	 	where 
+		 	a.sell_prdt_bcode in
+		 	 <iterate property="bcodeList" open="(" close=")" conjunction=",">
+                #bcodeList[]#
+            </iterate>
+	 </select>
+
+</sqlMap>

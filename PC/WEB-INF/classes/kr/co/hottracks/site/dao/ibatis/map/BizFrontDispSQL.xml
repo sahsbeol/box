@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BizFrontDispSQL">
+   	<typeAlias alias="bizDispBnr" type="kr.co.hottracks.site.model.common.disp.BizDispBnr"/>
+	<typeAlias alias="bizDispCriteria" type="kr.co.hottracks.site.model.common.disp.BizDispCriteria"/>
+	<typeAlias alias="bizDispPrdtExt" type="kr.co.hottracks.site.model.common.disp.BizDispPrdtExt"/>
+	<typeAlias alias="bizDispRecobellCriteria" type="kr.co.hottracks.site.model.common.disp.BizDispRecobellCriteria"/>
+	<typeAlias alias="bizEventHotdealExt" type="kr.co.hottracks.site.model.common.event.BizEventHotdealExt"/>
+	<typeAlias alias="eventSellProductExt" type="kr.co.hottracks.site.model.renewal.event.EventSellProductExt"/>
+	<typeAlias alias="bizDispBnrExt" type="kr.co.hottracks.site.model.common.disp.BizDispBnrExt"/>
+	<typeAlias alias="bizDispMaster" type="kr.co.hottracks.site.model.common.disp.BizDispMaster"/>
+	
+    <!-- 
+	작성자: 김정호
+	작성일: 2019.11.05
+	기능: 배너 리스트
+    -->
+    <select id="getBizBnrList" parameterClass="bizDispBnr" resultClass="bizDispBnr">
+        /* BizFrontDispSQL.getBizBnrList */
+        SELECT 
+        	*
+        FROM (
+			SELECT 
+				 ROWNUM AS rowNumber
+				,B.IMAGE_URL_PC AS imageUrlPc
+				,B.IMAGE_URL_MO AS imageUrlMo
+				,B.BNR_LINK_URL AS bnrLinkUrl
+				,B.IMAGE_ALT 	AS imageAlt
+				,B.SIGN_WAY_GBN AS signWayGbn
+				,MAIN_TEXT 		AS mainText
+				,SUB_TEXT  		AS subTExt
+			FROM TB_BNR_MST A			
+			INNER JOIN TB_BNR_DETL B ON A.BNR_MST_SEQ = B.BNR_MST_SEQ					
+			WHERE B.DISP_YN = 'Y'  				
+			AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN B.DISP_START_DT AND B.DISP_END_DT  
+			AND A.BNR_TYPE_CD = #bnrTypeCd#
+			AND B.CTGR_CD = #ctgrCd#
+			AND B.IMAGE_URL_PC IS NOT NULL			
+			ORDER BY B.DISP_ORD ASC) T
+			
+		<isNotEmpty property="limitSize">
+			WHERE T.rowNumber <![CDATA[<=]]> #limitSize#
+        </isNotEmpty>
+    </select>
+    
+    <!-- 
+	작성자: 김정호
+	작성일: 2019.11.22
+	기능: 커튼 배너 조회
+    -->
+    <select id="getCurtainBnr" parameterClass="bizDispBnr" resultClass="bizDispBnr">
+        /* BizFrontDispSQL.getCurtainBnr */
+        SELECT 
+        	T.bnrCont
+        FROM (
+			SELECT 
+				 ROWNUM AS rowNumber
+				,DBMS_LOB.SUBSTR(A.BNR_CONT, DBMS_LOB.GETLENGTH(A.BNR_CONT)) as bnrCont
+			FROM TB_BNR_CURTAIN A					
+			WHERE A.DISP_YN = 'Y' /* 노출여부*/			
+			AND SYSDATE BETWEEN A.DISP_START_DT AND A.DISP_END_DT /* 노출기간 */			
+			ORDER BY A.REG_ID DESC) T
+		WHERE T.rowNumber <![CDATA[=]]> 1
+    </select>
+    
+    <!--  
+        작성자: 이동익
+        작성일 : 2020.06.12
+        기능 : 커튼배너 상단 목록
+    -->
+    <select id="getCurtainTopBnr" parameterClass="bizDispBnr" resultClass="BizDispBnrExt">
+        /* BizFrontDispSQL.getCurtainTopBnr */
+        SELECT B.LNK_URL             bnrLnkUrl
+             , B.TITLE              bnrTitle
+             , B.DISP_START_DT      dispStartDt
+             , B.DISP_END_DT        dispEndDt
+          FROM TD_DISP_BNR A
+          LEFT JOIN TM_BNR B ON A.BNR_SEQ = B.BNR_SEQ
+         WHERE A.DISP_MSTR_ID = 'PWLC_TOP_BNR'
+           AND A.CTGR_ID = '00'
+         ORDER BY A.GROUP_NUM, A.DISP_ORDER
+    </select>
+    
+    <!--  
+        작성자: 이동익
+        작성일 : 2020.07.03
+        기능 : 상단 이미지 띠배너 
+    -->
+    <select id="getTopImgBnr" parameterClass="bizDispBnr" resultClass="BizDispBnrExt">
+        /* BizFrontDispSQL.getTopImgBnr */
+        SELECT B.IMG_URL			bnrImgUrl
+             , B.LNK_URL            bnrLnkUrl
+             , B.TITLE              bnrTitle
+             , B.DISP_START_DT      dispStartDt
+             , B.DISP_END_DT        dispEndDt
+          FROM TD_DISP_BNR A
+          LEFT JOIN TM_BNR B ON A.BNR_SEQ = B.BNR_SEQ
+         WHERE A.DISP_MSTR_ID = 'PWLC_TOPIMG_BNR'
+           AND A.CTGR_ID = '00'
+    </select>
+    
+    <!--  
+        작성자: 장진용
+        작성일 : 2014.06.20
+        기능 : 전시 상품 목록 반환
+    -->
+    <select id="getDispPrdt" parameterClass="bizDispCriteria" resultClass="BizDispPrdtExt">
+        /* FrontDispSQL.getDispPrdt */
+        SELECT A.DISP_SEQ           dispSeq
+             , A.DISP_MSTR_ID       dispMstrId
+             , A.MALL_ID            mallId
+             , A.CTGR_ID            ctgrId
+             , A.GROUP_NUM          groupNum
+             , A.DISP_ORDER         dispOrder
+             , A.SELL_PRDT_BCODE    sellPrdtBcode
+             , NVL(A.PRDT_NAME, B.PRDT_NAME)    prdtName
+             , NVL(A.PRDT_DESC, B.PRVD_TITLE)   prdtDesc
+             , A.DISP_YN            dispYn
+             , A.REGST_DTM          regstDtm
+             , A.REGST_ADMIN_ID     regstAdminId
+             , B.PRDT_NAME          basePrdtName
+             , B.PRVD_TITLE         basePrdtDesc
+             , B.PRDT_SELL_PRICE    basePrdtSellPrice
+             , B.RCRD_CD            rcrdCd
+             , B.SELL_PRDT_GBN      sellPrdtGbn
+             , B.NYO_SELL_BAN_YN    nyoSellBanYn
+             , B.PRDT_STAT_CODE     prdtStatCode
+             , C.ARTI_NAME          artiName
+             , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      prdtImgUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     productImageUrl2
+             , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, A.MALL_ID)    lastDcPrice
+             , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, A.MALL_ID)   lastCpnPrice
+             , D.BRAND_ID           brandId
+             , D.BRAND_NAME         brandName
+             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+             , FC_GET_WISH_PRODUCT_COUNT(B.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+             , FC_GET_PRODUCT_ICON_CODE(B.SELL_PRDT_BCODE, '02')    prdtIcon
+             , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02') reviewCount
+          FROM TD_DISP_PRDT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND B.PRMT_CODE = 'C0302' AND B.PRDT_STAT_CODE IN ('C0312', 'C0313')
+          LEFT JOIN TB_RECORD C ON B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+          LEFT JOIN TB_BRAND D ON B.BRAND_ID = D.BRAND_ID
+         WHERE A.DISP_YN = 'Y'
+           AND DISP_MSTR_ID LIKE #dispMstrId# || '%'
+           AND A.MALL_ID = #mallId#
+           <isNotEmpty property="ctgrId" prepend="AND">
+               A.CTGR_ID LIKE #ctgrId# || '%'
+           </isNotEmpty>
+           <isNotEmpty property="exceptDispMstrId" prepend="AND">
+               DISP_MSTR_ID NOT IN ($exceptDispMstrId$)
+           </isNotEmpty>
+         ORDER BY A.DISP_MSTR_ID, A.DISP_ORDER, B.PRMT_DTM DESC
+    </select>
+       
+	<!--  
+	작성자: DD
+	작성일 : 2019.11.28
+	기능 : 전시 상품 목록 반환 - Fix
+    -->
+    <select id="getDispPrdtFix" parameterClass="bizDispCriteria" resultClass="bizDispPrdtExt" remapResults="true">
+        /* BizFrontDispSQL.getDispPrdtFix */
+        SELECT A.DISP_SEQ           dispSeq
+             , A.DISP_MSTR_ID       dispMstrId
+             , A.MALL_ID            mallId
+             , A.CTGR_ID            ctgrId
+             , A.GROUP_NUM          groupNum
+             , A.DISP_ORDER         dispOrder
+             , A.SELL_PRDT_BCODE    sellPrdtBcode
+             , A.TITLE				title
+			 , A.SUB_TITLE			subTitle
+             , NVL(A.PRDT_NAME, B.PRDT_NAME)    prdtName
+             , NVL(A.PRDT_DESC, B.PRVD_TITLE)   prdtDesc
+             , A.DISP_YN            dispYn
+             , A.REGST_DTM          regstDtm
+             , A.REGST_ADMIN_ID     regstAdminId
+             , B.PRDT_NAME          basePrdtName
+             , B.PRVD_TITLE         basePrdtDesc
+             , B.PRDT_SELL_PRICE    prdtSellPrice
+             , B.PRDT_SELL_PRICE    basePrdtSellPrice
+             , B.RCRD_CD            rcrdCd
+             , B.SELL_PRDT_GBN      sellPrdtGbn
+             , B.NYO_SELL_BAN_YN    nyoSellBanYn
+             , B.PRDT_STAT_CODE     prdtStatCode
+             , C.ARTI_NAME          artiName
+             , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      prdtImgUrl
+             , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      productImageUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     productImageUrl2
+             , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, '02')    lastDcPrice
+             , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, '02')   lastCpnPrice
+             , D.BRAND_ID           brandId
+             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)         		brandName
+             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+             , FC_GET_WISH_PRODUCT_COUNT(B.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+             , FC_GET_PRODUCT_ICON_CODE(B.SELL_PRDT_BCODE, '02')    prdtIcon
+             , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02') reviewCount
+             , NVL((SELECT COUNT(1) 
+             		FROM TB_WISH_PRODUCT T 
+             		WHERE T.WISH_GBN = 'P' 
+             		AND T.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE 
+             		AND T.MALL_ID = '02' 
+             		AND T.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+             , NVL(B.PRVD_TITLE, C.RCRD_NAME)   commTitle
+             <isEqual property="dispMstrId" compareValue="MGFT_CTGR_PRDT">
+             , I.CODE_NAME           ctgrName
+			</isEqual>
+          FROM TD_DISP_PRDT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND B.PRMT_CODE = 'C0302' AND B.PRDT_STAT_CODE IN ('C0312', 'C0313')
+          LEFT JOIN TB_RECORD C ON B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+          LEFT JOIN TB_BRAND D ON B.BRAND_ID = D.BRAND_ID
+        <isEqual property="dispMstrId" compareValue="MGFT_CTGR_PRDT">
+          LEFT JOIN TB_CODE I ON I.PARNT_CODE = 'P0149' AND I.CODE = A.CTGR_ID
+        </isEqual>
+         WHERE A.DISP_YN = 'Y'
+           AND A.DISP_MSTR_ID = #dispMstrId#
+           AND A.MALL_ID IN ('00', #mallId#)
+           <isNotEmpty property="ctgrId" prepend="AND">
+               A.CTGR_ID = #ctgrId#
+           </isNotEmpty>
+           
+         ORDER BY A.DISP_MSTR_ID, A.DISP_ORDER, B.PRMT_DTM DESC
+    </select>
+       
+    <!--  
+	 작성자: DD
+	작성일 : 2019.11.28
+	기능 : 전시 상품 목록 반환 - Fix
+    -->
+    <select id="countDispPrdtFix" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizFrontDispSQL.countDispPrdtFix */
+        SELECT COUNT(*) AS CNT
+          FROM TD_DISP_PRDT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE
+         WHERE A.DISP_YN = 'Y'
+           AND DISP_MSTR_ID = #dispMstrId#
+           AND A.MALL_ID = #mallId#
+           <isNotEmpty property="ctgrId" prepend="AND">
+               A.CTGR_ID = #ctgrId#
+           </isNotEmpty>
+           AND ROWNUM &lt; #topCount# + 1
+    </select>
+    
+	<!--  
+	작성자: DD
+	작성일 : 2019.11.28
+	기능 : 전시 상품 목록 반환 - 랭킹용
+    -->
+    <select id="getDispPrdt4Rank" parameterClass="bizDispCriteria" resultClass="bizDispPrdtExt">
+        /* BizFrontDispSQL.getDispPrdt4Rank */
+        SELECT A.DISP_SEQ           dispSeq
+             , A.DISP_MSTR_ID       dispMstrId
+             , A.MALL_ID            mallId
+             , A.CTGR_ID            ctgrId
+             , A.GROUP_NUM          groupNum
+             , A.DISP_ORDER         dispOrder
+             , A.SELL_PRDT_BCODE    sellPrdtBcode
+             , NVL(A.PRDT_NAME, B.PRDT_NAME)    prdtName
+             , NVL(A.PRDT_DESC, B.PRVD_TITLE)   prdtDesc
+             , A.DISP_YN            dispYn
+             , A.REGST_DTM          regstDtm
+             , A.REGST_ADMIN_ID     regstAdminId
+             , B.PRDT_NAME          basePrdtName
+             , B.PRVD_TITLE         basePrdtDesc
+             , B.PRDT_SELL_PRICE    prdtSellPrice
+             , B.RCRD_CD            rcrdCd
+             , B.SELL_PRDT_GBN      sellPrdtGbn
+             , B.NYO_SELL_BAN_YN    nyoSellBanYn
+             , B.PRDT_STAT_CODE     prdtStatCode
+             , C.ARTI_NAME          artiName
+             , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE)      productImageUrl
+             , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     productImageUrl2
+             , FC_GET_DC_PRICE(A.SELL_PRDT_BCODE, A.MALL_ID)    lastDcPrice
+             , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, A.MALL_ID)   lastCpnPrice
+             , D.BRAND_ID           brandId
+             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)         brandName
+             , NVL(D.BRAND_ENG_NAME, D.BRAND_NAME)              brandEngName
+             , FC_GET_WISH_PRODUCT_COUNT(B.SELL_PRDT_BCODE, '02')   wishPrdtCnt
+             , FC_GET_PRODUCT_ICON_CODE(B.SELL_PRDT_BCODE, '02')    prdtIcon
+             , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02') reviewCount
+             , NVL((SELECT COUNT(1) 
+             		FROM TB_WISH_PRODUCT T 
+             		WHERE T.WISH_GBN = 'P' 
+             		AND T.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE 
+             		AND T.MALL_ID = '02' 
+             		AND T.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+          FROM TD_DISP_PRDT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND B.PRMT_CODE = 'C0302' AND B.PRDT_STAT_CODE IN ('C0312', 'C0313')
+          LEFT JOIN TB_RECORD C ON B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+          LEFT JOIN TB_BRAND D ON B.BRAND_ID = D.BRAND_ID
+         WHERE A.DISP_YN = 'Y'
+           AND DISP_MSTR_ID = #dispMstrId#
+           AND A.MALL_ID = #mallId#
+           <isNotEmpty property="ctgrId" prepend="AND">
+               A.CTGR_ID = #ctgrId#
+           </isNotEmpty>
+           <isEqual property="dispMstrId" compareValue="CATE_GFT_SALE" prepend="AND">
+           		FC_GET_LAST_DC_RATE(B.SELL_PRDT_BCODE, #mallId#) > 0
+           	</isEqual>
+           
+         ORDER BY A.DISP_MSTR_ID, A.DISP_ORDER, B.PRMT_DTM DESC
+    </select>
+    
+	<!--  
+	작성자: DD
+	작성일 : 2019.11.28
+	기능 : 전시 상품 목록 수 반환 - 랭킹용
+    -->
+    <select id="countDispPrdt4Rank" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizFrontDispSQL.countDispPrdt4Rank */
+        SELECT COUNT(*)
+          FROM TD_DISP_PRDT A
+          JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE AND B.PRMT_CODE = 'C0302' AND B.PRDT_STAT_CODE IN ('C0312', 'C0313')
+          LEFT JOIN TB_RECORD C ON B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE
+          LEFT JOIN TB_BRAND D ON B.BRAND_ID = D.BRAND_ID
+         WHERE A.DISP_YN = 'Y'
+           AND DISP_MSTR_ID = #dispMstrId#
+           AND A.MALL_ID = #mallId#
+           AND rownum <![CDATA[ < ]]> #topCount# + 1
+           <isNotEmpty property="ctgrId" prepend="AND">
+               A.CTGR_ID = #ctgrId#
+           </isNotEmpty>
+           <isEqual property="dispMstrId" compareValue="CATE_GFT_SALE" prepend="AND">
+           		FC_GET_LAST_DC_RATE(B.SELL_PRDT_BCODE, #mallId#) > 0
+           	</isEqual>
+    </select> 
+    
+   	<!--  
+	작성자: 장진용
+	작성일 : 2014.09.02
+	기능 : 전시 상품 목록 반환 - Fix
+	-->
+    <select id="getRecobellPrdtFix" parameterClass="bizDispRecobellCriteria" resultClass="bizDispPrdtExt">
+    	/* BizFrontDispSQL.getRecobellPrdtFix */
+         SELECT 
+         	A.SELL_PRDT_BCODE    sellPrdtBcode
+		    , A.SELL_PRDT_GBN      sellPrdtGbn
+		    , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE) prdtImgUrl
+		    , NVL(A.PRDT_NAME, FC_GET_PRDT_NAME(A.SELL_PRDT_BCODE , #mallId#))  prdtName
+		    , A.RCRD_CD   rcrdCd
+		    , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, #mallId#) 		lastCpnPrice
+		    , A.PRDT_SELL_PRICE    									prdtSellPrice		    
+		    , FC_GET_PRODUCT_IMAGE_URL(A.SELL_PRDT_BCODE) 			productImageUrl
+		    , FC_GET_PRODUCT_IMAGE_URL2(A.SELL_PRDT_BCODE)     		productImageUrl2
+		    , A.NYO_SELL_BAN_YN    									nyoSellBanYn
+		    , FC_GET_REVIEW_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02')	reviewCount
+		    , FC_GET_WISH_PRODUCT_COUNT(A.SELL_PRDT_BCODE, '02')	wishPrdtCnt
+		    , FC_GET_PRODUCT_ICON_CODE(A.SELL_PRDT_BCODE, '02')		prdtIcon
+		    , A.PRDT_SELL_PRICE    									basePrdtSellPrice
+		    , FC_GET_CPN_PRICE(A.SELL_PRDT_BCODE, '02')   			lastCpnPrice
+		    , A.PRDT_STAT_CODE     									prdtStatCode
+		    , E.BRAND_ID 											brandId
+		    , NVL(E.BRAND_ENG_NAME, E.BRAND_NAME)					brandName
+		    , FC_GET_DC_RATE_MALL(A.SELL_PRDT_BCODE, '02')         	lastDcRate
+		    , C.RTNG_CODE 											rtngCode
+		    , NVL(E.BRAND_ENG_NAME, E.BRAND_NAME)					brandEngName	        
+	        , FC_GET_FREE_DLVY_YN(A.SELL_PRDT_BCODE, '02')         	lastFreeDlvyYn
+	        , A.COD_DLVY_AMT_YN           							codDlvyAmtYn	        
+	        , C.ARTI_NAME                                           artiName	        
+	        , NVL((SELECT COUNT(1) 
+             		FROM TB_WISH_PRODUCT T 
+             		WHERE T.WISH_GBN = 'P' 
+             		AND T.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE 
+             		AND T.MALL_ID = '02' 
+             		AND T.USER_NUM = #userNum#), 0)   					wishUserPrdtCnt
+          FROM TB_SELL_PRODUCT A
+          JOIN (
+                SELECT ROWNUM RK, AA 
+                  from (
+			           <iterate property="sellPrdtBcode" conjunction="union all">
+			                SELECT #sellPrdtBcode[]# AA FROM DUAL
+			           </iterate>
+                       )
+               ) B ON A.SELL_PRDT_BCODE = B.AA
+          LEFT JOIN TB_RECORD C ON A.RCRD_CD = C.RCRD_CD
+          LEFT JOIN TB_REC_PROD_STOCK_LAST D ON A.SELL_PRDT_BCODE = D.SELL_PRDT_BCODE
+          LEFT JOIN TB_BRAND E ON A.BRAND_ID = E.BRAND_ID
+         WHERE A.PRDT_STAT_CODE = 'C0312'
+           AND A.PRMT_CODE = 'C0302'
+           and A.SELL_PRDT_BCODE NOT IN ('2310041561148','2300185984408')
+           AND FC_REC_GET_SALE_YN(D.STOCK_CNT_PRODUCT, A.RCRD_STAT, A.RCRD_HARD_SALE_YN, A.RCRD_LSALE_START_DTH, A.RCRD_LSALE_END_DTH, A.LAVE_COUNT) = 'Y'
+           	<isEqual property="sellPrdtGbn" compareValue="01">
+               AND A.SELL_PRDT_GBN IN ('P','G','S')
+           	</isEqual>
+           	<isEqual property="sellPrdtGbn" compareValue="02">
+           	AND A.SELL_PRDT_GBN IN ('R','D')
+           	</isEqual>
+         ORDER BY B.RK
+    </select>
+    
+    		
+	<!-- 
+	작성자: DD
+	작성일: 2019-11-11
+	기능: 이벤트 핫딜 상품 반환
+	-->
+    <select id="getEventHotdealInToday" resultClass="bizEventHotdealExt">
+        /* BizFrontDispSQL.getEventHotdealInToday */
+        SELECT EH.SELL_PRDT_BCODE                               sellPrdtBcode
+             , NVL(EH.PRDT_NAME, SP.PRDT_NAME)                  prdtName
+             , SP.PRDT_SELL_PRICE                               prdtSellPrice
+             , NVL(B.BRAND_ENG_NAME, B.BRAND_NAME)              brandName
+             , FC_GET_PRODUCT_IMAGE_URL(SP.SELL_PRDT_BCODE)     productImageUrl
+             , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE, '02')       lastCpnPrice
+             , EH.EVENT_ID                                      eventId
+             , EM.EVENT_TITLE                                   eventTitle
+             , EH.FREE_DLVY_YN									freeDlvyYn
+             , EH.PRDT_DSCNT_RATE								prdtDscntRate
+          FROM TB_EVENT_HOTDEAL EH
+          JOIN TB_SELL_PRODUCT SP ON EH.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+          JOIN TB_BRAND B ON SP.BRAND_ID = B.BRAND_ID
+          LEFT JOIN TB_EVENT_MASTER EM ON EH.EVENT_ID = EM.EVENT_ID
+         WHERE EH.APPLY_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND EH.MALL_ID = '02'
+    </select>
+    
+	<!-- 
+	작성자: DD
+	작성일: 2019-11-11
+	기능: 이벤트 핫딜 연관 상품
+	-->
+    <select id="getEventHotdealInTodayPrdList" parameterClass="string" resultClass="eventSellProductExt">
+        /* BizFrontDispSQL.getEventHotdealInTodayPrdList */
+        SELECT ROWNUM AS rowNumber
+        	 , EM.EVENT_TITLE                               eventTitle
+             , ESP.SELL_PRDT_BCODE                          sellPrdtBcode
+             , EDT.EVENT_LINK_URL                           eventLinkUrl
+             , NVL(ESP.PRE_FIX, SP.PRDT_NAME)               prdtName
+             , SP.PRDT_SELL_PRICE                           prdtSellPrice
+             , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE, '02')   lastCpnPrice
+             , ESP.MAIN_YN                                  mainYn
+             , (SELECT PI.PRDT_IMAGE_URL FROM TB_PRODUCT_IMAGE PI WHERE PI.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE AND PI.DISP_ORDER = 0)   prdtImageUrl
+             , ESP.EVENT_DSCNT_RATE							eventDscntRate
+          FROM TB_EVENT_MASTER EM
+          JOIN TB_EVENT_DISPLAY_TYPE EDT ON EM.EVENT_ID = EDT.EVENT_ID
+          JOIN TB_EVENT_SELL_PRODUCT ESP ON EDT.EVENT_ID = ESP.EVENT_ID AND EDT.EVENT_TYPE_INSEQ = ESP.EVENT_TYPE_INSEQ
+          JOIN TB_SELL_PRODUCT SP ON ESP.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+         WHERE EDT.EVENT_ID = #eventId#
+          AND FC_IS_VALID_PRODUCT(ESP.SELL_PRDT_BCODE, '02') = 'Y'
+         ORDER BY EDT.DISP_ORDER, ESP.DISP_ORDER, SP.PRMT_DTM DESC
+    </select>    
+
+	<!--  
+	 작성자: DD
+	작성일 : 2019.11.25
+ 	기능 : 앵콜 특가
+    -->
+    <select id="getBizEncoreBnr" resultClass="bizDispPrdtExt">
+        /* BizFrontDispSQL.getBizEncoreBnr */
+        SELECT 
+        	*
+  		FROM (
+	        SELECT A.DISP_SEQ           dispSeq
+	             , A.DISP_MSTR_ID       dispMstrId
+	             , A.MALL_ID            mallId
+	             , A.CTGR_ID            ctgrId
+	             , A.GROUP_NUM          groupNum
+	             , A.DISP_ORDER         dispOrder
+	             , A.BNR_SEQ            bnrSeq
+	             , A.BNR_WIDTH          bnrWidth
+	             , A.BNR_HEIGHT         bnrHeight
+	             , A.DISP_YN            dispYn
+	             , B.IMG_URL            bnrImgUrl
+	             , B.IMG_URL2           bnrImgUrl2
+	             , B.LNK_URL            bnrLnkUrl
+	             , B.IMG_MAP            bnrImgMap
+	             , B.NEW_WIN_YN         bnrNewWinYn
+	             , B.TITLE              bnrTitle
+	             , B.SUB_TITLE          bnrSubTitle
+	             , B.IMG_WIDTH          orgBnrWidth
+	             , B.IMG_HEIGHT         orgBnrHeight
+	             , B.SIGN_WAY_GBN		signWayGbn
+	             , B.FLAG_CD			flagCd
+	             , B.DISC_RATE			discRate
+	             , B.EVENT_ID			eventId
+	             , C.EVENT_TITLE    	eventTitle
+	             , FC_GET_PRODUCT_IMAGE_URL(E.SELL_PRDT_BCODE)	productImageUrl
+	             , FC_GET_PRODUCT_IMAGE_URL2(E.SELL_PRDT_BCODE)	productImageUrl2
+	             , NVL(E.PRDT_NAME, FC_GET_PRDT_NAME(E.SELL_PRDT_BCODE , A.MALL_ID))	prdtName
+	             , FC_GET_DC_PRICE(E.SELL_PRDT_BCODE, A.MALL_ID)	lastDcPrice
+	             , FC_GET_CPN_PRICE(E.SELL_PRDT_BCODE, A.MALL_ID)	lastCpnPrice
+	             , E.PRDT_SELL_PRICE    prdtSellPrice
+	             , E.SELL_PRDT_GBN      sellPrdtGbn
+	             , E.RCRD_CD            rcrdCd
+	             
+	          FROM TD_DISP_BNR A
+	          JOIN TM_BNR B ON A.BNR_SEQ = B.BNR_SEQ
+	          LEFT JOIN TB_EVENT_MASTER C ON C.EVENT_ID = B.EVENT_ID
+	          INNER JOIN TB_EVENT_SELL_PRODUCT D ON D.EVENT_ID = B.EVENT_ID
+	          INNER JOIN TB_EVENT_DISPLAY_TYPE EDT ON D.EVENT_ID = EDT.EVENT_ID AND D.EVENT_TYPE_INSEQ = EDT.EVENT_TYPE_INSEQ
+	 		  INNER JOIN TB_SELL_PRODUCT E ON E.SELL_PRDT_BCODE = D.SELL_PRDT_BCODE AND E.PRMT_CODE = 'C0302' AND E.PRDT_STAT_CODE IN ('C0312', 'C0313')
+	         WHERE A.DISP_YN = 'Y'
+	           AND A.DISP_MSTR_ID = 'MGFT_ENCORE_BNR'
+	           AND A.MALL_ID IN ('00', '02')
+	           AND A.CTGR_ID = '00'
+	           AND (B.DISP_START_DT||B.DISP_START_CLOCK &lt;= TO_CHAR(SYSDATE,'YYYYMMDDHH24') OR B.DISP_START_DT = '19000101')
+	           AND (B.DISP_END_DT||B.DISP_END_CLOCK &gt;= TO_CHAR(SYSDATE,'YYYYMMDDHH24') OR B.DISP_END_DT = '99991231')
+	         ORDER BY EDT.DISP_ORDER, D.DISP_ORDER, E.PRMT_DTM
+		)
+		WHERE ROWNUM &lt;= 3
+    </select>
+    
+	<!--  
+	 작성자: 장진용
+	작성일 : 2014.06.20
+ 	기능 : 전시 배너 목록 반환
+    -->
+    <select id="getBizDispBnr" parameterClass="bizDispCriteria" resultClass="bizDispBnrExt">
+        /* BizFrontDispSQL.getBizDispBnr */
+        SELECT A.DISP_SEQ           dispSeq
+             , A.DISP_MSTR_ID       dispMstrId
+             , A.MALL_ID            mallId
+             , A.CTGR_ID            ctgrId
+             , A.GROUP_NUM          groupNum
+             , A.DISP_ORDER         dispOrder
+             , A.BNR_SEQ            bnrSeq
+             , A.BNR_WIDTH          bnrWidth
+             , A.BNR_HEIGHT         bnrHeight
+             , A.DISP_YN            dispYn
+             , B.IMG_URL            bnrImgUrl
+             , B.IMG_URL2           bnrImgUrl2
+             , B.LNK_URL            bnrLnkUrl
+             , B.IMG_MAP            bnrImgMap
+             , B.NEW_WIN_YN         bnrNewWinYn
+             , B.TITLE              bnrTitle
+             , B.SUB_TITLE          bnrSubTitle
+             , B.IMG_WIDTH          orgBnrWidth
+             , B.IMG_HEIGHT         orgBnrHeight
+             , B.SIGN_WAY_GBN		signWayGbn
+             , B.FLAG_CD			flagCd
+             , B.DISC_RATE			discRate
+             , B.EVENT_ID			eventId
+             , B.DISP_START_DT		dispStartDt
+             , B.DISP_END_DT		dispEndDt
+             , C.CODE_NAME			flagName
+             , D.EVENT_TITLE    	eventTitle
+             , D.EVENT_DTL_CONT    	eventDtlCont
+             , F.IMAGE_URL      	eventImageUrl
+             , D.EVENT_START_DT		eventStartDt
+             , D.EVENT_END_DT		eventEndDt
+             , D.EVENT_RANGE_INFO   eventRangeInfo
+             
+          FROM TD_DISP_BNR A
+          JOIN TM_BNR B ON A.BNR_SEQ = B.BNR_SEQ
+          LEFT JOIN TB_CODE C ON B.FLAG_CD = C.CODE
+          LEFT JOIN TB_EVENT_MASTER D ON D.EVENT_ID = B.EVENT_ID
+          LEFT JOIN TB_EVENT_IMAGE F ON F.EVENT_ID = B.EVENT_ID AND F.EVENT_IMAGE_CODE = 'C0381'
+         WHERE A.DISP_YN = 'Y'
+           AND A.DISP_MSTR_ID LIKE #dispMstrId# || '%'
+           AND A.MALL_ID IN ('00', #mallId#)
+           <isNotEmpty property="ctgrId" prepend="AND">
+               A.CTGR_ID LIKE #ctgrId# || '%'
+           </isNotEmpty>
+           AND (B.DISP_START_DT||B.DISP_START_CLOCK &lt;= TO_CHAR(SYSDATE,'YYYYMMDDHH24') OR B.DISP_START_DT = '19000101')
+           AND (B.DISP_END_DT||B.DISP_END_CLOCK &gt;= TO_CHAR(SYSDATE,'YYYYMMDDHH24') OR B.DISP_END_DT = '99991231')
+         ORDER BY A.DISP_MSTR_ID, A.GROUP_NUM, A.DISP_ORDER
+    </select>
+    
+	<!--  
+	작성자: 장진용
+	작성일 : 2014.06.20
+	기능 : 전시 마스터 정보 반환
+    -->
+    <select id="getBizDispMaster" parameterClass="bizDispCriteria" resultClass="bizDispMaster" remapResults="true">
+        /* BizFrontDispSQL.getBizDispMaster */
+        SELECT 
+        	   A.DISP_MSTR_ID  	dispMstrId
+             , A.TITLE         	title
+             , A.IMG_URL       	imgUrl
+             , A.IMG_URL2    	imgUrl2
+             , A.IMG_ALT       	imgAlt
+             , A.MOD_DTM       	modDtm
+             , A.FIX_YN       	fixYn
+             , A.DISP_CNT     	dispCnt
+             , DECODE(NVL(B.DISP_MSTR_ID, ''), '', 'N', 'Y') dispPrdtYn
+       		 <isEqual property="dispMstrId" compareValue="MGFT_CTGR_PRDT">
+       		 , E.CTGR_ID 			ctgrId
+             , DECODE(F.IMG_TYPE, 'C1501', H.IMAGE_URL, F.IMG_URL) 		bnrImgUrl
+             , DECODE(F.IMG_TYPE, 'C1501', G.EVENT_TITLE, F.IMG_ALT) 	bnrImgAlt
+             , F.IMG_TYPE			imgType
+             , F.DISC_RATE 			discRate
+             , G.EVENT_ID			eventId
+             , G.EVENT_TITLE 		eventTitle
+             , G.EVENT_DTL_CONT 	eventDtlCont
+           	 , G.EVENT_START_DT		eventStartDt
+             , G.EVENT_END_DT		eventEndDt
+             , G.EVENT_RANGE_INFO   eventRangeInfo
+			</isEqual>
+          FROM TM_DISP A
+          LEFT JOIN (SELECT DISTINCT 
+          				 DISP_MSTR_ID 
+          				,CTGR_ID
+                    FROM TD_DISP_PRDT 	
+                    WHERE DISP_YN = 'Y' 
+                    AND MALL_ID IN ('00', #mallId#)
+                  <isNotEmpty property="ctgrId">
+			        AND CTGR_ID LIKE #ctgrId# || '%'
+			      </isNotEmpty>) B 	ON A.DISP_MSTR_ID = B.DISP_MSTR_ID 
+                    				AND A.CTGR_ID = B.CTGR_ID 
+         <isEqual property="dispMstrId" compareValue="MGFT_CTGR_PRDT">
+          LEFT JOIN TD_DISP_BNR E ON E.DISP_MSTR_ID = A.DISP_MSTR_ID
+          LEFT JOIN TM_BNR F ON E.BNR_SEQ = F.BNR_SEQ
+          LEFT JOIN TB_EVENT_MASTER G ON G.EVENT_ID = F.EVENT_ID
+          LEFT JOIN TB_EVENT_IMAGE H ON H.EVENT_ID = F.EVENT_ID AND H.EVENT_IMAGE_CODE = 'C0381'
+        </isEqual> 
+        
+         WHERE A.DISP_MSTR_ID LIKE #dispMstrId# || '%'
+         
+         <isNotEmpty property="ctgrId">
+            AND A.CTGR_ID LIKE #ctgrId# || '%'
+         </isNotEmpty>
+         
+         <isEqual property="dispMstrId" compareValue="MGFT_CTGR_PRDT">
+	        AND G.DISP_YN = 'Y'
+			AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN G.EVENT_START_DT AND G.EVENT_END_DT
+			AND G.EVENT_STAT_CODE = 'C0181'	/* 상태코드:정상 */
+			AND G.PRMT_CODE = 'C0374'		/* 승인코드:승인완료 */
+         </isEqual>
+         
+         ORDER BY A.DISP_MSTR_ID  <isEqual property="dispMstrId" compareValue="MGFT_CTGR_PRDT">,E.CTGR_ID</isEqual>
+    </select>
+    
+    <!-- 
+	작성자: 김정호
+	작성일: 2019.11.05
+	기능: 배너 리스트
+    -->
+    <select id="getskyBrnInfo" parameterClass="bizDispBnr" resultClass="bizDispBnr">
+        /* BizFrontDispSQL.getskyBrnInfo */
+        SELECT 
+        	*
+        FROM (
+			SELECT 
+				 ROWNUM AS rowNumber
+				,B.OVER_IMAGE_URL_PC AS overImageUrlPc
+				,B.IMAGE_URL_PC AS imageUrlPc
+				,B.BNR_LINK_URL AS bnrLinkUrl
+				,B.IMAGE_ALT AS imageAlt						  
+			FROM TB_BNR_MST A			
+			INNER JOIN TB_BNR_DETL B ON A.BNR_MST_SEQ = B.BNR_MST_SEQ					
+			WHERE B.DISP_YN = 'Y'  				
+			AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN B.DISP_START_DT AND B.DISP_END_DT  
+			AND A.BNR_TYPE_CD = #bnrTypeCd#					
+			ORDER BY B.DISP_ORD ASC) T
+			
+		<isNotEmpty property="limitSize">
+			WHERE T.rowNumber <![CDATA[<=]]> #limitSize#
+        </isNotEmpty>
+    </select>
+    
+    <!-- 
+	작성자: 박민
+	작성일: 2020.04.07
+	기능: 이럴 때, 메인 컨텐츠 조회
+    -->
+    <select id="getLifeMainList" parameterClass="bizDispCriteria" resultClass="bizDispCriteria">
+        /* BizFrontDispSQL.getLifeMainList */
+		SELECT * FROM (
+			SELECT
+			       SL.SVC_SEQ		svcSeq
+			      ,SL.IMAGE_URL		imgUrl
+			      ,SL.MAIN_TEXT		mainText
+			      ,SL.SUB_TEXT		subText
+			      ,SL.IMAGE_ALT		imgAlt
+			      ,CASE WHEN (SELECT COUNT(*) 
+			                    FROM TB_WISH_PRODUCT 
+			                   WHERE SVC_SEQ = SL.SVC_SEQ 
+			                     AND USER_NUM = #userNum#) > 0 THEN 'Y' ELSE 'N' END userWishYn /* 유저 좋아요 여부 */
+			      ,COUNT(WP.SVC_SEQ) wishCnt /* 좋아요 건수 */
+			  FROM TB_SVC_LIFE SL
+			  LEFT OUTER JOIN TB_WISH_PRODUCT WP ON WP.WISH_GBN = 'L' AND SL.SVC_SEQ = WP.SVC_SEQ
+			  	<isNotEmpty property="hashTag">
+					LEFT OUTER JOIN TB_SVC_LIFE_HASH SLH ON SL.SVC_SEQ = SLH.SVC_SEQ
+				</isNotEmpty>
+			 WHERE SL.DISP_YN = 'Y'
+			   AND TO_CHAR(SYSDATE, 'YYYYMMDDHH24') BETWEEN TO_CHAR(SL.DISP_START_DT || SL.DISP_START_CLOCK) AND TO_CHAR(SL.DISP_END_DT || SL.DISP_END_CLOCK)
+			   <isNotEmpty property="hashTag">
+			   		AND SLH.code = #hashTag#
+			   </isNotEmpty>
+			   GROUP BY SL.SVC_SEQ
+				       ,SL.IMAGE_URL
+				       ,SL.MAIN_TEXT
+				       ,SL.SUB_TEXT
+				       ,SL.IMAGE_ALT
+				       ,SL.DISP_ORD
+				       ,SL.REG_DATE
+				       ,SL.DISP_START_DT
+				       ,SL.DISP_START_CLOCK
+	        <dynamic prepend="ORDER BY">
+	            <!-- R:최신순, P:인기순 -->
+	            <isEmpty property="productOrderBy">SL.DISP_ORD ASC, SL.DISP_START_DT DESC, SL.DISP_START_CLOCK DESC</isEmpty>
+	            <isNotEmpty property="productOrderBy">
+	                <isEqual property="productOrderBy" compareValue="R">SL.DISP_ORD ASC, SL.DISP_START_DT DESC, SL.DISP_START_CLOCK DESC</isEqual>
+	                <isEqual property="productOrderBy" compareValue="P">wishCnt DESC, SL.DISP_START_DT DESC, SL.DISP_START_CLOCK DESC</isEqual>                
+	            </isNotEmpty>
+	        </dynamic>
+        )
+		<isNotEmpty property="likeYn">
+			<isEqual property="likeYn" compareValue="Y">
+				WHERE userWishYn = #likeYn#
+			</isEqual>
+		</isNotEmpty>
+    </select>
+
+	<!-- 
+	작성자: 박민
+	작성일: 2020.04.07
+	기능: 이럴 때, 메인 컨텐츠 count
+    -->
+    <select id="getLifeMainListCount" parameterClass="bizDispCriteria" resultClass="int">
+        /* BizFrontDispSQL.getLifeMainListCount */
+		SELECT COUNT(*) FROM (
+			SELECT *
+			  FROM TB_SVC_LIFE SL
+			  <isNotEmpty property="hashTag">
+			   		LEFT OUTER JOIN TB_SVC_LIFE_HASH SLH ON SL.SVC_SEQ = SLH.SVC_SEQ
+			  </isNotEmpty>
+			 WHERE SL.DISP_YN = 'Y'
+			 	<isNotEmpty property="hashTag">
+			   		AND SLH.code = #hashTag#
+			   	</isNotEmpty>
+			   AND TO_CHAR(SYSDATE, 'YYYYMMDDHH24') BETWEEN TO_CHAR(SL.DISP_START_DT || SL.DISP_START_CLOCK) AND TO_CHAR(SL.DISP_END_DT || SL.DISP_END_CLOCK)
+        )
+    </select>
+    
+    <!-- 
+	작성자: 김정호
+	작성일: 2019.11.05
+	기능: 이럴 때, 서버 컨텐츠 조회
+    -->
+    <select id="getLifeSubList" parameterClass="bizDispCriteria" resultClass="bizDispCriteria">
+        /* BizFrontDispSQL.getLifeSubList */
+		SELECT
+		      SL.SVC_SEQ			svcSeq
+		      ,SP.SELL_PRDT_BCODE	sellPrdtBcode
+		      ,SP.IMAGE_URL         imgUrl
+		      ,SP.TITLE             title
+		      ,PR.PRDT_NAME         prdtName
+		      ,PR.PRVD_TITLE        prvdTitle
+		  FROM TB_SVC_LIFE SL
+		  LEFT OUTER JOIN TB_SVC_PRDT SP ON SL.SVC_SEQ = SP.SVC_SEQ
+		  LEFT OUTER JOIN TB_SELL_PRODUCT PR ON SP.SELL_PRDT_BCODE = PR.SELL_PRDT_BCODE
+		 WHERE SL.DISP_YN = 'Y'
+		   AND TO_CHAR(SYSDATE, 'YYYYMMDDHH24') BETWEEN TO_CHAR(SL.DISP_START_DT || SL.DISP_START_CLOCK) AND TO_CHAR(SL.DISP_END_DT || SL.DISP_END_CLOCK)
+		   <isNotEmpty property="svcSeq">
+		   AND SL.SVC_SEQ = #svcSeq#
+		   </isNotEmpty>
+		 ORDER BY SP.DISP_ORD ASC
+    </select>   
+    
+        <!-- 
+	작성자: DD
+	작성일: 2020-01-08
+	기능: 타입별 이벤트 리스트
+	-->
+    <select id="getEventTypeList" parameterClass="kr.co.hottracks.site.model.renewal.event.BizEventCriteria" resultClass="bizDispBnrExt">
+        /* BizFrontDispSQL.getEventTypeList */
+        SELECT ROWNUM AS rowNumber
+        	 , A.EVENT_TITLE    	eventTitle
+             , A.EVENT_DTL_CONT    	eventDtlCont
+             , C.IMAGE_URL      	eventImageUrl
+             , A.EVENT_START_DT		eventStartDt
+             , A.EVENT_END_DT		eventEndDt
+             , A.EVENT_RANGE_INFO   eventRangeInfo
+             , A.EVENT_ID           eventId
+		FROM TB_EVENT_MASTER A
+		JOIN TB_MALL_EVENT B ON A.EVENT_ID = B.EVENT_ID AND B.MALL_ID = '02'
+		LEFT JOIN TB_EVENT_IMAGE C ON C.EVENT_ID = A.EVENT_ID AND C.EVENT_IMAGE_CODE = 'C0381'
+		WHERE A.DISP_YN = 'Y'
+		AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.EVENT_START_DT AND A.EVENT_END_DT
+		AND A.EVENT_STAT_CODE = 'C0181'	/* 상태코드:정상 */
+		AND A.PRMT_CODE = 'C0374'		/* 승인코드:승인완료 */
+		AND A.EVENT_TYPE_CODE NOT IN ('C0196', 'C0198')    /* 오늘만특가,코멘트C,뮤직샵상품할인 */
+		AND FC_IS_VALID_EVENT(A.EVENT_ID, #mallId#) = 'Y'
+		
+		<isNotEmpty property="type" prepend="AND">
+			A.NEW_EVENT_DISP_TYPE_CODE = #type#
+        </isNotEmpty>
+        
+        <isNotEmpty property="ctgrId" prepend="AND">
+			A.CTGR_ID LIKE #ctgrId#  || '%'
+        </isNotEmpty>
+    </select> 
+
+    <select id="getTotalLifeHashList" parameterClass="kr.co.hottracks.site.model.backoffice.CodeCriteria" resultClass="kr.co.hottracks.site.model.backoffice.CodeCriteria">
+        /* BizFrontDispSQL.getTotalLifeHashList */
+       	SELECT * 
+       	  FROM ( SELECT  CODE 	code
+			       		 , CODE_NAME 	codeName
+			       		 , CODE_DESC 	codeDesc
+			       		 , PARNT_CODE 	parentCode
+	       	  FROM TB_CODE
+	         WHERE PARNT_CODE = #code#
+	           AND USE_YN = 'Y'
+	         ORDER BY CODE_ORDER ASC
+         )
+         WHERE ROWNUM &lt;= 11
+    </select> 
+    
+    <select id="getLifeHashList" parameterClass="bizDispCriteria" resultClass="kr.co.hottracks.site.model.backoffice.CodeCriteria">
+        /* BizFrontDispSQL.getLifeHashList */
+       	SELECT  A.CODE 			code
+       		  , B.CODE_NAME 	codeName
+	      FROM TB_SVC_LIFE_HASH A 
+	      LEFT JOIN TB_CODE B ON A.CODE = B.CODE
+	     WHERE A.SVC_SEQ = #svcSeq#
+	       AND A.USE_YN = 'Y'
+	     ORDER BY A.HASH_ORDER ASC
+    </select> 
+    
+     <select id="getLoginBnrList" parameterClass="bizDispBnr" resultClass="bizDispBnr">
+        /* BizFrontDispSQL.getLoginBnrList */
+        SELECT 
+        	BNR_MST_SEQ			bnrMstSeq
+        	,IMAGE_URL_PC		imageUrlPc
+        	,BNR_LINK_URL		bnrLinkUrl
+        	,MAIN_TEXT			mainText
+        	,SUB_TEXT			subText
+        	,IMAGE_ALT			imageAlt
+        	,SIGN_WAY_GBN		signWayGbn
+        FROM TB_BNR_DETL 
+        WHERE BNR_MST_SEQ = '12'
+        AND DISP_YN = 'Y'
+        AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN DISP_START_DT AND DISP_END_DT
+    </select>
+
+    <select id="getBnrList" parameterClass="bizDispBnr" resultClass="bizDispBnr">
+    	/* BizFrontDispSQL.getBnrList */
+		SELECT 
+			 B.BNR_MST_SEQ			bnrMstSeq
+        	,B.IMAGE_URL_PC		imageUrlPc
+        	,B.BNR_LINK_URL		bnrLinkUrl
+        	,B.MAIN_TEXT			mainText
+        	,B.SUB_TEXT			subText
+        	,B.IMAGE_ALT			imageAlt
+        	,B.SIGN_WAY_GBN		signWayGbn				  
+		FROM TB_BNR_MST A			
+		INNER JOIN TB_BNR_DETL B ON A.BNR_MST_SEQ = B.BNR_MST_SEQ					
+		WHERE B.DISP_YN = 'Y'  				
+		AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN B.DISP_START_DT AND B.DISP_END_DT  
+		AND A.BNR_MST_SEQ = #bnrMstSeq#
+		ORDER BY B.DISP_ORD ASC
+    </select>
+    
+    <!-- 
+	작성자: DD
+	작성일: 2020-09-17
+	기능: 다이어리 이벤트 핫딜 상품 반환
+	-->
+    <select id="getEventHotdealDiary" resultClass="bizEventHotdealExt">
+        /* BizFrontDispSQL.getEventHotdealDiary */
+        SELECT EH.SELL_PRDT_BCODE                               sellPrdtBcode
+             , NVL(EH.PRDT_NAME, SP.PRDT_NAME)                  prdtName
+             , SP.PRDT_SELL_PRICE                               prdtSellPrice
+             , NVL(B.BRAND_ENG_NAME, B.BRAND_NAME)              brandName
+             , FC_GET_PRODUCT_IMAGE_URL(SP.SELL_PRDT_BCODE)     productImageUrl
+             , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE, '04')       lastCpnPrice
+             , EH.EVENT_ID                                      eventId
+             , EM.EVENT_TITLE                                   eventTitle
+             , EH.FREE_DLVY_YN									freeDlvyYn
+             , EH.PRDT_DSCNT_RATE								prdtDscntRate
+          FROM TB_EVENT_HOTDEAL EH
+          JOIN TB_SELL_PRODUCT SP ON EH.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+          JOIN TB_BRAND B ON SP.BRAND_ID = B.BRAND_ID
+          LEFT JOIN TB_EVENT_MASTER EM ON EH.EVENT_ID = EM.EVENT_ID
+         WHERE EH.APPLY_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+           AND EH.MALL_ID = '04'
+    </select>
+</sqlMap>

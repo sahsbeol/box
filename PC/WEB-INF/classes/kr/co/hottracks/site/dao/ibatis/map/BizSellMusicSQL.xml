@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BizSellMusicSQL">
+    <typeAlias alias="sellMusic" type="kr.co.hottracks.site.model.common.sellMusic.SellMusic"/>
+    <typeAlias alias="sellMusicCriteria" type="kr.co.hottracks.site.model.common.sellMusic.SellMusicCriteria"/>
+    <typeAlias alias="sellMusicExt" type="kr.co.hottracks.site.model.common.sellMusic.SellMusicExt"/>
+    <typeAlias alias="bizSellMusicCriteria" type="kr.co.hottracks.site.model.common.sellMusic.BizSellMusicCriteria"/>
+    
+    <!-- 
+        기능 : 상품 상세 검색
+        작성자 : 장진용
+        작성일 : 2012.09.14
+    -->
+    <select id="getSellMusic" resultClass="sellMusicExt" parameterClass="sellMusicCriteria">
+        /* BizSellMusicSQL.getSellMusic */
+        SELECT SP.SELL_PRDT_BCODE               sellPrdtBcode
+             , SP.PRVD_TITLE                    prvdTitle
+             , CASE WHEN TO_CHAR(SYSDATE, 'YYYYMMDD') &lt;= SP.SUB_COMMENTS_END_DT THEN SP.RCRD_SUB_COMMENTS END             rcrdSubComments
+             , SP.SELL_PRDT_GBN                  sellPrdtGbn
+             , SP.RCRD_STAT                     rcrdStat
+             , SP.RCRD_RLSE_INFO                rcrdRlseInfo
+             , SP.MAX_ORDER_ALW_COUNT           maxOrderAlwCount
+             , SP.RCRD_HARD_SALE_YN             rcrdHardSaleYn
+             , NVL(SP.PRVD_TITLE, SP.PRDT_NAME) commTitle
+             , SP.DISP_YN                      dispYn
+             , SP.PRDT_SELL_PRICE              prdtSellPrice
+             , SP.PRDT_SAVED_RATE              prdtSavedRate
+             , SP.LIMIT_COUNT                  limitCount
+             , R.RCRD_NAME                      rcrdName
+             , R.ARTI_NAME                      artiName
+             , R.REC_ARTI_CD                    recArtiCd
+             , R.LABEL_CD                       labelCd
+             , TO_CHAR(TO_DATE(R.RLSE_DT,'YYYYMMDD') +1,'YYYYMMDD')  rlseDtNextDay 
+             , R.RLSE_DT                        rlseDt
+             , R.RCRD_CD                        rcrdCd
+             , R.IMP_YN                         impYn
+             , R.CD_COUNT                       cdCount
+             , R.DRCTR                          drctr
+             , R.ACTOR                          actor
+             , R.LANG                           lang
+             , R.CAPTN                          captn
+             , R.SCR                            scr
+             , R.SOUND                          sound
+             , R.SCR_HOUR                       scrHour
+             , R.LOCAL_CODE                     localCode
+             , R.RTNG_CODE                      rtngCode
+             , R.CMPSR                          cmpsr
+             , R.PRFMR                          prfmr
+             , R.CNDTR                          cndtr
+             , R.OCSTR                          ocstr
+             , R.INSMT                          insmt
+             , R.VOCAL                          vocal
+             , R.RCRD_YEAR                      rcrdYear
+             , R.OKDATE                         okdate
+             , R.PRODUCTION_NATION              productionNation
+             , RD.RCRD_DESC                     description
+             , RD.RCRD_DESC_SUB                 subDescription
+             , (SELECT T.CTGR_ID FROM TB_PRODUCT_CATEGORY T WHERE T.STD_CTGR_YN = 'Y' AND T.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)   ctgrId 
+             , (SELECT T.MAKER_NAME FROM TB_REC_MAKER T WHERE T.MAKER_CD = R.MAKER_CD)      makerName
+             , (SELECT T.LABEL_NAME FROM TB_REC_LABEL T WHERE T.LABEL_CD = R.LABEL_CD)      labelName
+             , (SELECT T.MEDIA_NAME FROM TB_REC_MEDIA T WHERE T.MEDIA_CD = R.MEDIA_CD)      mediaName
+             , FC_GET_DC_PRICE(SP.SELL_PRDT_BCODE,'02')                                     lastDcPrice
+             , FC_GET_CPN_PRICE(SP.SELL_PRDT_BCODE,'02')                                    lastCpnPrice
+             , FC_REC_GET_LIMIT_YN(SP.RCRD_LSALE_START_DTH, SP.RCRD_LSALE_END_DTH)          lsaleYn
+             , FC_REC_GET_SALE_YN(RPSL.STOCK_CNT_PRODUCT, SP.RCRD_STAT, SP.RCRD_HARD_SALE_YN, SP.RCRD_LSALE_START_DTH, SP.RCRD_LSALE_END_DTH, SP.LAVE_COUNT)                                               saleYn
+             , FC_REC_GET_STOCK_MAIL_YN(RPSL.STOCK_CNT_PRODUCT, SP.RCRD_STAT, SP.RCRD_HARD_SALE_YN, SP.RCRD_LSALE_START_DTH, SP.RCRD_LSALE_END_DTH)                                                         outOfStockMailYn
+             , CASE WHEN NVL(SP.RCRD_MD_MEMO_END_DT, '10000101') >= to_char(sysdate,'yyyymmdd') THEN SP.RCRD_MD_MEMO ELSE NULL END                                                                          rcrdMdMemoReal 
+             , FC_REC_GET_DISP_YN(SP.RCRD_HARD_SALE_YN, SP.RCRD_STAT, SP.RCRD_LSALE_START_DTH, SP.RCRD_LSALE_END_DTH, RPSL.STOCK_CNT_RECORD, RPSL.STOCK_CNT_PRODUCT, SP.SELL_PRDT_BCODE,R.SELL_PRDT_BCODE)  lastDispYn
+             , DECODE((SELECT COUNT(*) FROM TB_POSTER_CASE A WHERE TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.PRSNT_START_DAY AND PRSNT_END_DAY AND A.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE), '0', 'N', 'Y')     hasPosterCase
+             , (SELECT MOVIE_PATH FROM TB_REC_MOVIE RM WHERE RM.RCRD_CD = SP.RCRD_CD)                                                                                                                       moviePath
+             , nvl((SELECT COUNT(1) FROM TB_WISH_PRODUCT T WHERE T.WISH_GBN = 'P' AND T.SELL_PRDT_BCODE =  SP.SELL_PRDT_BCODE AND T.MALL_ID = '02'), 0)                                           wishPrdtCnt
+             , nvl((SELECT COUNT(1) FROM TB_WISH_PRODUCT T WHERE T.WISH_GBN = 'P' AND T.SELL_PRDT_BCODE =  SP.SELL_PRDT_BCODE AND T.MALL_ID = '02' AND T.USER_NUM = #userNum#), 0)                wishUserPrdtCnt
+             , FC_GET_OFFLINE_URL(SP.SELL_PRDT_BCODE, '01')                                 offlineUrl
+          FROM TB_SELL_PRODUCT SP
+         INNER JOIN TB_REC_PROD_STOCK_LAST RPSL ON SP.SELL_PRDT_BCODE = RPSL.SELL_PRDT_BCODE
+         INNER JOIN TB_RECORD R ON SP.RCRD_CD = R.RCRD_CD AND R.DISP_YN = 'Y'
+          LEFT OUTER JOIN TB_REC_DESC RD ON RD.RCRD_CD = R.RCRD_CD
+         WHERE SP.DISP_YN = 'Y'
+           AND SP.SELL_PRDT_BCODE = #sellPrdtBcode#
+    </select>
+    
+    <!-- 
+        기능 : 상품 리스트
+        작성자 : 장진용
+        작성일 : 2012.09.27
+    -->
+    <select id="getSellMusicList" resultClass="sellMusicExt" parameterClass="sellMusicCriteria">
+    	/*	BizSellMusicSQL.getSellMusicList	*/
+        SELECT A.RCRD_CD                        rcrdCd
+             , A.SELL_PRDT_BCODE                sellPrdtBcode
+             , B.PRVD_TITLE                     prvdTitle
+             , CASE WHEN TO_CHAR(SYSDATE, 'YYYYMMDD') &lt;= B.SUB_COMMENTS_END_DT THEN B.RCRD_SUB_COMMENTS END              rcrdSubComments
+             , B.SELL_PRDT_GBN                  sellPrdtGbn
+             , C.RCRD_NAME                      rcrdName
+             , NVL(B.PRVD_TITLE, B.PRDT_NAME)   commTitle
+             , C.ARTI_NAME                      artiName
+             , (SELECT T.MAKER_NAME FROM TB_REC_MAKER T WHERE T.MAKER_CD = C.MAKER_CD)  makerName
+             , C.RLSE_DT                        rlseDt
+             , FC_REC_GET_SALE_YN(A.STOCK_CNT_PRODUCT, B.RCRD_STAT, B.RCRD_HARD_SALE_YN, B.RCRD_LSALE_START_DTH, B.RCRD_LSALE_END_DTH, B.LAVE_COUNT)  saleYn
+             , FC_REC_GET_STOCK_MAIL_YN(A.STOCK_CNT_PRODUCT, B.RCRD_STAT, B.RCRD_HARD_SALE_YN, B.RCRD_LSALE_START_DTH, B.RCRD_LSALE_END_DTH)            outOfStockMailYn
+             , B.PRDT_SELL_PRICE                prdtSellPrice
+             , FC_GET_DC_PRICE (A.SELL_PRDT_BCODE, '02')    lastDcPrice
+             , B.PRDT_SAVED_RATE                prdtSavedRate
+             , B.RCRD_STAT                      rcrdStat
+             , B.RCRD_RLSE_INFO                 rcrdRlseInfo
+             , FC_GET_REVIEW_COUNT('02', A.RCRD_CD)         reviewCount
+             , FC_GET_REVIEW_GRADE('02', A.RCRD_CD)         reviewGrade
+             , C.RTNG_CODE                      rtngCode
+             , C.IMP_YN                         impYn
+             , C.OKDATE                         okdate
+             , C.PRODUCTION_NATION              productionNation
+             , listSize
+        FROM (
+           SELECT T.*
+                , ROWNUM NO
+                , SUM(CASE WHEN ROWNUM &lt; #topCount#+1 THEN 1 ELSE 0 END) OVER() listSize
+             FROM (SELECT SP.SELL_PRDT_BCODE
+                        , SP.RCRD_CD
+                        , RPSL.STOCK_CNT_PRODUCT 
+                     FROM TB_SELL_PRODUCT SP
+                    INNER JOIN TB_RECORD R ON SP.RCRD_CD = R.RCRD_CD AND R.DISP_YN = 'Y'
+                    INNER JOIN TB_REC_PROD_STOCK_LAST RPSL ON SP.SELL_PRDT_BCODE = RPSL.SELL_PRDT_BCODE
+                    WHERE (   SP.RCRD_HARD_SALE_YN = 'Y'
+                           OR TO_CHAR(SYSDATE, 'YYYYMMDDHH24') BETWEEN NVL(SP.RCRD_LSALE_START_DTH, '9999999999') AND NVL(SP.RCRD_LSALE_END_DTH, '0000000000')
+                           OR DECODE(RPSL.STOCK_CNT_RECORD, 0, DECODE(SP.SELL_PRDT_BCODE, R.SELL_PRDT_BCODE, 'Y', 'N'), DECODE(RPSL .STOCK_CNT_PRODUCT, 0, 'N', 'Y')) = 'Y'
+                          )
+                      AND SP.SELL_PRDT_GBN IN ('R', 'D')
+                      AND SP.SELL_PRDT_BCODE NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+                      AND SP.SELL_PRDT_BCODE NOT IN ('2300185905250' , '2300185905243')
+                      <isNotEmpty property="ctgrId" prepend="AND">
+                          EXISTS (SELECT 1 FROM TB_PRODUCT_CATEGORY T1 WHERE T1.CTGR_ID LIKE #ctgrId#||'%' AND T1.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                      </isNotEmpty>
+                      <isEqual property="saleYn" compareValue="Y" prepend="AND">
+                         FC_REC_GET_SALE_YN(RPSL.STOCK_CNT_PRODUCT, SP.RCRD_STAT, SP.RCRD_HARD_SALE_YN, SP.RCRD_LSALE_START_DTH, SP.RCRD_LSALE_END_DTH, SP.LAVE_COUNT) = 'Y' 
+                      </isEqual>
+                      <isEqual property="saleYn" compareValue="N" prepend="AND">
+                         FC_REC_GET_SALE_YN(RPSL.STOCK_CNT_PRODUCT, SP.RCRD_STAT, SP.RCRD_HARD_SALE_YN, SP.RCRD_LSALE_START_DTH, SP.RCRD_LSALE_END_DTH, SP.LAVE_COUNT) != 'Y' 
+                      </isEqual>        
+                      <isNotEmpty property="rcrdStat" prepend="AND">
+                          SP.RCRD_STAT = #rcrdStat#
+                      </isNotEmpty>
+                      <isNotEmpty property="rcrdStatNotIn" prepend="AND">
+                          SP.RCRD_STAT NOT IN (#rcrdStatNotIn#)
+                      </isNotEmpty>
+                      <isGreaterThan property="newStdDay" compareValue="0" prepend="AND">
+                          R.RLSE_DT >= TO_CHAR((SYSDATE - #newStdDay#), 'YYYYMMDD')
+                      </isGreaterThan>
+                      <isNotEmpty property="impYn" prepend="AND">
+                          R.IMP_YN = #impYn#
+                      </isNotEmpty>
+                      <isNotEmpty property="sellPrdtGbn" prepend="AND">
+                          SP.SELL_PRDT_GBN = #sellPrdtGbn# 
+                      </isNotEmpty>
+                      <isGreaterThan property="searchLabelClassId" compareValue="0" prepend="AND">
+                          EXISTS (SELECT 1 FROM TB_LABEL_STRG_INFO_PRDT T1 WHERE T1.LABEL_CLASS_ID = #searchLabelClassId# AND T1.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                      </isGreaterThan>
+                      <isEqual property="search3DBlurayYn" compareValue="Y" prepend="AND">
+                          R.RCRD_NAME LIKE '%3D%'
+                      </isEqual>
+                      <isEqual property="searchAudioLpBox" compareValue="audio" prepend="AND">
+                          R.MEDIA_CD IN ('C082A', 'C082B', 'C082C') 
+                          <isEqual property="searchAudioLpBoxCate" compareValue="pop" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T1.CATE02CD != '07' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="jazz" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T1.CATE02CD = '07' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="classic" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '03' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                      </isEqual>
+                      <isEqual property="searchAudioLpBox" compareValue="lp" prepend="AND">
+                          R.MEDIA_CD IN ('C0824')
+                          <isEqual property="searchAudioLpBoxCate" compareValue="song" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '01' and T1.CATE02CD NOT IN ('03', '04', '08') AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="classic" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '03' and T1.CATE02CD NOT IN ('04', '05') AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="pop" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T1.CATE02CD IN ('01', '02', '03') AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="rock" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T1.CATE02CD IN ('04', '05', '06') AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="jazz" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T1.CATE02CD = '07' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="worldmusic" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T1.CATE02CD = '09' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="ost" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T1.CATE02CD = '11' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                      </isEqual>
+                      <isEqual property="searchAudioLpBox" compareValue="box" prepend="AND">
+                          R.CD_COUNT >= 4
+                          <isEqual property="searchAudioLpBoxCate" compareValue="song" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '01' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="pop" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '02' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>
+                          <isEqual property="searchAudioLpBoxCate" compareValue="classic" prepend="AND">
+                              EXISTS (SELECT 1 FROM TB_RECORD_ONOFF_CATEGORY_MAP T1 INNER JOIN TB_PRODUCT_CATEGORY T2 ON T1.CTGR_ID = T2.CTGR_ID WHERE T1.CATE01CD = '03' AND T2.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE)
+                          </isEqual>                
+                      </isEqual>        
+                <dynamic prepend="ORDER BY">
+                    <isEmpty property="order">SP.PRMT_DTM DESC</isEmpty>
+                    <isNotEmpty property="order">
+                        <isEqual property="order" compareValue="regstAsc">SP.REGST_DTM ASC</isEqual>
+                        <isEqual property="order" compareValue="regstDesc">SP.REGST_DTM DESC</isEqual>
+                        <isEqual property="order" compareValue="rlseAsc">SP.PRMT_DTM ASC</isEqual>
+                        <isEqual property="order" compareValue="rlseDesc">SP.PRMT_DTM DESC</isEqual>
+                        <isEqual property="order" compareValue="saleDesc">SP.SALE_CNT_WEEK DESC</isEqual>
+                        <isEqual property="order" compareValue="priceAsc">FC_GET_DC_PRICE(SP.SELL_PRDT_BCODE, '02') ASC</isEqual>
+                        <isEqual property="order" compareValue="priceDesc">FC_GET_DC_PRICE(SP.SELL_PRDT_BCODE, '02') DESC</isEqual>
+                    </isNotEmpty>
+                </dynamic>
+                  ) T
+        ) A
+        JOIN TB_SELL_PRODUCT B ON A.SELL_PRDT_BCODE = B.SELL_PRDT_BCODE 
+        JOIN TB_RECORD C ON A.RCRD_CD = C.RCRD_CD 
+        WHERE NO BETWEEN #fetchScale# + 1 AND #maxRownum#
+        ORDER BY NO
+    </select>
+
+    <!--
+            작성자 : 김기석
+            작성일 : 2012.01.30
+            기능 : 
+            - 교보 배송안내 관련 정보를 반환함.
+    -->
+    <select id="getKyoboDelvInfo" parameterClass="string" resultClass="resultMap">
+        /* BizSellMusicSQL.getKyoboDelvInfo */
+        SELECT A.SELL_PRDT_BCODE    sell_prdt_bcode
+             , A.HOT_STOCK_QTY      hot_stock_qty
+             , A.LEAD_DAY           lead_day
+             , DECODE(A.QUICK_GB, '1', 'Y', 'N')    quick_gb_yn
+             , (SELECT T.RCRD_HARD_SALE_YN FROM TB_SELL_PRODUCT T WHERE T.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE)          rcrd_hard_sale_yn
+             , (SELECT T.STOCK_CNT_PRODUCT FROM TB_REC_PROD_STOCK_LAST T WHERE T.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE)   stock_cnt_product
+          FROM TB_DELIVERY_NOTICE A
+         WHERE A.SELL_PRDT_BCODE = #sellPrdtBcode#
+    </select>
+
+   <!--
+        작성자 : 김기석
+        작성일 : 2011.09.19
+        기능 : 
+            베스트 상품 정보 반환
+            - 모든 베스트상품 목록은 여기에서 공통으로 처리
+            - 성능이슈로 캐쉬모델을 사용함.
+             cacheModel="getRecordBestChache"
+    -->
+    <cacheModel type="LRU" id="getRecordBestChache" readOnly="true">
+        <flushInterval minutes="10"/>
+        <property name="size" value="3000"/>
+    </cacheModel>    
+    <select id="getRecordBest" parameterClass="bizSellMusicCriteria" resultClass="sellMusicExt">
+        /* BizSellMusicSQL.getRecordBest */
+        SELECT A.RANK               rank
+             , A.RCRD_CD            rcrdCd
+             , B.SELL_PRDT_BCODE    sellPrdtBcode
+             , FC_GET_PRDT_NAME(B.SELL_PRDT_BCODE, '02')   rcrdName
+             , B.PRVD_TITLE         prvdTitle
+             , B.SELL_PRDT_GBN      sellPrdtGbn
+             , NVL(B.PRVD_TITLE, C.RCRD_NAME)   commTitle
+             , C.ARTI_NAME          artiName
+             , (SELECT T.MAKER_NAME FROM TB_REC_MAKER T WHERE T.MAKER_CD = C.MAKER_CD)  makerName
+             , (SELECT T.LABEL_NAME FROM TB_REC_LABEL T WHERE T.LABEL_CD = C.LABEL_CD)  labelName   /* 레이블명 */
+             , C.RLSE_DT            rlseDt
+             , b.prdt_sell_price    prdtSellPrice
+             , fc_get_dc_price(b.sell_prdt_bcode, #mallId#)     lastDcPrice
+             , fc_get_cpn_price(b.sell_prdt_bcode, #mallId#)    lastCpnPrice
+             , b.prdt_saved_rate    prdtSavedRate
+             , c.rlse_dt            rlseDt
+             , b.rcrd_stat          rcrdStat
+             , c.rtng_code          rtngCode
+        FROM TB_RECORD_BEST A
+        JOIN TB_RECORD C ON A.RCRD_CD = C.RCRD_CD
+        JOIN TB_SELL_PRODUCT B ON B.SELL_PRDT_BCODE = C.SELL_PRDT_BCODE AND B.SELL_PRDT_BCODE NOT IN (SELECT SELL_PRDT_BCODE FROM TB_EXP_PRODUCT)
+        <dynamic prepend="where">
+            <isGreaterThan property="rank" compareValue="0" removeFirstPrepend="true" prepend="and">
+                A.RANK &lt;= #rank#
+            </isGreaterThan>        
+            <isNotEmpty property="recBestType" removeFirstPrepend="true" prepend="and">
+                A.REC_BEST_TYPE = #recBestType#
+            </isNotEmpty>
+            <isNotEmpty property="bestRangeType" removeFirstPrepend="true" prepend="and">
+                A.BEST_RANGE_TYPE = #bestRangeType#
+            </isNotEmpty>
+            <isNotEmpty property="stdDt" removeFirstPrepend="true" prepend="and">
+                A.STD_DT = #stdDt#
+            </isNotEmpty>
+            <isNotEmpty property="ctgrId" removeFirstPrepend="true" prepend="and">
+                A.CTGR_ID = #ctgrId#
+            </isNotEmpty>
+            <isEmpty property="ctgrId" removeFirstPrepend="true" prepend="and">
+                A.CTGR_ID IS NULL
+            </isEmpty>
+        </dynamic>
+        ORDER BY A.RANK
+    </select>
+        
+     <!--
+        작성자 : 김기석
+        작성일 : 2011.09.19
+        기능 : 베스트 상품의 최종 기준일자 정보를 반환함.
+            - 최종 업데이트 기준일자를 획득하기 위해서 사용함.
+    -->
+    <select id="getRecordBestLastStdDt" parameterClass="bizSellMusicCriteria" resultClass="string">
+        /* BizSellMusicSQL.getRecordBestLastStdDt */
+        SELECT MAX(A.STD_DT)
+          FROM TB_RECORD_BEST A
+        <dynamic prepend="where">
+            <isNotEmpty property="recBestType" removeFirstPrepend="true" prepend="and">
+                A.REC_BEST_TYPE = #recBestType#
+            </isNotEmpty>
+            <isNotEmpty property="bestRangeType" removeFirstPrepend="true" prepend="and">
+                A.BEST_RANGE_TYPE = #bestRangeType#
+            </isNotEmpty>
+            <isNotEmpty property="ctgrId" removeFirstPrepend="true" prepend="and">
+                A.CTGR_ID = #ctgrId#
+            </isNotEmpty>
+            <isEmpty property="ctgrId" removeFirstPrepend="true" prepend="and">
+                A.CTGR_ID IS NULL
+            </isEmpty>
+        </dynamic>
+    </select>
+    
+        <!--  
+        작성자: 
+        작성일 : 2019.12.04
+        기능 : 
+    -->
+    <select id="getMusicDispPrdt" parameterClass="bizDispCriteria" resultClass="bizDispPrdtExt">
+        /* BizSellMusicSQL.getMusicDispPrdt */
+			SELECT MD.SELL_PRDT_BCODE  sellPrdtBcode 
+			     , SP.REGST_DTM        regstDtm
+			     , TR.ARTI_NAME        artiName
+			     , SP.PRDT_NAME        basePrdtName
+			     , SP.PRDT_SELL_PRICE  prdtSellPrice
+			     , SP.PRDT_DSCNT_PRICE lastDcPrice
+			     , SP.SELL_PRDT_GBN      sellPrdtGbn
+			     , TRUNC(SP.PRDT_DSCNT_RATE) discRate
+			     , TD.CTGR_ID          ctgrId
+			     , TD.DISP_MSTR_ID     dispMstrId
+			     , TR.RCRD_CD          rcrdCd
+			  FROM TM_DISP TD
+			 INNER JOIN TB_MAIN_DISPLAY MD ON TD.DISP_MSTR_ID = MD.DISP_MSTR_ID
+			 INNER JOIN TB_SELL_PRODUCT SP ON MD.SELL_PRDT_BCODE = SP.SELL_PRDT_BCODE
+			 INNER JOIN TB_RECORD TR ON SP.RCRD_CD = TR.RCRD_CD
+			 WHERE TD.DISP_MSTR_ID LIKE #dispMstrId# || '%'
+	           AND MD.MALL_ID = #mallId#
+	           <isNotEmpty property="ctgrId" prepend="AND">
+	               TD.CTGR_ID LIKE #ctgrId# || '%'
+	           </isNotEmpty>
+	           <isNotEmpty property="exceptDispMstrId" prepend="AND">
+	               DISP_MSTR_ID NOT IN ($exceptDispMstrId$)
+	           </isNotEmpty>
+			 ORDER BY MD.DISP_ORDER
+    </select>
+</sqlMap>

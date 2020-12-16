@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+
+#sidebar {
+	position: relative;
+	z-index: 20;
+	float: left;
+	padding: 75px 15px 20px 0;
+}
+ 
+#contents div.page-location {
+	position: absolute;
+	margin: 0 0 20px 0 !important;
+	padding: 0 0 6px;
+	top:10px;
+	left:0;
+	height: 30px;
+	background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/office/page_location_bg.gif") repeat-x 0 bottom;
+}
+#contents div.page-location h2 {
+	float: left;
+	width: 195px;
+}
+#contents div.page-location h2 img {
+	margin: 8px 0 0 8px;
+}
+#contents div.page-location ul {
+	float: left;
+	margin: 10px 0 0 0;
+}
+#quick_menu {
+	position: absolute; 
+	left: 960px;
+	top: 0pt !important; 
+	width: 112px;
+}
+ 
+#contents div.main-event-search fieldset p {
+	border: 4px solid #f0551f;
+}  

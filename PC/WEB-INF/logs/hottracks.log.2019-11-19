@@ -1,0 +1,74 @@
+2019-11-19 11:00:30,246 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 11:00:30,248 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 11:03:38,441 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:03:38,486 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/ht/order/cart
+2019-11-19 11:03:38,486 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/removeCart
+2019-11-19 11:03:38,487 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]cartSeqs:12082180
+2019-11-19 11:03:38,492 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/ht/order/cart
+2019-11-19 11:03:38,493 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/removeCart
+2019-11-19 11:03:38,493 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]cartSeqs:12082180
+2019-11-19 11:03:39,978 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:03:40,745 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:03:41,129 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:04:21,610 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 11:04:21,611 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 11:04:23,753 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:04:33,164 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 11:04:33,165 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 11:04:34,761 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:04:39,241 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:04:41,929 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:04:43,081 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:04:45,513 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:05:45,047 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 11:05:45,048 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 11:07:19,836 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 11:07:19,837 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 11:12:07,498 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:12:07,498 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:12:52,681 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:21:21,737 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:21:21,782 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/ht/order/cart
+2019-11-19 11:21:21,783 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/checkOrderSheetProduct
+2019-11-19 11:21:21,783 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]cartSeqs:12082180
+2019-11-19 11:21:21,782 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/ht/order/cart
+2019-11-19 11:21:21,784 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/order/checkOrderSheetProduct
+2019-11-19 11:21:21,785 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:41) - [파라미터]cartSeqs:12082180
+2019-11-19 11:29:50,794 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 11:33:15,002 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 11:33:15,003 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 11:38:19,722 ERROR kr.co.hottracks.site.service.impl.OrderServiceImpl.kyoboOrderApi(OrderServiceImpl.java:4859) - Kyobo Order Api Error -->>>> Connection timed out
+2019-11-19 13:46:17,666 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 13:46:17,667 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 13:46:20,400 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 13:46:20,401 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 14:00:45,246 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 14:00:45,249 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/mypage/orderDeliveryDetail
+2019-11-19 14:01:12,815 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 14:01:12,816 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ht/mypage/orderDeliveryDetail
+2019-11-19 14:02:07,654 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/css/biz/common_v2.css
+2019-11-19 14:02:07,655 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/font/NotoSansKR-Bold.woff
+2019-11-19 14:02:07,655 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/css/biz/common_v2.css
+2019-11-19 14:02:07,657 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/font/NotoSansKR-Regular.woff
+2019-11-19 14:36:45,518 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/css/biz/common_v2.css
+2019-11-19 14:36:45,520 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/font/NotoSansKR-Regular.woff
+2019-11-19 14:36:45,520 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]http://dev.hottracks.co.kr/css/biz/common_v2.css
+2019-11-19 14:36:45,521 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/font/NotoSansKR-Bold.woff
+2019-11-19 14:47:54,148 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 14:47:54,149 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 14:50:23,825 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 14:50:23,826 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 16:47:11,364 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 16:47:11,365 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 17:58:56,528 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 17:58:56,529 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 18:00:07,448 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 18:00:07,449 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 18:04:35,470 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 18:04:35,471 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 18:23:50,483 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 18:23:50,484 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 18:25:13,672 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 18:25:13,673 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map
+2019-11-19 18:25:47,948 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
+2019-11-19 18:25:47,948 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/js/swiper.min.js.map

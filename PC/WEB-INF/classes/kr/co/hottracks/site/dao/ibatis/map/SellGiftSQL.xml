@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SellGiftSQL">
+    <typeAlias alias="sellGift" type="kr.co.hottracks.site.model.common.sellGift.SellGift"/>
+    <typeAlias alias="sellGiftDesc" type="kr.co.hottracks.site.model.common.sellGift.SellGiftDesc"/>
+    <typeAlias alias="sellGiftPrice" type="kr.co.hottracks.site.model.common.sellGift.SellGiftPrice"/>
+    <typeAlias alias="sellGiftCriteria" type="kr.co.hottracks.site.model.common.sellGift.SellGiftCriteria"/>
+    <typeAlias alias="sellGiftExt" type="kr.co.hottracks.site.model.common.sellGift.SellGiftExt"/>
+    <typeAlias alias="productImage" type="kr.co.hottracks.site.model.common.product.ProductImage"/>
+    <typeAlias alias="optionTemp" type="kr.co.hottracks.site.model.backoffice.product.OptionTemp"/>
+    <typeAlias alias="sellGiftExt" type="kr.co.hottracks.site.model.common.sellGift.SellGiftExt" />
+    
+    <!-- 
+        기능 : 상품 상세 검색
+        작성자 : 장진용
+        작성일 : 2012.09.14
+    -->
+    <select id="getSellGift" resultClass="sellGiftExt" parameterClass="sellGiftCriteria">
+        /* SellGiftSQL.getSellGift */
+        SELECT SG.SELL_PRDT_BCODE           sellPrdtBcode
+             , SG.PRIME_SELL_PRDT_BCODE     primeSellPrdtBcode
+             , FC_GET_PRDT_NAME(SG.SELL_PRDT_BCODE, #mallId#)   prdtName
+             , SG.PRVD_TITLE                prvdTitle
+             , SG.VNDR_CNTRT_ID             vndrCntrtId
+             , SG.DLVY_VNDR_ID              dlvyVndrId
+             , SG.BRAND_ID                  brandId
+             , SG.SELL_PRDT_GBN             sellPrdtGbn
+             , SG.PRMT_CODE                 prmtCode
+             , SG.PRDT_STAT_CODE            prdtStatCode
+             , SG.LIMIT_COUNT               limitCount
+             , SG.LAVE_COUNT                laveCount
+             , SG.ORDER_MAKE_YN             orderMakeYn
+             , SG.PRDT_DTL_INFO             prdtDtlInfo
+             , SG.PRDT_SELL_PRICE           prdtSellPrice
+             , SG.PRDT_SAVED_RATE           prdtSavedRate
+             , SG.PRDT_SAVED_PRICE          prdtSavedPrice
+             , SG.MNFTR                     mnftr
+             , SG.PLORG                     plorg
+             , SG.COD_DLVY_AMT_YN           codDlvyAmtYn
+             , SG.DLVY_DELAY_DTCNT          dlvyDelayDtcnt
+             , SG.SPEC_GROUP_NAME           specGroupName
+             , SG.CVSL_YN                   cvslYn
+             , SG.SPEC_NAME                 specName
+             , SG.NYO_SELL_BAN_YN           nyoSellBanYn
+             , SG.PRDT_BCODE                mngrPrdtBcode
+             , FC_GET_DC_PRICE(SG.SELL_PRDT_BCODE, '02')            lastDcPrice
+             , FC_GET_DC_RATE_MALL(SG.SELL_PRDT_BCODE, '02')        lastDcRate
+             , FC_GET_FREE_DLVY_YN(SG.SELL_PRDT_BCODE, '02')        lastFreeDlvyYn
+             , FC_GET_PRDT_SALE_STAT(SG.SELL_PRDT_BCODE)            saleStat
+             , FC_GET_PRODUCT_ICON_CODE(SG.SELL_PRDT_BCODE, '02')   icon
+             , FC_IS_VALID_PRODUCT(SG.SELL_PRDT_BCODE, #mallId#)    valid
+             , (SELECT BRAND_NAME FROM TB_BRAND B WHERE B.BRAND_ID = SG.BRAND_ID)                       brandName
+             , (SELECT NVL(BRAND_ENG_NAME,BRAND_NAME) FROM TB_BRAND B WHERE B.BRAND_ID = SG.BRAND_ID)   brandEngName
+             , FC_GET_CPN_PRICE(SG.SELL_PRDT_BCODE, '02')           lastCpnPrice
+             , FC_IS_PRINT_DATE_YN(SG.SELL_PRDT_BCODE)              prntDateYn
+             , FC_GET_CHGE_RATE(SG.SELL_PRDT_BCODE, '02')           lastChgeRate
+             , (SELECT BRAND_IMAGE_URL FROM TB_BRAND_IMAGE BI WHERE BI.BRAND_ID = SG.BRAND_ID AND BI.BRAND_IMAGE_CODE = 'C0294') dtlBrandImg
+             , SG.PRDT_SRCH_WORD            prdtSrchWord
+             , FC_GET_WISH_PRODUCT_COUNT(SG.SELL_PRDT_BCODE, '02')  wishPrdtCnt
+             , nvl((SELECT COUNT(1) FROM TB_WISH_PRODUCT T WHERE T.WISH_GBN = 'P' AND T.SELL_PRDT_BCODE = SG.SELL_PRDT_BCODE AND T.MALL_ID = '02' AND T.USER_NUM = #userNum#), 0)   wishUserPrdtCnt
+             , TO_CHAR(SG.REGST_DTM,'yyyy-MM-dd"T"HH24:MI:SS"Z"') regDate
+          FROM TB_SELL_PRODUCT SG
+         <dynamic prepend="where">
+             <isEmpty property="sellPrdtBcode">
+                 <isEmpty property="primeSellPrdtBcode">
+                     1 != 1
+                 </isEmpty>
+             </isEmpty>
+             <isNotEmpty property="sellPrdtBcode">
+                 SG.SELL_PRDT_BCODE = #sellPrdtBcode#
+             </isNotEmpty>
+             <isNotEmpty property="primeSellPrdtBcode">
+                 SG.PRIME_SELL_PRDT_BCODE = #primeSellPrdtBcode#
+             </isNotEmpty>
+         </dynamic>
+         ORDER BY SG.DISP_ORDER, SG.SPEC_NAME, SG.PRMT_DTM DESC
+    </select>
+    
+    <!--                             *기본 검색*                             -->
+    <!--  
+        작성자: 장진용
+        작성일 : 2012.08.09
+        기능 : TB_DISPLAY_PRODUCT 테이블 정보 반환  
+    -->
+    <select id="getSellGiftOnly" resultClass="sellGiftExt" parameterClass="sellGiftCriteria">
+        /* SellGiftSQL.getSellGiftOnly */
+        SELECT SELL_PRDT_BCODE           sellPrdtBcode
+             , PRIME_SELL_PRDT_BCODE     primeSellPrdtBcode
+             , SELL_PRDT_GBN             sellPrdtGbn
+             , PRDT_NAME                 prdtName
+             , FC_GET_WISH_PRODUCT_COUNT(DP.SELL_PRDT_BCODE, '02')      wishPrdtCnt
+             , nvl((SELECT COUNT(1) FROM TB_WISH_PRODUCT T WHERE T.WISH_GBN = 'P' AND T.SELL_PRDT_BCODE = #sellPrdtBcode# AND T.MALL_ID = '02' AND T.USER_NUM = #userNum#), 0)   wishUserPrdtCnt
+          FROM TB_DISPLAY_PRODUCT DP
+         WHERE SELL_PRDT_GBN IN ('P', 'G', 'S')
+           AND SELL_PRDT_BCODE = #sellPrdtBcode#
+    </select>
+    
+    <!--  
+        작성자: 장진용
+        작성일 : 2012.08.09
+        기능 : TB_DISPLAY_PRODUCT 간략 정보 반환  
+    -->
+    <select id="getDisplayProductSimple" resultClass="sellGiftExt" parameterClass="sellGiftCriteria">
+        /* SellGiftSQL.getDisplayProductSimple */
+        SELECT DP.SELL_PRDT_BCODE           sellPrdtBcode
+             , DP.PRIME_SELL_PRDT_BCODE     primeSellPrdtBcode
+             , DP.SELL_PRDT_GBN             sellPrdtGbn
+             , DP.PRDT_NAME                 prdtName
+          FROM TB_DISPLAY_PRODUCT DP
+         WHERE SELL_PRDT_BCODE = #sellPrdtBcode#
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2012.09.14
+        기능 : 상품 이미지 반환
+    -->
+    <select id="getProductImageList" resultClass="productImage" parameterClass="sellGiftCriteria">
+        /* SellGiftSQL.getProductImageList */
+        SELECT SELL_PRDT_BCODE  barcode
+             , PRDT_IMAGE_SEQ   sequence
+             , PRDT_IMAGE_URL   imageUrl
+             , DISP_ORDER       displayOrder
+          FROM TB_PRODUCT_IMAGE
+         WHERE SELL_PRDT_BCODE = #sellPrdtBcode#
+         ORDER BY DISP_ORDER
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2012.09.14
+        기능 : 상품 옵션 반환
+    -->
+    <select id="getTempOptionList" resultClass="optionTemp" parameterClass="sellGiftCriteria">
+        /* SellGiftSQL.getOptionTemp */
+        SELECT SELL_PRDT_BCODE  barcode
+             , OPTN_SEQ         sequence
+             , OPTN_NAME        optionName
+             , OPTN_DESC        optionDescription
+          FROM TB_TEMP_OPTION
+         WHERE SELL_PRDT_BCODE = #sellPrdtBcode#
+         ORDER BY OPTN_SEQ
+    </select>
+    
+    <!-- 
+        작성자 : 장진용
+        작성일 : 2018.08.14
+        기능 : 상품2.0 옵션 반환
+    -->
+    <select id="getProductOption" parameterClass="string" resultClass="kr.co.hottracks.site.model.v2.product.ProductOptionExt">
+        /* SellGiftSQL.getProductOption */
+        SELECT PO.OPTN_SEQ      optnSeq
+             , PO.OPTN_NAME     optnName
+             , PO.OPTN_GBN1     optnGbn1
+             , PO.OPTN_GBN2     optnGbn2
+             , PO.OPTN_GBN3     optnGbn3
+             , PO.DISP_YN       dispYn
+          FROM TB_PRODUCT_OPTION PO
+         WHERE PO.MNGR_PRDT_BCODE = #mngrPrdtBcode#
+           AND PO.DLT_YN = 'N'
+         ORDER BY PO.DISP_ORDER, PO.OPTN_SEQ
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일 : 2016-06-20
+        기능 : 기프트상품목록반환
+    -->
+    <select id="getSellGiftList" parameterClass="sellGiftCriteria" resultClass="sellGiftExt">
+        /* SellGiftSQL.getSellGiftList */
+        SELECT DP.SELL_PRDT_BCODE                           sellPrdtBcode
+             , FC_GET_PRDT_NAME(DP.SELL_PRDT_BCODE, '02')   prdtName
+             , DP.PRDT_SELL_PRICE                           prdtSellPrice
+             , DP.PRDT_SAVED_PRICE                          prdtSavedPrice
+             , DP.PRDT_SAVED_RATE                           prdtSavedRate
+             , DP.DLVY_VNDR_ID                              dlvyVndrId
+             , DP.PRDT_STAT_CODE                            prdtStatCode
+             , DP.NYO_SELL_BAN_YN                           nyoSellBanYn
+             , DP.WISH_COUNT                                wishPrdtCnt
+             , DP.REVIEW_COUNT                              reviewCount
+             , FC_GET_DC_PRICE(DP.SELL_PRDT_BCODE, '02')                lastDcPrice
+             , FC_GET_DC_RATE_MALL(DP.SELL_PRDT_BCODE, '02')            lastDcRate
+             , FC_GET_CPN_PRICE(DP.SELL_PRDT_BCODE, '02')               lastCpnPrice
+             , FC_GET_PRODUCT_ICON_CODE(DP.SELL_PRDT_BCODE, '02')       prdtIcon
+             , (SELECT NVL(B.BRAND_ENG_NAME, B.BRAND_NAME) FROM TB_BRAND B WHERE B.BRAND_ID = DP.BRAND_ID)                          brandName
+             , (SELECT T.PRDT_IMAGE_URL FROM TB_PRODUCT_IMAGE T WHERE T.SELL_PRDT_BCODE = DP.SELL_PRDT_BCODE AND T.DISP_ORDER = 0)  productImageUrl
+             , (SELECT T.PRDT_IMAGE_URL FROM TB_PRODUCT_IMAGE T WHERE T.SELL_PRDT_BCODE = DP.SELL_PRDT_BCODE AND T.DISP_ORDER = 1)  productImageUrl2
+          FROM TB_DISPLAY_PRODUCT DP
+          JOIN TB_PRODUCT_CATEGORY PC ON DP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.CTGR_ID LIKE #ctgrId# || '%'
+          LEFT JOIN TB_DISPLAY_PRODUCT_SALE DPS ON DP.SELL_PRDT_BCODE = DPS.SELL_PRDT_BCODE AND DPS.MALL_ID = '02'
+         WHERE DP.SELL_PRDT_GBN IN ('P', 'G')
+           <isNotEmpty property="brandId">
+               AND DP.BRAND_ID = #brandId#
+           </isNotEmpty>
+           <isNotEmpty property="benefitGbn">
+               <isEqual property="benefitGbn" compareValue="N">
+                   AND FC_GET_FREE_DLVY_YN_DISP(DP.SELL_PRDT_BCODE, '02') = 'Y'
+               </isEqual>
+               <isEqual property="benefitGbn" compareValue="H">
+                   AND DP.DLVY_VNDR_ID = '0625'
+               </isEqual>
+               <isEqual property="benefitGbn" compareValue="A">
+                   AND FC_GET_FREE_DLVY_YN_DISP(DP.SELL_PRDT_BCODE, '02') = 'Y'
+                   AND DP.DLVY_VNDR_ID = '0625'
+               </isEqual>
+           </isNotEmpty>
+           <isNotEmpty property="saleYn">
+               <isEqual property="saleYn" compareValue="Y">
+                   AND DP.PRDT_STAT_CODE = 'C0312'
+               </isEqual>
+           </isNotEmpty>
+         GROUP BY DP.SELL_PRDT_BCODE, DP.PRDT_SELL_PRICE, DP.PRDT_SAVED_PRICE, DP.PRDT_SAVED_RATE, DP.DLVY_VNDR_ID, DP.PRDT_STAT_CODE, DP.NYO_SELL_BAN_YN, DP.CLICK_COUNT, DP.WISH_COUNT, DP.REVIEW_COUNT, DP.BRAND_ID, NVL(DPS.SALE_CNT, 0), DP.PRMT_DTM
+        <dynamic prepend="ORDER BY">
+            <!-- R:최신순, P:인기순, L:낮은가격순, H:높은가격순 -->
+            <isEmpty property="productOrderBy">DP.PRMT_DTM DESC</isEmpty>
+            <isNotEmpty property="productOrderBy">
+                <isEqual property="productOrderBy" compareValue="R">DP.PRMT_DTM DESC</isEqual>
+                <isEqual property="productOrderBy" compareValue="P">NVL(DPS.SALE_CNT, 0) DESC, DP.CLICK_COUNT DESC, DP.WISH_COUNT DESC, DP.REVIEW_COUNT DESC, DP.PRMT_DTM DESC</isEqual>
+                <isEqual property="productOrderBy" compareValue="L">FC_GET_CPN_PRICE(DP.SELL_PRDT_BCODE, #mallId#) ASC, DP.PRMT_DTM DESC</isEqual>
+                <isEqual property="productOrderBy" compareValue="H">FC_GET_CPN_PRICE(DP.SELL_PRDT_BCODE, #mallId#) DESC, DP.PRMT_DTM DESC</isEqual>
+                <isEqual property="productOrderBy" compareValue="T">FC_GET_LAST_DC_RATE(DP.SELL_PRDT_BCODE, #mallId#) DESC, DP.PRMT_DTM DESC</isEqual>
+                <isEqual property="productOrderBy" compareValue="W">DP.WISH_COUNT DESC, DP.PRMT_DTM DESC</isEqual>
+                <isEqual property="productOrderBy" compareValue="Q">DP.REVIEW_COUNT DESC, DP.PRMT_DTM DESC</isEqual>
+            </isNotEmpty>
+        </dynamic>
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일 : 2015-04-20
+        기능 : 카테고리별 상품 목록 수 반환
+    -->
+    <select id="countSellGiftList" parameterClass="sellGiftCriteria" resultClass="int">
+        /* SellGiftSQL.countSellGiftList */
+        SELECT COUNT(1) as CNT
+          FROM (SELECT 1
+                  FROM TB_DISPLAY_PRODUCT DP
+                  JOIN TB_PRODUCT_CATEGORY PC ON DP.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE AND PC.CTGR_ID LIKE #ctgrId# || '%'
+                 WHERE DP.SELL_PRDT_GBN IN ('P', 'G')
+                   <isNotEmpty property="brandId">
+                       AND DP.BRAND_ID = #brandId#
+                   </isNotEmpty>
+                   <isNotEmpty property="benefitGbn">
+                       <isEqual property="benefitGbn" compareValue="N">
+                           AND FC_GET_FREE_DLVY_YN_DISP(DP.SELL_PRDT_BCODE, '02') = 'Y'
+                       </isEqual>
+                       <isEqual property="benefitGbn" compareValue="H">
+                           AND DP.DLVY_VNDR_ID = '0625'
+                       </isEqual>
+                       <isEqual property="benefitGbn" compareValue="A">
+                           AND FC_GET_FREE_DLVY_YN_DISP(DP.SELL_PRDT_BCODE, '02') = 'Y'
+                           AND DP.DLVY_VNDR_ID = '0625'
+                       </isEqual>
+                   </isNotEmpty>
+                   <isNotEmpty property="saleYn">
+                       <isEqual property="saleYn" compareValue="Y">
+                           AND DP.PRDT_STAT_CODE = 'C0312'
+                       </isEqual>
+                   </isNotEmpty>
+                 GROUP BY DP.SELL_PRDT_BCODE
+               )
+         WHERE ROWNUM &lt; #topCount# + 1
+    </select>
+    
+    <select id="getPrdtCntByCtgrForBrand" parameterClass="sellGiftCriteria" resultClass="sellGiftExt">
+        /* SellGiftSQL.getPrdtCntByCtgrForBrand */
+        SELECT V.CTGR_ID                ctgrId
+             , NVL(C.CTGR_NAME, 'ALL')  ctgrName
+             , CNT                      productCnt
+          FROM (SELECT ''       CTGR_ID
+                     , COUNT(SG.SELL_PRDT_BCODE) CNT
+                  FROM TB_DISPLAY_PRODUCT SG
+                 WHERE SG.SELL_PRDT_GBN IN ('P', 'G')
+                   AND SG.BRAND_ID = #brandId#
+                UNION ALL
+                SELECT SUBSTR(PC.CTGR_ID, 0, 6)
+                     , COUNT(DISTINCT SG.SELL_PRDT_BCODE) CNT
+                  FROM TB_DISPLAY_PRODUCT SG
+                  JOIN TB_PRODUCT_CATEGORY PC ON SG.SELL_PRDT_BCODE = PC.SELL_PRDT_BCODE
+                 WHERE SG.SELL_PRDT_GBN IN ('P', 'G')
+                   AND SG.BRAND_ID = #brandId#
+                   AND NOT EXISTS (SELECT 1 FROM TB_CATEGORY SA WHERE PC.CTGR_ID LIKE SA.CTGR_ID||'%' AND SA.USE_YN = 'N')
+                 GROUP BY SUBSTR(PC.CTGR_ID, 0, 6)
+          )V
+          LEFT OUTER JOIN TB_CATEGORY C ON V.CTGR_ID = C.CTGR_ID
+         ORDER BY NVL(C.DISP_ORDER, 0)
+    </select>
+    
+    <!-- 
+        기능 : 다이어리 상세정보
+        작성자 : 장진용
+        작성일 : 2016.09.20
+    -->
+    <select id="getSellDescinfo" resultClass="kr.co.hottracks.site.model.common.product.SellDescinfo" parameterClass="string">
+        /* SellGiftSQL.getSellDescinfo */
+        SELECT SELL_PRDT_BCODE  sellPrdtBcode
+             , DATE_PRINT       datePrint
+             , MON_COMP         monComp
+             , DIARY_SIZE       diarySize
+             , DIARY_PER        diaryPer
+             , MON_LOC          monLoc
+             , COVER            cover
+             , MON_START        monStart
+             , IN_COMP          inComp
+             , MON_PAGE         monPage
+             , IN_THICK         inThick
+             , REG_ID           regId
+             , REG_DTM          regDtm
+             , PRODUCTMAKEYN    productmakeyn
+          FROM TB_SELL_DESCINFO
+         WHERE SELL_PRDT_BCODE = #sellPrdtBcode#
+    </select>
+    
+    <!-- 
+        작성자: 장진용
+        작성일: 2018-07-13
+        기능: 그룹별 상품목록 반환
+     -->
+    <select id="getProductByGroup" resultClass="sellGiftExt" parameterClass="string">
+        /* SellGiftSQL.getProductByGroup */
+        SELECT PB.SELL_PRDT_BCODE   sellPrdtBcode
+             , PB.BASE_PRDT_NAME    prdtName
+             , FC_GET_PRODUCT_IMAGE_URL(PB.SELL_PRDT_BCODE)     productImageUrl
+             , FC_GET_CPN_PRICE(PB.SELL_PRDT_BCODE, '02')       lastCpnPrice
+          FROM TB_PRODUCT_BASE PB
+          JOIN TB_PRODUCT_GROUP PG ON PB.GRP_PRDT_BCODE = PG.GRP_PRDT_BCODE AND PG.DLT_YN = 'N'
+         WHERE PB.DLT_YN = 'N'
+           AND PB.GRP_PRDT_BCODE = #grpPrdtBcode#
+         ORDER BY PB.PRMT_DTM DESC
+    </select>
+    
+    <select id="getLimitProductYn" resultClass="sellGiftExt" parameterClass="string">
+        /* SellGiftSQL.getLimitProductYn */
+        select 'Y'          icon
+             , A.LIMIT_QTY  limitCount
+             , nvl((
+                    select sum(SB.ORDER_COUNT) 
+                      from TB_ORDER SA
+                      join TB_ORDER_PRODUCT SB on SA.ORDER_NUM = SB.ORDER_NUM
+                     where SB.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE
+                       and SA.ORDER_DTM between to_date(A.STARTDT || '000000','yyyymmddHH24MISS') and to_date(A.ENDDT || '235959','yyyymmddHH24MISS')  
+                       and SB.ORDER_PRDT_STAT_CODE = 'C0171'   
+                   )
+                   , 0 ) laveCount
+          from TB_LIMIT_PRODUCT A
+         where GUBUN = '01'
+           and SELL_PRDT_BCODE = #value#
+           and to_char(sysdate,'yyyymmdd') between STARTDT and ENDDT
+    </select>
+    
+    <select id="getLimitOrderProductYn" resultClass="string" parameterClass="string">
+        /* SellGiftSQL.getLimitOrderProductYn */
+        select nvl(
+               (
+                select max('Y') 
+                  from TB_LIMIT_PRODUCT A
+                 where A.GUBUN = '01'
+                   and A.SELL_PRDT_BCODE in (
+                                             select SB.SELL_PRDT_BCODE
+                                               from TB_CART_SELT_PRDT SA
+                                               join TB_CART SB on SA.CART_SEQ = SB.CART_SEQ
+                                              where SA.ORDER_ID = #value#)
+                   and to_char(sysdate,'yyyymmdd') between A.STARTDT and A.ENDDT
+                ),'N') AA 
+          from dual
+    </select>
+    
+    <select id="getOrderCheckYn" resultClass="string" parameterClass="string">
+        /* SellGiftSQL.getOrderCheckYn */
+        select nvl(
+	               (select 'Y'
+	                  from TB_LIMIT_PRODUCT A
+	                 where GUBUN = '01'
+	                   and SELL_PRDT_BCODE = #value#
+	                   and to_char(sysdate,'yyyymmdd') between STARTDT and ENDDT)
+                  , 'N') AA
+          from dual 
+    </select>
+    
+    <select id="getOrderCheckQty" resultClass="int" parameterClass="string">
+        select nvl(
+               (
+                select A.LIMIT_QTY  - nvl((
+                            select sum(SB.ORDER_COUNT) 
+                              from TB_ORDER SA
+                              join TB_ORDER_PRODUCT SB on SA.ORDER_NUM = SB.ORDER_NUM
+                             where SB.SELL_PRDT_BCODE = A.SELL_PRDT_BCODE
+                               and SA.ORDER_DTM between to_date(A.STARTDT || '000000','yyyymmddHH24MISS') and to_date(A.ENDDT || '235959','yyyymmddHH24MISS')  
+                               and SB.ORDER_PRDT_STAT_CODE = 'C0171'   
+                           )
+                           , 0 ) laveCount
+                  from TB_LIMIT_PRODUCT A
+                 where A.GUBUN = '01'
+                   and A.SELL_PRDT_BCODE = #value#
+                   and to_char(sysdate,'yyyymmdd') between A.STARTDT and A.ENDDT
+               )
+               , 0) AA
+          from dual
+    </select>
+</sqlMap>

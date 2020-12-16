@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="VendorSQL">
+    <typeAlias alias="vendor" type="kr.co.hottracks.site.model.common.vendor.Vendor"/>
+    <typeAlias alias="contractParam" type="kr.co.hottracks.site.model.common.vendor.VendorContractParam"/>
+    <typeAlias alias="tacbae" type="kr.co.hottracks.site.model.common.vendor.Tacbae"/>
+    <typeAlias alias="vendorInquiryParam" type="kr.co.hottracks.site.model.common.vendor.VendorInquiryParam"/>
+    
+    <select id="getVendorByVendorId" parameterClass="string" resultClass="vendor" >
+        /*VendorSQL.getVendorByVendorId*/
+        SELECT V.VNDR_ID                vendorId
+             , V.VNDR_NAME              vendorName
+             , V.PRIME_NAME             primeName
+             , V.BIZ_REG_NUM            businessRegistrationNumber
+             , V.PRIME_TEL_NUM          primeTelNumber
+             , V.VNDR_FAX_NUM           vendorFaxNumber
+             , V.VNDR_POST_NUM          vendorPostNumber
+             , V.VNDR_ADDR              vendorAddress
+             , V.VNDR_DTL_ADDR          vendorDetailAddress
+             , V.SALES_MNGR_TEL_NUM     salesManagerTelNumber
+             , V.SALES_MNGR_HDPHN_NUM   salesManagerHandPhoneNumber
+             , V.vndr_gbn_code          vendorGubunCode
+             , decode( V.BUY_CODE
+                     , 'C0084', '특정판매분'
+                     , 'C0081', '특정일반'
+                     , 'C0082', '직매입'
+                     , 'C0083', '행사'
+                     , '')              vendorGubunCodeName
+             , V.VNDR_TYPE_CODE         vendorTypeCode
+             , decode ( V.VNDR_TYPE_CODE
+                      , 'C0044','면세사업자'
+                      , 'C0043','간이과세자'
+                      , 'C0042','일반과세자'
+                      , 'C0041','법인과세자'
+                      , '')             vendorTypeCodeName
+             , V.CSTM_TYPE_CODE         customerTypeCode
+             , V.BIZ_TYPE_INFO          businessTypeInfo
+             , V.BIZ_KIND_INFO          businessKindInfo
+             , V.SALES_MNGR_NAME        salesManagerName
+             , V.HMPG_URL               homepageUrl
+             , V.MNGR_MD_ID             managerMdId
+             , V.BUY_CODE               buyCode
+             , (SELECT ADMIN_NAME FROM TB_ADMIN WHERE ADMIN_ID = MNGR_MD_ID) managerMdName
+             , V.MNGR_VNDR_ADMIN_ID     managerVendorAdminId
+             , (SELECT ADMIN_NAME FROM TB_ADMIN WHERE ADMIN_ID = MNGR_VNDR_ADMIN_ID) managerVendorAdminName
+             , V.DLVY_LEVY_STD_AMT      deliveryLevyStandardAmount
+             , V.DLVY_AMT               deliveryAmount
+             , V.note                   note
+             , A.admin_id               adminId
+             , A.tel_num                adminTel
+             , A.hdphn_tel_num          adminCell
+             , A.admin_email            adminEmail
+             , A.ADMIN_PASSWD           adminPw
+             , A.etc_text               adminEtcText
+             , V.SALES_MNGR_EMAIL_ADDR salesManagerEmailAddress
+             , (select CTGR_NAME from TB_CATEGORY where CTGR_ID = CATEGORY_ID01) selcate1
+             , (select CTGR_NAME from TB_CATEGORY where CTGR_ID = CATEGORY_ID02) selcate2
+             , CATEGORY_ID01 codcate1
+             , CATEGORY_ID02 codcate2
+          FROM TB_VENDOR V
+             , tb_admin A
+         WHERE V.VNDR_ID = #vendorId#
+           AND V.MNGR_VNDR_ADMIN_ID = A.admin_id(+)
+    </select>
+    
+    <select id="getContractByContractId" parameterClass="string" resultClass="contractParam">
+        /*VendorSQL.getContractByContractId*/
+        SELECT A.VNDR_CNTRT_ID          contractId
+             , A.CNTRT_START_DT         contractStartDate
+             , A.CNTRT_END_DT           contractEndDate
+             , A.VNDR_CHGE_RATE         chargeRate
+             , A.VNDR_SAVED_RATE        savedRate
+             , A.REGST_ADMIN_ID         registAdminId
+             , A.REGST_DTM              registDate
+             , A.VNDR_CNTRT_STAT_CODE   contractStatusCode
+             , A.VAT_TAX_YN             vatTaxYn
+             , A.VNDR_DLVY_CODE         deliveryCode
+             , A.BRAND_ID               brandId
+             , A.VNDR_ID                vendorId
+             , (SELECT BRAND_NAME FROM TB_BRAND WHERE BRAND_ID = A.BRAND_ID) brandName
+             , B.VNDR_NAME              vendorName
+             , B.SALES_MNGR_NAME        salesManagerName
+             , B.SALES_MNGR_TEL_NUM     salesManagerTelNumber
+             , B.SALES_MNGR_HDPHN_NUM   salesManagerHandPhoneNumber
+             , B.SALES_MNGR_EMAIL_ADDR  salesManagerEmailAddress
+             , B.MNGR_VNDR_ADMIN_ID     managerVendorAdminId
+             , B.DLVY_LEVY_STD_AMT      deliveryLevyStandardAmount
+             , B.DLVY_AMT               deliveryAmount
+             , (SELECT TCB_ID FROM TB_VENDOR_CONTRACT_TACBAE WHERE VNDR_CNTRT_ID = A.VNDR_CNTRT_ID AND std_yn = 'Y') stdTacbaeId
+          FROM TB_VENDOR_CONTRACT A
+             , TB_VENDOR B
+         WHERE A.VNDR_ID = B.VNDR_ID
+           AND VNDR_CNTRT_ID = #contractId#
+    </select>
+    
+    <select id="getTacbaeListByContractId" parameterClass="string" resultClass="tacbae">
+        /*VendorSQL.getTacbaeListByContractId*/
+        SELECT C.TCB_ID     tacbaeId
+             , C.TCB_NAME   tacbaeName
+             , B.std_yn     standardYn
+          FROM TB_VENDOR_CONTRACT A
+             , TB_VENDOR_CONTRACT_TACBAE B
+             , TB_TACBAE C
+         WHERE A.VNDR_CNTRT_ID = B.VNDR_CNTRT_ID
+           AND B.TCB_ID = C.TCB_ID
+           AND C.USE_YN = 'Y'
+           AND A.VNDR_CNTRT_ID = #contractId#
+    </select>
+    
+    <insert id="insertVendorInquiry" parameterClass="vendorInquiryParam">
+        <selectKey keyProperty="iqrySeq" resultClass="int" type="pre">SELECT iqry_seq.nextval FROM dual</selectKey>
+        INSERT INTO TB_VENDOR_INQUIRY (IQRY_SEQ, VNDR_NAME, VNDR_ADDR, MNGR_NAME, DPTMT_NAME, TEL_NUM, HDPHN_TEL_NUM, EMAIL_ADDR, VNDR_URL, PRIME_DLVY_CSTM, PRIME_NAME, BIZ_REG_NUM, BIZ_KIND_INFO, BIZ_TYPE_INFO, YYYY_SALES, PRDT_BRAND, PRDT_GBN, IQRY_DESC, PROC_STAT_GBN, PROC_DESC, ADMIN_ID, REGST_DTM, SELL_PSBLT_PRDT_COUNT, PROC_DTM, CTGR_ID)
+                               VALUES (#iqrySeq#, #vndrName#, #vndrAddr#, #mngrName#, #dptmtName#, #telNum#, #hdphnTelNum#, #emailAddr#, #vndrUrl#, #primeDlvyCstm#, #primeName#, #bizRegNum#, #bizKindInfo#, #bizTypeInfo#, #yyyySales#, #prdtBrand#, #prdtGbn#, #iqryDesc#, 'N', #procDesc#, #adminId#, SYSDATE, #sellPsbltPrdtCount#, #procDtm#, #categoryId#)
+    </insert>
+</sqlMap>

@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+.page-location { background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_page_location.gif") repeat-x 0px bottom !important; }
+.page-location .title { padding-left: 10px; float: left; }
+.page-location ul { width: 730px !important; }
+
+/* music */
+	#container .snb {width:180px; overflow:hidden; float:left; padding-bottom:40px;}
+
+#music {width:755px; overflow:hidden; float:right; margin-bottom:30px;}
+#music .contents {width:755px; overflow:hidden; float:right; position:relative;}  
+#music .contents .stitle { padding-left: 5px; height: 32px; clear: both; border-bottom: 2px solid #c14141; margin-bottom: 10px; }
+
+.snb a:link, .snb a:visited { background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_snb.gif") no-repeat 0px -25px; height: 25px; overflow: hidden; display: block; color: #363636; padding-left: 15px; width: 160px; font-family: "돋움", "돋움체"; font-size: 11px; line-height: 25px !important; font-weight: bold; }
+.snb a:hover, .snb .on a:link, .snb .on a:visited { color: #f50a2b; background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_snb.gif") no-repeat 0px 0px; text-decoration: none; }
+.contents .description { display: block; border: 1px solid #d2d2d2; padding: 13px 15px 12px; margin-bottom: 25px; }
+.contents .description li { font-size: 11px; color: #4d4d4d; background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/dot_desc.gif") no-repeat 0px 6px; padding-left: 8px; line-height: 15px; }
+
+#container #music .pager { clear:both; position:relative; margin:0; padding:10px 0 10px; text-align: center; border: none; }
+#container #music .pager.bottom { border-top: 1px solid #737373; }
+
+.list_tool { margin-top: 10px; display: block; text-align: right; margin-bottom: 10px; clear: both; float: left; width: 755px; }
+.list_option { background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/bg_list_option.gif") repeat-x 0px top; padding-top: 21px; height: 30px; float: left; width: 755px; }
+.list_option .list_sort { float: left; }
+.list_option .national { float: left; }
+.list_option .list_type { float: right; }
+.list_option .national { font-size: 11px; color: #464646; margin-left: 60px; height: 14px; line-height: 14px; }
+.list_option .list_sort span { border-right: 1px solid #ccc; padding: 0px 15px; float: left; height: 14px; overflow: hidden; }
+.list_option .list_sort span.end { border-right: none; }
+.list_option .list_sort a { width: 55px; height: 14px; overflow:hidden; float: left; }
+.list_option .list_sort img { margin-top: -14px; }
+.list_option .list_sort .on img { margin-top: 0px; }
+.list_option .list_type a { margin-right: 10px; height: 14px; width: 57px; float: left; overflow: hidden; }
+.list_option .list_type .on img { margin-top: -16px; }
+
+.music_list { display: block; border-top: 1px solid #ccc; float: left; width: 755px; }
+.music_list em { color: #fe5705; }
+.music_list li { border-bottom:1px solid #ccc; font-size: 11px; display: block; padding: 15px; _padding-bottom: 0px; height: 125px; position: relative; float: left; width: 725px; }
+.music_list li p { float: left; width: 450px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #898989; height: 16px; line-height: 16px; }
+.music_list .seperate { color: #d7d7d7; }
+.music_list p.album_pic { float: left; margin-right: 13px; width: 83px; height: auto !important;}
+.music_list a.album_pic { height: 85px !important; }
+.music_list .album_pic span { text-align: center; display: block; padding-top: 5px; width: 85px; height: auto; }
+.music_list a.album_pic img { width: 83px; height: 83px; border: solid 1px #ececec; }
+.music_list .album_title { font-weight: bold; color: #333; margin-top: 8px; margin-bottom: 4px; }
+.music_list .album_title a { color: #333;  }
+.music_list .price { margin-top: 8px; float: left; width: 450px; height: 16px; }
+.music_list .price .ori_price { color: #363636; text-decoration: line-through; }
+.music_list .price .dis_price { font-weight: bold; color: #da2729; }
+.music_list .price .save_price { color: #363636; }
+
+.music_list .album_tool { position: absolute; top: 15px; right: 15px; width: 100px; height: 100px; }
+.music_list .album_tool span { display:block; margin-bottom: 4px; }
+.music_list .album_tool .count { margin-left: 24px; display: inline; }
+.music_list .album_tool .album_count { width: 25px; padding-right: 4px; text-align: right; border: 1px solid #cacaca; height: 16px; margin-bottom: 4px; }
+.music_list .album_tool button { width: 97px; }
+.list_tool button { width: 113px; _margin-right: 4px; }
+.music_list .album_review { clear: both; background: url("http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/music/dot_line_list.gif") repeat-x 0px top; width: 755px; float: left; height: 30px; margin: 10px -15px 0px; padding: 8px 15px 0px; }
+.music_list .album_review .point { margin-left: 350px; }
+.music_list .album_review .seperate { margin-right: 10px; margin-left: 10px; }
+.music_list .album_review .point img { margin-bottom: 2px; margin-left: 2px; }
+
+.music_grid { display: block; border-bottom: 1px solid #ccc; float: left; width: 755px; }
+.music_grid.first { border-top: 1px solid #ccc;}
+.music_grid em { color: #fe5705; }
+.music_grid li { font-size: 11px; display: block; padding: 15px 5px 10px 10px; float: left; width: 135px; }
+.music_grid li p { white-space: nowrap; text-overflow: ellipsis; color: #898989; text-align: center; display: block; overflow: hidden; }
+.music_grid .check { float: left; height: 24px; width: 24px; text-align: left; }
+.music_grid p.album_pic { width: 85px; height: auto !important; }
+.music_grid a.album_pic { height: 85px !important; }
+.music_grid a.album_pic img { width: 83px; height: 83px; border: solid 1px #ececec; }
+.music_grid .album_title { color: #333; margin-top: 8px; }
+.music_grid .album_title a { color: #333; white-space: nowrap; width: 85px; overflow: hidden; text-overflow: ellipsis; }
+.music_grid .price { margin-top: 8px; height: 16px; text-align: center; font-weight:: bold; font-weight: bold; color: #464646; }

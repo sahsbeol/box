@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<!-- 태그 라이브러리 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+<!-- 태그 라이브러리 -->
+<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="/images/ico_app.png">
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/contents.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
+<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
+
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906210101"></script>
+<script type="text/javascript" src="/scripts/common?201906210101"></script>
+
+</head>
+<body>
+<div class="popup f_noto">
+<h1 class="tit01 mgt0 fs24 c_white"><span class="fw500">반품/교환 상품 조회</span></h1>
+<div class="pop_cont">
+    <ul class="list_type02_v2 mgb20">
+        <li>반품/교환 신청은 발송 완료일로부터 7일 이내에 가능합니다.</li>
+        <li>반품/교환을 원하시는 상품 및 수량을 선택하세요.</li>
+    </ul>
+    <form name="returnExchangeForm" id="returnExchangeForm">
+        <table class="table02_v1 t_center">
+            <caption>반품/교환 상품조회 <span>선택, 상품명, 가격, 신청수량</span>
+            </caption>
+            <colgroup>
+                <col style="width:60px" />
+                <col style="width:*" />
+                <col style="width:80px" />
+                <col style="width:80px" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col" class="fir">선택</th>
+                    <th scope="col">상품명</th>
+                    <th scope="col">가격</th>
+                    <th scope="col" class="last">신청수량</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="4" class="no_data">반품/교환 신청 가능한 내역이 없습니다.</td></tr>
+                
+            </tbody>
+        </table>    	
+        <div class="btn_area t_center mgt30">
+            <a href="#n" class="btn_type04_v2" _onclick="self.close()">취소</a>
+            <a href="#n" class="btn_type04_v1 mgl10" id="">저장</a>
+        </div>
+    </form>
+</div>
+
+</div>
+</body>
+</html>
