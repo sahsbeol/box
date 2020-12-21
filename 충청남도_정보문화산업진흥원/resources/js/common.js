@@ -112,6 +112,108 @@ $(function(){
 	// }
 	// /*//메인 슬라이드*/
 
+	/*gnb 오픈 및 gnb hover */
+	$(".gnb_list > li:not(.search_btn) > a").on("mouseenter focusin", function(){
+		$('#gnb').addClass('gnb_active');
+		$('.depth2_wrap').addClass('op1');
+		$(this).addClass("hover");
+	});
+	$(".gnb_list").on("mouseleave", function(){
+		$('#gnb').removeClass('gnb_active');
+		$('.depth2_wrap').removeClass('op1');
+	});
+
+	$(".depth2 > li > a").on("mouseenter focusin", function(){		
+		$(this).parents('li').children('a').addClass('hover');
+	});
+	$(".gnb_list > li > a").on("mouseleave focusout", function(){
+		$(".gnb_list li a").removeClass("hover");
+	});	
+	$(".depth2 > li > a").on("mouseleave focusout", function(){
+		$(".depth2 > li > a").removeClass('hover');
+		$(this).parents('li').siblings('li').children('a').removeClass('hover');
+		$(this).parents('.gnb_list').find('li').siblings('li').children('a').removeClass('hover');
+	});
+
+	$(".depth3 > li > a").on("mouseenter focusin", function(){		
+		$(this).parents('li').children('a').addClass('hover');
+	});		
+	$(".depth3 > li > a").on("mouseleave focusout", function(){
+		$(".depth3 > li > a").removeClass('hover');
+		$(this).parents('li').siblings('li').children('a').removeClass('hover');
+		$(this).parents('.gnb_list').find('li').siblings('li').children('a').removeClass('hover');
+	});
+
+	/*// gnb 오픈 및 gnb hover */
+
+	/* gnb active */
+	$('.gnb_list li a').click(function(){
+		$('.gnb_list li a').removeClass('active');
+		// $(this).addClass('active').parent('li').siblings('li').children('a').removeClass('active');
+	});
+
+	/* 검색 활성화 */
+	$(function(){
+		$('.gnb_wrap .search_btn').hover(function(){
+			$(this).addClass('hover');		
+
+		},function(){
+			$(this).removeClass('hover');
+		});
+
+		$('.gnb_wrap .search_btn > a').on('click', function(){
+
+			if($(this).parent().hasClass("close")){
+				$(this).parent().removeClass("active");
+				$(this).parent().removeClass("close");
+				$(this).parent().removeClass("hover");
+				$(".search_wrap").hide();
+
+				// $("#header").css("z-index", "102");
+				dim_close()
+			} else{
+				$(this).parent().addClass("close");
+				$(".search_wrap").show();
+				$(this).parent().addClass("active");
+				$(this).parent().removeClass("hover");
+				// $("#header").css("z-index", "104");
+				dim_open()
+			}
+
+			// $(this).toggleClass("active");
+
+			//   if($(".search_btn").hasClass("active")){
+
+			// 	 $('.search_wrap').show();
+			// 	}else{
+			// 		$('.search_wrap').hide();
+			// }
+
+		});
+
+		$(".search_close").on('click', function() {
+           $('#total_search').val('');
+
+        });
+	})
+
+
+
+	// $(document).focusin(function(e){
+	// 	// gnb 포커스
+	// 	var el01 = $(".gnb_list");
+	// 	if(el01.parents("#gnb").has(e.target).length === 0){
+	// 		el01.find("li").removeClass("on").find(".depth2_wrap").hide();
+	// 	}
+	// 	// 전체메뉴 포커스
+	// 	// var el02 = $(".all_menu_wrap");
+	// 	// if(el02.has(e.target).length === 0){
+	// 	// 	$(".all_menu_close").focus();
+	// 	// }
+	// });
+
+
+
 
 	/*메인 슬라이드*/
 	if($('.main_slide_wrap').length){
@@ -119,8 +221,8 @@ $(function(){
 		main_bnr.on('init reInit', function(){
 			var main_controler = '<div class="main_banner_btn">' +
 				'<button type="button" class="prev">이전</button>' +
-				'<button type="button" class="stop">정지</button>' +
 				'<button type="button" class="next">다음</button>' +
+				'<button type="button" class="stop">정지</button>' +
 			'</div>';
 			$('.main_banner_list .slick-dots').wrap('<div class="main_banner_control"><div class="main_banner_dot"></div></div>');
 			$('.main_banner_dot').append(main_controler);
@@ -130,7 +232,7 @@ $(function(){
 			infinite: true,
 			accessibility: true,
 			slidesToScroll: 1,
-			autoplay: false,
+			autoplay: true,
 			autoplaySpeed:5000,
 			draggable: false,
 			arrows: false,
@@ -156,10 +258,11 @@ $(function(){
 	  slidesToShow: 4,
 	  slidesToScroll: 1,
 	  asNavFor: '.slider-for',
-	  centerMode: true,
+	  centerMode: false,
 	  focusOnSelect: true, 
 	  arrows: true,
 	  dots:false,
+	  variableWidth: true
 	});
 	/*//메인 슬라이드*/
 
@@ -217,14 +320,7 @@ $(function(){
 
 	}
 
-	// // middle_slide_banner //
-	// $('.bottom_slide_banner_list').slick({
- //  		infinite: true,
- //  		slidesToShow: 6,
-	//   	slidesToScroll: 2,
-	// 	arrows: true,
-	// 	dots:false,
-	// });
+
 
 	/*배너존 슬라이드*/
 	if($('.banner_zone').length){
@@ -440,16 +536,19 @@ $(function(){
 	/*//셀렉트 형식 팝업 다른 영역 클릭 시 닫기*/
 
 	/*모바일 검색영역*/
-	$(".search_btn a").click(function(){
+	$(".mobile_wrap .search_btn a").click(function(){
 		if($(this).parent().hasClass("close")){
 			$(this).parent().removeClass("close");
+			$(this).parent().removeClass("hover");
 			$(".search_wrap").hide();
-			$("#header").css("z-index", "102");
+
+			// $("#header").css("z-index", "102");
 			dim_close()
 		} else{
 			$(this).parent().addClass("close");
 			$(".search_wrap").show();
-			$("#header").css("z-index", "104");
+			$(this).parent().removeClass("hover");
+			// $("#header").css("z-index", "104");
 			dim_open()
 		}
 	});
@@ -477,12 +576,9 @@ $(function(){
 	$(window).resize(function(){
 
 		if($(window).width() >= 1200){
-			$(".search_wrap").removeAttr("style");
-			$(".search_btn.close a").click();
-			$(".all_menu_wrap").removeClass("m_all_menu").find("li").removeClass("on");
-			$(".all_menu_depth2, .all_menu_depth3").removeAttr("style");
+
 		} else if($(window).width() <= 1199){
-			$(".all_menu_wrap").addClass("m_all_menu");
+	
 		}
 
 	});
@@ -590,7 +686,7 @@ $(function() {
 
   var UI = {
     init: function() {
-      this.quickMenuFn();
+      //this.quickMenuFn();
       this.topBtn();
     },
 
@@ -605,19 +701,19 @@ $(function() {
       this.init();
     },
 
-    quickMenuFn: function() {
-      var quick = $(this.id.target.quick);
-      var qTop = parseInt(quick.css('top'));
+    // quickMenuFn: function() {
+    //   var quick = $(this.id.target.quick);
+    //   var qTop = parseInt(quick.css('top'));
 
-      $(window).scroll(function() {
-        var winTop = $(window).scrollTop();
+    //   $(window).scroll(function() {
+    //     var winTop = $(window).scrollTop();
 
-        quick.stop().animate({
-          top: winTop + qTop
-        });
+    //     quick.stop().animate({
+    //       top: winTop + qTop
+    //     });
 
-      })
-    },
+    //   })
+    // },
 
     topBtn: function() {
       var btnLocation = $('.' + this.id.topBtnClass);
