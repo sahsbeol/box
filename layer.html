@@ -1231,12 +1231,12 @@ function gnbSearchKerword(keyword){
 					.form_search_list .items .link span {display: block; float: left; font-size: inherit;}
 
 					.popular_search_wrap .bxslider {display: block; height:auto;}
-					.popular_search_wrap {display:none;   width: 320px;    position: absolute;    top: 0;    right: 0;}
+					.popular_search_wrap {display:none;   width: 320px;    position: absolute;        top: -20px;    right: -24px;}
 					.popular_search_wrap.active {display: block;}		
-					#gnb .popular_search_wrap .keyword_list_v2 { display: block !important; box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.16); padding-bottom: 63px; padding-right: 30px; width:280px; }
+					#gnb .popular_search_wrap .keyword_list_v2 { display: block !important; box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.16); padding-bottom: 63px; padding-right: 30px; width:280px; top:0; left:auto; margin:20px 20px 30px;}
 
-					.popular_search_wrap .bx-viewport {min-height:500px;}
-					.popular_search_wrap .bx-controls {position: absolute;left: 0;width: 100%;bottom: 32px;}
+					.popular_search_wrap .bx-viewport {min-height:545px;}
+					.popular_search_wrap .bx-controls {position: absolute;left: 0;    width: 320px;    bottom: 75px;}
 					.popular_search_wrap .bx-pager {display: table;    text-align: center;    margin: 0 auto;}
 					.popular_search_wrap .bx-pager .bx-pager-item { display: table-cell; width:10px;}
 					.popular_search_wrap .bx-pager .bx-pager-link {font-size: 0; width:10px; height:10px; margin:0 4px; background: #BDBDBD; border-radius: 5px;}
@@ -1248,7 +1248,7 @@ function gnbSearchKerword(keyword){
 
  					#gnb .popular_search_wrap .keyword_list_v2 .last_texts {width: 70%;}
  					#gnb .popular_search_wrap .keyword_list_v2 .btn_last_delete {font-size: 0; width:9px; height:8px; position: absolute; top:0; right:0;}
- 					#gnb .popular_search_wrap .inner_popular_search {width:inherit !important; height:100%;}
+ 					#gnb .popular_search_wrap .inner_popular_search {width:380px !important; height:100%;}
 				</style>
 				<script>
 					$(function(){
@@ -1262,16 +1262,21 @@ function gnbSearchKerword(keyword){
 						});
 
 						// 인기검색어 슬라이드
-						$('.popular_search_wrap .bxslider').bxSlider({
+						$('.popular_search_wrap .bxslider').bxSlider({					    
 						    
-						    slideWidth: 320,
 						    controls:false,
+						    slideWidth:380,
+						    slideMargin:30
 						}); 
 
-						$('.keyword_wrap').hover(function(){
-							$('.popular_search_wrap').addClass('active');
+						// 최근검색어 슬라이드
+						$('.keyword_wrap, .popular_search_wrap').mouseover(function(){
+							$('.popular_search_wrap').show();
 						});
-						
+
+					    $(".popular_search_wrap").mouseout(function(){
+					      $(".popular_search_wrap").hide();
+					    });
 
 						
 
