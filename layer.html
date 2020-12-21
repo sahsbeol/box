@@ -1222,13 +1222,38 @@ function gnbSearchKerword(keyword){
 
 				<!-- 201221 키워드 S -->
 				<style>
-					.form_search_list_wrap {position: absolute; top:0; left:0;}
-					.form_search_list {border:4px #000 solid;}
-					.form_search_list .items .link {display: block; font-size: 15px; font-weight: 500; margin: 0 10px;}
+					.form_search_list_wrap {display:none; position: absolute;    top: 58px;    right: 0;    z-index: 1;    width: 424px; background: #fff;}
+					.form_search_list_wrap.active {display: block;}
+					.form_search_list {border:4px #000 solid; padding:10px 25px 22px;}
+					.form_search_list .items {margin:10px 0;}
+					.form_search_list .items .link {display: block; font-size: 15px; font-weight: 500; padding:5px 0;}
 					.form_search_list .items .link:after {content:''; display: block; clear: both;}
 					.form_search_list .items .link span {display: block; float: left; font-size: inherit;}
 
+					.bxslider {display: block;}
+					.popular_search_wrap {display:none; border:1px #f00 solid;    width: 280px;    position: absolute;    top: 0;    right: 0;}
+
+
 				</style>
+				<script>
+					$(function(){
+
+						// 키워드 
+						$("input[name='searchTerm']").on("change keyup paste", function(){
+							$('.form_search_list_wrap').addClass('active');
+						});
+						$("input[name='searchTerm']").focusout(function(){
+							$('.form_search_list_wrap').removeClass('active');
+						});
+
+						// 인기검색어 슬라이드
+						$('.bxslider').bxSlider(); 
+
+						
+
+					});
+
+				</script>
 
 				<div class="form_search_list_wrap">
 					<ul class="form_search_list">
@@ -1237,129 +1262,499 @@ function gnbSearchKerword(keyword){
 						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
 						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미 라미</span><span>만년필</span></a></li>
 						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미 라미</span><span>만년필</span></a></li>
+						<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
 					</ul>
 				</div>
+
+				<!--// 201221 키워드 E -->
+
+				<div class="popular_search_wrap">
+					<div class="bxslider">
+
+						<div class="keyword_list_v2">
+				            <h5>인기 검색어</h5>
+				            <p class="txt"><strong>2020.12.21 19:00</strong> 기준</p>
+				            <a href="#none" class="keyword_close">닫기</a>
+				            <ul>
+				            	
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('NCT');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">1.</em>
+										<p>NCT</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('스티커');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">2.</em>
+										<p>스티커</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">3.</em>
+										<p>다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('러브미모어');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">4.</em>
+										<p>러브미모어</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">5.</em>
+										<p>필통</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('모트모트');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">6.</em>
+										<p>모트모트</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('2021다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">7.</em>
+										<p>2021다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('달력');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">8.</em>
+										<p>달력</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num up">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('마스킹테이프');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">9.</em>
+										<p>마스킹테이프</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num down">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('크리스마스카드');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">10.</em>
+										<p>크리스마스카드</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            	</ul>
+			            </div>
+			            <div class="keyword_list_v2">
+				            <h5>인기 검색어</h5>
+				            <p class="txt"><strong>2020.12.21 19:00</strong> 기준</p>
+				            <a href="#none" class="keyword_close">닫기</a>
+				            <ul>
+				            	
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('NCT');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">1.</em>
+										<p>NCT</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('스티커');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">2.</em>
+										<p>스티커</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">3.</em>
+										<p>다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('러브미모어');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">4.</em>
+										<p>러브미모어</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">5.</em>
+										<p>필통</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('모트모트');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">6.</em>
+										<p>모트모트</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('2021다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">7.</em>
+										<p>2021다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('달력');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">8.</em>
+										<p>달력</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num up">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('마스킹테이프');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">9.</em>
+										<p>마스킹테이프</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num down">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('크리스마스카드');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">10.</em>
+										<p>크리스마스카드</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            	</ul>
+			            </div>
+			            <div class="keyword_list_v2">
+				            <h5>인기 검색어</h5>
+				            <p class="txt"><strong>2020.12.21 19:00</strong> 기준</p>
+				            <a href="#none" class="keyword_close">닫기</a>
+				            <ul>
+				            	
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('NCT');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">1.</em>
+										<p>NCT</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('스티커');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">2.</em>
+										<p>스티커</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">3.</em>
+										<p>다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('러브미모어');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">4.</em>
+										<p>러브미모어</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">5.</em>
+										<p>필통</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('모트모트');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">6.</em>
+										<p>모트모트</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('2021다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">7.</em>
+										<p>2021다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('달력');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">8.</em>
+										<p>달력</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num up">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('마스킹테이프');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">9.</em>
+										<p>마스킹테이프</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num down">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('크리스마스카드');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">10.</em>
+										<p>크리스마스카드</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            	</ul>
+			            </div>
+					</div>
+				</div>
+
+				<div class="keyword_list_v2">
+				            <h5>인기 검색어</h5>
+				            <p class="txt"><strong>2020.12.21 19:00</strong> 기준</p>
+				            <a href="#none" class="keyword_close">닫기</a>
+				            <ul>
+				            	
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('NCT');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">1.</em>
+										<p>NCT</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('스티커');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">2.</em>
+										<p>스티커</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">3.</em>
+										<p>다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('러브미모어');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">4.</em>
+										<p>러브미모어</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">5.</em>
+										<p>필통</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('모트모트');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">6.</em>
+										<p>모트모트</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('2021다이어리');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">7.</em>
+										<p>2021다이어리</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('달력');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">8.</em>
+										<p>달력</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num up">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('마스킹테이프');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">9.</em>
+										<p>마스킹테이프</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span class="num down">1</span>
+											
+									</a>
+			            		</li>
+							
+			            		<li>
+									<a href="javascript:;" onclick="gnbSearchKerword('크리스마스카드');return false;" class="PC_MAIN_TOP_12_N">
+										<em class="font_t">10.</em>
+										<p>크리스마스카드</p>
+										<!-- ▲ up , ▼ down : class 추가 -->
+										
+												<span>-</span>
+											
+									</a>
+			            		</li>
+							
+			            	</ul>
+			            </div>
+
+
 			
-			
-	            <div class="keyword_list_v2">
-		            <h5>인기 검색어</h5>
-		            <p class="txt"><strong>2020.12.21 19:00</strong> 기준</p>
-		            <a href="#none" class="keyword_close">닫기</a>
-		            <ul>
-		            	
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('NCT');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">1.</em>
-									<p>NCT</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('스티커');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">2.</em>
-									<p>스티커</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('다이어리');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">3.</em>
-									<p>다이어리</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('러브미모어');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">4.</em>
-									<p>러브미모어</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">5.</em>
-									<p>필통</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('모트모트');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">6.</em>
-									<p>모트모트</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('2021다이어리');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">7.</em>
-									<p>2021다이어리</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('달력');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">8.</em>
-									<p>달력</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span class="num up">1</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('마스킹테이프');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">9.</em>
-									<p>마스킹테이프</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span class="num down">1</span>
-										
-								</a>
-		            		</li>
-						
-		            		<li>
-								<a href="javascript:;" onclick="gnbSearchKerword('크리스마스카드');return false;" class="PC_MAIN_TOP_12_N">
-									<em class="font_t">10.</em>
-									<p>크리스마스카드</p>
-									<!-- ▲ up , ▼ down : class 추가 -->
-									
-											<span>-</span>
-										
-								</a>
-		            		</li>
-						
-		            </ul>
-	            </div>
-			
+				
+
 			
 			<div class="g_menu">
 				<ul>
