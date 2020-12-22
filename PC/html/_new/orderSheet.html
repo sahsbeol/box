@@ -124,6 +124,7 @@
                 </div>
             </nav>
         </div>
+        
 
         <!-- Container -->
         <div id="container">
@@ -142,7 +143,7 @@
                                 </colgroup>
                                 <tbody>
                                      <tr>
-                                        <th>이름</th>
+                                        <th>이름 <span>*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="" class="width_name">
@@ -150,7 +151,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>휴대전화</th>
+                                        <th>휴대전화 <span>*</span></th>
                                         <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
                                                 <span class="input_wrap">
@@ -169,7 +170,7 @@
                                     </t
                                     r>
                                     <tr>
-                                        <th>이메일</th>
+                                        <th>이메일<span>*</span></th>
                                         <td>
                                             <div class="choice_wrap type_squre have_inner_txt inner_float_dot">                                                  
                                                 <span class="input_wrap">
@@ -179,7 +180,8 @@
                                                 <span class="input_wrap">
                                                     <input type="text" placeholder="" class="width_email">
                                                 </span> 
-                                                <span class="input_wrap _last">
+                                                <span class="input_wrap 
+                                                ">
                                                     <select name="" id="" class="width_email">
                                                         <option value="">직접입력</option>
                                                     </select>
@@ -188,12 +190,12 @@
                                         </td>                                    
                                     </tr>
                                     <tr>
-                                        <th>SMS수신</th>
+                                        <th>SMS수신 <span>*</span></th>
 
                                         <td>
                                             <div class="choice_wrap">
                                                 <span class="choice_wrap_inner">
-                                                    <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" />
+                                                    <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="" />
                                                     <label for="orderInfoSmsY">정보 수신</label>
                                                 </span>
                                                 <span class="choice_wrap_inner">
@@ -207,8 +209,18 @@
                             </table>
                         </div>
 
-                        <div class="user_title distance">
-                            <p>배송지 정보</p>
+                        <div class="user_title mgt70 have_inner_txt">
+                            <h3 class="i_txt">배송지 정보</h3>
+                            <div class="choice_wrap">
+                                <span class="choice_wrap_inner">
+                                    <input type="radio" name="orderInfo1" id="orderInfo_11" value="Y" checked="" />
+                                    <label for="orderInfo_11">주문자 정보</label>
+                                </span>
+                                <span class="choice_wrap_inner">
+                                    <input type="radio" name="orderInfo1" id="orderInfo_12" value="N" />
+                                    <label for="orderInfo_12">최근 배송지</label>
+                                </span>
+                            </div>
                         </div>               
                         <div class="user_table_wrap">                        
                             <table class="table_wrap">
@@ -218,7 +230,7 @@
                                 </colgroup>
                                 <tbody>
                                      <tr>
-                                        <th>이름</th>
+                                        <th>이름 <span>*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="" class="width_name">
@@ -226,7 +238,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>휴대전화</th>
+                                        <th>휴대전화 <span>*</span></th>
                                         <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
                                                 <span class="input_wrap">
@@ -239,29 +251,51 @@
                                                 </span>
                                                 <span class="input_wrap">
                                                     <input type="text" placeholder="" class="width_phone">
-                                                </span>                                              
+                                                </span>
+                                                <div class="choice_wrap_inner">
+                                                    <span>
+                                                        <input type="checkbox" name="orderInfo2" id="orderInfo_21" value="Y">
+                                                        <label for="orderInfo_21">안심번호 사용</label>
+                                                    </span>
+                                                    <a href="javascript:;" class="icon_question" title="팝업 열기">팝업 열기</a>
+                                                </div>                                             
                                             </div>
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>주소</th>
-                                        <td>
+                                        <th>전화번호 <span>*</span></th>
+                                        <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                <span class="input_wrap">
+                                                    <select name="" id="" class="width_phone">
+                                                        <option value="">선택</option>
+                                                    </select>
+                                                </span>  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_phone">
+                                                </span>
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_phone">
+                                                </span>                                        
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>주소 <span>*</span></th>
+                                        <td>
+                                            <div class="have_inner_txt">
                                                 <span class="input_wrap">
                                                    <input type="text" placeholder="" class="width_address">                                                 
                                                 </span>
-                                                <button class="btn_defalut">우편번호검색</button>   
-                                                <span class="choice_wrap_inner">
-                                                    <span>
-                                                        <input type="checkbox" name="orderInfo4" id="orderInfo_41" value="Y" />
-                                                        <label for="orderInfo_41">기본 배송지 설정</label>
-                                                    </span>
-                                                </span>                                                 
+                                                <span class="input_wrap">
+                                                   <input type="text" placeholder="" class="">                                                 
+                                                </span>
+                                                <button class="btn_defalut">우편번호검색</button>            
                                             </div>
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>주문 요청사항</th>
+                                        <th>주문 요청사항 <span>*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="주문 상품 업체에 전달되는 메시지입니다. 요청사항을 입력해주세요." class="width_check">
@@ -269,7 +303,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>배송 요청사항</th>
+                                        <th>배송 요청사항 <span>*</span></th>
                                         <td>
                                             <div class="select_wrap">
                                                 <select name="" id="" class="width_check">
@@ -280,11 +314,12 @@
                                     </tr>
                                 </tbody> 
                             </table>
+                            <p class="alert_txt mgt10"><span class="point02">*</span><span>표시는 필수 입력 항목입니다. 필수 항목 모두 입력 완료 시 주문/결제 가능합니다.</span></p>
                         </div>
 
                         <div class="user_title distance have_inner_txt">
-                            <p class="i_txt"><span>주문상품  : </span><span class="red">999</span> <span>개</span></p>
-                            <p class="i_small_txt">상품수량 및 옵션변경은 상품상세 또는 장바구니에서 가능합니다.</p>                            
+                            <p class="i_txt"><span>주문상품  : </span><span class="point02">999</span> <span>개</span></p>
+                            <p class="i_small_txt">상품수량 및 옵션변경은 <span>상품상세</span> 또는 <span>장바구니</span>에서 가능합니다.</p>                            
                         </div>
 
                     </div>

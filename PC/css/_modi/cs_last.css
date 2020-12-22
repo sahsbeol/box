@@ -1,0 +1,156 @@
+@charset "utf-8";
+
+/*----- cs css all Modified - 고객센터 css 폰트종류 폰트사이즈 등등 수정 -----*/
+.content.f_set.cs_last {font-family: 'NS','Apple SD Gothic Neo', sans-serif; line-height: normal; font-size:14px;}
+.content .only_english {font-family: 'GS','Apple SD Gothic Neo', sans-serif !important; line-height: normal; font-size: inherit;}
+
+/* lnb common */
+.cs_last .lnb > ul > li > a {font-size: 16px; min-height: 37px; line-height: 37px;}
+.cs_last .lnb > ul > li > .depth2 > li > a {font-size: 14px; line-height: 1.5em;}
+.cs_last .lnb > ul > li > .depth2 > li.active, .lnb > ul > li > .depth2 > li a:hover {letter-spacing:0px;}
+.cs_last .lnb > ul > li > .depth2 > li.active > a {color :#ff6600;}
+
+/* title */
+.cs_last .page_location .loc {float:right;padding: 0;margin: 17px 0 0 0;/* font-size: 26px; */}
+.cs_last .page_location .loc * {font-size: 14px;line-height: 14px;background: url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_bl02.gif) no-repeat 0 6px;}
+.cs_last .page_location .loc .home {margin-left:0;padding-left:12px;background: url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_dot.gif) no-repeat 0px 5px;}
+.cs_last .page_location .title {float:left;font-size: 26px;margin-bottom: 10px;line-height: normal;}
+
+.cs_last h3.page_title {font-size: 23px;font-weight: 700;margin-bottom: 15px; min-height:auto;}  
+.cs_last .tit01 {font-size: 18px; font-weight:500; line-height: normal; min-height:auto; margin-bottom:10px; margin-top:40px;}
+.cs_last .save_point > .inner .tit01 {margin-top:0;}
+.cs_last .page_stitle a { font-size: 22px; line-height: 1.4; margin-bottom: 15px; letter-spacing: -1px; font-weight: 700; color:#bebebe;}
+.cs_last .page_stitle a.active {color:#000;}
+
+.cs_last h4.important_info {font-size:18px; line-height: normal; margin-bottom: 5px; }
+.cs_last .detail_txt {color: #898989;  line-height: normal; font-weight: 300; font-size:14px;}
+
+/* list */
+.cs_last ul.list_type02 > li {font-size: 14px; font-weight:300; line-height: 1.4; margin-bottom: 5px; word-break: break-all; background-position: 0 8px;}
+
+/* table */
+/* 
+	table02 td: height: 55px; 
+*/
+
+.cs_last .table01 tbody th {padding:17px 24px; font-size: 14px;  line-height:1.4em;}
+.cs_last .table01 tbody td {padding:17px 35px 17px 21px; font-size:14px;  line-height:1.4em;}
+
+.cs_last .table02 {font-size:14px; line-height:1.4em;}
+.cs_last .table02 thead th {padding:10px 0;color:#646464;border-bottom: 1px solid #eaeaea;background:#f5f5f1;}
+.cs_last .table02 tbody th {padding:10px 9px 10px 9px;font-weight: 500;}
+.cs_last .table02 tbody th label { font-weight: inherit;}
+.cs_last .table02 tbody td {padding:10px 20px 11px;}
+.cs_last .table02.t_center tbody td {padding:17px 0;text-align:center;}
+.cs_last .table02.cash {border-collapse:separate;border:1px solid #a31112}
+.cs_last .table02.cash th {padding:5px;border-left:1px solid #eaeaea}
+.cs_last .table02.cash td {padding:5px;border-left:1px solid #eaeaea}
+.cs_last .table02.cash th + td {border-left:0}
+.cs_last .table02.cash td + th {border-left:1px solid #eaeaea}
+.cs_last .table02.cash td.t_center {padding:0}
+.cs_last .table02.cash.t_center th {text-align:center}
+.cs_last .table02.cash.t_center td {padding:5px}
+.cs_last .table02.cash tr.tfoot th {border-bottom:1px solid #eaeaea;background:#f5f5f5}
+.cs_last .table02.cash tr.tfoot td {border-bottom:1px solid #eaeaea;background:#f5f5f5}
+.cs_last .table02 input[type=checkbox] {vertical-align:middle}
+.cs_last .table02 input[type=checkbox] + * {position:relative;top:1px;}
+
+.cs_last .table03 thead th {padding: 13px 0; line-height:initial;font-size: 13px;font-weight: 300;}
+.cs_last .table03 tbody td {height:auto; padding: 13px 8px; font-size: 13px; line-height: 1.4;}
+
+.cs_last label.t01 { margin-left: 5px;}
+.cs_last .radios { margin-left:10px; }
+.cs_last .radios.first { margin-left:0px; }
+
+/* board */
+/* 
+	bbs_list01 td: height: 50px; 
+*/
+
+.cs_last .bbs_search {margin:25px 0 10px; text-align:right;}
+.cs_last .bbs_search * {vertical-align:top;}
+
+.cs_last .bbs_list01 {border-collapse: separate; position: relative;}
+.cs_last .bbs_list01 .t_left {padding-left:0px;}
+.cs_last .bbs_list01 thead {}
+.cs_last .bbs_list01 thead th, .cs_last .bbs_list01 tbody td {font-size:14px; line-height: normal; border-right:1px solid #eaeaea;  text-align:center;}
+.cs_last .bbs_list01 thead th:first-child, .cs_last .bbs_list01 tbody td:first-child {border-left:1px solid #eaeaea;}
+.cs_last .bbs_list01 thead th {padding:11px 0; font-weight: 700;}
+.cs_last .bbs_list01 thead th.fir {border-width:1px 0 1px 1px;}
+.cs_last .bbs_list01 thead th.last {border-width:1px 1px 1px 0;}
+.cs_last .bbs_list01 tbody td,
+.cs_last .bbs_list01.tbl_slide tbody td {padding:14px 12px 15px !important; text-align:center !important; font-weight: 500;}
+.cs_last .bbs_list01 tbody td a {color:#898989; font-size:inherit; line-height: inherit; font-weight: inherit;}
+
+.cs_last .bbs_list01 tbody tr.conts td {padding:0 0;text-align:left;background:#f5f5f1;}
+
+/*_ board 최상단 고정 */
+.cs_last .bbs_list01 .list_fixed,
+.cs_last .bbs_list01 .list_fixed.conts {background: #f5f5f1;}
+.cs_last .bbs_list01 .list_fixed td, .cs_last .bbs_list01 .list_fixed td a.click {color:#646464;}
+
+
+/* text */
+.cs_last .s_title { font-size: 20px; min-height: auto; line-height: normal; margin-bottom: 10px;}
+.cs_last .s_title .desc {font-size: 14px; line-height: normal; padding: 0; margin: 9px 10px 0px}
+.cs_last .stxt {font-size: 13px; font-weight:400;}
+
+.cs_last .txt_tip {font-size: 15px; font-weight: 400; background-position: 0 4px;}
+.cs_last .txt_tip .stxt {margin-top:5px;}
+.cs_last .stxt_tip {font-size: 14px; line-height: 1.4em; font-weight: 300;}
+
+.cs_last .infobox01 {margin-top:45px;}
+.cs_last .infobox01 .f_left {width:330px;}
+.cs_last .infobox01 .f_right {width:315px;}
+.cs_last .infobox01 .con {margin-top:15px;padding-left:8px;}
+.cs_last .infobox01 dl {line-height:18px;}
+.cs_last .infobox01 dl dt { font-size: 14px; font-weight: 700; margin-bottom: 5px;}
+.cs_last .infobox01 dl dt:first-child {margin-top:0;}
+.cs_last .infobox01 dl dd { font-size: 13px; font-weight: 400; line-height: 1.7; word-break: keep-all;}
+.cs_last .infobox01.type2 {position:relative;margin-top:-1px;border:1px solid #dbdbdb;}
+
+.cs_last .sv_carving {padding-top:10px;}
+.cs_last .sv_carving .stit {font-size: 16px;font-weight: 500;letter-spacing: -1.4px;padding: 0;height: auto;margin-bottom: 5px;}
+
+
+/* box */
+.cs_last .info_box .incont {font-size: 14px; line-height: 1.4;}
+.cs_last .info_box .incont .info_tit {margin-bottom: 8px;}
+.cs_last .info_box .incont li {font-size: 14px; line-height: 1.4; margin-bottom: 3px;}
+
+/* search */
+.cs_last .search_box02 {padding:40px 10px;text-align:center;border:1px solid #e2e2e2;background:#f5f5f1;}
+.cs_last .search_box02 .stit {font-size: 20px; font-weight: 700; vertical-align: middle;}
+.cs_last .search_box02 .text_box {position:relative;display:inline-block;width:266px;height: auto;padding: 5px 45px 5px 23px;vertical-align: middle;background: #4f4f4f;border-radius: 19px;}
+.cs_last .search_box02 .text_box input[type="text"] {width:100%;height:30px;color:#fff;font-size: 14px;border:0;background:#4f4f4f;outline:none;}
+.cs_last .search_box02 .text_box .search_btn {position:absolute;top: 50%;margin-top: -16px;right:16px;display:inline-block;width:19px;height:30px;background:url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_search02.gif) no-repeat 50% 50%;}
+.cs_last .search_box02 .text_box .search_btn span {display:inline-block;visibility:hidden;font-size:0;line-height:0}
+.cs_last .search_box02 .text_box .exm_txt {position:absolute;top: 50%;margin-top: -15px;left:23px;color:#fff;font-size: 14px;line-height:30px;}
+
+.cs_last .search_box02 .wordlist {height:auto; line-height: normal;}
+
+/* btn */
+.cs_last .btn_type07 {font-size: 14px;min-width: 105px;padding: 10px 30px 11px 13px;height: auto;line-height: normal;}
+.cs_last .btn_type01 {height: 16px; line-height: normal; font-size: 13px; padding: 6px 10px 8px; vertical-align: middle;}
+.cs_last .btn_type03 {height: auto;line-height: normal;font-size: 16px;padding: 17px 55px 17px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;}
+
+/* sos 상담 */
+.sos_counsel .txt { line-height: 1.5;}
+.sos_counsel .btn_type01 {font-size: 12px;padding: 6px 11px; height: auto; line-height: 1.4;}
+
+/* unit */
+.input_txt, textarea {padding: 6px 4px 6px 4px;border: 1px solid #ccc;color: #000000;line-height: 1.4;font-size: 14px;}
+.input_txt {vertical-align: middle;height: auto;}
+input::placeholder, 
+input::-webkit-input-placeholder, 
+input:-ms-input-placeholder, textarea::-webkit-input-placeholder, textarea:-ms-input-placeholder {  color: #898989 !important; }
+
+/*_ input_file 첨부 */
+.file_input {position: relative;height: 100%;}
+.file_input label {position: absolute;top: 0;left: 0;cursor:pointer;height: inherit;}
+.file_input label span.text {font-size: inherit;font-weight: inherit;color:#fff;text-align:center;padding: 4px 25px 6px;height: auto;line-height: normal;width: auto;background: #4f4f4f;margin-left: 195px;/* margin-top: 9px; */display: inline-block;}
+.file_input label input { position:absolute; width:0; height:0; overflow:hidden;}
+
+
+/* paging */
+.paging ul li a {font-size: 14px; line-height: 20px;}

@@ -1,0 +1,1316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+
+<head>
+    <!-- 태그 라이브러리 -->
+
+
+
+
+
+
+ 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=950">
+    <title>주문결제 | 주문FAQ | 고객센터 - HOTTRACKS</title>
+
+    <!-- 태그 라이브러리 -->
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+    <link rel="stylesheet" type="text/css" href="../../css/_modi/cs_last.css">
+
+    <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../js/m_contents.js"></script>
+    <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+    <script type="text/javascript" src="../../js/biz/hott.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script> 
+
+<!-- 데이타 스토리  script--> 
+<script type="text/javascript">
+(function() {
+    var nl = document.createElement('script'); nl.type = 'text/javascript';
+    nl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.hottracks.co.kr/js/wl6.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(nl, s);
+    var done = false;
+    nl.onload = nl.onreadystatechange = function() {
+        if ( !done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') ) {
+            done = true;
+            _n_sid = 'pc.hottracks.co.kr';        // _n_sid 값 별로 로그파일이 생성이 됩니다
+            _n_uid_cookie = 'WNO';
+            n_logging();
+            nl.onload = nl.onreadystatechange = null;
+        }
+    }
+})();
+</script>
+
+    
+
+<script type="text/javascript">
+jQuery(function($){
+    
+    $("tbody tr td a.click").click(function(event) {
+        event.preventDefault(); // # 링크 이동 중지
+        
+        var selectHref = $(this).attr("href");
+        if($(selectHref).hasClass("on")){
+            $(selectHref).removeClass("on");
+        }else{
+            $(selectHref).addClass("on");
+            
+            var seq = $(this).siblings("input").val();
+            var hit = $("#faqHit" + seq);
+            var hitVal = parseInt(hit.text()) + 1;
+            hit.text(hitVal);
+            //setHit
+            $.ajax({
+                type: "GET"
+                ,url: "/ht/help/AjaxFFaqSetHit"
+                ,dataType: "html"
+                ,data:{seq:seq}
+            });  
+        }
+
+        var selectData = $(this).parents('tr');
+
+    });
+    
+    
+    $("a.searchText").click(function(event) {
+        event.preventDefault(); // # 링크 이동 중지
+        
+        $("form[name='faqSearchForm']").submit();
+    });
+    
+    $("form[name='faqSearchForm'] .exm_txt").click(function(){
+        $("form[name='faqSearchForm'] .exm_txt").hide();
+        $("form[name='faqSearchForm'] input[name='title']").focus();
+    });
+    
+    $("form[name='faqSearchForm'] input[name='title']").focus(function(){
+        $("form[name='faqSearchForm'] .exm_txt").hide();
+    });
+    
+    $("form[name='faqSearchForm'] input[name='title']").blur(function(){
+        if($(this).val() == ""){
+            $("form[name='faqSearchForm'] .exm_txt").show();
+        }
+    });
+    
+    $("form[name='faqSearchForm'] input[name='title']").select();
+});
+</script>
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5MVN3Z4');</script>
+<!-- End Google Tag Manager -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+    gnb();//gnb
+    nav();//nav 
+    if($('.header_wrap').length >0){
+        bodyScroll();//body scroll  
+    }
+})  
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- 태그 라이브러리 -->
+
+
+
+
+
+
+
+
+
+<!-- 탑 텍스트 배너 -->
+
+    <div class="top_txtbnr">
+       <ul class="inner">
+        
+        
+           <li><a href="http://dev.hottracks.co.kr/e/63326">모바일 첫구매 3천원 쿠폰</a></li>
+        
+           <li><a href="http://dev.hottracks.co.kr/e/68610">핫트랙스 물류배송 인기</a></li>
+        
+           <li><a href="http://dev.hottracks.co.kr/p/8809633189159">BTS(방탄소년단) - BE [딜럭스 한정반]</a></li>
+        
+           <li><a href="http://dev.hottracks.co.kr/ht/biz/agit?agitTypeCd=C1511">별걸 다 리뷰하는 핫트연구소</a></li>
+        
+       </ul>
+    </div>
+
+
+    <!-- 커튼 배너 -->
+    <div class="top_banner PC_MAIN_TOP_1" style="background-color:#7e68ff;">
+        <div class="inner">
+            <!-- 영역 -->
+                <style>
+/* 좌에서 우로 컬러 #코드 모두 수정 필수 */
+.top_banner {
+background: -webkit-linear-gradient(left,  #ad3333 0%,#ad3333 50%,#bb8520 50%,#bb8520 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #ad3333 0%,#ad3333 50%,#bb8520 50%,#bb8520 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+</style>
+<div class="top_banner_a type2">
+    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1421/1607936103702_201214_03.jpg" usemap="#top_map">
+            <map name="top_map">
+                <area onfocus="this.blur()" href="/e/70991" shape="rect" coords="5,8,438,76">
+                <area onfocus="this.blur()" href="/e/71286" shape="rect" coords="496,4,972,87">
+    </map>
+    <!-- 화이트 버튼 white로 / 블랙 버튼 black로 클래스 추가 -->
+    <a class="btn_close white" href="#none">닫기</a>
+</div>              
+            <!--// 영역 -->
+        </div>
+    </div>
+
+
+<div id="wrap" class="content_new">
+    
+<!-- 태그 라이브러리 -->
+
+
+
+
+
+
+
+
+
+<style>
+
+#header.fixed #gnb .keyword_list_v2 {display:none !important;}
+#gnb .keyword_list_v2{border: 1px solid #dbdbdb;box-sizing:border-box;border-radius: 20px;background: #fff;z-index: 10;width: 270px;position: relative;top: -70px;margin: 0 auto;left: 510px;padding: 20px 10px 30px 36px;display:none;-webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);-moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);}
+
+#gnb .keyword_list_v2 h5{color:#000;font-size: 15px;font-weight:bold;}
+#gnb .keyword_list_v2 .keyword_close {display:none; position:absolute;top: 17.5px;width:20px;height:20px;right: 33px;text-indent:-9999px;background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_closeb_top.png') 50% 50% no-repeat;}
+#gnb .keyword_list_v2 ul{margin-top: 20px;}
+#gnb .keyword_list_v2 ul li{position:relative;background: #fff;}
+#gnb .keyword_list_v2 ul li + li{margin-top:20px;}
+#gnb .keyword_list_v2 a {display:block;}
+#gnb .keyword_list_v2 a > *{display:inline-block; vertical-align:top;}
+#gnb .keyword_list_v2 .font_t{width:20px;color: #999;font-size: 12px;padding: 2px 0 0 0;font-weight: normal;vertical-align:top;position: inherit;}
+#gnb .keyword_list_v2 p{width:70%;font-size: 14px;/* margin: 10px 0 0 0; */line-height: 14px;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#gnb .keyword_list_v2 span{position:absolute;min-width: 26px;text-align:center;padding-top:7px;right:20px;font-size: 8px;vertical-align:top;box-sizing:border-box;font-family:font_gs, sans-serif;}
+#gnb .keyword_list_v2 .new{font-weight:bold;color: #000000;letter-spacing: -0.1em;}
+#gnb .keyword_list_v2 .num{padding-top: 6px;}
+#gnb .keyword_list_v2 .num:before{content:'';position:absolute;right:50%;margin-right: -5px;top: -2px;width: 10px;height: 6px;}
+#gnb .keyword_list_v2 .num.up:before{background:url('../../images/biz/common/icon_updown.png') no-repeat;background-size: 20px 6px;}
+#gnb .keyword_list_v2 .num.down:before{background:url('../../images/biz/common/icon_updown.png') no-repeat;background-size: 20px 6px;background-position: -10px 0;}
+#gnb .keyword_list_v2 .txt{color: #777;font-size: 12px;padding-top: 10px;}
+#gnb .keyword_list_v2 .txt strong{font-weight: normal; font-family: 'font_gs', 'AppleGothic', sans-serif;}
+
+</style>
+<script type="text/javascript">
+jQuery(function($){
+    var ticker = function(){
+            timer = setTimeout(function(){
+                $('#ticker a:first').animate( {marginTop: '-34px'}, 400, function()
+                {
+                    $(this).detach().appendTo('#ticker').removeAttr('style');
+                });
+                ticker();
+            }, 2000);         
+    };
+    var autoplay = true;
+    ticker();
+    
+    /*var chkInt = sessionStorage.getItem('chkInt');
+    if (chkInt && chkInt<5) {
+            sessionStorage.setItem('chkInt', (parseInt(chkInt)+1));
+            $("input[name=exLink]").val($("input[name=exLink"+(parseInt(chkInt)+1)+"]").val());
+            $("input[name=exTxt]").val($("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
+            $("input[name=searchTerm]").attr("placeholder",$("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
+    }else{
+        sessionStorage.setItem('chkInt', 1);
+    }*/
+
+});
+$(document).ready(function(){
+    $(".keyword_wrap").mouseover(function(){
+      $(".keyword_list_v2").show();
+    });
+    $(".keyword_list_v2").mouseover(function(){
+      $(".keyword_list_v2").show();
+    });
+    $(".keyword_list_v2").mouseout(function(){
+      $(".keyword_list_v2").hide();
+    });
+    $('.keyword_close').click(function(){
+      $('.keyword_list_v2').hide();
+    });
+});
+function gnbSearchKerword(keyword){
+    document.location.href="/ht/biz/bizSearchMain?searchTerm="+keyword;
+};
+</script>
+<!-- header -->
+<div id="header">
+    <!-- util menu -->
+    <div class="util_menu">
+        <ul>
+            <li class="gnbLoginStat PC_MAIN_TOP_8_N" style="display:none;"><a href="http://dev.hottracks.co.kr/ht/user/logout">로그아웃</a></li>
+            <li class="gnbLoginStat PC_MAIN_TOP_9_N" style="display:none;"><a href="http://dev.hottracks.co.kr/ht/mypage/mypageMain">마이핫트랙스</a></li>
+            <li class="gnbLogoutStat PC_MAIN_TOP_2_N" style="display:none;"><a href="javascript://" onclick="login()">로그인</a></li>
+            <li class="gnbLogoutStat PC_MAIN_TOP_3_N" style="display:none;"><a href="http://dev.hottracks.co.kr/ht/biz/mypage/loginForm?returnUrl=http://www.hottracks.co.kr/ht/mypage/mypageMain">주문조회</a></li>
+<!--            <li class="gnbLogoutStat PC_MAIN_TOP_4" style="display:none;"><a href="javascript://" onclick="goMemJoin()">회원가입</a></li> -->
+            <li class="icon_topcart PC_MAIN_TOP_14_N"><a href="http://dev.hottracks.co.kr/ht/order/cart">장바구니</a></li>
+            <li class="PC_MAIN_TOP_5_N"><a href="http://dev.hottracks.co.kr/ht/help/helpMain">고객센터</a></li>
+            <li class="PC_MAIN_TOP_7_N"><a href="http://dev.hottracks.co.kr/company/story/sign" target="_blank">팬사인회</a></li>
+            <li class="PC_MAIN_TOP_6_N"><a href="http://dev.hottracks.co.kr/company/main/" target="_blank">매장안내</a></li>
+        </ul>
+    </div>
+    <!--// util menu -->
+    <!-- gnb -->
+       <nav id="gnb">
+        <div class="header_wrap">
+            <h1 class="g_logo PC_MAIN_TOP_10"><a href="http://dev.hottracks.co.kr/ht/biz/welcomeMain">HOTTRACKS</a></h1>
+            <!-- 신규 수정추가 -->
+            <ul class="gnb_bmenu">
+                
+                    
+                        
+                                <li class="PC_MAIN_GNB_12_N"><a href="http://dev.hottracks.co.kr/ht/biz/sticker/stickerMain">
+                                    스티커샵
+                                <em></em></a></li>
+                            
+                    
+                        
+                                <li class="PC_MAIN_GNB_15_N"><a href="http://dev.hottracks.co.kr/ht/biz/diary/main">
+                                    다이어리
+                                <em></em></a></li>
+                            
+                    
+                        
+                                <li class="PC_MAIN_GNB_13_N"><a href="http://dev.hottracks.co.kr/e/71061">
+                                    크리스마스
+                                <em></em></a></li>
+                            
+                    
+                
+                      <li class="PC_MAIN_GNB_2_N"><a href="http://dev.hottracks.co.kr/ht/biz/record/recordCategoryMain?ctgrId=0003">음반</a></li>
+            </ul>
+            
+            <div class="g_search">
+                
+                    
+                        
+                        
+                        
+                        
+                        <input type="hidden" name="exLink1" value="/e/71087"/>
+                        <input type="hidden" name="exTxt1" value="절찬리 상영중! 미션 특파서블~"/>
+                    
+                        
+                        
+                        
+                        
+                        <input type="hidden" name="exLink2" value="/p/"/>
+                        <input type="hidden" name="exTxt2" value=""/>
+                    
+                        
+                        
+                        
+                        
+                        <input type="hidden" name="exLink3" value="/p/"/>
+                        <input type="hidden" name="exTxt3" value=""/>
+                    
+                        
+                        
+                        
+                        
+                        <input type="hidden" name="exLink4" value="/e/"/>
+                        <input type="hidden" name="exTxt4" value=""/>
+                    
+                        
+                        
+                        
+                        
+                        <input type="hidden" name="exLink5" value="/e/"/>
+                        <input type="hidden" name="exTxt5" value=""/>
+                    
+                
+                <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+                <input type="hidden" name="exLink" value="/e/"/>
+                <input type="hidden" name="exTxt" value=""/>
+                    <div class="form_search">
+                        <input type="text" name="searchTerm" value="" placeholder="" title="검색어 키워드" autocomplete="off" >
+                        <div class="PC_MAIN_TOP_11_N"> 
+                            <a href="#" class="btn_search" onclick="gnbSrchFrm();return false;"></a>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    $("input[name=exLink]").val($("input[name=exLink1]").val());
+                    $("input[name=exTxt]").val($("input[name=exTxt1]").val());
+                    $("input[name=searchTerm]").attr("placeholder",$("input[name=exTxt1]").val());
+                </script>
+                <div class="keyword_wrap" id="ticker">
+                    
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('텐트');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">1</em>
+                                <p>텐트</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num up">3</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">2</em>
+                                <p>필통</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num down">1</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('아이패드미니');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">3</em>
+                                <p>아이패드미니</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num up">4</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('카카오프렌즈');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">4</em>
+                                <p>카카오프렌즈</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num up">4</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('화장품파우치');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">5</em>
+                                <p>화장품파우치</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="txt">-</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('제트스트림');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">6</em>
+                                <p>제트스트림</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num up">8</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('토토로');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">7</em>
+                                <p>토토로</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num down">5</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('레코드북');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">8</em>
+                                <p>레코드북</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num up">13</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('모기장');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">9</em>
+                                <p>모기장</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num up">13</span>
+                                    
+                            </a>
+                        
+                            <a href="javascript:;" onclick="gnbSearchKerword('어린왕자다이어리');return false;" class="PC_MAIN_TOP_12_N">
+                                <em class="font_t">10</em>
+                                <p>어린왕자다이어리</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+                                
+                                        <span class="num up">14</span>
+                                    
+                            </a>
+                        
+                    
+                </div>
+            </div>
+            
+            <!-- 인기검색레이어 -->
+            
+            
+                <div class="keyword_list_v2">
+                    <h5>인기 검색어</h5>
+                    <p class="txt"><strong>2020.12.16 17:00</strong> 기준</p>
+                    <a href="#none" class="keyword_close">닫기</a>
+                    <ul>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('텐트');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">1.</em>
+                                    <p>텐트</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num up">3</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">2.</em>
+                                    <p>필통</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num down">1</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('아이패드미니');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">3.</em>
+                                    <p>아이패드미니</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num up">4</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('카카오프렌즈');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">4.</em>
+                                    <p>카카오프렌즈</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num up">4</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('화장품파우치');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">5.</em>
+                                    <p>화장품파우치</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span>-</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('제트스트림');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">6.</em>
+                                    <p>제트스트림</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num up">8</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('토토로');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">7.</em>
+                                    <p>토토로</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num down">5</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('레코드북');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">8.</em>
+                                    <p>레코드북</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num up">13</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('모기장');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">9.</em>
+                                    <p>모기장</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num up">13</span>
+                                        
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="javascript:;" onclick="gnbSearchKerword('어린왕자다이어리');return false;" class="PC_MAIN_TOP_12_N">
+                                    <em class="font_t">10.</em>
+                                    <p>어린왕자다이어리</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+                                    
+                                            <span class="num up">14</span>
+                                        
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+            
+            <div class="g_menu">
+                <ul>
+                    <li class="icon_my">
+                        <a class="gnbLoginStat" style="display:none;" href="http://dev.hottracks.co.kr/ht/mypage/mypageMain"><img src="../../images/biz/common/icon_my.png" alt=""></a>
+                        <a class="gnbLogoutStat" style="display:none;" href="javascript://" onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>                                                                                     
+                    </li>
+                    <li class="icon_today">
+                        <a href="http://dev.hottracks.co.kr/ht/biz/mypage/todayBenefit" class="PC_MAIN_TOP_13">
+                            <img src="../../images/biz/common/icon_today.png" alt="">
+                            <em>오늘,<strong>혜택</strong></em>
+                        </a>
+                    </li>
+                    <li class="icon_cart">
+                        <a href="http://dev.hottracks.co.kr/ht/order/cart" class="PC_MAIN_TOP_14">
+                            <img src="../../images/biz/common/icon_cart.png" alt="">
+                            
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="gnb_wrap">
+            <div class="inner">
+                <div class="category_wrap">
+                    <div class="btn_category PC_MAIN_GNB_1">
+                        <a href="javascript:;">카테고리</a>
+                    </div>
+                    <div class="category_cont">
+                        <ul>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000020" class="dp1" value="000020">디자인문구</a>                              
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000022" class="dp1" value="000022">디지털</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000007" class="dp1" value="000007">고급필기구</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000021" class="dp1" value="000021">오피스</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000025" class="dp1" value="000025">리빙/생활가전</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000026" class="dp1" value="000026">키친/푸드</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000024" class="dp1" value="000024">가구/수납</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000028" class="dp1" value="000028">패션잡화</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000006" class="dp1" value="000006">뷰티/헬스</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000027" class="dp1" value="000027">여행/자동차</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000023" class="dp1" value="000023">취미/펫</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000029" class="dp1" value="000029">유아동</a>
+                            </li>
+<!--                            <li> -->
+<!--                                <a href="/ht/biz/eventDetail?eventId=47389" class="dp1 c_call" value="999999">직수입/PB</a> -->
+<!--                            </li> -->
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/record/recordCategoryMain?ctgrId=0003" class="dp1" value="0003">CD/LP</a>
+                            </li>
+                            <li class="PC_SIDE_CATE_1">
+                                <a href="/ht/biz/record/dvdCategoryMain?ctgrId=000401" class="dp1" value="000401">DVD/BLU-RAY</a>
+                            </li>
+                        </ul>
+                        <div class="banner PC_SIDE_CATE_IMG" id="gnbLbrnImgDiv">
+<!--                            <a href="#"><img src="" alt=""></a>                              -->
+                        </div>
+                    </div>
+                </div>
+                <ul class="gnb_menu">
+                    <li class="PC_MAIN_GNB_8_N"><a id="gnbEvent" href="http://dev.hottracks.co.kr/ht/biz/hotEventMain">이벤트</a></li>
+                    <li class="PC_MAIN_TOP_13_N"><a id="gnbTodayBenefit" href="http://dev.hottracks.co.kr/ht/biz/mypage/todayBenefit">쿠폰&amp;혜택</a></li>
+                    <li class="PC_MAIN_GNB_9_N"><a id="gnbPersonalRecommend" href="http://dev.hottracks.co.kr/ht/biz/personal/personalRecommend">추천</a></li>
+                    <li class="PC_MAIN_GNB_4_N"><a id="gnbBest" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotAwardPage">베스트</a></li>
+                    <li class="PC_MAIN_GNB_5_N"><a id="gnbFree" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotFreeDeliveryPage">무료배송</a></li>
+                    <li class="PC_MAIN_GNB_6_N"><a id="gnbNew" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotAwardRecentPage">신상</a></li>
+                    <li class="PC_MAIN_GNB_7_N"><a id="gnbSale" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotAwardPage?dispMstrId=CATE_GFT_SALE">할인</a></li>
+                </ul>
+                <ul class="sub_menu">
+                    <li class="PC_MAIN_GNB_10_N"><a id="gnbLifeMain" href="http://dev.hottracks.co.kr/ht/biz/life/lifeMain">이럴 때,</a></li>
+                    <li class="PC_MAIN_GNB_11_N"><a id="gnbAgit" href="http://dev.hottracks.co.kr/ht/biz/agit">아지트</a></li>
+                    <li class="PC_MAIN_GNB_14_N"><a id="gnbNews" href="http://dev.hottracks.co.kr/ht/idol/news">뮤직매거진</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!--// header -->
+<script type="text/javascript">
+var vid = getCookie('UserCookieKey');
+if (isEmpty(vid)) {//로그인이 안되있으면
+    $('.gnbLogoutStat').show();
+    $('.gnbLoginStat').hide();
+} else {
+    $('.gnbLogoutStat').hide(); 
+    $('.gnbLoginStat').show();
+    $(".gnbMypageBtn").find(".inner").addClass("member");
+}
+</script>
+    
+    
+    
+    
+    <!-- Container -->
+    <div id="container" >   
+        <!-- 컨텐츠 -->        
+        <div class="content cs_last" id="content">
+            
+<!-- sub top -->
+<div class="page_location">
+    <h2 class="title only_english">CS Center</h2>
+    
+            <div class="loc"><a href="/" class="home">Home</a><em>주문 FAQ</em></div>
+        
+</div>
+<!-- //sub top -->
+
+
+
+
+
+
+
+<script type="text/javascript">
+jQuery(function($){
+    $(document).ready(function(){
+        $('#content').addClass('f_set');//폰트 및 간격 재설정
+    });
+});
+</script>
+<!-- lnb -->
+<div class="lnb">
+    <ul>
+        <li><a href="/ht/help/sosCounselMain">SOS상담</a></li>
+        <li><a>공지/문의</a>
+            <ul class="depth2">
+                <li><a href="/ht/help/listNotice">공지사항</a></li>
+                <li><a href="/ht/help/eventPrizeList">이벤트 당첨자</a></li>
+                <li><a href="/ht/help/vendorInquiry">상품입점문의</a></li>
+                <li><a href="/ht/help/businessBuy">대량구매상담</a></li>
+            </ul>
+        </li>
+        <li><a>서비스안내</a>
+            <ul class="depth2">
+                <li><a href="/ht/help/memberShip">통합 멤버십</a></li>
+                <li><a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a></li>
+                <li><a href="/ht/help/carvingService">각인 서비스</a></li>
+                <li><a href="/ht/help/packingService">포장 서비스</a></li>
+                <li><a href="/ht/help/cardInfo">제휴/할인 카드</a></li>
+            </ul>
+        </li>
+        <li><a>주문 FAQ</a>
+            <ul class="depth2">
+                <li><a href="/ht/help/faqListC0391">주문결제</a></li>
+                <li><a href="/ht/help/faqListC0392">배송</a></li>
+                <li><a href="/ht/help/faqListC0393">반품/교환/환불</a></li>
+                <li><a href="/ht/help/faqListC0394">세금계산서/증빙</a></li>
+            </ul>
+        </li>
+        <li><a>회원 FAQ</a>
+            <ul class="depth2">
+                <li><a href="/ht/help/faqListC0401">회원정보</a></li>
+                <li><a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a></li>
+                <li><a href="/ht/help/faqListC0403">상품문의</a></li>
+                <li><a href="/ht/help/faqListC0404">이벤트</a></li>
+            </ul>
+        </li>
+        <li><a>기타 FAQ</a>
+            <ul class="depth2">
+                <li><a href="/ht/help/faqListC0411">영업점</a></li>
+                <li><a href="/ht/help/faqListC0412">사이트이용/장애</a></li>
+                <li><a href="/ht/help/faqListC0413">기타</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- //lnb -->
+
+<!-- sub contents -->
+<div class="sub_contents">
+    
+            <h3 class="page_title mgt0">주문 FAQ</h3>
+        
+    <!-- search -->
+    <div class="search_box02">
+        <form method="get" action="/ht/help/faqListC0391" name="faqSearchForm">
+            <fieldset>
+                <legend>FAQ Search</legend>
+                <label for="search_faq" class="stit">FAQ Search</label>
+                <span class="text_box">
+                    <input type="text" id="search_faq" name="title" value="" title="검색어 입력" />
+                    <a href="#" class="search_btn searchText"><span>검색</span></a>
+                    <span class="exm_txt">검색어를 입력하세요</span>
+                </span>
+            </fieldset>
+        </form>
+    </div>
+    <!-- search -->
+
+    <!-- tab -->
+    <div class="tab1 typeS">
+        
+                <ul> 
+                    <li><a href="/ht/help/faqListC0391" class="on"><span>주문결제</span></a></li>
+                    <li><a href="/ht/help/faqListC0392" ><span>배송</span></a></li> 
+                    <li><a href="/ht/help/faqListC0393" ><span>반품/교환/환불</span></a></li>
+                    <li><a href="/ht/help/faqListC0394" ><span>세금계산서/증빙</span></a></li>
+                </ul>  
+             
+    </div>
+    <!-- //tab -->
+    <!-- list -->
+    <table class="bbs_list01 tbl_slide">
+        <caption></caption>
+        <colgroup>
+            <col width="75" />
+            <col width="120">
+            <col width="*">
+            <col width="90">
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col" class="fir">번호</th>
+                <th scope="col">구분</th>
+                <th scope="col">제목</th>
+                <th scope="col" class="last">조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 상단 고정 : S -->
+                <tr class="list_fixed">
+                    <td>0</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq0_0" class="click">상품권(문화상품권, 도서상품권 등)으로 결제할 수 있나요?</a>
+                        <input type="hidden" value="40"/>
+                    </td>
+                    <td id="faqHit40">19748</td>
+                </tr>
+                <tr class="list_fixed conts" id="faq0_0">
+                    <td colspan="4"><div class="txt"><P>죄송합니다 이전까지 진행되었던 컬쳐랜드 문화상품권 결제 서비스가 <BR>2016년 9월 19일 이후로&nbsp; 종료되었습니다. <BR>앞으로 더욱 나은 서비스로 찾아뵐 수 있도록 노력하겠습니다 <BR></P><P>&nbsp;</P></div></td>
+                </tr>
+            <!--// 상단 고정 : E -->
+            
+                <tr>
+                    <td>1</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq0" class="click">상품권(문화상품권, 도서상품권 등)으로 결제할 수 있나요?</a>
+                        <input type="hidden" value="40"/>
+                    </td>
+                    <td id="faqHit40">19748</td>
+                </tr>
+                <tr class="conts" id="faq0">
+                    <td colspan="4"><div class="txt"><P>죄송합니다 이전까지 진행되었던 컬쳐랜드 문화상품권 결제 서비스가 <BR>2016년 9월 19일 이후로&nbsp; 종료되었습니다. <BR>앞으로 더욱 나은 서비스로 찾아뵐 수 있도록 노력하겠습니다 <BR></P>
+<P>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr class="">
+                    <td>2</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq1" class="click">크롬(Chrome) 결제시 INIpayPlugin.exe를 다운받아도 계속 재설치가 뜹니다.</a>
+                        <input type="hidden" value="241"/>
+                    </td>
+                    <td id="faqHit241">12537</td>
+                </tr>
+                <tr class="conts" id="faq1">
+                    <td colspan="4"><div class="txt"><P>크롬에서 결제시INIpayPlugin.exe를 다운받아도 계속 재설치 하라고 할 경우, <BR>아래와 같이 일시적으로 사용해주시기 바랍니다. <BR>(KG이니시스 플러그인 크로스브라우저 서비스 관련 공지안내) <BR><BR><B>1. 증상 및 원인 </B><BR><BR>(1) 증상 <BR>사용자가 Chrome브라우저에서 결제시 플러그인 설치 안내 페이지가 표시되며, INIpayPlugin.exe를 다운로드 받아 재설치 <BR>하여도 동일증상 무한반복 <BR><BR>(2) 원인 <BR>구글정책 상, 더 이상의 NPAPI(Chrome 브라우저에서 IE의 Active X와 동일한 기능을 수행하도록 지원하는 기술)차단 <BR>(Chrome 42.X버전 이상에서는 오픈웹 결제 플러그인 실행 불가) <BR><BR><B>2. 대응방법</B> <BR><BR>(1) Chrome 브라우저에서 주소창에 chrome://flags/#enable-npapi 입력 후 Enter </P>
+<P><BR><IMG alt="주소창에 chrome://flags/#enable-npapi 입력 후 Enter" src="http://image.kyobobook.co.kr/ink/images/cscenter/ini_01.jpg"></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>(2) NPAPI사용버튼 클릭 </P>
+<P><BR><IMG alt="NPAPI사용버튼 클릭" src="http://image.kyobobook.co.kr/ink/images/cscenter/ini_02.jpg"> <BR><BR><FONT color=#ff5e00><SPAN style="COLOR: rgb(59,156,233)"><FONT color=#ff5e00>(3) NPAPI사용의 사용버튼을 클릭 후 반드시 브라우저를 재실행 하시기 바랍니다.</FONT></SPAN> </FONT><BR>브라우저 재실행을 해야 해당기능이 활성화 됩니다. <BR></P>
+<P><STRONG></STRONG>&nbsp;</P>
+<P><STRONG><FONT color=#000000>※&nbsp;플러그인 차단 해제 방법</FONT></STRONG></P>
+<P>&nbsp;(1)Chrome 브라우저에서 주소창 옆 X표시를 클릭<BR>&nbsp;(2)www.hottracks.co.kr에서 플러그인 항상 허용 클릭 후 완료 버튼 클릭</P>
+<P>&nbsp;</P>
+<P style="TEXT-ALIGN: left"><IMG class=tx-daum-image style="FLOAT: none; CLEAR: none" src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1604/1438759526445_01.jpg"></P>
+<P style="TEXT-ALIGN: left"><BR>&nbsp;</P>
+<P style="TEXT-ALIGN: left"><IMG class=tx-daum-image style="FLOAT: none; CLEAR: none" src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1125/1438759538841_02.jpg"></P>
+<P style="TEXT-ALIGN: left">&nbsp;<BR><BR><STRONG>※ 크롬버전 확인 방법</STRONG> <BR>- Chrome 정보 클릭 <BR><IMG alt="Chrome 정보 클릭" src="http://image.kyobobook.co.kr/ink/images/cscenter/ini_03.jpg">&nbsp;</P>
+<P><BR>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>3</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq2" class="click">결제한 내역은 취소가 가능합니까?</a>
+                        <input type="hidden" value="49"/>
+                    </td>
+                    <td id="faqHit49">2995</td>
+                </tr>
+                <tr class="conts" id="faq2">
+                    <td colspan="4"><div class="txt"><P>주문취소/반품시 카드 결제는 승인 취소가, 현금성 결제 금액(실시간 계좌이체)은 핫트랙스 온라인몰 예치금으로 전환됩니다. </P>
+<P>&nbsp;</P>
+<P>핫트랙스 온라인몰 예치금은 상품 주문시 현금과 동일하게 사용하실 수 있으며, 환불을 원하실 경우 예치금 환불 신청 또는 고객센터(1661-1112)로 </P>
+<P>&nbsp;</P>
+<P>연락 주시면 지정하신 계좌로 송금해 드립니다. </P>
+<P>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>4</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq3" class="click">주문을 취소할 수 있나요?</a>
+                        <input type="hidden" value="41"/>
+                    </td>
+                    <td id="faqHit41">3185</td>
+                </tr>
+                <tr class="conts" id="faq3">
+                    <td colspan="4"><div class="txt"><P>주문취소는 주문/배송조회에서 회원 로그인 후 하실 수 있습니다.</P>
+<P><BR>비회원 주문의 경우는 주문하실 때 입력했던 이메일주소와 비밀번호로 로그인하실 수 있습니다.</P>
+<P><BR>결제를 완료하신 상태에서‘상품준비중’ 직전단계까지 가능하며 전체취소, 부분취소 모두 가능합니다.</P>
+<P>&nbsp;</P>
+<P>상품준비중 단계 이후에는 주문취소가 어려우시며 반품처리로 진행하셔야 합니다.</P>
+<P>&nbsp;</P>
+<P>반품주소 : 경기도 파주시 교하읍 문발리 파주출판단지 정보산업단지 501-1 교보문고 북시티 B동 1층 교보핫트랙스 반품 담당자앞</P>
+<P>&nbsp;</P>
+<P>위 주소는 핫트랙스 온라인몰 구매고객께서 이용하시는 반품 주소입니다.</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>5</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq4" class="click">인터넷 안전결제(ISP, 안심결제) 안내</a>
+                        <input type="hidden" value="37"/>
+                    </td>
+                    <td id="faqHit37">2952</td>
+                </tr>
+                <tr class="conts" id="faq4">
+                    <td colspan="4"><div class="txt"><IMG border=0 src="http://image.kyobobook.co.kr/newimages/apps/b2c/cscenter/System_011.gif" width=580 height=806 useMap=#Map>&nbsp;<BR><MAP id=Map name=Map><AREA href="http://www.kbcard.com/" shape=rect target=_blank coords=73,355,233,382><AREA href="http://www.bccard.com/" shape=rect target=_blank coords=286,355,448,382><BR><AREA href="http://www.lgcard.com" shape=rect target=_blank coords=34,693,117,717><BR><AREA href="http://www.samsungcard.co.kr" shape=rect target=_blank coords=135,693,219,716><BR><AREA href="http://www.yescard.co.kr" shape=rect target=_blank coords=239,694,324,716><BR><AREA href="http://www.shinhancard.com" shape=rect target=_blank coords=341,693,426,715><BR></MAP>
+<P>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>6</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq5" class="click">공인인증서 안내</a>
+                        <input type="hidden" value="35"/>
+                    </td>
+                    <td id="faqHit35">781</td>
+                </tr>
+                <tr class="conts" id="faq5">
+                    <td colspan="4"><div class="txt"><IMG border=0 src="http://image.kyobobook.co.kr/newimages/apps/b2c/cscenter/System_010.gif" width=580 height=1122 useMap=#Map>&nbsp;<BR><MAP id=Map name=Map><AREA href="https://www.yessign.or.kr/main/mod/modGuide.jsp" shape=rect target=_blank coords=21,61,181,88><AREA href="http://www.yessign.or.kr/yessignFile/etc/yessign5Install.exe" shape=rect target=_blank coords=22,101,202,128><BR></MAP>
+<P>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>7</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq6" class="click">장바구니, 보관함, 최근 본 상품목록 등의 사용법이 궁금해요.</a>
+                        <input type="hidden" value="34"/>
+                    </td>
+                    <td id="faqHit34">744</td>
+                </tr>
+                <tr class="conts" id="faq6">
+                    <td colspan="4"><div class="txt"><P>장바구니의 하단을 보면 아래에 &lt;찜하기&gt;가 생성된 것을 확인할 수 있습니다.</P>
+<P>&nbsp;</P>
+<P>단, &lt;찜하기&gt;는 회원로그인을 할 때에만 장바구니에서 보여집니다.</P>
+<P>&nbsp;</P>
+<P>- &lt;장바구니&gt;에 담긴 상품은 최대 3일까지 저장됩니다.</P>
+<P><BR>- 회원님의 &lt;찜하기&gt;에 담긴 상품은 저장 기간의 제한이 없습니다.</P>
+<P><BR>&nbsp;&nbsp; 최근 본 상품이나 장바구니에 담은 상품 중 장기간 보관하실 상품은 &lt;찜하기&gt;로 옮겨 주십시오.</P>
+<P><BR>- &lt;최근 본 상품&gt;은 고객님께서 핫트랙스 온라인몰에 방문하여 열람한 상품을 저장하여 보여드립니다.</P>
+<P><BR>&nbsp;&nbsp; 이 정보는 고객님의 웹브라우저 쿠키값에 저장되므로, 대략 1~7일 이내에 자동삭제됩니다. </P>
+<P><BR>&nbsp;&nbsp; (고객님의 PC 환경에 따라 차이있음)</P>
+<P>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>8</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq7" class="click">결제방법을 변경할 수 있나요?</a>
+                        <input type="hidden" value="33"/>
+                    </td>
+                    <td id="faqHit33">2696</td>
+                </tr>
+                <tr class="conts" id="faq7">
+                    <td colspan="4"><div class="txt"><P>주문/결제하신 후에는 인터넷 상에서 결제방법을 변경하실 수 없습니다.</P>
+<P>&nbsp;</P>
+<P>이 경우에는 기존 주문을 취소한 후 재주문하셔야 합니다.</P>
+<P>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>9</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq8" class="click">실시간 계좌이체 서비스란?</a>
+                        <input type="hidden" value="30"/>
+                    </td>
+                    <td id="faqHit30">2474</td>
+                </tr>
+                <tr class="conts" id="faq8">
+                    <td colspan="4"><div class="txt"><P>실시간 계좌이체는 회원님의 은행계좌에서 바로 결제대금을 이체하여 지불하는 편리한 서비스 입니다.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>실시간 계좌이체를 이용할 경우,</P>
+<P><BR>- 회원님께서 별도 수수료를 부담할 필요가 없습니다.</P>
+<P><BR>- 인터넷뱅킹에 가입하지 않은 고객도 이용할 수 있습니다.(국민은행제외)</P>
+<P><BR>- 은행에 직접 가실 필요가 없으며, 입금확인이 실시간으로 가능합니다.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>실시간 계좌이체 서비스를 사용할 수 있는 은행은 아래와 같습니다.</P>
+<P><BR>&nbsp;</P>기업, 국민, 외환, 수협, 농협중앙회, 농협회원조합, 우리, 조흥, 제일, 신한, 한미, 대구, 부산, 광주, 제주, 전북, 경남, 하나은행<BR>
+<P>&nbsp;</P></div></td>
+                </tr>
+            
+                <tr>
+                    <td>10</td>
+                    <td>주문결제</td>
+                    <td class="t_left">
+                        <a href="#faq9" class="click">주문과 관련된 E-Mail을 받을 수 있나요?</a>
+                        <input type="hidden" value="32"/>
+                    </td>
+                    <td id="faqHit32">1044</td>
+                </tr>
+                <tr class="conts" id="faq9">
+                    <td colspan="4"><div class="txt"><P>네. 고객님께서 회원가입 시 지정하신 E-Mail 주소로 주문완료, 배송처리안내 등 주문과 관련한 E-Mail이 발송되고 있습니다. </P>
+<P><BR>뿐만 아니라 신규상품, 이벤트 및 쿠폰 등의 할인혜택에 대한 정보도 받아보실 수 있습니다. </P>
+<P><BR>혹시 주문하신 상품의 결제완료 후 E-Mail을 받지 못하셨다면 회원정보의 재확인 및 변경을 부탁드립니다. </P>
+<P><BR>그 외의 문의 사항은 고객센터(국번없이 1661-1112)로 연락주시기 바랍니다</P>
+<P>&nbsp;</P></div></td>
+                </tr>
+             
+            
+            
+        </tbody>
+    </table>
+    <!-- //list -->
+    <!-- paging -->
+    <div class="paging mgt40">
+        
+
+
+
+
+    <a title="맨 처음 페이지로 이동" href="/ht/help/faqListC0391?page=1" class="first">처음</a>
+    
+    <ul>
+        
+            
+            
+                <li class="active"><a href="javascript://">1</a></li>
+            
+        
+    </ul>
+    
+
+    </div>
+    <!-- //paging -->
+</div>
+<!-- //sub contents -->
+
+            
+        </div>
+        <!-- //컨텐츠 -->
+    </div>
+    <!-- //Container -->
+    
+
+
+
+
+<script type="text/javascript">
+/* Array.from 미지원에 따른 추가내용 */
+// Production steps of ECMA-262, Edition 6, 22.1.2.1
+// Reference: https://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.from
+if (!Array.from) {
+  Array.from = (function () {
+    var toStr = Object.prototype.toString;
+    var isCallable = function (fn) {
+      return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+    };
+    var toInteger = function (value) {
+      var number = Number(value);
+      if (isNaN(number)) { return 0; }
+      if (number === 0 || !isFinite(number)) { return number; }
+      return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
+    };
+    var maxSafeInteger = Math.pow(2, 53) - 1;
+    var toLength = function (value) {
+      var len = toInteger(value);
+      return Math.min(Math.max(len, 0), maxSafeInteger);
+    };
+
+    // The length property of the from method is 1.
+    return function from(arrayLike/*, mapFn, thisArg */) {
+      // 1. Let C be the this value.
+      var C = this;
+
+      // 2. Let items be ToObject(arrayLike).
+      var items = Object(arrayLike);
+
+      // 3. ReturnIfAbrupt(items).
+      if (arrayLike == null) {
+        throw new TypeError("Array.from requires an array-like object - not null or undefined");
+      }
+
+      // 4. If mapfn is undefined, then let mapping be false.
+      var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+      var T;
+      if (typeof mapFn !== 'undefined') {
+        // 5. else      
+        // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
+        if (!isCallable(mapFn)) {
+          throw new TypeError('Array.from: when provided, the second argument must be a function');
+        }
+
+        // 5. b. If thisArg was supplied, let T be thisArg; else let T be undefined.
+        if (arguments.length > 2) {
+          T = arguments[2];
+        }
+      }
+
+      // 10. Let lenValue be Get(items, "length").
+      // 11. Let len be ToLength(lenValue).
+      var len = toLength(items.length);
+
+      // 13. If IsConstructor(C) is true, then
+      // 13. a. Let A be the result of calling the [[Construct]] internal method of C with an argument list containing the single item len.
+      // 14. a. Else, Let A be ArrayCreate(len).
+      var A = isCallable(C) ? Object(new C(len)) : new Array(len);
+
+      // 16. Let k be 0.
+      var k = 0;
+      // 17. Repeat, while k < len… (also steps a - h)
+      var kValue;
+      while (k < len) {
+        kValue = items[k];
+        if (mapFn) {
+          A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+        } else {
+          A[k] = kValue;
+        }
+        k += 1;
+      }
+      // 18. Let putStatus be Put(A, "length", len, true).
+      A.length = len;
+      // 20. Return A.
+      return A;
+    };
+  }());
+}
+/* Array.from 미지원에 따른 추가내용 */
+
+jQuery(function($) {
+    $('select.select_style02').change(function(){
+        if($(this).val()!="Family Site"){
+            window.open($(this).val());
+        }
+    });
+    
+    $.ajax({
+        url: '//admin.hottracks.co.kr/admin/system/hotSiteClickCheck2'
+        ,dataType: 'jsonp'
+        ,jsonpCallback: "callback"
+        ,success: function(data) {
+        }
+    });
+});
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-968575-10']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!-- 네이버 검색 광고 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 --> 
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script> 
+<script type="text/javascript"> 
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_4d6e800c5751";
+if (!_nasa) var _nasa={};
+wcs.inflow();
+wcs_do(_nasa);
+</script>
+<!-- 끝 -- 네이버 검색 광고 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '2595348470556537');
+fbq('track', "PageView");
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1053245131399072&ev=PageView&noscript=1"/></noscript>
+<!-- End Facebook Pixel Code -->
+
+
+<!--  레코벨 스크립트 -->
+<script type="text/javascript">
+  var _recoUserId = getCookie('UserCookieKey');
+
+    window._eglqueue = window._eglqueue || [];
+    _eglqueue.push(['setVar','cuid','e15e978e-3623-4892-bf0a-485b9f8196ee']);
+    _eglqueue.push(['setVar','userId',SHA256(_recoUserId)]); // optional
+    _eglqueue.push(['track','visit']);
+    (function(s,x){s=document.createElement('script');s.type='text/javascript';
+    s.async=true;s.defer=true;s.src=(('https:'==document.location.protocol)?'https':'http')+'://logger.eigene.io/js/logger.min.js';
+    x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();
+</script>
+<!--  레코벨 스크립트 끝 -->
+
+<!-- SK Planet 유입경로 추적 스크립트 -->
+<script src="//js.ad4989.co.kr/common/js/mojise/intro.js"></script>
+<!--/ SK Planet 유입경로 추적 스크립트 -->
+
+<!-- footer -->
+<div id="footer">
+    <div class="util">
+        <div class="util_cont">
+            <ul>
+                <li><a href="http://dev.hottracks.co.kr/company/about/introduce" target="_blank">회사소개</a></li>
+                <li><a href="http://info.hottracks.co.kr/company/recruit/notice" target="_blank">채용정보</a></li>
+                <li><a href="/heart" target="_blank">핫트합니다</a></li>
+                <li><a href="http://dev.hottracks.co.kr/company/store/main?deptcode=030005" target="_blank">매장안내</a></li>
+                <li><a href="http://dev.hottracks.co.kr/company/about/alliance" target="_blank">제휴/광고안내</a></li>
+                <li><a href="http://dev.hottracks.co.kr/ht/welcomeMain/viewRule" target="_blank">이용약관</a></li>
+                <li><a href="http://dev.hottracks.co.kr/ht/welcomeMain/privacy" target="_blank"><strong>개인정보처리방침</strong></a></li>
+                <li><a href="http://dev.hottracks.co.kr/ht/welcomeMain/popupEmail" onclick="window.open(this.href,'popupPrizewinner','width=400,height=365');return false;" title="새 창으로 열림">이메일수집거부</a></li>
+            </ul>
+            <div class="family_site">
+                <p>패밀리 사이트</p>
+                <ul>
+                    <li><a href="http://www.kyobo.co.kr" title="새 창 열림" target="_blank">교보생명</a></li>
+                    <li><a href="http://www.kyobobook.co.kr" title="새 창 열림" target="_blank">교보문고</a></li>
+                    <li><a href="http://www.kyobotrade.com" title="새 창 열림" target="_blank">교보증권</a></li>
+                    <li><a href="http://www.kico.co.kr" title="새 창 열림" target="_blank">교보정보통신</a></li>
+                    <li><a href="http://www.kyobobldg.co.kr" title="새 창 열림" target="_blank">교보리얼코</a></li>
+                    <li><a href="http://www.kyoboitm.co.kr" title="새 창 열림" target="_blank">교보악사자산운용</a></li>
+                    <li><a href="http://www.lifeplanet.co.kr" title="새 창 열림" target="_blank">교보라이프플래닛생명</a></li>
+                    <li><a href="http://www.kcasonsa.co.kr" title="새 창 열림" target="_blank">KCA 손해사정</a></li>
+                    <li><a href="http://www.daesan.or.kr" title="새 창 열림" target="_blank">대산문화재단</a></li>
+                    <li><a href="http://www.kbedu.or.kr" title="새 창 열림" target="_blank">교보생명교육문화재단</a></li>
+                    <li><a href="http://www.dsa.or.kr" title="새 창 열림" target="_blank">대산농촌재단</a></li>
+                    <li><a href="http://www.kyoboacademy.co.kr" title="새 창 열림" target="_blank">교보아카데미</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="inner">
+        <div class="cont left">
+            <div class="cs_center">
+                <strong class="font_t">1661-1112</strong>
+                <span>평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
+                <dl>
+                    <dt><a href="http://dev.hottracks.co.kr/ht/help/sosCounselMain"><span>SOS 상담</span></a></dt>
+                    <dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
+                </dl>
+            </div>
+            <h2>교보핫트랙스㈜</h2>
+            <span>대표이사 오교철</span>
+            <span>사업자등록번호 : 102-81-29258 <a href="javascript://" onclick="window.open('http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1028129258', 'communicationViewPopup', 'scrollbars=yes, width=750, height=700;');return false;" title="새 창으로 열림">사업자정보확인 &gt;</a></span>
+            <span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+            <span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+            <span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
+        </div>
+        <div class="cont right">
+            <ul class="sns">
+                <li><a href="https://www.instagram.com/hottracks_online/" target="_blank"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+                <li><a href="https://www.facebook.com/HOTTRACKSFRIEND/" target="_blank"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+                <li><a href="https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg" target="_blank"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+                <li><a href="https://twitter.com/hotonmusic" target="_blank"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+                <li><a href="http://hottracks91.blog.me/" target="_blank"><img src="../../images/biz/common/icon_blog.png" alt="blog"></a></li>
+            </ul>
+               <div class="mobile">
+                    <a href="https://apps.apple.com/kr/app/hottracks/id1129743143" target="_blank" class="font_t ios">APP STORE</a>
+                    <a href="https://play.google.com/store/apps/details?id=kr.co.hottracks.m.and" target="_blank" class="font_t and">PLAY STORE</a>
+               </div>
+            <ul class="copyright">
+                <li><a href="/heart" target="_blank"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+                <li><a href="http://www.copyrightok.kr" target="_blank"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+            </ul>
+            <span class="payment"><em class="font_t">NICEPAY</em><a href="#n" onclick="window.open('http://image.kyobobook.co.kr/newimages/giftshop_new/company/nicepay.html','window','location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no, width=740, height=867, left=100, top=50, scrollbars=no');return false">서비스 가입사실 확인 &gt;</a></span>
+            <span class="txt">핫트랙스는 나이스페이먼츠 에스크로 서비스에 가입된 사업자이며,<br/>고객님은 구매 안전서비스를 이용하실 수 있습니다.</span>
+        </div>
+    </div>
+</div>
+<!--// footer -->
+</div>
+<div id="mask"></div>
+</body>
+</html>

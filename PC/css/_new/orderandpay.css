@@ -4,25 +4,25 @@
 	300: Light
 	400: Regular
 	500: Medium
-	700: 700
+	700: bold
 
 */
 /* ---------- common_style --------------*/
 
 .orderandpay {}
-.orderandpay h2.tit {font-size: 40px; margin-top:20px; font-weight: 700;}
+.orderandpay h2.tit {font-size: 40px; margin-top:48px; font-weight: 700;}
 
 .orderandpay .distance {margin-top:100px;}
 .orderandpay .width_check {max-width: 520px;}
 .orderandpay .width_phone {max-width: 80px;}
 .orderandpay .width_name {max-width: 190px;}
-.orderandpay .width_address {max-width: 270px; width:270px !important;}
+.orderandpay .width_address {max-width: 400px;width: 4000px !important;}
 .orderandpay .width_email {max-width: 140px; width:140px !important;}
 .orderandpay .input_wrap select.width_phone,
 .orderandpay .select_wrap select.width_phone  {width: 80px !important;}
 
 /* 기본 박스 */
-.orderandpay .user_info_wrap {margin-top:100px;}
+.orderandpay .user_info_wrap {margin-top:50px;}
 .orderandpay .user_info_wrap .user_title {font-size: 22px; font-weight: 700; padding-bottom:10px; border-bottom: 2px #000 solid;}
 .orderandpay .user_info_wrap .user_title:after {content: ''; display:block; clear:both;}
 
@@ -51,10 +51,11 @@
 
 /* table */
 /* 기본형 */
-.orderandpay .table_wrap {margin-top: 15px;}
+.orderandpay .table_wrap {/* margin-top: 15px; */}
 .orderandpay .table_wrap th, .orderandpay .table_wrap td {text-align: left; font-size:14px; font-weight: 500;}
-.orderandpay .table_wrap th {font-size:14px; font-weight: 400;}
-.orderandpay .table_wrap td {padding:8px 0; font-size: 14px; font-weight: 500; height:38px;}
+.orderandpay .table_wrap th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid;}
+.orderandpay .table_wrap th span {color:#DA2128;}
+.orderandpay .table_wrap td {padding: 10px 0px 10px 24px;font-size: 14px;font-weight: 500;height:38px;border-bottom: 1px #EEEEEE solid;}
 
 /* 주문상품 */
 .orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;}
@@ -88,7 +89,7 @@
 
 
 /* input 기본형 */
-.orderandpay .input_wrap input {padding: 10px 10px 11px;  border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 400;display: block;width: 100%; color:#777777;}
+.orderandpay .input_wrap input {padding: 10px 10px 11px;border: 1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 400;display: block;width: 100%;color:#777777;}
 
 /* select 기본형 */
 .orderandpay .select_wrap select ,
@@ -105,9 +106,136 @@
 .orderandpay .inner_float .choice_wrap_inner {margin-top: 11px; margin-left: 20px;}
 .orderandpay .inner_float .btn_defalut {float: left;}
 
+
 .orderandpay .inner_float_dot .input_wrap {float: left; margin-left: 3px; line-height: 35px;}
 .orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
 .orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
 
 /* btn */
-.btn_defalut {padding:10px 22px; height:38px; background: #000; font-size: 14px; font-weight: 500; color:#FFFFFF; outline:none;}
+.btn_defalut {padding: 10px 16px;height:38px;background: #EEEEEE;font-size: 13px;font-weight: 700;color:#FFFFFF;outline:none;color: #000;border-radius: 30px;}
+
+.alert_txt {font-size: 13px; font-weight: 400; color: #777777}
+.alert_txt span {font-size: inherit; font-weight: inherit;}
+
+.user_title .i_small_txt {font-size: 14px; color:#777777; font-weight: 400;}
+.user_title .i_small_txt span {font-size: inherit; color:#000; font-weight: 500;}c@charset "utf-8";
+
+/* font-weight: 100 ~ 900 
+	300: Light
+	400: Regular
+	500: Medium
+	700: bold
+
+*/
+/* ---------- common_style --------------*/
+
+.orderandpay {}
+.orderandpay h2.tit {font-size: 40px; margin-top:48px; font-weight: 700;}
+
+.orderandpay .distance {margin-top:100px;}
+.orderandpay .width_check {max-width: 520px;}
+.orderandpay .width_phone {max-width: 80px;}
+.orderandpay .width_name {max-width: 190px;}
+.orderandpay .width_address {max-width: 400px;width: 4000px !important;}
+.orderandpay .width_email {max-width: 140px; width:140px !important;}
+.orderandpay .input_wrap select.width_phone,
+.orderandpay .select_wrap select.width_phone  {width: 80px !important;}
+
+/* 기본 박스 */
+.orderandpay .user_info_wrap {margin-top:50px;}
+.orderandpay .user_info_wrap .user_title {font-size: 22px; font-weight: 700; padding-bottom:10px; border-bottom: 2px #000 solid;}
+.orderandpay .user_info_wrap .user_title:after {content: ''; display:block; clear:both;}
+
+/* 기본 박스 타이틀 안에 글자 있을때 */
+.orderandpay .have_inner_txt:after {content: ''; display:block; clear:both;}
+.orderandpay .user_info_wrap .user_title.have_inner_txt .i_txt,
+.orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt,
+.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {float: left;}
+.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left:36px;}
+.orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt {margin-top: 8px; margin-left: 10px;}
+
+.orderandpay .choice_wrap.type_squre.have_inner_txt .i_txt,
+.orderandpay .choice_wrap.type_squre.have_inner_txt .choice_wrap_inner {float: left;}
+
+.orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt {font-size: 14px; font-weight: 400;}
+
+/*--- 아이콘 --*/
+/* 화살표 */
+.orderandpay .icon_arrow {display: inline-block; margin-left:20px; font-size: 14px; font-weight: 500;}
+.orderandpay .icon_arrow:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/_new/icon_arrow.png) no-repeat 0 0;margin-left:5px;margin-bottom: -1px;}
+
+/* 안내 */
+.orderandpay .icon_question {font-size: 0; display: block; float: right; width:18px; height:18px; border:1px #999999 solid; border-radius: 100%; background: url(../../images/_new/icon_question.png) no-repeat 6px 0px; box-sizing: border-box; margin-left:5px;}
+.orderandpay .icon_question:after {content: ''; display: block; clear:both;}
+
+
+/* table */
+/* 기본형 */
+.orderandpay .table_wrap {/* margin-top: 15px; */}
+.orderandpay .table_wrap th, .orderandpay .table_wrap td {text-align: left; font-size:14px; font-weight: 500;}
+.orderandpay .table_wrap th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid;}
+.orderandpay .table_wrap th span {color:#DA2128;}
+.orderandpay .table_wrap td {padding: 10px 0px 10px 24px;font-size: 14px;font-weight: 500;height:38px;border-bottom: 1px #EEEEEE solid;}
+
+/* 주문상품 */
+.orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;}
+.orderandpay .table_wrap.bbs_list_v2 tfoot th, .orderandpay .table_wrap.bbs_list_v2 tfoot td {text-align:right; font-size: 22px; font-weight: 500;}
+
+/* radio , checkbox 원형 */
+.orderandpay .choice_wrap .choice_wrap_inner {margin-left:30px; font-size:14px; font-weight: 500;}
+.orderandpay .choice_wrap .choice_wrap_inner:first-child {margin-left:0;}
+.orderandpay .choice_wrap input[type="checkbox"],
+.orderandpay .choice_wrap input[type=radio] {  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0 }
+.orderandpay .choice_wrap input[type="checkbox"] + label ,
+.orderandpay .choice_wrap input[type=radio]+ label { display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
+.orderandpay .choice_wrap input[type="checkbox"] + label:before,
+.orderandpay .choice_wrap input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/_new/icon_radio_on.png) no-repeat center center;; border: 1px solid #DBDBDB; border-radius : 10px;  box-sizing: border-box;} 
+/*필요시 입력
+.orderandpay .choice_wrap input[type="checkbox"] + label:active:before, 
+.orderandpay .choice_wrap input[type="checkbox"]:checked + label:active:before,
+.orderandpay .choice_wrap input[type="radio"] + label:active:before, 
+.orderandpay .choice_wrap input[type="radio"]:checked + label:active:before  { } */
+
+.orderandpay .choice_wrap input[type="checkbox"]:checked + label:before,
+.orderandpay .choice_wrap input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center center;}
+.orderandpay .choice_wrap input[type=radio]::-ms-expand,
+.orderandpay .choice_wrap input[type=checkbox]::-ms-expand{    display: none;}
+
+/* radio , checkbox 사각형 */
+.orderandpay .choice_wrap.type_squre input[type="checkbox"] + label:before,
+.orderandpay .choice_wrap.type_squre input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 5px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/_new/icon_radio_on.png) no-repeat center center;; border: 1px solid #DBDBDB; border-radius : 4px;  box-sizing: border-box;} 
+.orderandpay .choice_wrap.type_squre input[type="checkbox"]:checked + label:before,
+.orderandpay .choice_wrap.type_squre input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center center;}
+
+
+/* input 기본형 */
+.orderandpay .input_wrap input {padding: 10px 10px 11px;border: 1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 400;display: block;width: 100%;color:#777777;}
+
+/* select 기본형 */
+.orderandpay .select_wrap select ,
+.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background: url('../../images/_new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+.orderandpay .input_wrap select::-ms-expand ,
+.orderandpay .select_wrap select::-ms-expand {display: none;}
+
+
+/* input 및 unit 개수 추가 시 */
+.orderandpay .inner_float .input_wrap {float: left; position: relative; margin-left: 30px;}
+.orderandpay .inner_float .input_wrap:first-child {margin-left: 0;}
+.orderandpay .inner_float .input_wrap:before {content: '';display: block;position: absolute;top: 50%;left: -20px;width:10px;height: 1px;background: #707070;}
+.orderandpay .inner_float .input_wrap:first-child:before {content: '';display: none;}
+.orderandpay .inner_float .choice_wrap_inner {margin-top: 11px; margin-left: 20px;}
+.orderandpay .inner_float .btn_defalut {float: left;}
+
+
+.orderandpay .inner_float_dot .input_wrap {float: left; margin-left: 3px; line-height: 35px;}
+.orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
+.orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
+
+/* btn */
+.btn_defalut {padding: 10px 16px;height:38px;background: #EEEEEE;font-size: 13px;font-weight: 700;color:#FFFFFF;outline:none;color: #000;border-radius: 30px;}
+
+.alert_txt {font-size: 13px; font-weight: 400; color: #777777}
+.alert_txt span {font-size: inherit; font-weight: inherit;}
+
+.user_title .i_small_txt {font-size: 14px; color:#777777; font-weight: 400;}
+.user_title .i_small_txt span {font-size: inherit; color:#000; font-weight: 500;}
