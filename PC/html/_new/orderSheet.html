@@ -43,8 +43,8 @@
         });
 
         
-        
-        $('.tab_list').on('click', 'li', function(){            
+        // 결제 방법 
+        $('.tab_list').on('click', 'li', function(){         
                 
             var $tab = $(this);
             var i = $tab.index();
@@ -60,6 +60,36 @@
                 $($Layers[i]).addClass('is_active');                
             }   
         });
+
+        //현금영수증_휴대전화와 카드번호 
+        $('.cash_receipt_input_layer select').each(function() {
+            $(this).on("change", function(){
+                var value = $(this).find("option:selected").val(); 
+                var $box = $(this).closest('.cash_receipt_wrap');
+                           
+                if(value =='cellphone'){
+                    $box.find('.cardnumber_wrap').hide();
+                    $box.find('.cellphone_wrap').show();
+                }else{
+                    $box.find('.cardnumber_wrap').show();
+                    $box.find('.cellphone_wrap').hide();
+                }            
+            });
+        });
+
+        //현금영수증_ 현금영수증 종류선택
+        $('.cash_receipt_list .choice_wrap_inner input').each(function() {
+           $(this).on('change', function(){
+                var idx = $(this).parent('.choice_wrap_inner').index();
+                var $contents = $(this).closest('.cash_receipt_wrap').find('.cash_receipt_input_layer');
+                
+                this.checked = true;
+                if(this.checked){
+                    $contents.removeClass('active');
+                    $contents.eq(idx).addClass('active');
+                }
+           });
+       });
     
 });
 
@@ -952,7 +982,7 @@
                         <div class="user_pay_wrap">
                             <div class="tab_wrap">
                                 <ul class="tab_list">
-                                    <li class="items">
+                                    <li class="items is_active">
                                         <a href="javascript:;" class="link">신용카드</a>
                                     </li>
                                     <li class="items">
@@ -978,6 +1008,192 @@
                                     </li>
                                 </ul>
                                 <div class="tab_layer_wrap">
+
+                                    <!-- 신용카드 -->
+                                    <div class="tab_layer is_active">
+                                        <div class="tab_layer_text_box">
+
+                                            <p class="layer_title">신용카드 할인 안내</p>
+                                            <p class="layer_title mgt30">신한카드</p>
+                                            <ul class="layer_txt_list">
+                                                <li>2~6개월, 12개월(부분) 무이자</li>
+                                            </ul>
+
+                                            <p class="layer_title">하나카드</p>
+                                            <ul class="layer_txt_list">
+                                                <li>2~3개월 무이자</li>
+                                            </ul>
+
+                                            <p class="layer_title">국민카드</p>
+                                            <ul class="layer_txt_list">
+                                                <li>2~5개월 무이자</li>
+                                            </ul>
+
+                                            <p class="layer_title">신한카드</p>
+                                            <ul class="layer_txt_list">
+                                                <li>2~6개월, 12개월(부분) 무이자</li>
+                                            </ul>
+
+                                            <p class="layer_title">비씨카드, NH농협카드, 현대카드, 삼성카드</p>
+                                            <ul class="layer_txt_list">
+                                                <li>2~6개월 무이자</li>
+                                            </ul>
+
+                                            <p class="layer_title mgt30">유의사항</p>
+                                            <ul class="layer_txt_list">
+                                                <li>행사 제외 카드 : 법인, 체크, 선불, 기프트, 하이브리드 등</li>
+                                                <li>무이자 적용 최소 결제 금액 등 상세 내용은 결제 팝업창에서 확인해 주시기 바랍니다.</li>
+                                            </ul>
+
+                                            <p>기타 문의나 더 자세한 내용이 알고 싶으시면 고객센터 &gt; 주문 FAQ 를 이용해 주시기 바랍니다.</p>
+
+                                        </div>
+                                        <div class="choice_wrap type_squre mgt10">
+                                            <span class="choice_wrap_inner">
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
+                                        </div>
+                                    </div>
+                                    <!--// 신용카드 -->
+
+                                    <!-- 실시간 계좌이체 -->
+                                    <div class="tab_layer">
+                                        <div class="choice_wrap type_squre">
+                                            <span class="choice_wrap_inner">
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
+                                        </div>
+                                    </div>
+                                    <!--// 실시간 계좌이체 -->
+
+                                    <!-- 휴대폰 -->
+                                    <div class="tab_layer">
+                                        <div class="tab_layer_text_box">
+                                            <p class="layer_title">휴대폰 결제 안내</p>
+                                            <ul class="layer_txt_list">
+                                                <li>교보핫트랙스에서 휴대폰으로 결제 가능한 최대 금액은 월 30만원이지만
+                                                개인별 한도 금액은 통신사 및 개인 설정에 따라 다를 수 있습니다.</li>
+                                                <li>휴대폰으로 결제하신 금액은 익월 휴대폰 요금에 함께 청구됩니다.</li>
+                                                <li>휴대폰 소액 결제로 구매하실 경우 세금계산서 및 현금영수증이 발급되지 않습니다.</li>
+                                                <li>휴대폰 소액 결제로 결제하신 상품을 취소할 경우 결제하신 당월 말까지 가능합니다.</li>
+                                                <li>휴대폰 결제로 별도의 수수료 부과는 없습니다.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="choice_wrap type_squre mgt10">
+                                            <span class="choice_wrap_inner">
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
+                                        </div>
+                                    </div>
+                                    <!--// 휴대폰 -->
+
+                                    <!-- 무통장 입금 -->
+                                    <div class="tab_layer">
+                                        <div class="tab_layer_text_box">
+                                            <p class="layer_title">현금영수증 선택</p>
+                                            <div class="cash_receipt_wrap">
+                                                <div class="choice_wrap cash_receipt_list">
+                                                    <div class="choice_wrap_inner">
+                                                        <input type="radio" name="cashReceipt" id="cashReceipt1" value="Y" checked="" />
+                                                        <label for="cashReceipt1">개인소득공제용</label>
+                                                    </div>
+                                                    <div class="choice_wrap_inner">
+                                                        <input type="radio" name="cashReceipt" id="cashReceipt2" value="N" />
+                                                        <label for="cashReceipt2">사업자증빙용</label>
+                                                    </div>
+                                                    <div class="choice_wrap_inner">
+                                                        <input type="radio" name="cashReceipt" id="cashReceipt3" value="N" />
+                                                        <label for="cashReceipt3">미신청</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="cash_receipt_input_wrap">
+                                                    <div class="cash_receipt_input_layer active">
+                                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                            <span class="select_wrap">
+                                                                <select name="" id="" class="width_phone">
+                                                                    <option value="cellphone">휴대폰</option>
+                                                                    <option value="cardnumber">카드번호</option>
+                                                                </select>
+                                                            </span>  
+                                                            <!-- 휴대폰 -->
+                                                            <div class="cellphone_wrap">                               
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                            </div>
+                                                            <!-- 카드번호 -->
+                                                            <div class="cardnumber_wrap">
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>  
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span> 
+                                                            </div>                                     
+                                                        </div>
+                                                    </div>
+                                                    <div class="cash_receipt_input_layer">
+                                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                            <span class="input_wrap">
+                                                                <select name="" id="" class="width_phone">
+                                                                    <option value="">사업자등록번호</option>
+                                                                </select>
+                                                            </span>  
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>  
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>                                        
+                                                        </div>
+                                                    </div> 
+                                                    <div class="cash_receipt_input_layer">
+                                                        &nbsp;
+                                                    </div>             
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="choice_wrap type_squre mgt10">
+                                            <span class="choice_wrap_inner">
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
+                                        </div>
+                                    </div>
+                                    <!--// 무통장 입금 -->
+
+                                    <!-- 네이버 Pay -->
                                     <div class="tab_layer">
                                         <div class="tab_layer_text_box">
                                             <p class="layer_title">네이버페이 안내</p>
@@ -989,30 +1205,184 @@
                                                 <li>네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 무이자, 청구할인 혜택을 받을 수 있습니다.</li>
                                             </ul>
                                             <p class="layer_title">현금영수증 선택</p>
-                                            <div>
-                                                <div class="choice_wrap">
-                                                    <span class="choice_wrap_inner">
-                                                        <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="" />
-                                                        <label for="orderInfoSmsY">정보 수신</label>
-                                                    </span>
-                                                    <span class="choice_wrap_inner">
-                                                        <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N" />
-                                                        <label for="orderInfoSmsN">수신하지 않음</label>
-                                                    </span>
+                                            <div class="cash_receipt_wrap">
+                                                <div class="choice_wrap cash_receipt_list">
+                                                    <div class="choice_wrap_inner">
+                                                        <input type="radio" name="cashReceipt1" id="cashReceipt11" value="Y" checked="" />
+                                                        <label for="cashReceipt11">개인소득공제용</label>
+                                                    </div>
+                                                    <div class="choice_wrap_inner">
+                                                        <input type="radio" name="cashReceipt1" id="cashReceipt12" value="N" />
+                                                        <label for="cashReceipt12">사업자증빙용</label>
+                                                    </div>
+                                                    <div class="choice_wrap_inner">
+                                                        <input type="radio" name="cashReceipt1" id="cashReceipt13" value="N" />
+                                                        <label for="cashReceipt13">미신청</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="cash_receipt_input_wrap">
+                                                    <div class="cash_receipt_input_layer active">
+                                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                            <span class="select_wrap">
+                                                                <select name="" id="" class="width_phone">
+                                                                    <option value="cellphone">휴대폰</option>
+                                                                    <option value="cardnumber">카드번호</option>
+                                                                </select>
+                                                            </span>  
+                                                            <!-- 휴대폰 -->
+                                                            <div class="cellphone_wrap">                               
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                            </div>
+                                                            <!-- 카드번호 -->
+                                                            <div class="cardnumber_wrap">
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span>  
+                                                                <span class="input_wrap">
+                                                                    <input type="text" placeholder="" class="width_phone">
+                                                                </span> 
+                                                            </div>                                     
+                                                        </div>
+                                                    </div>
+                                                    <div class="cash_receipt_input_layer">
+                                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                            <span class="input_wrap">
+                                                                <select name="" id="" class="width_phone">
+                                                                    <option value="">사업자등록번호</option>
+                                                                </select>
+                                                            </span>  
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>  
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>                                        
+                                                        </div>
+                                                    </div> 
+                                                    <div class="cash_receipt_input_layer">
+                                                        &nbsp;
+                                                    </div>             
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="choice_wrap">
+                                        <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="" />
-                                                <label for="orderInfoSmsY">정보 수신</label>
-                                            </span>
-                                            <span class="choice_wrap_inner">
-                                                <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N" />
-                                                <label for="orderInfoSmsN">수신하지 않음</label>
-                                            </span>
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
                                         </div>
                                     </div>
+                                    <!--// 네이버 Pay -->
+
+                                    <!-- 카카오 Pay -->
+                                    <div class="tab_layer">
+                                        <div class="tab_layer_text_box">
+                                            <p class="layer_title">휴대폰 결제 안내</p>
+                                            <ul class="layer_txt_list">
+                                                <li>카카오페이는 개인 신용카드를 카카오톡 앱에 등록/인증하여 결제하는 방식입니다.</li>
+                                                <li>최초 1회 결제 정보만 입력하여 간편하게 결제하실 수 있는 모바일 결제 서비스입니다.</li>
+                                                <li>본인 명의 휴대폰에서 본인 명의의 카드 등록 후 사용 가능합니다.</li>
+                                                <li>카카오톡 앱 미설치 시 앱스토어에서 앱 설치후 회원가입을 하셔야 합니다.</li>
+                                                <li>카카오톡 앱 내에서 카카오페이 가입 시 카드사 등록/인증을 하셔야 결제가 가능합니다.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="choice_wrap type_squre mgt10">
+                                            <span class="choice_wrap_inner">
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
+                                        </div>
+                                    </div>
+                                    <!--// 카카오 Pay -->
+
+                                    <!-- Smile Pay -->
+                                    <div class="tab_layer">
+                                        <div class="tab_layer_text_box">
+                                            <p class="layer_title">스마일페이 안내</p>
+                                            <ul class="layer_txt_list">
+                                                <li>앱 설치 없이 G마켓/옥션 ID 로그인 또는 회원가입 후 간편 결제</li>
+                                                <li>국내 신용/체크 카드 등록 후 이용 가능(은행 계좌이체 불가)</li>
+                                                <li>실 결제 금액의 0.5% 스마일캐시 적립(1회 최대 5천 원)</li>
+                                                <li>스마일캐시는 교보핫트랙스 및 G마켓, 옥션, G9 등에서 사용 가능</li>
+                                            </ul>
+                                            <p class="layer_title mgt30">스마일페이 결제 시 15% 캐시백</p>
+                                            <ul class="layer_txt_list">
+                                                <li>1만원 이상 스마일페이 (삼성카드) 결제 시 15% 캐시백 (최대 3만원)</li>
+                                                <li>기간 : 2019년 12월 9일(월) ~ 31일(화)</li>
+                                                <li>결제금액 기준: 쿠폰 할인금액,적립금,스마일캐시 사용금액 등을 제외한 스마일페이 실 결제금액</li>
+                                                <li>적립일: 익월 말일</li>
+                                                <li>1회 결제금액 기준 1만원 이상(무이자할부 건 포함) / 스마일페이 회원ID 기준 1회 적립</li>
+                                                <li>결제 건을 전체 취소할 경우 차후 재 결제 시 적용</li>
+                                                <li>적립된 스마일캐시는 유효기간(적립일로부터 90일) 내 미사용 및 구매 취소, 반품 시 자동 회수</li>
+                                            </ul>
+                                        </div>
+                                        <div class="choice_wrap type_squre mgt10">
+                                            <span class="choice_wrap_inner">
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
+                                        </div>
+                                    </div>
+                                    <!--// Smile Pay -->
+
+                                    <!-- PAYCO -->
+                                    <div class="tab_layer">
+                                        <div class="tab_layer_text_box">
+                                            <p class="layer_title">PAYCO 안내</p>
+                                            <ul class="layer_txt_list">
+                                                <li>PAYCO는 엔에이치엔페이코가 만든 안전한 간편결제 서비스입니다.</li>
+                                                <li>휴대폰과 카드 명의자가 동일해야 결제 가능합니다.</li>
+                                                <li>*지원 카드: 모든 국내 신용/체크카드</li>
+                                                <li>PAYCO 유상 충전 포인트로 결제 시 2% 적립</li>
+                                            </ul>
+                                            <p class="layer_title mgt30">PAYCO 결제 리워드 프로모션</p>
+                                            <ul class="layer_txt_list">
+                                                <li>온라인 가맹정에서 PAYCO로 결제한 구매 금액의 0.2% PAYCO 포인트로 적립</li>
+                                                <li>지급일자는 결제 완료된 달의 다음 달 15일에 포인트 또는 쿠폰으로 지급</li>
+                                                <li>지급예정 포인트가 1P 이상 ~ 1,000P 미만인 경우 1,000원 할인쿠폰으로 지급되며,</li>
+                                                <li>1,000P 이상인 경우 해당 금액만큼 포인트로 지급</li>
+                                                <li>*타 프로모션과 중복 적용 불가</li>
+                                                <li>*기타 상세내용은 페이코 이벤트 공지사항을 참고 바랍니다.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="choice_wrap type_squre mgt10">
+                                            <span class="choice_wrap_inner">
+                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
+                                                <label for="orderCheck" class="last_check">
+                                                    <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
+                                                    <span class="color">(전자상거래법 제8조 2항)</span>
+                                                </label>
+                                            </span>    
+                                        </div>                                      
+                                    </div>
+                                    <!--// PAYCO -->
                                 </div>
                             </div>
                         </div>                       

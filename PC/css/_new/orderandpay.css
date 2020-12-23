@@ -115,7 +115,7 @@
 
 /* select 기본형 */
 .orderandpay .select_wrap select ,
-.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background: url('../../images/_new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background:#fff url('../../images/_new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
 .orderandpay .input_wrap select::-ms-expand ,
 .orderandpay .select_wrap select::-ms-expand {display: none;}
 
@@ -180,22 +180,56 @@
 .orderandpay .user_price_wrap .user_price_unit .unit_sum_point {border-top:1px #B5B5B5 solid; margin-top: 22px;text-align: center;padding: 18px 20px 0;}
 
 /* 결제방법 */
-.orderandpay .user_pay_wrap {}
+.orderandpay .user_pay_wrap .color {color: #777777;}
 
 /* tab */
-.tab_wrap {}
-.tab_list  {margin-top:20px; margin-left: -10px;}
-.tab_list:after {content:''; display:block; clear:both;}
-.tab_list .items {float: left;min-width: 180px;margin-left: 12px;margin-top: 10px;}
-.tab_list .items .link {display: block;vertical-align: middle;padding: 13px 10px;font-size:18px;font-weight:400;color:#000;position: relative;text-align: center;border: 2px #DBDBDB solid;border-radius: 24px;}
-.tab_layer_wrap {position: relative; margin-top:20px;}
-.tab_layer { position: absolute; top:0px; display: block; height: auto;}
-.tab_layer.is_active {display: block;}
-.tab_list li.is_active .link {background: #DD1016; border-color: #DD1016; color:#fff;}
+.orderandpay .tab_wrap {}
+.orderandpay .tab_list  {margin-top:20px; margin-left: -10px;}
+.orderandpay .tab_list:after {content:''; display:block; clear:both;}
+.orderandpay .tab_list .items {float: left;min-width: 180px;margin-left: 12px;margin-top: 10px;}
+.orderandpay .tab_list .items .link {display: block;vertical-align: middle;padding: 13px 10px;font-size:18px;font-weight:400;color:#000;position: relative;text-align: center;border: 2px #DBDBDB solid;border-radius: 24px;}
+.orderandpay .tab_layer_wrap {position: relative; margin-top:20px;}
+.orderandpay .tab_layer {display: none; height: auto;}
+.orderandpay .tab_layer.is_active {display: block;}
+.orderandpay .tab_list li.is_active .link {background: #DD1016; border-color: #DD1016; color:#fff;}
 
-.tab_layer .tab_layer_text_box {background: #FAFAFA; padding:30px;}
+/* tab_layer inner box */
+.orderandpay .tab_layer .tab_layer_text_box {background: #FAFAFA; padding:30px;}
+.orderandpay .tab_layer .tab_layer_text_box .layer_title {font-size: 16px; font-weight: 500}
+.orderandpay .tab_layer .tab_layer_text_box .layer_txt_list {margin-top: 15px;}
+.orderandpay .tab_layer .tab_layer_text_box .layer_txt_list li {font-size: 13px;font-weight:400;position: relative;margin:10px 0;padding-left: 10px;}
+.orderandpay .tab_layer .tab_layer_text_box .layer_txt_list li:before {content:'';display: block;width: 3px;height:3px;background: #777777;position: absolute;top:6px;left:0;border-radius: 100%;}
 
-.tab_layer .tab_layer_text_box .layer_title {font-size: 16px; font-weight: 500}
-.tab_layer .tab_layer_text_box .layer_txt_list {margin-top: 15px;}
-.tab_layer .tab_layer_text_box .layer_txt_list li {font-size: 13px;font-weight:400;position: relative;margin:10px 0;padding-left: 10px;}
-.tab_layer .tab_layer_text_box .layer_txt_list li:before {content:'';display: block;width: 3px;height:3px;background: #777777;position: absolute;top:6px;left:0;border-radius: 100%;}
+.orderandpay .tab_layer .last_check {font-size: 16px;}
+.orderandpay .tab_layer .last_check span {font-size: inherit;}
+
+/* 현금영수증 */
+.orderandpay .cash_receipt_wrap {margin-top:15px;}
+.orderandpay .cash_receipt_wrap .choice_wrap:after,
+.orderandpay .cash_receipt_wrap:after {content: ''; display:block; clear: both;}
+.orderandpay .cash_receipt_wrap .choice_wrap_inner,
+.orderandpay .cash_receipt_wrap .choice_wrap,
+.orderandpay .cash_receipt_input_wrap {float: left;}
+.orderandpay .cash_receipt_wrap .cash_receipt_list {margin-top:8px;}
+
+.orderandpay .cash_receipt_input_wrap .cash_receipt_input_layer {display: none;}
+.orderandpay .cash_receipt_input_wrap .cash_receipt_input_layer.active {display: block; min-height:32px;}
+
+.orderandpay .cash_receipt_input_wrap .width_phone {width:64px !important;}
+.orderandpay .cash_receipt_input_wrap .input_wrap select.width_phone,
+.orderandpay .cash_receipt_input_wrap .select_wrap select.width_phone {width:auto !important; max-width: initial;}
+.orderandpay .cash_receipt_input_wrap .select_wrap select,
+.orderandpay .cash_receipt_input_wrap .input_wrap select {padding-top:5px; padding-bottom: 6px;}
+.orderandpay .cash_receipt_input_wrap .input_wrap input {padding-top: 7px; padding-bottom: 8px;}
+
+.orderandpay .cash_receipt_input_wrap .inner_float .select_wrap {float: left;}
+.orderandpay .cash_receipt_input_wrap .inner_float .select_wrap,
+.orderandpay .cash_receipt_input_wrap .inner_float .input_wrap { margin-left:5px;}
+.orderandpay .cash_receipt_input_wrap .inner_float .input_wrap:before {content: ''; display: none;}
+
+.orderandpay .cash_receipt_input_wrap .cardnumber_wrap {display: none;}
+.orderandpay .cash_receipt_input_wrap .cardnumber_wrap:after,
+.orderandpay .cash_receipt_input_wrap .cellphone_wrap:after {content: ''; display:block; clear: both;}
+
+.orderandpay .cash_receipt_input_wrap .cardnumber_wrap,
+.orderandpay .cash_receipt_input_wrap .cellphone_wrap {float: left;}
