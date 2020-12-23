@@ -142,26 +142,59 @@
                                 </colgroup>
                                 <tbody>
                                      <tr>
-                                        <th>이름</th>
-                                        <td>홍길동 </td>                                    
+                                        <th>이름 <span>*</span></th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input type="text" placeholder="" class="width_name">
+                                            </div>
+                                        </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>휴대전화</th>
-                                        <td>010-1234-5678</td>                                    
-                                    </tr>
+                                        <th>휴대전화 <span>*</span></th>
+                                        <td>                                         
+                                            <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                <span class="input_wrap">
+                                                    <select name="" id="" class="width_phone">
+                                                        <option value="">선택</option>
+                                                    </select>
+                                                </span>  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_phone">
+                                                </span>
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_phone">
+                                                </span>                                               
+                                            </div>
+                                        </td>                                    
+                                    </t
+                                    r>
                                     <tr>
-                                        <th>이메일</th>
+                                        <th>이메일<span>*</span></th>
                                         <td>
-                                            <span>ottracks@ottracks.co.kr</span>
-                                            <a href="javascript:;" class="icon_arrow">회원정보수정</a>
+                                            <div class="choice_wrap type_squre have_inner_txt inner_float_dot">                                                  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_email">
+                                                </span>
+                                                <span class="input_wrap">@</span>
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_email">
+                                                </span> 
+                                                <span class="input_wrap 
+                                                ">
+                                                    <select name="" id="" class="width_email">
+                                                        <option value="">직접입력</option>
+                                                    </select>
+                                                </span>                                              
+                                            </div>
                                         </td>                                    
                                     </tr>
                                     <tr>
-                                        <th>SMS수신</th>
+                                        <th>SMS수신 <span>*</span></th>
+
                                         <td>
                                             <div class="choice_wrap">
                                                 <span class="choice_wrap_inner">
-                                                    <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" />
+                                                    <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="" />
                                                     <label for="orderInfoSmsY">정보 수신</label>
                                                 </span>
                                                 <span class="choice_wrap_inner">
@@ -175,18 +208,17 @@
                             </table>
                         </div>
 
-                        <div class="user_title distance have_inner_txt">
+                        <div class="user_title mgt70 have_inner_txt">
                             <h3 class="i_txt">배송지 정보</h3>
                             <div class="choice_wrap">
                                 <span class="choice_wrap_inner">
-                                    <input type="radio" name="orderInfo1" id="orderInfo_11" value="Y" />
-                                    <label for="orderInfo_11">기본 배송지</label>
+                                    <input type="radio" name="orderInfo1" id="orderInfo_11" value="Y" checked="" />
+                                    <label for="orderInfo_11">주문자 정보</label>
                                 </span>
                                 <span class="choice_wrap_inner">
                                     <input type="radio" name="orderInfo1" id="orderInfo_12" value="N" />
                                     <label for="orderInfo_12">최근 배송지</label>
                                 </span>
-                                <a href="javascript:;" class="icon_arrow">배송지 변경</a>
                             </div>
                         </div>               
                         <div class="user_table_wrap">                        
@@ -197,64 +229,7 @@
                                 </colgroup>
                                 <tbody>
                                      <tr>
-                                        <th>이름</th>
-                                        <td>홍길동 </td>                                    
-                                    </tr>
-                                     <tr>
-                                        <th>휴대전화</th>
-                                        <td>                                            
-                                            <div class="choice_wrap type_squre have_inner_txt">
-                                                <p class="i_txt">010-1234-5678</p>
-                                                <div class="choice_wrap_inner">
-                                                    <span>
-                                                        <input type="checkbox" name="orderInfo2" id="orderInfo_21" value="Y" />
-                                                        <label for="orderInfo_21">안심번호 사용</label>
-                                                    </span>
-                                                    <a href="javascript:;" class="icon_question" title="팝업 열기">팝업 열기</a>
-                                                </div>
-                                            </div>
-                                        </td>                                    
-                                    </tr>
-                                     <tr>
-                                        <th>주소</th>
-                                        <td>
-                                            (001-100) 경기도 파주시 회동길 78
-                                        </td>                                    
-                                    </tr>
-                                     <tr>
-                                        <th>주문 요청사항</th>
-                                        <td>
-                                            <div class="input_wrap">
-                                                <input type="text" placeholder="주문 상품 업체에 전달되는 메시지입니다. 요청사항을 입력해주세요." class="width_check">
-                                            </div>
-                                        </td>                                    
-                                    </tr>
-                                     <tr>
-                                        <th>배송 요청사항</th>
-                                        <td>
-                                            <div class="select_wrap">
-                                                <select name="" id="" class="width_check">
-                                                    <option value="">배송기사에게 전달되는 메시지입니다. 선택하여 주세요.</option>
-                                                </select>
-                                            </div>
-                                        </td>                                    
-                                    </tr>
-                                </tbody> 
-                            </table>
-                        </div>
-
-                        <div class="user_title distance">
-                            <h3>배송지 정보</h3>
-                        </div>               
-                        <div class="user_table_wrap">                        
-                            <table class="table_wrap">
-                                <colgroup> 
-                                    <col width="14.8%" /> 
-                                    <col width="85.2%" />                    
-                                </colgroup>
-                                <tbody>
-                                     <tr>
-                                        <th>이름</th>
+                                        <th>이름 <span>*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="" class="width_name">
@@ -262,7 +237,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>휴대전화</th>
+                                        <th>휴대전화 <span>*</span></th>
                                         <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
                                                 <span class="input_wrap">
@@ -276,35 +251,50 @@
                                                 <span class="input_wrap">
                                                     <input type="text" placeholder="" class="width_phone">
                                                 </span>
-                                                <span class="choice_wrap_inner">
+                                                <div class="choice_wrap_inner">
                                                     <span>
-                                                        <input type="checkbox" name="orderInfo3" id="orderInfo_31" value="Y" />
-                                                        <label for="orderInfo_31">안심번호 사용</label>
+                                                        <input type="checkbox" name="orderInfo2" id="orderInfo_21" value="Y">
+                                                        <label for="orderInfo_21">안심번호 사용</label>
                                                     </span>
                                                     <a href="javascript:;" class="icon_question" title="팝업 열기">팝업 열기</a>
-                                                </span>                                                 
+                                                </div>                                             
                                             </div>
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>주소</th>
-                                        <td>
+                                        <th>전화번호 <span>*</span></th>
+                                        <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
                                                 <span class="input_wrap">
-                                                   <input type="text" placeholder="" class="width_address">                                                 
+                                                    <select name="" id="" class="width_phone">
+                                                        <option value="">선택</option>
+                                                    </select>
+                                                </span>  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_phone">
                                                 </span>
-                                                <a href="javascript:;" class="btn_defalut">우편번호검색</a>
-                                                <span class="choice_wrap_inner">
-                                                    <span>
-                                                        <input type="checkbox" name="orderInfo4" id="orderInfo_41" value="Y" />
-                                                        <label for="orderInfo_41">기본 배송지 설정</label>
-                                                    </span>
-                                                </span>                                                 
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="" class="width_phone">
+                                                </span>                                        
                                             </div>
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>주문 요청사항</th>
+                                        <th>주소 <span>*</span></th>
+                                        <td> 
+                                            <div class="have_inner_txt address">
+                                                <div class="input_wrap">
+                                                   <input type="text" placeholder="" class="width_address">                                                 
+                                                </div>
+                                                <div class="input_wrap mgt10">
+                                                   <input type="text" placeholder="" class="width_check">                                                 
+                                                </div>
+                                                <button class="btn_defalut">우편번호검색</button>            
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>주문 요청사항 <span>*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="주문 상품 업체에 전달되는 메시지입니다. 요청사항을 입력해주세요." class="width_check">
@@ -312,7 +302,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>배송 요청사항</th>
+                                        <th>배송 요청사항 <span>*</span></th>
                                         <td>
                                             <div class="select_wrap">
                                                 <select name="" id="" class="width_check">
@@ -323,24 +313,27 @@
                                     </tr>
                                 </tbody> 
                             </table>
+                            <p class="alert_txt mgt10"><span class="point02">*</span><span>표시는 필수 입력 항목입니다. 필수 항목 모두 입력 완료 시 주문/결제 가능합니다.</span></p>
                         </div>
 
                         <div class="user_title distance have_inner_txt">
-                            <h3 class="i_txt"><span>주문상품  : </span><span class="point02">999</span> <span>개</span></h3>
-                            <p class="i_small_txt">상품수량 및 옵션변경은 상품상세 또는 장바구니에서 가능합니다.</p>                            
+                            <p class="i_txt"><span>주문상품  : </span><span class="point02">999</span> <span>개</span></p>
+                            <p class="i_small_txt">상품수량 및 옵션변경은 <span>상품상세</span> 또는 <span>장바구니</span>에서 가능합니다.</p>                            
                         </div>
-                        <div class="user_table_wrap">
-                            <p class="">핫트랙스 배송</p>
-                            <table class="table_wrap bbs_list_v2">                               
-                                <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트, 상품 처리 </span></caption>
+                        <div class="user_table_wrap">  
+                            <div class="order_list" id="hid_order">
+                                <h3 class="tit01">핫트랙스 배송</h3>
+                                <table class="bbs_list_v2">
+                                <caption>핫트랙스 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+                                </caption>
                                 <colgroup>
-                                <col style="width:12%">
-                                <col style="width:12%">
-                                <col style="width:30%">
+                                <col style="width:11%">
+                                <col style="width:14%">
+                                <col style="width:35%">
                                 <col style="width:10%">
                                 <col style="width:10%">
                                 <col style="width:10%">
-                                <col style="width:8%">
+                                <col style="width:10%">
                                 </colgroup>
                                 <thead>
                                 <tr>
@@ -367,46 +360,712 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tfoot>
-                                <tr>
-                                    <td colspan="7">
-                                         상품금액 <strong>156,000</strong>원 + 배송비 <strong>0</strong>원 = <strong class="point02">156,000</strong>원
-                                    </td>
-                                </tr>
-                                </tfoot>
                                 <tbody>
                                 <tr>
-                                    <td>2310042665814</td>
                                     <td>
-                                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1690/hot1553670797576.jpg" alt="[삼성전자] 갤럭시버즈 블루투스 이어폰" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"></a>
+                                        2310040795247
                                     </td>
                                     <td>
-                                         [삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰[삼성전자] 갤럭시버즈 블루투스 이어폰
+                                        <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1883/hot1569470438060.jpg" alt="로이텀 미디엄 노트 뮤트 데님" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                    </td>
+                                    <td class="t_left">
+                                        <input type="hidden" name="prdtName" value="로이텀 미디엄 노트 뮤트 데님"/>
+                                        로이텀 미디엄 노트 뮤트 데님
                                         <p class="txt_option">
-                                            블랙
+                                            LINE
                                         </p>
                                     </td>
                                     <td>
-                                        156,000원<br>
-                                        [2%↓]
+                                        23,400원<br>
+                                        [10%↓]
                                     </td>
                                     <td>
-                                        <input type="text" class="input_txt t_center inputNumberText" value="1" name="prdtCount" style="ime-mode:disabled;width:25px;" maxlength="4" title="[[삼성전자] 갤럭시버즈 블루투스 이어폰] 주문 수량">
-                                        <a href="#n" class="btn_type05_v2 btnChangePrdtCount">수정</a>
+                                        1
                                     </td>
                                     <td>
-                                        156,000원
+                                        23,400원
                                     </td>
                                     <td>
                                          0원
                                     </td>
                                 </tr>
                                 </tbody>
-                            </table>
+                                </table>
+                            </div>
+                            <div id="slideToggle_a" style="display:none;">
+                                <div class="order_list">
+                                    <h3 class="tit01">핫트랙스 배송</h3>
+                                    <table class="bbs_list_v2">
+                                    <caption>핫트랙스 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+                                    </caption>
+                                    <colgroup>
+                                    <col style="width:11%">
+                                    <col style="width:14%">
+                                    <col style="width:35%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            상품코드
+                                        </th>
+                                        <th scope="col">
+                                            상품
+                                        </th>
+                                        <th scope="col">
+                                            상품명
+                                        </th>
+                                        <th scope="col">
+                                            판매가
+                                        </th>
+                                        <th scope="col">
+                                            수량
+                                        </th>
+                                        <th scope="col">
+                                            가격
+                                        </th>
+                                        <th scope="col">
+                                            통합포인트
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="7">
+                                             상품금액 <strong>87,400</strong>원 + 배송비 <strong>0</strong>원 = <strong class="point02">87,400</strong>원
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            2310040795247
+                                        </td>
+                                        <td>
+                                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1883/hot1569470438060.jpg" alt="로이텀 미디엄 노트 뮤트 데님" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                        </td>
+                                        <td class="t_left">
+                                            <input type="hidden" name="prdtName" value="로이텀 미디엄 노트 뮤트 데님"/>
+                                            로이텀 미디엄 노트 뮤트 데님
+                                            <p class="txt_option">
+                                                LINE
+                                            </p>
+                                        </td>
+                                        <td>
+                                            23,400원<br>
+                                            [10%↓]
+                                        </td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            23,400원
+                                        </td>
+                                        <td>
+                                             0원
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            8809440339266
+                                        </td>
+                                        <td>
+                                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/music/midi/6525/2525615.jpg" alt="GOT7 MINI ALBUM" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                        </td>
+                                        <td class="t_left">
+                                            <input type="hidden" name="prdtName" value="GOT7 MINI ALBUM"/>
+                                            GOT7 MINI ALBUM
+                                        </td>
+                                        <td>
+                                            16,300원<br>
+                                            [18%↓]
+                                        </td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            16,300원
+                                        </td>
+                                        <td>
+                                             170원
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2310003345595
+                                        </td>
+                                        <td>
+                                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1600/A201205021124545442.jpg" alt="파버카스텔 룸 피아노 만년필 (화이트 / 블랙)" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                        </td>
+                                        <td class="t_left">
+                                            <input type="hidden" name="prdtName" value="파버카스텔 룸 피아노 만년필 (화이트 / 블랙)"/>
+                                            파버카스텔 룸 피아노 만년필 (화이트 / 블랙)
+                                            <p class="txt_option">
+                                                피아노 블랙 - EF촉
+                                            </p>
+                                            <p class="txt_option">
+                                                 무료각인 : 양재난초체 최강 ( + 0)
+                                            </p>
+                                        </td>
+                                        <td>
+                                            47,700원<br>
+                                            [10%↓]
+                                        </td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            47,700원
+                                        </td>
+                                        <td>
+                                             480원
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h3 class="tit01">업체개별 배송</h3>
+                                    <table class="bbs_list_v2">
+                                    <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+                                    </caption>
+                                    <colgroup>
+                                    <col style="width:11%">
+                                    <col style="width:14%">
+                                    <col style="width:35%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            상품코드
+                                        </th>
+                                        <th scope="col">
+                                            상품
+                                        </th>
+                                        <th scope="col">
+                                            상품명
+                                        </th>
+                                        <th scope="col">
+                                            판매가
+                                        </th>
+                                        <th scope="col">
+                                            수량
+                                        </th>
+                                        <th scope="col">
+                                            가격
+                                        </th>
+                                        <th scope="col">
+                                            통합포인트
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="7">
+                                             상품금액 <strong>156,000</strong>원 + 배송비 <strong>0</strong>원 = <strong class="point02">156,000</strong>원
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            2310040307839
+                                        </td>
+                                        <td>
+                                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1690/hot1553670797576.jpg" alt="[삼성전자] 갤럭시버즈 블루투스 이어폰" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                        </td>
+                                        <td class="t_left">
+                                            <input type="hidden" name="prdtName" value="[삼성전자] 갤럭시버즈 블루투스 이어폰"/>
+                                            [삼성전자] 갤럭시버즈 블루투스 이어폰
+                                            <p class="txt_option">
+                                                블랙
+                                            </p>
+                                        </td>
+                                        <td>
+                                            156,000원<br>
+                                            [2%↓]
+                                        </td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            156,000원
+                                        </td>
+                                        <td>
+                                             0원
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h3 class="tit01">업체개별 배송</h3>
+                                    <table class="bbs_list_v2">
+                                    <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+                                    </caption>
+                                    <colgroup>
+                                    <col style="width:11%">
+                                    <col style="width:14%">
+                                    <col style="width:35%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            상품코드
+                                        </th>
+                                        <th scope="col">
+                                            상품
+                                        </th>
+                                        <th scope="col">
+                                            상품명
+                                        </th>
+                                        <th scope="col">
+                                            판매가
+                                        </th>
+                                        <th scope="col">
+                                            수량
+                                        </th>
+                                        <th scope="col">
+                                            가격
+                                        </th>
+                                        <th scope="col">
+                                            통합포인트
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="7">
+                                             상품금액 <strong>12,200</strong>원 + 배송비 <strong>2,500</strong>원 = <strong class="point02">14,700</strong>원
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            2310040093039
+                                        </td>
+                                        <td>
+                                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1453/hot1546565085235.jpg" alt="슈즈용네임스티커냥냥이" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                        </td>
+                                        <td class="t_left">
+                                            <input type="hidden" name="prdtName" value="슈즈용네임스티커냥냥이"/>
+                                            슈즈용네임스티커냥냥이
+                                            <p class="txt_option">
+                                                <strong>사이즈</strong> : 소형<span class="one_line"></span><strong>폰트</strong> : 한글3<span class="one_line"></span></span>
+                                            </p>
+                                            <p class="txt_option">
+                                                기타정보 : 안녕
+                                            </p>
+                                        </td>
+                                        <td>
+                                            5,000원<br>
+                                            [0%↓]
+                                        </td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            5,000원
+                                        </td>
+                                        <td>
+                                             50원
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2310036611216
+                                        </td>
+                                        <td>
+                                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1829/hot1531981621277.jpg" alt="[주문제작]자수네임택쪼꼬미" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                        </td>
+                                        <td class="t_left">
+                                            <input type="hidden" name="prdtName" value="[주문제작]자수네임택쪼꼬미"/>
+                                            [주문제작]자수네임택쪼꼬미
+                                            <p class="txt_option">
+                                                <strong>색상</strong> : 3 Pink 리본<span class="one_line"></span></span>
+                                            </p>
+                                            <p class="txt_option">
+                                                기타정보 : 은유
+                                            </p>
+                                        </td>
+                                        <td>
+                                            7,200원<br>
+                                            [20%↓]
+                                        </td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            7,200원
+                                        </td>
+                                        <td>
+                                             80원
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h3 class="tit01">업체개별 배송</h3>
+                                    <table class="bbs_list_v2">
+                                    <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
+                                    </caption>
+                                    <colgroup>
+                                    <col style="width:11%">
+                                    <col style="width:14%">
+                                    <col style="width:35%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            상품코드
+                                        </th>
+                                        <th scope="col">
+                                            상품
+                                        </th>
+                                        <th scope="col">
+                                            상품명
+                                        </th>
+                                        <th scope="col">
+                                            판매가
+                                        </th>
+                                        <th scope="col">
+                                            수량
+                                        </th>
+                                        <th scope="col">
+                                            가격
+                                        </th>
+                                        <th scope="col">
+                                            통합포인트
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="7">
+                                             상품금액 <strong>8,000</strong>원 + 배송비 <strong>2,700</strong>원 = <strong class="point02">10,700</strong>원
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            8807333795496
+                                        </td>
+                                        <td>
+                                            <a href="#n"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1576/hot1477977956729.jpg" alt="웍스 S스케줄러 1년 라임그린 미디에스" class="photo" width="100" height="100" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
+                                        </td>
+                                        <td class="t_left">
+                                            <input type="hidden" name="prdtName" value="웍스 S스케줄러 1년 라임그린 미디에스"/>
+                                            웍스 S스케줄러 1년 라임그린 미디에스
+                                        </td>
+                                        <td>
+                                            8,000원<br>
+                                            [0%↓]
+                                        </td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            8,000원
+                                        </td>
+                                        <td>
+                                             80원
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="text_show_wrap">
+                                <p name="toggle-control" class="text_show">
+                                    주문 상품 전체 보기<span class="bg_arrowdown"></span>
+                                </p>
+                                <p name="toggle-control" class="text_show" style="display:none;">
+                                    주문 상품 간략 보기<span class="bg_arrowup"></span>
+                                </p>
+                            </div>                            
+                            <div class="help_box_wrap">
+                                <ul class="text_list">
+                                    <li>
+                                        주문 상품 목록에 발매 예정인 예약 상품이 포함되어 있습니다.
+                                    </li>
+                                    <li>
+                                        예약 상품 발매 후 배송이 진행됩니다.
+                                    </li>
+                                    <li>
+                                        기 출시 상품을 먼저 받아보시려면 예약 상품과 별도로 주문하시기 바랍니다.
+                                    </li>
+                                            
+                                </ul>
+                            </div>
                         </div>
+
+                        <h3 class="user_title distance">할인 정보</h3>
+                        <div class="user_table_wrap">
+                            <table class="table_wrap type_1">
+                                <colgroup> 
+                                    <col width="14.8%" /> 
+                                    <col width="85.2%" />                    
+                                </colgroup>
+                                <tbody>
+                                     <tr>
+                                        <th>쿠폰할인</th>
+                                        <td>
+                                            <div class="choice_wrap type_squre have_inner_txt">
+                                                <p class="i_txt"><span class="ft_big">999,999</span><span>원</span></p>
+                                                <div class="choice_wrap_inner mgt5">
+                                                    <span>
+                                                        <input type="checkbox" name="orderInfo5" id="orderInfo_51" value="Y">
+                                                        <label for="orderInfo_51">최대 할인혜택 적용</label>
+                                                    </span>
+                                                    <a href="javascript:;" class="icon_arrow">쿠폰 변경</a>
+                                                </div>
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>통합포인트</th>
+                                        <td>
+                                            <div class="have_inner_txt inner_float">                                                  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="10,000 P" class="width_point">
+                                                </span>
+                                                <a href="javascript:;" class="btn_defalut squre">모두 사용</a>                                                  
+                                                <span class="text_wrap">
+                                                    <span>(보유 통합포인트 : </span><span>999,999</span><span>P)</span>
+                                                </span>                                            
+                                            </div>
+                                        </td>                               
+                                    </tr>
+                                     <tr>
+                                        <th>마일리지</th>
+                                        <td>
+                                            <div class="have_inner_txt inner_float">                                                  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="0 P" class="width_point">
+                                                </span>
+                                                <a href="javascript:;" class="btn_defalut squre">모두 사용</a>                                                  
+                                                <span class="text_wrap">
+                                                    <span>(보유 마일리지 : </span><span>999,999</span><span>P)</span>
+                                                </span>                                                                                                  
+                                            </div>
+                                        </td>                              
+                                    </tr>
+                                     <tr>
+                                        <th>예치금</th>
+                                        <td>
+                                            <div class="have_inner_txt inner_float">                                                  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="0 P" class="width_point">
+                                                </span>
+                                                <a href="javascript:;" class="btn_defalut squre">모두 사용</a>                                                  
+                                                <span class="text_wrap">
+                                                    <span>(보유 예치금 : </span><span>999,999</span><span>P)</span>
+                                                </span>                                                                                                  
+                                            </div>
+                                        </td>                              
+                                    </tr>
+                                </tbody> 
+                            </table>
+                            <div class="help_box_wrap mgt20">
+                                <ul class="text_list">
+                                    <li>
+                                        주문 상품 목록에 발매 예정인 예약 상품이 포함되어 있습니다.
+                                    </li>
+                                    <li>
+                                        예약 상품 발매 후 배송이 진행됩니다.
+                                    </li>
+                                    <li>
+                                        기 출시 상품을 먼저 받아보시려면 예약 상품과 별도로 주문하시기 바랍니다.
+                                    </li>
+                                            
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="user_title distance">제휴 포인트</h3>
+                        <div class="user_table_wrap">
+                            <table class="table_wrap type_1">
+                                <colgroup> 
+                                    <col width="14.8%" /> 
+                                    <col width="85.2%" />                    
+                                </colgroup>
+                                <tbody>
+                                     <tr>
+                                        <th>GS&amp;POINT</th>
+                                        <td>
+                                            <div class="have_inner_txt inner_float">                                                  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="0 P" class="width_point">
+                                                </span>
+                                                <a href="javascript:;" class="btn_defalut squre">포인트 조회</a>                                                                                              
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                     <tr>
+                                        <th>L.POINT</th>
+                                        <td>
+                                            <div class="have_inner_txt inner_float">                                                  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="10,000 P" class="width_point">
+                                                </span>
+                                                <a href="javascript:;" class="btn_defalut squre">모두 사용</a>                                                  
+                                                <span class="text_wrap">
+                                                    <span>(사용 가능 포인트 : </span><span>999,999</span><span>P)</span>
+                                                </span>                                            
+                                            </div>
+                                        </td>                               
+                                    </tr>
+                                     <tr>
+                                        <th>OK캐쉬백</th>
+                                        <td>
+                                            <div class="have_inner_txt inner_float">                                                  
+                                                <span class="input_wrap">
+                                                    <input type="text" placeholder="0 P" class="width_point">
+                                                </span>
+                                                <a href="javascript:;" class="btn_defalut squre">모두 사용</a>                                                  
+                                                <span class="text_wrap">
+                                                    <span>(사용 가능 포인트 : </span><span>999,999</span><span>P)</span>
+                                                </span>                                                                                                  
+                                            </div>
+                                        </td>                              
+                                    </tr>
+                                </tbody> 
+                            </table>
+                            <div class="help_box_wrap mgt20">
+                                <ul class="text_list">
+                                    <li>
+                                        주문 상품 목록에 발매 예정인 예약 상품이 포함되어 있습니다.
+                                    </li>
+                                    <li>
+                                        예약 상품 발매 후 배송이 진행됩니다.
+                                    </li>
+                                    <li>
+                                        기 출시 상품을 먼저 받아보시려면 예약 상품과 별도로 주문하시기 바랍니다.
+                                    </li>
+                                            
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="user_title distance">결제금액</h3>
+                        <div class="user_price_wrap">
+                            <div class="user_price_unit">
+                                <dl class="price_unit_list">
+                                    <dt>총 상품금액</dt>
+                                    <dd>100,000원</dd>
+                                </dl>
+                                <dl class="price_unit_list">
+                                    <dt>배송비</dt>
+                                    <dd>+ 3,000원</dd>
+                                </dl>
+                                <dl class="price_unit_list">
+                                    <dt class="color">총 주문금액</dt>
+                                    <dd>100,000원</dd>
+                                </dl>
+                                <dl class="price_unit_list">
+                                    <dt class="color">총 할인금액</dt>
+                                    <dd>- 10,000원</dd>
+                                </dl>
+                            </div>
+                            <div class="user_price_unit sum">
+                                <p class="unit_sum_tit">총 결제금액</p>
+                                <p class="unit_sum"><span class="only_english point02">699,000</span><span>원</span></p>
+                                <p class="unit_sum_point"><span class="color">통합포인트 적립 예정</span> <span>100원</span></p>
+                            </div>
+                        </div>
+
+                        <h3 class="user_title distance">결제방법</h3>
+                        <div class="user_pay_wrap">
+                            <div class="tab_wrap">
+                                <ul class="tab_list">
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">신용카드</a>
+                                    </li>
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">실시간 계좌이체</a>
+                                    </li>
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">휴대폰</a>
+                                    </li>
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">무통장 입금</a>
+                                    </li>
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">네이버 Pay</a>
+                                    </li>
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">카카오 Pay</a>
+                                    </li>
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">Smile Pay</a>
+                                    </li>
+                                    <li class="items">
+                                        <a href="javascript:;" class="link">PAYCO</a>
+                                    </li>
+                                </ul>
+                                <div class="tab_layer_wrap">
+                                    <div class="tab_layer">
+                                        <div class="tab_layer_text_box">
+                                            <p class="layer_title">네이버페이 안내</p>
+                                            <ul class="layer_txt_list">
+                                                <li>주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.</li>
+                                                <li>네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행 계좌 정보를 등록하여 네이버페이 비밀번호로 결제할 수 있는 간편결제 서비스입니다.</li>
+                                                <li>결제 가능한 신용카드 : 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티</li>
+                                                <li>결제 가능한 은행 : NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국</li>
+                                                <li>네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 무이자, 청구할인 혜택을 받을 수 있습니다.</li>
+                                            </ul>
+                                            <p class="layer_title">현금영수증 선택</p>
+                                            <div>
+                                                <div class="choice_wrap">
+                                                    <span class="choice_wrap_inner">
+                                                        <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="" />
+                                                        <label for="orderInfoSmsY">정보 수신</label>
+                                                    </span>
+                                                    <span class="choice_wrap_inner">
+                                                        <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N" />
+                                                        <label for="orderInfoSmsN">수신하지 않음</label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="choice_wrap">
+                                            <span class="choice_wrap_inner">
+                                                <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="" />
+                                                <label for="orderInfoSmsY">정보 수신</label>
+                                            </span>
+                                            <span class="choice_wrap_inner">
+                                                <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N" />
+                                                <label for="orderInfoSmsN">수신하지 않음</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
 
                     </div>
                 </form>
+                <div class="btn_type_wrap bottom_wrap">
+                    <a href="javascript:;" class="btn_basic">결제하기</a>
+                </div>
                 <!--// 주문결제 form : E -->
             </div>
             <!-- //컨텐츠 -->
