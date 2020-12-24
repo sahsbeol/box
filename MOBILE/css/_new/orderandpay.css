@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+/* font-weight: 100 ~ 900 
+	300: Light
+	400: Regular
+	500: Medium
+	700: bold
+
+*/
+/* ---------- common_style --------------*/
+.orderandpay {font-family: 'NS','Apple SD Gothic Neo', sans-serif; font-size:14px;}
+.orderandpay .only_english {font-family: 'GS','Apple SD Gothic Neo', sans-serif !important;}
+
+.orderandpay .cong_msg .tit { font-size: 18px;}
+.orderandpay .cartlist {font-size: 16px;}

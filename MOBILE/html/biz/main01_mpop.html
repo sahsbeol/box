@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/content.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/hottm_yj.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/swiper.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+<script type="text/javascript" src="../../js/biz/m_hott.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+<script>
+// common_v2.js 충돌로 별도 설정
+$(document).ready(function(){
+      var swiperpopup = new Swiper('.popup_sbox .swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 5,
+      speed: 1000,
+	  autoplay: 2000,
+	  loop: true,
+      draggable: true,
+      pagination: '.swiper-pagination',
+      paginationType: 'fraction'
+	  });
+      var swipercont04 = new Swiper('.main_wrapper .cont04 .swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      speed: 1000,
+      freeMode: true,
+      scrollbar: '.swiper-scrollbar',
+      });
+      var swipercont05 = new Swiper('.main_wrapper .cont05 .swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      speed: 1000,
+      freeMode: true,
+      scrollbar: '.swiper-scrollbar',
+      });
+	  $('#appDown').css('display','none');
+});
+</script>
+<style>
+.bnr_topbox {position: fixed; top:0px; width:100%; height:44px; z-index:99999;}
+.bnr_topbox img {width:100%; height:auto;}
+.bnr_topbox .btn_btclose {position: absolute;top: 10px;width: 24px;height: 24px;right: 10px;text-indent: -999999px;background: url(http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/device/ic_topclose.png) no-repeat;background-size: 24px 24px;}
+.bnr_topbox + #header.bnr_top {top: 44px !important;}
+.bnr_topbox + #header.bnr_top.active {top: -65px !important;}
+.popup_sbox {position: fixed; width: 100%; height: 314px; z-index: 999; background: #fff; bottom: 0; border-radius: 20px 20px 0px 0px; -moz-border-radius: 20px 20px 0px 0px; -webkit-border-radius: 20px 21px 0px 0px; -webkit-box-shadow: 0px -4px 8px #0000001A; -moz-box-shadow: 0px -4px 8px #0000001A; box-shadow: 0px -4px 8px #0000001A;}    
+.popup_sbox .tit_a {position: absolute;padding: 15px 30px 0 40px;width: calc(100% - 70px);font-size: 14px;}
+.popup_sbox .tit_a .btn_tclose {text-decoration: underline;color: #777;}
+.popup_sbox .tit_a .btn_pclose {float: right;color: #777;padding-right: 20px;}
+.popup_sbox .tit_a .btn_pclose:after {position: absolute;content: '';width: 24px;height: 24px;background: url('http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/ic_pclose.png') no-repeat;background-size: 24px 24px;margin-left: -3px;} 
+.popup_sbox .swiper-container{margin: 50px 0 0 40px;overflow: inherit;}
+@media screen and ( max-width: 320px ) {
+	.popup_sbox .swiper-container{margin: 50px 0 0 10px;}
+}
+.popup_sbox .swiper-slide{width:300px;}
+.popup_sbox .swiper-slide a{display:block; height: 230px;}
+.popup_sbox .swiper-slide .thum{position:relative; width: 300px; height: 100%; overflow: hidden;}
+.popup_sbox .swiper-slide .thum img{width: 100%;}
+.popup_sbox .swiper-slide .label{position:absolute; display:inline-block; bottom:-5px; right:0; font-weight:bold; width:70px; padding:7px 0 4px; text-align:center; font-size:1.333em; color:#fff; background:rgba(0,0,0,1);}
+.popup_sbox .swiper-slide .txt_a {position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; background: #fff; line-height: 1.2; padding-top: 8px;}
+.popup_sbox .swiper-slide strong{display:block; width: calc(100% - 58px); padding: 0 10px; color:#000;font-size: 1.667em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; box-sizing: border-box;}
+.popup_sbox .swiper-slide p{font-size: 1.167em; width: calc(100% - 58px); padding: 0px 10px; color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; box-sizing: border-box;}
+.popup_sbox .pagination_wrap{position:absolute;width: 67px;height: 24px;right: 0;bottom: -24px;}
+.popup_sbox .pagination_wrap .swiper-pagination {left: -10px;top: 5.5px;font-family:font_gs, sans-serif;display: inline-block;color: rgba(255,255,255,0.5);font-size:0;}
+.popup_sbox .pagination_wrap .swiper-pagination span{font-size:11px;}
+.popup_sbox .pagination_wrap .swiper-pagination-current{font-size:11px;font-weight:600;opacity:1;color: #000;}
+.popup_sbox .pagination_wrap .swiper-pagination-total{position:relative;font-size:11px;opacity:0.5;color: #000;margin-left: 5px;}
+/* <!-- 2020.07.28 김지우 커밋 --> */
+.dim{position:fixed; top:0; right:0; bottom:0; left:0; z-index:99; opacity:0.7; background-color:#000;}
+/* <!-- 2020.07.28 김지우 커밋 끝--> */
+</style>
+</head>
+
+<body>
+<!-- 메인은 main : class 추가 -->
+<div id="wrap" class="content_new main">
+	<!-- search -->
+	<div id="search_menu">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="search_cont">
+						<div class="top_banner" style="background:#8971ff;">
+							<a href="#n"><img src="../../images/biz/thums/img_top_banner.png" alt=""></a>
+						</div>
+						<div class="search_top">
+						    <div class="inner">
+								<div class="input_wrap">
+									<input type="text" placeholder="검색어를 입력해주세요">
+									<span class="input_clear hidden">삭제</span>
+								</div>
+						    </div>
+							<a href="#n" class="btn_back">뒤로가기</a>
+							<a href="../../html/biz/search_view.html" class="btn_search"><span>검색</span></a>
+						</div>
+						<div class="search_wrap">
+							<div class="search_list">
+								<div class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<div class="cont cont01">
+												<h5>인기 검색어</h5>
+												<ul>
+													<li>
+														<a href="#n">
+															<em class="font_t">1</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span class="num up">99+</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">2</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span class="num down">1</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">3</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span>-</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">4</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span class="new">NEW</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">5</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span>-</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">6</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span>-</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">7</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span class="num up">1</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">8</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span class="new">NEW</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">9</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span class="num down">1</span>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">10</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															<span class="num down">1</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+											<p class="txt"><span class="font_t">2019.11.11 11:00</span> 기준</p>
+										</div>
+										<div class="swiper-slide">
+											<div class="cont cont02">
+												<h5>추천 검색어</h5>
+												<ul>
+													<li>
+														<a href="#n">
+															<em class="font_t">1</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">2</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">3</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">4</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">5</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">6</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">7</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">8</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">9</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+													<li>
+														<a href="#n">
+															<em class="font_t">10</em>
+															<p>성공의 정석 베개</p>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="cont cont03">
+												<h5>최근 검색어</h5>
+												<ul>
+													<li>
+														<a href="#n" class="keyword">성공의 정석 베개</a>
+														<a href="#n" class="btn_delete">삭제</a>
+													</li>
+													<li>
+														<a href="#n" class="keyword">성공의 정석 베개</a>
+														<a href="#n" class="btn_delete">삭제</a>
+													</li>
+												</ul>
+												<!-- 검색어 없는 경우 -->
+												<div class="none" style="display:none;">
+													최근 검색어가 없습니다
+												</div>
+												<!--// 검색어 없는 경우 -->
+											</div>
+											<div class="btn_wrapper">
+												<a href="#n" class="btn_delete_all">전체삭제</a>
+											</div>
+										</div>
+									</div>
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- search -->
+    
+    <!-- 모바일웹 전용 상단 배너 -->
+    <div class="bnr_topbox">
+       <a href="#n" class="wd100"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/device/bnr_appdown.png"/></a>
+       <a href="#n" class="btn_btclose">닫기</a>        
+    </div>
+    
+	<!-- header -->
+	<div id="header" class="bnr_top">
+	    <div class="inner">
+			<a href="#" class="btn_home">홈버튼</a>
+			<!-- 메인 -->
+			<div class="main_wrap">
+				<input type="text" placeholder="모바일 첫구매시 3,000원 쿠폰">
+		        <a href="#" class="btn_category"><span>카테고리 보기</span></a>
+		        <a href="#" class="btn_search"><span>검색</span></a>
+			</div>
+			<!--// 메인 -->
+
+			<!-- 서브 -->
+			<div class="sub_wrap">
+				<a href="#" class="btn_back">뒤로가기</a>
+		        <a href="#" class="btn_category">카테고리 보기</a>
+		        <a href="#" class="btn_search">검색</a>
+				<h2>상품정보</h2>
+			</div>
+			<!--// 서브 -->
+	    </div>
+		<div class="top_menu">
+			<ul>
+				<li class="active"><a href="../biz/main01.html">문구&middot;기프트</a></li>
+				<li><a href="../biz/mrecord.html">음반</a></li>
+				<li id="gnblife"><a href="../biz/life.html">이럴 때,<i class="this"></i></a></li>
+				<li><a href="../biz/agit.html">아지트</a></li>
+			</ul>
+		</div>
+		<div id="sidemenu_wrapper">
+			<!-- <div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"> -->
+						<div class="sidemenu_cont">
+							<!-- 로그인시 프렌즈,실버,골드,플래티넘,임직원 grade01 ~ grade05 : class 추가 -->
+							<div class="hd grade04">
+								<div class="cont">
+									<p><span>서유미</span>님. <strong>플래티넘</strong></p>
+									<ul>
+										<li>
+											<a href="#">
+												<i class="ico01"></i>
+												<span>마이핫트랙스</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico02"></i>
+												<span>주문조회</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico03"><em class="font_t">5</em></i>
+												<span>쿠폰</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico04"></i>
+												<span>장바구니<em></em></span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="store">
+									<dl>
+										<dt>지금 가장 가까운 매장,</dt>
+										<dd><a href="#">광화문점</a></dd>
+									</dl>
+								</div>
+
+								<div class="btn_wrap">
+									<button type="button" class="btn_alarm"><em class="font_t">5</em></button>
+									<button type="button" class="btn_sidemenu_close"></button>
+								</div>
+							</div>
+							<!--// 로그인시 -->
+
+							<!-- 비로그인시 -->
+							<div class="hd no_login" style="display:none;">
+								<div class="cont">
+									<p>안녕하세요 고객님.</p>
+									<ul>
+										<li>
+											<a href="#">
+												<i class="ico05"></i>
+												<span>로그인</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico06"></i>
+												<span>회원가입</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico02"></i>
+												<span>주문조회</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico04"></i>
+												<span>장바구니</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="store">
+									<dl>
+										<dt>지금 가장 가까운 매장,</dt>
+										<dd><a href="#">광화문점</a></dd>
+									</dl>
+								</div>
+
+								<div class="btn_wrap">
+									<button type="button" class="btn_alarm"><em class="font_t">5</em></button>
+									<button type="button" class="btn_sidemenu_close"></button>
+								</div>
+							</div>
+							<!--// 비로그인시 -->
+
+							<!-- gnb -->
+							<nav id="gnb">
+								<div class="banner">
+									<div class="swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide">
+												<a href="#">
+													<div class="text"><span><em>단골 손님만을<br/>위한 혜택</em></span></div>
+													<img src="../../images/biz/thums/img_banner.png" alt="">
+												</a>
+											</div>
+											<div class="swiper-slide">
+												<a href="#">
+													<div class="text"><span><em>단골 손님만을<br/>위한 혜택</em></span></div>
+													<img src="../../images/biz/thums/img_banner.png" alt="">
+												</a>
+											</div>
+										</div>
+										<div class="swiper-pagination"></div>
+									</div>
+								</div>
+								<div class="category">
+									<ul>
+										<li>
+											<a href="../../html/biz/category_list.html">
+												<i class="ico01"></i>
+												<span>디자인문구</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico02"></i>
+												<span>디지털</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico03"></i>
+												<span>고급필기구</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico04"></i>
+												<span>오피스</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico05"></i>
+												<span>리빙/생활가전</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico06"></i>
+												<span>키친/푸드</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico07"></i>
+												<span>가구/수납</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico08"></i>
+												<span>패션잡화</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico09"></i>
+												<span>뷰티/헬스</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico10"></i>
+												<span>여행/자동차</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico11"></i>
+												<span>취미/펫</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico12"></i>
+												<span>유아동</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico13"></i>
+												<span>직수입/PB</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico14"></i>
+												<span>CD</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="ico15"></i>
+												<span>DVD</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="sales">
+									<ul>
+										<li><a href="../biz/mbest.html">베스트</a></li>
+										<li><a href="../biz/mfreeship.html">무료배송</a></li>
+										<li><a href="../biz/mnew.html">신상품</a></li>
+										<li><a href="../biz/mdiscount.html">할인</a></li>
+										<li><a href="../biz/event_list.html">이벤트</a></li>
+										<li><a href="../biz/personal_taste01.html">개인의취향</a></li>
+									</ul>
+								</div>
+								<div class="service_banner">
+									<div class="tit">
+										<h5></h5>
+									</div>
+									<div class="swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide first">
+												<a href="#">
+													<p class="txt">나의 라이프를 찾아하는 경험<br/>당신의 버킷 리스트는 무엇인가요?</p>
+													<img src="../../images/biz/thums/img_banner02.png" alt="">
+												</a>
+											</div>
+											<div class="swiper-slide">
+												<a href="#">
+													<p class="txt">나의 라이프를 찾아하는 경험<br/>당신의 버킷 리스트는 무엇인가요?</p>
+													<img src="../../images/biz/thums/img_banner03.png" alt="">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="content">
+									<ul>
+										<li><a href="#"><span><img src="../../images/biz/common/img_thumb01.png" alt="핫트연구소"></span>핫트연구소</a></li>
+										<li><a href="#"><span><img src="../../images/biz/common/img_thumb02.png" alt="뮤직매거진"></span>뮤직매거진</a></li>
+										<li><a href="#"><span><img src="../../images/biz/common/img_thumb03.png" alt="팬사인회"></span>팬사인회</a></li>
+									</ul>
+								</div>
+								<div class="notice">
+									<h5>공지사항<em></em></h5>
+									<p><a href="#">벚꽃시리즈 코멘트 이벤트 당첨자 발표</a></p>
+								</div>
+								<div class="cs">
+									<dl>
+										<dt>고객센터</dt>
+										<dd>
+											1661-1112
+											<span>월-금<em>오전9시~오후6시</em></span>
+										</dd>
+									</dl>
+								</div>
+								<div class="util">
+									 <ul>
+									 	<li>
+											<a href="#" class="btn_inquiry">
+												<i class="ico01"></i>
+												<span>고객센터</span>
+											</a>
+										</li>
+   									 	<li>
+											<a href="#" class="btn_alarm">
+												<i class="ico02"></i>
+												<span>설정</span>
+											</a>
+										</li>
+   									 	<li>
+											<a href="#" class="btn_pc">
+												<i class="ico03"></i>
+												<span>PC화면</span>
+											</a>
+										</li>
+   									 	<li>
+   											<a href="#" class="btn_logout">
+   												<i class="ico04"></i>
+   												<span>로그아웃</span>
+   											</a>
+   										</li>
+									 </ul>
+								</div>
+							</nav>
+							<!--// gnb -->
+						</div>
+					<!-- </div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<!--// header -->
+
+	<!-- content -->
+	<div id="content" style="margin-top:214px;">
+		<div class="main_wrapper">
+			<div class="cont cont01">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<!-- 시스템 배너 -->
+				        <div class="swiper-slide type01">
+							<a href="#n">
+								<span class="tag_percent"><p>~</p><strong>90</strong>%</span>
+								<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1398/1585298004816_3.jpg" alt="">
+								<div class="info">
+                                    <p class="tit">이젠 일상이 되버린<br>어쩌다, 집콕!</p>
+                                    <p class="txt">바이러스를 피해 집생활<br>강제 집콕러의 브이로그</p>
+                                </div>
+							</a>
+						</div>
+						<!--/ 시스템 배너 -->
+						<!-- 이미지 배너 -->
+						<div class="swiper-slide type02">
+							<a href="#n">
+								<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1164/1585542411829_mo_hotdeals_01.jpg" alt="">
+							</a>
+						</div>
+						<!--/ 이미지 배너 -->
+					</div>
+
+					<!-- swiper-pagination -->
+					<div class="pagination_wrap">
+						<a href="javascript:" class='paging_link'>
+							<div class="swiper-pagination"></div>
+							<div class="plus_inner">
+								<a href="javascript:" class="btn_plus"></a>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 메인 탑링크 -->
+			<div class="main_toplink_a">
+			    <ul class="main_toplink">
+                    <li>							
+                        <a href="javascript:;" onclick="location.href='/m/biz/hot/best/';return false;">
+                            <i class="ico01"></i>
+                            <span>베스트</span>
+                        </a>	
+                    </li>
+                    <li>							
+                        <a href="javascript:;" onclick="location.href='/m/biz/hot/eventMain';return false;">
+                            <i class="ico02"></i>
+                            <span>이벤트</span>
+                        </a>	
+                    </li>
+                    <li>							
+                        <a href="javascript:;" onclick="location.href='/m/biz/hot/best?dispMstrId=CATE_GFT_NEW';return false;">
+                            <i class="ico03"></i>
+                            <span>신상품</span>
+                        </a>	
+                    </li>
+                    <li>							
+                        <a href="javascript:;" onclick="location.href='/m/biz/hot/best?dispMstrId=CATE_GFT_SALE';return false;">
+                            <i class="ico04"></i>
+                            <span>할인</span>
+                        </a>	
+                    </li>
+                    <li>							
+                        <a href="javascript:;" onclick="location.href='/m/biz/hot/best?dispMstrId=FREE_DELIVERY_BEST';return false;">
+                            <i class="ico05"></i>
+                            <span>무료배송</span>
+                        </a>	
+                    </li>
+                </ul>
+			</div>
+			<!-- / 메인 탑링크 -->
+
+			<!-- 오늘만 특가 -->
+			<div class="cont cont02">
+				<h3>오늘만 <strong>특가</strong><a href="#" class="btn_detail">더보기</a></h3>
+				<strong class="font_t time">07<span> : </span>30<span> : </span>39</strong>
+				<div class="product">
+					<span class="percent font_t"><em>10</em>%</span>
+					<a href="#" class="main_pd">
+						<div class="thum">
+							<img src="../../images/biz/thums/main_banner00.png" alt="">
+						</div>
+						<span class="label">무료배송</span>
+						<p class="tit">로이텀 MASTER SUM 121P – LINE 2020 신상품 할인중</p>
+						<p class="price font_t"><em class="discount">28,800</em>28,800</p>
+					</a>
+				</div>
+				<ul class="event">
+					<li>
+						<a href="#">
+							<div class="thum">
+								<img src="../../images/biz/thums/img_main05.png" alt="">
+							</div>
+							<span class="percent font_t">20%</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="thum">
+								<img src="../../images/biz/thums/img_main03.png" alt="">
+							</div>
+							<span class="percent font_t">20%</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="thum">
+								<img src="../../images/biz/thums/img_main04.png" alt="">
+							</div>
+							<span class="percent font_t">20%</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="thum">
+								<img src="../../images/biz/thums/img_main06.png" alt="">
+							</div>
+							<span class="percent font_t">20%</span>
+						</a>
+					</li>
+				</ul>
+				<!-- 남은 시간 -->
+				<div class="time_line">
+					<span class="txt">남은시간</span>
+					<div class="bar">
+						<span style="height:50%;"></span>
+					</div>
+				</div>
+			</div>
+			<!--// 오늘만 특가 -->
+
+			<!-- 급상승 인기 검색어 -->
+			<div class="cont cont03">
+				<h3>급상승 <strong>인기 검색어</strong></h3>
+				<div class="keyword_wrap">
+					<ul>
+						<li>
+							<a href="#">
+								<em class="font_t">1</em>
+								<p>문구</p>
+								<!-- ▲ up , ▼ down : class 추가 -->
+								<span class="num up">1</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<em class="font_t">2</em>
+								<p>하임</p>
+								<!-- ▲ up , ▼ down : class 추가 -->
+								<span class="num down">33</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<em class="font_t">3</em>
+								<p>커튼</p>
+								<span class="txt"><strong>NEW</strong></span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<em class="font_t">4</em>
+								<p>에어팟케이스</p>
+								<span class="txt">-</span>
+							</a>
+						</li>
+					</ul>
+					<a href="#n" class="btn_more"><span>인기검색어 더보기</span></a>
+				</div>
+			</div>
+			<!--// 급상승 인기 검색어 -->
+
+			<!-- 실시간 인기 / 베스트 -->
+			<div class="cont cont04">
+				<div class="tab">
+					<ul>
+						<li class="active"><a href="#">실시간 인기</a></li>
+						<li><a href="#">베스트</a></li>
+					</ul>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main04.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main05.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main06.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+					</div>
+
+					<!-- 스크롤바 -->
+					<div class="swiper-scrollbar"></div>
+				</div>
+			</div>
+			<!--// 실시간 인기 / 베스트 -->
+
+			<!-- 2020.07.31 김지우 커밋 -->
+			<div class="banner_wrap">
+				<ul>
+					<li>
+						<a href="#">
+							<img src="" alt="">
+							<p>매일 출석체크! 최대 5,000P 찬스</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="" alt="">
+							<p>핫트랙스 X 룸룸 스페셜 에디션 증정!</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="" alt="">
+							<p>핫트랙스 X 룸룸 스페셜 에디션 증정!</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1235/1596006545237_띠배너-모바일-2.jpg" alt="띠배너 이미지">
+							<p></p>
+						</a>
+					</li>
+					<!-- <li>
+						<a href="#">
+							<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1935/1594626369599_bnr_m2.jpg" alt="띠배너 이미지">
+							<p></p>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+			<!-- 2020.07.31 김지우 커밋 끝-->
+
+			<!-- 내게 맞는 추천상품 -->
+			<div class="cont cont05">
+				<h3>내게 맞는 <strong>추천상품</strong><a href="#" class="btn_detail">더보기</a></h3>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main04.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main05.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main06.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main07.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main05.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main04.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+					</div>
+
+					<!-- 스크롤바 -->
+					<div class="swiper-scrollbar"></div>
+				</div>
+			</div>
+			<!--// 내게 맞는 추천상품 -->
+
+			<div class="event_banner">
+				<a href="#">
+					<div class="img_wrap">
+						<img src="../../images/biz/thums/event_banner06.png" alt="">
+					</div>
+					<span class="font_t percent">10%</span>
+					<strong>아날로그 갬수성</strong>
+					<p>코닥~하고 찰칵 찍어요!</p>
+				</a>
+			</div>
+
+			<!-- 앵콜특가 -->
+			<div class="cont cont06">
+				<h3>앵콜 특가</h3>
+				<p>한 주간 최다 판매 베스트를 모아 한정 세일</p>
+				<div class="pd_list">
+					<ul>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/event_banner08.png" alt="">
+								</div>
+								<div class="info">
+									<p class="tit">[페이스인페이스]실키포어 선스틱<br/>실키포어 선스틱</p>
+									<p class="price font_t">
+										16,300
+										<span class="percent">18.5%</span>
+									</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main08.png" alt="">
+								</div>
+								<div class="info">
+									<p class="tit">[페이스인페이스]실키포어 선스틱<br/>실키포어 선스틱</p>
+									<p class="price font_t">
+										16,300
+										<span class="percent">18.5%</span>
+									</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--// 앵콜특가 -->
+
+			<div class="banner_wrap type02">
+				<ul>
+					<li>
+						<a href="#">
+							<img src="../../images/biz/thums/main_banner03.png" alt="">
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="../../images/biz/thums/main_banner04.png" alt="">
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 에디터 추천 -->
+			<div class="cont cont07">
+				<h5>에디터 <strong>추천</strong></h5>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/main_banner09.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_taste02.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--// 에디터 추천 -->
+
+			<div class="banner_wrap type03">
+				<img src="../../images/biz/thums/main_banner05.png" alt="">
+			</div>
+
+			<!-- 기획상품 -->
+			<div class="cont cont08">
+				<h3><strong>10월 벤트리</strong></h3>
+				<div class="pd_list">
+					<ul>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/main_banner08.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main09.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main10.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main11.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main12.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main13.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<a href="#n" class="btn_change"><span>다른 테마 또 보여줘<em class="font_t"><strong>1</strong>/12</em></span></a>
+			</div>
+			<!--// 기획상품 -->
+
+			<div class="event_banner">
+				<ul>
+					<li>
+						<a href="#">
+							<div class="img_wrap">
+								<img src="../../images/biz/thums/event_banner08.png" alt="">
+							</div>
+							<span class="font_t percent">10%</span>
+							<strong>아날로그 갬수성</strong>
+							<p>코닥~하고 찰칵 찍어요!</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="img_wrap">
+								<img src="../../images/biz/thums/event_banner06.png" alt="">
+							</div>
+							<span class="font_t percent">10%</span>
+							<strong>아날로그 갬수성</strong>
+							<p>코닥~하고 찰칵 찍어요!</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="img_wrap">
+								<img src="../../images/biz/thums/main_banner07.png" alt="">
+							</div>
+							<span class="font_t percent">10%</span>
+							<strong>아날로그 갬수성</strong>
+							<p>코닥~하고 찰칵 찍어요!</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 스페셜 에디션 -->
+			<div class="cont cont09">
+				<h3><strong>스페셜 에디션&#59;</strong></h3>
+				<div class="tit_wrap">
+					<h5>핫트랙스 PB</h5>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="#n">
+								<div class="thum">
+									<img src="../../images/biz/thums/main_banner11.png" alt="">
+								</div>
+								<p class="tit">기억하고 싶은 모든것<br/>여기 보관하다</p>
+								<p class="txt">하임디퓨저는 여유로운 삶과<br/>건강하고 향기로운 라이프스<br/>타일을 지향합니다.</p>
+							</a>
+							<div class="thum_list">
+								<ul>
+									<li><a href="#n"><img src="../../images/biz/thums/img_main14.png" alt=""></a></li>
+									<li><a href="#n"><img src="../../images/biz/thums/img_main15.png" alt=""></a></li>
+									<li><a href="#n"><img src="../../images/biz/thums/img_main16.png" alt=""></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<a href="#n">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main18.png" alt="">
+								</div>
+								<p class="tit">기억하고 싶은 모든것<br/>여기 보관하다</p>
+								<p class="txt">하임디퓨저는 여유로운 삶과<br/>건강하고 향기로운 라이프스<br/>타일을 지향합니다.</p>
+							</a>
+							<div class="thum_list">
+								<ul>
+									<li><a href="#n"><img src="../../images/biz/thums/img_main17.png" alt=""></a></li>
+									<li><a href="#n"><img src="../../images/biz/thums/img_main14.png" alt=""></a></li>
+									<li><a href="#n"><img src="../../images/biz/thums/img_main15.png" alt=""></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--// 스페셜 에디션 -->
+
+			<div class="dot_banner">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main13.png" alt="">
+								</div>
+								<p class="tit">#이조합찬성</p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main14.png" alt="">
+								</div>
+								<p class="tit">#BT21 20%할인</p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main11.png" alt="">
+								</div>
+								<p class="tit">#이조합찬성이조합찬성</p>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main12.png" alt="">
+								</div>
+								<p class="tit">#이조합찬성</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 카테고리별 추천 / 디자인문구 -->
+			<div class="cont category">
+				<h3><strong>디자인문구</strong><a href="#" class="btn_detail">더보기</a></h3>
+				<div class="top_banner">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../../images/biz/thums/main_banner02.png" alt="">
+						</div>
+						<span class="font_t percent">10%</span>
+						<strong>아날로그 갬수성</strong>
+						<p>코닥~하고 찰칵 찍어요!</p>
+					</a>
+				</div>
+				<div class="pd_list">
+					<ul>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main19.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main20.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main21.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main22.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--// 카테고리별 추천 / 디자인문구 -->
+
+			<!-- 카테고리별 추천 / 패션 -->
+			<div class="cont category">
+				<h3><strong>패션</strong><a href="#" class="btn_detail">더보기</a></h3>
+				<div class="top_banner">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../../images/biz/thums/main_banner06.png" alt="">
+						</div>
+						<span class="font_t percent">10%</span>
+						<strong>아날로그 갬수성</strong>
+						<p>코닥~하고 찰칵 찍어요!</p>
+					</a>
+				</div>
+				<div class="pd_list">
+					<ul>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main23.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main24.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main25.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main26.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--// 카테고리별 추천 / 패션 -->
+
+			<!-- 카테고리별 추천 / 디지털 -->
+			<div class="cont category">
+				<h3><strong>디지털</strong><a href="#" class="btn_detail">더보기</a></h3>
+				<div class="top_banner">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../../images/biz/thums/main_banner07.png" alt="">
+						</div>
+						<span class="font_t percent">10%</span>
+						<strong>아날로그 갬수성</strong>
+						<p>코닥~하고 찰칵 찍어요!</p>
+					</a>
+				</div>
+				<div class="pd_list">
+					<ul>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main27.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main28.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main29.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<div class="thum">
+									<img src="../../images/biz/thums/img_main30.png" alt="">
+								</div>
+								<p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+								<p class="price font_t">16,000<span class="percent">20%</span></p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--// 카테고리별 추천 / 디지털 -->
+
+		</div>
+	</div>
+	<!--// content -->
+	<!-- benefit -->
+	<div id="benefit_wrapper">
+		<div class='benefit_wrap'>
+            
+            <a href="/html/biz/main01.html" class="btn_close" id="benefitClose">닫기</a>
+
+			<div class='tit_benefit'>
+				<h2><span>서유미님</span>의 오늘,<b>혜택</b></h2>
+				<p>혹시 놓치고 있지 않으세요?<br> <small>알림 수신 시,</small> 더 많은 쿠폰, 상품할인 혜택을 받으실 수 있습니다.</p>
+			</div>
+
+			<div class='box_alarm'>
+				<div class="box_check">
+					<em href="javascript:" class='chk_alarm'>푸시알림</em>
+					<label class="btn_check">
+						<em>받기</em>
+						<em>괜찮아요</em>
+						<input type="checkbox">
+						<span></span>
+					</label>
+				</div>
+
+				<ul class='list_coupon'>
+					<li>
+						<dl class='num_coupon clear'>
+							<dt><img src="../../images/biz/sub/ic_coupon.png" alt="나의 보유 쿠폰">나의 보유 쿠폰</dt>
+							<dd><em class='font_t'>1</em> 개</dd>
+						</dl>
+						<a href="javascript:"></a>
+					</li>
+					<li>
+						<dl class='num_coupon clear'>
+							<dt><img src="../../images/biz/sub/ic_down.png" alt="다운로드 가능한 쿠폰">다운로드 가능한 쿠폰</dt>
+							<dd><em class='font_t'>122</em> 개</dd>
+						</dl>
+						<a href="javascript:"></a>
+					</li>
+					<li>
+						<dl class='num_coupon clear'>
+							<dt><img src="../../images/biz/sub/ic_comment.png" alt="작성 가능한 상품평">작성 가능한 상품평</dt>
+							<dd><em class='font_t'>3</em> 개</dd>
+						</dl>
+						<a href="javascript:"></a>
+					</li>
+				</ul>
+				<div class='box_comment'>
+					<h3>상품평 작성하고<br> 최대 <span>28,000ⓟ</span>혜택을 누리세요!</h3>
+					<div class="desc_comment">
+						<ul class='list_saving clear'>
+							<li>
+								<div class="saving_point">
+									<em class='font_t'>200P</em>
+								</div>
+								<p>최초 작성시</p>
+							</li>
+							<li>
+								<div class="saving_point">
+									<em class='font_t'>100P</em>
+								</div>
+								<p>상품평 작성시</p>
+							</li>
+							<li class='win'>
+								<div class="saving_point">
+									<em class='font_t'>5,000P</em>
+									<span>매월 10명</span>
+								</div>
+								<p>월간후기왕 선정</p>
+							</li>
+						</ul>
+						<h2>[ 상품평 적립 기준 ]</h2>
+						<ul class='list_info'>
+							<li><p>구매 후 3개월 이내 작성 시, 포인트 적립 가능</p></li>
+							<li><p>상품평 작성 후, 익일 PM 11시 이후 적립</p></li>
+							<li><p>포인트 적립 제외 대상 (1천원 미만 또는 CD/DVD 관련 상품)</p></li>
+						</ul>
+					</div>
+					<a href="javascript:" class='btn_comment'></a>
+				</div>
+			</div>
+			<div class='box_shade'>
+				<img src="../../images/biz/sub/benefit/bnr_vip.png" alt="오늘혜택">
+				<a href="javascript:"></a>
+			</div>
+			<div class='box_benefit'>
+				<ul class='list_benefits clear'>
+					<li>
+						<a href="javascript:"><img src="../../images/biz/sub/ic_membership.png" alt="멤버십 혜택">
+							멤버십혜택
+						</a>
+					</li>
+					<li>
+						<a href="javascript:"><img src="../../images/biz/sub/ic_attend.png" alt="출석체크">
+							월간혜택
+						</a>
+					</li>
+					<li>
+						<a href="javascript:"><img src="../../images/biz/sub/ic_gift.png" alt="사은품">
+							구매사은품
+						</a>
+					</li>
+				</ul>
+				<ul class='list_myevent clear'>
+					<li>
+						<a href="javascript:">이벤트 당첨자 발표</a>
+					</li>
+					<li>
+						<a href="javascript:">이벤트 응모내역</a>
+					</li>
+				</ul>
+			</div>
+			<div class='timeSale_wrap'>
+				<h2>오늘의 특가!</h2>
+				<div class='timer_inner'>
+					<em>종료까지</em>
+					<strong class='font_t'>10:32:49</strong>
+					<span><img src="../../images/biz/sub/benefit/img_area.png" alt="특가 상품 이미지"></span>
+					<a href="javascript:"></a>
+				</div>
+				<div class='cont_sale'>
+					<dl class='clear'>
+						<dt class='dt_product'><small>무료배송</small> 로이텀 MASTER SLIM 121P - LINE</dt>
+						<dd class='font_t'>~68%</dd>
+						<a href="javascript:"></a>
+					</dl>
+					<dl class='clear'>
+						<dt class='dt_price font_t'>48,800</dt>
+						<dd class='dd_price font_t'>28,800</dd>
+						<a href="javascript:"></a>
+					</dl>
+					<ul class='list_sale clear'>
+						<li>
+							<span>오늘 신규 할인상품</span>
+							<p><em class='font_t'>960</em>개</p>
+							<a href="javascript:"></a>
+						</li>
+						<li>
+							<span>무료배송 상품</span>
+							<p><em class='font_t'>960</em>개</p>
+							<a href="javascript:"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class='swiper-area'>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><a href='javascript:'><img src="../../images/biz/sub/benefit/slide_samsung.png" alt="삼성카드"></a></div>
+						<div class="swiper-slide"><a href='javascript:'><img src="../../images/biz/sub/benefit/slide_kakao.png" alt="카카오카드"></a></div>
+						<div class="swiper-slide"><a href='javascript:'><img src="../../images/biz/sub/benefit/slide_samsung.png" alt="삼성카드"></a></div>
+						<div class="swiper-slide"><a href='javascript:'><img src="../../images/biz/sub/benefit/slide_kakao.png" alt="카카오카드"></a></div>
+						<div class="swiper-slide"><a href='javascript:'><img src="../../images/biz/sub/benefit/slide_samsung.png" alt="삼성카드"></a></div>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<div class='exhibition_wrap'>
+				<h2>오늘의 <span>기획전</span></h2>
+				<!-- 이벤트 목록 -->
+				<div class='event_list'>
+					<div class="event_banner">
+						<ul>
+							<li>
+								<a href="#n">
+									<div class="img_wrap">
+										<img src="../../images/biz/thums/main_banner02.png" alt="">
+									</div>
+									<span class="font_t percent">10%</span>
+									<strong>아날로그 갬수성</strong>
+									<p>코닥~하고 찰칵 찍어요!</p>
+									<span class="date font_t">2019.10.16 ~ 2019.10.22</span>
+								</a>
+							</li>
+							<li>
+								<a href="#n">
+									<div class="img_wrap">
+										<img src="../../images/biz/thums/main_banner07.png" alt="">
+									</div>
+									<span class="font_t percent">10%</span>
+									<strong>아날로그 갬수성</strong>
+									<p>코닥~하고 찰칵 찍어요!</p>
+									<span class="date font_t">2019.10.16 ~ 2019.10.22</span>
+								</a>
+							</li>
+							<li>
+								<a href="#n">
+									<div class="img_wrap">
+										<img src="../../images/biz/thums/event_banner08.png" alt="">
+									</div>
+									<span class="font_t percent">10%</span>
+									<strong>아날로그 갬수성</strong>
+									<p>코닥~하고 찰칵 찍어요!</p>
+									<span class="date font_t">2019.10.16 ~ 2019.10.22</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="btn_more">
+						<a href="javascript:">기획전 더보기</a>
+					</div>
+				</div>
+				<!--// 이벤트 목록 -->
+			</div>
+		</div>
+	</div>
+	<!-- //benefit -->
+	<!-- history -->
+	<div id="history_wrapper">
+		<div class="top_header">
+			<a href="#" class="btn_close">닫기</a>
+			<h2>히스토리</h2>
+		</div>
+		<div class="history_inner category_wrap">
+						<div class="category_type">
+							<a href="javascript:" class='btn_histShop active'>최근 본 쇼핑정보</a>
+							<a href="javascript:" class='btn_histGood'>좋아요</a>
+							<div class="txt_blue">
+								<a href="../biz/history02.html"><em class='edit'>편집</em></a>
+							</div>
+							<p class='bott_border'></p>
+							<ul class='list_kind clear'>
+								<li><!-- 활성화시, active : class 추가 -->
+									<i class='ic_01'></i><!-- 순서대로 ic_01 ~ 05 -->
+									<span>상품</span>
+									<a href="javascript:"></a>
+								</li>
+								<li class='active'>
+									<i class='ic_02'></i>
+									<span>검색</span>
+									<a href="javascript:"></a>
+								</li>
+								<li class='active'>
+									<i class='ic_03'></i>
+									<span>기획전</span>
+									<a href="javascript:"></a>
+								</li>
+								<li>
+									<i class='ic_04'></i>
+									<span>이벤트</span>
+									<a href="javascript:"></a>
+								</li>
+								<li>
+									<i class='ic_05'></i>
+									<span>브랜드</span>
+									<a href="javascript:"></a>
+								</li>
+							</ul>
+						</div>
+						<div class="box_history pd_list">
+							<h4 class='tdy font_t'>Today</h4>
+							<ul class='catalog_history'>
+								<li class='ic_01 hide'>
+									<a href="javascript:">
+										<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+										<div class="desc_type01">
+											<h2>로이텀 MASTER SLIM 121P<br>- LINE</h2>
+											<p>
+												<span class='font_t percent'>20%</span>
+												<span class='font_t'>999,999</span>
+											</p>
+										</div>
+									</a>
+									<a href="#n" class="btn_like active"><span>좋아요</span></a>
+								</li>
+								<li class='ic_02'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2># 에어팟 케이스</h2>
+										</div>
+									</a>
+								</li>
+								<li class='ic_03'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2>단, 하루만! 인기 키친 브랜드 특가!</h2>
+											<p>마리슈타이거 단독 3품목 초특가</p>
+										</div>
+									</a>
+								</li>
+								<li class='ic_04'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2>핫트♥프라이데이 딱 3일간, 저 세상 혜택</h2>
+											<p>친구에게 공유하면 에어팟pro 매일 증정!</p>
+										</div>
+									</a>
+								</li>
+								<li class='ic_05'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2>Kenko 겐코</h2>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="box_history pd_list">
+							<h4 class='lst font_t'><span class='year'>2020</span> 01 <em>09</em> <i class='mon'></i><!-- sun·mon·tue·wed·thur·fri·sat : class 추가 --></h4>
+							<ul class='catalog_history'>
+								<li class='ic_01'><!-- (아이콘) 상품·검색·기획전·이벤트·브랜드순 ic_01 ~ 05 -->
+									<a href="javascript:">
+										<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+										<div class="desc_type01">
+											<h2>로이텀 MASTER SLIM 121P<br>- LINE</h2>
+											<p>
+												<span class='font_t percent'>20%</span>
+												<span class='font_t'>999,999</span>
+											</p>
+										</div>
+									</a>
+									<a href="#n" class="btn_like active"><span>좋아요</span></a>
+								</li>
+								<li class='ic_02'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2># 에어팟 케이스</h2>
+										</div>
+									</a>
+								</li>
+								<li class='ic_03'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2>단, 하루만! 인기 키친 브랜드 특가!</h2>
+											<p>마리슈타이거 단독 3품목 초특가</p>
+										</div>
+									</a>
+								</li>
+								<li class='ic_04'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2>핫트♥프라이데이 <딱 3일간, 저 세상 혜택></h2>
+											<p>친구에게 공유하면 에어팟pro 매일 증정!</p>
+										</div>
+									</a>
+								</li>
+								<li class='ic_05'>
+									<a href="javascript:">
+										<div class="desc_type02">
+											<h2>Kenko 겐코</h2>
+										</div>
+									</a>
+								</li>
+								<li class='ic_01'>
+									<a href="javascript:">
+										<i><img src="../../images/biz/sub/benefit/img_area.png" alt="이미지"></i>
+										<div class="desc_type01">
+											<h2>[한정수량] 드레택 스탑워치<br> 화이트</h2>
+											<p>
+												<span class='font_t percent'>20%</span>
+												<span class='font_t'>999,999</span>
+											</p>
+										</div>
+									</a>
+									<a href="#n" class="btn_like"><span>좋아요</span></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+	</div>
+	<!--// history -->
+	<!-- footer -->
+	<div id="footer">
+		<div class="inner">
+			<p>고객센터 <em class="font_t">1661-1112</em></p>
+			<div class="util_menu">
+		        <ul>
+		            <li><a href="#">사업자정보확인</a></li>
+		            <li><a href="#">이용약관</a></li>
+		            <li><a href="#"><strong>개인정보취급방침</strong></a></li>
+		        </ul>
+		    </div>
+			<div class="cont">
+				<img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019">
+				<ul class="sns_wrap">
+		            <li class="ig"><a href="#" traget="_blank">instagram</a></li>
+		            <li class="fb"><a href="#" traget="_blank">facebook</a></li>
+		            <li class="tt"><a href="#" traget="_blank">twitter</a></li>
+		            <li class="bg"><a href="#" traget="_blank">blog</a></li>
+		            <li class="yt"><a href="#" traget="_blank">youtube</a></li>
+		        </ul>
+			</div>
+			<a href="#n" class="btn_cont">교보핫트랙스(주)</a>
+			<div class="txt">
+				<span>대표이사 박영규</span>
+				<span>사업자등록번호 : 102-81-29258</span>
+				<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+				<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+				<span>개인정보보호책임자 : 김재식</span>
+				<span>이메일 : PRIVACY@HOTTRACKS.CO.KR</span>
+				<span class="copyright">ⓒ Kyobo Hottracks inc.</span>
+			</div>
+		</div>
+	</div>
+	<!--// footer -->
+
+    <!-- 팝업 슬라이드 배너 -->
+    <!-- <div class="popup_sbox">
+       
+        <div class="tit_a">
+            <a href="#n" class="btn_tclose">오늘 하루 그만보기</a>
+            <a href="#n" class="btn_pclose">닫기</a>
+        </div>
+       
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="#">
+                        <div class="thum">
+                            <img src="" alt="">
+                        </div>
+                        <div class="txt_a">
+                            <strong>아날로그 갬수성</strong>
+							<p>코닥~하고 찰칵 찍어요!</p>
+							<div class="discount-box">
+								<i>~</i>
+								<em>90%</em>
+							</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <div class="thum">
+                            <img src="" alt="">
+						</div>
+						<div class="txt_a">
+                            <strong>아날로그 갬수성</strong>
+							<p>코닥~하고 찰칵 찍어요!</p>
+							<div class="discount-box hot">
+								<i>~</i>
+								<em>HOT</em>
+							</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <div class="thum">
+                            <img src="" alt="">
+						</div>
+						<div class="txt_a">
+                            <strong>아날로그 갬수성</strong>
+							<p>코닥~하고 찰칵 찍어요!</p>
+							<div class="discount-box gift">
+								<i>~</i>
+								<em>사은품</em>
+							</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <div class="thum">
+                            <img src="" alt="">
+						</div>
+						<div class="txt_a">
+                            <strong>아날로그 갬수성</strong>
+							<p>코닥~하고 찰칵 찍어요!</p>
+							<div class="discount-box ship">
+								<i>~</i>
+								<em>무료<br>배송</em>
+							</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <div class="thum">
+                            <img src="../../images/biz/thums/event_banner01.png" alt="">
+						</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pagination_wrap">
+                <div class="swiper-pagination"></div>
+            </div>
+		</div>
+		
+	</div> -->
+	<!-- 2020.07.28 김지우 커밋 -->
+	<div class="dim"></div>
+	<!-- 2020.07.28 김지우 커밋 끝-->
+	<!--/ 팝업 슬라이드 배너 -->
+	<div id="appDown" class="" onclick="" style="position:fixed;left: 0px;top: 0px;width: 100%;height: 100%;background: rgba(0,0,0,0.7);z-index: 9999;">
+        <div style="display:block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-150px;">
+            <a href="#n" onclick="" style="position:relative;font-size:15px;font-weight:bold;">
+                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/device/btn_appdown.png" style="width:100%;">
+            </a>
+            <a href="#n" class="today-app" onclick="" style="display:block;color:#fff;text-decoration:underline;margin-top:25px;text-align:center;">괜찮아요, 모바일웹으로 볼게요</a>
+        </div>
+    </div>
+    
+	<!-- app bar -->
+	<div id="app_bar">
+		<a href="../biz/main01.html" class="btn_home">HOTTRACKS</a>
+		<a href="javascript:" class="btn_today"><span class='img_today'>오늘,혜택</span></a>
+		<a href="#n" class="btn_cart">장바구니<em class="font_t">99+</em></a>
+		<!-- 최근 본상품 있을경우 on : class 추가 -->
+		<a href="javascript:" class="btn_history on"><img src="../../images/biz/thums/img_prod.png" alt=""></a>
+	</div>
+	<!--// app bar -->
+
+	<script type="text/javascript">
+        $(document).ready(function() {
+			sideMenu(); //side menu
+			topMenu(); //main tob menu
+			footerFn(); //footer
+			mainFn();
+			searchFn();
+			topDownFn();//gnb
+			historyOpenClose(); //historyOpen
+			benefitOpenClose();//open
+			benefitFn();//point
+			// <!-- 2020.07.28 김지우 커밋 -->
+			function dimSort(){
+				if( $('#appDown').is(':visible') ){
+					// 최초에 앱다운로드가 떠있는지 아닌지 구분후 dim 투명도 조절
+					$('.dim').css('opacity', '0');
+				}
+				if( !$('.popup_sbox').is('display','block') ){
+					$('.dim').hide()
+				}
+			} dimSort()
+			$('#appDown a').click(function(){
+				// 앱다운로드 클릭시 앱다운로드 닫히면서 dim의 투명도 변경
+				$('#appDown').hide()
+				$('.dim').css('opacity', '0.7');
+			})
+			$('.popup_sbox .btn_tclose, .popup_sbox .btn_pclose').click(function(){
+				// 슬라이드 닫기 버튼 클릭시 슬라이드 닫히면서 dim도 닫힘
+				$('.popup_sbox').hide()
+				$('.dim').hide()
+			})
+			// <!-- 2020.07.28 김지우 커밋 끝-->
+
+
+			// <!-- 2020.07.31 김지우 커밋 -->
+			var arry = []
+			$('.banner_wrap li p').each(function (i, e){
+				if( $(e).is(':empty') ){
+					$(e).hide()
+				}else{
+					arry.push($(e))
+				}
+			})
+			arry[1].addClass('other')
+			arry[2].addClass('other-one')
+			// <!-- 2020.07.31 김지우 커밋 끝-->
+		});
+	</script>
+</div>
+</body>
+</html>
