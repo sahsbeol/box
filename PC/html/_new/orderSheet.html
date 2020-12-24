@@ -211,7 +211,7 @@
                                 </colgroup>
                                 <tbody>
                                      <tr>
-                                        <th>이름 <span>*</span></th>
+                                        <th>이름 <span class="star">*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="" class="width_name">
@@ -219,7 +219,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>휴대전화 <span>*</span></th>
+                                        <th>휴대전화 <span class="star">*</span></th>
                                         <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
                                                 <span class="input_wrap">
@@ -238,7 +238,7 @@
                                     </t
                                     r>
                                     <tr>
-                                        <th>이메일<span>*</span></th>
+                                        <th>이메일<span class="star">*</span></th>
                                         <td>
                                             <div class="choice_wrap type_squre have_inner_txt inner_float_dot">                                                  
                                                 <span class="input_wrap">
@@ -258,7 +258,7 @@
                                         </td>                                    
                                     </tr>
                                     <tr>
-                                        <th>SMS수신 <span>*</span></th>
+                                        <th>SMS수신 <span class="star">*</span></th>
 
                                         <td>
                                             <div class="choice_wrap">
@@ -298,7 +298,7 @@
                                 </colgroup>
                                 <tbody>
                                      <tr>
-                                        <th>이름 <span>*</span></th>
+                                        <th>이름 <span class="star">*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="" class="width_name">
@@ -306,7 +306,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>휴대전화 <span>*</span></th>
+                                        <th>휴대전화 <span class="star">*</span></th>
                                         <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
                                                 <span class="input_wrap">
@@ -331,7 +331,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>전화번호 <span>*</span></th>
+                                        <th>전화번호 <span class="star">*</span></th>
                                         <td>                                         
                                             <div class="choice_wrap type_squre have_inner_txt inner_float">
                                                 <span class="input_wrap">
@@ -349,7 +349,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>주소 <span>*</span></th>
+                                        <th>주소 <span class="star">*</span></th>
                                         <td> 
                                             <div class="have_inner_txt address">
                                                 <div class="input_wrap">
@@ -363,7 +363,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>주문 요청사항 <span>*</span></th>
+                                        <th>주문 요청사항 <span class="star">*</span></th>
                                         <td>
                                             <div class="input_wrap">
                                                 <input type="text" placeholder="주문 상품 업체에 전달되는 메시지입니다. 요청사항을 입력해주세요." class="width_check">
@@ -371,7 +371,7 @@
                                         </td>                                    
                                     </tr>
                                      <tr>
-                                        <th>배송 요청사항 <span>*</span></th>
+                                        <th>배송 요청사항 <span class="star">*</span></th>
                                         <td>
                                             <div class="select_wrap">
                                                 <select name="" id="" class="width_check">
@@ -903,6 +903,7 @@
                                                 </span>
                                                 <a href="javascript:;" class="btn_defalut squre">포인트 조회</a>                                                                                              
                                             </div>
+                                            
                                         </td>                                    
                                     </tr>
                                      <tr>
@@ -978,6 +979,7 @@
                             </div>
                         </div>
 
+                        <!-- 결제방법 -->
                         <h3 class="user_title distance">결제방법</h3>
                         <div class="user_pay_wrap">
                             <div class="tab_wrap">
@@ -1050,8 +1052,8 @@
                                         </div>
                                         <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck1" id="orderCheck1"  />
+                                                <label for="orderCheck1" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1064,8 +1066,8 @@
                                     <div class="tab_layer">
                                         <div class="choice_wrap type_squre">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck2" id="orderCheck2"  />
+                                                <label for="orderCheck2" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1089,8 +1091,8 @@
                                         </div>
                                         <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck3" id="orderCheck3"  />
+                                                <label for="orderCheck3" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1106,7 +1108,7 @@
                                             <div class="cash_receipt_wrap">
                                                 <div class="choice_wrap cash_receipt_list">
                                                     <div class="choice_wrap_inner">
-                                                        <input type="radio" name="cashReceipt" id="cashReceipt1" value="Y" checked="" />
+                                                        <input type="radio" name="cashReceipt" id="cashReceipt1"  checked="" />
                                                         <label for="cashReceipt1">개인소득공제용</label>
                                                     </div>
                                                     <div class="choice_wrap_inner">
@@ -1183,8 +1185,8 @@
                                         </div>
                                         <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck4" id="orderCheck4"  />
+                                                <label for="orderCheck4" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1208,7 +1210,7 @@
                                             <div class="cash_receipt_wrap">
                                                 <div class="choice_wrap cash_receipt_list">
                                                     <div class="choice_wrap_inner">
-                                                        <input type="radio" name="cashReceipt1" id="cashReceipt11" value="Y" checked="" />
+                                                        <input type="radio" name="cashReceipt1" id="cashReceipt11" checked="" />
                                                         <label for="cashReceipt11">개인소득공제용</label>
                                                     </div>
                                                     <div class="choice_wrap_inner">
@@ -1285,8 +1287,8 @@
                                         </div>
                                         <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck5" id="orderCheck5"  />
+                                                <label for="orderCheck5" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1309,8 +1311,8 @@
                                         </div>
                                         <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck6" id="orderCheck6"  />
+                                                <label for="orderCheck6" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1342,8 +1344,8 @@
                                         </div>
                                         <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck7" id="orderCheck7"  />
+                                                <label for="orderCheck7" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1374,8 +1376,8 @@
                                         </div>
                                         <div class="choice_wrap type_squre mgt10">
                                             <span class="choice_wrap_inner">
-                                                <input type="checkbox" name="orderCheck" id="orderCheck" value="Y" checked="" />
-                                                <label for="orderCheck" class="last_check">
+                                                <input type="checkbox" name="orderCheck8" id="orderCheck8" />
+                                                <label for="orderCheck8" class="last_check">
                                                     <span>주문 상품의 상품명, 가격, 배송 정보에 동의 합니다.</span>
                                                     <span class="color">(전자상거래법 제8조 2항)</span>
                                                 </label>
@@ -1385,7 +1387,8 @@
                                     <!--// PAYCO -->
                                 </div>
                             </div>
-                        </div>                       
+                        </div>
+                        <!--// 결제방법 -->                        
 
                     </div>
                 </form>

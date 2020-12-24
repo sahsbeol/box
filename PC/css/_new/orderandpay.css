@@ -70,7 +70,7 @@
 .orderandpay .table_wrap {/* margin-top: 15px; */}
 .orderandpay .table_wrap th, .orderandpay .table_wrap td {text-align: left; font-size:14px; font-weight: 500;}
 .orderandpay .table_wrap th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid;}
-.orderandpay .table_wrap th span {color:#DA2128;}
+.orderandpay .table_wrap th span.star {color:#DA2128;}
 .orderandpay .table_wrap td {padding: 10px 0px 10px 24px;font-size: 14px;font-weight: 500;height:38px;border-bottom: 1px #EEEEEE solid;}
 
 /* 주문상품 _table  */
@@ -138,7 +138,7 @@
 
 /* btn */
 .orderandpay .btn_type_wrap {text-align: center;}
-.orderandpay .btn_defalut {padding: 10px 19px;height:auto;background: #EEEEEE;font-size: 13px;font-weight: 700;color:#FFFFFF;outline:none;color: #000;border-radius: 30px;}
+.orderandpay .btn_defalut {padding: 10px 19px;height:auto;min-width: 116px;background: #EEEEEE;font-size: 13px;font-weight: 700;color:#FFFFFF;outline:none;color: #000;border-radius: 30px;}
 .orderandpay .btn_defalut.squre {background: #fff; height: auto;font-size: 14px;font-weight: 400;outline:none;color: #000;border:1px #B5B5B5 solid;border-radius: 0;/* max-width: 120px; */text-align: center;min-width: 120px;box-sizing: border-box;padding: 11px 10px}
 .orderandpay button.btn_defalut.squre {padding: 10px 20px;height:38px; font-family: 'font_ns'; line-height: inherit;}
 
@@ -233,3 +233,44 @@
 
 .orderandpay .cash_receipt_input_wrap .cardnumber_wrap,
 .orderandpay .cash_receipt_input_wrap .cellphone_wrap {float: left;}
+
+.orderandpay .deposit_wrap {position: relative;}
+.orderandpay .deposit_wrap:after {content: ''; display:block; clear: both;}
+.orderandpay .deposit_wrap ._txt,
+.orderandpay .deposit_wrap .icon_question {float: left;}
+.orderandpay .deposit_wrap .icon_question {margin-top:-1px;}
+
+
+.orderandpay .tooltip_wrap {display:none; background: #fff;box-shadow:0 3px 20px rgba(0,0,0,.16);margin: 20px;width: max-content;z-index: 1;border-radius: 24px;}
+.orderandpay .tooltip_wrap .tooltip_inner {padding: 44px 30px;position: relative;}
+.orderandpay .tooltip_wrap .tooltip_tit {font-size: 32px;font-weight:400;border-bottom: 2px #000 solid;padding-bottom: 10px;}
+.orderandpay .tooltip_wrap .tooltip_list {margin-top: 30px;}
+.orderandpay .tooltip_wrap .tooltip_list li {font-size: 14px; color:#777777;}
+.orderandpay .tooltip_wrap .tooltip_close {position:absolute;top: 54px;right:30px;width:22px;height:22px;font-size: 0;display: block;background: url(../../images/_new/icon_tool_tip.png) no-repeat center center;}
+
+.orderandpay .deposit_wrap .tooltip_wrap {display:none; position: absolute;top: -30px;left: 17px;}
+
+.orderandpay .layer_pop_box {position: relative;}
+.orderandpay .dimed {display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0, .6); z-index: 1000;}
+.orderandpay .layer_pop {position: absolute;}
+
+
+
+.orderandpay .bigger.btn_type01_v2 { height: 38px; font-size: 16px; min-width: 180px; line-height: initial; padding: 6px 0; height: auto; box-sizing: border-box;}
+
+.orderandpay .txt_option {}
+.orderandpay .btn_type05_v2 {font-size: 13px;height:32px;width:112px;padding: 0;box-sizing: border-box;border: 1px #D6D6D6 solid;line-height: 28px;} 
+
+.orderandpay .count_up,
+.orderandpay .count_down  {width:32px;height:32px;display:block;border:1px #D6D6D6 solid;font-size: 0;float: left;box-sizing: border-box;} 
+.orderandpay .count_up { background: url(../../images/_new/icon_count_up.png) no-repeat center center;}
+.orderandpay .count_down {background: url(../../images/_new/icon_count_down.png) no-repeat center center;} 
+
+.orderandpay .bbs_list_v2 .t_left a.txt_option { color: #FF6A5B;font-size: 14px;line-height: 20px;padding: 5px 0 0 0;}
+
+.orderandpay .btn_bgred { height: 32px;line-height: 30px;}
+.orderandpay .btn_bgred.white {background: #fff; color:#000 !important; border:1px #D6D6D6 solid;}
+
+.orderandpay .count_wrap {text-align: center;    margin-left: 1px;}
+.orderandpay .count_wrap:after {content:''; display:block; clear: both;}
+.orderandpay .count_wrap .input_txt {float: left;    width: 39px !important;    padding: 5px 4px 6px 5px;    border-left: 0;    border-right: 0;}
