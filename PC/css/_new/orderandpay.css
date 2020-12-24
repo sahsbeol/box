@@ -8,11 +8,18 @@
 
 */
 /* ---------- common_style --------------*/
-.orderandpay {font-family: 'NS','Apple SD Gothic Neo', sans-serif; font-size:14px;}
-.orderandpay .only_english {font-family: 'GS','Apple SD Gothic Neo', sans-serif !important;}
+.orderandpay {font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-size:14px;}
+.orderandpay .only_english {font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important;}
 
 .orderandpay {}
 .orderandpay h2.tit {font-size: 40px; margin-top:48px; font-weight: 700;}
+
+.orderandpay .tit01 {min-height:28px;margin-top: 60px;font-size: 18px; color: #000; font-weight: 500;}
+.orderandpay .tit02 {margin:50px 0 12px;font-size:12px;color:#4f4f4f;}
+.orderandpay .tit03 {margin:20px 0;font-size:20px;font-family:"Malgun Gothic";color:#4f4f4f;}
+.orderandpay .tit03 .sub {display:inline-block;height:28px;margin-left:6px;padding-left:9px;color:#ccc;font-weight:normal;background:#fff url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/bg_line02.gif) no-repeat 0 50%}
+.orderandpay .tit04 {margin:37px 0 7px;padding-left:17px;color:#424242;font-size:12px;line-height:18px;background:url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_bl02.gif) no-repeat 4px 6px;}
+
 
 .orderandpay .distance {margin-top:100px;}
 .orderandpay .width_check {max-width: 520px;}
@@ -153,7 +160,7 @@
 .orderandpay .user_title .i_small_txt span {font-size: inherit; color:#000; font-weight: 500;}
 
 /* 주문 상품 */
-.orderandpay .tit01 {font-size: 16px; font-weight: 400; color:#000;margin-top: 35px;}
+.orderandpay .tit01 {/*font-size: 16px; font-weight: 400; color:#000;*/margin-top: 35px;}
 .orderandpay .text_show {font-size: 18px;text-align: center;border:1px #DBDBDB solid;border-radius: 30px;padding: 20px 94px;display: inline-block;}
 .orderandpay .text_show_wrap {margin-top:40px; text-align: center;}
 
