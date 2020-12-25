@@ -75,10 +75,10 @@
 /* table */
 /* 기본형 */
 .orderandpay .table_wrap {/* margin-top: 15px; */}
-.orderandpay .table_wrap th, .orderandpay .table_wrap td {text-align: left; font-size:14px; font-weight: 500;}
+.orderandpay .table_wrap th, .orderandpay .table_wrap td {text-align: left; font-size:13px; font-weight: 500;}
 .orderandpay .table_wrap th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid;}
 .orderandpay .table_wrap th span.star {color:#DA2128;}
-.orderandpay .table_wrap td {padding: 10px 0px 10px 24px;font-size: 14px;font-weight: 500;height:38px;border-bottom: 1px #EEEEEE solid;}
+.orderandpay .table_wrap td {padding: 10px 0px 10px 24px;height:38px;border-bottom: 1px #EEEEEE solid;}
 
 /* 주문상품 _table  */
 .orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;padding-right: 10px;padding-left: 10px;}
