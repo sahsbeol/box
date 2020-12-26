@@ -18,6 +18,7 @@
 .orderandpay .margin_set_top {margin-top:12px;}
 .orderandpay .padding_set_top {padding-top:12px  !important;}
 .orderandpay .point02 {color:#DA2128 !important; margin-right:3px;}
+.orderandpay .bold {font-weight: 700; margin-right: 0 !important;}
 
 .orderandpay .width_check,
 .orderandpay .width_phone,
@@ -225,7 +226,7 @@
 
 
 /* 결제방법 */
-.orderandpay .user_pay_wrap .color {color: #777777;}
+.orderandpay  .color {color: #777777 !important;}
 
 /* tab */
 .orderandpay .tab_wrap {}
@@ -285,27 +286,63 @@
 .orderandpay .cash_receipt_input_wrap .cellphone_wrap .input_wrap {width: calc(34% - 9px);}
 .orderandpay .cash_receipt_input_wrap .cardnumber_wrap .input_wrap {width: calc(25% - 5px);}
 
+/* 예치금 */
 .orderandpay .deposit_wrap {position: relative;}
 .orderandpay .deposit_wrap:after {content: ''; display:block; clear: both;}
 .orderandpay .deposit_wrap ._txt,
 .orderandpay .deposit_wrap .icon_question {float: left;}
 .orderandpay .deposit_wrap .icon_question {margin-top:-1px;}
 
+/* 레이어 팝업 */
+.orderandpay .tooltip_wrap {display:block;background: #fff;margin: 20px;z-index: 1;border-radius: 24px;}
+.orderandpay .tooltip_wrap .tooltip_inner {padding: 54px 26px 20px;position: relative;}
+.orderandpay .tooltip_wrap .tooltip_inner:before {content:'';display: block;width:28px;height: 28px;background: #DA2128 url(../../images/_new/layer_icon_question.png) no-repeat top 5px left 8px;background-size: 13px 23px;border-radius: 28px;top: -14px;position: absolute;left: 50%;margin-left: -14px;}
+.orderandpay .tooltip_wrap .tooltip_tit {font-size: 16px;font-weight: 700;padding-bottom: 10px;text-align: center;}
 
-.orderandpay .tooltip_wrap {display:none; background: #fff;box-shadow:0 3px 20px rgba(0,0,0,.16);margin: 20px;width: max-content;z-index: 1;border-radius: 24px;}
-.orderandpay .tooltip_wrap .tooltip_inner {padding: 44px 30px;position: relative;}
-.orderandpay .tooltip_wrap .tooltip_tit {font-size: 32px;font-weight:400;border-bottom: 2px #000 solid;padding-bottom: 10px;}
-.orderandpay .tooltip_wrap .tooltip_list {margin-top: 30px;}
-.orderandpay .tooltip_wrap .tooltip_list li {font-size: 14px; color:#777777;}
-.orderandpay .tooltip_wrap .tooltip_close {position:absolute;top: 54px;right:30px;width:22px;height:22px;font-size: 0;display: block;background: url(../../images/_new/icon_tool_tip.png) no-repeat center center;}
+.orderandpay .tooltip_wrap .tooltip_list li,
+.orderandpay .tooltip_wrap .tooltip_inner .texts {font-size: 10px;font-weight: 400;}
+.orderandpay .tooltip_wrap .tooltip_list li {position: relative;padding-left: 5px;}
+.orderandpay .tooltip_wrap .tooltip_list li:before {content: '';display: block;width: 2px;height:2px;background: #000;position: absolute;top: 7px;left:0;}
+.orderandpay .tooltip_wrap .tooltip_inner .texts {line-height: 1.5em; margin-top: 10px;}
 
 .orderandpay .deposit_wrap .tooltip_wrap {display:none; position: absolute;top: -30px;left: 17px;}
 
-.orderandpay .layer_pop_box {position: relative;}
-.orderandpay .dimed {display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0, .6); z-index: 1000;}
-.orderandpay .layer_pop {position: absolute;}
+.orderandpay .layer_pop_box {display:none; position: absolute;width: 100%;top: 0%;left: 0;}
+.orderandpay .dimed { display: none; position: fixed;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0, .6);}
+.orderandpay .layer_pop {position: relative;z-index: 1000;} 
+.orderandpay .layer_pop .layer_close {position: absolute;top: 15px;right: 35px; padding:10px; background: url(../../images/_new/layer_icon_close.png) no-repeat center center;width:16px;height:16px;background-size: 16px 16px;font-size: 0;}
 
+.orderandpay .layer_pop_box.active {display: block;}
+.orderandpay .layer_pop_box.active .dimed {display: block;}
 
+.orderandpay .layer_pop_box {}
+
+/* 쿠폰 팝업 */
+.orderandpay .coupon_list_wrap {padding:20px;}
+.orderandpay .coupon_list_wrap .text_list li{ font-size: 12px; line-height: 1.8; }
+.orderandpay .coupon_list_wrap .coupon_alert {margin-top:50px;font-size: 13px;font-weight: 700;}
+
+.orderandpay .coupon_list_wrap .coupon_list {}
+.orderandpay .coupon_list_wrap .coupon_list .coupon_product {font-size: 13px; font-weight: 700;background: #FAFAFA;margin-top:10px; padding: 11px 10px 10px; border-top:1px #EEEEEE solid; border-bottom:1px #EEEEEE solid;}
+.orderandpay .coupon_list_wrap .coupon_list .coupon_name {font-size:13px;font-weight:500; border-bottom:1px #EEEEEE solid; padding:10px 0 10px 10px;}
+.orderandpay .coupon_list_wrap .coupon_list .coupon_name:after {content: ''; display: block; clear: both;}
+
+/* 쿠폰들 */
+.orderandpay .coupon_list_wrap .choice_wrap.have_inner_txt {padding-top:0;}
+.orderandpay .coupon_list_wrap .choice_wrap.inner_float .input_wrap {float: left;width: calc(30%);margin-left:0;text-align: left;padding-left: 10px;padding-top: 12px;/* min-height: 44px; */padding-bottom: 11px;}
+.orderandpay .coupon_list_wrap .choice_wrap.inner_float .input_wrap.right{float: right;padding-left: 0;width: calc(60% - 10px);text-align: right;}
+.orderandpay .coupon_list_wrap .choice_wrap.inner_float .input_wrap:before {content: ''; display:none;}
+.orderandpay .coupon_list_wrap .choice_wrap.inner_float .select_wrap.right{float: right;padding-left: 0;width: calc(70% - 10px);text-align: right;}
+
+.orderandpay .coupon_list_wrap .choice_wrap .choice_wrap_inner {text-align: left;}
+
+.orderandpay .coupon_list_wrap .coupon_sum { padding:23px; background: #FAFAFA; border-top:1px #EEEEEE solid; border-bottom:1px #EEEEEE solid; font-size: 13px; font-weight: 500;}
+.orderandpay .coupon_list_wrap .coupon_sum span { font-size: inherit;  font-weight: 500;}
+.orderandpay .coupon_list_wrap .coupon_sum:after {content: ''; display: block; clear: both;}
+.orderandpay .coupon_list_wrap .coupon_sum .coupon_sum_left {float: left;}
+.orderandpay .coupon_list_wrap .coupon_sum .coupon_sum_right {float: right;}
+
+.orderandpay .coupon_list_wrap .choice_wrap .choice_wrap_inner .choice_inner_set .term {margin-top:12px; padding-left:25px;}
 
 .orderandpay .bigger.btn_type01_v2 { height: 38px; font-size: 16px; min-width: 180px; line-height: initial; padding: 6px 0; height: auto; box-sizing: border-box;}
 
@@ -364,6 +401,7 @@
 	.orderandpay .input_wrap input::-webkit-input-placeholder{font-size: 11px;}
 
 	.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left:6px;}
+	.orderandpay .coupon_list_wrap .choice_wrap .choice_wrap_inner .choice_inner_set .term {padding-left:20px;}
 
 
 

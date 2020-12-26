@@ -102,6 +102,24 @@
                 }
            });
        });
+
+        // 배송요청사항 직접입력
+        $('.delivery_order select').each(function(){
+            $(this).on('change', function(){
+                var value = $(this).find("option:selected").val(); 
+                var $box = $(this).closest('.select_wrap');
+
+                var $texts = '<div class="input_wrap">'+
+                             '<input type="text" class="width_check mt10">'+
+                             '</div>';
+
+                if(value =='orderDirectly'){
+                    $box.append($texts);
+                }else{
+                    $box.find('.input_wrap').remove();
+                }  
+            });
+        });
     
 });
 
@@ -295,9 +313,10 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <div class="select_wrap">
+                                    <div class="select_wrap delivery_order">
                                         <select name="" id="" class="width_check">
                                             <option value="">배송기사에게 전달되는 메시지입니다. 선택하여 주세요.</option>
+                                            <option value="orderDirectly">직접입력</option>
                                         </select>
                                     </div>
                                 </td>                                    

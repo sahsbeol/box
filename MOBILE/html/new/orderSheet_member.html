@@ -102,7 +102,55 @@
                 }
            });
        });
-    
+
+      
+        // 예치금, 안심번호 
+        $('.deposit_box.icon_question').click(function(){
+            $('.deposit_box.layer_pop_box').addClass('active');
+            $('html, body').css('overflow','hidden');
+            var H1 = $('.deposit_box.layer_pop_box').height();
+            var H0 = $(window).height();
+            var H2 = H0/2;
+            $('.deposit_box.layer_pop_box').css('margin-top', H2 - (H1/2) - 30 +'px');
+            // console.log(H2);
+
+        });
+        $('.safetynumber_box.icon_question').click(function(){
+            $('.safetynumber_box.layer_pop_box').addClass('active');
+            $('html, body').css('overflow','hidden');
+
+            var H1 = $('.safetynumber_box.layer_pop_box').height();
+            var H0 = $(window).height();
+            var H2 = H0/2;
+
+            $('.safetynumber_box.layer_pop_box').css('margin-top', H2 - (H1/2) - 30 +'px')
+        });
+
+        $('.layer_pop .layer_close').each(function(){
+            $(this).click(function(){
+                $(this).closest('.layer_pop_box').removeClass('active');
+                $('html, body').css('overflow','visible');
+
+            });
+        });
+
+        // 배송요청사항 직접입력
+        $('.delivery_order select').each(function(){
+            $(this).on('change', function(){
+                var value = $(this).find("option:selected").val(); 
+                var $box = $(this).closest('.select_wrap');
+
+                var $texts = '<div class="input_wrap">'+
+                             '<input type="text" class="width_check mt10">'+
+                             '</div>';
+
+                if(value =='orderDirectly'){
+                    $box.append($texts);
+                }else{
+                    $box.find('.input_wrap').remove();
+                }  
+            });
+        });
 });
 
 </script>
@@ -156,7 +204,7 @@
                                         <div>
                                             hottracks@ottracks.co.kr
                                         </div>
-                                        <a href="javascript:;" onclick="openCouponPopup();" class="icon_arrow margin_set_top">쿠폰 변경</a>
+                                        <a href="javascript:;" class="icon_arrow margin_set_top">회원정보변경</a>
                                         
                                     </div>
 
@@ -219,7 +267,7 @@
                                                 <input type="checkbox" name="orderInfo2" id="orderInfo_21" value="Y">
                                                 <label for="orderInfo_21">안심번호 사용</label>
                                             </span>
-                                            <a href="javascript:;" class="icon_question" title="팝업 열기">팝업 열기</a>
+                                            <a href="javascript:;" class="icon_question safetynumber_box" title="팝업 열기">팝업 열기</a>
                                         </div>  
                                         <div class="margin_set_top">
 	                                        <span class="input_wrap">
@@ -284,9 +332,10 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <div class="select_wrap">
+                                    <div class="select_wrap delivery_order">
                                         <select name="" id="" class="width_check">
                                             <option value="">배송기사에게 전달되는 메시지입니다. 선택하여 주세요.</option>
+                                            <option value="orderDirectly">직접입력</option>
                                         </select>
                                     </div>
                                 </td>                                    
@@ -303,7 +352,6 @@
                             <col width="100%" />                     
                         </colgroup>
                         <tbody>
-
                             <tr>
                                 <th>
                                     <div class="choice_wrap type_squre inner_float have_inner_txt">
@@ -317,7 +365,7 @@
                                                 <input type="checkbox" name="orderInfo5" id="orderInfo_51" value="Y">
                                                 <label for="orderInfo_51">최대 할인 적용</label>
                                             </span>
-                                            <a href="javascript:;" onclick="openCouponPopup();" class="icon_arrow">쿠폰 변경</a>
+                                            <a href="./popup_coupon_list.html" target="_blank" class="icon_arrow">쿠폰 변경</a>
                                         </div>
                                     </div>
                                 </th>                        
@@ -370,7 +418,7 @@
                                         <span class="text_wrap">
                                             <span>(보유 예치금 : </span><span>999,999</span><span>P)</span>
                                         </span>
-                                        <a href="javascript:;" class="icon_question margin_set_top" title="팝업 열기">팝업 열기</a>
+                                        <a href="javascript:;" class="icon_question margin_set_top deposit_box" title="팝업 열기">팝업 열기</a>
                                     </div>
                                 </th>                               
                             </tr>
@@ -905,6 +953,46 @@
             <a href="javascript:;" class="btn_basic">결제하기</a>
         </div>
         <!--// 주문결제 form : E -->
+
+        <div class="layer_bottom_wrap">
+            <!-- popup 레이어 안심번호 -->
+            <div class="layer_pop_box safetynumber_box">
+                <div class="dimed"></div>
+                <div class="layer_pop">
+                    <div class="tooltip_wrap ">
+                        <div class="tooltip_inner">  
+                            <p class="tooltip_tit">안심번호 서비스 안내</p>
+                            <p class="texts">안심번호 서비스는 상품 수취인의 개인정보인 휴대폰 번호 및 전화번호를 1회성 임시번호 (0502-XXX-XXX)로 변환하여 사용하는 서비스입니다.</p>
+                            <p class="texts">판매자/택배사에게 0502 안심번호가 전달되므로 만일에 발생할 수 있는 개인정보 유출을 사전에 차단할 수 있습니다. (택배상자에 안심번호 표시)</p>
+                            <p class="texts">상품 배송완료 후 부여된 안심번호는 14일 이내에 자동으로 해지/소멸됩니다. 장기 미처리 건의 경우 안심번호 채번 후 90일 경과시 자동으로 해지/소멸됩니다. 본 서비스는 KT와 제휴하여 무료로 제공되며, 고객에게 부여된 안심번호는 해지/소멸 후 KT에서 다른 번호에 연결하여 재사용할 수 있습니다. (단, 일부 택배사의 경우 택배사 사정으로 인해 안심번호 서비스 지원이 불가할 수 있음)</p>
+                            <p class="texts">KT 안심번호 연동 오류 등으로 인해 안심번호 체번 실패시 해당 주문 고객님께 SMS안내후 실제 휴대전화번호로 상품주문이 진행됩니다. 안심번호서비스'는 고객이 서비스 이용 동의 시에 한해 서비스 제공이 됩니다. 해외 배송 상품의 경우 안심번호 서비스 제공이 되지 않습니다. 이 점 양해바랍니다.</p>
+                        </div>
+                        <a href="javascript:;" class="layer_close">닫기</a>
+                    </div>
+                </div>
+            </div>
+            <!--// popup 레이어 안심번호 -->
+
+            <!-- popup 레이어 예치금 -->
+            <div class="layer_pop_box deposit_box">
+                <div class="dimed"></div>
+                <div class="layer_pop">
+                    <div class="tooltip_wrap ">
+                        <div class="tooltip_inner">  
+                            <p class="tooltip_tit">교보핫트랙스 온라인 예치금 안내</p>
+                            <ul class="tooltip_list">
+                                <li>교보핫트랙스 온라인 예치금은 결제 후 환불, 배송비 정산 등으로 발생한 금액입니다.</li>
+                                <li>개인 정보 보호를 위해 회원님께서 직접 환불 접수해주실 때까지 환불 금액을 임시로 보관해드리고 있습니다.</li>
+                                <li>예치금은 핫트랙스 온라인몰에서만 사용 가능하며, 은행 계좌로 환불받으실 수 있습니다.</li>
+                                <li>휴대폰, 신용카드 등으로 결제 시 입금 확인 시간이 소요되어 환불 처리가 다소 지연될 수 있습니다.</li>
+                            </ul>
+                        </div>
+                        <a href="javascript:;" class="layer_close">닫기</a>
+                    </div>
+                </div>
+            </div>
+            <!--// popup 레이어 예치금 -->
+        </div>
 	</div>
 	
 	

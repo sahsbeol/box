@@ -90,6 +90,27 @@
                 }
            });
        });
+        
+        // 배송요청사항 직접입력
+        $('.delivery_order select').each(function(){
+            $(this).on('change', function(){
+                var value = $(this).find("option:selected").val(); 
+                var $box = $(this).closest('.select_wrap');
+
+                var $texts = '<div class="input_wrap">'+
+                             '<input type="text" class="width_check mgt10">'+
+                             '</div>';
+
+                if(value =='orderDirectly'){
+                    $box.append($texts);
+                }else{
+                    $box.find('.input_wrap').remove();
+                }  
+            });
+        });
+        
+
+        
     
 });
 
@@ -320,12 +341,21 @@
                                                 <span class="input_wrap">
                                                     <input type="text" placeholder="" class="width_phone">
                                                 </span>
-                                                <div class="choice_wrap_inner">
+                                                <div class="choice_wrap_inner safetynumber">
                                                     <span>
                                                         <input type="checkbox" name="orderInfo2" id="orderInfo_21" value="Y">
                                                         <label for="orderInfo_21">안심번호 사용</label>
                                                     </span>
                                                     <a href="javascript:;" class="icon_question" title="팝업 열기">팝업 열기</a>
+                                                    <div class="tooltip_wrap ">
+                                                        <div class="tooltip_inner">  
+                                                            <p class="tooltip_tit">안심번호 서비스 안내</p>
+                                                            <p class="texts">안심번호 서비스는 상품 수취인의 개인정보인 휴대폰 번호 및 전화번호를 1회성 임시번호 (0502-XXX-XXX)로 변환하여 사용하는 서비스입니다. 판매자/택배사에게 0502 안심번호가 전달되므로 만일에 발생할 수 있는 개인정보 유출을 사전에 차단할 수 있습니다. (택배상자에 안심번호 표시)</p>
+                                                            <p class="texts">상품 배송완료 후 부여된 안심번호는 14일 이내에 자동으로 해지/소멸됩니다. 장기 미처리 건의 경우 안심번호 채번 후 90일 경과시 자동으로 해지/소멸됩니다. 본 서비스는 KT와 제휴하여 무료로 제공되며, 고객에게 부여된 안심번호는 해지/소멸 후 KT에서 다른 번호에 연결하여 재사용할 수 있습니다. (단, 일부 택배사의 경우 택배사 사정으로 인해 안심번호 서비스 지원이 불가할 수 있음)</p>
+                                                            <p class="texts">KT 안심번호 연동 오류 등으로 인해 안심번호 체번 실패시 해당 주문 고객님께 SMS안내후 실제 휴대전화번호로 상품주문이 진행됩니다. 안심번호서비스'는 고객이 서비스 이용 동의 시에 한해 서비스 제공이 됩니다. 해외 배송 상품의 경우 안심번호 서비스 제공이 되지 않습니다. 이 점 양해바랍니다.</p>
+                                                        </div>
+                                                        <a href="javascript:;" class="tooltip_close">닫기</a>
+                                                    </div> 
                                                 </div>                                             
                                             </div>
                                         </td>                                    
@@ -373,9 +403,10 @@
                                      <tr>
                                         <th>배송 요청사항 <span class="star">*</span></th>
                                         <td>
-                                            <div class="select_wrap">
+                                            <div class="select_wrap delivery_order">
                                                 <select name="" id="" class="width_check">
                                                     <option value="">배송기사에게 전달되는 메시지입니다. 선택하여 주세요.</option>
+                                                    <option value="orderDirectly">직접입력</option>
                                                 </select>
                                             </div>
                                         </td>                                    

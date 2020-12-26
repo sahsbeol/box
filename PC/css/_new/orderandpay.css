@@ -20,6 +20,8 @@
 .orderandpay .tit03 .sub {display:inline-block;height:28px;margin-left:6px;padding-left:9px;color:#ccc;font-weight:normal;background:#fff url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/bg_line02.gif) no-repeat 0 50%}
 .orderandpay .tit04 {margin:37px 0 7px;padding-left:17px;color:#424242;font-size:12px;line-height:18px;background:url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_bl02.gif) no-repeat 4px 6px;}
 
+.orderandpay .bold {font-weight: 700 !important; }
+.orderandpay .fz0 {font-size:0 !important;}
 
 .orderandpay .distance {margin-top:100px;}
 .orderandpay .width_check {max-width: 520px;}
@@ -98,7 +100,7 @@
 .orderandpay .choice_wrap input[type="checkbox"] + label ,
 .orderandpay .choice_wrap input[type=radio]+ label { display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
 .orderandpay .choice_wrap input[type="checkbox"] + label:before,
-.orderandpay .choice_wrap input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/_new/icon_radio_on.png) no-repeat center center;; border: 1px solid #DBDBDB; border-radius : 10px;  box-sizing: border-box;} 
+.orderandpay .choice_wrap input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/_new/icon_radio_on.png) no-repeat center left 4px; border: 1px solid #DBDBDB; border-radius : 10px;  box-sizing: border-box;} 
 /*필요시 입력
 .orderandpay .choice_wrap input[type="checkbox"] + label:active:before, 
 .orderandpay .choice_wrap input[type="checkbox"]:checked + label:active:before,
@@ -106,7 +108,7 @@
 .orderandpay .choice_wrap input[type="radio"]:checked + label:active:before  { } */
 
 .orderandpay .choice_wrap input[type="checkbox"]:checked + label:before,
-.orderandpay .choice_wrap input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center center;}
+.orderandpay .choice_wrap input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center left 4px;}
 .orderandpay .choice_wrap input[type=radio]::-ms-expand,
 .orderandpay .choice_wrap input[type=checkbox]::-ms-expand{    display: none;}
 
@@ -114,7 +116,7 @@
 .orderandpay .choice_wrap.type_squre input[type="checkbox"] + label:before,
 .orderandpay .choice_wrap.type_squre input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 5px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/_new/icon_radio_on.png) no-repeat center center;; border: 1px solid #DBDBDB; border-radius : 4px;  box-sizing: border-box;} 
 .orderandpay .choice_wrap.type_squre input[type="checkbox"]:checked + label:before,
-.orderandpay .choice_wrap.type_squre input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center center;}
+.orderandpay .choice_wrap.type_squre input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center left 4px;}
 
 
 /* input 기본형 */
@@ -248,18 +250,33 @@
 .orderandpay .deposit_wrap .icon_question {margin-top:-1px;}
 
 
-.orderandpay .tooltip_wrap {display:none; background: #fff;box-shadow:0 3px 20px rgba(0,0,0,.16);margin: 20px;width: max-content;z-index: 1;border-radius: 24px;}
+.orderandpay .tooltip_wrap {display:none; background: #fff;box-shadow:0 3px 20px rgba(0,0,0,.16);margin: 20px;min-width:680px; z-index: 1;border-radius: 24px;}
 .orderandpay .tooltip_wrap .tooltip_inner {padding: 44px 30px;position: relative;}
 .orderandpay .tooltip_wrap .tooltip_tit {font-size: 32px;font-weight:400;border-bottom: 2px #000 solid;padding-bottom: 10px;}
 .orderandpay .tooltip_wrap .tooltip_list {margin-top: 30px;}
-.orderandpay .tooltip_wrap .tooltip_list li {font-size: 14px; color:#777777;}
-.orderandpay .tooltip_wrap .tooltip_close {position:absolute;top: 54px;right:30px;width:22px;height:22px;font-size: 0;display: block;background: url(../../images/_new/icon_tool_tip.png) no-repeat center center;}
+.orderandpay .tooltip_wrap .tooltip_list li, 
+.orderandpay .tooltip_wrap .tooltip_inner .texts {font-size: 14px; color:#777777;}
+.orderandpay .tooltip_wrap .tooltip_inner .texts {line-height: 1.5em; margin-top: 25px;}
+.orderandpay .tooltip_wrap .tooltip_close,
+.orderandpay .tooltip_wrap .layer_close {position:absolute;top: 54px;right:30px;width:22px;height:22px;font-size: 0;display: block;background: url(../../images/_new/icon_tool_tip.png) no-repeat center center;}
+.orderandpay .tooltip_wrap.active {display: block;}
+/* 팝업 */
+/* 쿠폰조회 */
+.orderandpay .tooltip_wrap .table02_v1 thead th{background: #FAFAFA;font-size: 13px;font-weight: 500;}
+.orderandpay .tooltip_wrap .tit01 {font-size:16px; font-weight:700;}
+.orderandpay .tooltip_wrap .box_gray02 { background: #FAFAFA; border: 0 none; font-size: 18px;font-weight: 500; color: #000;   } 
 
-.orderandpay .deposit_wrap .tooltip_wrap {display:none; position: absolute;top: -30px;left: 17px;}
+.orderandpay .tooltip_wrap .choice_wrap .select_wrap { min-width: 164px; margin: 0 auto; max-width: max-content;}
 
-.orderandpay .layer_pop_box {position: relative;}
-.orderandpay .dimed {display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0, .6); z-index: 1000;}
-.orderandpay .layer_pop {position: absolute;}
+
+/* 예치금 */
+.orderandpay .deposit_wrap .tooltip_wrap { position: absolute;top: -30px;left: 17px; width:740px;}
+.orderandpay .safetynumber {position: relative;}
+.orderandpay .safetynumber .tooltip_wrap {position: absolute; top:0; left:0; width:680px;}
+
+.orderandpay .layer_pop_box {position: absolute;     top: 0;    left: 0;}
+.orderandpay .dimed {display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0, .6); z-index: 999;}
+.orderandpay .layer_pop {    position: relative; z-index: 1000;}
 
 
 
@@ -278,6 +295,6 @@
 .orderandpay .btn_bgred { height: 32px;line-height: 30px;}
 .orderandpay .btn_bgred.white {background: #fff; color:#000 !important; border:1px #D6D6D6 solid;}
 
-.orderandpay .count_wrap {text-align: center;    margin-left: 1px;}
+.orderandpay .count_wrap {text-align: center; margin-left: 1px;}
 .orderandpay .count_wrap:after {content:''; display:block; clear: both;}
 .orderandpay .count_wrap .input_txt {float: left;    width: 39px !important;    padding: 5px 4px 6px 5px;    border-left: 0;    border-right: 0;}
