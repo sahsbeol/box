@@ -203,7 +203,7 @@
 .orderandpay .help_box_wrap .text_list li:before {content: '';display: block;width:5px;height:1px;background: #777777;position: absolute;left: 0;top: 6px;}
 
 /* 결제금액 */
-.orderandpay .user_price_wrap {background: #fff;padding: 0;margin-top: 30px;}
+.orderandpay .user_price_wrap {background: #fff;padding: 0;margin-top: 10px;}
 .orderandpay .user_price_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .user_price_wrap .user_price_unit {background: #fff;padding: 0;float: none;margin-left: 0;}
 .orderandpay .user_price_wrap .user_price_unit:first-child {margin-left:0;}
@@ -213,20 +213,22 @@
 .orderandpay .user_price_wrap .price_unit_list dt {font-size: 13px;font-weight: 400;color:#000;}
 .orderandpay .user_price_wrap .price_unit_list dd {font-size: 15px;font-weight: 500;text-align: right;float: right;}
 
-.orderandpay .user_price_wrap .user_price_unit.sum {padding: 0;border-top: 1px #707070 solid;margin-top: 15px;padding-top: 16px;}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum_tit {font-size: 16px;font-weight:700;text-align: center;float: left;max-width: 56%;}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum {font-size: 18px;font-weight:500;/* margin-top: 13px; */text-align: center;float: right;max-width: 70%;}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum .only_english {font-size: 28px; font-weight:700;}
+.orderandpay .user_price_wrap .user_price_unit.sum {padding: 0;border-top: 1px #707070 solid;margin-top: 10px;padding-top: 15px;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum_tit {font-size: 13px;font-weight:700;text-align: center;float: left;max-width: 56%;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum {font-size: 13px;font-weight:500;/* margin-top: 13px; */text-align: center;float: right;max-width: 70%;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum .only_english {font-size: 15px;font-weight:700;}
 
 .orderandpay .user_price_wrap .user_price_unit:after {content: ''; display: block; clear: both;}{}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum_point {/* padding: 18px 0px 0; */margin-top: 2px;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum_point {/* padding: 18px 0px 0; */margin-top: 5px;}
 .orderandpay .user_price_wrap .user_price_unit .unit_sum_point:after {content: ''; display: block; clear: both;}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum_point span {float : right;display: block;font-size: 15px;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum_point span {float : right;display: block;font-size: 13px;}
 .orderandpay .user_price_wrap .user_price_unit .unit_sum_point .color {float: left; color: #777777;}
 
 
 /* 결제방법 */
 .orderandpay  .color {color: #777777 !important;}
+.orderandpay .orderlist {background: #fafafa;}
+.orderandpay .w_top {margin:0;}
 
 /* tab */
 .orderandpay .tab_wrap {}
@@ -283,7 +285,7 @@
 .orderandpay .cash_receipt_input_wrap .cardnumber_wrap,
 .orderandpay .cash_receipt_input_wrap .cellphone_wrap {float: left;width: calc(75%);}
 
-.orderandpay .cash_receipt_input_wrap .cellphone_wrap .input_wrap {width: calc(34% - 9px);}
+.orderandpay .cash_receipt_input_wrap .cellphone_wrap .input_wrap {width: calc(34% - 12px);}
 .orderandpay .cash_receipt_input_wrap .cardnumber_wrap .input_wrap {width: calc(25% - 5px);}
 
 /* 예치금 */
@@ -346,7 +348,6 @@
 
 .orderandpay .bigger.btn_type01_v2 { height: 38px; font-size: 16px; min-width: 180px; line-height: initial; padding: 6px 0; height: auto; box-sizing: border-box;}
 
-.orderandpay .txt_option {}
 .orderandpay .btn_type05_v2 {font-size: 13px;height:32px;width:112px;padding: 0;box-sizing: border-box;border: 1px #D6D6D6 solid;line-height: 28px;} 
 
 .orderandpay .count_up,

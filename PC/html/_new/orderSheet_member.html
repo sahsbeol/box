@@ -133,31 +133,16 @@
             $('html, body').css('overflow','visible');
 
         });
-
-        
-     
-
-
     
 });
 
 </script>
-<style>
-    .orderandpay .layer_pop_box {display: none;}
-    .orderandpay .layer_pop_box.active {display: block;}
-    .orderandpay .layer_pop_box.active .tooltip_wrap {display: block;}
-    .orderandpay .layer_pop_box.active .dimed {display: block;}
-
-    .orderandpay .layer_pop_box .dimed {display: none;}
-
-
-</style>
 </head>
 
 <body>
 
 
-    <div id="wrap" class="content_new orderandpay">
+    <div id="wrap" class="content_new">
 
         <div id="header">
             <!-- util menu -->
@@ -250,8 +235,9 @@
             </nav>
         </div>
 
+        <!-- 201222 S : 작업부분 id="container" 에 class="orderandpay" 넣어주세요  -->
         <!-- Container -->
-        <div id="container">
+        <div id="container" class="orderandpay">
             <!-- 컨텐츠 -->
             <div class="content">
                 <h2 class="tit">주문결제</h2>
@@ -1559,6 +1545,7 @@
             <!-- //컨텐츠 -->
         </div>
         <!-- //Container -->
+        <!--// 201222 E : 작업부분 -->
 
         <!-- footer -->
         <div id="footer">

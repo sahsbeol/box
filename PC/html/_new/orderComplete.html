@@ -39,7 +39,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div id="wrap" class="content_new orderandpay">
+<div id="wrap" class="content_new">
 
 <!-- header -->
 <div id="header">
@@ -133,9 +133,9 @@ $(document).ready(function(){
 	</nav>
 </div>
 <!--// header -->    
-    <!-- Container -->
-    
-       <div id="container">
+	<!-- 201222 : 작업부분 id="container" class="orderandpay" 넣어주세요  -->
+    <!-- Container -->    
+       <div id="container" class="orderandpay">
         <!-- 컨텐츠 -->
         <div class="content" id="content">
             
@@ -149,20 +149,20 @@ $(document).ready(function(){
 	        
 	   		</div>
     
-    	<div>
-		    <div class="title_box mgt40">
-			    <h3 class="tit01 f_left mgt10">주문번호 <span class="mgl30 order_num">191205000004</span></h3>
-			    <a class="f_right" href="#n"><span class="btn_type01_v2 bigger">주문배송조회</span></a>
+    		<div>
+			    <div class="title_box mgt40">
+				    <h3 class="tit01 f_left mgt10">주문번호 <span class="mgl30 order_num">191205000004</span></h3>
+				    <a class="f_right" href="#n"><span class="btn_type01_v2 bigger">주문배송조회</span></a>
+				</div>
+			    
+			    <div class="box_gray02 b_line pdt40 pdb40 t_center fs18 mgt10">  
+			        
+					<span>총 상품금액 <strong>7,200</strong>원</span> + 
+					<span>총 배송비 <strong>2,500</strong>원</span> - 
+					<span>총 할인금액 <strong>9,700</strong>원</span> = 
+					<span>총 결제금액 <strong class="c_red">0</strong>원</span>
+				</div>
 			</div>
-		    
-		    <div class="box_gray02 b_line pdt40 pdb40 t_center fs18 mgt10">  
-		        
-				<span>총 상품금액 <strong>7,200</strong>원</span> + 
-				<span>총 배송비 <strong>2,500</strong>원</span> - 
-				<span>총 할인금액 <strong>9,700</strong>원</span> = 
-				<span>총 결제금액 <strong class="c_red">0</strong>원</span>
-			</div>
-		</div>
     
     <!-- 이벤트 배너 
     <div class="mgt20" id="evnetBannerArea" style="display: block;">

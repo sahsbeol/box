@@ -39,7 +39,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div id="wrap" class="content_new orderandpay">
+<div id="wrap" class="content_new">
 
 <!-- header -->
 <div id="header">
@@ -132,38 +132,39 @@ $(document).ready(function(){
 		</div>
 	</nav>
 </div>
-<!--// header -->    
-    <!-- Container -->
-    <div id="container">
-        <!-- 컨텐츠 -->
-        <div class="content " id="content">
-            
+<!--// header --> 
+<!-- 201222 : 작업부분 id="container" class="orderandpay" 넣어주세요  -->
+<!-- Container -->    
+   <div id="container" class="orderandpay">
+    <!-- 컨텐츠 -->
+    <div class="content " id="content">
+        
+    	<!-- 201222 : 작업부분 -->
+		<!-- sub top -->
+		<h2 class="tit">주문완료</h2>
+		<!-- / sub top -->
 
-<!-- sub top -->
-<h2 class="tit">주문완료</h2>
-<!-- / sub top -->
-
-<div class="box_wrap">
-    <div class="t_center bb_line" style="min-height:80px;">
-        <p class="fs24 c_black mgt60"><strong>하태경</strong> 회원님의 주문이 완료되었습니다.</p>
-        <p class="fs18 mgt30">주문일로부터 일주일까지 입금이 완료되면 배송이 진행됩니다.</p>
-        <p class="fs18 mgt20 mgb60"><span>입금 계좌 : </span>국민은행 <span class="c_blue">1234-56-7890</span><span class="mgl10">예금주 : 교보핫트랙스㈜</span></p>
-    </div>
+	<div class="box_wrap">
+	    <div class="t_center bb_line" style="min-height:80px;">
+	        <p class="fs24 c_black mgt60"><strong>하태경</strong> 회원님의 주문이 완료되었습니다.</p>
+	        <p class="fs18 mgt30">주문일로부터 일주일까지 입금이 완료되면 배송이 진행됩니다.</p>
+	        <p class="fs18 mgt20 mgb60"><span>입금 계좌 : </span>국민은행 <span class="c_blue">1234-56-7890</span><span class="mgl10">예금주 : 교보핫트랙스㈜</span></p>
+	    </div>
     
-    <div>
-	    <div class="title_box mgt40">
-		    <h3 class="tit01 f_left mgt10">주문번호 <span class="mgl30 order_num">191205000004</span></h3>
-		    <a class="f_right" href="#n"><span class="btn_type01_v2 bigger">주문배송조회</span></a>
+	    <div>
+		    <div class="title_box mgt40">
+			    <h3 class="tit01 f_left mgt10">주문번호 <span class="mgl30 order_num">191205000004</span></h3>
+			    <a class="f_right" href="#n"><span class="btn_type01_v2 bigger">주문배송조회</span></a>
+			</div>
+		    
+		    <div class="box_gray02 b_line pdt40 pdb40 t_center fs18 mgt10">  
+		        
+				<span>총 상품금액 <strong>7,200</strong>원</span> + 
+				<span>총 배송비 <strong>2,500</strong>원</span> - 
+				<span>총 할인금액 <strong>9,700</strong>원</span> = 
+				<span>총 결제금액 <strong class="c_red">0</strong>원</span>
+			</div>
 		</div>
-	    
-	    <div class="box_gray02 b_line pdt40 pdb40 t_center fs18 mgt10">  
-	        
-			<span>총 상품금액 <strong>7,200</strong>원</span> + 
-			<span>총 배송비 <strong>2,500</strong>원</span> - 
-			<span>총 할인금액 <strong>9,700</strong>원</span> = 
-			<span>총 결제금액 <strong class="c_red">0</strong>원</span>
-		</div>
-	</div>
     
     <!-- 이벤트 배너 
     <div class="mgt20" id="evnetBannerArea" style="display: block;">

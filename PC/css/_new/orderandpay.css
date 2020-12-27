@@ -274,9 +274,14 @@
 .orderandpay .safetynumber {position: relative;}
 .orderandpay .safetynumber .tooltip_wrap {position: absolute; top:0; left:0; width:680px;}
 
-.orderandpay .layer_pop_box {position: absolute;     top: 0;    left: 0;}
+.orderandpay .layer_pop_box {display: none; position: absolute;     top: 0;    left: 0;}
 .orderandpay .dimed {display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0, .6); z-index: 999;}
 .orderandpay .layer_pop {    position: relative; z-index: 1000;}
+
+.orderandpay .layer_pop_box.active {display: block;}
+.orderandpay .layer_pop_box.active .tooltip_wrap {display: block;}
+.orderandpay .layer_pop_box.active .dimed {display: block;}
+.orderandpay .layer_pop_box .dimed {display: none;}
 
 
 

@@ -25,20 +25,6 @@
 <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
 <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
 
-<style type="text/css">
-#content {
-    padding: 0px;
-}
-.card_box {display:none;}
-.card_box.active {display:block;}
-.cash_box {display:none;}
-.cash_box.active {display:block;}
-.smile_box {display:none;}
-.smile_box.active {display:block;}
-#useCouponList {position: relative;}
-.input_line {width:5%; text-align:center; padding-top:2px; color:#ccc;}
-#ly_content .br_list li:first-child {border:none;}
-</style>
 
 <script type="text/javascript">
     $(function(){
@@ -157,7 +143,7 @@
 </head>
 <body>
 
-<div id="wrap" class="content_new orderandpay">
+<div id="wrap" class="content_new">
 <!-- #header -->
   <div id="header">
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
@@ -172,7 +158,8 @@
     </div>
   </div>
 <!-- //#header -->
-    <div id="content">
+    <!-- 201222 S : 작업부분 id="content" class="orderandpay" 넣어주세요-->
+    <div id="content" class="orderandpay">
     	<h2 class="blind">주문결제</h2>
         <!-- 주문결제 form : S -->
         <form action="">
@@ -993,8 +980,9 @@
             </div>
             <!--// popup 레이어 예치금 -->
         </div>
+
 	</div>
-	
+    <!--// 201222 E : 작업부분 -->	
 	
 	
 
