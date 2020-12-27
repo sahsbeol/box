@@ -112,6 +112,19 @@
             $('.safetynumber_box.layer_pop_box').css('margin-top', H2 - (H1/2) - 30 +'px')
         });
 
+
+        $('.point_box.btn_defalut').click(function(){
+            $('.point_box.layer_pop_box').addClass('active');
+            $('html, body').css('overflow','hidden');
+
+            var H1 = $('.point_box.layer_pop_box').height();
+            var H0 = $(window).height();
+            var H2 = H0/2;
+
+            $('.point_box.layer_pop_box').css('margin-top', H2 - (H1/2) - 30 +'px')
+        });
+        
+
         $('.layer_pop .layer_close').each(function(){
             $(this).click(function(){
                 $(this).closest('.layer_pop_box').removeClass('active');
@@ -446,7 +459,7 @@
                                         <span class="input_wrap">
                                             <input type="text" placeholder="0 P" class="width_point">
                                         </span>
-                                        <a href="javascript:;" class="btn_defalut squre">포인트 조회</a>                                                                                             
+                                        <a href="javascript:;" class="btn_defalut squre point_box">포인트 조회</a>                                                                                             
                                     </div>                                    
                                 </td>            
                             </tr>
@@ -979,6 +992,42 @@
                 </div>
             </div>
             <!--// popup 레이어 예치금 -->
+
+            <!-- popup 레이어 포인트조회 -->
+            <div class="layer_pop_box point_box">
+                <div class="dimed"></div>
+                <div class="layer_pop">
+                    <div class="tooltip_wrap ">
+                        <div class="tooltip_inner">  
+                            <p class="tooltip_tit">GS&amp;POINT</p>                          
+
+                            <div class="point_box_inner">
+                                <ul class="inner_float" id="gsPointInfo" style="margin: 0 auto;">
+                                    <li class="have_inner_txt">
+                                        <div class="input_wrap left">
+                                            <label for="gsPointInfoId">아이디</label>
+                                        </div>
+                                        <div class="input_wrap right">
+                                            <input type="text" placeholder="" class="width_name" id="gsPointInfoId">
+                                        </div>
+                                    </li>
+                                    <li class="have_inner_txt">
+                                        <div class="input_wrap left">
+                                            <label for="gsPwInput">비밀번호</label>
+                                        </div>
+                                        <div class="input_wrap right">
+                                            <input type="password" placeholder="" class="width_name" id="gsPwInput">
+                                        </div>
+                                    </li>
+                                    <li class="have_inner_txt t_c"><a href="#n" class="bt_mbgb">조회</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="javascript:;" class="layer_close">닫기</a>
+                    </div>
+                </div>
+            </div>
+            <!--// popup 레이어 포인트조회 -->
         </div>
 
 	</div>

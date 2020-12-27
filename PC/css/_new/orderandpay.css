@@ -30,6 +30,7 @@
 .orderandpay .width_point {max-width: 240px; width:240px !important; text-align: right;}
 .orderandpay .width_address {max-width: 400px;width: 400px !important;}
 .orderandpay .width_email {max-width: 140px; width:140px !important;}
+.orderandpay .width_popup_point {max-width: 100px; width:100px !important;}
 .orderandpay .input_wrap select.width_phone,
 .orderandpay .select_wrap select.width_phone  {width: 80px !important;}
 
@@ -252,6 +253,7 @@
 
 .orderandpay .tooltip_wrap {display:none; background: #fff;box-shadow:0 3px 20px rgba(0,0,0,.16);margin: 20px;min-width:680px; z-index: 1;border-radius: 24px;}
 .orderandpay .tooltip_wrap .tooltip_inner {padding: 44px 30px;position: relative;}
+.orderandpay .tooltip_wrap .tooltip_inner:after {content: ''; display: block; clear:both;}
 .orderandpay .tooltip_wrap .tooltip_tit {font-size: 32px;font-weight:400;border-bottom: 2px #000 solid;padding-bottom: 10px;}
 .orderandpay .tooltip_wrap .tooltip_list {margin-top: 30px;}
 .orderandpay .tooltip_wrap .tooltip_list li, 
@@ -303,3 +305,16 @@
 .orderandpay .count_wrap {text-align: center; margin-left: 1px;}
 .orderandpay .count_wrap:after {content:''; display:block; clear: both;}
 .orderandpay .count_wrap .input_txt {float: left;    width: 39px !important;    padding: 5px 4px 6px 5px;    border-left: 0;    border-right: 0;}
+
+/* GS 포인트 조회 팝업 */
+.orderandpay .point_go_wrap {position: absolute; top:0; left: 222px;}
+.orderandpay .point_go_wrap .tooltip_conts {margin-top:13px;}
+.orderandpay .point_go_wrap .tooltip_conts_inner:after {content: ''; display: block; clear:both;}
+.orderandpay .point_go_wrap .tooltip_conts:after {content: ''; display: block; clear:both;}
+.orderandpay .point_go_wrap .point-info {float:right; width:300px; margin-top:10px;}
+.orderandpay .point_go_wrap .point-info li {margin-bottom: 5px;font-size: 13px;line-height: 1.5;color:#777;text-indent: -7px;}
+.orderandpay .point_go_wrap .point-site {margin-top:10px;}
+.orderandpay .point_go_wrap .table_wrap.type_1 {float: left;width:300px;}
+.orderandpay .point_go_wrap .btn_type01_v2 { height: auto; padding: 9px 22px; margin-left: 5px;}
+.orderandpay .point_go_wrap .table_wrap.type_1 .point_txt {vertical-align: middle; margin-top: 14px; display: block; margin-left: 10px; float: left;}
+.orderandpay .point_go_wrap .btn_wrap {margin: 0px auto 0 auto;border-top:1px #eee solid;text-align: center;padding-top: 20px;}

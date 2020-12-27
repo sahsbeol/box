@@ -309,6 +309,12 @@
 
 .orderandpay .deposit_wrap .tooltip_wrap {display:none; position: absolute;top: -30px;left: 17px;}
 
+.orderandpay .point_box_inner {margin-top:15px;}
+.orderandpay .point_box_inner .inner_float .input_wrap.left {width: 65px; margin-top: 10px;}
+.orderandpay .point_box_inner .inner_float .input_wrap.right {margin-left: 10px;width: calc(100% - 75px);}
+.orderandpay .point_box_inner .have_inner_txt {margin-top:10px;}
+.orderandpay .point_box_inner .inner_float .input_wrap:before {content: ''; display: none;}
+
 .orderandpay .layer_pop_box {display:none; position: absolute;width: 100%;top: 0%;left: 0;}
 .orderandpay .dimed { display: none; position: fixed;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0, .6);}
 .orderandpay .layer_pop {position: relative;z-index: 1000;} 
