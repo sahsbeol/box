@@ -43,7 +43,7 @@
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_txt,
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt,
 .orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {float: left; font-size: inherit;}
-.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left: 11px;}
+.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left: 15px;}
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt {margin-top: 8px; margin-left: 10px;}
 
 .orderandpay .choice_wrap.type_squre.have_inner_txt .i_txt,
@@ -74,7 +74,7 @@
 .orderandpay .position .icon_arrow {position:absolute;top: 12px;right:0;}
 
 /* 안내 */
-.orderandpay .icon_question {font-size: 0;display: block;float: left;width: 16px;height: 16px;border:1px #999999 solid;border-radius: 100%;background: url(../../images/new/icon_question.png) no-repeat 4px 0px;background-size: 5px 14px;box-sizing: border-box;margin-left: 7px;margin-top: 3px;}
+.orderandpay .icon_question {font-size: 0;display: block;float: left;width: 16px;height: 16px;border:1px #999999 solid;border-radius: 100%;background: url(../../images/new/icon_question.png) no-repeat 5px 0px;background-size: 5px 14px;box-sizing: border-box; margin-left: 5px; margin-top: 5px;}
 .orderandpay .icon_question:after {content: ''; display: block; clear:both;}
 .orderandpay .icon_question.margin_set_top {margin-top:15px;}
 
@@ -137,10 +137,10 @@
 
 /* input 기본형 */
 .orderandpay .input_wrap {display: block;}
-.orderandpay .input_wrap input {padding: 11px 10px 12px;border:1px #B5B5B5 solid;font-size: 13px;box-sizing: border-box;text-align: left;}
+.orderandpay .input_wrap input {padding: 11px 10px 12px;border:1px #B5B5B5 solid;font-size: 13px;box-sizing: border-box;text-align: left; font-weight: 300 ; font-family: 'font_ns';}
 
-.orderandpay .input_wrap input::placeholder{text-align: left}
-.orderandpay .input_wrap input::-webkit-input-placeholder{text-align: left}
+.orderandpay .input_wrap input::placeholder{text-align: left; font-size: 13px;}
+.orderandpay .input_wrap input::-webkit-input-placeholder{text-align: left; font-size: 13px;}
 
 .orderandpay .table_wrap.type_1 .input_wrap input::placeholder{direction: rtl; text-align: right;}
 .orderandpay .table_wrap.type_1 .input_wrap input::-webkit-input-placeholder{direction: rtl; text-align: right;}
@@ -148,7 +148,7 @@
 
 /* select 기본형 */
 .orderandpay .select_wrap select ,
-.orderandpay .input_wrap select {width:100%;padding: 12px 32px 13px 7px;max-height: 44px;border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block;color:#777777;font-family: inherit;background:#fff url('../../images/new/icon_select.png') no-repeat right 12px center;background-size: 10px 5px;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+.orderandpay .input_wrap select {width:100%;padding: 12px 32px 13px 10px;max-height: 44px;border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block;color:#777777;font-family: inherit;background:#fff url('../../images/new/icon_select.png') no-repeat right 12px center;background-size: 10px 5px;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
 .orderandpay .input_wrap select::-ms-expand ,
 .orderandpay .select_wrap select::-ms-expand {display: none;}
 
@@ -177,7 +177,7 @@
 
 /* btn */
 .orderandpay .btn_type_wrap {text-align: center;}
-.orderandpay .btn_defalut {padding: 13px 5px;height:auto;min-width: 86px;background: #EEEEEE;font-size: 12px;font-weight: 700;color:#FFFFFF;outline:none;color: #000;border-radius: 34px;}
+.orderandpay .btn_defalut {padding: 13px 5px;height:auto;min-width: 86px;background: #EEEEEE;font-size: 12px;font-weight: 600;color:#FFFFFF;outline:none;color: #000;border-radius: 34px;}
 .orderandpay .btn_defalut.squre {background: #fff;height: 44px;font-size: 14px;font-weight: 400;outline:none;color: #000;border:1px #B5B5B5 solid;border-radius: 0;/* max-width: 120px; */text-align: center;min-width: 88px;box-sizing: border-box;padding: 11px 8px;}
 .orderandpay button.btn_defalut.squre {padding: 10px 20px;height:38px; font-family: 'font_ns'; line-height: inherit;}
 
@@ -221,7 +221,8 @@
 .orderandpay .user_price_wrap .user_price_unit.sum {padding: 0;border-top: 1px #707070 solid;margin-top: 10px;padding-top: 15px;}
 .orderandpay .user_price_wrap .user_price_unit .unit_sum_tit {font-size: 14px;font-weight:700;text-align: center;float: left;max-width: 56%;}
 .orderandpay .user_price_wrap .user_price_unit .unit_sum {font-size: 13px;font-weight:500;/* margin-top: 13px; */text-align: center;float: right;max-width: 70%;}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum .only_english {font-size: 16px;font-weight:700;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum .only_english {font-size: 25px;font-weight:700;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum .s_txt {font-size: 20px;font-weight:700; color:#DA2128 ;}
 
 .orderandpay .user_price_wrap .user_price_unit:after {content: ''; display: block; clear: both;}{}
 .orderandpay .user_price_wrap .user_price_unit .unit_sum_point {/* padding: 18px 0px 0; */margin-top: 5px;}
@@ -372,13 +373,15 @@
 
 @media screen and (max-width: 360px) {
 
-	.orderandpay .input_wrap input {padding-top: 11px;padding-bottom: 12px;}
+	.orderandpay .input_wrap input {padding-top: 11px;padding-bottom: 12px;font-size: 11px;}
 	.orderandpay .user_info_wrap .have_inner_txt .i_small_txt,
 	.orderandpay .choice_wrap input[type="checkbox"] + label,
 	.orderandpay .choice_wrap input[type=radio]+ label {font-size: 12px; letter-spacing: -1px;}
 	.orderandpay .select_wrap select,
 	.orderandpay .input_wrap select {font-size: 11px;padding-right: 15px;background-position: center right 5px;}
 	.orderandpay .select_wrap select, .orderandpay .input_wrap select {padding-top:13px; padding-bottom: 14px;}
+	.orderandpay .input_wrap input::placeholder{text-align: left; font-size: 12px;}
+	.orderandpay .input_wrap input::-webkit-input-placeholder{text-align: left; font-size: 12px;}
 
 
 
@@ -406,7 +409,7 @@
 	.orderandpay .input_wrap input::placeholder{font-size: 11px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{font-size: 11px;}
 
-	.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left:6px;}
+	.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {}
 	.orderandpay .coupon_list_wrap .choice_wrap .choice_wrap_inner .choice_inner_set .term {padding-left:20px;}
 
 	.orderandpay .cash_receipt_input_wrap .input_wrap select.width_phone, .orderandpay .cash_receipt_input_wrap .select_wrap select.width_phone {font-size: 10px;}

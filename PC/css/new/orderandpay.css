@@ -148,6 +148,8 @@
 .orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
 .orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
 
+.orderandpay .bbs_list_v2 thead th { background: #FAFAFA; }
+
 
 /* btn */
 .orderandpay .btn_type_wrap {text-align: center;}
