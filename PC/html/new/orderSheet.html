@@ -62,17 +62,19 @@
         });
 
         //현금영수증_휴대전화와 카드번호 
-        $('.cash_receipt_input_layer select').each(function() {
+        $('.cash_receipt_input_layer .select_wrap select').each(function() {
             $(this).on("change", function(){
                 var value = $(this).find("option:selected").val(); 
-                var $box = $(this).closest('.cash_receipt_wrap');
+                var $box = $(this).closest('.choice_wrap');
                            
-                if(value =='cellphone'){
-                    $box.find('.cardnumber_wrap').hide();
-                    $box.find('.cellphone_wrap').show();
+                if(value =='cellphone'){                    
+                    $box.removeClass('cardnumber_wrap');
+                    $box.find($('.input_wrap')).last().hide();
+                   
                 }else{
-                    $box.find('.cardnumber_wrap').show();
-                    $box.find('.cellphone_wrap').hide();
+                    $box.addClass('cardnumber_wrap')
+                    $box.find($('.input_wrap')).last().show();
+                   
                 }            
             });
         });
@@ -1178,45 +1180,31 @@
 
                                                 <div class="cash_receipt_input_wrap">
                                                     <div class="cash_receipt_input_layer active">
-                                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                        <div class="choice_wrap type_squre have_inner_txt inner_float ">
+                                                            <!-- 휴대폰, 카드번호-->
                                                             <span class="select_wrap">
                                                                 <select name="" id="" class="width_phone">
                                                                     <option value="cellphone">휴대폰</option>
                                                                     <option value="cardnumber">카드번호</option>
                                                                 </select>
                                                             </span>  
-                                                            <!-- 휴대폰 -->
-                                                            <div class="cellphone_wrap">                               
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                            </div>
-                                                            <!-- 카드번호 -->
-                                                            <div class="cardnumber_wrap">
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>  
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span> 
-                                                            </div>                                     
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap" style="display:none;">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>                                 
                                                         </div>
                                                     </div>
                                                     <div class="cash_receipt_input_layer">
                                                         <div class="choice_wrap type_squre have_inner_txt inner_float">
-                                                            <span class="input_wrap">
+                                                            <span class="select_wrap">
                                                                 <select name="" id="" class="width_phone">
                                                                     <option value="">사업자등록번호</option>
                                                                 </select>
@@ -1280,45 +1268,31 @@
 
                                                 <div class="cash_receipt_input_wrap">
                                                     <div class="cash_receipt_input_layer active">
-                                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                        <div class="choice_wrap type_squre have_inner_txt inner_float ">
+                                                            <!-- 휴대폰, 카드번호-->
                                                             <span class="select_wrap">
                                                                 <select name="" id="" class="width_phone">
                                                                     <option value="cellphone">휴대폰</option>
                                                                     <option value="cardnumber">카드번호</option>
                                                                 </select>
                                                             </span>  
-                                                            <!-- 휴대폰 -->
-                                                            <div class="cellphone_wrap">                               
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                            </div>
-                                                            <!-- 카드번호 -->
-                                                            <div class="cardnumber_wrap">
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span>  
-                                                                <span class="input_wrap">
-                                                                    <input type="text" placeholder="" class="width_phone">
-                                                                </span> 
-                                                            </div>                                     
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>
+                                                            <span class="input_wrap" style="display:none;">
+                                                                <input type="text" placeholder="" class="width_phone">
+                                                            </span>                                 
                                                         </div>
                                                     </div>
                                                     <div class="cash_receipt_input_layer">
                                                         <div class="choice_wrap type_squre have_inner_txt inner_float">
-                                                            <span class="input_wrap">
+                                                            <span class="select_wrap">
                                                                 <select name="" id="" class="width_phone">
                                                                     <option value="">사업자등록번호</option>
                                                                 </select>

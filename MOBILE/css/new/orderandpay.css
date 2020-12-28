@@ -173,7 +173,7 @@
 /* btn */
 .orderandpay .btn_type_wrap {text-align: center;}
 .orderandpay .btn_defalut {padding: 13px 5px;height:auto;min-width: 86px;background: #EEEEEE;font-size: 12px;font-weight: 700;color:#FFFFFF;outline:none;color: #000;border-radius: 34px;}
-.orderandpay .btn_defalut.squre {background: #fff;height: auto;font-size: 14px;font-weight: 400;outline:none;color: #000;border:1px #B5B5B5 solid;border-radius: 0;/* max-width: 120px; */text-align: center;min-width: 88px;box-sizing: border-box;padding: 11px 8px;}
+.orderandpay .btn_defalut.squre {background: #fff;height: 44px;font-size: 14px;font-weight: 400;outline:none;color: #000;border:1px #B5B5B5 solid;border-radius: 0;/* max-width: 120px; */text-align: center;min-width: 88px;box-sizing: border-box;padding: 11px 8px;}
 .orderandpay button.btn_defalut.squre {padding: 10px 20px;height:38px; font-family: 'font_ns'; line-height: inherit;}
 
 .orderandpay .btn_basic {padding: 13px 20px 14px;height:auto;background: #000;font-size: 15px;font-weight: 400;color:#FFFFFF;min-width: auto;/* width: 100%; */display: block;}
@@ -268,25 +268,18 @@
 
 .orderandpay .cash_receipt_input_wrap .width_phone {}
 .orderandpay .cash_receipt_input_wrap .input_wrap select.width_phone,
-.orderandpay .cash_receipt_input_wrap .select_wrap select.width_phone {width: 100% !important;min-width: initial;padding-right: 18px;background-position: center right 6px;}
+.orderandpay .cash_receipt_input_wrap .select_wrap select.width_phone {width: 100% !important;min-width: 55px;padding-right: 18px;background-position: center right 6px; height:32px;}
 .orderandpay .cash_receipt_input_wrap .select_wrap select,
 .orderandpay .cash_receipt_input_wrap .input_wrap select {padding-top:5px;padding-bottom: 8px;}
 .orderandpay .cash_receipt_input_wrap .input_wrap input {padding: 6px 3px 7px;}
 
 .orderandpay .cash_receipt_input_wrap .inner_float .select_wrap,
-.orderandpay .cash_receipt_input_wrap .inner_float .input_wrap {margin-left:5px;width: calc(25% - 5px);}
+.orderandpay .cash_receipt_input_wrap .inner_float .input_wrap {margin-left:5px;width: calc(25% - 4px);}
 .orderandpay .cash_receipt_input_wrap .inner_float .select_wrap {float: left; margin-left:0;}
 .orderandpay .cash_receipt_input_wrap .inner_float .input_wrap:before {content: ''; display: none;}
 
-.orderandpay .cash_receipt_input_wrap .cardnumber_wrap {display: none;}
-.orderandpay .cash_receipt_input_wrap .cardnumber_wrap:after,
-.orderandpay .cash_receipt_input_wrap .cellphone_wrap:after {content: ''; display:block; clear: both;}
-
-.orderandpay .cash_receipt_input_wrap .cardnumber_wrap,
-.orderandpay .cash_receipt_input_wrap .cellphone_wrap {float: left;width: calc(75%);}
-
-.orderandpay .cash_receipt_input_wrap .cellphone_wrap .input_wrap {width: calc(34% - 12px);}
-.orderandpay .cash_receipt_input_wrap .cardnumber_wrap .input_wrap {width: calc(25% - 5px);}
+.orderandpay .cash_receipt_input_wrap .cardnumber_wrap {}
+.orderandpay .cash_receipt_input_wrap .cardnumber_wrap .input_wrap {width: calc(20% - 12px);}
 
 /* 예치금 */
 .orderandpay .deposit_wrap {position: relative;}
@@ -383,6 +376,8 @@
 	.orderandpay .inner_float_dot .input_wrap {width :calc(32% - 5px);}
 	.orderandpay .inner_float_dot .input_wrap.inner_dot {    width: calc(1% + 10px);}
 
+
+
 }	
 
 @media screen and (max-width: 320px) {
@@ -409,6 +404,8 @@
 
 	.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left:6px;}
 	.orderandpay .coupon_list_wrap .choice_wrap .choice_wrap_inner .choice_inner_set .term {padding-left:20px;}
+
+	.orderandpay .cash_receipt_input_wrap .input_wrap select.width_phone, .orderandpay .cash_receipt_input_wrap .select_wrap select.width_phone {font-size: 10px;}
 
 
 

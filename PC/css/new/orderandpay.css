@@ -237,12 +237,8 @@
 .orderandpay .cash_receipt_input_wrap .inner_float .input_wrap { margin-left:5px;}
 .orderandpay .cash_receipt_input_wrap .inner_float .input_wrap:before {content: ''; display: none;}
 
-.orderandpay .cash_receipt_input_wrap .cardnumber_wrap {display: none;}
-.orderandpay .cash_receipt_input_wrap .cardnumber_wrap:after,
-.orderandpay .cash_receipt_input_wrap .cellphone_wrap:after {content: ''; display:block; clear: both;}
-
-.orderandpay .cash_receipt_input_wrap .cardnumber_wrap,
-.orderandpay .cash_receipt_input_wrap .cellphone_wrap {float: left;}
+.orderandpay .cash_receipt_input_wrap .cardnumber_wrap {}
+.orderandpay .cash_receipt_input_wrap .cardnumber_wrap .input_wrap {width: calc(20% - 12px);}
 
 .orderandpay .deposit_wrap {position: relative;}
 .orderandpay .deposit_wrap:after {content: ''; display:block; clear: both;}
