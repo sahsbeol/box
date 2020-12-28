@@ -79,9 +79,12 @@
 /* 기본형 */
 .orderandpay .table_wrap {/* margin-top: 15px; */}
 .orderandpay .table_wrap th, .orderandpay .table_wrap td {text-align: left; font-size:13px; font-weight: 500;}
-.orderandpay .table_wrap th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid;}
+.orderandpay .table_wrap th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid; border-left: 1px #EEEEEE solid;  border-top: 1px #EEEEEE solid;}
 .orderandpay .table_wrap th span.star {color:#DA2128;}
-.orderandpay .table_wrap td {padding: 10px 0px 10px 24px;height:38px;border-bottom: 1px #EEEEEE solid;}
+.orderandpay .table_wrap td {padding: 10px 0px 10px 24px;height:38px;border-bottom: 1px #EEEEEE solid; border-right: 1px #EEEEEE solid;}
+
+.orderandpay .bbs_list_v2 tbody td:first-child {border-left:1px #EEEEEE solid;}
+.orderandpay .bbs_list_v2 tbody td:last-child {border-right:1px #EEEEEE solid;}
 
 /* 주문상품 _table  */
 .orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;padding-right: 10px;padding-left: 10px;}
@@ -89,7 +92,7 @@
 
 /* 제휴포인트_table*/
 .orderandpay .table_wrap.type_1 {}
-.orderandpay .table_wrap.type_1 th {background: #fff; text-align: left;}
+.orderandpay .table_wrap.type_1 th {background: #fff; text-align: left; border-left:0; border-right: 0;}
 .orderandpay .table_wrap.type_1 .btn_defalut.squre {margin-left:-1px;}
 
 
