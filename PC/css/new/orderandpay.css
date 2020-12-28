@@ -68,10 +68,10 @@
 /*--- 아이콘 --*/
 /* 화살표 */
 .orderandpay .icon_arrow {display: inline-block; margin-left:20px; font-size: 14px; font-weight: 500;}
-.orderandpay .icon_arrow:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/_new/icon_arrow.png) no-repeat 0 0;margin-left:5px;margin-bottom: -1px;}
+.orderandpay .icon_arrow:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/new/icon_arrow.png) no-repeat 0 0;margin-left:5px;margin-bottom: -1px;}
 
 /* 안내 */
-.orderandpay .icon_question {font-size: 0; display: block; float: right; width:18px; height:18px; border:1px #999999 solid; border-radius: 100%; background: url(../../images/_new/icon_question.png) no-repeat 6px 0px; box-sizing: border-box; margin-left:5px;}
+.orderandpay .icon_question {font-size: 0; display: block; float: right; width:18px; height:18px; border:1px #999999 solid; border-radius: 100%; background: url(../../images/new/icon_question.png) no-repeat 6px 0px; box-sizing: border-box; margin-left:5px;}
 .orderandpay .icon_question:after {content: ''; display: block; clear:both;}
 
 
@@ -101,7 +101,7 @@
 .orderandpay .choice_wrap input[type="checkbox"] + label ,
 .orderandpay .choice_wrap input[type=radio]+ label { display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
 .orderandpay .choice_wrap input[type="checkbox"] + label:before,
-.orderandpay .choice_wrap input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/_new/icon_radio_on.png) no-repeat center left 4px; border: 1px solid #DBDBDB; border-radius : 10px;  box-sizing: border-box;} 
+.orderandpay .choice_wrap input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/new/icon_radio_on.png) no-repeat center left 4px; border: 1px solid #DBDBDB; border-radius : 10px;  box-sizing: border-box;} 
 /*필요시 입력
 .orderandpay .choice_wrap input[type="checkbox"] + label:active:before, 
 .orderandpay .choice_wrap input[type="checkbox"]:checked + label:active:before,
@@ -109,15 +109,15 @@
 .orderandpay .choice_wrap input[type="radio"]:checked + label:active:before  { } */
 
 .orderandpay .choice_wrap input[type="checkbox"]:checked + label:before,
-.orderandpay .choice_wrap input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center left 4px;}
+.orderandpay .choice_wrap input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/new/icon_radio_on.png) no-repeat center left 4px;}
 .orderandpay .choice_wrap input[type=radio]::-ms-expand,
 .orderandpay .choice_wrap input[type=checkbox]::-ms-expand{    display: none;}
 
 /* radio , checkbox 사각형 */
 .orderandpay .choice_wrap.type_squre input[type="checkbox"] + label:before,
-.orderandpay .choice_wrap.type_squre input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 5px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/_new/icon_radio_on.png) no-repeat center center;; border: 1px solid #DBDBDB; border-radius : 4px;  box-sizing: border-box;} 
+.orderandpay .choice_wrap.type_squre input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 5px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/new/icon_radio_on.png) no-repeat center center;; border: 1px solid #DBDBDB; border-radius : 4px;  box-sizing: border-box;} 
 .orderandpay .choice_wrap.type_squre input[type="checkbox"]:checked + label:before,
-.orderandpay .choice_wrap.type_squre input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/_new/icon_radio_on.png) no-repeat center left 4px;}
+.orderandpay .choice_wrap.type_squre input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/new/icon_radio_on.png) no-repeat center left 4px;}
 
 
 /* input 기본형 */
@@ -125,7 +125,7 @@
 
 /* select 기본형 */
 .orderandpay .select_wrap select ,
-.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background:#fff url('../../images/_new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background:#fff url('../../images/new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
 .orderandpay .input_wrap select::-ms-expand ,
 .orderandpay .select_wrap select::-ms-expand {display: none;}
 
@@ -260,7 +260,7 @@
 .orderandpay .tooltip_wrap .tooltip_inner .texts {font-size: 14px; color:#777777;}
 .orderandpay .tooltip_wrap .tooltip_inner .texts {line-height: 1.5em; margin-top: 25px;}
 .orderandpay .tooltip_wrap .tooltip_close,
-.orderandpay .tooltip_wrap .layer_close {position:absolute;top: 54px;right:30px;width:22px;height:22px;font-size: 0;display: block;background: url(../../images/_new/icon_tool_tip.png) no-repeat center center;}
+.orderandpay .tooltip_wrap .layer_close {position:absolute;top: 54px;right:30px;width:22px;height:22px;font-size: 0;display: block;background: url(../../images/new/icon_tool_tip.png) no-repeat center center;}
 .orderandpay .tooltip_wrap.active {display: block;}
 /* 팝업 */
 /* 쿠폰조회 */
@@ -294,8 +294,8 @@
 
 .orderandpay .count_up,
 .orderandpay .count_down  {width:32px;height:32px;display:block;border:1px #D6D6D6 solid;font-size: 0;float: left;box-sizing: border-box;} 
-.orderandpay .count_up { background: url(../../images/_new/icon_count_up.png) no-repeat center center;}
-.orderandpay .count_down {background: url(../../images/_new/icon_count_down.png) no-repeat center center;} 
+.orderandpay .count_up { background: url(../../images/new/icon_count_up.png) no-repeat center center;}
+.orderandpay .count_down {background: url(../../images/new/icon_count_down.png) no-repeat center center;} 
 
 .orderandpay .bbs_list_v2 .t_left a.txt_option { color: #FF6A5B;font-size: 14px;line-height: 20px;padding: 5px 0 0 0;}
 

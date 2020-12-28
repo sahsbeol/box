@@ -3,13 +3,13 @@
 <head>
 <!-- 태그 라이브러리 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=950">
-<title>HOTTRACKS - 생활 속 감성충전소</title>
-<!-- 태그 라이브러리 -->
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=950">
+    <title>HOTTRACKS - 생활 속 감성충전소</title>
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
     <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <link rel="stylesheet" type="text/css" href="../../css/layout.css">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
     <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
     <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
-    <link rel="stylesheet" type="text/css" href="../../css/_new/orderandpay.css">
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
     <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../../js/m_contents.js"></script>
@@ -88,18 +88,18 @@ $(document).ready(function(){
 				<ul>
 					<li class="icon_my">
 						
-								<a href="#n" _onclick="login()"><img src="/images/biz/common/icon_my.png" alt=""></a>
+								<a href="#n" _onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>
 																															
 					</li>
 					<li class="icon_today">
 						<a href="#n">
-							<img src="/images/biz/common/icon_today.png" alt="">
+							<img src="../../images/biz/common/icon_today.png" alt="">
 							<em>오늘,<strong>혜택</strong></em>
 						</a>
 					</li>
 					<li class="icon_cart">
 						<a href="#n">
-							<img src="/images/biz/common/icon_cart.png" alt="">
+							<img src="../../images/biz/common/icon_cart.png" alt="">
 							<em class="font_t bizCartCount"></em>
 						</a>
 					</li>
@@ -132,39 +132,37 @@ $(document).ready(function(){
 		</div>
 	</nav>
 </div>
-<!--// header --> 
-<!-- 201222 : 작업부분 id="container" class="orderandpay" 넣어주세요  -->
-<!-- Container -->    
-   <div id="container" class="orderandpay">
-    <!-- 컨텐츠 -->
-    <div class="content " id="content">
-        
-    	<!-- 201222 : 작업부분 -->
-		<!-- sub top -->
-		<h2 class="tit">주문완료</h2>
-		<!-- / sub top -->
+<!--// header -->    
+	<!-- 201222 : 작업부분 id="container" class="orderandpay" 넣어주세요  -->
+    <!-- Container -->    
+       <div id="container" class="orderandpay">
+        <!-- 컨텐츠 -->
+        <div class="content" id="content">
+            
 
-	<div class="box_wrap">
-	    <div class="t_center bb_line" style="min-height:80px;">
-	        <p class="fs24 c_black mgt60"><strong>하태경</strong> 회원님의 주문이 완료되었습니다.</p>
-	        <p class="fs18 mgt30">주문일로부터 일주일까지 입금이 완료되면 배송이 진행됩니다.</p>
-	        <p class="fs18 mgt20 mgb60"><span>입금 계좌 : </span>국민은행 <span class="c_blue">1234-56-7890</span><span class="mgl10">예금주 : 교보핫트랙스㈜</span></p>
-	    </div>
+			<h2 class="tit">주문완료</h2>
+
+			<div class="box_wrap">
+	  			 <div class="t_center bb_line" style="min-height:80px;">
+       			 <p class="fs24 c_black mgt60"><strong>하태경</strong> 회원님의 주문이 완료되었습니다.</p>
+	        
+	        
+	   		</div>
     
-	    <div>
-		    <div class="title_box mgt40">
-			    <h3 class="tit01 f_left mgt10">주문번호 <span class="mgl30 order_num">191205000004</span></h3>
-			    <a class="f_right" href="#n"><span class="btn_type01_v2 bigger">주문배송조회</span></a>
+    		<div>
+			    <div class="title_box mgt40">
+				    <h3 class="tit01 f_left mgt10">주문번호 <span class="mgl30 order_num">191205000004</span></h3>
+				    <a class="f_right" href="#n"><span class="btn_type01_v2 bigger">주문배송조회</span></a>
+				</div>
+			    
+			    <div class="box_gray02 b_line pdt40 pdb40 t_center fs18 mgt10">  
+			        
+					<span>총 상품금액 <strong>7,200</strong>원</span> + 
+					<span>총 배송비 <strong>2,500</strong>원</span> - 
+					<span>총 할인금액 <strong>9,700</strong>원</span> = 
+					<span>총 결제금액 <strong class="c_red">0</strong>원</span>
+				</div>
 			</div>
-		    
-		    <div class="box_gray02 b_line pdt40 pdb40 t_center fs18 mgt10">  
-		        
-				<span>총 상품금액 <strong>7,200</strong>원</span> + 
-				<span>총 배송비 <strong>2,500</strong>원</span> - 
-				<span>총 할인금액 <strong>9,700</strong>원</span> = 
-				<span>총 결제금액 <strong class="c_red">0</strong>원</span>
-			</div>
-		</div>
     
     <!-- 이벤트 배너 
     <div class="mgt20" id="evnetBannerArea" style="display: block;">
@@ -179,10 +177,10 @@ $(document).ready(function(){
 <table class="table02_v1">
     <caption>배송지 정보 상세</caption>
     <colgroup>
-        <col style="width:15%">
-        <col style="width:35%">
-        <col style="width:15%">
-        <col style="width:*">
+        <col style="width:15%" />
+        <col style="width:35%" />
+        <col style="width:15%" />
+        <col style="width:*" />
     </colgroup>
     <tbody>
         
@@ -202,7 +200,7 @@ $(document).ready(function(){
                 <th scope="row">주소</th> 
                 <td colspan="3" class="fs14 c_black">
                     
-                        108-81<br>
+                        108-81<br />
                      
                     <div class="w01">경기 파주시 회동길 78  교보핫트랙스 </div>
                 </td>
@@ -223,10 +221,10 @@ $(document).ready(function(){
 <table class="table02_v1">
     <caption>결제 정보 상세</caption>
     <colgroup>
-        <col style="width:15%">
-        <col style="width:35%">
-        <col style="width:15%">
-        <col style="width:*">
+        <col style="width:15%" />
+        <col style="width:35%" />
+        <col style="width:15%" />
+        <col style="width:*" />
     </colgroup>
     <tbody>
         <tr>
@@ -243,19 +241,28 @@ $(document).ready(function(){
                 <div class="payment_list">
                     <p class="c_black fs14">상품금액 : 7,200원</p>
                     <p class="mgt10 c_black fs14">배송비 : 2,500원</p>
-                    <p class="p_lineh mgt5 c_black fs14">할인금액 : 0원</p>
+                    <p class="p_lineh mgt5 c_black fs14">할인금액 : 
+                    <span>교보핫트랙스 온라인 예치금 9,700원</span></p>
+                    
+                    
+                    
+                    
+                    
+                    
                 </div>
             </td>
         </tr>
         <tr>
             <td colspan="3" class="c_black fs14">
             <div class="p_lineh">
-                <p>결제금액 : 9,700원
-                <span>( 국민은행 &nbsp; 1234-56-7890 &nbsp; 예금주 : 교보핫트랙스㈜ )<br>주문일로부터 일주일까지 입금이 안 될 경우 주문이 자동으로 취소됩니다.</span>
+                <p>결제금액 : 0원
+                
                 
                 </p>
                 </div>
-                
+                        <a href="#n" class="btn_type05_v2 mgt10">신용카드 전표출력</a>
+                        <a href="#n" class="btn_type05_v2 mgt10">현금영수증 출력</a>
+                        <a href="#n" class="btn_type05_v2 mgt10">거래명세서 출력</a>
                     
             </td>
         </tr>
@@ -267,9 +274,9 @@ $(document).ready(function(){
 </table>
 
 <ul class="list_type02_v2 mgt10">
-  <li>주문하신 내역은 '마이핫트랙스 &gt; 주문/배송조회' 메뉴에서 확인하실 수 있습니다.</li>
+  <li>주문하신 내역은 '마이핫트랙스 &#62; 주문/배송조회' 메뉴에서 확인하실 수 있습니다.</li>
   <li>주문 후 취소 및 변경, 반품, 교환 요청사항은 '마이핫트랙스'에서 접수 가능합니다.</li>
-  <li>현금영수증, 세금계산서, 신용카드 매출전표 등 증빙 서류는 주문 완료 후 '마이핫트랙스 &gt; 주문정보' 메뉴에서 발급 가능합니다.</li>
+  <li>현금영수증, 세금계산서, 신용카드 매출전표 등 증빙 서류는 주문 완료 후 '마이핫트랙스 &#62; 주문정보' 메뉴에서 발급 가능합니다.</li>
 </ul>
 
 <div class="btn_area t_center mgt50">
@@ -285,6 +292,8 @@ $(document).ready(function(){
         </div>
         <!-- //컨텐츠 -->
     </div>
+    
+    
     <!-- //Container -->
     
 
@@ -343,18 +352,18 @@ $(document).ready(function(){
 		</div>
 		<div class="cont right">
 			<ul class="sns">
-				<li><a href="#n"><img src="/images/biz/common/icon_instagram.png" alt="instagram"></a></li>
-				<li><a href="#n"><img src="/images/biz/common/icon_facebook.png" alt="facebook"></a></li>
-				<li><a href="#n"><img src="/images/biz/common/icon_youtube.png" alt="youtube"></a></li>
-				<li><a href="#n"><img src="/images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+				<li><a href="#n"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+				<li><a href="#n"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+				<li><a href="#n"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+				<li><a href="#n"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a></li>
 			</ul>
                <div class="mobile">
                		<a href="#n" class="font_t ios">APP STORE</a>
 					<a href="#n" class="font_t and">PLAY STORE</a>
                </div>
 			<ul class="copyright">
-				<li><a href="#n"><img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
-				<li><a href="#n"><img src="/images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+				<li><a href="#n"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+				<li><a href="#n"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
 			</ul>
 			<span class="payment"><em class="font_t">LGU+</em><a href="#n" _onclick="goValidEscrow('hottracks');">서비스 가입사실 확인 &gt;</a></span>
 			<span class="txt">고객님은 안전거래를 위해 현금 등으로 5만원 이상 결제 시 저희 쇼핑몰에서<br/>가입한 LG데이콤의 구매 안전서비스를 이용하실 수 있습니다.</span>

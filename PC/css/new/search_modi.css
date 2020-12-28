@@ -19,7 +19,7 @@
 .search_modi.search_wrapper .cont02.pd_unit .category_slide .bx-pager strong{ font-size: inherit; font-family: inherit; min-width: 20px; display: inline-block;}
 
 .search_modi.search_wrapper .cont03 .search_tit {font-size: 28px; font-weight: 700;}
-.search_modi.search_wrapper .filter_btn {display:block;background: #000 url(../../images/_new/filter_icon.png) center right 7px no-repeat;float: left;font-size: 14px;color: #fff;padding: 8px 29px 8px 12px;font-weight: 300;margin-left: 10px;}
+.search_modi.search_wrapper .filter_btn {display:block;background: #000 url(../../images/new/filter_icon.png) center right 7px no-repeat;float: left;font-size: 14px;color: #fff;padding: 8px 29px 8px 12px;font-weight: 300;margin-left: 10px;}
 
 .search_modi .category_wrap .pd_filter .pd_total {}
 
@@ -27,7 +27,7 @@
 .search_modi.search_wrapper .search_tab {margin-top:120px;}
 .search_modi.search_wrapper .pd_filter {margin-top: 40px;}
 .search_modi.search_wrapper .pd_filter .form_select {width: auto;}
-.search_modi.search_wrapper .pd_filter .form_select select {height: auto;width:auto; direction: rtl; margin-left: 10px;font-size: 18px;font-weight: 700;color: #000;padding: 2px 30px 2px 10px;background: url(../../images/_new/search_modi_btn.png) center right no-repeat;box-sizing: border-box;display: block;float: left;text-align: right;}
+.search_modi.search_wrapper .pd_filter .form_select select {height: auto;width:auto; direction: rtl; margin-left: 10px;font-size: 18px;font-weight: 700;color: #000;padding: 2px 30px 2px 10px;background: url(../../images/new/search_modi_btn.png) center right no-repeat;box-sizing: border-box;display: block;float: left;text-align: right;}
 .search_modi.search_wrapper .pd_filter .form_select:after {background: #000;}
 .search_modi.search_wrapper .pd_filter .form_select:after{content:''; display: none;}
 
@@ -51,7 +51,7 @@
 .search_modi .search_filter .btn_wrapper {float: none; display:none; position: absolute;top: 14px;right: 12px;}
 .search_modi .search_filter.active .btn_wrapper {display: block;}
 
-.search_modi .search_filter .btn_dp2:after{position:absolute;content:'';right:0;width: 12px;top:50%;margin-top: -6px;height: 12px;background:url('../../images/_new/select_depth.png') no-repeat;}
+.search_modi .search_filter .btn_dp2:after{position:absolute;content:'';right:0;width: 12px;top:50%;margin-top: -6px;height: 12px;background:url('../../images/new/select_depth.png') no-repeat;}
 .search_modi .search_filter .btn_dp2.on:after{background-position:-12px 0;}
 
 .search_modi .search_filter.active .search_dp2{display:block;}
@@ -71,9 +71,9 @@
 .search_modi .search_filter .price .input_wrap input:-ms-input-placeholder { /* Internet Explorer 10-11 */   color: #777777;}
 .search_modi .search_filter .price .input_wrap input::placeholder {   color: #777777;}
 
-.search_modi .search_filter .btn_price_search {width:26px;height:26px;background:url('../../images/_new/ico_btn_search.png') no-repeat center;font-size: 0;display: block;float: left;margin-left: 5px;}
+.search_modi .search_filter .btn_price_search {width:26px;height:26px;background:url('../../images/new/ico_btn_search.png') no-repeat center;font-size: 0;display: block;float: left;margin-left: 5px;}
 
-.search_modi .search_filter .btn_wrapper .btn_reset {border:0;font-size: 0;padding:0;width: 26px;height: 24px;background: url('../../images/_new/icon_refresh.png') no-repeat center;}
+.search_modi .search_filter .btn_wrapper .btn_reset {border:0;font-size: 0;padding:0;width: 26px;height: 24px;background: url('../../images/new/icon_refresh.png') no-repeat center;}
 
 /* list */
 .search_modi .category_wrap .pd_unit .category_slide ul li {width:230px !important; margin-right: 10px !important; padding:0;}
@@ -107,13 +107,13 @@
 .popular_search_wrap .bx-pager .bx-pager-link {font-size: 0; width:10px; height:10px; margin:0 4px; background: #BDBDBD; border-radius: 5px;}
 .popular_search_wrap .bx-pager .bx-pager-link.active{ background: #000; }
 .popular_search_wrap .blank_box {display: table; width:100%; height:100%; min-height:320px;}
-.popular_search_wrap .blank_box ._txt {display: table-cell;vertical-align: top;text-align: center;color:#777777;font-size: 14px;font-weight: 400;background:url(../../images/_new/icon_message.png) no-repeat center 70px;padding-top: 137px;}
+.popular_search_wrap .blank_box ._txt {display: table-cell;vertical-align: top;text-align: center;color:#777777;font-size: 14px;font-weight: 400;background:url(../../images/new/icon_message.png) no-repeat center 70px;padding-top: 137px;}
 
 #gnb .popular_search_wrap .keyword_list_v2 { border: 1px solid #dbdbdb;box-sizing:border-box;border-radius: 20px;background: #fff;z-index: 10;position: relative; margin: 0 auto; padding: 20px 30px 63px 30px;-webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);-moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3); display: block !important; box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.16); width:280px; top:0; left:auto; margin:20px 20px 30px;}
 #gnb .popular_search_wrap .keyword_list_v2:before {z-index: -1;border-radius: 20px;content: '';display: block;position: absolute;top:0;left:0;width: 100%;height: 100%;background: #fff;}
 #gnb .popular_search_wrap .keyword_list_v2 .last_cont {margin-top:10px; padding:15px 0; border-top:1px #777 solid; border-bottom:1px #777 solid;}
 #gnb .popular_search_wrap .keyword_list_v2 .last_texts {width: 70%;}
-#gnb .popular_search_wrap .keyword_list_v2 .btn_last_delete {font-size: 0; width:9px; height:9px; position: absolute; top:50%; right:0; margin-top:-4px; background:url(../../images/_new/icon_last_search_close.png) no-repeat center;}
+#gnb .popular_search_wrap .keyword_list_v2 .btn_last_delete {font-size: 0; width:9px; height:9px; position: absolute; top:50%; right:0; margin-top:-4px; background:url(../../images/new/icon_last_search_close.png) no-repeat center;}
 #gnb .popular_search_wrap .keyword_list_v2 .all_delete_txt {position: absolute; top:20px; right:33px; font-size: 13px; font-weight: 400; overflow: hidden;}
-#gnb .popular_search_wrap .keyword_list_v2 .all_delete_txt:after {content:''; display:block; float: left; width:14px; height:16px; margin-right:2px; background:url(../../images/_new/icon_trash.png) no-repeat center;}
+#gnb .popular_search_wrap .keyword_list_v2 .all_delete_txt:after {content:''; display:block; float: left; width:14px; height:16px; margin-right:2px; background:url(../../images/new/icon_trash.png) no-repeat center;}
 #gnb .popular_search_wrap .inner_popular_search {width:380px !important; height:100%;}
