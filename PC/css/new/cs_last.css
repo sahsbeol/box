@@ -1,8 +1,8 @@
 @charset "utf-8";
 
 /*----- cs css all Modified - 고객센터 css 폰트종류 폰트사이즈 등등 수정 -----*/
-.content.f_set.cs_last {font-family: 'NS','Apple SD Gothic Neo', sans-serif; line-height: normal; font-size:14px;}
-.content .only_english {font-family: 'GS','Apple SD Gothic Neo', sans-serif !important; line-height: normal; font-size: inherit;}
+.content.f_set.cs_last {font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; line-height: normal; font-size:14px;}
+.content .only_english {font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important; line-height: normal; font-size: inherit;}
 
 /* lnb common */
 .cs_last .lnb > ul > li > a {font-size: 16px; min-height: 37px; line-height: 37px;}
@@ -11,10 +11,9 @@
 .cs_last .lnb > ul > li > .depth2 > li.active > a {color :#ff6600;}
 
 /* title */
-.cs_last .page_location .loc {float:right;padding: 0;margin: 17px 0 0 0;/* font-size: 26px; */}
-.cs_last .page_location .loc * {font-size: 14px;line-height: 14px;background: url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_bl02.gif) no-repeat 0 6px;}
-.cs_last .page_location .loc .home {margin-left:0;padding-left:12px;background: url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_dot.gif) no-repeat 0px 5px;}
-.cs_last .page_location .title {float:left;font-size: 26px;margin-bottom: 10px;line-height: normal;}
+.cs_last .page_location {background: none;}
+.cs_last .page_location .title {float:left;font-size: 40px; font-weight:700; line-height: normal;}
+.cs_last .page_location .title a {display: block;}
 
 .cs_last h3.page_title {font-size: 23px;font-weight: 700;margin-bottom: 15px; min-height:auto;}  
 .cs_last .tit01 {font-size: 18px; font-weight:500; line-height: normal; min-height:auto; margin-bottom:10px; margin-top:40px;}
@@ -119,13 +118,13 @@
 .cs_last .info_box .incont li {font-size: 14px; line-height: 1.4; margin-bottom: 3px;}
 
 /* search */
-.cs_last .search_box02 {padding:40px 10px;text-align:center;border:1px solid #e2e2e2;background:#f5f5f1;}
-.cs_last .search_box02 .stit {font-size: 20px; font-weight: 700; vertical-align: middle;}
-.cs_last .search_box02 .text_box {position:relative;display:inline-block;width:266px;height: auto;padding: 5px 45px 5px 23px;vertical-align: middle;background: #4f4f4f;border-radius: 19px;}
-.cs_last .search_box02 .text_box input[type="text"] {width:100%;height:30px;color:#fff;font-size: 14px;border:0;background:#4f4f4f;outline:none;}
+.cs_last .search_box02 {padding:40px 10px;text-align:center;border: 0 none;background:#f5f5f1;}
+.cs_last .search_box02 .stit {font-size: 24px; font-weight: 700; vertical-align: middle;}
+.cs_last .search_box02 .text_box {position:relative;display:inline-block;width:266px;height: auto;padding: 5px 45px 5px 23px;vertical-align: middle;background: #fff;border-radius: 0;border: 2px #000 solid;}
+.cs_last .search_box02 .text_box input[type="text"] {width:100%;height: 36px;color:#fff;font-size: 16px;border:0;background: #fff;outline:none;}
 .cs_last .search_box02 .text_box .search_btn {position:absolute;top: 50%;margin-top: -16px;right:16px;display:inline-block;width:19px;height:30px;background:url(https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_search02.gif) no-repeat 50% 50%;}
 .cs_last .search_box02 .text_box .search_btn span {display:inline-block;visibility:hidden;font-size:0;line-height:0}
-.cs_last .search_box02 .text_box .exm_txt {position:absolute;top: 50%;margin-top: -15px;left:23px;color:#fff;font-size: 14px;line-height:30px;}
+.cs_last .search_box02 .text_box .exm_txt {position:absolute;top: 50%;margin-top: -15px;left: 10px;color: #BDBDBD;font-size: 14px;line-height:30px;}
 
 .cs_last .search_box02 .wordlist {height:auto; line-height: normal;}
 
