@@ -42,7 +42,7 @@
 .orderandpay .have_inner_txt.address .btn_defalut {position: absolute;top:0;/* left:404px; */right: 0;}
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_txt,
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt,
-.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {float: left;}
+.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {float: left; font-size: inherit;}
 .orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {margin-left: 11px;}
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt {margin-top: 8px; margin-left: 10px;}
 
@@ -164,10 +164,15 @@
 .orderandpay .inner_float .text_wrap {margin-left: 14px; margin-top:12px; float: left;} 
 
 
-.orderandpay .inner_float_dot .input_wrap {float: left;margin-left: 3px;line-height: 35px;width: calc(32% - 4px);}
+/* 이메일 */
+.orderandpay .inner_float_dot .input_wrap {float: left;margin-left: 0px;line-height: 44px;width: calc(48% - 6px);text-align: center;}
 .orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
 .orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
-.orderandpay .inner_float_dot .input_wrap.inner_dot {width: calc(1% - -10px);}
+.orderandpay .inner_float_dot .input_wrap.inner_dot {width: calc(4% - -12px);}
+.orderandpay .inner_float_dot .input_wrap.right {float: right;}
+
+.orderandpay .inner_float_dot .select_wrap {float: none; margin-top: 10px;}
+
 
 
 /* btn */
@@ -214,9 +219,9 @@
 .orderandpay .user_price_wrap .price_unit_list dd {font-size: 15px;font-weight: 500;text-align: right;float: right;}
 
 .orderandpay .user_price_wrap .user_price_unit.sum {padding: 0;border-top: 1px #707070 solid;margin-top: 10px;padding-top: 15px;}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum_tit {font-size: 13px;font-weight:700;text-align: center;float: left;max-width: 56%;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum_tit {font-size: 14px;font-weight:700;text-align: center;float: left;max-width: 56%;}
 .orderandpay .user_price_wrap .user_price_unit .unit_sum {font-size: 13px;font-weight:500;/* margin-top: 13px; */text-align: center;float: right;max-width: 70%;}
-.orderandpay .user_price_wrap .user_price_unit .unit_sum .only_english {font-size: 15px;font-weight:700;}
+.orderandpay .user_price_wrap .user_price_unit .unit_sum .only_english {font-size: 16px;font-weight:700;}
 
 .orderandpay .user_price_wrap .user_price_unit:after {content: ''; display: block; clear: both;}{}
 .orderandpay .user_price_wrap .user_price_unit .unit_sum_point {/* padding: 18px 0px 0; */margin-top: 5px;}
@@ -364,17 +369,16 @@
 .orderandpay .count_wrap .input_txt {float: left;    width: 39px !important;    padding: 5px 4px 6px 5px;    border-left: 0;    border-right: 0;}
 
 
+
 @media screen and (max-width: 360px) {
 
-	.orderandpay .input_wrap input {padding-top: 12px;padding-bottom: 13px;}
+	.orderandpay .input_wrap input {padding-top: 11px;padding-bottom: 12px;}
 	.orderandpay .user_info_wrap .have_inner_txt .i_small_txt,
 	.orderandpay .choice_wrap input[type="checkbox"] + label,
 	.orderandpay .choice_wrap input[type=radio]+ label {font-size: 12px; letter-spacing: -1px;}
 	.orderandpay .select_wrap select,
 	.orderandpay .input_wrap select {font-size: 11px;padding-right: 15px;background-position: center right 5px;}
 	.orderandpay .select_wrap select, .orderandpay .input_wrap select {padding-top:13px; padding-bottom: 14px;}
-	.orderandpay .inner_float_dot .input_wrap {width :calc(32% - 5px);}
-	.orderandpay .inner_float_dot .input_wrap.inner_dot {    width: calc(1% + 10px);}
 
 
 

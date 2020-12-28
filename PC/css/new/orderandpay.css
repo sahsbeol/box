@@ -141,7 +141,7 @@
 .orderandpay .inner_float .text_wrap {margin-left: 14px; margin-top:12px; float: left;} 
 
 
-.orderandpay .inner_float_dot .input_wrap {float: left; margin-left: 3px; line-height: 35px;}
+.orderandpay .inner_float_dot .input_wrap {float: left; margin-left: 7px; line-height: 35px;}
 .orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
 .orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
 
@@ -166,10 +166,13 @@
 .orderandpay .tit01 {/*font-size: 16px; font-weight: 400; color:#000;*/margin-top: 35px;}
 .orderandpay .text_show {font-size: 18px;text-align: center;border:1px #DBDBDB solid;border-radius: 30px;padding: 20px 94px;display: inline-block;}
 .orderandpay .text_show_wrap {margin-top:40px; text-align: center;}
+.orderandpay .bg_arrowdown {background: url(../../images/new/icon_arrow2.png) no-repeat center center;width: 19px;height: 11px;margin-left: 10px;margin-top: 4px;display: block;float: right;}
+.orderandpay .bg_arrowup {background: url(../../images/new/icon_arrow2_active.png) no-repeat center center;width: 19px;height: 11px;margin-left: 10px;margin-top: 4px;display: block;float: right; }
 
 .orderandpay .help_box_wrap {background: #FAFAFA;padding: 8px 20px; margin-top: 40px;}
 .orderandpay .help_box_wrap .text_list li {font-size: 13px;font-weight:400;color:#777777;position: relative;padding-left: 10px;margin: 12px 0;}
 .orderandpay .help_box_wrap .text_list li:before {content: '';display: block;width:5px;height:1px;background: #777777;position: absolute;left: 0;top: 6px;}
+.orderandpay .order_list {}
 
 /* 결제금액 */
 .orderandpay .user_price_wrap {background: #FAFAFA; padding:40px; margin-top: 30px;}

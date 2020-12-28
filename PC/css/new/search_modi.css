@@ -19,7 +19,7 @@
 .search_modi.search_wrapper .cont02.pd_unit .category_slide .bx-pager strong{ font-size: inherit; font-family: inherit; min-width: 20px; display: inline-block;}
 
 .search_modi.search_wrapper .cont03 .search_tit {font-size: 28px; font-weight: 700;}
-.search_modi.search_wrapper .filter_btn {display:block;background: #000 url(../../images/new/filter_icon.png) center right 7px no-repeat;float: left;font-size: 14px;color: #fff;padding: 8px 29px 8px 12px;font-weight: 300;margin-left: 10px;}
+.search_modi.search_wrapper .filter_btn {display:block;background: #000 url(../../images/new/filter_icon.png) center right 7px no-repeat;float: left;font-size: 14px;color: #fff;padding: 8px 29px 8px 12px;font-weight: 300;margin-left: 20px;}
 
 .search_modi .category_wrap .pd_filter .pd_total {}
 
