@@ -229,7 +229,7 @@
 .cs_last .sos_counsel {background: none; border:none;}
 .cs_last .sos_counsel .f_left {border-right:0;}
 .cs_last .sos_counsel .txt {line-height: 1.5;margin-top: 80px;text-align: center;}
-.cs_last .sos_counsel .btn_type01 {margin-top:10px; font-size: 12px;padding: 6px 11px;height: auto;line-height: 1.4;text-align: center;display: inline-block; background: #fff; border:1px #000 solid; color:#000;}
+.cs_last .sos_counsel .btn_type01 {margin-top:10px; font-size: 12px;padding: 6px 11px;height: auto;line-height: 1.4;text-align: center;display: inline-block; background: #fff; border:1px #000 solid; color:#000 !important;}
 .sos_counsel .f_right {text-align: center;}
 
 /* unit */
