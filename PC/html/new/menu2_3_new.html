@@ -921,47 +921,91 @@ jQuery(function($){
         <p class="agree"><input type="checkbox" id="chkAgree"/><label for="chkAgree"> 위 개인정보 수집, 이용에 동의합니다.</label></p>
     </div>
 
-    <h4 class="important_info mgt30">필수 입력 정보</h4>
-    <p class="detail_txt">상품 입점을 위한 필수 정보입니다.  모두 입력 후 추가 선택 정보를 입력해 주세요.</p>
-    <table class="table02 mgt10" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
+    <h4 class="important_info mgt30">
+        <span>필수 입력 정보 </span>
+        <span class="detail_txt">상품 입점을 위한 필수 정보입니다.  모두 입력 후 추가 선택 정보를 입력해 주세요.</span>
+    </h4>
+    <table class="table_wrap mgt10" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
         <caption>상품입점문의 양식</caption>
         <colgroup>
-            <col width="18%" />
-            <col width="32%" />
-            <col width="18%" />
-            <col width="*" />
+            <col width="36%" />
+            <col width="64%" />
         </colgroup>        
         <tbody>
-            <tr>
-                <th scope="row"><label for="vndrName">회사명</label></th> 
-                <td><input type="text" name="vndrName" id="vndrName" style="width:100%; max-width:175px;" class="input_txt required" title="회사명"/></td>
 
-                <th scope="row"><label for="mngrName">담당자명</label></th> 
-                <td><input type="text" name="mngrName" id="mngrName" style="width:100%; max-width:175px;" class="input_txt required" title="담당자명"/></td>  
+             <tr scope="row">
+                <th><label>회사명 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="width_name">
+                    </div>
+                </td>                                  
+            </tr>
+            <tr scope="row">
+                <th><label>담당자명 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="width_name">
+                    </div>
+                </td>
             </tr>
 
-            <tr>
-                <th scope="row">연락처</th> 
+            <tr scope="row">
+                <th><label>연락처 <span class="star">*</span></label></th>
                 <td>
-                    <select name="" id="" class="input_txt inputNumberText" title="연락처 첫 번째 자리">
-                        <option value="">010</option>
-                    </select>
-                    -
-                    <input type="text" name="telNum2" style="width:40px;" class="input_txt inputNumberText" maxlength="4" title="연락처 두 번째 자리"/>
-                    -
-                    <input type="text" name="telNum3" style="width:40px;" class="input_txt inputNumberText" maxlength="4" title="연락처 세 번째 자리"/>
-                </td> 
-
-                <th scope="row"><label for="emailAddr">이메일</label></th> 
-                <td><input type="text" name="emailAddr" id="emailAddr" style="width:100%; max-width:175px;" class="input_txt required" title="이메일"/></td>
+                    <div class="choice_wrap have_inner_txt inner_float">
+                        <span class="input_wrap">
+                            <select name="" id="" class="width_phone">
+                                <option value="">선택</option>
+                            </select>
+                        </span>  
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_phone">
+                        </span>
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_phone">
+                        </span>                                           
+                    </div>
+                </td>                                   
+            </tr>
+            <tr scope="row">                 
+                <th><label>이메일 <span class="star">*</span></label></th>
+                <td>
+                    <div class="choice_wrap type_squre have_inner_txt inner_float_dot">                                                  
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_email">
+                        </span>
+                        <span class="input_wrap">@</span>
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_email">
+                        </span> 
+                        <span class="input_wrap 
+                        ">
+                            <select name="" id="" class="width_email">
+                                <option value="">직접입력</option>
+                            </select>
+                        </span>                                              
+                    </div>
+                </td>
             </tr>
 
             <tr>
                 <th scope="row">입점 희망 채널</th> 
                 <td class="txt" colspan="3"> 
-                    <input name="prdtStore" id="storeForm" type="radio" value="N" class="radios first" title="입점형태"/><label for="storeForm" class="t01">온/오프라인</label>
-                    <input name="prdtStore" id="offline" type="radio" value="I" class="radios" title="오프라인"/><label for="offline" class="t01">오프라인</label>
-                    <input name="prdtStore" id="online" type="radio" value="S" class="radios" title="온라인"/><label for="online" class="t01">온라인</label> 
+                    <div class="choice_wrap">
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="">
+                            <label for="orderInfoSmsY">정보 수신</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N">
+                            <label for="orderInfoSmsN">수신하지 않음</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N">
+                            <label for="orderInfoSmsN">수신하지 않음</label>
+                        </span>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -988,9 +1032,11 @@ jQuery(function($){
         </tbody>
     </table>
 
-    <h4 class="important_info mgt30">선택 입력 정보</h4>
-    <p class="detail_txt">상품 입점을 위한 추가 선택 정보를 입력해 주세요. 필수 정보 모두 입력 시 상품입점문의가 가능합니다.</p>
-    <table class="table02 mgt10" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
+    <h4 class="important_info mgt30">
+        <span>선택 입력 정보</span>
+        <span class="detail_txt">상품 입점을 위한 추가 선택 정보를 입력해 주세요. 필수 정보 모두 입력 시 상품입점문의가 가능합니다.</span>
+    </h4>
+    <table class="table_wrap mgt10" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
         <caption>상품입점문의 양식</caption>
         <colgroup>
             <col width="19%" />

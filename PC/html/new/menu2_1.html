@@ -676,14 +676,15 @@ jQuery(function($){
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr class="list_fixed">
                     <!-- <td>
                         121
                     </td> -->
                     <td class="t_left">
                         <input type="hidden" value="22304"/>
                         <a href="#list-content22304" id="22304" class="click">
-                        [공지사항] 한터차트 반영 정정 안내 <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/content/ic_new.gif" alt="NEW" style="vertical-align:baseline;margin-left:5px;"/>
+                        [공지사항] 한터차트 반영 정정 안내 
+                        <span class="icon_cs_new">N</span>
                         </a>
                     </td>
                     <td>
@@ -9482,20 +9483,19 @@ jQuery(function($){
                                     </tr>
                                     </tbody>
                                     </table>
+                                    <!-- 20.12.28 : 작업부분 -->
                                     <!-- paging -->
-                                    <div class="paging mgt40">
-                                        <a title="맨 처음 페이지로 이동" href="/ht/help/listNotice?page=1" class="first">처음</a>
-                                        <ul>
-                                            <li class="active"><a href="javascript://">1</a></li>
-                                            <li><a title="2페이지로 이동" href="/ht/help/listNotice?page=2">2</a></li>
-                                            <li><a title="3페이지로 이동" href="/ht/help/listNotice?page=3">3</a></li>
-                                            <li><a title="4페이지로 이동" href="/ht/help/listNotice?page=4">4</a></li>
-                                            <li><a title="5페이지로 이동" href="/ht/help/listNotice?page=5">5</a></li>
-                                            <li><a title="6페이지로 이동" href="/ht/help/listNotice?page=6">6</a></li>
-                                            <li><a title="7페이지로 이동" href="/ht/help/listNotice?page=7">7</a></li>
-                                        </ul>
-                                    </div>
+                                    <div class="pagination_v2 mgt80">
+                                        <a title="테스트" href="javascript:" class="arr prev first"></a>
+                                        <a href="javascript://" class="active">1</a>
+                                        <a title="2페이지로 이동" href="javascript:srchPageMove('2')">2</a>
+                                        <a title="3페이지로 이동" href="javascript:srchPageMove('3')">3</a>
+                                        <a title="4페이지로 이동" href="javascript:srchPageMove('4')">4</a>
+                                        <a title="5페이지로 이동" href="javascript:srchPageMove('5')">5</a>
+                                        <a href="javascript:srchPageMove('6')" class="arr next"></a>
+                                    </div>                                    
                                     <!-- //paging -->
+                                    <!--// 20.12.28 : 작업부분 -->
                                 </div>
                                 <!-- //sub contents -->
                             </div>
