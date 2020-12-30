@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
     <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
     <!-- 20.12.28 -->
-    <link rel="stylesheet" type="text/css" href="../../css/new/cs_last.css">
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
     <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../../js/m_contents.js"></script>
@@ -827,11 +827,11 @@ if (isEmpty(vid)) {//로그인이 안되있으면
     
     
     
-    <!-- 201228 S : id="content 에 class="cs_last" 넣어주세요 -->
+    <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
     <!-- Container -->
-    <div id="container" >   
+        <div id="container" >   
             <!-- 컨텐츠 -->        
-        <div class="content cs_last" id="content">
+            <div class="content orderandpay" id="content">
             
             <!-- sub top -->
             <div class="page_location">
@@ -910,7 +910,7 @@ jQuery(function($){
         <li>업무폭주로 인해 따로 전화상담은 받고 있지 않으니 참고 바랍니다.</li>
     </ul>
     <form name="vendorIqryForm" action="/" method="post">
-    <div class="info_box mgt20">
+    <div class="info_box mgt30">
         <ul class="incont">
             <li class="info_tit">* 제휴업체 담당자 개인정보 수집 및 이용에 대한 안내</li>
             <li>- 수집항목: 담당자명, 연락처, 이메일</li>
@@ -918,52 +918,59 @@ jQuery(function($){
             <li>- 활용기간: 접수일로부터 한 달</li>
             <li>- 기재하여 주신 개인 정보는 제휴협의 외 다른 목적으로 사용되지 않습니다</li>
         </ul>
-        <p class="agree"><input type="checkbox" id="chkAgree"/><label for="chkAgree"> 위 개인정보 수집, 이용에 동의합니다.</label></p>
+        <div class="choice_wrap type_squre have_inner_txt inner_float">
+            <div class="choice_wrap_inner">
+                <span>
+                    <input type="checkbox" name="orderInfo2" id="orderInfo_21" >
+                    <label for="orderInfo_21">위 개인정보 수집, 이용에 동의합니다. </label>
+                </span>
+            </div>                                             
+        </div>
     </div>
 
     <h4 class="important_info mgt30">
         <span>필수 입력 정보 </span>
         <span class="detail_txt">상품 입점을 위한 필수 정보입니다.  모두 입력 후 추가 선택 정보를 입력해 주세요.</span>
     </h4>
-    <table class="table_wrap mgt10" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
+    <table class="table_wrap cs" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
         <caption>상품입점문의 양식</caption>
         <colgroup>
-            <col width="36%" />
-            <col width="64%" />
+            <col width="19.7%" />
+            <col width="80.3%" />
         </colgroup>        
         <tbody>
 
-             <tr scope="row">
-                <th><label>회사명 <span class="star">*</span></label></th>
+            <tr scope="row">
+                <th><label for="vndrName">회사명 <span class="star">*</span></label></th>
                 <td>
                     <div class="input_wrap">
-                        <input type="text" placeholder="" class="width_name">
+                        <input type="text" placeholder="" class="width_name" id="vndrName">
                     </div>
                 </td>                                  
             </tr>
             <tr scope="row">
-                <th><label>담당자명 <span class="star">*</span></label></th>
+                <th><label for="mngrName">담당자명 <span class="star">*</span></label></th>
                 <td>
                     <div class="input_wrap">
-                        <input type="text" placeholder="" class="width_name">
+                        <input type="text" placeholder="" class="width_name" id="mngrName">
                     </div>
                 </td>
             </tr>
 
             <tr scope="row">
-                <th><label>연락처 <span class="star">*</span></label></th>
+                <th>연락처 <span class="star">*</span></th>
                 <td>
                     <div class="choice_wrap have_inner_txt inner_float">
                         <span class="input_wrap">
-                            <select name="" id="" class="width_phone">
+                            <select name="" id="" class="width_phone" title="연락처 첫번째 자리">
                                 <option value="">선택</option>
                             </select>
                         </span>  
                         <span class="input_wrap">
-                            <input type="text" placeholder="" class="width_phone">
+                            <input type="text" placeholder="" class="width_phone" title="연락처 두번째 자리">
                         </span>
                         <span class="input_wrap">
-                            <input type="text" placeholder="" class="width_phone">
+                            <input type="text" placeholder="" class="width_phone" title="연락처 세번째 자리">
                         </span>                                           
                     </div>
                 </td>                                   
@@ -990,96 +997,137 @@ jQuery(function($){
             </tr>
 
             <tr>
-                <th scope="row">입점 희망 채널</th> 
-                <td class="txt" colspan="3"> 
+                <th scope="row"><label>입점 희망 채널 <span class="star">*</span></label></th> 
+                <td class="txt"> 
                     <div class="choice_wrap">
                         <span class="choice_wrap_inner">
-                            <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsY" value="Y" checked="">
-                            <label for="orderInfoSmsY">정보 수신</label>
+                            <input type="radio" name="store" id="storeAll"  checked="">
+                            <label for="storeAll">온/오프라인</label>
                         </span>
                         <span class="choice_wrap_inner">
-                            <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N">
-                            <label for="orderInfoSmsN">수신하지 않음</label>
+                            <input type="radio" name="store" id="offline" >
+                            <label for="offline">오프라인</label>
                         </span>
                         <span class="choice_wrap_inner">
-                            <input type="radio" name="orderInfoSmsYn" id="orderInfoSmsN" value="N">
-                            <label for="orderInfoSmsN">수신하지 않음</label>
+                            <input type="radio" name="store" id="online" >
+                            <label for="online">온라인</label>
                         </span>
                     </div>
                 </td>
             </tr>
             <tr>
-                <th scope="row">판매형태</th> 
-                <td class="txt" colspan="3"> 
-                    <input name="prdtGbn" id="internal" type="radio" value="N" class="radios first" title="상품종류"/><label for="internal" class="t01">국내유통 상품</label>
-                    <input name="prdtGbn" id="importation" type="radio" value="I" class="radios" title="수입"/><label for="importation" class="t01">수입</label>
-                    <input name="prdtGbn" id="itself" type="radio" value="S" class="radios" title="자체제작"/><label for="itself" class="t01">자체제작</label> 
+                <th scope="row">판매형태 <span class="star">*</span></th> 
+                <td class="txt">
+                    <div class="choice_wrap">
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="prdtGbn" id="internal"  checked="">
+                            <label for="internal">국내유통 상품</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="prdtGbn" id="importation" >
+                            <label for="importation">수입</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="prdtGbn" id="itself" >
+                            <label for="itself">자체제작</label>
+                        </span>
+                    </div> 
                 </td>
             </tr>
             <tr>
-                <th scope="row">상품브랜드</th> 
-                <td class="txt" colspan="3"> 
-                    <input type="text" name="productBrand" id="productBrand" style="width:100%;" class="input_txt required" title="상품브랜드"/>
+                <th scope="row"><label for="prdtBrand">상품브랜드 <span class="star">*</span></label></th> 
+                <td class="txt"> 
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" id="prdtBrand">
+                    </div>
                 </td>
             </tr>
             <tr> 
-                <th scope="row"><label for="iqryDesc">상품설명</label></th> 
-                <td colspan="3">
-                    <div><textarea class="in01" style="width:100%;height:80px;" name="iqryDesc" id="iqryDesc" onkeyup="checkLengthArea('iqryDesc', 2000)" title="상품설명"></textarea></div>
+                <th scope="row"><label for="iqryDesc">상품설명 <span class="star">*</span></label></th> 
+                <!-- <td colspan="3">
+                    <div><textarea class="in01" style="width:100%;height:80px;" name="iqryDesc" id="iqryDesc" onkeyup="checkLengthArea('iqryDesc', 2000)" title="상품설명" ></textarea></div>
+                    <div style="float:right;">(<span id="t_iqryDesc">0Byte</span> / 2000 Byte)</div>
+                </td> -->
+                <td class="txt"> 
+                    <div class="input_wrap">
+                        <textarea class="in01" style="width:100%;height:80px;" name="iqryDesc" id="iqryDesc" onkeyup="checkLengthArea('iqryDesc', 2000)" title="상품설명" ></textarea>
+                    </div>
                     <div style="float:right;">(<span id="t_iqryDesc">0Byte</span> / 2000 Byte)</div>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <h4 class="important_info mgt30">
+    <h4 class="important_info mgt70">
         <span>선택 입력 정보</span>
         <span class="detail_txt">상품 입점을 위한 추가 선택 정보를 입력해 주세요. 필수 정보 모두 입력 시 상품입점문의가 가능합니다.</span>
     </h4>
-    <table class="table_wrap mgt10" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
-        <caption>상품입점문의 양식</caption>
+    <table class="table_wrap cs" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
+        <caption>상품입점문의 양식</caption>        
         <colgroup>
-            <col width="19%" />
-            <col width="31%" />
-            <col width="19%" />
-            <col width="31%" />
-        </colgroup>
+            <col width="19.7%" />
+            <col width="80.3%" />
+        </colgroup>        
         <tbody>
-            <tr> 
-                <th scope="row"><label for="vndrUrl">회사 URL</label></th> 
-                <td><input type="text" name="vndrUrl" id="vndrUrl" style="width:100%; max-width:175px;" class="input_txt" title="회사 URL"/></td>
-
-                <th scope="row"><label for="bizRegNum">사업자등록번호</label></th> 
-                <td><input type="text" name="bizRegNum" id="bizRegNum" style="width:100%; max-width:175px;" class="input_txt required" title="사업자등록번호"/></td>
+            <tr scope="row">
+                <th><label for="vndrUrl">회사 URL <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="회사 URL" id="vndrUrl">
+                    </div>
+                </td>                                  
             </tr>
-
-            <tr>
-                <th scope="row"><label for="primeName">대표자명</label></th> 
-                <td><input type="text" name="primeName" id="primeName" style="width:100%; max-width:175px;" class="input_txt required" title="대표자명"/></td>
-            
-                <th scope="row"><label for="bizKindInfo">업종</label></th>
-                <td><input type="text" name="bizKindInfo" id="bizKindInfo" style="width:100%; max-width:175px;" class="input_txt required" title="업종"/></td>
+            <tr scope="row">
+                <th><label for="bizRegNum">사업자등록번호 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="사업자등록번호" id="bizRegNum">
+                    </div>
+                </td>
             </tr>
-
-            <tr> 
-                <th scope="row"><label for="yyyySales">연매출</label></th> 
-                <td colspan="3"><input type="text" name="yyyySales" id="yyyySales" placeholder="숫자만가능" style="width:100%; max-width:175px;ime-mode:disabled;" class="input input_txt inputNumberText inputOnlyNum required" maxlength="9" title="연매출"/></td>
+            <tr scope="row">
+                <th><label for="primeName">대표자명<span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="대표자명" id="primeName">
+                    </div>
+                </td>                                  
             </tr>
-            
-            <tr> 
-                <th scope="row"><label for="vipStore">주요 입점몰</label></th> 
-                <td colspan="3"><input name="vipStore" title="주요 입점몰" class="input_txt required" id="vipStore" style="width:100%; max-width:175px;" type="text"></td>
+            <tr scope="row">
+                <th><label for="bizKindInfo">업종 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="업종" id="bizKindInfo">
+                    </div>
+                </td>
             </tr>
-            
-            <tr> 
-                <th scope="row"><label for="file_route">상품 주요 파일 첨부</label></th> 
-                <td colspan="3">
+            <tr scope="row">
+                <th><label for="yyyySales">연매출 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="숫자만가능" class="" title="연매출" maxlength="9" id="yyyySales">
+                    </div>
+                </td>
+            </tr>
+            <tr scope="row">
+                <th><label>주요 입점몰 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="주요 입점몰">
+                    </div>
+                </td>
+            </tr>
+            <tr scope="row">
+                <th>파일 첨부 <span class="star">*</span></th>
+                <td>
                     <div class="file_input">
-                        <input type="text" readonly="readonly" title="File Route" id="file_route" class="input_txt required" style="width:100%; max-width:175px;" placeholder="파일명">
-                        <label>
-                            <span class="text">파일찾기</span>
-                            <input type="file" onchange="javascript:document.getElementById('file_route').value=this.value">
-                        </label>
+                        <div class="input_wrap">
+                            <input type="text" readonly="readonly" title="File Route" id="file_route" class="width_file" placeholder="파일명" class="" title="파일 첨부">                            
+                            <label>
+                                <span class="text">파일찾기</span>
+                                <input type="file" onchange="javascript:document.getElementById('file_route').value=this.value">
+                            </label>
+                        </div>
                         <p class="detail_txt mgt5">상품 주요 정보를 파일로 첨부해주세요. 파일은 1MB 이하의 용량만 첨부 가능합니다.</p>
                     </div>
                 </td>
@@ -1090,8 +1138,8 @@ jQuery(function($){
     
     
 
-    <div class="btn_area t_center mgt50">
-        <a href="javascript://" class="btn_type03" onclick="submitFrm()">접수</a>
+    <div class="btn_wrap distance">
+        <a href="javascript://" class="btn_basic" onclick="submitFrm()">상품 입점 문의</a>
     </div>
     </form>
 </div>

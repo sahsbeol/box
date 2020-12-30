@@ -39,7 +39,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
     <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
     <!-- 20.12.28 -->
-    <link rel="stylesheet" type="text/css" href="../../css/new/cs_last.css">
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
     <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../../js/m_contents.js"></script>
@@ -572,11 +572,11 @@ if (isEmpty(vid)) {//로그인이 안되있으면
     $(".gnbMypageBtn").find(".inner").addClass("member");
 }
     </script>
-    <!-- 201228 S : id="content 에 class="cs_last" 넣어주세요 -->
+    <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
     <!-- Container -->
         <div id="container" >   
             <!-- 컨텐츠 -->        
-        <div class="content cs_last" id="content">
+        <div class="content orderandpay" id="content">
             <!-- sub top -->
             <div class="page_location">
                 <h2 class="title">
@@ -641,9 +641,9 @@ jQuery(function($){
             <!-- sub contents -->
             <div class="sub_contents">
                 <!-- h3 class="page_title mgt0"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/tit_notice.gif" alt="공지사항" /></h3 -->
-                <div class="page_stitle ">
-                    <a href="/ht/help/listNotice">공지사항</a>
-                </div>
+                <h3 class="page_title">
+                    공지사항
+                </h3>
                 <ul class="list_type02">
                     <li>핫트랙스에서 고객 여러분께 유익한 쇼핑 정보를 알려드립니다.</li>
                 </ul>
@@ -676,6 +676,7 @@ jQuery(function($){
                 </tr>
                 </thead>
                 <tbody>
+                <!-- 고정 일때 class="list_fixed" -->
                 <tr class="list_fixed">
                     <!-- <td>
                         121
@@ -726,7 +727,9 @@ jQuery(function($){
                     <td class="t_left">
                         <input type="hidden" value="22145"/>
                         <a href="#list-content22145" id="22145" class="click">
-                        [CJ대한통운] 배송기사 코로나19 확진 판정에 따른 배송지연 </a>
+                            [CJ대한통운] 배송기사 코로나19 확진 판정에 따른 배송지연 
+                            <span class="icon_cs_new">N</span>
+                        </a>
                     </td>
                     <td>
                         2020.11.03
