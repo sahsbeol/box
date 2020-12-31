@@ -114,7 +114,7 @@
 .orderandpay .choice_wrap input[type="checkbox"]:checked + label:before,
 .orderandpay .choice_wrap input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/new/icon_radio_on.png) no-repeat center left 4px;}
 .orderandpay .choice_wrap input[type=radio]::-ms-expand,
-.orderandpay .choice_wrap input[type=checkbox]::-ms-expand{    display: none;}
+.orderandpay .choice_wrap input[type=checkbox]::-ms-expand{display: none;}
 
 /* radio , checkbox 사각형 */
 .orderandpay .choice_wrap.type_squre input[type="checkbox"] + label:before,
@@ -295,7 +295,7 @@
 .orderandpay .safetynumber {position: relative;}
 .orderandpay .safetynumber .tooltip_wrap {position: absolute; top:0; left:0; width:680px;}
 
-.orderandpay .layer_pop_box {display: none; position: absolute;     top: 0;    left: 0;}
+.orderandpay .layer_pop_box {display: none; position: absolute; top: 0;    left: 0;}
 .orderandpay .dimed {display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0, .6); z-index: 999;}
 .orderandpay .layer_pop {    position: relative; z-index: 1000;}
 
@@ -521,10 +521,15 @@
 
 /* paging */
 .orderandpay .paging {margin-top: 50px;}
-.orderandpay .paging ul li a {font-size: 22px;line-height: initial;font-weight: 500;font-family: 'GS','Apple SD Gothic Neo', sans-serif;;}
+.orderandpay .paging ul li a {font-size: 22px;line-height: initial;font-weight: 500;font-family: 'GS','Apple SD Gothic Neo', sans-serif;border: 0;min-width: 10px;height: auto;padding: 8px 13px;}
 .orderandpay .paging ul li.active a,
 .orderandpay .paging ul li a:hover,
-.orderandpay .paging ul li a:focus {background: #000;color: #fff;border:0;padding: 13px;line-height: 16px;border-radius: 24px;}
+.orderandpay .paging ul li a:focus {background: #000;color: #fff;border:0;   vertical-align: top;width: 48px;height: 48px;padding-top: 15px; border-radius: 24px;font-weight: 700;}
+
+.orderandpay .paging ul {display: inline-block;}
+.orderandpay .paging ul li {display: inline-block; vertical-align: top; text-align: center; box-sizing: border-box; width: 48px; height: 48px; padding-top: 15px; border-radius: 24px; font-family: font_gs;
+ font-size: 22px;}
+.orderandpay .paging ul li a {display: block;}
 
 /* icon - new */
 .orderandpay .icon_cs_new {width:20px;height: 0px;font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important;line-height: normal;font-size: inherit;font-weight: 700;color:#fff;background: #FF6A5B;display: inline-block;border-radius: 20px;text-align: center;vertical-align: middle;padding: 5px 0px 15px;/* max-width: 20px; *//* max-height: 20px; */overflow: hidden;font-size: 9px;margin-top: -3px;margin-left: 1px;}
@@ -550,3 +555,29 @@
 .orderandpay .save_point > .inner .tit01 {margin-top:0; margin-bottom: 5px;}
 .orderandpay .save_point .table01 {}
 .orderandpay .save_point .table01 tbody th {background: #fafafa; padding:;}
+
+
+.pagination_v2{text-align:center; margin-bottom:80px;}
+.pagination_v2 a{display:inline-block; color:#000; vertical-align:top; width:48px; height:48px; padding-top:15px; border-radius:24px; font-family:font_gs; font-size:22px; text-align:center; box-sizing:border-box;}
+.pagination_v2 .active{display:inline-block; color:#fff; font-weight:bold;}
+.pagination_v2 .active{background:#000;;}
+.pagination_v2 .arr{display:inline-block; width:20px; padding-top:12px;}
+.pagination_v2 .arr:after{content:''; display:inline-block; width:15px; height:25px; background:url('../../images/biz/sub/icon_page_arr.png') no-repeat; background-size:60px 25px;}
+.pagination_v2 .arr.prev{margin-right:50px;}
+.pagination_v2 .arr.next{margin-left:50px;}
+.pagination_v2 .arr.prev:after{background-position:-15px 0}
+.pagination_v2 .arr.first:after{background-position:0 0}
+.pagination_v2 .arr.next:after{background-position:-30px 0}
+.pagination_v2 .arr.last:after{background-position:100% 0}
+
+
+.orderandpay .paging .first,
+.orderandpay .paging .next02,
+.orderandpay .paging .prev,
+.orderandpay .paging .last  {border:0; display:inline-block; width:15px; height:25px; background:url('../../images/biz/sub/icon_page_arr.png') no-repeat; background-size:60px 25px; margin-top: 12px;}
+.orderandpay .paging .next02 {background-position:-30px 0;}
+.orderandpay .paging .prev {background-position:-15px 0}
+.orderandpay .paging .last {background-position:100% 0}
+.orderandpay .paging .first {background-position:0 0}
+.orderandpay .paging .first , .orderandpay .paging .prev {margin-right:50px;}
+.orderandpay .paging .last, .orderandpay .paging .next02 {margin-left:50px;}
