@@ -11,7 +11,7 @@
 .orderandpay {font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-size:14px;}
 .orderandpay .only_english {font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important;}
 
-.orderandpay {}
+.orderandpay.f_set {margin-top:0;}
 .orderandpay h2.tit {font-size: 40px; margin-top:48px; font-weight: 700;}
 
 .orderandpay .order_list .tit01 {min-height:28px;margin-top: 60px;font-size: 18px; color: #000; font-weight: 500;}
