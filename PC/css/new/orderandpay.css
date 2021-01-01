@@ -521,25 +521,13 @@
 
 /* paging */
 .orderandpay .paging {margin-top: 50px;}
-.orderandpay .paging ul li a {font-size: 22px;line-height: initial;font-weight: 500;font-family: 'GS','Apple SD Gothic Neo', sans-serif;border: 0;min-width: 10px;height: auto;padding: 8px 13px;}
+.orderandpay .paging ul li a {display: inline-block;font-size: 22px;font-weight: 500;font-family: 'font_gs','Apple SD Gothic Neo', sans-serif;border: 0;width: 48px;height: 48px;/* height: auto; */line-height: 1;padding: 15px 0 0px;box-sizing: border-box;vertical-align: top;}
 .orderandpay .paging ul li.active a,
 .orderandpay .paging ul li a:hover,
-.orderandpay .paging ul li a:focus {background: #000;color: #fff;border:0;vertical-align: top;/* width: 48px; *//* height: 48px; *//* padding-top: 15px; */border-radius: 24px;font-weight: 700;}
+.orderandpay .paging ul li a:focus {background: #000;color: #fff;border:0;width: 48px;height: 48px;padding: 15px 0 0 0;border-radius: 24px;font-weight: 700;display: inline-block;vertical-align: top;}
 
-.orderandpay .paging ul {display: inline-block;}
-.orderandpay .paging ul li {
- display: inline-block;
- vertical-align: top;
- text-align: center;
- box-sizing: border-box;
- width: 48px;
- /* height: 48px; */
- /* padding-top: 15px; */
- border-radius: 24px;
- font-family: font_gs;
- font-size: 22px;
- }
-.orderandpay .paging ul li a {display: block;}
+.orderandpay .paging ul {display: inline-block;line-height: 1;}
+.orderandpay .paging ul li {display:block;float: left;text-align: center;box-sizing: border-box;width: auto;height: auto;font-family: 'font_gs';font-size: 22px;line-height: 1;box-sizing: border-box;}
 
 /* icon - new */
 .orderandpay .icon_cs_new {width:20px;height: 0px;font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important;line-height: normal;font-size: inherit;font-weight: 700;color:#fff;background: #FF6A5B;display: inline-block;border-radius: 20px;text-align: center;vertical-align: middle;padding: 5px 0px 15px;/* max-width: 20px; *//* max-height: 20px; */overflow: hidden;font-size: 9px;margin-top: -3px;margin-left: 1px;}
