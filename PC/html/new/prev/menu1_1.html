@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
     <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
     <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+
     <!-- 20.12.28 -->
     <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
@@ -816,8 +817,10 @@
             <div class="content orderandpay" id="content">
 
                 <!-- sub top -->
-                 <div class="page_location">
-                    <h2 class="title"><a href="javascript:;">고객센터</a></h2>
+                <div class="page_location">
+                    <h2 class="title">
+                        <a href="javascript:;">고객센터</a>
+                    </h2>
                 </div>
                 <!-- //sub top -->
 
@@ -831,29 +834,21 @@
                     jQuery(function($) {
                         $(document).ready(function() {
                             $('#content').addClass('f_set'); //폰트 및 간격 재설정
+
+                            
                         });
                     });
                 </script>
                 <!-- lnb -->
-<div class="lnb">
-    <ul>
-        <li><a href="/ht/help/sosCounselMain">FAQ 통합검색</a></li>
-        <li><a href="/ht/help/sosCounselMain">SOS상담</a></li>
-                        <li><a>공지/문의</a>
+                <!-- 201228 S : 작업부분 -->
+                <div class="lnb">
+                    <ul>
+                        <li><a href="/ht/help/sosCounselMain">SOS상담</a></li>
+                        <li><a>공지사항</a>
                             <ul class="depth2">
                                 <li><a href="/ht/help/listNotice">공지사항</a></li>
                                 <li><a href="/ht/help/eventPrizeList">이벤트 당첨자</a></li>
-                                <li><a href="/ht/help/vendorInquiry">상품입점문의</a></li>
-                                <li><a href="/ht/help/businessBuy">대량구매상담</a></li>
-                            </ul>
-                        </li>
-                        <li><a>서비스안내</a>
-                            <ul class="depth2">
-                                <li><a href="/ht/help/memberShip">통합 멤버십</a></li>
-                                <li><a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a></li>
-                                <li><a href="/ht/help/carvingService">각인 서비스</a></li>
-                                <li><a href="/ht/help/packingService">포장 서비스</a></li>
-                                <li><a href="/ht/help/cardInfo">제휴/할인 카드</a></li>
+                               
                             </ul>
                         </li>
                         <li><a>주문 FAQ</a>
@@ -872,25 +867,40 @@
                                 <li><a href="/ht/help/faqListC0404">이벤트</a></li>
                             </ul>
                         </li>
+                        <li><a>문의사항</a>
+                            <ul class="depth2">
+                                <li><a href="/ht/help/vendorInquiry">상품입점문의</a></li>
+                                <li><a href="/ht/help/businessBuy">대량구매상담</a></li>
+                            </ul>
+                        </li>
+                        <li><a>서비스안내</a>
+                            <ul class="depth2">
+                                <li><a href="/ht/help/memberShip">통합 멤버십</a></li>
+                                <li><a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a></li>
+                                <li><a href="/ht/help/carvingService">각인 서비스</a></li>
+                                <li><a href="/ht/help/packingService">포장 서비스</a></li>
+                                <li><a href="/ht/help/cardInfo">제휴/할인 카드</a></li>
+                            </ul>
+                        </li>
                         <li><a>기타 FAQ</a>
                             <ul class="depth2">
                                 <li><a href="/ht/help/faqListC0411">영업점</a></li>
-                                <li><a href="/ht/help/faqListC0412">사이트이용/장애</a></li>
-                                <li><a href="/ht/help/faqListC0413">기타</a></li>
+                                <li><a href="/ht/help/faqListC0412">사이트이용/장애/기타</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+                <!-- // 201228 E : 작업부분 -->
                 <!-- //lnb -->
 
                 <!-- sub contents -->
                 <div class="sub_contents">
-                    <h3 class="page_title mgt0"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/tit_list_sos_counsel.gif" alt="SOS상담" /></h3>
+                    <h3 class="page_title mgt0">SOS상담</h3>
                     <ul class="list_type02">
-                        <li>핫트랙스는, 원활한 상담과 타인의 주민번호도용 및 허위정보로 인한 피해를 방지하기 위해 실명인증을 시행하고 있습니다.</li>
-                        <li>교보핫트랙스 회원이신 고객께서는 [회원 상담]을 선택해 주시기 바라며 (로그인 후 바로 이용가능하십니다),<br />비회원으로 상담을 원하시는 고객께서는 <span class="point02">[비회원 상담]</span>을 선택해 주시기 바랍니다.</li>
-                        <li><span class="point02">[비회원 상담]</span>의 경우 실명확인을 하셔야만 접수가 가능합니다.</li>
-                        <li>입력하신 정보는 고객님의 동의 없이 공개되지 않으며, 개인정보보호정책에 의해 보호 받고 있습니다.</li>
+                        <li>핫트랙스는, 원활한 상담과 타인의 주민번호도용 및 허위정보로 인한 피해를 방지하기 위해 실명인증을 시행하고 있습니다. </li>
+                        <li>교보핫트랙스 회원이신 고객께서는 [회원 상담]을 선택해 주시기 바라며 (로그인 후 바로 이용가능하십니다), <br> 비회원으로 상담을 원하시는 고객께서는 [비회원 상담]을 선택해 주시기 바랍니다. </li>
+                        <li>[비회원 상담]의 경우 실명확인을 하셔야만 접수가 가능합니다. </li>
+                        <li>입력하신 정보는 고객님의 동의 없이 공개되지 않으며, 개인정보보호정책에 의해 보호 받고 있습니다. </li>
                     </ul>
 
                     <!-- <FORM id="reqForm" name="reqForm" method="POST" action="">
@@ -903,18 +913,19 @@
                         <input type="hidden" name="enc_data" value="AgEERkoyOAnmzoT5VmB+15k1Wj0DXaBwp0m9lE7MkruvMDjEJ6IKh9phDekFJe1hsw565W6nIMZEu7j718j/wyTxIRknE5x2PhRZ1NJxMFESCDH34v1/+Em5Hbb2AZhvBRmDgMHfGvjWuDN4hfRhwUTEKBrHp4JjMS3PoNOrZru94yE1xgCHnmf7TWGv2Z0f+mvESC+VqYy+9A5680IIuAbPT4BoDj40sBUGhCGENaGixxawr2KiE0N3jxFdr9ffDzLi3+K+CoqM5s3XPbYMQM7wwdpWP21TPEb0adyJnNrPJ8k3LXq5nGc3Wf/3ZHGPebCMiuXURg==">
                         <div class="sos_counsel">
                             <div class="f_left">
-                                <h4 class="tit01">회원 상담</h4>
+                                <!-- <h4 class="tit01">회원 상담</h4> -->
                                 <div class="btn">
-                                    <a href="https://www.hottracks.co.kr/ht/mypage/loginForm" class="btn_type07">회원 상담</a>
+                                    <a href="https://www.hottracks.co.kr/ht/mypage/loginForm" class="btn_type07">회원 상담 바로가기</a>
                                 </div>
                             </div>
                             <div class="f_right">
-                                <h4 class="tit01">비회원 상담</h4>
+                                <!-- <h4 class="tit01">비회원 상담</h4> -->
                                 <div class="btn">
-                                    <a href="javascript://" onclick="javascript:fnPopup('0', '정상 처리되었습니다.');" class="btn_type07">실명 인증</a>
+                                    <a href="javascript://" onclick="javascript:fnPopup('0', '정상 처리되었습니다.');" class="btn_type07">비회원 상담 바로가기</a>
+                                    <p class="mgt10">실명인증 후 상담이 가능합니다.</p>
                                 </div>
                                 <p class="txt">교보문고/핫트랙스 통합 회원으로 가입하시면<br /> 편리함과 혜택이 늘어납니다!</p>
-                                <a href="javascript://" onclick="goMemJoin()" class="btn_type01">회원가입 하기</a>
+                                <a href="javascript://" onclick="goMemJoin()" class="btn_type01">회원가입 바로가기</a>
                             </div>
                         </div>
                     </FORM>

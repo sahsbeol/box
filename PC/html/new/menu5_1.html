@@ -1,24 +1,23 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+
 <head>
     <!-- 태그 라이브러리 -->
-    
 
 
 
 
 
 
+     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Script-Type" content="text/javascript">
     <meta http-equiv="Content-Style-Type" content="text/css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=950">
-    <title>회원정보 | 회원FAQ | 고객센터 - HOTTRACKS</title>
-    
-<!-- 태그 라이브러리 -->
+    <title>상품입점문의 | 공지문의 | 고객센터 - HOTTRACKS</title>
+
+    <!-- 태그 라이브러리 -->
 
 
 
@@ -29,7 +28,8 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
     <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <link rel="stylesheet" type="text/css" href="../../css/layout.css">
@@ -47,7 +47,7 @@
     <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
     <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
     <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
-    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>  
 
 <!-- 데이타 스토리  script--> 
 <script type="text/javascript">
@@ -70,56 +70,168 @@
 
     
 
+<script type="text/javascript" src="/js/jquery.form.js" charset="utf-8"></script>
 <script type="text/javascript">
-jQuery(function($){
-    
-    $("tbody tr td a.click").click(function(event) {
-        event.preventDefault(); // # 링크 이동 중지
+jQuery(function($) {
+    $("form[name='vendorIqryForm']").submit(function() {
+        var required = new Array();
+        $(".required").each(function(){
+            if(isEmpty($(this).val())){
+                required.push($(this).attr("title"));
+            }
+        });
         
-        var selectHref = $(this).attr("href");
-        if($(selectHref).hasClass("on")){
-            $(selectHref).removeClass("on");
+        if($("input[name=prdtGbn]:checked").val() == undefined){
+            required.push("상품종류");
+        }
+        if($("#categorySelect select:eq(1)").val() == "0000"){
+            required.push("2차 카테고리");
+        }
+        if(isEmpty($("textarea[name=iqryDesc]").val())){
+            required.push("상품설명");
+        }
+        
+        if(!$("#chkAgree").is(":checked")){
+            alert("[제휴업체 담당자 개인정보 수집 및 이용에 대한 안내]에 대한 동의를 해주세요.");
+            $("#chkAgree").focus();
+        }else if(required.length > 0){
+            alert("※해당 항목들은 생략이 불가능합니다.\r\n-"+required.join("\r\n-"));
         }else{
-            $(selectHref).addClass("on");
-            
-            var seq = $(this).siblings("input").val();
-            var hit = $("#faqHit" + seq);
-            var hitVal = parseInt(hit.text()) + 1;
-            hit.text(hitVal);
-            //setHit
-            $.ajax({
-                type: "GET"
-                ,url: "/ht/help/AjaxFFaqSetHit"
-                ,dataType: "html"
-                ,data:{seq:seq}
-            });  
+            beforeSubmit();
+            $(".newbtn_064").hide();
+            $("form[name='vendorIqryForm']").ajaxSubmit({
+                url: "/ht/help/createVendorInquiry"
+                ,dataType: "json"
+                ,success: saveSuccess
+                ,error: function(xhr, status, error) {
+                    alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+                    $(".newbtn_064").show();
+                }
+            });
         }
-    });
-    
-    
-    $("a.searchText").click(function(event) {
-        event.preventDefault(); // # 링크 이동 중지
         
-        $("form[name='faqSearchForm']").submit();
+        return false;
+    });
+});
+
+function saveSuccess(data) {
+    if (data.save) {
+        alert('저장하였습니다.');
+        document.location.href = "/ht/welcomeMain"; 
+    } else {
+        var errorMessages = data.errorMessages;
+        alert(errorMessages.join("\n"));
+        $(".newbtn_064").show();
+    }
+}
+
+
+function beforeSubmit() {
+    var cnt = $("input[name=sellPsbltPrdtCount]");
+    var tmp = cnt.val().replace(/\D/gi,"");
+    cnt.val(tmp);
+    
+    $(".inputNumberText").each(function () {
+        if($(this).val() == ""  && !$(this).hasClass("nums")) {
+            $(this).val(0);
+        }
+    });
+}
+
+function get_number(val){
+    val = $.trim(val);
+    var rv = [];
+    for(var i=0 ; i < val.length ; i++){
+        if(i==0 && val.substring(i, i+1) == "-"){ rv.push("-"); }
+        if(!isNaN(val.substring(i, i+1))){ rv.push(val.substring(i, i+1)); }
+    }
+    return rv.join("");
+}
+
+$(document).ready(function(event){
+    $(".inputOnlyNum").change(function(event){
+        this.value = get_number(this.value);
     });
     
-    $("form[name='faqSearchForm'] .exm_txt").click(function(){
-        $("form[name='faqSearchForm'] .exm_txt").hide();
-        $("form[name='faqSearchForm'] input[name='title']").focus();
-    });
+    categorySelectLoad("0000", 2);
+});
+
+function categorySelectLoad(parentCateId, maxLength, divId, inputName, mallId) {
+    if (maxLength == undefined || maxLength == "") {
+        maxLength = 0;
+    }
     
-    $("form[name='faqSearchForm'] input[name='title']").focus(function(){
-        $("form[name='faqSearchForm'] .exm_txt").hide();
-    });
+    if (divId == undefined || divId == '') {
+        divId = 'categorySelect';
+    }
     
-    $("form[name='faqSearchForm'] input[name='title']").blur(function(){
-        if($(this).val() == ""){
-            $("form[name='faqSearchForm'] .exm_txt").show();
+    if (inputName == undefined || inputName == '') {
+        inputName = 'selectCategory';
+    }
+    
+    if (mallId == undefined) {
+        mallId = '';
+    }
+    
+    if (parentCateId == undefined || parentCateId == '') {
+        parentCateId = '00';
+    }
+    
+    var params = 'parentCateId='+parentCateId;
+    params += '&maxLength=' + maxLength;
+    params += '&inputName=' + inputName;
+    params += '&divId=' + divId;
+    params += '&mallId=' + mallId;
+    
+    $('#' + divId).html('');
+    $.ajax({
+        type: 'GET'
+        ,url: '/product/listCategoryForSelect'
+        ,data: params
+        ,dataType: 'html'
+        ,success: function(html) {
+            $('#' + divId).html(html);
         }
     });
     
-    $("form[name='faqSearchForm'] input[name='title']").select();
-});
+}
+function checkLengthArea(chkObj, maxLength){
+    var str = new String($("textarea[name="+chkObj+"]").val());
+    var _byte = 0;
+    if(str.length != 0){
+        for(var i = 0; i < str.length; i++){
+            if(escape(str.charAt(i)).length > 4)    _byte += 2;  // 2Byte
+            else                                    _byte++;     // 1Byte
+            
+            if(_byte > maxLength){
+                alert('제한 글자 수를 초과하였습니다');
+                $("textarea[name="+chkObj+"]").val(str.substr(0, i));
+                
+                if(escape(str.charAt(i)).length > 4)    _byte -= 2;
+                else                                    _byte--;
+                
+                break;
+            }
+        }
+    }
+    
+    $("#t_"+chkObj).html(Byte_Length($($("textarea[name="+chkObj+"]")).val())+" Byte");
+}
+function Byte_Length(lvStr){
+    var resultSize = 0;
+    if (lvStr == null) return 0;
+    for(var i=0; i<lvStr.length; i++){
+        var c = escape(lvStr.charAt(i));
+        if(c.length == 1) resultSize ++;
+        else if(c.indexOf("%u") != -1) resultSize += 2;
+        else if(c.indexOf("%") != -1) resultSize += c.length/3;
+    }
+    return resultSize;
+}
+
+function submitFrm(){
+    $("form[name=vendorIqryForm]").submit();
+}
 </script>
 
 
@@ -721,11 +833,11 @@ if (isEmpty(vid)) {//로그인이 안되있으면
             <!-- 컨텐츠 -->        
             <div class="content orderandpay" id="content">
             
-        <!-- sub top -->
-         <div class="page_location">
-            <h2 class="title"><a href="javascript:;">고객센터</a></h2>
-        </div>
-        <!-- //sub top -->
+                <!-- sub top -->
+                <div class="page_location">
+                    <h2 class="title"><a href="javascript:;">고객센터</a></h2>
+                </div>
+                <!-- //sub top -->
 
 
 
@@ -740,408 +852,302 @@ jQuery(function($){
     });
 });
 </script>
-<!-- lnb -->
-<div class="lnb">
-    <ul>
-        <li><a href="/ht/help/sosCounselMain">SOS상담</a></li>
-        <li><a>공지/문의</a>
-            <ul class="depth2">
-                <li><a href="/ht/help/listNotice">공지사항</a></li>
-                <li><a href="/ht/help/eventPrizeList">이벤트 당첨자</a></li>
-                <li><a href="/ht/help/vendorInquiry">상품입점문의</a></li>
-                <li><a href="/ht/help/businessBuy">대량구매상담</a></li>
-            </ul>
-        </li>
-        <li><a>서비스안내</a>
-            <ul class="depth2">
-                <li><a href="/ht/help/memberShip">통합 멤버십</a></li>
-                <li><a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a></li>
-                <li><a href="/ht/help/carvingService">각인 서비스</a></li>
-                <li><a href="/ht/help/packingService">포장 서비스</a></li>
-                <li><a href="/ht/help/cardInfo">제휴/할인 카드</a></li>
-            </ul>
-        </li>
-        <li><a>주문 FAQ</a>
-            <ul class="depth2">
-                <li><a href="/ht/help/faqListC0391">주문결제</a></li>
-                <li><a href="/ht/help/faqListC0392">배송</a></li>
-                <li><a href="/ht/help/faqListC0393">반품/교환/환불</a></li>
-                <li><a href="/ht/help/faqListC0394">세금계산서/증빙</a></li>
-            </ul>
-        </li>
-        <li><a>회원 FAQ</a>
-            <ul class="depth2">
-                <li><a href="/ht/help/faqListC0401">회원정보</a></li>
-                <li><a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a></li>
-                <li><a href="/ht/help/faqListC0403">상품문의</a></li>
-                <li><a href="/ht/help/faqListC0404">이벤트</a></li>
-            </ul>
-        </li>
-        <li><a>기타 FAQ</a>
-            <ul class="depth2">
-                <li><a href="/ht/help/faqListC0411">영업점</a></li>
-                <li><a href="/ht/help/faqListC0412">사이트이용/장애</a></li>
-                <li><a href="/ht/help/faqListC0413">기타</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<!-- //lnb -->
+            <!-- lnb -->
+            <!-- 201228 S : 작업부분 -->
+            <div class="lnb">
+                <ul>
+                    <li><a href="/ht/help/sosCounselMain">SOS상담</a></li>
+                    <li><a>공지사항</a>
+                        <ul class="depth2">
+                            <li><a href="/ht/help/listNotice">공지사항</a></li>
+                            <li><a href="/ht/help/eventPrizeList">이벤트 당첨자</a></li>
+                           
+                        </ul>
+                    </li>
+                    <li><a>주문 FAQ</a>
+                        <ul class="depth2">
+                            <li><a href="/ht/help/faqListC0391">주문결제</a></li>
+                            <li><a href="/ht/help/faqListC0392">배송</a></li>
+                            <li><a href="/ht/help/faqListC0393">반품/교환/환불</a></li>
+                            <li><a href="/ht/help/faqListC0394">세금계산서/증빙</a></li>
+                        </ul>
+                    </li>
+                    <li><a>회원 FAQ</a>
+                        <ul class="depth2">
+                            <li><a href="/ht/help/faqListC0401">회원정보</a></li>
+                            <li><a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a></li>
+                            <li><a href="/ht/help/faqListC0403">상품문의</a></li>
+                            <li><a href="/ht/help/faqListC0404">이벤트</a></li>
+                        </ul>
+                    </li>
+                    <li><a>문의사항</a>
+                        <ul class="depth2">
+                            <li><a href="/ht/help/vendorInquiry">상품입점문의</a></li>
+                            <li><a href="/ht/help/businessBuy">대량구매상담</a></li>
+                        </ul>
+                    </li>
+                    <li><a>서비스안내</a>
+                        <ul class="depth2">
+                            <li><a href="/ht/help/memberShip">통합 멤버십</a></li>
+                            <li><a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a></li>
+                            <li><a href="/ht/help/carvingService">각인 서비스</a></li>
+                            <li><a href="/ht/help/packingService">포장 서비스</a></li>
+                            <li><a href="/ht/help/cardInfo">제휴/할인 카드</a></li>
+                        </ul>
+                    </li>
+                    <li><a>기타 FAQ</a>
+                        <ul class="depth2">
+                            <li><a href="/ht/help/faqListC0411">영업점</a></li>
+                            <li><a href="/ht/help/faqListC0412">사이트이용/장애/기타</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- // 201228 E : 작업부분 -->
+            <!-- //lnb -->
 
 <!-- sub contents -->
 <div class="sub_contents">
-    
-            <h3 class="page_title mgt0">회원 FAQ</h3>
-        
-    <!-- search -->
-    <div class="search_box02">
-        <form method="get" action="/ht/help/faqListC0401" name="faqSearchForm">
-            <fieldset>
-                <legend>FAQ Search</legend>
-                <label for="search_faq" class="stit">FAQ Search</label>
-                <span class="text_box">
-                    <input type="text" id="search_faq" name="title" value="" title="검색어 입력" />
-                    <a href="#" class="search_btn searchText"><span>검색</span></a>
-                    <span class="exm_txt">검색어를 입력하세요</span>
+    <h3 class="page_title mgt0">상품입점문의</h3>
+    <ul class="list_type02">
+        <li>핫트랙스와 함께 할 파트너를 모십니다.</li>
+        <li>귀사의 상품을 입점하고자 하실 경우, 먼저 아래의 입점신청서를 작성하여 등록해 주세요.</li>
+        <li>각 담당자가 신청서를 검토 및 확인 후 개별적으로 전화나 이메일로 답변을 드리고 있습니다.</li>
+        <li>업무폭주로 인해 따로 전화상담은 받고 있지 않으니 참고 바랍니다.</li>
+    </ul>
+    <form name="vendorIqryForm" action="/" method="post">
+    <div class="info_box mgt30">
+        <ul class="incont">
+            <li class="info_tit">* 제휴업체 담당자 개인정보 수집 및 이용에 대한 안내</li>
+            <li>- 수집항목: 담당자명, 연락처, 이메일</li>
+            <li>- 수집목적: 제휴협의를 위한 문의내역 확인 및 답변처리</li>
+            <li>- 활용기간: 접수일로부터 한 달</li>
+            <li>- 기재하여 주신 개인 정보는 제휴협의 외 다른 목적으로 사용되지 않습니다</li>
+        </ul>
+        <div class="choice_wrap type_squre have_inner_txt inner_float">
+            <div class="choice_wrap_inner">
+                <span>
+                    <input type="checkbox" name="orderInfo2" id="orderInfo_21" >
+                    <label for="orderInfo_21">위 개인정보 수집, 이용에 동의합니다. </label>
                 </span>
-            </fieldset>
-        </form>
+            </div>                                             
+        </div>
     </div>
-    <!-- search -->
 
-    <!-- tab -->
-    <div class="tab1 typeS">
-        
-                <ul> 
-                    <li><a href="/ht/help/faqListC0401" class="on"><span>회원정보</span></a></li>
-                    <li><a href="/ht/help/faqListC0402" ><span>통합포인트/예치금/쿠폰</span></a></li>
-                    <li><a href="/ht/help/faqListC0403" ><span>상품문의</span></a></li>
-                    <li><a href="/ht/help/faqListC0404" ><span>이벤트</span></a></li> 
-                </ul>
-             
-    </div>
-    <!-- //tab -->
-    <!-- list -->
-    <table class="bbs_list01 tbl_slide">
-        <caption></caption>
+    <h4 class="important_info mgt30">
+        <span>필수 입력 정보 </span>
+        <span class="detail_txt">상품 입점을 위한 필수 정보입니다.  모두 입력 후 추가 선택 정보를 입력해 주세요.</span>
+    </h4>
+    <table class="table_wrap cs" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
+        <caption>상품입점문의 양식</caption>
         <colgroup>
-            <col width="75" />
-            <col width="120">
-            <col width="*">
-            <col width="90">
-        </colgroup>
-        <thead>
-            <tr>
-                <th scope="col" class="fir">번호</th>
-                <th scope="col">구분</th>
-                <th scope="col">제목</th>
-                <th scope="col" class="last">조회수</th>
-            </tr>
-        </thead>
+            <col width="19.7%" />
+            <col width="80.3%" />
+        </colgroup>        
         <tbody>
-            
-                <tr>
-                    <td>1</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq0" class="click">회원정보변경은 어떻게 하나요?</a>
-                        <input type="hidden" value="99"/>
-                    </td>
-                    <td id="faqHit99">1684</td>
-                </tr>
-                <tr class="conts" id="faq0">
-                    <td colspan="4"><div class="txt"><P>회원 로그인 후, MY HOTTRACKS &gt; 마이핫트랙스 &gt; 회원정보수정을 통하여 변경가능합니다.</P>
-<P>&nbsp;</P>
-<P>※ 단, 아이디(ID)와 실명관련정보는 변경 불가능합니다.</P>
-<P><BR>※ 탈퇴 후 재가입시 아이디 변경이 가능하며 기존 주문내역, 마이리스트, 통합포인트/마일리지, 할인쿠폰 등은&nbsp; 사라집니다.</P>
-<P><BR>※ 배송과 관련된 주소, 연락처 등은 MY HOTTRACKS &gt; 마이핫트랙스 &gt; 주문정보 &gt; 주소록 관리 에서 변경가능합니다.</P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>2</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq1" class="click">회원가입을 하면 무엇이 좋은가요?</a>
-                        <input type="hidden" value="100"/>
-                    </td>
-                    <td id="faqHit100">834</td>
-                </tr>
-                <tr class="conts" id="faq1">
-                    <td colspan="4"><div class="txt"><P>회원으로 가입을 하시면 보다 편리하게 핫트랙스 온라인/교보문고를 이용하실 수 있으며, 보다 많은 서비스를 받으실 수 있습니다.</P>
-<P><BR>예를 들어 비회원으로 상품을 구매하시면 통합포인트를 받으실 수 없습니다. </P>
-<P><BR>또한 각종 이벤트 행사에 참여하실 기회가 제한되며, 핫트랙스에서 제공하는 상품정보메일 등의 다양한 컨텐츠 사용에 일정 부분 제약이 있습니다.</P>
-<P>&nbsp;</P>
-<P>회원가입을 통해 핫트랙스 온라인, 인터넷교보문고와 교보문고 각 영업점의 다양한 회원 혜택을 누리시기 바랍니다.</P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>3</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq2" class="click">핫트랙스 온라인몰 회원혜택</a>
-                        <input type="hidden" value="105"/>
-                    </td>
-                    <td id="faqHit105">4623</td>
-                </tr>
-                <tr class="conts" id="faq2">
-                    <td colspan="4"><div class="txt"><P>다양한 혜택, 차별화된 서비스 회원가입 순간부터 통합 멤버십 혜택이 기다립니다.</P>
-<P>&nbsp;</P>
-<P>회원가입은 핫트랙스 온라인몰과 인터넷 교보문고 웹사이트를 통해 즉시 신청이 가능합니다. </P>
-<P>&nbsp;</P>
-<P><STRONG>등급추가 통합포인트</STRONG><BR>- 순수 구매액 2만원이상 결제건에 추가 통합포인트를 제공합니다</P>
-<P>&nbsp;</P>
-<P><STRONG>무료배송 쿠폰</STRONG><BR>- 신규가입 및 실버, 골드, 플래티넘 회원에게 무료 배송 쿠폰을 제공합니다<BR></P>
-<P>&nbsp;</P>
-<P><A href="http://www.hottracks.co.kr/ht/help/memberShip" target=_blank>회원혜택 바로가기</A></P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>4</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq3" class="click">회원이 되면 어떠한 혜택이 있나요?</a>
-                        <input type="hidden" value="97"/>
-                    </td>
-                    <td id="faqHit97">1185</td>
-                </tr>
-                <tr class="conts" id="faq3">
-                    <td colspan="4"><div class="txt"><P>교보문고/핫트랙스 통합 회원이 되시면 온/오프라인에서 알찬 혜택이 가득합니다.</P>
-<P>&nbsp;</P>
-<P>회원가입은 핫트랙스 온라인몰 웹사이트를 통해 즉시 신청이 가능합니다. </P>
-<P>&nbsp;</P>
-<P>핫트랙스 회원이면 누구나 - </P>
-<P>인터넷으로 1회 주문건당 2만원 이상 구입시 배송료 무료. </P>
-<P>&nbsp;</P>
-<P>핫트랙스 온라인몰, 교보문고 인터넷/영업장 구매시에 통합포인트 현금처럼 결제 가능. </P>
-<P><BR>(단, 영업장에서 결제시 1,000원부터 사용가능하며 단체 등으로 할인구입하신 금액은 제외됨, 통합포인트로&nbsp;결제하신 금액에 대해서는&nbsp;통합포인트로 재적립이 되지 않음) </P>
-<P><BR>구매금액별 다양한 쿠폰혜택 -</P>
-<P>오직 핫트랙스 온라인몰 과&nbsp; 인터넷교보문고에서만 드리는 다양한 쿠폰 혜택. 알뜰쇼핑을 마음껏 즐기세요.</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P><A href="http://www.hottracks.co.kr/ht/help/memberShip" target=_blank>[핫트랙스 회원 혜택 바로가기]</A></P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>5</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq4" class="click">[본인확인제] 본인인증이 되지 않을 때는 어떻게 하나요?</a>
-                        <input type="hidden" value="104"/>
-                    </td>
-                    <td id="faqHit104">355</td>
-                </tr>
-                <tr class="conts" id="faq4">
-                    <td colspan="4"><div class="txt"><P>핫트랙스 온라인몰 에서는 본인 확인 시 본인의 실명여부 확인을 하기 위해 신용정보의 이용 및 보호에 관한 법률에 따라<BR>신용조회업 허가를 받은 NICE신용평가정보㈜의 신용정보자료를 참조하고 있습니다.</P>
-<P><BR>본인이 실명임에도 정보가 일치하지 않는다면&nbsp; NICE신용평가정보㈜ 네임체크(<A href="http://www.namecheck.co.kr">www.namecheck.co.kr</A>)로 문의하여<BR>정상적인 실명인증 서비스를 받으실 수 있습니다.</P>
-<P><BR><STRONG>온라인 실명등록 (NICE신용평가정보㈜)<BR></STRONG>실명인증/아이핀 등록은 아래의 URL을 이용하시면 편리하게 등록하실 수 있습니다.</P>
-<P>&nbsp;</P>
-<P>[개인회원]<BR>- 실명등록안내 : <A href="https://www.namecheck.co.kr/front/personal/register_online.jsp">https://www.namecheck.co.kr/front/personal/register_online.jsp</A><BR>- 온라인 실명등록 : <A href="https://www.namecheck.co.kr/front/personal/register_howtoonline.jsp">https://www.namecheck.co.kr/front/personal/register_howtoonline.jsp</A><BR>- 실명등록확인 : <A href="https://www.namecheck.co.kr/front/personal/process_check.jsp">https://www.namecheck.co.kr/front/personal/process_check.jsp</A><BR>&nbsp;<BR>- 아이핀 발급안내 : <A href="http://www.namecheck.co.kr/front/personal/ipin/howtouseipin.jsp">http://www.namecheck.co.kr/front/personal/ipin/howtouseipin.jsp</A><BR>- 아이핀 발급받기 : <A href="http://www.namecheck.co.kr/front/personal/ipin/getipin.jsp">http://www.namecheck.co.kr/front/personal/ipin/getipin.jsp</A><BR>- 아이핀 이용안내 : <A href="http://www.namecheck.co.kr/front/personal/ipin/howtouseipin.jsp">http://www.namecheck.co.kr/front/personal/ipin/howtouseipin.jsp</A></P>
-<P><BR>[외국인회원]<BR>- 외국인 실명확인 : <A href="http://www.namecheck.co.kr/front/personal/register_foreigner.jsp">http://www.namecheck.co.kr/front/personal/register_foreigner.jsp</A></P>
-<P>&nbsp;</P>
-<P>[법인회원]<BR>- 법인 실명등록안내 : <A href="http://www.namecheck.co.kr/front/personal/register_corporate.jsp">http://www.namecheck.co.kr/front/personal/register_corporate.jsp</A></P>
-<P>&nbsp;</P>
-<P><STRONG>&lt;참고사항&gt;<BR></STRONG>NICE신용평가정보㈜로부터 사업자 인증 서비스를 받고 있는 사이트에서 인증에 실패하시는 경우 </P>
-<P><BR>귀사의 사업자등록증사본에 연락처를 기재하여 당사 콜센터 팩스 및 이메일(스캔파일첨부)로 보내주시기 바랍니다.</P>
-<P>&nbsp;</P>
-<P>FAX : (02)3771-4818 (4899) <BR>E-mail : <A href="mailto:callcenter@kisinfo.com">callcenter@kisinfo.com</A>&nbsp; </P>
-<P>&nbsp;</P>
-<P><STRONG>실명등록 처리 업무시간</STRONG><BR>평일 09:00~21:00, 토요일 09:00~18:00<BR></P>
-<P>실명등록에 소요되는 시간은 업무시간 기준 1시간 내외입니다. <BR></P>
-<P>업무 시간 외에 접수된 건은 다음 업무일 업무 시간에 처리됩니다.</P>
-<P>&nbsp;</P>
-<P>전화문의 : 국번없이 1600-1522 (평일 9시~ 12시, 13시~18시, 토요일/공휴일 휴무) 전화상으로는 실명등록 불가<BR>메일문의 : <A href="mailto:callcenter@kisinfo.com">callcenter@kisinfo.com</A></P>
-<P>&nbsp;</P>
-<P><STRONG>주민등록번호 단순도용 처벌 안내<BR></STRONG>2006년 9월 25일부터 개정된 주민등록법에 의해 타인의 주민번호를 도용하여 <BR></P>
-<P>온라인 회원 가입을 하는 등 다른 사람의 주민등록번호를 부정 사용자는 <BR></P>
-<P>3년 이하의 징역 또는 1천만원 이하의 벌금이 부과될 수 있습니다. <BR></P>
-<P>※ 관련 법률 : 주민등록법 제21조(벌칙)제2항9호(시행일 2006.9.25)</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>6</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq5" class="click">[본인확인제]란 무엇인가요?</a>
-                        <input type="hidden" value="103"/>
-                    </td>
-                    <td id="faqHit103">422</td>
-                </tr>
-                <tr class="conts" id="faq5">
-                    <td colspan="4"><div class="txt"><P>건전한 인터넷 게시판 이용문화 조성을 위한 게시판 이용자의 본인확인제</P>
-<P>&nbsp;</P>
-<P><STRONG>본인확인제란?</STRONG></P><STRONG>
-<P><BR></STRONG>정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 44조의 5 (게시판이용자의 본인확인) 에 따라 </P>
-<P><BR>2009년 4월 1일부터 시행되는 제도로서, 이용자가 게시판에 정보를 게시 하려고 할 경우 </P>
-<P><BR>해당 게시판의 관리/운영자가 게시판 이용자의 본인 여부를 확인하는 제도로 최초 1회만 확인하면 이후에는 </P>
-<P><BR>자유롭게 이용할 수 있습니다<BR></P>
-<P><STRONG>본인확인제의 목적은?</STRONG></P><STRONG>
-<P><BR></STRONG>게시판 이용자의 본인확인을 통해 이용자의 자기책임성 향상 및 사업자의 사회적책무를 강화함으로써 </P>
-<P><BR>고객님의 개인정보 보호 및 피해자 차단효과 (명예훼손 및 악플에 대한 사전 방지)와 함께 </P>
-<P><BR>더 나은 인터넷 환경 문화 조성을 위하여 본인확인제를 실시합니다. </P>
-<P><BR>본인확인제는 2009년 4월 1일부터 정부에 의해 시행되며 인터넷교보문고도 대상 사이트로 선정되어 </P>
-<P><BR>핫트랙스/교보문고 통합 회원가입과 게시물 작성시의 본인 확인을 위하여 실명확인 서비스를 실시합니다.</P>
-<P>&nbsp;</P>
-<P>※ 단, 해외거주회원의 경우 구매 등 사이트의 전반적인 기능은 이용 가능하나, </P>
-<P><BR>현재 본인확인 방법이 없어 게시판 등의 글 작성은 제한됩니다. <BR></P>
-<P>추후 개선을 통하여 정상적인 사이트 이용이 가능하도록 노력하겠습니다.</P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>7</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq6" class="click">회원등급은 어떤 기준으로 구분됩니까?</a>
-                        <input type="hidden" value="102"/>
-                    </td>
-                    <td id="faqHit102">840</td>
-                </tr>
-                <tr class="conts" id="faq6">
-                    <td colspan="4"><div class="txt"><P>
-<TABLE class=txc-table style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none" cellSpacing=0 cellPadding=0 width=584 border=0>
-<TBODY>
-<TR>
-<TD style="BORDER-TOP: #000 1px solid; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000 1px solid" cols="1" rows="1">&nbsp;구분</TD>
-<TD style="BORDER-TOP: #000 1px solid; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center" cols="1" rows="1">구매실적&nbsp;</TD>
-<TD style="BORDER-TOP: #000 1px solid; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center" cols="1" rows="1">등급산정일&nbsp;</TD>
-<TD style="BORDER-TOP: #000 1px solid; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center" cols="1" rows="1">유지기간&nbsp;</TD></TR>
-<TR>
-<TD style="BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000 1px solid" cols="1" rows="1">플래티넘 회원</TD>
-<TD style="BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center" cols="1" rows="1">직전 3개월간 구매 금액<BR>30만 원 이상</TD>
-<TD style="BORDER-TOP: medium none; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; BORDER-LEFT: medium none" rowSpan=4>
-<P style="TEXT-ALIGN: center">&nbsp;&nbsp;&nbsp;매월 1일</P>
-<P style="TEXT-ALIGN: center">오전 9시 이후</P>&nbsp;</TD>
-<TD style="BORDER-TOP: medium none; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; BORDER-LEFT: medium none" rowSpan=4>
-<P style="TEXT-ALIGN: center">등급 산정일로부터</P>
-<P style="TEXT-ALIGN: center">3개월&nbsp;&nbsp;&nbsp;</P></TD></TR>
-<TR>
-<TD style="BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000 1px solid" cols="1" rows="1">골드 회원</TD>
-<TD style="BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center" cols="1" rows="1">직전 3개월간 구매 금액<BR>20만 원 이상, 30만 원 미만</TD></TR>
-<TR>
-<TD style="BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000 1px solid" cols="1" rows="1">실버 회원</TD>
-<TD style="BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center" cols="1" rows="1">직전 3개월간 구매 금액<BR>10만 원 이상, 20만 원 미만</TD></TR>
-<TR>
-<TD style="BORDER-TOP: medium none; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000 1px solid" cols="1" rows="1">프렌즈 회원</TD>
-<TD style="BORDER-TOP: medium none; BORDER-RIGHT: #000 1px solid; WIDTH: 146px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: medium none" cols="1" rows="1">&nbsp;-</TD></TR></TBODY></TABLE></P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>- 순수구매액은 핫트랙스 온라인몰 , 교보문고에서&nbsp;구매시 지불한 금액이며,&nbsp; 발송 완료된 주문내역입니다.</P>
-<P><BR>- 통합포인트, 마일리지, 할인쿠폰, 포장봉투, 배송비, 티켓 매출은 순수구매액에서 제외됩니다.</P>
-<P><BR>- 선정금액은 직전 3개월간 순수구매액이며,</P>
-<P>&nbsp; 직전 3개월 전 26일~ 전월 25일까지 발송 완료된 주문내역으로 선정됩니다.(반품제외)</P>
-<P><BR>- 매월 1일 등급 산정시 구매액이 상위 등급 기준에 충족되시면 상향조정 됩니다.</P>
-<P><BR>- 회원 기준 및 혜택은 당사 규정에 따라 변경될 수 있습니다.</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>8</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq7" class="click">아이디(ID)와 비밀번호(Password)를 잊어버렸어요. 어떻게 확인하</a>
-                        <input type="hidden" value="101"/>
-                    </td>
-                    <td id="faqHit101">742</td>
-                </tr>
-                <tr class="conts" id="faq7">
-                    <td colspan="4"><div class="txt"><P><STRONG>아이디(ID) 찾기</STRONG><BR>회원로그인 화면에서 [아이디찾기] &gt; [실명인증 또는 아이핀(I-pin)인증]을 통하여 바로 확인하실 수 있습니다.</P>
-<P>&nbsp;</P>
-<P><STRONG>비밀번호 찾기<BR></STRONG>① 회원로그인 화면에서 [비밀번호찾기]를 클릭&gt; [아이디와 성함, 실명인증 또는 아이핀(I-Pin)인증]을 입력하십시오.</P>
-<P><BR>② 기존 회원정보에 등록한 이메일주소 또는 휴대폰 SMS로 새로운 임시비밀번호를 보내드립니다.</P>
-<P><BR>③ 임시비밀번호로 로그인하신 후 인터넷 교보문고 마이룸 에서 기억하기 쉬운 비밀번호로 변경하시면 됩니다.</P>
-<P><BR>④ 고객센터로 전화문의(국번없이 1544-1900)하셔도 비밀번호를 찾으실 수 있습니다.</P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>9</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq8" class="click">실명인증이 되지 않을 때는 어떻게 하나요?</a>
-                        <input type="hidden" value="98"/>
-                    </td>
-                    <td id="faqHit98">272</td>
-                </tr>
-                <tr class="conts" id="faq8">
-                    <td colspan="4"><div class="txt"><P>핫트랙스 온라인몰/ 인터넷 교보문고 에서는 회원 가입시 본인 실명확인을 하기 위해 신용정보의 이용 및 보호에 관한 법률에 따라<BR>신용조회업 허가를 받은 ㈜NICE신용평가정보의 신용정보자료를 참조하고 있습니다.</P>
-<P>&nbsp;</P>
-<P>이 자료들은 업체들과 고객사이의 신용거래가 발생한 경우 수집되는 것으로, <BR>수집 과정 중 특정 고객의 주민등록번호에 대한 성명이 잘못 기재되어 자료화되어 있을 수 있습니다. </P>
-<P>(예 : 성춘향 → 성춘양, 이몽룡 → 리몽룡)</P>
-<P>&nbsp;</P>
-<P>또한 실명과 주민등록번호를 정확히 입력하셨는데도 정보가 없다고 나온다면,<BR>㈜NICE신용평가정보의 자료에 고객님의 자료가 단지 등록이 되어 있지 않은 경우입니다. </P>
-<P><BR>본인이 실명임에도, 정보가 일치하지 않는다면 대개 위와 같은 경우로 신용정보에 문제가 있거나 도용된 것이 아니므로,<BR>㈜NICE신용평가정보 네임체크로 문의하시면 확인 후 바로 정보를 수정해 드립니다. </P>
-<P>&nbsp;</P>
-<P>→&nbsp; <A href="http://www.namecheck.co.kr/" target=_blank>온라인 실명등록 바로가기 </A></P>
-<P>&nbsp;</P>
-<P>[법인회원] <BR>실명인증의 경우 기존 회원가입시 입력하신 법인명, 사업자번호 외에 대표자명이 <BR>추가로 필요합니다. </P>
-<P>&nbsp;</P>
-<P>→&nbsp; <A href="http://www.namecheck.co.kr/front/personal/register_corporate.jsp" target=_blank>법인실명등록 안내 바로가기</A></P>
-<P>&nbsp;</P>
-<P>※ 참고사항<BR>&nbsp;&nbsp; ㈜NICE신용평가정보로 부터 사업자 인증 서비스를 받고 있는 사이트에서 인증에 실패하시는 경우 </P>
-<P><BR>&nbsp;&nbsp; 귀사의 사업자등록증 사본에 연락처를기재하여 당사 콜센터 팩스 및 이메일(스캔파일첨부)로 보내주시기 바랍니다. </P>
-<P>&nbsp;</P>
-<P>&nbsp;&nbsp; - FAX : 02-3771-4818 (4899) <BR>&nbsp;&nbsp; - Email : <A href="mailto:callcenter@kisinfo.com">callcenter@kisinfo.com</A> </P>
-<P>&nbsp;</P>
-<P>&nbsp;&nbsp; 평일 오전 9시~오후 9시, 토요일 오전 9시~오후 6시 <BR>&nbsp;&nbsp; (업체등록에 소요되는 시간은 업무시간 기준 1시간 내외 이며,<BR>&nbsp;&nbsp;&nbsp; 업무시간 외에 접수된 건은 다음 업무일 업무 시간에 처리됩니다.) <BR></P>
-<P>&nbsp;&nbsp; 국번없이 1600-1522 (평일 9시~12시, 13시~18시), 토요일 및 공휴일 휴무 <BR>&nbsp;&nbsp; (전화문의만으로는 업체등록이 불가능하며, 첨부서류를 보내주셔야 합니다.)</P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <td>10</td>
-                    <td>회원정보</td>
-                    <td class="t_left">
-                        <a href="#faq9" class="click">회원가입/회원탈퇴는 어떻게 하나요?</a>
-                        <input type="hidden" value="96"/>
-                    </td>
-                    <td id="faqHit96">1222</td>
-                </tr>
-                <tr class="conts" id="faq9">
-                    <td colspan="4"><div class="txt"><P><STRONG>회원가입</STRONG><BR>핫트랙스 온라인몰 화면 상단의 [회원가입]을 클릭하시면 </P>
-<P><BR>통합회원 약관동의 &gt; 회원구분 및 실명확인 &gt; 고객정보입력 &gt; 가입완료의 단계를 거치시면 회원가입이 가능합니다.</P>
-<P><BR>교보문고/핫트랙스 온라인은 고객님의 개인정보보호와 안전쇼핑을 위해 실명확인제를 실시하고 있습니다.</P>
-<P><BR><STRONG>회원탈퇴<BR></STRONG>교보문고/핫트랙스 온라인의 회원가입 및 탈퇴는 방문자의 의사를 존중합니다.</P>
-<P><BR>자유롭게 탈퇴하실 수 있으며 마이핫트랙스 &gt; 회원탈퇴 선택 후&nbsp; 인터넷교보문고&nbsp;이동하신 후</P>
-<P><BR>교보문고 마이룸 &gt; 나의정보 &gt; 회원탈퇴 &gt; 탈퇴사유를 입력 후 확인을 누르시면 탈퇴처리됩니다.</P>
-<P><BR>회원탈퇴시 핫트랙스 온라인몰, 교보문고 오프라인회원도 함께 탈퇴처리되며, 회원탈퇴와 동시에 </P>
-<P><BR>회원정보 및 구매실적, 마이리스트, 마일리지, 할인쿠폰 등의 모든 기록이 삭제되므로 다시 한번 확인바랍니다.</P>
-<P>&nbsp;</P>
-<P>※ 단, 회원ID에 대해서는 서비스이용의 혼선 방지, 법령에서 규정하는 </P>
-<P><BR>회원거래 정보의 보존기간동안의 보관의무의 이행, 기타 안정적인 서비스제공을 위하여 필요한 정보이므로 <BR></P>
-<P>탈퇴 후 동일 ID로는 재가입이 허용되지 않습니다.</P></div></td>
-                </tr>
-             
-            
-            
+
+            <tr scope="row">
+                <th><label for="vndrName">회사명 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="width_name" id="vndrName">
+                    </div>
+                </td>                                  
+            </tr>
+            <tr scope="row">
+                <th><label for="mngrName">담당자명 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="width_name" id="mngrName">
+                    </div>
+                </td>
+            </tr>
+
+            <tr scope="row">
+                <th>연락처 <span class="star">*</span></th>
+                <td>
+                    <div class="choice_wrap have_inner_txt inner_float">
+                        <span class="input_wrap">
+                            <select name="" id="" class="width_phone" title="연락처 첫번째 자리">
+                                <option value="">선택</option>
+                            </select>
+                        </span>  
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_phone" title="연락처 두번째 자리">
+                        </span>
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_phone" title="연락처 세번째 자리">
+                        </span>                                           
+                    </div>
+                </td>                                   
+            </tr>
+            <tr scope="row">                 
+                <th><label>이메일 <span class="star">*</span></label></th>
+                <td>
+                    <div class="choice_wrap type_squre have_inner_txt inner_float_dot">                                                  
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_email">
+                        </span>
+                        <span class="input_wrap">@</span>
+                        <span class="input_wrap">
+                            <input type="text" placeholder="" class="width_email">
+                        </span> 
+                        <span class="input_wrap 
+                        ">
+                            <select name="" id="" class="width_email">
+                                <option value="">직접입력</option>
+                            </select>
+                        </span>                                              
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row"><label>입점 희망 채널 <span class="star">*</span></label></th> 
+                <td class="txt"> 
+                    <div class="choice_wrap">
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="store" id="storeAll"  checked="">
+                            <label for="storeAll">온/오프라인</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="store" id="offline" >
+                            <label for="offline">오프라인</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="store" id="online" >
+                            <label for="online">온라인</label>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">판매형태 <span class="star">*</span></th> 
+                <td class="txt">
+                    <div class="choice_wrap">
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="prdtGbn" id="internal"  checked="">
+                            <label for="internal">국내유통 상품</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="prdtGbn" id="importation" >
+                            <label for="importation">수입</label>
+                        </span>
+                        <span class="choice_wrap_inner">
+                            <input type="radio" name="prdtGbn" id="itself" >
+                            <label for="itself">자체제작</label>
+                        </span>
+                    </div> 
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="prdtBrand">상품브랜드 <span class="star">*</span></label></th> 
+                <td class="txt"> 
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" id="prdtBrand">
+                    </div>
+                </td>
+            </tr>
+            <tr> 
+                <th scope="row"><label for="iqryDesc">상품설명 <span class="star">*</span></label></th> 
+                <!-- <td colspan="3">
+                    <div><textarea class="in01" style="width:100%;height:80px;" name="iqryDesc" id="iqryDesc" onkeyup="checkLengthArea('iqryDesc', 2000)" title="상품설명" ></textarea></div>
+                    <div style="float:right;">(<span id="t_iqryDesc">0Byte</span> / 2000 Byte)</div>
+                </td> -->
+                <td class="txt"> 
+                    <div class="input_wrap">
+                        <textarea class="in01" style="width:100%;height:80px;" name="iqryDesc" id="iqryDesc" onkeyup="checkLengthArea('iqryDesc', 2000)" title="상품설명" ></textarea>
+                    </div>
+                    <div class="t_r mgt10">(<span id="t_iqryDesc">0Byte</span> / 2000 Byte)</div>
+                </td>
+            </tr>
         </tbody>
     </table>
-    <!-- //list -->
-    <!-- paging -->
-    <div class="paging mgt40">
-        
 
+    <h4 class="important_info mgt70">
+        <span>선택 입력 정보</span>
+        <span class="detail_txt">상품 입점을 위한 추가 선택 정보를 입력해 주세요. 필수 정보 모두 입력 시 상품입점문의가 가능합니다.</span>
+    </h4>
+    <table class="table_wrap cs" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
+        <caption>상품입점문의 양식</caption>        
+        <colgroup>
+            <col width="19.7%" />
+            <col width="80.3%" />
+        </colgroup>        
+        <tbody>
+            <tr scope="row">
+                <th><label for="vndrUrl">회사 URL <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="회사 URL" id="vndrUrl">
+                    </div>
+                </td>                                  
+            </tr>
+            <tr scope="row">
+                <th><label for="bizRegNum">사업자등록번호 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="사업자등록번호" id="bizRegNum">
+                    </div>
+                </td>
+            </tr>
+            <tr scope="row">
+                <th><label for="primeName">대표자명<span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="대표자명" id="primeName">
+                    </div>
+                </td>                                  
+            </tr>
+            <tr scope="row">
+                <th><label for="bizKindInfo">업종 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="업종" id="bizKindInfo">
+                    </div>
+                </td>
+            </tr>
+            <tr scope="row">
+                <th><label for="yyyySales">연매출 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="숫자만가능" class="" title="연매출" maxlength="9" id="yyyySales">
+                    </div>
+                </td>
+            </tr>
+            <tr scope="row">
+                <th><label>주요 입점몰 <span class="star">*</span></label></th>
+                <td>
+                    <div class="input_wrap">
+                        <input type="text" placeholder="" class="" title="주요 입점몰">
+                    </div>
+                </td>
+            </tr>
+            <tr scope="row">
+                <th>파일 첨부 <span class="star">*</span></th>
+                <td>
+                    <div class="file_input">
+                        <div class="input_wrap">
+                            <input type="text" readonly="readonly" title="File Route" id="file_route" class="width_file" placeholder="파일명" class="" title="파일 첨부">                            
+                            <label>
+                                <span class="text">파일찾기</span>
+                                <input type="file" onchange="javascript:document.getElementById('file_route').value=this.value">
+                            </label>
+                        </div>
+                        <p class="detail_txt mgt5">상품 주요 정보를 파일로 첨부해주세요. 파일은 1MB 이하의 용량만 첨부 가능합니다.</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-
-
-    <a title="맨 처음 페이지로 이동" href="/ht/help/faqListC0401?page=1" class="first">처음</a>
     
-    <ul>
-        
-            
-            
-                <li class="active"><a href="javascript://">1</a></li>
-            
-        
-    </ul>
     
 
+    <div class="btn_wrap distance">
+        <a href="javascript://" class="btn_basic" onclick="submitFrm()">상품 입점 문의</a>
     </div>
-    <!-- //paging -->
+    </form>
 </div>
 <!-- //sub contents -->
 

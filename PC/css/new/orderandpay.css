@@ -22,6 +22,7 @@
 .orderandpay .distance {margin-top:100px !important;}
 .orderandpay .btn_wrap.distance{margin-top:90px !important;}
 .orderandpay .width_check {max-width: 520px;}
+.orderandpay .width_barcode {max-width: 150px; width:150px !important;}
 .orderandpay .width_phone {max-width: 80px;}
 .orderandpay .width_name {max-width: 190px;}
 .orderandpay .width_point {max-width: 240px; width:240px !important; text-align: right;}
@@ -54,8 +55,6 @@
 
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt {font-size: 14px; font-weight: 400;}
 
-.orderandpay .have_inner_txt.inner_float {}
-
 /* text */
 .orderandpay .order_txt {font-size: 16px;font-weight: 400;color:#000;}
 .orderandpay .user_table_wrap .order_txt {;padding-bottom: 10px; margin-top:30px;}
@@ -87,7 +86,7 @@
 .orderandpay .table_wrap.cs td {padding: 10px 24px 10px 24px;}
 .orderandpay .table_wrap.cs textarea {max-width: 522px;}
 
-
+.orderandpay .bbs_list_v2 thead th { background: #FAFAFA; }
 .orderandpay .bbs_list_v2 tbody td:first-child {border-left:1px #EEEEEE solid;}
 .orderandpay .bbs_list_v2 tbody td:last-child {border-right:1px #EEEEEE solid;}
 
@@ -153,8 +152,6 @@
 .orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
 .orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
 
-.orderandpay .bbs_list_v2 thead th { background: #FAFAFA; }
-
 
 /* btn */
 .orderandpay .btn_type_wrap {text-align: center;}
@@ -210,6 +207,8 @@
 .orderandpay .user_pay_wrap .color {color: #777777;}
 
 /* tab */
+
+/*결제방법선택 tab */
 .orderandpay .tab_wrap {}
 .orderandpay .tab_list  {margin-top:20px; margin-left: -10px;}
 .orderandpay .tab_list:after {content:''; display:block; clear:both;}
@@ -220,7 +219,7 @@
 .orderandpay .tab_layer.is_active {display: block;}
 .orderandpay .tab_list li.is_active .link {background: #DD1016; border-color: #DD1016; color:#fff;}
 
-/* tab_layer inner box */
+/* 결제방법선택 tab_layer inner box */
 .orderandpay .tab_layer .tab_layer_text_box {background: #FAFAFA; padding:30px;}
 .orderandpay .tab_layer .tab_layer_text_box .layer_title {font-size: 16px; font-weight: 500}
 .orderandpay .tab_layer .tab_layer_text_box .layer_txt_list {margin-top: 15px;}
@@ -229,6 +228,22 @@
 
 .orderandpay .tab_layer .last_check {font-size: 16px;}
 .orderandpay .tab_layer .last_check span {font-size: inherit;}
+
+/* 고객센터 tab */
+.orderandpay .tab1 {margin:50px 0 20px}
+.orderandpay .tab1 ul {overflow:visible; display: table; width:100%;}
+.orderandpay .tab1 ul li {float:left;margin-right:0px; display:table-cell; min-width:25%; width:auto;}
+.orderandpay .tab1 ul li a {display: block; height: auto !important;background:#fff; text-align: center;border-top: 1px #DBDBDB solid; border-bottom: 1px #DBDBDB solid; border-right: 1px #DBDBDB solid;}
+.orderandpay .tab1 ul li a span {display:inline-block;width:auto;height:auto;border:none;text-align:center; font-weight:inherit; font-size:18px; color:#000;line-height:normal; position: relative; padding: 20px;}
+.orderandpay .tab1 ul li:first-child a { border-left: 1px #DBDBDB solid;}
+.orderandpay .tab1 ul li a.on {background:#000;}
+.orderandpay .tab1 ul li a.on span {border:0 none;background:#000; color:#fff; font-weight: 700;}
+.orderandpay .tab1 ul li a.on span:after {content:''; display:block; background: url(../../images/new/icon_cs_tab_active.png) no-repeat center center;width: 12px;height: 9px; position: absolute; top: 30px; left: 5px;}
+
+.orderandpay .tab1.text_large ul li {min-width: 23.1%;}
+
+
+
 
 /* 현금영수증 */
 .orderandpay .cash_receipt_wrap {margin-top:15px;}
@@ -345,13 +360,16 @@
 /*----- cs css all Modified - 고객센터 css 폰트종류 폰트사이즈 등등 수정 -----*/
 /*------------ 고객센터 -------------*/
 /* lnb common */
-.orderandpay .lnb > ul > li > a {font-size: 16px; min-height: 37px; line-height: 37px;}
-.orderandpay .lnb > ul > li > .depth2 > li > a {font-size: 14px; line-height: 1.5em;}
-.orderandpay .lnb > ul > li > .depth2 > li.active, .lnb > ul > li > .depth2 > li a:hover {letter-spacing:0px;}
+.orderandpay .lnb > ul > li {margin-bottom: 36px;}
+.orderandpay .lnb > ul > li > a {font-size: 18px;padding: 12px 11px;min-height: auto;line-height: normal;border-top: 2px #000 solid;color: #000;border-bottom: 1px #DBDBDB solid;background: none;font-weight: 700;}
+.orderandpay .lnb > ul > li > .depth2 {margin-top:15px;}
+.orderandpay .lnb > ul > li > .depth2 > li {margin-top:0;}
+.orderandpay .lnb > ul > li > .depth2 > li > a {font-size: 14px;line-height: 1.5em;color: #313131;font-weight: 400;margin:0; padding:8px 0 7px 11px;}
+.orderandpay .lnb > ul > li > .depth2 > li.active, .lnb > ul > li > .depth2 > li a:hover {letter-spacing:0px; font-weight: 700;}
 .orderandpay .lnb > ul > li > .depth2 > li.active > a {color :#ff6600;}
 
 /* title */
-.orderandpay .page_location {background: none;}
+.orderandpay .page_location {background: none;  padding-top:20px;}
 .orderandpay .page_location .title {float:left;font-size: 40px; font-weight:700; line-height: normal;}
 .orderandpay .page_location .title a {display: block;}
 
@@ -365,8 +383,8 @@
 
 /* list */
 .orderandpay ul.list_type02 {margin-top: 10px;}
-.orderandpay ul.list_type02 > li {position:relative; font-size: 13px; font-weight:400; line-height: 1.4; margin-bottom: 5px; word-break: break-all; background: none; padding-left:10px; color:#313131;}
-.orderandpay ul.list_type02 > li:before {content: ''; display:block; width:4px; height: 4px; background: #000; position:absolute; top:6px; left:0;}
+.orderandpay ul.list_type02 > li {position:relative;font-size: 13px;font-weight:400;line-height: 2;/* margin-bottom: 5px; */word-break: break-all;background: none;padding-left:10px;color:#313131;}
+.orderandpay ul.list_type02 > li:before {content: '';display:block;width:4px;height: 4px;background: #000;position:absolute;top: 11px;left:0;}
 /* table */
 /* 
 	table02 td: height: 55px; 
@@ -403,6 +421,7 @@
 .orderandpay .table03 tbody th,
 .orderandpay .table03 tbody td {height: 41px;padding: 15px 8px;font-size: 12px;font-weight:300;line-height: 1.4;border: 1px solid #EEEEEE;color:#000;/* min-height: 65px; */}
 .orderandpay .table03 tbody th {font-weight: 400;}
+.orderandpay .table03.fz13 tbody td {font-size: 13px; font-weight: 400;}
 .orderandpay label.t01 { margin-left: 5px;}
 .orderandpay .radios { margin-left:10px; }
 .orderandpay .radios.first { margin-left:0px; }
@@ -430,7 +449,7 @@
 .orderandpay .bbs_list01 thead th {font-size: 14px; color: #313131; padding: 16px 0 17px;font-weight:500;background: #fafafa;border-top:2px #000 solid;border-bottom:1px #eee solid;}
 .orderandpay .bbs_list01 tbody td, 
 .orderandpay .bbs_list01.tbl_slide tbody td{padding: 25px 20px 24px;text-align:center;font-weight: 500;color: #000;}
-.orderandpay .bbs_list01.tbl_slide tbody td {padding-left:50px; padding-right: 50px;}
+.orderandpay .bbs_list01.tbl_slide tbody td {/*padding-left:50px; padding-right: 50px;*/}
 .orderandpay .bbs_list01 tbody td a {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit;}
 
 .orderandpay .bbs_list01 tbody tr.conts td {padding:0 0;text-align:left;background:#fafafa;}
@@ -447,23 +466,23 @@
 .orderandpay .s_title .desc {font-size: 14px; line-height: normal; padding: 0; margin: 9px 10px 0px}
 .orderandpay .stxt {font-size: 13px; font-weight:400; color:#777777;}
 
-.orderandpay .txt_tip {font-size: 15px; font-weight: 400; background-position: 0 4px;}
+.orderandpay .txt_tip {font-size: 14px; font-weight: 400; background-position: 0 3px;}
 .orderandpay .txt_tip .stxt {margin-top:5px;}
-.orderandpay .stxt_tip {font-size: 14px; line-height: 1.4em; font-weight: 300;}
+.orderandpay .stxt_tip {font-size: 14px; line-height: 1.4em; font-weight: 300; color:#777777;}
 
-.orderandpay .infobox01 {margin-top:45px;}
+.orderandpay .infobox01 {margin-top:45px; background:#fafafa;}
 .orderandpay .infobox01 .f_left, 
 .orderandpay .infobox01 .f_right {width:auto; float: none !important;} 
 .orderandpay .infobox01 .f_right {margin-top:30px;}
 .orderandpay .infobox01 .con {margin-top:15px;padding-left:8px;}
 .orderandpay .infobox01 dl {line-height:18px;}
-.orderandpay .infobox01 dl dt {font-size: 16px;font-weight: 500;margin-bottom: 6px; background: none; padding-left:0;  margin-top: 30px;}
+.orderandpay .infobox01 dl dt {font-size: 16px;font-weight: 500;margin-bottom: 6px; background: none; padding-left:0;  margin-top: 30px; color:#000000;}
 .orderandpay .infobox01 dl dt:first-child {margin-top:0;}
-.orderandpay .infobox01 dl dd { font-size: 13px; font-weight: 400; line-height: 1.7; word-break: keep-all;}
+.orderandpay .infobox01 dl dd { font-size: 13px; font-weight: 400; line-height: 1.7; word-break: keep-all; color:#777;}
 .orderandpay .infobox01.type2 {position:relative;margin-top:-1px;border:1px solid #dbdbdb;}
 
 .orderandpay .sv_carving {padding-top:10px;}
-.orderandpay .sv_carving .stit {font-size: 16px;font-weight: 500;letter-spacing: -1.4px;padding: 0;height: auto;margin-bottom: 5px;}
+.orderandpay .sv_carving .stit {font-size: 16px;font-weight: 500;letter-spacing: -1.4px;padding: 0;height: auto;margin-bottom: 5px; margin-top: 5px;}
 
 
 /* box */
@@ -487,7 +506,8 @@
 .orderandpay .search_box02 .wordlist .usualword:after {content: '';display: block;width:1px;height:16px;background: #707070;position: absolute;top: 3px;right: 0;}
 .orderandpay .search_box02 .wordlist a {color:#000000; margin-left:15px;}
 
-.orderandpay .btn_type01 {height: 19px;line-height: normal;font-size: 13px;padding: 6px 10px 8px;vertical-align: middle; background: #EEEEEE;border-radius: 30px;padding: 10px 30px 9px;font-size: 13px;font-weight: 500;color: #000 !important;}
+.orderandpay .btn_type01 {height: 19px;line-height: normal;font-size: 13px;vertical-align: middle; background: #EEEEEE;border-radius: 30px;padding: 10px 30px 9px;font-size: 13px;font-weight: 500;color: #000 !important;}
+.orderandpay .btn_type07 {font-size: 14px;min-width: 105px;padding: 10px 13px 11px 13px;height: auto;line-height: normal; background: #000; text-align: center;}
 
 
 /* sos 상담 */
@@ -550,25 +570,14 @@
 
 /* 대량구매상담 팝업 */
 .orderandpay .save_point {}
-.orderandpay .save_point > .inner .tit01 {margin-top:0; margin-bottom: 5px;}
+.orderandpay .save_point > .inner .tit01 {margin-top:0; margin-bottom: 0px;}
+.orderandpay .save_point > .inner .stxt {margin-top:10px;}
 .orderandpay .save_point .table01 {}
-.orderandpay .save_point .table01 tbody th {background: #fafafa; padding:;}
+.orderandpay .save_point .table01 tbody th {background: #fafafa; padding:17px 24px; color: #000; font-weight: 500; }
+.orderandpay .save_point .table01 tbody td { padding:17px 24px; color: #000; font-weight: 500; }
+.orderandpay .save_point > .inner .table01 tbody td .btn_type01 {float: right;margin-left: 3px; padding: 10px 20px 9px;}
 
-
-.pagination_v2{text-align:center; margin-bottom:80px;}
-.pagination_v2 a{display:inline-block; color:#000; vertical-align:top; width:48px; height:48px; padding-top:15px; border-radius:24px; font-family:font_gs; font-size:22px; text-align:center; box-sizing:border-box;}
-.pagination_v2 .active{display:inline-block; color:#fff; font-weight:bold;}
-.pagination_v2 .active{background:#000;;}
-.pagination_v2 .arr{display:inline-block; width:20px; padding-top:12px;}
-.pagination_v2 .arr:after{content:''; display:inline-block; width:15px; height:25px; background:url('../../images/biz/sub/icon_page_arr.png') no-repeat; background-size:60px 25px;}
-.pagination_v2 .arr.prev{margin-right:50px;}
-.pagination_v2 .arr.next{margin-left:50px;}
-.pagination_v2 .arr.prev:after{background-position:-15px 0}
-.pagination_v2 .arr.first:after{background-position:0 0}
-.pagination_v2 .arr.next:after{background-position:-30px 0}
-.pagination_v2 .arr.last:after{background-position:100% 0}
-
-
+/* paging */
 .orderandpay .paging .first,
 .orderandpay .paging .next02,
 .orderandpay .paging .prev,
