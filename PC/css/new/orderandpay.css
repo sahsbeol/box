@@ -23,6 +23,7 @@
 .orderandpay .btn_wrap.distance{margin-top:90px !important;}
 .orderandpay .width_check {max-width: 520px;}
 .orderandpay .width_barcode {max-width: 150px; width:150px !important;}
+.orderandpay .width_cs {max-width: 300px; width:300px !important;}
 .orderandpay .width_phone {max-width: 80px;}
 .orderandpay .width_name {max-width: 190px;}
 .orderandpay .width_point {max-width: 240px; width:240px !important; text-align: right;}
@@ -108,13 +109,18 @@
 .orderandpay .choice_wrap input[type="checkbox"] + label ,
 .orderandpay .choice_wrap input[type=radio]+ label { display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
 .orderandpay .choice_wrap input[type="checkbox"] + label:before,
-.orderandpay .choice_wrap input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/new/icon_radio_on.png) no-repeat center left 4px; border: 1px solid #DBDBDB; border-radius : 10px;  box-sizing: border-box;} 
+.orderandpay .choice_wrap input[type="radio"] + label:before { content: ''; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/new/icon_radio_on.png) no-repeat center left 4px; border: 1px solid #DBDBDB; border-radius : 10px;  box-sizing: border-box;} 
 
 .orderandpay .choice_wrap input[type="checkbox"]:checked + label:before,
 .orderandpay .choice_wrap input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/new/icon_radio_on.png) no-repeat center left 4px;}
 .orderandpay .choice_wrap input[type=radio]::-ms-expand,
 .orderandpay .choice_wrap input[type=checkbox]::-ms-expand{display: none;}
 
+/*.orderandpay .choice_wrap.exclusive input[type="checkbox"] + label:before,
+.orderandpay .choice_wrap.exclusive input[type="radio"] + label:before { margin:0 auto; display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;}
+.orderandpay .choice_wrap.exclusive input[type="checkbox"]:checked + label:before,
+.orderandpay .choice_wrap.exclusive input[type="radio"]:checked + label:before  { border:1px #DA2128 solid; background: #DA2128 url(../../images/new/icon_radio_on.png) no-repeat center left 4px;}
+*/
 /* radio , checkbox 사각형 */
 .orderandpay .choice_wrap.type_squre input[type="checkbox"] + label:before,
 .orderandpay .choice_wrap.type_squre input[type="radio"] + label:before { content: ' '; display: inline-block; width: 20px; height: 20px; line-height: 20px; margin: -2px 5px 0 0; text-align: center; vertical-align: middle; background: #EEEEEE url(../../images/new/icon_radio_on.png) no-repeat center center;; border: 1px solid #DBDBDB; border-radius : 4px;  box-sizing: border-box;} 
@@ -127,7 +133,7 @@
 
 /* select 기본형 */
 .orderandpay .select_wrap select ,
-.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background:#fff url('../../images/new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+.orderandpay .input_wrap select {width:100%; padding: 9px 32px 10px 7px; max-height:38px; height:auto; border:1px #B5B5B5 solid;box-sizing: border-box;font-size: 13px;font-weight: 300;display: block; color:#777777;font-family: inherit;background:#fff url('../../images/new/icon_select.png') no-repeat right 12px center;border-radius: 0px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
 .orderandpay .input_wrap select::-ms-expand ,
 .orderandpay .select_wrap select::-ms-expand {display: none;}
 
@@ -310,7 +316,7 @@
 .orderandpay .safetynumber {position: relative;}
 .orderandpay .safetynumber .tooltip_wrap {position: absolute; top:0; left:0; width:680px;}
 
-.orderandpay .layer_pop_box {display: none; position: absolute; top: 0;    left: 0;}
+.orderandpay .layer_pop_box {display: none; position: absolute; top: 0; left: 0;}
 .orderandpay .dimed {display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0, .6); z-index: 999;}
 .orderandpay .layer_pop {    position: relative; z-index: 1000;}
 
@@ -375,7 +381,7 @@
 
 .orderandpay h3.page_title {font-size: 28px;font-weight: 700;margin-bottom: 15px; min-height:auto; margin-top:0;}  
 .orderandpay .tit01 {font-size: 18px; color: #000; font-weight:500; line-height: normal; min-height:auto; margin-bottom:20px; margin-top:60px;}
-.orderandpay h4.tit01 {font-size:20px; font-weight:700; color:#000;}
+.orderandpay h4.tit01 {font-size:20px; font-weight:700; color:#000; margin-bottom: 10px;}
 .orderandpay .page_stitle a { font-size: 22px; line-height: 1.4; margin-bottom: 0px; letter-spacing: -1px; font-weight: 700; color:#000;}
 
 .orderandpay h4.important_info {font-size:18px; line-height: normal; margin-bottom: 5px; }
@@ -383,7 +389,7 @@
 
 /* list */
 .orderandpay ul.list_type02 {margin-top: 10px;}
-.orderandpay ul.list_type02 > li {position:relative;font-size: 13px;font-weight:400;line-height: 2;/* margin-bottom: 5px; */word-break: break-all;background: none;padding-left:10px;color:#313131;}
+.orderandpay ul.list_type02 > li {position:relative;font-size: 13px;font-weight:400;line-height: 2; word-break: break-all;background: none;padding-left:10px;color:#000;}
 .orderandpay ul.list_type02 > li:before {content: '';display:block;width:4px;height: 4px;background: #000;position:absolute;top: 11px;left:0;}
 /* table */
 /* 
@@ -392,12 +398,17 @@
 
 .orderandpay .table01 tbody th {padding:17px 24px; font-size: 14px;  line-height:1.4em;}
 .orderandpay .table01 tbody td {padding:17px 35px 17px 21px; font-size:14px;  line-height:1.4em;}
-/*
+
 .orderandpay .table02 {font-size:14px; line-height:1.4em;}
-.orderandpay .table02 thead th {padding:10px 0;color:#646464;border-bottom: 1px solid #eaeaea;background:#f5f5f1;}
-.orderandpay .table02 tbody th {padding:10px 9px 10px 9px;font-weight: 500;}
+.orderandpay .table02 thead th {padding:10px 0;color:#000;border-bottom: 1px solid #EEEEEE;background:#fafafa;}
+.orderandpay .table02 tbody th {padding: 19px 0px 19px 24px;font-weight: 500;background: #fafafa;font-size: 13px;font-weight: 500;color: #000;}
 .orderandpay .table02 tbody th label { font-weight: inherit;}
-.orderandpay .table02 tbody td {padding:10px 20px 11px;}
+.orderandpay .table02 tbody td {padding:10px 20px 11px; color:#000; font-size: 13px; font-weight: 400;}
+
+.orderandpay .table02 .choice_wrap .choice_wrap_inner {margin-left: 15px; display: block; float: left;   margin-top: 5px; line-height: 2;}
+.orderandpay .table02 .choice_wrap .choice_wrap_inner:first-child {margin-left:0;}
+/*
+
 .orderandpay .table02.t_center tbody td {padding:17px 0;text-align:center;}
 .orderandpay .table02.cash {border-collapse:separate;border:1px solid #a31112}
 .orderandpay .table02.cash th {padding:5px;border-left:1px solid #eaeaea}
@@ -425,6 +436,8 @@
 .orderandpay label.t01 { margin-left: 5px;}
 .orderandpay .radios { margin-left:10px; }
 .orderandpay .radios.first { margin-left:0px; }
+
+
 
 /* table */
 /* 
@@ -506,9 +519,10 @@
 .orderandpay .search_box02 .wordlist .usualword:after {content: '';display: block;width:1px;height:16px;background: #707070;position: absolute;top: 3px;right: 0;}
 .orderandpay .search_box02 .wordlist a {color:#000000; margin-left:15px;}
 
-.orderandpay .btn_type01 {height: 19px;line-height: normal;font-size: 13px;vertical-align: middle; background: #EEEEEE;border-radius: 30px;padding: 10px 30px 9px;font-size: 13px;font-weight: 500;color: #000 !important;}
+.orderandpay .btn_type01 {height: 19px;line-height: normal;font-size: 13px;vertical-align: middle; background: #EEEEEE;border-radius: 30px;padding: 10px 30px 9px;font-size: 13px;font-weight: 700;color: #000 !important;}
 .orderandpay .btn_type07 {font-size: 14px;min-width: 105px;padding: 10px 13px 11px 13px;height: auto;line-height: normal; background: #000; text-align: center;}
-
+.orderandpay .btn_type03 {height: auto;line-height: normal;font-size: 18px;padding: 14px 0 13px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;min-width: 200px;background: #000;font-weight: 400;box-sizing: border-box;}
+.orderandpay .btn_type04 {height: auto;line-height: normal;font-size: 18px;padding: 14px 0 13px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;min-width: 200px;background: #fff;font-weight: 400; border:1px #000 solid; box-sizing: border-box; color:#000;}
 
 /* sos 상담 */
 .orderandpay .sos_counsel {background: none; border:none;}
@@ -521,7 +535,7 @@
 .orderandpay .sos_counsel .btn_type03 {height: auto;line-height: normal;font-size: 16px;padding: 17px 55px 17px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;}
 
 /* unit */
-.orderandpay .input_txt, .orderandpay textarea {padding: 6px 4px 6px 4px;border: 1px solid #ccc;color: #000000;line-height: 1.4;font-size: 13px; font-weight: 400; font-family: 'font_ns','Apple SD Gothic Neo', sans-serif;}
+.orderandpay .input_txt, .orderandpay textarea {padding: 9px 4px 9px 4px;border: 1px solid #ccc;color: #000000;line-height: 1.4;font-size: 13px; font-weight: 400; font-family: 'font_ns','Apple SD Gothic Neo', sans-serif;}
 .orderandpay textarea {resize: none;}
 .orderandpay .input_txt {vertical-align: middle;height: auto;}
 .orderandpay input::placeholder {  color: #898989 !important; } 

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=950">
+<title>SOS상담 주문 선택 - NEW ME HOTTRACKS</title>
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+
+<link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="../../images/ico_app.png">
+
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/shop.css">
+<!-- 20.12.28 -->
+<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="../../js/m_contents.js"></script>
+<script type="text/javascript" src="../../js/music.js"></script>
+<script type="text/javascript" src="../../js/musicPlayer.js"></script>
+<script type="text/javascript" src="/scripts/common"></script>
+<script type="text/javascript" src="../../js/ht.common.utils.1.0.0.js"></script>
+<script type="text/javascript" src="../../js/ht.menu.topGnb.1.0.0.js"></script>
+
+
+
+
+<script type="text/javascript">
+    jQuery(function($) {
+        window.resizeTo(900, 680);
+        
+        $("tbody tr td a").click(function() {
+            $("input[name='deliveryId']", opener.document).val($(this).find("input[name='deliveryId']").val()); 
+            $("input[name='orderNum']", opener.document).val($(this).find("input[name='orderNum']").val());
+            self.close();
+        });
+    });
+</script>
+
+
+</head>
+<!-- 201228 S : 작업부분 body에 class="orderandpay" 넣어주세요  -->
+<body class="popup orderandpay ">
+
+    <div class="tooltip_wrap active">
+        <div class="tooltip_inner">
+            <p class="tooltip_tit">주문내역 조회</p>
+            <div class="pop_cont">
+                <ul class="list_type02">
+                    <li>상담을 원하시는 주문번호/상품명을 선택하세요(최근 6개월간의 주문내역을 기본으로 보여드립니다).</li>
+                </ul>
+                <table class="table02 mgt15">
+                    <caption>주문내역 조회 <span>주문일, 주문번호, 상품명, 상품금액(배송금액), 배송업체, 처리상태</span></caption>
+                    <colgroup>  
+                        <col width="120px" />
+                        <col width="120px" />
+                        <col width="*" /> 
+                        <col width="120px" />
+                        <col width="120px" />
+                        <col width="100px" /> 
+                    </colgroup>
+                    <thead>
+                        <tr> 
+                            <th scope="col">주문일</th>
+                            <th scope="col">주문번호</th>
+                            <th scope="col">상품명</th> 
+                            <th scope="col">상품금액(배송금액)</th>
+                            <th scope="col">배송업체</th>
+                            <th scope="col">처리상태</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>  
+                </table>
+                <div class="paging">
+
+
+
+                </div>
+            </div>
+            <a href="javascript:;" onclick="self.close(); return false;" class="tooltip_close">닫기</a>
+        </div>
+    </div>
+</body>
+<!--// 201228 : E 작업부분 -->
+</html>
