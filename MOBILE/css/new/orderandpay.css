@@ -383,7 +383,7 @@
 
 .orderandpay .customer .accordion li a {border-bottom:1px #eee solid;}
 .orderandpay .customer .accordion li:first-child a {border-top:0;}
-.orderandpay .customer .bbs_box {margin-top:50px;}
+.orderandpay .customer .bbs_box{}
 .orderandpay .customer .bbs_box h4 {font-size: 16px; font-weight: 700; padding-bottom: 16px;}
 .orderandpay .customer .bbs_box .btn_more {font-size: 0; width:16px; height:16px; background: url(../../images/new/cs_icon_more.png) no-repeat center center; background-size: 16px 16px; right: -10px; top: -2px;}
 .orderandpay .customer .bbs_box .accordion > li > a {padding:20px 0; font-size:13px; font-weight: 400; color:#000;}
