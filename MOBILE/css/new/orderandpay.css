@@ -370,6 +370,31 @@
 .orderandpay .count_wrap .input_txt {float: left;    width: 39px !important;    padding: 5px 4px 6px 5px;    border-left: 0;    border-right: 0;}
 
 
+/* 고객 센터 */
+.orderandpay .customer {line-height: 1;padding: 0 10px;}
+.orderandpay .customer .cs_alert {}
+.orderandpay .customer .cs_alert_text {margin-top:15px;}
+.orderandpay .customer .cs_alert_text dt {font-size: 25px; font-weight: 700;}
+.orderandpay .customer .cs_alert_text dd {font-size: 13px; font-weight: 500; color: #777777;}
+.orderandpay .customer .cs_button_list { display: table; width: 100%; margin-top:20px;}
+.orderandpay .customer .cs_button_list li { display: table-cell; width: 50%;}
+.orderandpay .customer .cs_button_list .link {font-size: 15px;font-weight: 400;display: block;background: #000;color: #fff;text-align: center; margin-left: 5px; padding:19px 10px 20px }
+.orderandpay .customer .cs_button_list li:first-child .link {margin-left:0;}
+
+.orderandpay .customer .accordion li a {border-bottom:1px #eee solid;}
+.orderandpay .customer .accordion li:first-child a {border-top:0;}
+.orderandpay .customer .bbs_box {margin-top:50px;}
+.orderandpay .customer .bbs_box h4 {font-size: 16px; font-weight: 700; padding-bottom: 16px;}
+.orderandpay .customer .bbs_box .btn_more {font-size: 0; width:16px; height:16px; background: url(../../images/new/cs_icon_more.png) no-repeat center center; background-size: 16px 16px; right: -10px; top: -2px;}
+.orderandpay .customer .bbs_box .accordion > li > a {padding:20px 0; font-size:13px; font-weight: 400; color:#000;}
+.orderandpay .customer .bbs_box .accordion > li > a > span {font-size:inherit; font-weight: inherit; color:inherit;}
+.orderandpay .customer .bbs_box .accordion > li > a > em {top:20px;}
+
+.orderandpay .customer .tab_box { display:-webkit-box;margin:10px;border:1px solid #FF6A5B;border-radius:5px;background-color:#fff; }
+.orderandpay .customer .tab_box a { -webkit-box-flex:1;display:block;text-align:center;padding:10px;color:#FF6A5B;font-weight:bold; width : 50%;}
+.orderandpay .customer .tab_box a.active { background-color:#FF6A5B;color:#fff; }
+
+
 
 @media screen and (max-width: 360px) {
 

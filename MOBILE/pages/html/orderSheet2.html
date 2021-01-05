@@ -1,0 +1,1981 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no, address=no, email=no" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+
+
+<link rel="stylesheet" type="text/css" href="/resources/css/layout.css?">
+<link rel="stylesheet" type="text/css" href="/resources/css/content.css?">
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css?">
+
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js?20191101"></script>
+<script type="text/javascript" src="/js/jquery.mobile-events.min.js?20191101"></script>
+<script type="text/javascript" src="/js/idangerous.swiper.min.js?20191101"></script>
+<script type="text/javascript" src="/js/common.js?20191101"></script>
+<script type="text/javascript" src="/js/kakao.min.js?20191101"></script>
+<script type="text/javascript" src="/scripts/common?20191101"></script>
+<script type="text/javascript" src="/scripts/loadingBar?20191101"></script>
+<script type="text/javascript" src="/scripts/device?"></script>
+
+
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="wed, 04 jul 1973 16:00:00 gmt">
+<script type="text/javascript" src="/js/jquery.form.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/jquery.timers-1.2.js"></script>
+<style type="text/css">
+.s_point {font-family: '돋움',Dotum,AppleGothic; color: #da2128; padding: 0 2px;}
+.card_box {display:none;}
+.card_box.active {display:block;}
+.cash_box {display:none;}
+.cash_box.active {display:block;}
+.smile_box {display:none;}
+.smile_box.active {display:block;}
+.cash_box .chk_wrap {font-size:12px;}
+.cash_box .cash_info {clear:both;padding-top:5px;display:none;margin-top:5px;}
+.cash_box .cash_info.active {display:block;}
+.cash_box .cash_info .select {float:left;margin-right:5px;font-size:11px}
+.cash_box .cash_info .cash_info_in {display:none;}
+.cash_box .cash_info .cash_info_in input {font-size:11px;padding:6px 6px 6px 6px;}
+.cash_box .cash_info .cash_info_in label {margin-left:5px;}
+.cash_box .cash_info .cash_info_in.active {display:block;}
+.cash_box .cash_biz {clear:both;padding-top:5px;display:none;margin-top:5px;}
+.cash_box .cash_biz.active {display:block;}
+.cash_box .cash_biz .select {float:left;margin-right:5px;font-size:11px}
+.cash_box .cash_biz .cash_biz_in {display:none;}
+.cash_box .cash_biz .cash_biz_in input {font-size:11px;padding:6px 6px 6px 6px;}
+.cash_box .cash_biz .cash_biz_in label {margin-left:5px;}
+.cash_box .cash_biz .cash_biz_in.active {display:block;}
+ul.box_slidelist + ul.box_slidelist {border-bottom: 16px solid #eee;}
+</style>
+
+<script type="text/javascript">
+$('.rdo_chs label input').on('focus',function(){
+    var targetLink = '#' + $(this).attr('value');
+    $('.r_cont').hide();
+    $(targetLink).show();
+});
+
+jQuery(function($) {
+    $(document).ready(function(){
+        $('body').addClass('bg_gray');//상단 mini 모드
+        var chkPay = $("input[name=pymntMeansCode]:checked").val();
+        if (chkPay == "C011E") {
+            // 네이버페이
+            $(".cash_box").addClass("active");
+        } else {
+            $(".cash_box.active").removeClass("active");
+        }
+        
+        // 자동완성 전체끄기
+        $("input[type=text]").attr("autocomplete", "off");
+        
+        // 주문상품 열기
+		$(".box_slidelist .btn_tit").click(function(e) {
+			e.preventDefault();
+			var item = $($(this).attr("href"));
+			if (item.hasClass("active")) {
+				item.removeClass("active");
+				item.find(".roundbox").slideUp();
+			} else {
+				item.addClass("active");
+				item.find(".roundbox").slideDown();
+			}
+		});
+    });
+    
+    
+    $("input[name=pymntMeansCode]").click(function() {
+        var chkPay = $("input[name=pymntMeansCode]:checked").val();
+        if (chkPay == "C011E") {
+        	// 네이버페이
+        	$(".card_box.active").removeClass("active");
+            $(".cash_box").addClass("active");
+            $(".smile_box.active").removeClass("active");
+        } else if (chkPay == "C011I") {
+        	$(".card_box.active").removeClass("active");
+        	$(".cash_box.active").removeClass("active");
+        	$(".smile_box").addClass("active");
+        } else if (chkPay == "C0111") {
+        	$(".card_box").addClass("active");
+            $(".cash_box.active").removeClass("active");
+            $(".smile_box.active").removeClass("active");
+        } else {
+        	$(".card_box.active").removeClass("active");
+            $(".cash_box.active").removeClass("active");
+            $(".smile_box.active").removeClass("active");
+        }
+    });
+    
+    $('.chk_agree').click(function (){
+        if ($(this).find('input[name=agreeCheck]').attr('checked')){
+        	$(this).find('input[name=agreeCheck]').removeAttr('checked');
+            $(this).removeClass('active');
+        } else {
+            $(this).find('input[name=agreeCheck]').attr('checked',true);
+            $(this).addClass('active');
+        }
+    });
+
+    $('.chk_gsSave').click(function (){
+        if ($(this).find('input[name=gsSaveCheck]').attr('checked')){
+            $(this).find('input[name=gsSaveCheck]').removeAttr('checked');
+            $(this).removeClass('active');
+        } else {
+            $(this).find('input[name=gsSaveCheck]').attr('checked',true);
+            $(this).addClass('active');
+        }
+    });
+    
+    
+    
+    $("form#orderSheetForm input[name=totmileage]").blur(function(){
+        var usableTotMileage = Number($("form#orderSheetForm input[name=userTotPoint]").val());
+        var inputTotMileage = Number(isEmpty($(this).val())? 0 : $(this).val());
+        
+        var orderAmt = calculateOrderAmtExceptDiscountMethod("totmileage");
+        
+        if(inputTotMileage > 0) {
+            usableTotMileage = Math.floor(eval(usableTotMileage/10))*10;
+            
+            if(inputTotMileage % 10 != 0) {
+                alert("통합포인트는 10원단위로 사용 가능합니다.");
+                inputTotMileage = Math.floor(eval(inputTotMileage/10))*10;
+                $(this).val(inputTotMileage);
+            }
+            
+            if(inputTotMileage > usableTotMileage || inputTotMileage > orderAmt) {
+                if(usableTotMileage > orderAmt) {
+                    usableTotMileage = orderAmt;
+                }
+                alert("사용가능한 통합포인트는 " + price_format(usableTotMileage) + "원 입니다.");
+                $(this).val(usableTotMileage);
+            }
+        } else {
+            $(this).val(inputTotMileage);
+        }
+        
+        calculateDiscountPrice();
+        calculateOrderAmt();
+    });
+    
+    
+    $("form#orderSheetForm input[name=mileage]").blur(function(){
+        var usableMileage = Number($("form#orderSheetForm input[name=userMileage]").val());
+        var inputMileage = Number(isEmpty($(this).val())? 0 : $(this).val());
+        
+        var orderAmt = calculateOrderAmtExceptDiscountMethod("mileage");
+        
+        if(inputMileage > 0) {
+            usableMileage = Math.floor(eval(usableMileage/10))*10;
+            
+            if(inputMileage % 10 != 0) {
+                alert("마일리지는 10원단위로 사용 가능합니다.");
+                inputMileage = Math.floor(eval(inputMileage/10))*10;
+                $(this).val(inputMileage);
+            }
+            
+            if(inputMileage > usableMileage || inputMileage > orderAmt) {
+                if(usableMileage > orderAmt) {
+                    usableMileage = orderAmt;
+                }
+                alert("사용가능한 마일리지는 " + price_format(usableMileage) + "원 입니다.");
+                $(this).val(usableMileage);
+            }
+        } else {
+            $(this).val(inputMileage);
+        }
+        
+        calculateDiscountPrice();
+        calculateOrderAmt();
+    });
+    
+    
+    $("form#orderSheetForm input[name=deposit]").blur(function(){
+        var usableDeposit = Number($("form#orderSheetForm input[name=userDeposit]").val());
+        var inputDeposit = Number($(this).val());
+        var orderAmt = calculateOrderAmtExceptDiscountMethod("deposit");
+        
+        if(isEmpty(inputDeposit)) {
+            $(this).val(0);
+        } else if(inputDeposit > usableDeposit || inputDeposit > orderAmt) {
+            if(usableDeposit > orderAmt) {
+                usableDeposit = orderAmt;
+            }
+            alert("사용가능한 예치금은 " + price_format(usableDeposit) + "원 입니다.");
+            $(this).val(usableDeposit);
+        }
+        
+        calculateDiscountPrice();
+        calculateOrderAmt();
+    });
+    
+    
+    $("#btnPayment").click(function(){
+    	$("input[name=buyerName]").val($("input[name=receiverName]").val());
+        $("input[name=telephone1]").val($("input[name=receiverTelePhone1]").val());
+        $("input[name=telephone2]").val($("input[name=receiverTelePhone2]").val());
+        $("input[name=telephone3]").val($("input[name=receiverTelePhone3]").val());
+        $("input[name=handPhone1]").val($("input[name=receiverHandPhone1]").val());
+        $("input[name=handPhone2]").val($("input[name=receiverHandPhone2]").val());
+        $("input[name=handPhone3]").val($("input[name=receiverHandPhone3]").val());
+        
+        var chkPay = $("input[name=pymntMeansCode]:checked").val();
+        
+        if(fnCheckOrderFrm()){
+            var httsPartner = getCookie("LinkCookieKey");
+            // 직원구매 MOBSTEP , 모바일 MOB
+            if ('02' == '99') {
+                if ("N" == "Y") {
+                    $("input[name=linkTmsYn]").val('MOBASTEP');
+                } else {
+                    $("input[name=linkTmsYn]").val('MOBSTEP');
+                }
+            } else {
+                if ("N" == "Y") {
+                    $("input[name=linkTmsYn]").val('MOBA' + httsPartner);
+                } else {
+                    $("input[name=linkTmsYn]").val('MOB' + httsPartner);
+                }
+            }
+            
+            $("form#orderSheetForm input").each(function() {
+                $(this).val($.trim($(this).val()));
+            });
+            // 파라메터 유효성 체크
+            $("form#orderSheetForm").ajaxSubmit({
+                url: "/m/order/checkBeforePayment"
+                ,dataType: "json"
+                ,success: function checkSuccess(data) {
+                    if (data.save) {
+                        var orderNum = isEmpty(data.orderNum)? "" : data.orderNum;
+                        var prdtName = isEmpty($("input[name=prdtName]:eq(0)").val())? "" : $("input[name=prdtName]:eq(0)").val(); 
+                        var orderAmt =$("form#orderSheetForm").find("input[name=orderAmt]").val();
+                        
+                        if(orderAmt == 0) {
+                            // 보조결제 수단만으로 결제
+                            $("form#orderSheetForm").find("input[name=orderNum]").val(orderNum);
+                            $("form#orderSheetForm").find("input[name=prdtName]").val(prdtName);
+                            $("form#orderSheetForm").ajaxSubmit({
+                                url: "/m/order/orderOnlySubPayment"
+                                ,dataType: "json"
+                                ,success: function saveSuccess(data) {
+                                    if(data.save) {
+                                        $("form#orderSheetForm").attr("action", "http://devm.hottracks.co.kr/m/order/orderComplete");
+                                        $("form#orderSheetForm").attr("target", "");
+                                        $("form#orderSheetForm").submit();
+                                    } else {
+                                        var errorMessages = data.errorMessages;
+                                        alert(errorMessages.join("\n"));
+                                        location.href = "http://devm.hottracks.co.kr/m/order/cart";
+                                    }
+                                },error: function(xhr, status, error) {
+                                    alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+                                    location.href = "http://devm.hottracks.co.kr/m/order/cart";
+                                }
+                            });
+                        } else if (chkPay=="C011E") {
+                            // 네이버페이결제
+                        	alert("테스트서버에서 결제 불가능합니다.\n전산팀에 문의하세요.");
+                        } else if (chkPay=="C011D") {
+                            // 휴대폰 결제
+                        	alert("테스트서버에서 결제 불가능합니다.\n전산팀에 문의하세요.");
+                        } else if (chkPay=="C011I") {
+                            // 스마일페이 결제
+                        	alert("테스트서버에서 결제 불가능합니다.\n전산팀에 문의하세요.");
+                        } else if (chkPay=="C011H") {
+                            // 직카카오결제
+                        	alert("테스트서버에서 결제 불가능합니다.\n전산팀에 문의하세요.");
+                        } else if (chkPay=="C011J" || chkPay=="C011K" || chkPay=="C011L") {
+                            // NICE PAY 결제
+                        	alert("테스트서버에서 결제 불가능합니다.\n전산팀에 문의하세요.");
+                        } else {
+                            // 결제창 띄우기
+                        	alert("테스트서버에서 결제 불가능합니다.\n전산팀에 문의하세요.");
+                        }
+                    } else {
+                        var errorMessages = data.errorMessages;
+                        alert(errorMessages.join("\n"));
+                    }
+                }
+                ,error: function(xhr, status, error) {
+                    alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+                }
+            });
+        }
+    });
+    
+    $("[name=cashRepCode]").change(function(){
+    	var index = $("input[name=cashRepCode]").index(this) + 1;
+    	if (index == 1) {
+            $(".cash_biz.active").removeClass("active");
+            $("#cashRcpPri").addClass("active");
+    	} else if (index == 2) {
+            $(".cash_info.active").removeClass("active");
+            $("#cashRcpPub").addClass("active");
+    	} else {
+            $(".cash_biz.active").removeClass("active");
+            $(".cash_info.active").removeClass("active");
+    	}
+    });
+    
+    $("[name=cashRepCodeKi]").change(function(){
+    	$(".cash_info_in.active").removeClass("active");
+    	if ($(this).val() == "01") {
+            $("#infoCash").addClass("active");
+    	} else if ($(this).val() == "02") {
+    		$("#infoCard").addClass("active");
+    	}
+    });
+    
+
+    
+    $("form#orderSheetForm input[name=gsPointUse]").blur(function(){
+        var userGsPoint = Number($("form#orderSheetForm input[name=userGsPoint]").val());
+        userGsPoint = Math.floor(eval(userGsPoint/10))*10;
+        
+        var inputGsPoint = Number(isEmpty($(this).val())? 0 : $(this).val());
+        
+        var orderAmt = calculateOrderAmtExceptDiscountMethod("gsPoint");
+        
+        if(inputGsPoint > 0) {
+            if(inputGsPoint % 10 != 0) {
+                alert("Gs Point는 10원단위로 사용 가능합니다.");
+                inputGsPoint = Math.floor(eval(inputGsPoint/10))*10;
+                $(this).val(inputGsPoint);
+            }
+            inputGsPoint = Math.floor(eval(inputGsPoint/10))*10;
+            
+            if(inputGsPoint > userGsPoint || inputGsPoint > orderAmt) {
+                if(userGsPoint > orderAmt) {
+                    userGsPoint = orderAmt;
+                }
+                alert("사용가능한 Gs Point는 " + price_format(userGsPoint) + "원 입니다.");
+                $(this).val(userGsPoint);
+            }
+        } else {
+            $(this).val(inputGsPoint);
+        }
+        
+        calculateDiscountPrice();
+        calculateOrderAmt();
+    });
+    
+    
+    $("form#orderSheetForm input[name=okPointUse]").blur(function(){
+        var userOkPoint = Number($("form#orderSheetForm input[name=userokPoint]").val());
+        userOkPoint = Math.floor(eval(userOkPoint/10))*10;
+        
+        var inputOkPoint = Number(isEmpty($(this).val())? 0 : $(this).val());
+        
+        var orderAmt = calculateOrderAmtExceptDiscountMethod("okPoint");
+        
+        if(inputOkPoint > 0) {
+            if(inputOkPoint % 10 != 0) {
+                alert("Ok 캐쉬백은 10원단위로 사용 가능합니다.");
+                inputOkPoint = Math.floor(eval(inputOkPoint/10))*10;
+                $(this).val(inputOkPoint);
+            }
+            inputOkPoint = Math.floor(eval(inputOkPoint/10))*10;
+            
+            if(inputOkPoint > userOkPoint || inputOkPoint > orderAmt) {
+                if(userOkPoint > orderAmt) {
+                	userOkPoint = orderAmt;
+                }
+                alert("사용가능한 Ok 캐쉬백는 " + price_format(userOkPoint) + "원 입니다.");
+                $(this).val(userOkPoint);
+            }
+        } else {
+            $(this).val(inputOkPoint);
+        }
+        
+        calculateDiscountPrice();
+        calculateOrderAmt();
+    });
+    
+    
+    $("form#orderSheetForm input[name=lPointUse]").blur(function(){
+        var userlPoint = Number($("form#orderSheetForm input[name=userlPoint]").val());
+        userlPoint = Math.floor(eval(userlPoint/10))*10;
+        
+        var inputlPoint = Number(isEmpty($(this).val())? 0 : $(this).val());
+        
+        var orderAmt = calculateOrderAmtExceptDiscountMethod("lPoint");
+        
+        if(inputlPoint > 0) {
+            if(inputlPoint % 10 != 0) {
+                alert("L.Point는 10원단위로 사용 가능합니다.");
+                inputlPoint = Math.floor(eval(inputlPoint/10))*10;
+                $(this).val(inputlPoint);
+            }
+            inputlPoint = Math.floor(eval(inputlPoint/10))*10;
+            
+            if(inputlPoint > userlPoint || inputlPoint > orderAmt) {
+                if(userlPoint > orderAmt) {
+                    userlPoint = orderAmt;
+                }
+                alert("사용가능한 L.Point는 " + price_format(userlPoint) + "원 입니다.");
+                $(this).val(userlPoint);
+            }
+        } else {
+            $(this).val(inputlPoint);
+        }
+        
+        calculateDiscountPrice();
+        calculateOrderAmt();
+    });
+});
+
+
+function totPointAllUse(){
+    var totmileage = $("form#orderSheetForm input[name=userTotPoint]").val();
+    var orderAmt = calculateOrderAmtExceptDiscountMethod("totmileage");
+    totmileage = Math.floor(eval(totmileage/10))*10;
+    
+    if(totmileage == 0) {
+        alert("사용가능한 통합포인트가 없습니다.");
+    } else {
+        if(totmileage > orderAmt) {
+            totmileage = orderAmt;
+        }
+        $("form#orderSheetForm input[name=totmileage]").val(totmileage).select();
+    }
+    
+    calculateDiscountPrice();
+    calculateOrderAmt();
+}
+
+
+function mileAllUse(){
+    var mileage = $("form#orderSheetForm input[name=userMileage]").val();
+    var orderAmt = calculateOrderAmtExceptDiscountMethod("mileage");
+    mileage = Math.floor(eval(mileage/10))*10;
+    
+    if(mileage == 0) {
+        alert("사용가능한 마일리지가 없습니다.");
+    } else {
+        if(mileage > orderAmt) {
+            mileage = orderAmt;
+        }
+        $("form#orderSheetForm input[name=mileage]").val(mileage).select();
+    }
+    
+    calculateDiscountPrice();
+    calculateOrderAmt();
+}
+
+
+function depositAllUse(){
+    var deposit = $("form#orderSheetForm input[name=userDeposit]").val();
+    var orderAmt = calculateOrderAmtExceptDiscountMethod("deposit");
+    
+    if(deposit == 0) {
+        alert("사용가능한 예치금이 없습니다.");
+    } else {
+        if(deposit > orderAmt) {
+            deposit = orderAmt;
+        }
+        $("form#orderSheetForm input[name=deposit]").val(deposit).select();
+    }    
+    
+    calculateDiscountPrice();
+    calculateOrderAmt();
+}
+
+function showRecentAddr(){
+	//var username = "박민";
+	//alert(username);
+	$("#zipcode").load("/m/order/recentAddr");
+    $("#zipcode").show();
+}
+function showZipcode(){
+	$("#zipcode").load("/m/zipcode?ssl=Y");
+	$("#zipcode").show();
+}
+function closeZipcode(){
+    $("#zipcode").empty;
+    $("#zipcode").hide();
+}
+
+function searchGsPoint(){
+    document.getElementById("lGetPoint").innerHTML = "0P";
+    document.getElementById("gsGetPoint").innerHTML = "0P";
+    document.getElementById("okGetPoint").innerHTML = "0P";
+    $("input[name=userlPoint]").val(0);	
+    $("input[name=userGsPoint]").val(0);
+    $("input[name=userokPoint]").val(0);
+    
+    $("input[name=gsPointUse]").val(0); 
+    $("input[name=okPointUse]").val(0);
+    $("input[name=lPointUse]").val(0);
+    
+    calculateDiscountPrice();
+    calculateOrderAmt();
+    
+    $("#lPoint").hide();
+    $("#gsPoint").show();
+    $("#okPoint").hide();
+}
+
+function closeGsPoint(){
+    $("#gsPoint").hide();
+}
+
+function searchLPoint(){
+    document.getElementById("lGetPoint").innerHTML = "0P";
+    document.getElementById("gsGetPoint").innerHTML = "0P";
+    document.getElementById("okGetPoint").innerHTML = "0P";
+    $("input[name=userlPoint]").val(0); 
+    $("input[name=userGsPoint]").val(0);
+    $("input[name=userokPoint]").val(0);
+	
+    $("input[name=gsPointUse]").val(0); 
+    $("input[name=okPointUse]").val(0);
+    $("input[name=lPointUse]").val(0);
+    
+    calculateDiscountPrice();
+    calculateOrderAmt();
+    
+    $("#gsPoint").hide();
+    $("#lPoint").show();
+    $("#okPoint").hide();
+}
+
+function closeLPoint(){
+    $("#lPoint").hide();
+}
+
+function searchOkPoint(){
+    document.getElementById("lGetPoint").innerHTML = "0P";
+    document.getElementById("gsGetPoint").innerHTML = "0P";
+    document.getElementById("okGetPoint").innerHTML = "0P";
+    $("input[name=userlPoint]").val(0); 
+    $("input[name=userGsPoint]").val(0);
+    $("input[name=userokPoint]").val(0);
+	
+    $("input[name=gsPointUse]").val(0); 
+    $("input[name=okPointUse]").val(0);
+    $("input[name=lPointUse]").val(0);
+    
+    calculateDiscountPrice();
+    calculateOrderAmt();
+    
+    $("#gsPoint").hide();
+    $("#lPoint").hide();
+    $("#okPoint").show();
+}
+
+function closeOkPoint(){
+    $("#okPoint").hide();
+}
+
+function conLPoint(){
+    if ($("input[name=lIdInput]").val().replace(/(^\s*)|(\s*$)/gi,"") == "") {alert("GS 아이디를 입력해야 합니다.");return;}
+    if ($("input[name=lPwInput]").val().replace(/(^\s*)|(\s*$)/gi,"") == "") {alert("비밀번호를 입력해야 합니다.");return;}
+    
+    $("input[name=lCard]").val($("input[name=lIdInput]").val().replace(/(^\s*)|(\s*$)/gi,""));
+    $("input[name=lPw]").val($("input[name=lPwInput]").val().replace(/(^\s*)|(\s*$)/gi,""));
+    $("form#lPoint").ajaxSubmit({
+        url: "/m/order/lPointSearch"
+        ,dataType: "json"
+        ,success: function checkSuccess(data) {
+
+            if (data.result.rspC =="0") {
+                document.getElementById("lGetPoint").innerHTML = data.result.avlPt + "P";
+                $("input[name=userlPoint]").val(data.result.avlPt);
+                $("input[name=userlCardNo]").val(data.result.lCard);
+                $("input[name=userlPw]").val(data.result.lPw);
+                $("#lPoint").hide();
+            } else {
+                alert(data.result.rspMsgCn);
+            }
+        }
+        ,error: function(xhr, status, error) {
+            alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+        }
+    });
+}
+
+function conGsPoint(){
+    if ($("input[name=gsIdInput]").val().replace(/(^\s*)|(\s*$)/gi,"") == "") {alert("GS 아이디를 입력해야 합니다.");return;}
+    if ($("input[name=gsPwInput]").val().replace(/(^\s*)|(\s*$)/gi,"") == "") {alert("비밀번호를 입력해야 합니다.");return;}
+    
+    $("input[name=gsId]").val($("input[name=gsIdInput]").val().replace(/(^\s*)|(\s*$)/gi,""));
+    $("input[name=gsPw]").val($("input[name=gsPwInput]").val().replace(/(^\s*)|(\s*$)/gi,""));
+    $("form#gsPoint").ajaxSubmit({
+        url: "/m/order/gsPointSearch"
+        ,dataType: "json"
+        ,success: function checkSuccess(data) {
+            if (data.result.result =="00000") {
+                document.getElementById("gsGetPoint").innerHTML = data.result.gsPoint + "P";
+                $("input[name=userGsPoint]").val(data.result.gsPoint);
+                $("input[name=userGsCardNo]").val(data.result.gsCardNum);
+                $("#gsPoint").hide();
+            } else {
+                alert(data.result.remark);
+            }
+        }
+        ,error: function(xhr, status, error) {
+            alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+        }
+    });
+}
+
+function conOkPoint(){
+    if ($("input[name=okIdInput]").val().replace(/(^\s*)|(\s*$)/gi,"") == "") {alert("카드번호를 입력해야 합니다.");return;}
+    if ($("input[name=okPwInput]").val().replace(/(^\s*)|(\s*$)/gi,"") == "") {alert("비밀번호를 입력해야 합니다.");return;}
+    
+    $("input[name=okId]").val($("input[name=okIdInput]").val().replace(/(^\s*)|(\s*$)/gi,""));
+    $("input[name=okPw]").val($("input[name=okPwInput]").val().replace(/(^\s*)|(\s*$)/gi,""));
+    
+    $("form#okPoint").ajaxSubmit({
+        url: "/m/order/okPointSearch"
+        ,dataType: "json"
+        ,success: function checkSuccess(data) {
+            if (data.result.sReplyCode =="000000") {
+                document.getElementById("okGetPoint").innerHTML = data.result.sAvPoint + "P";
+                $("input[name=userokPoint]").val(data.result.sAvPoint);
+                $("input[name=userokCardNo]").val($("input[name=okId]").val());
+                $("input[name=userokCardPw]").val($("input[name=okPw]").val());
+                $("#okPoint").hide();
+            } else {
+                alert(data.result.sReplyMessage);
+            }
+        }
+        ,error: function(xhr, status, error) {
+            alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+        }
+    });
+}
+
+
+function calculateOrderAmtExceptDiscountMethod(exceptDiscountMethod) {
+    var totalPrdtAmt = isEmpty($("input[name=totalPrdtAmt]").val())? 0 : Number($("input[name=totalPrdtAmt]").val());
+    var totalDlvyAmt = isEmpty($("input[name=totalDlvyAmt]").val())? 0 : Number($("input[name=totalDlvyAmt]").val());
+    
+    var mileage = isEmpty($("input[name=mileage]").val())? 0 : Number($("input[name=mileage]").val());
+    var deposit = isEmpty($("input[name=deposit]").val())? 0 : Number($("input[name=deposit]").val());
+    var totPoint = isEmpty($("input[name=totmileage]").val())? 0 : Number($("input[name=totmileage]").val());
+    var gsPoint = isEmpty($("input[name=gsPointUse]").val())? 0 : Number($("input[name=gsPointUse]").val());
+    var okPoint = isEmpty($("input[name=okPointUse]").val())? 0 : Number($("input[name=okPointUse]").val());
+    var lPoint = isEmpty($("input[name=lPointUse]").val())? 0 : Number($("input[name=lPointUse]").val());
+    
+    var cpnDscntPrice = isEmpty($("input[name=cpnDscntPrice]").val())? 0 : Number($("input[name=cpnDscntPrice]").val());
+    var discountPrice = 0;
+    
+     if(exceptDiscountMethod == "deposit") {
+        discountPrice = cpnDscntPrice + mileage + totPoint + gsPoint + okPoint + lPoint;
+    } else if(exceptDiscountMethod == "mileage") {
+        discountPrice = cpnDscntPrice + deposit + totPoint + gsPoint + okPoint + lPoint;
+    } else if(exceptDiscountMethod == "totmileage") {
+        discountPrice = cpnDscntPrice + mileage + deposit + gsPoint + okPoint + lPoint;
+    } else if(exceptDiscountMethod == "gsPoint") {
+        discountPrice = cpnDscntPrice + mileage + deposit + totPoint + okPoint + lPoint;
+    } else if(exceptDiscountMethod == "okPoint") {
+        discountPrice = cpnDscntPrice + mileage + deposit + totPoint + gsPoint + lPoint;
+    } else if(exceptDiscountMethod == "lPoint") {
+        discountPrice = cpnDscntPrice + mileage + deposit + totPoint + gsPoint + okPoint;
+    }
+    
+    
+    return eval(totalPrdtAmt + totalDlvyAmt - discountPrice);
+}
+
+
+function calculateDiscountPrice() {
+    var discountPrice = 0;
+    var mileage = isEmpty($("input[name=mileage]").val())? 0 : Number($("input[name=mileage]").val());
+    var deposit = isEmpty($("input[name=deposit]").val())? 0 : Number($("input[name=deposit]").val());
+    var totmileage = isEmpty($("input[name=totmileage]").val())? 0 : Number($("input[name=totmileage]").val());
+    var gsPointUse = isEmpty($("input[name=gsPointUse]").val())? 0 : Number($("input[name=gsPointUse]").val());
+    var okPointUse = isEmpty($("input[name=okPointUse]").val())? 0 : Number($("input[name=okPointUse]").val());
+    var lPointUse = isEmpty($("input[name=lPointUse]").val())? 0 : Number($("input[name=lPointUse]").val());
+    var cpnDscntPrice = isEmpty($("input[name=cpnDscntPrice]").val())? 0 : Number($("input[name=cpnDscntPrice]").val());
+    
+    discountPrice = eval(mileage + deposit + cpnDscntPrice + totmileage + gsPointUse + okPointUse + lPointUse);
+    $("input[name=discountPrice]").val(eval(discountPrice * (-1)));
+    
+    discountPrice = discountPrice > 0 ? "-" + price_format(discountPrice) : 0;
+    $("#discountPrice").html(discountPrice);
+}
+
+
+function calculateOrderAmt() {
+    var totalPrdtAmt = isEmpty($("input[name=totalPrdtAmt]").val())? 0 : Number($("input[name=totalPrdtAmt]").val());
+    var totalDlvyAmt = isEmpty($("input[name=totalDlvyAmt]").val())? 0 : Number($("input[name=totalDlvyAmt]").val());
+    var discountPrice = isEmpty($("input[name=discountPrice]").val())? 0 : Number($("input[name=discountPrice]").val());
+    
+    var orderAmt = totalPrdtAmt + totalDlvyAmt + discountPrice;
+    $("input[name=orderAmt]").val(orderAmt);
+    $("#orderAmt").html(price_format(orderAmt));
+    
+    // 결제금액에 따른 결제수단 처리
+    if(orderAmt > 0) {
+        $("input[name=pymntMeansCode]").attr("disabled", false);
+        $("#paymentArea").show();
+    } else {
+        $("input[name=pymntMeansCode]").attr("disabled", true);
+        $("#paymentArea").hide();
+    }
+    
+    // 에스크로 영역처리
+    //checkEscrow();
+}
+
+
+function callbackZipcode(zipcode, address) {
+    $("input[name=receiverAddress]").val(address);
+    $("#receiverAddress").text("["+zipcode.substring(0,3)+"-"+zipcode.substring(4,7)+"]"+address);
+    $("input[name=receiverPostNum1]").val(zipcode.substring(0,3));
+    $("input[name=receiverPostNum2]").val(zipcode.substring(4,7));
+    $("input[name=receiverDetailAddress]").val("");
+    closeZipcode();
+}
+
+
+function callbackRoadCode(zipcode, address1, address2, address3, address4 ) {
+    $("input[name=receiverAddress]").val(address1);
+    $("#receiverAddress").text("["+zipcode.substring(0,3)+"-"+zipcode.substring(4,7)+"]"+address1);
+    $("input[name=receiverPostNum1]").val(zipcode.substring(0,3));
+    $("input[name=receiverPostNum2]").val(zipcode.substring(4,7));
+    $("input[name=receiverDetailAddress3]").val(address2);
+    $("input[name=receiverDetailAddress4]").val(address3);
+    $("input[name=receiverDetailAddress]").val("");
+    document.getElementById("receiverDetailAddressView3").innerHTML = address2;
+    document.getElementById("receiverDetailAddressView4").innerHTML = address3;
+    closeZipcode();
+}
+
+function fnFocusEm(chkTarget, bgTarget, msg){
+    $(".chk_required").removeClass("chk_required");
+    
+    alert(msg);
+    chkTarget.focus();
+    bgTarget.addClass("chk_required");
+    return false;
+}
+
+function fnCheckOrderFrm(){
+    if(!$("input[name=agreeCheck]").attr('checked')){
+        return fnFocusEm($("#agreeCheck"), $(".agree-check"), "주문동의가 필요합니다.");
+    }else if(isEmpty($("input[name=receiverName]").val())){
+        return fnFocusEm($("input[name=receiverName]"), $("input[name=receiverName]"), "이름을 입력해주세요.");
+    }else if(isEmpty($("input[name=receiverHandPhone1]").val())){
+        return fnFocusEm($("input[name=receiverHandPhone1]"), $("input[name=receiverHandPhone1]"), "휴대폰번호를 입력해주세요.");
+    }else if(isEmpty($("input[name=receiverHandPhone2]").val())){
+        return fnFocusEm($("input[name=receiverHandPhone2]"), $("input[name=receiverHandPhone2]"), "휴대폰번호를 입력해주세요.");
+    }else if(isEmpty($("input[name=receiverHandPhone3]").val())){
+        return fnFocusEm($("input[name=receiverHandPhone3]"), $("input[name=receiverHandPhone3]"), "휴대폰번호를 입력해주세요.");
+    }else if(isEmpty($("input[name=receiverPostNum1]").val())){
+        return fnFocusEm($("input[name=receiverPostNum1]"), $("input[name=receiverPostNum1]"), "우편번호를 입력해주세요.");
+    }else if(isEmpty($("input[name=receiverPostNum2]").val())){
+        return fnFocusEm($("input[name=receiverPostNum2]"), $("input[name=receiverPostNum2]"), "우편번호를 입력해주세요.");
+    }else if(isEmpty($("input[name=receiverAddress]").val())){
+        return fnFocusEm($("input[name=receiverAddress]"), $("input[name=receiverAddress]"), "기본주소를 입력해주세요.");
+    }else if(isEmpty($("input[name=receiverDetailAddress]").val())){
+        return fnFocusEm($("input[name=receiverDetailAddress]"), $("input[name=receiverDetailAddress]"), "상세주소를 입력해주세요.");
+    }else if($("input[name=pymntMeansCode]:checked").length == 0){
+        var totalPrdtAmt = isEmpty($("input[name=totalPrdtAmt]").val())? 0 : Number($("input[name=totalPrdtAmt]").val());
+        var totalDlvyAmt = isEmpty($("input[name=totalDlvyAmt]").val())? 0 : Number($("input[name=totalDlvyAmt]").val());
+        var discountPrice = isEmpty($("input[name=discountPrice]").val())? 0 : Number($("input[name=discountPrice]").val());
+        
+        var orderAmt = totalPrdtAmt + totalDlvyAmt + discountPrice;
+        if(orderAmt > 0)
+            return fnFocusEm($("input[name=pymntMeansCode]:first"), $("input[name=pymntMeansCode]:first").parent(), "결제수단을 선택해주세요.");
+    }
+    
+    return true;
+}
+
+function openCouponPopup() {
+    if($("input[name=usableCpnCount]").val() != 0){
+        //window.open('', 'popupCouponList', 'width=670,height=720');
+        $("form#orderSheetForm").attr("action", "/m/order/popupCouponList");
+        $("form#orderSheetForm").attr("target", "#useCouponList");
+        $("form#orderSheetForm").submit();
+        $("#useCouponList").show();
+    } else {
+        alert("사용 가능하신 쿠폰이 없습니다.");
+    }
+}
+
+function openCouponList() {
+	$("form#orderSheetForm").ajaxSubmit({
+        url: '/m/order/popupCouponList'
+        ,dataType: 'html'
+        ,success: function(html) {
+        	$("#useCouponList").html(html);
+            $("#useCouponList").show();
+        }
+        ,error: function(data) {
+            alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+        }
+    });
+
+	
+    //$("#useCouponList").load("/m/order/popupCouponList?ssl=Y");
+}
+function closeCouponList(){
+    $("#useCouponList").empty;
+    $("#useCouponList").hide();
+}
+
+function applyCoupon(totalCpnDscntPrice, couponInfoList, dlvyCouponInfoList, orderCouponInfo) {
+    if(!isEmpty(totalCpnDscntPrice)) {
+        $("input[name=cpnDscntPrice]").val(totalCpnDscntPrice);
+        $("#cpnDscntPrice").html(totalCpnDscntPrice);
+    }
+    
+    $("form#orderSheetForm").find("input[name=applyCouponInfo]").remove();
+    $("form#orderSheetForm").find("input[name=applyDlvyCouponInfo]").remove();
+    $("form#orderSheetForm").find("input[name=applyOrderCouponInfo]").remove();
+    
+    for(var i=0;i<couponInfoList.length;i++) {
+        $("form#orderSheetForm").append("<input type='hidden' name='applyCouponInfo' value='" + couponInfoList[i] + "'/>");
+    }
+    
+    for(var j=0;j<dlvyCouponInfoList.length;j++) {
+        $("form#orderSheetForm").append("<input type='hidden' name='applyDlvyCouponInfo' value='" + dlvyCouponInfoList[j] + "'/>");
+    }
+    
+    $("form#orderSheetForm").append("<input type='hidden' name='applyOrderCouponInfo' value='" + orderCouponInfo + "'/>");
+    
+    calculateDiscountPrice();
+    calculateOrderAmt();
+}
+
+function select_address2(zip1, rcvrAddr, rcvrDtlAddr, rcvrTelNum, rcvrHdphnNum, name){
+     $("input[name=receiverAddress]").val(rcvrAddr);
+     
+     $("input[name=receiverName]").val(name);
+     
+     if(zip1.indexOf("-") > -1){
+         $("#receiverAddress").text("["+zip1.split("-")[0]+"-"+zip1.split("-")[1]+"]"+ rcvrAddr);
+         $("input[name=receiverPostNum1]").val(zip1.split("-")[0]);
+         $("input[name=receiverPostNum2]").val(zip1.split("-")[1]);
+     }else if(zip1.length == 5 || zip1.length == 6){
+         $("#receiverAddress").text("["+zip1.substring(0, 3)+"-"+zip1.substring(3, 6)+"]"+ rcvrAddr);
+         $("input[name=receiverPostNum1]").val(zip1.substring(0, 3));
+         $("input[name=receiverPostNum2]").val(zip1.substring(3, 6));
+     }else{
+         $("#receiverAddress").text("["+zip1+"]"+ rcvrAddr);
+         $("input[name=receiverPostNum1]").val(zip1);
+         $("input[name=receiverPostNum2]").val("");
+     }
+     
+     $("input[name=receiverDetailAddress]").val(rcvrDtlAddr);
+     
+     $("input[name=receiverTelePhone1]").val(rcvrTelNum.split("-")[0]);
+     $("input[name=receiverTelePhone2]").val(rcvrTelNum.split("-")[1]);
+     $("input[name=receiverTelePhone3]").val(rcvrTelNum.split("-")[2]);
+     
+     $("input[name=receiverHandPhone1]").val(rcvrHdphnNum.split("-")[0]);
+     $("input[name=receiverHandPhone2]").val(rcvrHdphnNum.split("-")[1]);
+     $("input[name=receiverHandPhone3]").val(rcvrHdphnNum.split("-")[2]);
+     
+     closeZipcode();
+     // self.close();
+}
+</script>
+
+
+
+</head>
+<body>
+<div id="loading" class="loadingbar"><img src="/images/common/ajax-loader.gif"/></div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+<!--
+jQuery(function($){
+    $("#cate-menu").swipeleft(function($){
+        closeGnbMenu();
+    });
+    
+    $(".cate_tab .tab_navi a").click(function(e){
+        e.preventDefault();
+        $(".cate_tab .tab_navi a.active").removeClass("active");
+        $(".cate_tab .tab_item.active").removeClass("active");
+        $(this).addClass("active");
+        $($(this).attr("href")).addClass("active");
+    });
+    
+    $(".snb-item > a").click(function(e){
+        e.preventDefault();
+        if($($(this).attr("href")).hasClass("active")){
+            $(".snb-item.active").removeClass("active");
+        }else{
+            $(".snb-item.active").removeClass("active");
+            $($(this).attr("href")).addClass("active");
+        }
+    });
+    
+    if("0" == "0"){
+        $("#cate-menu-box div div.btn_box a.btn_alarm.noover span em.col_orange").hide();
+    }else
+    	$("#cate-menu-box div div.btn_box a.btn_alarm.noover span em.col_orange").show();
+    
+    // 메인배너
+    var welcomeSwiper = new Swiper('.swipe-sub .swiper-container',{
+        pagination: '.swipe-sub div.pagination',
+        loop:true,
+        grabCursor: true,
+        paginationClickable: true,
+        autoplay: 3000,
+        autoplayDisableOnInteraction: false
+    });
+    
+});
+
+function tglSmneu(ctgrId){
+    if($("#lnbMenu").hasClass("active")){
+        $("#lnbSmenu").load("/m/hot/smenu?ctgrId="+ctgrId, function (){
+            $("#lnbMenu").removeClass("active");
+            $("#lnbSmenu").addClass("active");
+        });
+    }else{
+        $("#lnbSmenu").removeClass("active");
+        $("#lnbMenu").addClass("active");
+    }
+}
+//-->
+</script>
+<style>
+a.bnr_todaysub {
+	width:100%; text-align:center;
+}
+a.bnr_todaysub img {
+	width:100%; max-width:660px; text-align:center;
+}
+</style>
+<div id="cate-menu" class="ly_base">
+    <div id="cate-menu-box">
+        <div class="side_gnb">
+            <div class="info_box">
+                
+                        <span class="member">
+                            <strong>박민</strong>님
+                            <a href="#" onclick="location.href='/m/help/memberShip';return false;" class="btn_grade">
+                                
+                                실버
+                                
+                                
+                                
+                            </a>
+                        </span>
+                        <!-- 
+                        <a href="#" onclick="logout();return false;" class="btn_join">로그아웃</a>
+                        -->
+                    
+            </div>
+            <div class="btn_box">
+                <a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/listAlarm';return false;" class="btn_alarm noover">
+                    <span>0</span>
+                </a>
+                <a href="#" onclick="goSetting();return false;" class="btn_setting">환경설정</a>
+            </div>
+        </div>
+        <!-- .util -->
+        <ul class="side_menu">
+            <li><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/main';return false;" class="side_menu05 MB_SIDE_TOP_1">마이핫트랙스</a></li>
+            <li><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/orderDelivery';return false;" class="side_menu03 MB_SIDE_TOP_2">주문/배송</a></li>
+            <li><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/order/cart';return false;" class="side_menu04 MB_SIDE_TOP_3">장바구니</a></li>
+        </ul>
+        <!-- //.util -->
+        
+        <!-- 다이어리 배너 -->
+        <a class="bnr_todaysub" href="/m/diary/main">
+        	<img class="MB_SIDE_TODAY" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/bnr_cat02.gif">
+       	</a>
+       	              	
+        <div class="cate active" id="lnbMenu" style="margin:0px;">
+            <ul>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_1" onclick="tglSmneu('000020');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000020_off02.png" alt="디자인문구"/></em><span>디자인문구</span></a>
+                    <a href="#" class="MB_SIDE_CATE_3" onclick="tglSmneu('000022');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000022_off02.png" alt="디지털"/></em><span>디지털</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_2" onclick="tglSmneu('000007');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000007_off02.png" alt="고급필기구"/></em><span>고급필기구</span></a>
+                    <a href="#" class="MB_SIDE_CATE_4" onclick="tglSmneu('000021');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000021_off02.png" alt="오피스"/></em><span>오피스</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_7" onclick="tglSmneu('000025');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000025_off02.png" alt="리빙/생활가전"/></em><span>리빙/생활가전</span></a>
+                    <a href="#" class="MB_SIDE_CATE_9" onclick="tglSmneu('000026');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000026_off02.png" alt="키친/푸드"/></em><span>키친/푸드</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_8" onclick="tglSmneu('000024');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000024_off02.png" alt="가구/수납"/></em><span>가구/수납</span></a>
+                    <a href="#" class="MB_SIDE_CATE_11" onclick="tglSmneu('000028');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000028_off02.png" alt="패션잡화"/></em><span>패션잡화</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_12" onclick="tglSmneu('000006');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000006_off02.png" alt="뷰티/헬스"/></em><span>뷰티/헬스</span></a>
+                    <a href="#" class="MB_SIDE_CATE_10" onclick="tglSmneu('000027');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000027_off02.png" alt="여행/자동차"/></em><span>여행/자동차</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_5" onclick="tglSmneu('000023');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000023_off02.png" alt="취미/펫"/></em><span>취미/펫</span></a>
+                    <a href="#" class="MB_SIDE_CATE_13" onclick="tglSmneu('000029');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate000029_off02.png" alt="유아동"/></em><span>유아동</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_14" onclick="location.href='http://devm.hottracks.co.kr/m/hot/eventDetail?eventId=47389';return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_sohot_off02.png" alt="직수입&PB"/></em><span>직수입&PB</span></a>
+                    <a href="#" class="MB_SIDE_CATE_15" onclick="tglSmneu('0003');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate0003_off02.png" alt="CD"/></em><span>CD</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_CATE_16" onclick="tglSmneu('0004');return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/app/menu/ic_cate0004_off02_01.png" alt="DVD"/></em><span>DVD</span></a>
+                    <a href="#"></a>
+                </li>
+            </ul>
+            <ul style="margin:0 0 160px 0;">
+            	<li>
+                    <a href="#" class="MB_SIDE_ANNOUNCE_1" onclick="location.href='http://devm.hottracks.co.kr/m/help/listNotice';return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/menu/icon_menu_01_02.png" alt="공지사항"/></em><span>공지사항</span></a>
+                    <a href="#" class="MB_SIDE_ANNOUNCE_2" onclick="location.href='http://devm.hottracks.co.kr/m/help/main';return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/menu/icon_menu_02_02.png" alt="고객센터"/></em><span>고객센터</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_ANNOUNCE_3" onclick="location.href='http://devm.hottracks.co.kr/m/help/listStore';return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/menu/icon_menu_03_02.png" alt="매장안내"/></em><span>매장안내</span></a>
+                    <a href="#" class="MB_SIDE_ANNOUNCE_4" onclick="location.href='http://devm.hottracks.co.kr/m/help/signMain';return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/menu/icon_menu_04_02.png" alt="사인회안내"/></em><span>사인회안내</span></a>
+                </li>
+                <li>
+                    <a href="#" class="MB_SIDE_ANNOUNCE_5" onclick="location.href='http://devm.hottracks.co.kr/m/hot/eventMain?orderBy=&ctgrId=0000&eventDispTypeCode=C0213';return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/menu/icon_menu_05_02.png" alt="참여이벤트"/></em><span>참여이벤트</span></a>
+                    <a href="#" class="MB_SIDE_ANNOUNCE_6" onclick="location.href='http://devm.hottracks.co.kr/m/help/listEventPrize';return false;"><em class="disc"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/menu/icon_menu_06_02.png" alt="당첨자발표"/></em><span>당첨자발표</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="cate" id="lnbSmenu"></div>
+        
+    </div>
+    <div id="cate-close-box" onclick="closeGnbMenu()">
+        <a href="#" onclick="return false;">메뉴 레이어 닫기</a>
+    </div>
+</div>
+<!-- //#util -->
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+<!--
+jQuery(function($){
+    $(".srch_box02 .side_menu li a").click(function(){
+        if(!$(this).hasClass("active")){
+            $(".srch_box02 .side_menu li a.active").removeClass("active");
+            $(".srch_box02 .srch_list_item.active").removeClass("active");
+            
+            $(this).addClass("active");
+            $(".srch_box02 .srch_list_item").eq($(".srch_box02 .side_menu li").index($(this).parent())).addClass("active");
+        }
+    });
+    
+    // 자동완성/최근키워드 열기
+    $("form[name=gnbSearchFrm] input[name=searchTerm]").focus(function(){
+        $(".srch_box01").show();
+    });
+    
+    // 자동완성/최근키워드 닫기
+    $("body").click(function(e){
+        if($(".srch_box01").css("display") == "block"){
+            if(!$(".search").has(e.target).length && !$(".srch_box01").has(e.target).length){
+                $(".srch_box01").hide();
+            }
+        }
+    });
+});
+
+function gnbSrchFrm(){
+    var frm = $("form[name=gnbSearchFrm]");
+    if(frm.length < 1){
+        frm = $("form[name=searchedForm]");
+    }
+    if($.trim(frm.find("input[name=searchTerm]").val()) == ""){
+        alert("검색어를 입력해주세요");
+        return false;
+    }
+    frm.submit();
+}
+
+function gnbSrchKerword(keyword){
+    if($("form[name=gnbSearchFrm]").length < 1){
+        _search(keyword);
+    }else{
+        
+        $("form[name=gnbSearchFrm] input[name=searchTerm]").val(keyword);
+        gnbSrchFrm();
+    }
+}
+
+function rmRcntKerword(rcntKeySeq, id){
+    $.ajax({
+        type: "GET"
+        , url: "/m/search/rmRecentKeyword"
+        , data: "rcntKeySeq=" + rcntKeySeq
+        , dataType: "json"
+        , success: function(data) {
+            $(id).slideUp();
+        }
+        , error: function() {
+            //alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+        }
+    });
+}
+//-->
+</script>
+<div id="gnb-search">
+    <div id="srch_util" class="srch_cont">
+        <!-- search -->
+         <div class="search">
+            <form name="gnbSearchFrm" action="http://devm.hottracks.co.kr/m/search/searchMain" method="post">
+                <input type="hidden" name="viewType"/>
+                <input type="hidden" name="searchMenu"/>
+                <fieldset>
+                    <legend>검색</legend>
+                    <div class="s_box">
+                        <input type="text" class="s_input" name="searchTerm" value="" placeholder="검색어를 입력하세요" title="검색어를 입력하세요" autocomplete="off"/>
+                        <a href="#" class="s_submit" onclick="gnbSrchFrm();return false;">검색</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <!-- //.search -->
+        <div class="srch_box01">
+            <div class="search_auto_cmplt">
+                <p class="tit">연관 검색어</p>
+                <div class="srch_list">
+                    <div class="srch_list" id="searchAutoCmplt"></div>
+                </div>
+            </div>
+            
+                <p class="tit">최근 검색어</p>
+                <div class="srch_list">
+                    
+                        <p id="lyRcntItem52868572">
+                            <a href="#" onclick="gnbSrchKerword('웍스 스케줄러');return false;">웍스 스케줄러</a>
+                            <a href="#" onclick="rmRcntKerword('52868572', '#lyRcntItem52868572');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem50123572">
+                            <a href="#" onclick="gnbSrchKerword('악동');return false;">악동</a>
+                            <a href="#" onclick="rmRcntKerword('50123572', '#lyRcntItem50123572');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem49511572">
+                            <a href="#" onclick="gnbSrchKerword('하비풀');return false;">하비풀</a>
+                            <a href="#" onclick="rmRcntKerword('49511572', '#lyRcntItem49511572');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem48249183">
+                            <a href="#" onclick="gnbSrchKerword('dd');return false;">dd</a>
+                            <a href="#" onclick="rmRcntKerword('48249183', '#lyRcntItem48249183');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem48249173">
+                            <a href="#" onclick="gnbSrchKerword('필통');return false;">필통</a>
+                            <a href="#" onclick="rmRcntKerword('48249173', '#lyRcntItem48249173');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem48249106">
+                            <a href="#" onclick="gnbSrchKerword('ㅇㅇ');return false;">ㅇㅇ</a>
+                            <a href="#" onclick="rmRcntKerword('48249106', '#lyRcntItem48249106');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem48248398">
+                            <a href="#" onclick="gnbSrchKerword('s');return false;">s</a>
+                            <a href="#" onclick="rmRcntKerword('48248398', '#lyRcntItem48248398');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem47302778">
+                            <a href="#" onclick="gnbSrchKerword('다이어리');return false;">다이어리</a>
+                            <a href="#" onclick="rmRcntKerword('47302778', '#lyRcntItem47302778');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem47118518">
+                            <a href="#" onclick="gnbSrchKerword('？？프랑스자수 마리몬드');return false;">？？프랑스자수 마리몬드</a>
+                            <a href="#" onclick="rmRcntKerword('47118518', '#lyRcntItem47118518');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                        <p id="lyRcntItem47118478">
+                            <a href="#" onclick="gnbSrchKerword('？？프랑스자수');return false;">？？프랑스자수</a>
+                            <a href="#" onclick="rmRcntKerword('47118478', '#lyRcntItem47118478');return false;" class="btn_del">삭제</a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        <div class="srch_box02">
+            <!-- .side_menu -->
+            <ul class="side_menu">
+                <li><a href="#" onclick="return false;" class="active">인기 검색어</a></li>
+                <li><a href="#" onclick="return false;">추천 검색어</a></li>
+            </ul>
+            <!-- //.side_menu -->
+            <div class="srch_list">
+                <div class="srch_list_item popular arrow active">
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('카드 지갑');return false;" class=" up"><em class="num">1</em>카드 지갑</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('지갑');return false;" class=" down"><em class="num">2</em>지갑</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('카드지갑');return false;" class=" up"><em class="num">3</em>카드지갑</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('EXO');return false;" class=" up"><em class="num">4</em>EXO</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('인피니트');return false;" class=" down"><em class="num">5</em>인피니트</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('페인트');return false;" class=" up"><em class="num">6</em>페인트</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('퍼즐');return false;" class=" down"><em class="num">7</em>퍼즐</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('CHRIS DE BURGH');return false;" class=" down"><em class="num">8</em>CHRIS DE BURGH</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('봉투');return false;" class=" up"><em class="num">9</em>봉투</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('여행 파우치');return false;" class=" up"><em class="num">10</em>여행 파우치</a></p>
+                    
+                </div>
+                <div class="srch_list_item recomend">
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('스테들러');return false"><em class="num">1</em>스테들러</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('다이어리');return false"><em class="num">2</em>다이어리</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('할로윈');return false"><em class="num">3</em>할로윈</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('요이치');return false"><em class="num">4</em>요이치</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('캘린더');return false"><em class="num">5</em>캘린더</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('라이브워크');return false"><em class="num">6</em>라이브워크</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('아이코닉');return false"><em class="num">7</em>아이코닉</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('오썸띵');return false"><em class="num">8</em>오썸띵</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('가습기');return false"><em class="num">9</em>가습기</a></p>
+                    
+                        <p><a href="#" onclick="gnbSrchKerword('무선이어폰');return false"><em class="num">10</em>무선이어폰</a></p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="srch-close-box" onclick="closeGnbSearch()">
+        <a href="javascript://">메뉴 레이어 닫기</a>
+    </div>
+</div>
+<div id="wrap" class="mini">
+    
+
+
+
+
+
+<style>
+#header div.gnb span {
+	margin: 0 0.6rem;
+}
+@keyframes motion {
+    0%,60% {top:0;}
+	30% {top:-0.1em;}
+	0%,25%,75%,100% {color:#000;}
+	50% {color:#DA2128;}
+
+}
+@-webkit-keyframes motion {
+    0%,60% {top:0;}
+	30% {top:-0.1em;}
+	0%,25%,75%,100% {color:#000;}
+	50% {color:#DA2128;}
+}
+.gnb-box span .motion i {
+    position:relative; display:inline-block; animation:motion 1s infinite; font-style:normal; 
+}
+.gnb-box span .motion em {
+	display: inline-block;
+    width: 5px;
+    height: 5px;
+    background-color: #DA2128;
+    border-radius: 50%;
+    position: absolute;
+}
+.gnb-box span .motion i:nth-child(1){animation-delay:0.1s;}
+.gnb-box span .motion i:nth-child(2){animation-delay:0.2s; margin-left:6px;}
+.gnb-box span .motion i:nth-child(3){animation-delay:0.3s;}
+.gnb-box span .motion i:nth-child(4){animation-delay:0.4s;}
+.gnb-box span .motion i:nth-child(5){animation-delay:0.5s;}
+.gnb-box span.active .motion i {animation:none;}
+
+</style>
+<!-- #header -->
+<div id="header">
+    <div class="head">
+        <a href="#" onclick="openGnbMenu();return false;"  class="toggle_cate"><span>카테고리 보기</span></a>
+        <a href="#" onclick="location.href='http://devm.hottracks.co.kr/';return false;" class="logo"><h1>NEW ME HOTTRACKS</h1></a>
+        <a href="#" onclick="openGnbSearch();return false;"  class="btn_search"><span>검색</span></a>
+        <a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/order/cart';return false;"  class="btn_cart"><span id="cartCnt">0</span></a>
+    </div>
+    <div class="gnb" id="topMenu">
+        <a href="#" onclick="moreGnbMenu('L');return false;" class="btn_more left">왼쪽더보기</a>
+        <div class="gnb-box">
+            
+            
+            <span id="locWelcome"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/';return false;" class="MB_GNB_1">NOW</a></span>
+            <span id="2017DIARY"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/diary/main';return false;" class="motion"><em class="MB_GNB_10"></em><i class="MB_GNB_10">다</i><i class="MB_GNB_10">이</i><i class="MB_GNB_10">어</i><i class="MB_GNB_10">리</i><!--<em class="ic_new" style="vertical-align:top;margin-top: 3px;">NEW</em>--></a></span>
+            <span id="locBest"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/hot/best?dispMstrId=CATE_GFT_BEST';return false;" class="MB_GNB_3">베스트</a></span>
+            <span id="locMusic"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/hot/musicMain';return false;" class="MB_GNB_4">음반</a></span>
+            <span id="todayrecommend"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/hot/todayrecommend';return false;" class="MB_GNB_11"><span>오늘의발견</span></a></span>
+            <span id="locHeart"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/hot/heart';return false;" class="MB_GNB_9"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1958/1526862101505_hot_icon.png" style="width:14px;height:12px;margin-right:2px;margin-top:4px;vertical-align:text-top;"/>뿅뿅</a></span>
+            <span id="locEvent"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/hot/eventMain';return false;" class="MB_GNB_6">이벤트</a></span>
+            <span id="locCate000025"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/gift/category/000025';return false;" class="MB_GNB_2">리빙/데코</a></span>
+            <span id="locSale"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/hot/best?dispMstrId=CATE_GFT_SALE';return false;" class="MB_GNB_8">할인</a></span>
+            <span id="locNew"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/hot/best?dispMstrId=CATE_GFT_NEW';return false;" class="MB_GNB_7">신상품</a></span>
+            <span id="locStore"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/listStore';return false;" class="MB_GNB_5">매장안내</a></span>
+        </div>
+        <a href="#" onclick="moreGnbMenu('R');return false;" class="btn_more right">오른쪽더보기</a>
+    </div>
+    <div class="gnb snb snb01">
+        <span><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/main';return false;">마이룸</a></span>
+        <span id="locDelivery"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/orderDelivery';return false;">주문관리</a></span>
+        <span id="locGift"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/totsaved';return false;">혜택/관리</a></span>
+        <span id="locWish"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/wishProduct';return false;">♥좋아요</a></span>
+        <span id="locHelp"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/main';return false;">고객센터</a></span>
+    </div>
+    <div class="gnb snb snb02">
+        <span><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/main';return false;">마이룸</a></span>
+        <span id="locNotice"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/listNotice';return false;">공지사항</a></span>
+        <span id="locSign"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/signMain';return false;">사인회</a></span>
+        <span id="locStore1"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/listStore';return false;">매장안내</a></span>
+        <span id="locLevel"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/memberShip';return false;">등급혜택</a></span>
+    </div>
+    <div class="gnb snb snb03">
+        <span><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/main';return false;">마이룸</a></span>
+        <span id="locAlarm"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/listAlarm';return false;">알림함</a></span>
+        <span id="locReview"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/listTargetReview';return false;">상품평</a></span>
+        <span id="locQna"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/questionList';return false;">상품Q&A</a></span>
+        <span id="locSos"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/listSosCounsel';return false;">1:1문의</a></span>
+    </div>
+    <div class="gnb snb snb04">
+        <span><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/mypage/main';return false;">마이룸</a></span>
+        <span id="locReceipt"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/listReceipt';return false;">스마트영수증</a></span>
+        <span id="LocOffLineCoupon"><a href="#" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/offLineCoupon';return false;">영업점쿠폰</a></span>
+    </div>
+</div>
+<!-- //#header -->
+    <div id="content">
+        
+	<!-- 주문 정보 -->
+	
+	<ul class="box_slidelist">
+	    
+		<li id="p_list" class="active"><a href="#p_list" class="btn_tit p_list"><p class="tit_h2">주문 상품</p> </a> 
+				<div class="cont roundbox order_inquiry" style="display:block;">
+					<strong class="order_num">업체개별 배송 </strong>
+					
+					
+                		
+						<div class="p_name mt20">
+							<a href="#n"> <span class="thumb" onclick="location.href='http://m.hottracks.co.kr/p/8807333795533';return false;">  
+										<img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/goods/100/1034/hot1477977382319.jpg" alt="웍스 S스케줄러 1년 오렌지 포켓에스" width="100" height="100" onerror="this.src='https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/>
+									 </span>
+								<div class="name">
+									<input type="hidden" name="prdtName" value="웍스 S스케줄러 1년 오렌지 포켓에스" /> <strong>웍스 S스케줄러 1년 오렌지 포켓에스</strong>
+									
+									
+
+									
+									
+									<span class="p_price">7,000원 / 1개</span>
+								</div> </a>
+						</div>
+						<!--<ul class="br_list">
+                    <li class="br_none">
+                        <strong class="fl_l">판매가</strong>
+                        <span class="fl_r"><span class="col_red">7,000원[0%↓]</span></span>
+                    </li>
+                    <li>
+                        <strong class="fl_l">수량</strong>
+                        <span class="fl_r">1개</span>
+                    </li>
+                    <li>
+                        <strong class="fl_l">총금액</strong>
+                        <span class="fl_r">7,000원</span>
+                    </li>
+                </ul> -->
+					
+				</div>
+			
+			</li>
+			
+			<!-- 예약 상품 주문 시 -->
+			<li class="roundbox border_none" id="preOrderLayer" style="display:none;">              
+		        <p class="col_red">주문 상품 목록에 발매 예정인 예약 상품이 포함되어 있습니다.</p>
+		        <p>예약 상품 발매 후 배송이 진행됩니다. 기 출시 상품을 먼저 받아보시려면 예약 상품과 별도로 주문하시기 바랍니다.</p>
+		    </li>
+	</ul>
+	
+	<form id="orderSheetForm" action="#" method="post">
+		<input type="hidden" name="linkTmsYn" value="" /> <input type="hidden" name="orderNum" value="" /> <input type="hidden" name="prdtName" value="" /> <input type="hidden" name="productClassCount" value="1" /> <input type="hidden" name="orderCount" value="1" /> <input type="hidden" name="orderAmt" value="9700" /> <input type="hidden" name="buyerName" id="buyerName" value="박민" maxlength="30" class="input_txt" title="주문자명" /> <input type="hidden" name="telephone1" value="" /> <input type="hidden" name="telephone2" value="" /> <input type="hidden" name="telephone3" value="" /> <input type="hidden" name="handPhone1" value="" /> <input type="hidden" name="handPhone2" value="" /> <input type="hidden" name="handPhone3" value="" /> <input type="hidden" name="orderInfoSmsYn" id="orderInfoSmsN" value="Y" />
+
+		<!-- 배송지 정보 -->
+		<div class="roundbox bb_line">
+			<h2 class="tit_h2">배송지 정보</h2>
+			
+				<span class="fl_r mtm18"><a href="javascript://" onclick="showRecentAddr()" class="btn_s br_777" id="recentAddrBtn">최근 배송지</a> </span>
+			
+			<!--<span class="col_black">회원 정보를 수정하신 경우,재로그인 하셔야 변경된 정보가 반영됩니다.</span>-->
+			<div id="zipcode"></div>
+			<ul class="br_list">
+				<li><h3 class="tit_h3 mb10">이름<span class="s_point">&#42;</span></h3> <input type="text" name="receiverName" maxlength="30" class="i_input" title="수령인명" value="박민" style="width: 96%;" /></li>
+				<li>
+					<h3 class="tit_h3 mb10">주소<span class="s_point">&#42;</span><a href="javascript://" onclick="execDaumPostcode()" class="btn_black_s ml10">우편번호 검색</a></h3>
+					<div id="dwrap" style="display:none;margin:10px 0;position:relative">
+						<img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_layer_cls_b.png" id="btnFoldWrap" style="cursor:pointer; position:absolute; right:-7px; top:-45px; z-index:1; width:45px; height:auto;" onclick="foldDaumPostcode()" alt="접기 버튼">
+					</div>
+					<div id="receiverAddress" class="mt10" style="padding: 5px; text-align: left; font-size: 14px; border: 1px solid #dbdbdb; border-radius: 3px; background: #fff; width: 96%;">[049-29] 서울특별시 광진구 천호대로111길 9-0</div> <input class="i_input mt10" name="receiverDetailAddress" style="width: 96%;" maxlength="50" placeholder="상세주소" type="text" class="i_input" title="수령인 상세주소" value="403호" /> <span id="receiverDetailAddressView3" name="receiverDetailAddressView3"></span> <span id="receiverDetailAddressView4" name="receiverDetailAddressView4"></span> <input type="hidden" name="receiverPostNum1" value="049" /> <input type="hidden" name="receiverPostNum2" value="29" /> <input name="receiverAddress" type="hidden" class="i_input" title="수령인 기본주소" readonly="readonly" value="서울특별시 광진구 천호대로111길 9-0" /> <input
+					name="receiverDetailAddress3" maxlength="50" type="hidden" class="i_input" title="수령인 상세주소"/>
+					<input name="receiverDetailAddress4" maxlength="50" type="hidden" class="i_input" title="수령인 상세주소" />
+				</li>
+
+				<li><h3 class="tit_h3 mb10">휴대폰<span class="s_point">&#42;</span></h3> <input type="number" name="receiverHandPhone1" class="i_input inputNumberText" maxlength="4" title="수령인 휴대폰 지역번호 입력" style="width: 28.4%; ime-mode: disabled;" placeholder="" value="010" /> <input type="number" name="receiverHandPhone2" class="i_input inputNumberText" maxlength="4" title="수령인 휴대폰 중간자리 입력" style="width: 28.4%; ime-mode: disabled;" placeholder="" value="9295" /> <input type="number" name="receiverHandPhone3" class="i_input inputNumberText" maxlength="4" title="수령인 휴대폰 뒷자리 입력" style="width: 28.4%; ime-mode: disabled;" placeholder="" value="4818" /></li>
+				<li><h3 class="tit_h3 mb10">전화번호</h3> <input type="number" name="receiverTelePhone1" class="i_input inputNumberText" maxlength="4" title="수령인 전화번호 지역번호 입력" style="width:28.4%; ime-mode:disabled;" placeholder="" value="053" /> <input type="number" name="receiverTelePhone2" class="i_input inputNumberText" maxlength="4" title="수령인 전화번호 중간자리 입력" style="width:28.4%; ime-mode:disabled;" placeholder="" value="761" /> <input type="number" name="receiverTelePhone3" class="i_input inputNumberText" maxlength="4" title="수령인 전화번호 뒷자리 입력" style="width:28.4%; ime-mode:disabled;" placeholder="" value="4818" /></li>
+				<!--<li><input name="giftMessage" maxlength="100" type="text" class="i_input userInfo mt10" title="전달메시지" placeholder="전달메시지" style="width: 96%;" /></li>-->
+				<li><h3 class="tit_h3 mb10">주문 요청사항</h3> <input name="orderMessage" maxlength="100" type="text" class="i_input userInfo" title="주문 요청사항 " placeholder="상품 주문 시 업체에게 전달되는 메시지입니다." style="width: 96%;" /></li>
+				<li><h3 class="tit_h3 mb10">배송 요청사항</h3> <input name="deliveryMessage" maxlength="100" type="text" class="i_input userInfo" title="배송 요청사항 " placeholder="택배 배송 시 요청사항을 입력해주세요." style="width: 96%;" /></li>
+			</ul>
+		</div>
+
+
+		
+			
+				<!-- 공동구매가 아니면 -->
+				
+					<div class="roundbox pb5">
+						<h2 class="tit_h2 order_num">쿠폰 사용</h2>
+						<div class="fl_r mtm22">
+							<a href="javascript://" onclick="openCouponList()" class="btn btn_black_s more_link">사용가능 쿠폰<span class="ml5">2장</span> </a> <input type="hidden" name="usableCpnCount" value="2" />
+						</div>
+						<div id="useCouponList" class="mt20" style="position: relative;"></div>
+					</div>
+					<div class="order_fee bb_line">
+						<ul>
+							<li><span class="fl_l">쿠폰 할인금액</span><span class="col_red fl_r">원</span><span class="col_red fl_r" id="cpnDscntPrice">0</span> <input type="hidden" name="cpnDscntPrice" title="쿠폰 입력" value="0" /></li>
+						</ul>
+					</div>
+				
+			
+			<div class="roundbox bb_line">
+				<h2 class="tit_h2">할인 정보</h2>
+				<ul class="point">
+					<li class=""><strong class="tit">통합포인트</strong>
+						<p class="price col_red">
+							3,340
+							P
+						</p> <input type="hidden" name="userTotPoint" value="3340" />
+						<p class="count">
+							<input type="number" name="totmileage" id="totmileage" class="i_input inputNumberText" title="통합포인트 사용액 입력" value="0" style="width: 58px; text-align: center;">
+						</p> <a href="javascript:totPointAllUse();" class="btn btn_black_s">모두사용</a></li>
+					<li><strong class="tit">마일리지</strong>
+						<p class="price col_red">
+							0
+							원
+						</p> <input type="hidden" name="userMileage" value="0" />
+						<p class="count">
+							<input type="number" name="mileage" id="mileage" class="i_input inputNumberText" title="마일리지 사용액 입력" value="0" style="width: 58px; text-align: center;">
+						</p> <a href="javascript:mileAllUse();" class="btn btn_black_s">모두사용</a>
+					</li>
+					<li><strong class="tit">예치금</strong>
+						<p class="price col_red">
+							3,010,350
+							원
+						</p> <input type="hidden" name="userDeposit" value="3010350" />
+						<p class="count">
+							<input type="number" name="deposit" id="deposit" class="i_input inputNumberText" title="예치금 사용액 입력" value="0" style="width: 58px; text-align: center;">
+						</p> <a href="javascript:depositAllUse();" class="btn btn_black_s">모두사용</a>
+					</li>
+				</ul>
+			</div>
+			
+				<!-- 공동구매가 아니면 -->
+				<div class="roundbox bb_line">
+					<h2 class="tit_h2">제휴포인트</h2>
+					<div id="gsPoint" class="mt20" style="position: relative; display: none;">
+						<!-- GsPoint -->
+						<div id="ly_header">
+							<h1>GS&#38;POINT</h1>
+						</div>
+						<div id="ly_content">
+							<div class="roundbox">
+								<ul class="br_list" id="gsPointInfo" style="margin: 0 auto;">
+									<li><strong class="tit">아이디</strong><input type="text" name="gsIdInput" id="gsIdInput" class="i_input" title="Gs아이디" value="" style="width: 70%;"></li>
+									<li><strong class="tit">비밀번호</strong><input type="password" name="gsPwInput" id="gsPwInput" class="i_input" title="Gs비밀번호" value="" style="width: 70%;"></li>
+									<li class="box_flex clear"><a href="javascript:conGsPoint();" class="btn btn_black">조회</a></li>
+
+								</ul>
+							</div>
+							<a href="javascript:closeGsPoint();" class="btn_cls">닫기</a>
+						</div>
+						<!-- //GsPoint -->
+					</div>
+					<div id="lPoint" class="mt20" style="position: relative; display: none;">
+						<!-- LPoint -->
+						<div id="ly_header">
+							<h1>L.POINT</h1>
+						</div>
+						<div id="ly_content">
+							<div class="roundbox">
+								<ul class="br_list" id="lPointInfo" style="margin: 0 auto;">
+									<li><strong class="tit">카드번호</strong><input type="text" name="lIdInput" id="lIdInput" class="i_input" title="카드번호" value="" style="width: 70%;"></li>
+									<li><strong class="tit">비밀번호</strong><input type="password" name="lPwInput" id="lPwInput" class="i_input" title="비밀번호" value="" style="width: 70%;"></li>
+									<li class="box_flex clear"><a href="javascript:conLPoint();" class="btn btn_black">조회</a></li>
+
+								</ul>
+							</div>
+							<a href="javascript:closeLPoint();" class="btn_cls">닫기</a>
+						</div>
+						<!-- //LPoint -->
+					</div>
+					<div id="okPoint" class="mt20" style="position: relative; display: none;">
+						<!-- okPoint -->
+						<div id="ly_header">
+							<h1>OK캐쉬백</h1>
+						</div>
+						<div id="ly_content">
+							<div class="roundbox">
+								<ul class="br_list" id="okPointInfo" style="margin: 0 auto;">
+									<li><strong class="tit">카드번호</strong><input type="text" name="okIdInput" id="okIdInput" class="i_input" title="카드번호" value="" style="width: 70%;"></li>
+									<li><strong class="tit">비밀번호</strong><input type="password" name="okPwInput" id="okPwInput" class="i_input" title="비밀번호" value="" style="width: 70%;"></li>
+									<li class="box_flex clear"><a href="javascript:conOkPoint();" class="btn btn_black">조회</a></li>
+
+								</ul>
+							</div>
+							<a href="javascript:closeOkPoint();" class="btn_cls">닫기</a>
+						</div>
+						<!-- //okPoint -->
+					</div>
+					<ul class="point">
+						<li><p class="mg0"><strong class="tit">GS&#38;POINT</strong></p>
+							<a href="javascript:searchGsPoint();" class="btn btn_black_s mt10">포인트 조회</a> <input type="hidden" name="userGsPoint" value="" /> <input type="hidden" name="userGsCardNo" value="" />
+							<p class="price col_red" id="gsGetPoint" name="gsGetPoint">0P</p>
+							<p class="count">
+								<input type="number" name="gsPointUse" id="gsPointUse" class="i_input inputNumberText" title="GS Point 사용액 입력" value="0" style="width: 78px; text-align: center;">
+							</p>
+						</li>
+						<li><p class="mg0"><strong class="tit">OK캐쉬백</strong></p>
+							<a href="javascript:searchOkPoint();" class="btn btn_black_s mt10">포인트 조회</a><input type="hidden" name="userokPoint" value="" /> <input type="hidden" name="userokCardNo" value="" /> <input type="hidden" name="userokCardPw" value="" />
+							<p class="price col_red" id="okGetPoint" name="okGetPoint">0P</p>
+							<p class="count">
+								<input type="number" name="okPointUse" id="okPointUse" class="i_input inputNumberText" title="Ok 캐쉬백 사용액 입력" value="0" style="width: 78px; text-align: center;">
+							</p>
+						</li>
+						<li><p class="mg0"><strong class="tit">L.POINT</strong></p>
+							<a href="javascript:searchLPoint();" class="btn btn_black_s mt10">포인트 조회</a> <input type="hidden" name="userlPoint" value="" /> <input type="hidden" name="userlCardNo" value="" /> <input type="hidden" name="userlPw" value="" />
+							<p class="price col_red" id="lGetPoint" name="lGetPoint">0P</p>
+							<p class="count">
+								<input type="number" name="lPointUse" id="lPointUse" class="i_input inputNumberText" title="L.Point 사용액 입력" value="0" style="width: 78px; text-align: center;">
+							</p>
+						</li>
+					</ul>
+				</div>
+			
+		
+
+		<div class="order_fee mt30 pb40 bb_line">
+			<ul class="">
+				<!--<li><span class="fl_l">총 상품수량</span> <span
+					class="fl_r col_black">1종
+						(1개)</span></li>-->
+				<li><span class="fl_l">총 상품금액</span> <span class="fl_r col_black">7,000원</span> <input type="hidden" name="totalPrdtAmt" value="7000" />
+				</li>
+				<li><span class="fl_l">총 배송비</span> <span class="fl_r col_black">2,700원</span> <input type="hidden" name="totalDlvyAmt" value="2700" />
+				</li>
+				<li><span>총 할인금액</span><span class="fl_r col_red">원</span><span class="fl_r col_red" id="discountPrice">0</span><input type="hidden" name="discountPrice" value="0" />
+				</li>
+				<li class="amount"><span class="fl_l">총 결제금액</span><span class="fl_r col_red">원</span> <span class="fl_r col_red" id="orderAmt"> 9,700 </span></li>
+			</ul>
+		</div>
+
+		<div id="paymentArea">
+			<div class="roundbox">
+				<h2 class="tit_h2 order_num">결제 선택</h2>
+				<div class="l_box rdo_chs">
+					<ul class="mt30">
+						<li class="btnpay"><input type="radio" value="C0111" name="pymntMeansCode" title="신용카드 선택" checked="checked" />
+							<p>신용카드</p></li>
+						<li class="btnpay"><input type="radio" value="C0112" name="pymntMeansCode" title="실시간 계좌이체 선택" />
+							<p>
+								실시간<br />계좌이체
+							</p></li>
+						<li class="btnpay"><input type="radio" value="C0117" name="pymntMeansCode" title="무통장입금 선택" />
+							<p>무통장입금</p></li>
+						<li class="btnpay"><input type="radio" value="C011D" name="pymntMeansCode" title="휴대폰 선택" />
+							<p>휴대폰</p></li>
+						<li class="btnpay bg_smilepay w_3"><input type="radio" value="C011I" name="pymntMeansCode" title="스마일페이 선택" />
+							<p>
+								<img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/order/txt_m_smile.png" alt="스마일페이" />
+							</p>
+							<!--<p class="mt0">
+								<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/tool_dc_m.png" alt="2천원 적립">
+							</p>--></li>
+						<li class="btnpay bg_npay w_3"><input type="radio" value="C011E" name="pymntMeansCode" title="네이버페이 선택" />
+							<p>
+								<img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/order/txt_npay_mw.png" alt="네이버페이" />
+							</p></li>
+						<li class="btnpay bg_kakaopay w_3"><input type="radio" value="C011H" name="pymntMeansCode" title="카카오페이 선택" />
+							<p>
+								<img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/common/images/order/txt_kakao_m.png" alt="카카오페이" />
+							</p></li>
+					</ul>
+				</div>
+
+				<!-- 신용카드 -->
+				<div id="bill01" class="r_cont">
+					<ul class="info_txt clear">
+						<li class="pt20 pb20">아이폰 결제 시 세션 오류가 나는 경우, 설정 &gt; safari &gt; 쿠키 허용 항목을 “항상”으로 설정해주세요.</li>
+					</ul>
+				</div>
+
+				<!-- 네이버페이 -->
+				<div class="cash_box">
+					<strong class="chk_wrap chk_cash mt10 mb10">현금영수증 발급신청</strong>
+					<div class="l_box rdo_chs" style="clear: both; padding-top: 5px;">
+						<label><input type="radio" name="cashRepCode" value="01" title="" checked="checked" /> 개인소득공제</label> <label class="ml10"><input type="radio" name="cashRepCode" value="02" title="" /> 사업자증빙</label> <label class="ml10"><input type="radio" name="cashRepCode" value="03" title="" /> 미신청</label>
+					</div>
+					<div class="cash_info active" id="cashRcpPri">
+						<select class="select" name="cashRepCodeKi" title="">
+							<option value="01" selected="selected">휴대폰</option>
+							<option value="02">카드번호</option>
+						</select>
+						<div class="cash_info_in active" id="infoCash">
+							<input type="number" name="cashRepHp1" id="cashRepHp1" class="i_input inputNumberText" value="010" title="" style="width: 14%;"> <input type="number" name="cashRepHp2" id="cashRepHp2" class="i_input inputNumberText" value="9295" title="" style="width: 14%;"> <input type="number" name="cashRepHp3" id="cashRepHp3" class="i_input inputNumberText" value="4818" title="" style="width: 14%;">
+						</div>
+						<div class="cash_info_in" id="infoCard">
+							<input type="number" name="cashRepCd1" id="cashRepCd1" class="i_input inputNumberText" title="" style="width: 11%;"> <input type="password" name="cashRepCd2" id="cashRepCd2" class="i_input inputNumberText" title="" style="width: 11%;"> <input type="password" name="cashRepCd3" id="cashRepCd3" class="i_input inputNumberText" title="" style="width: 11%;"> <input type="number" name="cashRepCd4" id="cashRepCd4" class="i_input inputNumberText" title="" style="width: 11%;">
+						</div>
+					</div>
+					<div class="cash_biz" id="cashRcpPub">
+						<div class="cash_biz_in active" id="infobiz">
+							<label class="mr5">사업자 번호</label> <input type="number" name="cashRepbizNum1" id="cashRepbizNum1" class="i_input inputNumberText" title="" style="width: 14%;"> <input type="number" name="cashRepbizNum2" id="cashRepbizNum2" class="i_input inputNumberText" title="" style="width: 14%;"> <input type="number" name="cashRepbizNum3" id="cashRepbizNum3" class="i_input inputNumberText" title="" style="width: 14%;">
+						</div>
+					</div>
+				</div>
+				
+				<!-- 신용카드 할인 안내  -->
+				<div class="card_box active">
+				    <h2 class="col_black pd10_0 tb_line">신용카드 행사 안내</h2>
+				        <ul class="pd5">
+				            <li class="mt10">
+				            	<strong>신한카드</strong>
+		                        <p>· 2~6개월, 12개월(부분) 무이자</p>
+		                    </li>
+				            <li class="mt10">
+				            	<strong>하나카드</strong>
+		                        <p>· 2~3개월 무이자</p>
+		                    </li>
+				            <li class="mt10">
+				            	<strong>국민카드</strong>
+		                        <p>· 2~5개월 무이자</p>
+				            </li>
+				            <li class="mt10">
+				            	<strong>비씨, NH농협, 현대, 삼성카드</strong>
+		                        <p>· 2~6개월 무이자</p>
+		                    </li>
+		                    <li class="mt10">
+				            	<strong>유의사항</strong>
+		                        <p>· 행사 제외 카드 : 법인, 체크, 선불, 기프트, 하이브리드 등</p>
+		                        <p>· 무이자 적용 최소 결제 금액 등 상세 내용은 결제 팝업창에서 확인해 주시기 바랍니다.</p>
+		                    </li>
+				        </ul>
+				</div>
+				<!-- / 신용카드 할인 안내 -->
+
+				<!-- 스마일페이 할인 안내  -->
+				<!--<div class="smile_box">
+					<h2>SmilePay 결제 시 2천원 적립</h2>
+					<ul class="pd5">
+						<li>이벤트 기간 : 2019.08.01 ~ 2019.12.31</li>
+		            	<li>스마일페이로 3만원 이상 첫 결제 시 2천원 스마일캐시 적립</li>
+		            	<li>적립일 : 익월 말일 적립 (예: 8월  1일 ~ 8월 31일 적립액 &gt; 9월 31일 적립)</li>
+		            	<li>결제금액 기준 : 쿠폰 할인 금액, 적립금, 스마일캐시 사용 금액 등을 제외한 스마일페이 실 결제 금액</li>
+					</ul>
+				</div>-->
+				<!-- / 스마일페이 할인 안내  -->
+			</div>
+		</div>
+
+		
+
+		<div class="roundbox">
+			<span class="chk_wrap chk_agree"> <input type="checkbox" name="agreeCheck" id="agreeCheck" /><label for="cart1">주문 상품의 상품명, 가격, 배송 정보에 동의합니다.<br/>(전자상거래법 제8조 2항)</label>
+			</span>
+		</div>
+
+		<div class="btn_area box_flex mt30 mb30">
+			<a href="#n" class="btn bg_red btnPayment" id="btnPayment">결제하기</a>
+			<!--<a href="#n" class="btn br_484848">이전단계</a>-->
+		</div>
+	</form>
+	<form id="gsPoint" action="#" method="post" style="hegiht: 0">
+		<input type="hidden" name="gsId" value="" /> <input type="hidden" name="gsPw" value="" />
+	</form>
+	<form id="okPoint" action="#" method="post" style="hegiht: 0">
+		<input type="hidden" name="okId" value="" /> <input type="hidden" name="okPw" value="" />
+	</form>
+	<form id="lPoint" action="#" method="post" style="hegiht: 0">
+		<input type="hidden" name="lCard" value="" /> <input type="hidden" name="lPw" value="" />
+	</form>
+	
+<!-- 다음 주소 api start -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
+<script>
+    // 우편번호 찾기 화면을 넣을 element
+     var element_wrap = document.getElementById('dwrap');
+
+    function foldDaumPostcode() {
+        // iframe을 넣은 element를 안보이게 한다.
+    	element_wrap.style.display = 'none';
+    }
+
+    function execDaumPostcode() {
+        // 현재 scroll 위치를 저장해놓는다.
+        var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    // document.getElementById("sample2_extraAddress").value = extraAddr;
+                
+                } else {
+                    // document.getElementById("sample2_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                $("input[name=receiverAddress]").val(addr);
+                $("#receiverAddress").text("["+data.zonecode.substring(0,3)+"-"+data.zonecode.substring(3,6)+"]"+addr);
+                $("input[name=receiverPostNum1]").val(data.zonecode.substring(0,3));
+                $("input[name=receiverPostNum2]").val(data.zonecode.substring(3,6));
+                $("input[name=receiverDetailAddress]").val("");
+                $("input[name=receiverDetailAddress]").focus();
+                
+             // iframe을 넣은 element를 안보이게 한다.
+                // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+                element_wrap.style.display = 'none';
+
+                // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
+                document.body.scrollTop = currentScroll;
+            },
+            // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
+            onresize : function(size) {
+                element_wrap.style.height = size.height+'px';
+            },
+            width : '100%',
+            height : '100%'
+        }).embed(element_wrap);
+
+        // iframe을 넣은 element를 보이게 한다.
+        element_wrap.style.display = 'block';
+    }
+</script>
+<!-- / 다음 주소 api end -->
+
+
+    </div>
+    
+
+
+
+
+
+
+<script type="text/javascript">
+jQuery(function($){
+    $.ajax({
+        url: '//admin.hottracks.co.kr/admin/system/hotSiteClickCheck2'
+        ,dataType: 'jsonp'
+        ,jsonpCallback: "callback"
+        ,success: function(data) {
+        }
+    });
+});
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-968575-10']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 --> 
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script> 
+<script type="text/javascript"> 
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_3b427c425785";
+if (!_nasa) var _nasa={};
+wcs.inflow();
+wcs_do(_nasa);
+</script>
+
+<!-- 레코벨 스크립트 -->
+<script type="text/javascript">
+	var userId= getCookie("UserCookieKey");
+
+	window._rblq = window._rblq || [];
+	_rblq.push(['setVar','cuid','e15e978e-3623-4892-bf0a-485b9f8196ee']);
+	_rblq.push(['setVar','device','MW']);
+	_rblq.push(['setVar','userId',SHA256(userId)]); // optional
+	_rblq.push(['track','visit']);
+	(function(s,x){s=document.createElement('script');s.type='text/javascript';
+	s.async=true;s.defer=true;s.src=(('https:'==document.location.protocol)?'https':'http')+'://assets.recobell.io/rblc/js/rblc-apne1.min.js';
+  x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();
+</script>
+<!-- 레코벨 스크립트 끝 -->
+<style>
+#footer .ic_mark a{
+	text-align: center;
+    margin: 15px 0 10px 0;
+}
+#footer .ic_mark a img{
+	width: 40px;
+    float: left;
+}
+#footer .ic_mark a p{
+	float: left;
+    text-align: left;
+    padding: 10px 8px;
+    font-weight: bold;
+    font-size: 12px;
+}
+#footer .sns_box {
+    margin: 0 0 100px 0;
+    text-align: center;
+}
+</style>
+
+<!-- //#footer -->
+<div id="footer">
+    <ul class="finfo">
+        <li style="line-height:20px;">
+            <a style="font-size:1.1em;color:#757575;font-weight:bold;" href="#" onclick="location.href='http://devm.hottracks.co.kr/m/rule';return false;">이용약관</a>
+            <a style="font-size:1.1em;color:#000;font-weight:bold;margin-left:15px;" href="#" onclick="location.href='http://devm.hottracks.co.kr/m/privacy';return false;">개인정보처리방침</a>
+            <a style="font-size:1.1em;color:#da2128;font-weight:bold;margin-left:15px;" href="#" onclick="location.href='http://devm.hottracks.co.kr/heart';return false;">핫트합니다</a>
+            <a style="font-size:1.1em;color:#757575;font-weight:bold;margin-left:15px;" href="#" onclick="location.href='http://devm.hottracks.co.kr/m/help/main';return false;">고객센터</a>
+            <a style="font-size:1.1em;color:#757575;font-weight:bold;margin-left:15px;" href="#" onclick="showPcVer();return false;">PC화면</a>
+        </li>
+        <li class="mt10" style="line-height:16px;letter-spacing:-0.3px">교보핫트랙스㈜ 대표이사 박영규 사업자등록번호 : 102-81-29258</li>
+        <li style="line-height:16px;">서울시 통신판매업신고번호 : 제 2012-경기파주-3911 호</li>
+        <li style="line-height:16px;">주소 (10881) 경기도 파주시 회동길 78 (출판단지내)</li>
+        <li class="copyright" style="line-height:16px;">COPYRIGHT(C) 2019 KYOBO HOTTRACKS ALL RIGHTS RESERVED</li>
+    </ul>
+    
+    <!-- 소셜아이어워드  -->
+    <div class="ic_mark">
+    	<a href="/heart">
+    		<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/ic_siaward_m.png" alt="소셜아이어워드">
+				<p>소셜아이어워드 2019<br/>문화쇼핑 플랫폼분야 대상</p>
+		</a>
+    </div>
+    
+    <div class="sns_box">
+        <a href="#" onclick="goTwitter('모바일핫트랙스', 'http://m.hottracks.co.kr/');return false;" class="share_twiter"><span>트위터 바로가기</span></a>
+        <a href="#" onclick="winOpen('https://www.facebook.com/HOTTRACKSFRIEND/');return false;" class="share_facebook"><span>페이스북 바로가기</span></a>
+        <a href="#" onclick="linkToInstagram('home');return false;" target="_blank" class="share_instagram"><span>인스타그램 바로가기</span></a>
+    </div>
+</div>
+<!-- //#footer -->
+
+<div id="devLayer" class="lyDeviceAlert" style="position:fixed;left:0;top:0;width:100%;height:100%;background:url('/images/season01/bg_layer02.png');z-index:999;display:none;">
+<!-- 
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-100px;overflow:hidden;">
+    <dl style="position:relative;font-size:15px;font-weight:bold;">
+        <dt style="position:absolute;top:0;left:0;"><img src="/images/device/ico_logo.png" alt="HOTTRACKS" style="width:70px;height:70px;"></dt>
+        <dd style="margin-left:80px;color:#fff;">
+            <p style="margin-top:20px;">나의 감성 충전소, 핫트랙스</p>
+            <p style="font-size:1.3em;margin-top:7px;">더욱 편리하게<br/>쇼핑하실 수 있어요!</p>
+        </dd>
+    </dl>
+    <p style="margin-top:30px;"><a href="#" onclick="linkToDevice('Y');return false;"><img src="/images/device/btn_app.png" alt="앱으로 보기 " style="width:100%;"/></a></p>
+    <p style="margin-top:10px;text-align:center;"><a href="#" onclick="linkToDevice('F');return false;" style="color:#fff;text-decoration:underline;">모바일웹으로 볼께요.</a></p>
+</div>
+-->
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-200px;overflow:hidden;background:url('/images/device/bg_layer01.jpg');text-align:center;">
+    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/device/txt_layer02.png" style="width:100%;"/>
+    <a href="#" onclick="linkToDevice('Y');return false;" style="position:relative;font-size:15px;font-weight:bold;margin-top:10px;">
+        <img src="/images/device/btn_layer01.png" style="width:90%;"/>
+    </a>
+    <p style="margin:10px auto;text-align:center;"><a href="#" onclick="linkToDevice('F');return false;" style="color:#263741;text-decoration:underline;font-weight:bold;">웹으로 볼께요.</a></p>
+</div>
+</div>
+<div id="devLayer001" class="lyDeviceAlert" style="position:fixed;left:0;top:0;width:100%;height:100%;background:url('/images/season01/bg_layer02.png');z-index:999;display:none;">
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-150px;overflow:hidden;">
+    <a href="#" onclick="location.href='/m/hot/eventDetail?eventId=42347';return false;" style="position:relative;font-size:15px;font-weight:bold;">
+        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1056/1479708729992_popup01.png" style="width:100%;"/>
+    </a>
+    <p style="margin-top:10px;text-align:center;"><a href="#" onclick="linkToDevice('F');return false;" style="color:#fff;text-decoration:underline;">오늘 하루 그만보기</a></p>
+</div>
+</div>
+<div id="devLayer002" class="lyDeviceAlert" style="position:fixed;left:0;top:0;width:100%;height:100%;background:url('/images/season01/bg_layer02.png');z-index:999;display:none;">
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-150px;overflow:hidden;">
+    <a href="#" onclick="location.href='/m/hot/eventDetail?eventId=42347';return false;" style="position:relative;font-size:15px;font-weight:bold;">
+        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1535/1479708673064_popup02.png" style="width:100%;"/>
+    </a>
+    <p style="margin-top:10px;text-align:center;"><a href="#" onclick="linkToDevice('F');return false;" style="color:#fff;text-decoration:underline;">오늘 하루 그만보기</a></p>
+</div>
+</div>
+<div id="popupLayer001" style="position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:999;display:none;">
+<div style="display:block;position: relative;">
+    <a href="#" onclick="closeWin2();return false;" style="display:block;text-align:right;background-color:#000;padding:10px;margin:0;"><img src="/images/season01/btn_close01.png" style="width:25px;height:25px;"/></a></p>
+    <div style="position:relative;font-size:15px;font-weight:bold;background-color:#fff;width:100%;height:calc(100vh - 45px);overflow: auto; -webkit-overflow-scrolling: touch;display:block;">
+        <iframe src="about:Tabs" scrolling="yes" style="width:100vw;height:100vh;display:block;border:none;"></iframe>
+    </div>
+</div>
+</div>
+<div style="display: none;"><textarea id="myClipboard"></textarea></div>
+</div>
+</body>
+</html>

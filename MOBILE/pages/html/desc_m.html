@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&display=swap&subset=korean">
+</head>
+<body>
+
+<style>
+body {margin:0px; padding:0px;}
+.product-detail {display:block;width:100%;overflow:hidden;font-family:'Noto Sans KR', AppleGothic, sans-serif;}
+.product-detail .header {position: fixed;left: 0;top: 0;width: 100%;background: #fff;z-index: 900;text-align: center;display:none;height: 60px;border-bottom: 1px solid #dbdbdb;padding: 10px 0;box-sizing: border-box;}
+.product-detail.more .header { display:block; } 
+.product-detail .header h2 {padding: 10px 0;margin: 0 auto;line-height:1.4rem;font-size: 20px;font-weight: 700;color: #000;vertical-align: middle;letter-spacing: -0.1px;} 
+.product-detail .header .btn_cls {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    text-indent: -9999px;
+    font-size: 0;
+    background: url('https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_close_layer.png') 50% 50% no-repeat;
+    background-size: 15px;
+}
+.product-detail.active { height:auto; }
+.product-detail img { max-width:100%; }
+.product-detail table { max-width:100%; }
+
+li { display:list-item; text-align:-webkit-match-parent; list-style: none;}
+.tooltip_wrap {display:inline;position:relative;}
+.tooltip {display:inline-block;width:14px;height:14px;background:#888;font-weight:bold;text-align:center;color:#fff;line-height:14px;}
+.layer_pop_wrap {display:none;position:absolute;top:22px;left:-143px;z-index:10;}
+.layer_pop_container {position:relative;border:1px solid #b6b6b6;background:#fff;}
+.layer_pop_container h1 {height:32px;padding:0 0 0 15px;background:#4f4f4f;font-size:12px;color:#fff;line-height:32px;}
+.layer_pop_container .layer_pop_cont {padding: 15px;}
+.layer_pop_container .cls_btn {position:absolute;top:0;right:0;}
+.layer_pop_cont ul li {padding-left:0;background:none;line-height:18px;}
+.tit_tahoma { margin: 14px 0 18px; font-size: 18px;color:#363636; }
+
+.detail-title { line-height:50px;font-size:20px;text-align:center;background-color:#ff6000;color:#FFF;position:fixed;top:0;width:100%; }
+.detail-title .close-btn { float:right;margin-right:10px; }
+.detail-title .close-btn a { color:#FFF; }
+.product-detail.more .detail-cont {margin-top:60px; padding:10px; font-size:14px;}
+.detail-cont {padding:20px;}
+.detail-cont .album_option {margin-top:30px;padding:9px 15px;border:1px solid #d6d6d6;background:#f9f9f9;color:#252525;}
+.detail-cont .album_option > ul { }
+.detail-cont .album_option > ul > li {*zoom:1;float:left;padding-left:5px;line-height:20px;background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_dot03.gif) no-repeat 0 9px;margin-left:10px;}
+/*
+.detail-cont .album_option > ul > li .line {margin:0 16px 0 14px;color:#d6d6d6;}
+ */
+.detail-cont .album_option > ul:after {content:"";display:block;clear:both;}
+.detail-cont .album_option .layer_pop_wrap {top:20px;left:-70px;}
+.detail-cont .album_option .layer_pop_cont ul li {margin-bottom:7px;padding-left:7px;background:url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/ico_dot02.gif) no-repeat 0px 7px;color:#252525;}
+.detail-cont .album_info {margin-top:30px;}
+.detail-cont .album_info h3 {margin-bottom:20px;font-size:14px;color:#363636;}
+.detail-cont .album_info h4 {font-weight:normal;font-size:11px;color:#8e8e8e;line-height:18px;}
+.detail-cont .album_info p {margin-top:17px;font-size:11px;color:#8e8e8e;line-height:18px;}
+.detail-cont .album_info .p_add_info {padding-top:13px;border-top:1px solid #eaeaea;color:#8e8e8e;}
+.detail-cont .album_info .p_add_info li {line-height:24px;}
+.detail-cont .album_info .p_add_info li .line {margin:0 10px 0 6px;}
+</style>
+<!-- content -->
+<div class="product-detail more">
+<div class="header">
+    <h2>상품 상세보기</h2>
+    <a class="btn_cls" onclick="history.back(); return false;">닫기</a>
+</div>
+<div class="detail-cont">
+    
+        <h3 class="tit_tahoma">Track List</h3>
+        
+            <p style="margin-bottom:10px;">
+                <strong style="font-size:14px;">[DISC 001]</strong><br/>
+                
+                    <strong>01 |</strong> MIRACLE <br/>
+                
+                    <strong>02 |</strong> TAKE ME TO YOU <br/>
+                
+                    <strong>03 |</strong> 안 보여 <br/>
+                
+                    <strong>04 |</strong> 1:31AM (잘 지내야해) <br/>
+                
+                    <strong>05 |</strong> HIGHER <br/>
+                
+                    <strong>06 |</strong> I LOVE IT <br/>
+                
+                    <strong>07 |</strong> WOLO <br/>
+                
+                    <strong>08 |</strong> KING <br/>
+                
+                    <strong>09 |</strong> THINK ABOUT IT <br/>
+                
+                    <strong>10 |</strong> 이젠 <br/>
+                
+                    <strong>11 |</strong> HUNGER <br/>
+                
+                    <strong>12 |</strong> PHOENIX <br/>
+                
+            </p>
+        
+            <p style="margin-bottom:10px;">
+                <strong style="font-size:14px;">[DISC 002]</strong><br/>
+                
+                    <strong>01 |</strong> LULLABY <br/>
+                
+                    <strong>02 |</strong> ENOUGH <br/>
+                
+                    <strong>03 |</strong> 지켜줄게 <br/>
+                
+                    <strong>04 |</strong> NO ONE ELSE <br/>
+                
+                    <strong>05 |</strong> I AM ME <br/>
+                
+                    <strong>06 |</strong> SUNRISE <br/>
+                
+                    <strong>07 |</strong> OMW <br/>
+                
+                    <strong>08 |</strong> MADE IT <br/>
+                
+                    <strong>09 |</strong> MY YOUTH <br/>
+                
+                    <strong>10 |</strong> 혼자 (NOBODY KNOWS) <br/>
+                
+                    <strong>11 |</strong> PARTY <br/>
+                
+                    <strong>12 |</strong> FINE <br/>
+                
+                    <strong>13 |</strong> LULLABY (ENGLISH VER.) <br/>
+                
+                    <strong>14 |</strong> LULLABY (CHINESE VER.) <br/>
+                
+                    <strong>15 |</strong> LULLABY (SPANISH VER.) <br/>
+                
+                    <strong>16 |</strong> LULLABY (INST.) <br/>
+                
+            </p>
+        
+    
+    <div class="mgt50">
+        
+        
+    </div>
+    
+    <div class="album_option">
+        <ul>
+            
+                <li>
+                    <strong>미디어</strong> : CD
+                    <div class="tooltip_wrap">
+                        <a href="#tooltip3" class="tooltip">?</a>
+                        <div id="tooltip3" class="layer_pop_wrap">
+                            <div class="layer_pop_container" style="width:360px;height:385px;">
+                                <h1>미디어 코드 안내</h1>
+                                <div class="layer_pop_cont">
+                                    <ul class="list_type02">
+                                        <li>
+                                            <strong>SACD</strong><br />
+                                            본 음반은 Super Audio CD Players에서만 재생 가능합니다.
+                                        </li>
+                                        <li>
+                                            <strong>SACD Hybrid</strong><br />
+                                            본 음반은 일반 CD Players, Super Audio CD Players 모두 재생가능합니다.
+                                        </li>
+                                        <li>
+                                            <strong>DVD Audio</strong><br />
+                                            이것은 오직 DVD 플레이어에서만 재생 가능한 고음질 5.1채널 CD로서 영상은 포함되어 있지 않으니 유념하시기 바랍니다.
+                                        </li>
+                                        <li>
+                                            <strong>Blu-Ray</strong><br />
+                                            화질, 음향이 DVD보다 진화된 차세대 영상미디어 입니다.<br />
+                                            Blu-Ray는 Blu-Ray 전용플레이어서만 플레이가 되며, DVD 플레이어에서는 재생이 되지 않습니다.
+                                        </li>
+                                        <li>
+                                            <strong>Blu-Ray Audio</strong><br />
+                                            영상이 없는 '듣는 블루레이'입니다.<br />
+                                            Blu-Ray Audio는 Blu-Ray 전용 플레이어에서만 플레이가 되며, CD플레이어, DVD플레이어 등에서는 재생이 되지 않습니다.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a href="#none" class="cls_btn" title="레이어팝업 닫기"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/btn_cls.gif" alt="닫기" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            
+            <li><strong>수입구분</strong> : 라이센스</li>
+            <li><strong>디스크 수</strong> : 2 DISC</li>
+            
+            
+            <li>
+                <strong>제조국</strong> : 
+                한국
+            </li>
+        </ul>
+    </div>
+    <div class="album_info mgb55">
+        <h3>음반정보</h3>
+        
+        
+            <p><center><img src="http://image.kyobobook.co.kr/newimages/apps/b2c/prom/2018/11/22/2515729-1.jpg"></center><br><br><br/></p>
+        
+        <p><b>'GOT7', 리패키지 앨범 '<Present : YOU> &ME Edition' 및 타이틀곡 ‘Miracle’ 발매!</b><br/><br/>- GOT7, 2018년 대미를 장식할 리패키지 앨범 '[Present : YOU] &ME Edition' 발매... 올해 세 번째 컴백!<br/>- 타이틀곡 'Miracle', "2014년 1월 데뷔 GOT7에게 기적의 순간은 팬들을 만난 것"<br/>- JYP 박진영 작사한 'Miracle' & 'Take Me To You' 및 월드투어 무대곡 등 총 28트랙 수록!<br/><br/>그룹 GOT7이 12월 3일 새 앨범 '[Present : YOU] &ME Edition'과 타이틀곡 'Miracle'을 발매하고 컴백한다.<br/> <br/>GOT7은 3월 미니앨범 'Eyes On You'와 타이틀곡 'Look', 9월 정규 3집 앨범 'Present : YOU'와 타이틀곡 'Lullaby'를 발표한 데 이어 12월 리패키지 앨범 '[Present : YOU] &ME Edition'과 타이틀곡 'Miracle'로 올해 세 번째 컴백을 알렸다.<br/><br/>2018년 GOT7은 기적 같은 한 해를 보냈다. 아시아, 유럽, 북미, 남미 등 해외 17개 도시에서 월드투어를 성료하며 '글로벌 대세돌'로서 위상을 높이고 앞서 발매한 'Eyes On You'와 'Present : YOU' 앨범 모두 가온차트 플래티넘 인증을 획득하며 높은 인기를 입증했다.<br/><br/>[Present : YOU] &ME Edition'은 이러한 기적을 만들어준 국내외 팬들에게 고마움을 전하는 앨범으로 "GOT7에게 인생 최고의 선물은 팬들"이라는 정규 3집 'Present : YOU'의 메시지에 'ME'를 더해 "GOT7은 팬들과 함께함으로써 완성된다"는 의미를 담았다.<br/><br/>2CD로 구성된 이번 신보에는 총 28트랙이 수록됐다. CD1에는 타이틀곡 'Miracle'을 포함해 3곡의 신곡(1~3번 트랙)과 월드투어 'FLY', 'EYES ON YOU'의 솔로, 유닛 무대곡(4~12번 트랙)이, CD2에는 정규 3집 타이틀곡과 멤버별 솔로곡(13~28번 트랙)이 수록되어 풍성하게 트랙리스트를 채운다.<br/><br/>1번 트랙이자 타이틀곡인 'Miracle'은 GOT7에게 진정한 기적의 순간이 언제인지 노래하는 발라드곡이다. '2014년 1월 데뷔한 GOT7에게 있어서 진정한 기적은 겨울처럼 춥고 힘들었던 시간을 이겨낼 수 있도록 해준 팬들을 만난 순간'이라는 메시지를 전한다. GOT7의 연습생 시절부터 5년 차에 접어든 지금까지 멤버들과 함께해온 JYP 수장 박진영이 작사에 참여해 곡에 특별함을 더했다.<br/><br/>2번 트랙 'Take Me To You'는 깊은 사랑에 빠진 모습을 외딴 섬에 갇힌 상황에 비유한 팝 발라드곡. 멤버들의 매력적인 목소리는 바다를 연상시키는 기타 사운드 기반의 트랙과 어우러져 듣는 이들에게 몰입감을 선사한다. 박진영이 작사에 참여해 감미로운 감성을 녹여냈다.<br/><br/>3번 트랙 '안 보여'는 리더 JB가 작사, 작곡한 트랙으로 일렉트로닉 리드 기타 사운드와 808 베이스의 펀치감이 돋보이는 힙합곡이다. 가사 "자랑스러운 나의 사랑스러운 Girl", "네 생각만으로도 벌써 매일이 Birthday"등을 통해 팬들을 향한 마음을 귀엽고 재치있게 표현했다.<br/><br/>4번 트랙 '1:31AM(잘 지내야해)'는 JB, 영재 유닛의 발라드곡으로 1시 31분부터 노래를 만들기 시작해서 노래 제목이 '1:31AM'로 지어졌다.<br/><br/>5번 트랙 'Higher'는 '날 더 높이 올려줘'라는 메시지를 전하는 마크, 진영 유닛의 신나는 댄스곡이다.<br/><br/>6번 트랙 'I Love It'은 잭슨의 매력적인 보이스가 돋보이는 솔로 힙합 트랙이다.<br/><br/>7번 트랙 'WOLO'는 'We Only Live Once'의 줄임말로 타인이 나를 어떻게 생각하는지 신경 쓰지 말고 한 번 사는 인생을 즐기자는 메시지를 담았다. 잭슨, 뱀뱀, 유겸의 유닛이 함께한 힙합 장르의 곡이다.<br/><br/>8번 트랙 'King'은 진영과 뱀뱀이 작사, 작곡한 곡으로 최고의 모습을 보여주겠다는 자신감을 노래한다.<br/><br/>9번 트랙 'Think About It'은 힘들고 어려운 상황을 이겨내겠다는 의지를 담은 JB, 마크, 영재의 유닛곡이다.<br/><br/>10번 트랙 '이젠'은 유겸이 작사, 작곡한 곡으로 상대를 향한 애절한 마음을 표현한 R&B 장르의 곡이다.<br/><br/>11번 트랙 'Hunger'는 제목처럼 여전히 배고프다는 의미로 어떤 어려움에도 굴복하지 않고 당당하게 맞서며 성장하겠다는 의미를 담은 잭슨의 솔로곡이다.<br/><br/>12번 트랙 'Phoenix'는 세상에 그 어떠한 힘든 일이 있어도 GOT7과 아가새(GOT7 팬클럽)가 함께라면 모든 상황이 긍정적으로 정리된다는 메시지를 전하는 잭슨과 유겸의 듀엣곡이다.<br/><br/>GOT7은 이번 활동을 통해 팬들에 대한 무한한 사랑과 음악을 향한 식지 않은 열정을 마음껏 발산할 예정. 리패키지 앨범 '[Present : YOU] &ME Edition'과 타이틀곡 'Miracle'로 돌아온 GOT7이 2018년 마지막을 화려하게 장식할 준비를 마쳤다.<br/><br/>[상품정보]<br/>- 음 반 : 3종(랜덤 / 지정, 묶음판매 불가)<br/>- 예판특전 : 캘린더 + 데코스티커<br/></p>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1806 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+	<!-- 태그 라이브러리 -->
+	
+
+
+
+
+
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover">
+	<meta name="format-detection" content="telephone=no, address=no, email=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<title>이팔청춘 _매일의 도장찍기 - NEW ME HOTTRACKS</title>
+	
+<!-- 태그 라이브러리 -->
+
+
+<c:set var="tmpKey" value="20200519"/>
+
+<META http-equiv="Expires" content="-1"> 
+<META http-equiv="Pragma" content="no-cache"> 
+<META http-equiv="Cache-Control" content="No-Cache"> 
+
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+<meta name="apple-itunes-app" content="app-id=1129743143">
+<meta name="google-play-app" content="app-id=kr.co.hottracks.m.and">
+
+<link rel="apple-touch-icon-precomposed" href="/images/content/ico_app.png" />
+<link rel="apple-touch-startup-image" href="/images/content/ico_app.png">
+<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
+
+<link rel="stylesheet" type="text/css" href="/css/layout.css?">
+<link rel="stylesheet" type="text/css" href="/css/content.css?">
+<link rel="stylesheet" type="text/css" href="/css/common.css?">
+<link rel="stylesheet" type="text/css" href="/css/swiper.min.css?">
+<link rel="stylesheet" type="text/css" href="/css/biz/common_v2.css?">
+<link rel="stylesheet" type="text/css" href="/css/biz/hottm_yj.css?">
+
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js?"></script>
+<script type="text/javascript" src="/js/jquery.mobile-events.min.js?"></script>
+<script type="text/javascript" src="/js/jquery.lazyload.min.js?"></script>
+<script type="text/javascript" src="/js/idangerous.swiper.min.js?"></script>
+<script type="text/javascript" src="/js/common.js?"></script>
+<script type="text/javascript" src="/js/front.common.1.1.0.js?"></script>
+<script type="text/javascript" src="/js/front.common.ui.1.0.0.js?"></script>
+<script type="text/javascript" src="/js/kakao.min.v1.23.1.js"></script>
+<script type="text/javascript" src="/scripts/common?"></script>
+<script type="text/javascript" src="/scripts/loadingBar?"></script>
+<script type="text/javascript" src="/scripts/device?"></script>
+<script type="text/javascript" src="/js/swiper.min.js?"></script>
+<script type="text/javascript" src="/js/biz/common_v2.js?"></script>
+<script type="text/javascript" src="/js/biz/m_hott.js?"></script>
+<script type="text/javascript" src="/js/biz/jquery/jquery.easing.1.3.min.js?"></script>
+<script type="text/javascript" src="/js/biz/jquery/TweenMax.min.js?"></script>
+
+<!-- 데이타 스토리  script end--> 
+<script type="text/javascript">
+(function() {
+	var nl = document.createElement('script'); nl.type = 'text/javascript';
+	nl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'm.hottracks.co.kr/js/wl6.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(nl, s);
+	var done = false;
+	nl.onload = nl.onreadystatechange = function() {
+	    if ( !done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') ) {
+	        done = true;
+			_n_sid = 'm.hottracks.co.kr';        // _n_sid 값 별로 로그파일이 생성이 됩니다
+	        _n_uid_cookie = 'WNO';
+	        n_logging();
+	        nl.onload = nl.onreadystatechange = null;
+	    }
+	}
+})();
+</script>
+<!-- 데이타 스토리  script end--> 
+
+<script type="text/javascript">
+<!--
+jQuery(function($){
+    $(document).ready(function(){    	
+        initTopNavigation();
+    });
+});
+//-->
+</script>
+
+	
+	
+<!-- 태그 라이브러리 -->
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/js/jquery.rwdImageMaps.min.js"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript">
+//레이어 팝업 
+function go_popup(img) { 
+    popimg.src = img; 
+    $("#popup").bPopup({
+    	follow: [false, false],
+        position: [000, 'auto'] //x, y
+    });
+}
+
+//핫트 프라이데이 이벤트 포인트지급 참여 때문에 일회용으로 만듦(단계별이벤트형식으로 지급) - 스텝순서무시
+var date = new Date(); 
+var day = date.getDate(); 
+var st = 1;
+var shareYn = 0; 
+//20일(1step), 21일(2step), 22일(3step)
+switch(day) {
+	case 21:
+		st = 2;	
+		break;
+	case 22:
+		st = 3;
+		break;
+}
+
+function ht_dailyCheck(){ 
+	if (!isLogin) {
+        needLogin();
+    }else{
+        $.ajax({
+            type: 'POST'
+            ,url: '/m/hot/saveEventHistory'
+            ,data: {eventId:"68151", step : st}
+            ,dataType: 'json'
+            ,async: false
+            ,success: function(data) {
+                alert(data.alert);
+                if (data.save) {
+                    location.reload(true);
+                }
+            }
+            ,error: function(data) {
+                alert('이벤트 진행 중 오류가 발생하였습니다. 잠시 후 다시 이용해주세요');
+            }
+        });
+    }
+}
+/* 핫트 프라이데이 응모하기 이벤트 (1회용)*/
+function ht_entryEvent(){
+	
+	var eventId = '68151';
+	
+	if(eventId == '65004'){
+		eventId = '65101';
+	}
+	
+	if (preValidation()) {
+		if (shareYn > 0) {
+	        $.ajax({
+	            type: "GET"
+	            ,url: "/m/hot/entryEvent"
+	            ,data: "eventId="+eventId
+	            ,dataType: 'json'
+	            ,success: function(data) {
+	                if (data.result.save) {
+	                    alert(data.result.resultMsg);
+	                } else {
+	                    alert(data.result.errMsg);
+	                }
+	            }
+	            ,error: function(data) {
+	                alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+	            }
+	        });
+		}else{
+			alert('친구에게 공유하기를 하신 후 참여가능합니다');
+		}
+    }	
+}
+
+function ht_shareEvent(){
+	sendKakao('[핫트랙스] ' + "이팔청춘 _매일의 도장찍기", 'http://m.hottracks.co.kr/e/68151');
+}
+
+function ht_eventSns(eventNum) {
+    if (!isLogin) {
+        needLogin();
+    } else {
+        $.ajax({
+            type: "GET"
+            ,url: "/m/getEventRequest"
+            ,data: 'eventNum='+eventNum
+            ,dataType: "json"
+            ,success: function(data) {
+                if (data.save) {
+                	sendKakao('[핫트랙스] '+"이팔청춘 _매일의 도장찍기", 'http://m.hottracks.co.kr/e/68151');
+                } else {
+                    alert(data.msg);
+                    sendKakao('[핫트랙스] '+"이팔청춘 _매일의 도장찍기", 'http://m.hottracks.co.kr/e/68151');
+                }
+            }
+            ,error: function() {
+                alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+            }
+        });
+    }
+}
+
+function go_membership() {
+    if (isLogin) {
+        alert("이미 로그인한 상태입니다.");
+    } else {
+    	location.href="https://mobile.kyobobook.co.kr/member/join?partnerCode=HOT";
+    }
+}
+
+$(document).ready(function() {
+	eventFn(); //event
+	$("#wrap").removeClass("mini");
+    $("#locEvent").addClass("active");
+    $(window).load(function(){
+        if('' == 'skipEvent'){
+            $(".ly_box_skip").addClass("active");
+            $(".ly_box_skip.active").css("height", $(".event_cont").height());
+            $("form[name=eventCommentForm] textarea[name=cmnt]").attr("disabled","disabled");
+            }
+    });
+    $('img[usemap]').rwdImageMaps();
+    $("img.lazy").lazyload({placeholder:'/images/no_image2.gif',effect : "fadeIn"});
+    
+    var date = new Date();
+	
+	var yy = date.getFullYear();
+	var mm = date.getMonth()+1;
+	var dd = date.getDate();
+	var hh = date.getHours();
+	
+	if((mm+"").length < 2){
+		mm = "0"+mm;
+	}
+	if((dd+"").length < 2){
+		dd = "0"+dd;
+	}
+	if((hh+"").length < 2){
+		hh = "0"+hh;
+	}
+	
+	today = yy+''+mm+''+dd+''+hh;
+
+	if ("63326"=="68151") {
+		$("#loading").remove();
+	};
+});
+
+isLogin = false;
+isEntryTerm = false;
+
+function preValidation() {
+    if (!isLogin) {
+        needLogin();
+        return false;
+    } else if (!isEntryTerm) {
+        alert("해당기간이 아닙니다.");
+        return false;
+    }
+
+    return true;
+}
+
+/* 참여이벤트 */
+function entryEvent(){
+    if (preValidation()) {
+        $.ajax({
+            type: "GET"
+            ,url: "/m/hot/entryEvent"
+            ,data: "eventId=68151"
+            ,dataType: 'json'
+            ,success: function(data) {
+                if (data.result.save) {
+                    alert(data.result.resultMsg);
+                } else {
+                    alert(data.result.errMsg);
+                }
+            }
+            ,error: function(data) {
+                alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+            }
+        });
+    }
+}
+
+
+/* 참여이벤트 -주문금액 */
+function entryEventAmt(){
+    if (preValidation()) {
+        $.ajax({
+            type: "GET"
+            ,url: "/m/hot/entryEventAmt"
+            ,data: "eventId=68151"
+            ,dataType: 'json'
+            ,success: function(data) {
+                if (data.result.save) {
+                    alert(data.result.resultMsg);
+                } else {
+                    alert(data.result.errMsg);
+                }
+            }
+            ,error: function(data) {
+                alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+            }
+        });
+    }
+}
+
+function moveToLayer(preInseq, moveInseq){
+    if(preInseq != moveInseq){
+        $("#eventTypeInseq"+preInseq).find("option[value="+preInseq+"]").attr("selected", true);
+        $("html,body").animate({scrollTop: $("#eventTypeInseq"+moveInseq).offset().top - $("#header").height()}, 500);
+    }
+}
+
+function couponDown(couponId) {
+    if (!isLogin) {
+        needLogin();
+    } else {
+        $.ajax({
+            type: "GET"
+            ,url: "/m/getCouponDown"
+            ,data: 'couponId=' + couponId
+            ,dataType: "json"
+            ,success: function(data) {
+                if (data.save) {
+                    alert("쿠폰이 다운로드 되었습니다.");
+                } else {
+                    alert(data.errorMessage);
+                }
+            }
+            ,error: function() {
+                alert('시스템오류가 발생하였습니다. 고객센터에 문의해주시기 바랍니다.');
+            }
+        });
+    }
+}
+
+function checkEmtcId(obj, imgSrc){
+    $(".comment_emtc li a.on").removeClass("on");
+    obj.setAttribute("class", "on");
+    $("input[name=emtcId]").val(imgSrc);
+}
+
+function _applyEvent(){
+    if (!isLogin) {
+        needLogin();
+    } else {
+        $.ajax({
+            type: 'POST'
+            ,url: '/m/hot/saveCheckEvent'
+            ,data: { eventId:"68151" }
+            ,dataType: 'json'
+            ,success: function(data) {
+                alert(data.alert);
+                if (data.save) {
+                    location.reload(true);
+                }
+            }
+            ,error: function(data) {
+                alert('응모 중 오류가 발생하였습니다. 잠시 후 다시 이용해주세요');
+            }
+        });
+    }
+}
+
+function saveOff(){
+    if($("input[name=userName]").val() == null ||  $("input[name=userName]").val() == ""){
+        alert("이름을 입력해주세요.");
+    }else if($("input[name=handPhoneNum1]").val() == null ||  $("input[name=handPhoneNum1]").val() == ""
+       ||$("input[name=handPhoneNum2]").val() == null ||  $("input[name=handPhoneNum2]").val() == ""
+       ||$("input[name=handPhoneNum3]").val() == null ||  $("input[name=handPhoneNum3]").val() == ""
+       ){
+            alert("핸드폰번호를 입력해주세요.");
+    }else if($("textarea[name=userAddr]").val() == null ||  $("textarea[name=userAddr]").val() == ""){
+            alert("주소지를 입력해주세요.");
+    }else if($("input[name=userDtl]").val() == null ||  $("input[name=userDtl]").val() == ""){
+            alert("영수증번호를 입력해주세요.");
+    }else{
+        var userTelNum = $("input[name=handPhoneNum1]").val() + $("input[name=handPhoneNum2]").val() + $("input[name=handPhoneNum3]").val();
+        $('form[name="eventCommentForm"]').ajaxSubmit({
+            url: '/m/hot/entryEventOff'
+            ,dataType: 'json'
+            ,data :{
+            	eventId : '68151',
+                userTelNum : userTelNum
+            }
+            ,success: function(data) {
+                if (data.result.save) {
+                    alert(data.result.resultMsg);
+                    location.href="/m/welcomeMain";
+                } else {
+                    alert(data.result.errMsg);
+                }
+            }
+            ,error: function(data) {
+                alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+            }
+        });
+    }
+}
+
+function eventRequest(eventNum) {
+    if (!isLogin) {
+        needLogin();
+    } else {
+        $.ajax({
+            type: "GET"
+            ,url: "/m/getEventRequest"
+            ,data: 'eventNum=' + eventNum
+            ,dataType: "json"
+            ,success: function(data) {
+                if (data.save) {
+                    alert(data.msg);
+                } else {
+                    alert(data.msg);
+                }
+            }
+            ,error: function() {
+                alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+            }
+        });
+    }
+}
+
+function _syncData(){
+	if (!isLogin) {
+        needLogin();
+    } else {
+    	 /*FingerPush 수신 여부 관련 Native App 함수 호출*/
+        var userAgent = navigator.userAgent;
+        //안드로이드
+        if(/Android/i.test(userAgent)){
+        	if(window.HybridApp != undefined && window.HybridApp.pushRcvYn != undefined){
+        		window.HybridApp.pushRcvYn('Y'); 
+            }
+        }
+        //iOS
+        else if(/iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream){
+        	try{
+        		document.location = "myScheme://pushRcvYn?Y";
+        	}catch(err){
+        		alert(err);
+        	}
+        }
+    	
+    	var device = '';
+    	if(!isEmpty(device)){
+    		$.ajax({
+    	        type: "POST"
+    	        ,url: "/m/biz/dev/syncData"
+    	        ,dataType: "json"
+    	        ,async: false
+    	        ,data : {
+    	            devId : ""
+    	          , gcmKey : ""
+    	          , devVersion : ""
+    	          , adAltRcvYn : 'Y'
+    	        }
+    	        ,success : function(data){
+    	            //console.log("save");
+    	            alert('PUSH 알림 설정이 완료되었습니다.');
+    	            location.href = "/m/biz/hot/setting";
+    	        } 
+    	        ,error: function(data) {
+    	            //console.log("fail");
+    	        }
+    	    });
+    	}else{
+    		alert('모바일 앱에서만 신청가능합니다.');
+    	}
+    }
+}
+</script>
+
+<!-- 데이타 스토리  script-->
+<script type="text/javascript"> 
+_n_p1='이팔청춘 _매일의 도장찍기'; // 이벤트 명 
+</script> 
+<!-- 데이타 스토리  script end-->
+
+
+
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-5MVN3Z4');</script>
+	<!-- End Google Tag Manager -->
+	
+<script>
+$(document).ready(function(){	
+	topMenu();//gnb	
+	sideMenu();//side menu	
+	footerFn();//footer
+	topDownFn();//탑다운 버튼_
+	
+	// app bar 호출
+	$.ajax({
+        type: "POST"
+        ,url: "/m/biz/quickmenu"
+        ,dataType: "html"
+        ,success : function(html){
+            $("body").append(html);            
+        } 
+        ,error: function(data) {
+        }
+    });
+});
+</script>		
+</head>
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	
+	<div id="loading" class="loadingbar"><img src="/images/common/ajax-loader.gif"/></div>
+	<div id="popupArea"></div>
+
+	
+<head>
+<!-- 태그 라이브러리 -->
+
+
+
+
+
+
+
+
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var date = new Date();
+
+		var yy = date.getFullYear();
+		var mm = date.getMonth()+1;
+		var dd = date.getDate();
+
+		var hh = date.getHours();
+
+		if((mm+"").length < 2){
+			mm = "0"+mm;
+		}
+
+		if((dd+"").length < 2){
+			dd = "0"+dd;
+		}
+		$('#searchTime').html(yy+'.'+mm+'.'+dd+' '+hh+':00');
+		searchFn(); //search
+	});
+	
+	function gnbSrchFrm(){
+	    var frm = $("form[name=gnbSearchFrm]");
+	
+	    if($.trim(frm.find("input[name=searchTerm]").val()) == ""){
+	        alert("검색어를 입력해주세요");
+	        return false;
+	    }
+	    frm.submit();
+	}
+	function rmRcntKerword(rcntKeySeq, id){
+	    $.ajax({
+	        type: "GET"
+	        , url: "/m/search/rmRecentKeyword"
+	        , data: "rcntKeySeq=" + rcntKeySeq
+	        , dataType: "json"
+	        , success: function(data) {
+	            $(id).slideUp();
+	            setTimeout(function(){
+	            	if ($(".cont03 #keyWord li:visible").length == 0  ) {
+		            	$(".cont03").append("<div class='none'>최근 검색어가 없습니다</div>");
+	 						
+					}
+	            }, 500);
+	            
+			
+	        }
+	        , error: function() {
+	            //alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
+	        }
+	    });
+	}
+	function rmRecentKeywordAll(){
+	    $.ajax({
+	        type: "GET"
+	        , url: "/m/biz/search/rmRecentKeywordAll"
+	        , dataType: "json"
+	        , success: function(data) {
+	        	$(".cont03 ul").html("");
+            	if ($(".cont03 #keyWord li:visible").length == 0 && $(".cont03 .none").length == 0) {
+	            	$(".cont03").append("<div class='none'>최근 검색어가 없습니다</div>");
+ 						
+				}
+	        }
+	        , error: function() {
+	        }
+	    });
+	}
+	
+	function gnbSrchKerword(keyword){
+	    if($("form[name=gnbSearchFrm]").length < 1){
+	        _search(keyword);
+	    }else{
+	        
+	        $("form[name=gnbSearchFrm] input[name=searchTerm]").val(keyword);
+	        gnbSrchFrm();
+	    }
+	}
+</script>
+<form name="gnbSearchFrm" action="http://m.hottracks.co.kr/m/biz/search/searchMain" method="post">
+<div id="search_menu">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="search_cont">
+						
+						<div class="top_banner MB_MAIN_TOP_1_1" style="background:#8971ff;" onclick="location.href='/e/63326'" >
+						<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1740/1587544510620_20200422_모바일배너.jpg" alt="검색모바일이미지배너" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/>
+						</div>
+						
+						<div class="search_top">
+						    <div class="inner">
+								<div class="input_wrap">
+									<input type="text" class="s_input" name="searchTerm" value="" placeholder="검색어를 입력하세요" title="검색어를 입력하세요" autocomplete="off"/>
+									<span class="input_clear hidden">삭제</span>
+								</div>
+						    </div>
+							<a href="javascript:" class="btn_back">뒤로가기</a>
+							<a href="javascript:" onclick="gnbSrchFrm();return false;"  class="btn_search MB_MAIN_TOP_1_2"><span>검색</span></a>
+						</div>
+						
+						<div class="search_wrap">
+							<div class="search_list">
+								<div class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<div class="cont cont01">
+												<h5>인기 검색어</h5>
+												<ul>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('백현');return false;">
+															<em class="font_t">1</em>
+															<p>백현</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span>-</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('스티커');return false;">
+															<em class="font_t">2</em>
+															<p>스티커</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span>-</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('필통');return false;">
+															<em class="font_t">3</em>
+															<p>필통</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span>-</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('백예린');return false;">
+															<em class="font_t">4</em>
+															<p>백예린</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span class="num up">2</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('몬스타엑스');return false;">
+															<em class="font_t">5</em>
+															<p>몬스타엑스</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span class="num down">1</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('모트모트');return false;">
+															<em class="font_t">6</em>
+															<p>모트모트</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span class="num down">1</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('노트북파우치');return false;">
+															<em class="font_t">7</em>
+															<p>노트북파우치</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span class="num up">1</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('NCT127');return false;">
+															<em class="font_t">8</em>
+															<p>NCT127</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span class="num down">1</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('마스크');return false;">
+															<em class="font_t">9</em>
+															<p>마스크</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span>-</span>
+																
+														</a>
+													</li>
+													
+													<li class="MB_MAIN_TOP_1_3">
+														<a href="javascript:" onclick="gnbSrchKerword('샤프');return false;">
+															<em class="font_t">10</em>
+															<p>샤프</p>
+															<!-- ▲ up , ▼ down : class 추가 -->
+															
+																	<span class="num up">2</span>
+																
+														</a>
+													</li>
+													
+												</ul>
+											</div>
+											<p class="txt"><span class="font_t" id="searchTime">2019.11.11 11:00</span> 기준</p>
+										</div>
+										<div class="swiper-slide">
+											<div class="cont cont02">
+												<h5>추천 검색어</h5>
+												<ul>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('LG그램');return false">
+															<em class="font_t">1</em>
+															<p>LG그램</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('에어팟프로');return false">
+															<em class="font_t">2</em>
+															<p>에어팟프로</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('살균스프레이');return false">
+															<em class="font_t">3</em>
+															<p>살균스프레이</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('살균');return false">
+															<em class="font_t">4</em>
+															<p>살균</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('손소독제');return false">
+															<em class="font_t">5</em>
+															<p>손소독제</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('시원스쿨');return false">
+															<em class="font_t">6</em>
+															<p>시원스쿨</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('큐피드곰');return false">
+															<em class="font_t">7</em>
+															<p>큐피드곰</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('방역모자');return false">
+															<em class="font_t">8</em>
+															<p>방역모자</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('카멜보드');return false">
+															<em class="font_t">9</em>
+															<p>카멜보드</p>
+														</a>
+													</li>
+												
+													<li class="MB_MAIN_TOP_1_4">
+														<a href="javascript:" onclick="gnbSrchKerword('탠디');return false">
+															<em class="font_t">10</em>
+															<p>탠디</p>
+														</a>
+													</li>
+												
+												</ul>
+											</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="cont cont03">
+												<h5>최근 검색어</h5>
+												
+												<!-- 검색어 없는 경우 -->
+<!-- 												<script type="text/javascript"> -->
+
+<!-- 												</script> -->
+												
+												<div class="none">
+													최근 검색어가 없습니다
+												</div>
+												
+												<!--// 검색어 없는 경우 -->
+											</div>
+											<div class="btn_wrapper">
+												<a href="javascript:" class="btn_delete_all" onclick="rmRecentKeywordAll();">전체삭제</a>
+											</div>
+										</div>
+									</div>
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+</body>
+</html>
+	<div id="wrap" class="content_new">
+	    
+<!-- 태그 라이브러리 -->
+
+
+
+
+
+
+
+<script type="text/javascript">
+jQuery(function($){
+    var chkInt = 6; // sessionStorage.getItem('chkInt')를 출력
+    //console.log(chkInt);
+    /*if (chkInt && chkInt<5) {
+			sessionStorage.setItem('chkInt', (parseInt(chkInt)+1));
+			$("input[name=exLink]").val($("input[name=exLink"+(parseInt(chkInt)+1)+"]").val());
+			$("input[name=exTxt]").val($("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
+			if ($("input[name=exLink"+(parseInt(chkInt)+1)+"]").val() != undefined) {
+				$("#srcBtn").attr("onclick","location.href='"+$("input[name=exLink"+(parseInt(chkInt)+1)+"]").val()+"';return false;");
+			} else {
+				$("#srcBtn").attr("onclick","searchOpen();return false;");
+			}
+			$("#srcInput").attr("placeholder",$("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
+	}else{
+	    sessionStorage.setItem('chkInt', 1);
+		$("input[name=exLink]").val($("input[name=exLink1]").val());
+		$("input[name=exTxt]").val($("input[name=exTxt1]").val());
+		if ($("input[name=exLink1]").val() != null) {
+			
+		}
+	}*/
+		$("#srcBtn").attr("onclick","location.href='"+$("input[name=exLink1]").val()+"';return false;");
+		$("#srcInput").attr("placeholder",$("input[name=exTxt1]").val());
+});
+function searchOpen(){
+	$('body').addClass('fixed').on('touchmove', function(e){e.preventDefault();return false;});
+	$('#wrap').append('<div class="search_dim"></div>');
+	TweenLite.to($('#wrap .search_dim'),0.7,{ease:Power4.easeOut,opacity:0.8})
+	TweenLite.to($('#search_menu'),0.7,{ease:Power4.easeOut,left:0,onComplete:function(){
+		searchMenuSwiper.onResize();
+	}});
+}
+</script>
+<!-- header -->
+<div id="header">
+    <div class="inner">
+    	<a href="javascript:;" class="btn_home" onclick="location.href='http://m.hottracks.co.kr/';return false;">홈버튼</a>
+    	<!-- 메인 -->
+		<div class="main_wrap">
+            
+                
+                    
+                	
+	                    
+	                    
+	                    
+	                	<input type="hidden" name="exLink1" value="/e/30557"/>
+                    
+	                <input type="hidden" name="exTxt1" value="리모컨 써큘레이터 3만원대+무배"/>
+                
+                    
+                	
+	                <input type="hidden" name="exTxt2" value=""/>
+                
+                    
+                	
+	                <input type="hidden" name="exTxt3" value=""/>
+                
+                    
+                	
+	                <input type="hidden" name="exTxt4" value=""/>
+                
+                    
+                	
+	                <input type="hidden" name="exTxt5" value=""/>
+                
+            
+			<input type="hidden" name="exLink" value=""/>
+			<input type="hidden" name="exTxt" value=""/>
+			<input type="text" class="MB_MAIN_TOP_1" id="srcInput" placeholder="">
+	        <a href="javascript:;" class="btn_category MB_MAIN_TOP_3"><span>카테고리 보기</span></a>
+	        <a href="javascript:;" onclick="location.href='/e/30557';return false;" id="srcBtn" class="btn_search MB_MAIN_TOP_2"><span>검색</span></a>
+		</div>
+		<!--// 메인 -->
+        
+		<!-- 서브 -->
+		<div class="sub_wrap">
+			<a href="javascript:;" onclick="locBack();return false;" class="btn_back">뒤로가기</a>
+	        <a href="javascript:;" class="btn_category MB_MAIN_TOP_3">카테고리 보기</a>
+	        <a href="javascript:;" class="btn_search MB_MAIN_TOP_2">검색</a>
+	        <a href="/" class="btn_bhome" style="display: none;">홈으로</a>
+			<h2 id="subTitle">이벤트</h2>
+		</div>
+		<!--// 서브 -->
+    </div>
+	<div class="top_menu">
+		<ul>
+			<li id="gnbMunguGift" class="MB_MAIN_GNB_1"><a href="/m/biz/welcomeMain">문구&middot;기프트</a></li>
+			<li id="gnbRecord" class="MB_MAIN_GNB_2"><a href="/m/biz/musicMain">음반</a></li>
+			<li id="gnblife" class="MB_MAIN_GNB_4"><a href="/m/biz/lifeMain?productOrderBy=R">이럴 때,<i class="this"></i></a></li>
+			<li id="gnbAgit" class="MB_MAIN_GNB_3"><a href="/m/biz/agitMain?agitTypeCd=C1511">아지트</a></li>			
+		</ul>
+	</div>
+	
+	<!-- 아지트 탑메뉴 -->
+	<div class="agit_menu" id="agit_navi" style="display:none;">
+		<ul>
+			<li><a href="javascript:;" data-type="C1511"><i class="icon icon01"></i>핫트연구소</a></li>
+			<li><a href="javascript:;" data-type="C1512"><i class="icon icon02"></i>문구하울</a></li>
+			<li><a href="javascript:;" data-type="C1513"><i class="icon icon03"></i>보이는이야기</a></li>
+			<li><a href="javascript:;" data-type="C1514"><i class="icon icon04"></i>핫트뿅뿅</a></li>
+			<li><a href="javascript:;" data-type="SOSO"><i class="icon icon05"></i>소소클래스</a></li>
+		</ul>
+	</div>
+	<!--// 아지트 탑메뉴 -->
+		
+	<div id="sidemenu_wrapper">
+		<div class="sidemenu_cont">
+			<!-- 로그인시 프렌즈,실버,골드,플래티넘,임직원 grade01 ~ grade05 : class 추가 -->
+			<div class="hd no_login">
+				<div class="cont">
+					
+							<p>안녕하세요 회원님.</p>
+						
+					
+					<ul>
+						<!-- 첫번째 아이콘 -->
+						<li>
+							
+ 									<a href="javascript:;" class="MB_SIDE_TOP_2" onclick="login();return false;">
+									<!-- <a href="javascript:;" onclick="location.href='/m/temp/loginForm?totMileAmt=0&returnUrl='+escape((document.location.href).split('#')[0]);return false;"> -->
+										<i class="ico05"></i>
+										<span>로그인</span>
+									</a>
+									
+						</li>
+						
+						<!-- 두번째 아이콘 -->
+						<li>
+							
+ 									<!-- <a href="javascript:;" onclick="login();return false;"> -->
+ 									<a href="javascript:;" class="MB_SIDE_TOP_3" onclick="location.href='/m/mypage/main'; return false;">
+									<!-- <a href="javascript:;" onclick="location.href='/m/temp/loginForm?totMileAmt=0&returnUrl='+escape((document.location.href).split('#')[0]);return false;"> -->
+										<i class="ico02"></i>
+										<span>주문조회</span>
+									</a>
+												
+						</li>
+						
+						<!-- 세번째 아이콘(비회원은 쿠폰 없음) -->
+						<li>
+							
+ 									<a href="javascript:;" class="MB_SIDE_TOP_4" onclick="login();return false;">
+									<!-- <a href="javascript:;" onclick="location.href='/m/temp/loginForm?totMileAmt=0&returnUrl='+escape((document.location.href).split('#')[0]);return false;"> -->
+										<i class="ico03"></i>
+										<span>쿠폰</span>
+									</a>
+									
+						</li>
+						
+						<!-- 네번째 아이콘 -->
+						<li>
+							<a href="javascript:;" class="MB_SIDE_TOP_5" onclick="location.href='/m/order/cart';return false;">
+								<i class="ico04">
+									
+								</i>
+								<span>장바구니</span>
+							</a>
+						</li>
+					</ul>
+				</div>			
+				<div class="store storeArea first">
+					<dl class= "MB_SIDE_TOP_6">
+						<dt><a href="/m/help/listStore">지금 가장 가까운 매장,</a></dt>
+						<dd>
+							<a href="/m/help/listStore">광화문점</a>
+						</dd>
+					</dl>
+				</div>
+				<div class="btn_wrap">
+					<!-- 앱이고 로그인회원일때 노출 -->
+					
+					<!-- //앱이고 로그인회원일때 노출 -->
+					
+					<button type="button" class="btn_sidemenu_close"></button>
+				</div>
+			</div>
+			<!--// 로그인시 -->
+
+			<!-- gnb -->
+			<nav id="gnb">
+				<!-- 햄버거 상단 배너 -->
+				
+					<div class="banner">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								
+									<div class="swiper-slide">
+										<a href="javascript:;" class="MB_SIDE_TOP_7" onclick="location.href='/m/biz/personal/personalRecommend';return false;">
+											<div class="text"><span><em>당신의 취향이<br> 묻어나는 그 아이템 </em></span></div>
+											<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1965/1582763657703_KakaoTalk_20200227_090018994.jpg" alt="개인의취향" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/>
+										</a>
+									</div>
+								
+									<div class="swiper-slide">
+										<a href="javascript:;" class="MB_SIDE_TOP_7" onclick="location.href='/e/66843';return false;">
+											<div class="text"><span><em>쇼핑하기 전<br>혜택보기</em></span></div>
+											<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1641/1582764124782_KakaoTalk_20200227_093235989.jpg" alt="월간혜택" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/>
+										</a>
+									</div>
+								
+							</div>
+							<div class="swiper-pagination"></div>
+						</div>
+					</div>
+				
+				<!-- //햄버거 상단 배너 -->
+				
+				<div class="category">
+					<ul>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_1" onclick="location.href='/m/gift/biz/category/000020';return false;">
+								<i class="ico01"></i>
+								<span>디자인문구</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_2" onclick="location.href='/m/gift/biz/category/000022';return false;">
+								<i class="ico02"></i>
+								<span>디지털</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_3" onclick="location.href='/m/gift/biz/category/000007';return false;">
+								<i class="ico03"></i>
+								<span>고급필기구</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_4" onclick="location.href='/m/gift/biz/category/000021';return false;">
+								<i class="ico04"></i>
+								<span>오피스</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_5" onclick="location.href='/m/gift/biz/category/000025';return false;">
+								<i class="ico05"></i>
+								<span>리빙/생활가전</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_6" onclick="location.href='/m/gift/biz/category/000026';return false;">
+								<i class="ico06"></i>
+								<span>키친/푸드</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_7" onclick="location.href='/m/gift/biz/category/000024';return false;">
+								<i class="ico07"></i>
+								<span>가구/수납</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_8" onclick="location.href='/m/gift/biz/category/000028';return false;">
+								<i class="ico08"></i>
+								<span>패션잡화</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_9" onclick="location.href='/m/gift/biz/category/000006';return false;">
+								<i class="ico09"></i>
+								<span>뷰티/헬스</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_10" onclick="location.href='/m/gift/biz/category/000027';return false;">
+								<i class="ico10"></i>
+								<span>여행/자동차</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_11" onclick="location.href='/m/gift/biz/category/000023';return false;">
+								<i class="ico11"></i>
+								<span>취미/펫</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_12" onclick="location.href='/m/gift/biz/category/000029';return false;">
+								<i class="ico12"></i>
+								<span>유아동</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_13" onclick="location.href='/m/biz/eventDetail?eventId=47389';return false;">
+								<i class="ico13"></i>
+								<span>직수입/PB</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_14" onclick="location.href='/m/record/biz/category/0003';return false;">
+								<i class="ico14"></i>
+								<span>CD/LP</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_CATE_15" onclick="location.href='/m/dvd/biz/category/000401';return false;">
+								<i class="ico15"></i>
+								<span>DVD/BD</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="sales">
+					<ul>
+						<li class="MB_SIDE_MENU_1"><a href="javascript:;" onclick="location.href='/m/biz/hot/best/';return false;">베스트</a></li>
+						<li class="MB_SIDE_MENU_2"><a href="javascript:;" onclick="location.href='/m/biz/hot/best?dispMstrId=FREE_DELIVERY_BEST';return false;">무료배송</a></li>
+						<li class="MB_SIDE_MENU_3"><a href="javascript:;" onclick="location.href='/m/biz/hot/best?dispMstrId=CATE_GFT_NEW';return false;">신상품</a></li>
+						<li class="MB_SIDE_MENU_4"><a href="javascript:;" onclick="location.href='/m/biz/hot/best?dispMstrId=CATE_GFT_SALE';return false;">할인</a></li>
+						<li class="MB_SIDE_MENU_5"><a href="javascript:;" onclick="location.href='/m/biz/hot/eventMain';return false;">이벤트</a></li>
+						<li class="MB_SIDE_MENU_6"><a href="javascript:;" onclick="location.href='/m/biz/personal/personalRecommend';return false;">개인의 취향</a></li>
+					</ul>
+				</div>
+				
+				<!-- 햄버거 하단 배너 -->
+				
+					<div class="service_banner">
+						<div class="tit">
+							<h5></h5>
+						</div>
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								
+									<div class="swiper-slide first">
+										<a href="javascript:;" class="MB_SIDE_MENU_7" onclick="location.href='/m/biz/agitMain?agitTypeCd=C1511';return false;">
+											
+											<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1232/1582706850181_햄버거메뉴_아지트.jpg" alt="아지트" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/>
+										</a>
+									</div>
+								
+									<div class="swiper-slide ">
+										<a href="javascript:;" class="MB_SIDE_MENU_7" onclick="location.href='/m/biz/lifeMain';return false;">
+											
+											<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1400/1582706832840_햄버거메뉴_이럴때.jpg" alt="이럴때" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/>
+										</a>
+									</div>
+								
+							</div>
+						</div>
+					</div>
+				
+				<!-- //햄버거 하단 배너 -->
+				
+				<div class="content">
+					<ul>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_MENU_8" onclick="location.href='/m/biz/agitMain?agitTypeCd=C1511';return false;">
+								<span><img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/img_thumb01.jpg" alt="핫트연구소"></span>핫트연구소
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_MENU_9" onclick="location.href='/m/biz/idol/news';return false;">
+								<span><img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/img_thumb02.jpg" alt="뮤직매거진"></span>뮤직매거진
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="MB_SIDE_MENU_10" onclick="location.href='/m/help/signMain/';return false;">
+								<span><img src="https://simage.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/img_thumb03.jpg" alt="팬사인회"></span>팬사인회
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+				<!-- 공지사항 +당첨자발표 최근 1건 -->
+				
+				
+					<div class="notice">
+						<h5>공지사항<em></em></h5>
+						<p><a href="javascript:;" class="MB_SIDE_ANNOUNCE_1" onclick="location.href='/m/help/listEventPrize';return false;">BAEKHYUN The 2nd Mini Album [Delight] Special Polaroid EVENT 당첨자 발표</a></p>
+					</div>
+				
+				<!-- //공지사항 최근 1건 -->
+				
+				<div class="cs">
+					<dl>
+						<dt>고객센터</dt>
+						<dd>
+							1661-1112
+							<span>월-금<em>오전9시~오후6시</em></span>
+						</dd>
+					</dl>
+				</div>
+				<div class="util">
+					 <ul>
+						<!-- 로그인상태일때 노출 -->
+						
+						<!-- //로그인상태일때 노출 -->
+						
+						<li>
+							<a href="javascript:;" class="MB_SIDE_ANNOUNCE_2" onclick="location.href='/m/help/main';return false;" class="btn_inquiry">
+								<i class="ico01"></i>
+								<span>고객센터</span>
+							</a>
+						</li>
+						
+						<!-- 앱이고 로그인회원일때 노출 -->
+						
+						<!-- //앱이고 로그인회원일때 노출 -->
+						
+						<li>
+							<a href="javascript:;" onclick="pcVerConfirm();return false;" class="btn_pc">
+								<i class="ico03"></i>
+								<span>PC화면</span>
+							</a>
+						</li>
+					 </ul>
+				</div>
+			</nav>
+			<!--// gnb -->
+		</div>
+
+	</div>
+</div>
+<!--// header -->
+
+<script type="text/javascript">
+	var exType = ''; 
+	
+	$(document).ready(function() {
+		//회원등급 텍스트
+		$("#memberTxt").on("click", function(){
+			location.href = "/m/help/memberShip";
+		});
+		
+		$('#header .btn_category').on('click', function(){//sidemenu open
+	        if($(".storeArea").hasClass("first")){
+	        	$(".storeArea").removeClass("first");
+	        	findStore();
+	        }
+	    });
+	});
+	
+	function bizGoSetting(){
+    	location.href = 'http://m.hottracks.co.kr/m/biz/hot/setting';
+	}
+	
+	function findStore(){
+		//가까운 지점 찾기
+		if(window.HybridApp != undefined && window.HybridApp.enhanceLocation != undefined){
+            var data = window.HybridApp.enhanceLocation();
+            var json = JSON.parse(data);
+            var lat = json["LOC_LATITUDE"];
+            var long = json["LOC_LONGITUDE"];
+            if(lat == undefined || lat == null){
+                loadStore("", "");
+            } else{
+                loadStore(lat, long);
+            }
+        }else{
+            if(navigator && "geolocation" in navigator){
+                // var timecheck = setTimeout('loadStore("", "")', 5000);
+                
+                var geo_success = (function (position) {
+                    loadStore(position.coords.latitude, position.coords.longitude);
+                });
+                
+                var tryAPIGeolocation = function() {
+                    jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+                        geo_success({coords: {latitude: success.location.lat, longitude: success.location.lng}});
+                    })
+                    .fail(function(err) {
+                        // showMsg("위치 정보를 불러오는데 실패하였습니다.[API Fail]");
+                        loadStore("", "");
+                        // alert("API Geolocation error! \n\n"+err);
+                    });
+                };
+                
+                var geo_error = function(error) {
+                    switch (error.code) {
+                    case error.TIMEOUT:
+                        showMsg("위치 정보를 불러오는데 실패하였습니다.[Timeout]");
+                        loadStore("", "");
+                        break;
+                    case error.PERMISSION_DENIED:
+                        if(error.message.indexOf("Only secure origins are allowed") == 0) {
+                            tryAPIGeolocation();
+                        }
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        // dirty hack for safari
+                        if(error.message.indexOf("Origin does not have permission to use Geolocation service") == 0) {
+                            tryAPIGeolocation();
+                        } else {
+                            showMsg("위치 정보를 불러오는데 실패하였습니다.[Position unavailable]");
+                            loadStore("", "");
+                        }
+                        break;
+                }
+                };
+                
+                var geo_options = {
+                  enableHighAccuracy: true, 
+                  maximumAge        : 50000, 
+                  timeout           : 20000
+                };
+                
+                var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+            }else{
+                loadStore("", "");
+            }
+        }
+	}
+	
+	function pcVerConfirm(){
+		if(confirm("PC버전보기는 PC환경에 최적화 되어있어 일부 기능이 제대로 작동하지 않을 수 있습니다.")){
+			showPcVer();
+		}
+	}
+	
+	/* function sendGeoLocationiOS(latitude,longitude){
+	    loadStore(latitude, longitude);
+	} */
+	
+	function loadStore(latitude, longitude){
+		$.ajax({
+            type: "GET"
+           ,data : { "locLat"	: latitude
+        	   		,"locLong" 	: longitude	}
+           ,url: "/m/biz/layerStore"
+           ,dataType: 'json'
+           ,success : function(data) {
+        	   $(".storeArea a").attr("href", "/m/help/listStore");
+        	   $(".storeArea dd a").text(data.store.deptname);
+           }
+           ,error: function(data) {
+               alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
+               $("#loading").hide();
+           }
+        });
+	}
+	
+	// 아지트
+	$(".agit_menu ul li a").on("click", function (e) {
+		e.preventDefault();
+		var type = $(this).data('type');
+		if(exType != null && exType != '') {
+			if(exType == type) {
+				type = null;
+			}
+		}
+		
+		exType = type;
+		
+		if($(this).parent('li').hasClass('active')){
+		   $(this).parent('li').removeClass('active');
+		} else {
+		   $(this).parent('li').addClass('active');
+   		   $(this).parent('li').siblings().removeClass('active');
+		}
+		
+		var $obj = $("#tabSwiper .gnbAgit");
+		
+		location.href="/m/biz/agitMain?agitTypeCd="+type;
+	});
+	
+	function _logout(){
+		var device = '';
+		
+		if(device != null){
+			$.ajax({
+		        type: "POST"
+		        ,url: "/m/biz/dev/syncData"
+		        ,dataType: "json"
+		        ,async: false
+		        ,data : {
+		            devId : ""
+		          , gcmKey : ""
+		          , devVersion : ""
+		          , autoLoginYn : 'N'
+		        }
+		        ,success : function(data){
+		            //console.log("save");
+		        } 
+		        ,error: function(data) {
+		            //console.log("fail");
+		        }
+		    });
+		}
+	    
+	    logout();
+	}
+</script>
+	    
+
+<!-- content -->
+<img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/" class="sns_img" style="display:none;"/>
+<div id="content">
+	<div class="event_view">
+		<div class="event_title">
+	        <h5>이팔청춘 _매일의 도장찍기</h5>
+	        <p class="date font_t">
+	        2020.06.05 ~ 2020.06.19
+	        </p>
+	        <a href="javascript:layerPopup('.popup_sns');" class="share"><span>공유하기</span></a>
+	    </div>
+
+		<div class="event_view_cont">
+<div>
+<!-- class="event_info" -->
+    <div class="ly_box_skip">
+        <p>종료된 이벤트 입니다.</p>
+    </div>
+    <div class="event_cont">
+        
+        
+                <div><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1153/1590561025400_img_mtop.png" id="eventImageUrl" class="detail-img" usemap="#eventImageMap" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></div>
+                
+<div>
+<!-- 관리자 영역 -->
+
+<script>
+// menutap 스크롤 시 고정
+$(document).ready(function(){
+    var menutap = $(".menutap").offset().top;
+    $(window).scroll(function() {
+        var window = $(this).scrollTop();
+
+        if(menutap <= window) {
+          $(".menutap").addClass("fixed");
+        } else {
+          $(".menutap").removeClass("fixed");
+        }
+    });
+});
+</script>
+<style>
+.event_view_cont .event_cont {background:#f5eee0;}
+.event_view_cont .menutap {transition-duration:0.5s; z-index: 9; position: relative;} 
+.event_view_cont .menutap.fixed{position: fixed; top: 61px; z-index:9; width: 100%; transition-duration:0.5s;} /* menutap 스크롤 시 고정 높이값 수정 */
+.event_view_cont .menutap.fixed + .tit_main {padding-top:150px;}
+.event_view_cont .tit_main {margin-top: -10px;}
+.event_view_cont .day_box {padding:20px; margin: 0 20px; background: #f5eee0; width: calc(100% - 80px); border-radius: 40px;}
+.event_view_cont .day_box ul li {float:left;width: 50%;text-align: center;}
+.event_view_cont .day_box ul li.on .mdayclear {display:block;}
+.event_view_cont .day_box ul li.on .mday {display:none;}
+.event_view_cont .day_box ul li .mdayclear {display:none;}
+.event_view_cont .day_box ul li:last-child {padding-bottom:40px;}
+/* iPad, iPad Mini, iPad Pro Portrait / landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+    .event_view_cont .tit_main {margin-top: -23px;}
+}
+</style>
+<div class="menutap">
+    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_menutapm.png" alt="menu" usemap="#menumap"/>
+    <map name="menumap">
+      <area shape="rect" coords="5,7,188,229" href="/e/68150" onfocus="this.blur()">
+      <area shape="rect" coords="196,5,377,249" href="/e/68151" onfocus="this.blur()">
+      <area shape="rect" coords="385,8,570,229" href="/e/68152" onfocus="this.blur()">
+      <area shape="rect" coords="575,8,759,229" href="/e/68153" onfocus="this.blur()">
+      <area shape="rect" coords="763,8,945,229" href="/e/68154" onfocus="this.blur()">
+    </map>
+</div>
+
+<div class="tit_main">
+    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_m01.png" alt="오늘의 미션"/>
+</div>
+
+<div class="day_box">
+    <ul>
+        <!-- 미션 성공 시 on 클래스 추가 -->
+        <li class="on">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday01.png" alt="day01"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday02.png" alt="day02"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday03.png" alt="day03"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday04.png" alt="day04"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday05.png" alt="day05"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday06.png" alt="day06"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday07.png" alt="day07"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday08.png" alt="day08"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday09.png" alt="day09"/>
+            </a>
+        </li>
+        <li class="">
+            <a href="#n">
+                <img class="mdayclear" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mdayclear.png" alt="mdayclear"/>
+                <img class="mday" src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mday10.png" alt="day10"/>
+            </a>
+        </li>
+           
+    </ul>
+</div>
+
+<div>
+    <a href="#n" class="wd100">
+        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/btn_mclick.png" alt="오늘의 도장 도전"/>
+    </a>
+</div>
+
+<div>
+    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/event/banner/2020_hot28/68151/img_mfooter.png" alt="유의사항"/>
+</div>
+
+<!-- / 관리자 영역 -->
+</div>
+            
+        <!-- swiper -->
+        
+    </div>
+    
+    
+    
+</div>			
+			<!-- COMMENT 영역 -->
+			
+			
+			
+		</div>
+	</div>
+</div>
+<!--// content -->
+<!-- 신규 레이어팝업 : start --> 
+<div class="layer_popup popup_sns">
+    <div class="inner_layer">
+        <div class="sns_content">
+            <ul>
+                <li><a href="javascript:goTwitter('이팔청춘 _매일의 도장찍기', 'http://m.hottracks.co.kr/e/68151')" class="ic_twitter sns01"></a></li>
+                <li><a href="javascript:goFaceBook('이팔청춘 _매일의 도장찍기', 'http://m.hottracks.co.kr/e/68151')" class="ic_facebook sns02"></a></li>
+                <li><a href="javascript:sendKakao('[핫트랙스] 이팔청춘 _매일의 도장찍기', 'http://m.hottracks.co.kr/e/68151')" class="ic_kakaotalk sns03"></a></li>
+            </ul>
+        </div>
+    </div>
+	<a href="#none" class="layer_close"><span>취소</span></a>
+</div>
+<!-- 신규 레이어팝업 : end -->
+	    
+	    
+<!-- 태그 라이브러리 -->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+jQuery(function($){
+    $.ajax({
+        url: '//admin.hottracks.co.kr/admin/system/hotSiteClickCheck2'
+        ,dataType: 'jsonp'
+        ,jsonpCallback: "callback"
+        ,success: function(data) {
+        }
+    });
+});
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-968575-10']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 --> 
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script> 
+<script type="text/javascript"> 
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_3b427c425785";
+if (!_nasa) var _nasa={};
+wcs.inflow();
+wcs_do(_nasa);
+</script>
+
+<!-- 레코벨 스크립트window -->
+<script type="text/javascript">
+$(window).load(function() {
+	var userId= getCookie("UserCookieKey");
+
+	window._rblq = window._rblq || [];
+	_rblq.push(['setVar','cuid','e15e978e-3623-4892-bf0a-485b9f8196ee']);
+	_rblq.push(['setVar','device','MW']);
+	_rblq.push(['setVar','userId',SHA256(userId)]); // optional
+	_rblq.push(['track','visit']);
+	(function(s,x){s=document.createElement('script');s.type='text/javascript';
+	s.async=true;s.defer=true;s.src=(('https:'==document.location.protocol)?'https':'http')+'://assets.recobell.io/rblc/js/rblc-apne1.min.js';
+  x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();
+});
+</script>
+<!-- 레코벨 스크립트 끝 -->
+
+	<!-- footer -->
+	<div id="footer">
+		<div class="inner">
+			<p>고객센터 <em class="font_t">1661-1112</em></p>
+			<div class="util_menu">
+		        <ul>
+		            <li><a href="javascript:;" traget="_blank" onclick="winOpen3('http://m.hottracks.co.kr/heart?newPop=chromeYes');return false;">핫트합니다</a></li>
+		            <li><a href="javascript:;" traget="_blank" onclick="winOpen('http://m.hottracks.co.kr/m/rule?newPop=chromeYes');return false;">이용약관</a></li>
+		            <li><a href="javascript:;" traget="_blank" onclick="winOpen('http://m.hottracks.co.kr/m/privacy?newPop=chromeYes');return false;"><strong>개인정보취급방침</strong></a></li>
+		        </ul>
+		    </div>
+			<div class="cont">
+				<a href="javascript:;" traget="_blank" onclick="winOpen('http://m.hottracks.co.kr/heart?newPop=chromeYes');return false;">
+					<img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019">
+				</a>
+				<ul class="sns_wrap">
+		            <li class="ig"><a href="javascript:;" traget="_blank" onFocus="this.blur()" onclick="linkToInstagram('home');return false;">instagram</a></li>
+		            <li class="fb"><a href="javascript:;" traget="_blank" onFocus="this.blur()" onclick="winOpen('https://www.facebook.com/HOTTRACKSFRIEND/');return false;">facebook</a></li>
+		            <li class="tt"><a href="javascript:;" traget="_blank" onFocus="this.blur()" onclick="winOpen3('https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg?newPop=chromeYes');return false;">youtube</a></li>
+		            <li class="bg"><a href="javascript:;" traget="_blank" onFocus="this.blur()" onclick="goTwitter('모바일핫트랙스', 'http://m.hottracks.co.kr/');return false;">twitter</a></li>
+		            <li class="yt"><a href="javascript:;" traget="_blank" onFocus="this.blur()" onclick="winOpen3('https://hottracks91.blog.me?newPop=chromeYes');return false;">blog</a></li>
+		        </ul>
+			</div>
+			<a href="javascript:;" onclick="javacript:event.preventDefault();" class="btn_cont">교보핫트랙스(주)</a>
+			<div class="txt">
+				<span>대표이사 박영규</span>
+				<span>사업자등록번호 : 102-81-29258</span>
+				<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+				<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+				<span>개인정보보호책임자 : 김재식</span>
+				<span>이메일 : PRIVACY@HOTTRACKS.CO.KR</span>
+				<span class="copyright">ⓒ Kyobo Hottracks inc.</span>
+			</div>
+		</div>
+	</div>
+	<!--// footer -->
+
+<div id="devLayer" class="lyDeviceAlert" style="position:fixed;left:0;top:0;width:100%;height:100%;background:url('/images/season01/bg_layer02.png');z-index:999;display:none;">
+<!-- 
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-100px;overflow:hidden;">
+    <dl style="position:relative;font-size:15px;font-weight:bold;">
+        <dt style="position:absolute;top:0;left:0;"><img src="/images/device/ico_logo.png" alt="HOTTRACKS" style="width:70px;height:70px;"></dt>
+        <dd style="margin-left:80px;color:#fff;">
+            <p style="margin-top:20px;">나의 감성 충전소, 핫트랙스</p>
+            <p style="font-size:1.3em;margin-top:7px;">더욱 편리하게<br/>쇼핑하실 수 있어요!</p>
+        </dd>
+    </dl>
+    <p style="margin-top:30px;"><a href="javascript:;" onclick="linkToDevice('Y');return false;"><img src="/images/device/btn_app.png" alt="앱으로 보기 " style="width:100%;"/></a></p>
+    <p style="margin-top:10px;text-align:center;"><a href="javascript:;" onclick="linkToDevice('F');return false;" style="color:#fff;text-decoration:underline;">모바일웹으로 볼께요.</a></p>
+</div>
+-->
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-200px;overflow:hidden;background:url('/images/device/bg_layer01.jpg');text-align:center;">
+    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/device/txt_layer02.png" style="width:100%;"/>
+    <a href="javascript:;" onclick="linkToDevice('Y');return false;" style="position:relative;font-size:15px;font-weight:bold;margin-top:10px;">
+        <img src="/images/device/btn_layer01.png" style="width:90%;"/>
+    </a>
+    <p style="margin:10px auto;text-align:center;"><a href="javascript:;" onclick="linkToDevice('F');return false;" style="color:#263741;text-decoration:underline;font-weight:bold;">웹으로 볼께요.</a></p>
+</div>
+</div>
+<div id="devLayer001" class="lyDeviceAlert" style="position:fixed;left:0;top:0;width:100%;height:100%;background:url('/images/season01/bg_layer02.png');z-index:999;display:none;">
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-150px;overflow:hidden;">
+    <a href="javascript:;" onclick="location.href='/m/biz/eventDetail?eventId=42347';return false;" style="position:relative;font-size:15px;font-weight:bold;">
+        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1056/1479708729992_popup01.png" style="width:100%;"/>
+    </a>
+    <p style="margin-top:10px;text-align:center;"><a href="javascript:;" onclick="linkToDevice('F');return false;" style="color:#fff;text-decoration:underline;">오늘 하루 그만보기</a></p>
+</div>
+</div>
+<div id="devLayer002" class="lyDeviceAlert" style="position:fixed;left:0;top:0;width:100%;height:100%;background:url('/images/season01/bg_layer02.png');z-index:999;display:none;">
+<div style="display: block;margin:20px auto;max-width:290px;position: relative;top:50%;margin-top:-150px;overflow:hidden;">
+    <a href="javascript:;" onclick="location.href='/m/biz/eventDetail?eventId=42347';return false;" style="position:relative;font-size:15px;font-weight:bold;">
+        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1535/1479708673064_popup02.png" style="width:100%;"/>
+    </a>
+    <p style="margin-top:10px;text-align:center;"><a href="javascript:;" onclick="linkToDevice('F');return false;" style="color:#fff;text-decoration:underline;">오늘 하루 그만보기</a></p>
+</div>
+</div>
+<div id="popupLayer001" style="position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:999;display:none;">
+<div style="display:block;position: relative;">
+    <a href="javascript:;" onclick="closeWin2();return false;" style="display:block;text-align:right;background-color:#ff6600;padding:10px;margin:0;"><img src="/images/season01/btn_close01.png" style="width:25px;height:25px;"/></a></p>
+    <div style="position:relative;font-size:15px;font-weight:bold;background-color:#fff;width:100%;height:calc(100vh - 45px);overflow: auto; -webkit-overflow-scrolling: touch;display:block;">
+        <iframe src="about:Tabs" scrolling="yes" style="width:100vw;height:100vh;display:block;border:none;"></iframe>
+    </div>
+</div>
+</div>
+<div style="display: none;"><textarea id="myClipboard"></textarea></div>	     
+	</div>
+</body>
+</html>
