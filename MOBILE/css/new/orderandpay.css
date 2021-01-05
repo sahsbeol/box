@@ -390,9 +390,9 @@
 .orderandpay .customer .bbs_box .accordion > li > a > span {font-size:inherit; font-weight: inherit; color:inherit;}
 .orderandpay .customer .bbs_box .accordion > li > a > em {top:20px;}
 
-.orderandpay .customer .tab_box { display:-webkit-box;margin:10px;border:1px solid #FF6A5B;border-radius:5px;background-color:#fff; }
+.orderandpay .customer .tab_box {display:-webkit-box;margin: 15px 0 0 0;border: 0 none;border-radius: 0;background-color:#fff;}
 .orderandpay .customer .tab_box a { -webkit-box-flex:1;display:block;text-align:center;padding:10px;color:#FF6A5B;font-weight:bold; width : 50%;}
-.orderandpay .customer .tab_box a.active { background-color:#FF6A5B;color:#fff; }
+.orderandpay .customer .tab_box a.active {background-color: #000;color:#fff;}
 
 
 
