@@ -378,23 +378,47 @@
 .orderandpay .customer .cs_alert_text dd {font-size: 13px; font-weight: 500; color: #777777;}
 .orderandpay .customer .cs_button_list { display: table; width: 100%; margin-top:20px;}
 .orderandpay .customer .cs_button_list li { display: table-cell; width: 50%;}
-.orderandpay .customer .cs_button_list .link {font-size: 15px;font-weight: 400;display: block;background: #000;color: #fff;text-align: center; margin-left: 5px; padding:19px 10px 20px }
-.orderandpay .customer .cs_button_list li:first-child .link {margin-left:0;}
+.orderandpay .customer .cs_button_list .link {font-size: 13px;font-weight: 400;display: block;background: #fff;color: #000; border:1px #000 solid; text-align: center; padding:17px 10px 16px; }
+.orderandpay .customer .cs_button_list li:first-child .link {border-right:0;}
+.orderandpay .customer .cs_button_list .link span {font-size:inherit;}
 
-.orderandpay .customer .accordion li a {border-bottom:1px #eee solid;}
-.orderandpay .customer .accordion li:first-child a {border-top:0;}
+
 .orderandpay .customer .bbs_box{}
 .orderandpay .customer .bbs_box h4 {font-size: 16px; font-weight: 700; padding-bottom: 16px;}
 .orderandpay .customer .bbs_box .btn_more {font-size: 0; width:16px; height:16px; background: url(../../images/new/cs_icon_more.png) no-repeat center center; background-size: 16px 16px; right: -10px; top: -2px;}
-.orderandpay .customer .bbs_box .accordion > li > a {padding:20px 0; font-size:13px; font-weight: 400; color:#000;}
+.orderandpay .customer .bbs_box .accordion li a {border-bottom:0;}
+.orderandpay .customer .bbs_box .accordion li:first-child a {border-top:0;}
+.orderandpay .customer .bbs_box .accordion > li:first-child {border-top:1px #EEEEEE solid;}
+.orderandpay .customer .bbs_box .accordion > li {border-bottom:1px #EEEEEE solid;}
+.orderandpay .customer .bbs_box .accordion > li > a {padding:23px 0; font-size:13px; font-weight: 400; color:#000;}
 .orderandpay .customer .bbs_box .accordion > li > a > span {font-size:inherit; font-weight: inherit; color:inherit;}
-.orderandpay .customer .bbs_box .accordion > li > a > em {top:20px;}
+.orderandpay .customer .bbs_box .accordion > li > a > em {top:23px;}
 
 .orderandpay .customer .tab_box {display:-webkit-box;margin: 15px 0 0 0;border: 0 none;border-radius: 0;background-color:#fff;}
-.orderandpay .customer .tab_box a { -webkit-box-flex:1;display:block;text-align:center;padding:10px;color:#FF6A5B;font-weight:bold; width : 50%;}
-.orderandpay .customer .tab_box a.active {background-color: #000;color:#fff;}
+.orderandpay .customer .tab_box a {-webkit-box-flex:1;display:block;text-align:center;padding: 17px;color: #000;font-weight:400;width : 50%;border: 1px #000000 solid;}
+.orderandpay .customer .tab_box a.active {background-color: #000;color:#fff; border: 1px #000 solid;}
 
 
+/* 고객센터 paging */
+.orderandpay .paging {margin-top:36px;} 
+.orderandpay .paging > a {display:inline-block;width:24px;height:24px;overflow:hidden;line-height:99px;}
+.orderandpay .paging .prev {margin-right:7px;background:url(../../images/new/cs_icon_prev_off.png) no-repeat center center;background-size:10px 17px;}
+.orderandpay .paging .next {margin-left:7px;background:url(../../images/new/cs_icon_next_on.png) no-repeat center center;background-size:10px 17px;}
+.orderandpay .paging ul {display:inline;}
+.orderandpay .paging ul li {display:inline;margin:0;}
+.orderandpay .paging ul li a {width: 24px;height: 24px;border:0 none;border-radius:0;text-align:center;font-size:13px;font-weight:400;color:#000;line-height: 28px;font-family: 'font_gs';}
+.orderandpay .paging ul li a.active {color: #fff;background: #000;border-radius: 12px;font-weight: 700;}
+
+/* 고객센터 새창 팝업 */
+.orderandpay .layer_title {font-size:20px;font-weight: 700;padding: 20px 0;text-align: center;}
+.orderandpay .layer_title h1 {font-size:inherit;font-weight: inherit;display: block; width: 70%;margin: 0 auto; text-overflow: ellipsis; overflow: hidden; white-space:nowrap;}
+.orderandpay .layer_contents .accordion > li > a {padding: 25px 45px 25px 20px; font-size:13px; font-weight: 500; color:#000; overflow: hidden; text-overflow:ellipsis;white-space:nowrap; background:url(../../images/new/icon_cs_layer.png) no-repeat center right 20px;background-size:10px 5px;}
+.orderandpay .layer_contents .accordion > li > a.on {background:url(../../images/new/icon_cs_layer_on.png) no-repeat center right 20px; background-size:10px 5px;}
+.orderandpay .layer_contents .text {color:#777; font-size: 11px; font-weight:400; padding-left: 20px;}
+.orderandpay .layer_contents .btn_cls {width:17px; height:17px; font-size: 0; padding:10px; position:absolute; top: 12px;right: 2px; background:url(../../images/new/layer_cs_icon_close.png) no-repeat center center;background-size:17px 17px;}
+
+.orderandpay.positionTop {position:relative;}
+.orderandpay.positionTop .customer {padding:0;}
 
 @media screen and (max-width: 360px) {
 
