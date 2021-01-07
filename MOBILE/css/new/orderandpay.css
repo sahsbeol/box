@@ -162,7 +162,7 @@
 .orderandpay .choice_wrap.type_box .choice_wrap_inner:first-child input[type="radio"] + label {}
 
 .orderandpay .choice_wrap.type_box input[type="checkbox"] + label,
-.orderandpay .choice_wrap.type_box input[type="radio"] + label {display: block;border-left:1px #DBDBDB solid; border-top:1px #DBDBDB solid; border-bottom:1px #DBDBDB solid; padding: 15px 0 16px;text-align: center;margin-left: 0px;}
+.orderandpay .choice_wrap.type_box input[type="radio"] + label {display: block;border-left:1px #DBDBDB solid;border-right:1px #DBDBDB solid; border-top:1px #DBDBDB solid; border-bottom:1px #DBDBDB solid; padding: 15px 0 16px;text-align: center;margin-left: 0px;}
 .orderandpay .choice_wrap.type_box input[type="checkbox"] + label:before,
 .orderandpay .choice_wrap.type_box input[type="radio"] + label:before {content: ' ';display: inline-block; border:0; width: 12px;height: 9px;line-height: normal;margin: -2px 6px 0 0;text-align: center;vertical-align: middle;background: url(../../images/new/icon_order_check_off.png) no-repeat center center;background-size:12px 9px; box-sizing: border-box;} 
 
@@ -528,7 +528,7 @@
 
 	.orderandpay .tab_layer .last_check span {/* font-size: 11px; */}
 
-	.orderandpay .inner_float .input_wrap {width: calc(33% - 10.6px);}
+	.orderandpay .inner_float .input_wrap {width: calc(33% - 11px);}
 
 	.orderandpay .select_wrap select,
 	.orderandpay .input_wrap select {/* font-size: 11px; */padding-right: 15px;background-position: center right 5px;}
