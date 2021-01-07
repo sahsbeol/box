@@ -123,7 +123,12 @@
 /* 제휴 포인트 */ 
 .orderandpay .point_list:after {content: ''; display: block; clear: both;}
 .orderandpay .point_list li {float: left; width:50%;}
-.orderandpay .point_list li .link {display: block; width:100%;}
+.orderandpay .point_list li .link {display: block; width:100%; position: relative; text-align: center;}
+.orderandpay .point_list li .link.gs img{ display: block; height: 33px; margin: 0 auto;}
+.orderandpay .point_list li .link.lp img{ display: block; height: 39px; margin: 0 auto;}
+.orderandpay .point_list li .link.ok img{ display: block; height: 33px; margin: 0 auto;}
+.orderandpay .point_list li .link input[type="checkbox"] + label:before,
+.orderandpay .point_list li .link input[type="radio"] + label:before {position:absolute; top:0; right:0; margin: 0;}
 
 /* radio , checkbox 원형 */
 .orderandpay .choice_wrap .choice_wrap_inner {font-size:14px;font-weight: 500;}
@@ -173,7 +178,7 @@
 
 
 .orderandpay .choice_wrap.type_box input[type="checkbox"]:checked + label:after,
- .orderandpay .choice_wrap.type_box input[type="radio"]:checked + label:after {content: '';display: block;width:1px;height:100%;position: absolute;top:0;right: 0px;background: #000;z-index: 1;}
+ .orderandpay .choice_wrap.type_box input[type="radio"]:checked + label:after {content: '';display: block;width:1px;height: 103%;position: absolute;top: -1px;right: -1px;background: #000;z-index: 1;}
 
 /* input 기본형 */
 .orderandpay .input_wrap {display: block;}
@@ -505,8 +510,8 @@
 	.orderandpay .choice_wrap input[type="checkbox"] + label,
 	.orderandpay .choice_wrap input[type=radio]+ label {font-size: 12px;/* letter-spacing: -1px; */}
 	.orderandpay .select_wrap select,
-	.orderandpay .input_wrap select {font-size: 11px;padding-right: 15px;background-position: center right 5px;}
-	.orderandpay .select_wrap select, .orderandpay .input_wrap select {padding-top: 12px;padding-bottom: 11px;}
+	.orderandpay .input_wrap select {font-size: 12px;padding-right: 15px;background-position: center right 5px;}
+	.orderandpay .select_wrap select, .orderandpay .input_wrap select {padding-top: 12px;padding-bottom: 12px;}
 	.orderandpay .input_wrap input::placeholder{text-align: left; font-size: 12px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{text-align: left; font-size: 12px;}
 
@@ -520,11 +525,14 @@
 	.orderandpay .choice_wrap input[type="checkbox"] + label,
 	.orderandpay .choice_wrap input[type=radio]+ label {/* font-size: 11px; *//* letter-spacing: -1px; */}
 
+	.orderandpay .choice_wrap.between_space input[type="checkbox"] + label,
+	.orderandpay .choice_wrap.between_space input[type=radio]+ label {font-size: 11px;}
+
 	.orderandpay .choice_wrap input[type="checkbox"] + label:before,
 	.orderandpay .choice_wrap input[type="radio"] + label:before,
 
 	.orderandpay .choice_wrap.type_squre input[type="checkbox"] + label:before,
-	.orderandpay .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:1px;}
+	.orderandpay .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:3px;}
 
 	.orderandpay .tab_layer .last_check span {/* font-size: 11px; */}
 
