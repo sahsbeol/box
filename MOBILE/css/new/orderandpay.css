@@ -231,13 +231,11 @@
 
 
 /* 이메일 */
-.orderandpay .inner_float_dot .input_wrap {float: left;margin-left: 0px;line-height: 44px;width: calc(48% - 6px);text-align: center;}
+.orderandpay .inner_float_dot .input_wrap {float: left;margin-left: 0px;line-height: 40px;width: calc(48% - 6px);text-align: center;}
 .orderandpay .inner_float_dot .input_wrap:first-child {margin-left: 0;}
 .orderandpay .inner_float_dot .input_wrap._last {margin-left:10px;}
 .orderandpay .inner_float_dot .input_wrap.inner_dot {width: calc(4% - -12px);}
 .orderandpay .inner_float_dot .input_wrap.right {float: right;}
-
-.orderandpay .inner_float_dot .select_wrap {float: none; margin-top: 10px;}
 
 
 
@@ -614,7 +612,7 @@
 	.orderandpay .choice_wrap input[type="checkbox"] + label,
 	.orderandpay .choice_wrap input[type=radio]+ label {font-size: 12px;/* letter-spacing: -1px; */}
 	.orderandpay .table_wrap .select_wrap select,
-	.orderandpay .table_wrap .input_wrap select { font-size: 11px;  padding-right: 15px;background-position: center right 5px;}
+	.orderandpay .table_wrap .input_wrap select { font-size: 11px; padding-top: 13px; padding-bottom: 13px; padding-right: 15px;background-position: center right 5px;}
 	.orderandpay .select_wrap select, .orderandpay .input_wrap select {padding-top: 12px;padding-bottom: 12px;}
 	.orderandpay .input_wrap input::placeholder{text-align: left; font-size: 12px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{text-align: left; font-size: 12px;}
@@ -643,7 +641,7 @@
 	.orderandpay .inner_float .input_wrap {width: calc(33% - 11px);}
 
 	
-	.orderandpay .input_wrap input {/*font-size: 11px;*/padding-right: 3px;padding-left: 3px;padding-top: 12px;padding-bottom: 13px;}
+	.orderandpay .input_wrap input {/*font-size: 11px;*/padding-right: 3px;padding-left: 3px;padding-top: 12px;padding-bottom: 12px;}
 	.orderandpay .input_wrap input::placeholder{font-size: 11px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{font-size: 11px;}
 

@@ -34,7 +34,8 @@
             $('#slideToggle_a').slideToggle();
             $("p[name='toggle-control']").toggle();
             if ($("#hid_order").css("display") == "none") {
-                jQuery('#hid_order').show();             
+                jQuery('#hid_order').show();        
+                $("html, body").animate( { scrollTop: "0" })      
             } else {
                 jQuery('#hid_order').hide();
                 $("html, body").animate( { scrollTop: "0" })   
