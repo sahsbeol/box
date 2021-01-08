@@ -455,7 +455,7 @@
 /* 쿠폰 팝업 */
 .orderandpay .coupon_list_wrap {}
 .orderandpay .coupon_list_wrap .text_list {padding:20px;}
-.orderandpay .coupon_list_wrap .text_list li{ font-size: 12px; line-height: 1.8; font-weight: 500; margin-top:40px;}
+.orderandpay .coupon_list_wrap .text_list li{ font-size: 12px; line-height: 1.8; font-weight: 500;}
 .orderandpay .coupon_list_wrap .text_list li:first-child {margin-top:0;}
 
 
