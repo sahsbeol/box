@@ -67,8 +67,7 @@
 .orderandpay .have_inner_txt .choice_wrap_inner {}
 
 /* 양쪽으로 나눠 질때 */
-.orderandpay .choice_wrap.between_space .choice_wrap_inner{float: right;}
-.orderandpay .choice_wrap.between_space .choice_wrap_inner:first-child {float: left;}
+
 
 /* text */
 .orderandpay .order_txt {font-size: 16px;font-weight: 400;color:#000;}
@@ -270,12 +269,15 @@
 
 /* 주문 상품 */
 .orderandpay .tit01 {/*font-size: 16px; font-weight: 400; color:#000;*/margin-top: 35px;}
-.orderandpay .text_show {font-size: 18px;text-align: center;border:1px #DBDBDB solid;border-radius: 30px;padding: 20px 94px;display: inline-block;}
+.orderandpay .text_show {font-size: 13px;text-align: center;border:1px #DBDBDB solid;border-radius: 52px;padding: 17px 0; width:100%; position: relative;}
 .orderandpay .text_show_wrap {margin-top:40px; text-align: center;}
+.orderandpay .bg_arrowdown {background: url(../../images/new/icon_arrow2.png) no-repeat center center;width: 10px;height: 6px;background-size: contain;margin-left: 8px;margin-top: 8px;display: block;float: right;}
+.orderandpay .bg_arrowup {background: url(../../images/new/icon_arrow2_active.png) no-repeat center center;width: 10px;height: 6px; background-size: contain;margin-left: 8px;margin-top: 7px;display: block;float: right}
+
 
 .orderandpay .help_box_wrap {background: #FAFAFA;padding: 8px 20px; margin-top: 40px;}
-.orderandpay .help_box_wrap .text_list li {font-size: 13px;font-weight:400;color:#777777;position: relative;padding-left: 10px;margin: 12px 0;}
-.orderandpay .help_box_wrap .text_list li:before {content: '';display: block;width:5px;height:1px;background: #777777;position: absolute;left: 0;top: 6px;}
+.orderandpay .help_box_wrap .text_list li {font-size: 13px;font-weight:400;color:#313131;position: relative;padding-left: 10px;margin: 12px 0;}
+.orderandpay .help_box_wrap .text_list li:before {content: '';display: block;width:5px;height:1px;background: #777777;position: absolute;left: 0;top: 9px;}
 
 
 
@@ -394,11 +396,11 @@
 
 /* 레이어 팝업 */
 .orderandpay .tooltip_wrap {display:block;background: #fff;z-index: 1;border-radius: 24px; padding:20px;}
-.orderandpay .tooltip_wrap .tooltip_tit {font-size: 13px;font-weight: 700;padding-bottom: 10px;text-align: center;}
+.orderandpay .tooltip_wrap .tooltip_tit {font-size: 13px;font-weight: 700;padding-bottom: 10px;text-align: left;}
 .orderandpay .tooltip_wrap .tooltip_list li,
-.orderandpay .tooltip_wrap .tooltip_inner .texts {font-size: 10px;font-weight: 400;}
-.orderandpay .tooltip_wrap .tooltip_list li {position: relative;padding-left: 5px;}
-.orderandpay .tooltip_wrap .tooltip_list li:before {content: '';display: block;width: 2px;height:2px;background: #000;position: absolute;top: 7px;left:0;}
+.orderandpay .tooltip_wrap .tooltip_inner .texts {font-size: 13px;font-weight: 400;}
+.orderandpay .tooltip_wrap .tooltip_list li {position: relative;padding-left: 7px;}
+.orderandpay .tooltip_wrap .tooltip_list li:before {content: '';display: block;width: 2px;height:2px;background: #000;position: absolute;top: 9px;left:0;}
 .orderandpay .tooltip_wrap .tooltip_inner .texts {line-height: 1.5em; margin-top: 10px;}
 
 .orderandpay.positionTop .btn_cls {width:17px; height:17px; font-size: 0; padding:10px; position:absolute; top: 12px;right: 2px; background:url(../../images/new/layer_cs_icon_close.png) no-repeat center center;background-size:17px 17px;}
@@ -454,7 +456,8 @@
 
 /* 쿠폰 팝업 */
 .orderandpay .coupon_list_wrap {}
-.orderandpay .coupon_list_wrap .text_list li{ font-size: 13px; line-height: 1.8; font-weight: 500; margin-top:16px;}
+.orderandpay .coupon_list_wrap .text_list {padding:20px;}
+.orderandpay .coupon_list_wrap .text_list li{ font-size: 12px; line-height: 1.8; font-weight: 500; margin-top:40px;}
 .orderandpay .coupon_list_wrap .text_list li:first-child {margin-top:0;}
 
 
@@ -468,21 +471,34 @@
 
 .orderandpay .color_02 {color:#419BF9 !important;}
 
+/* 쿠폰 리스트 , 주문서 사용 */
+.orderandpay .coupon_list { position: relative;}
+.orderandpay .coupon_list .coupon_product {/* margin-top:28px; */padding-top: 28px;}
+.orderandpay .coupon_list .coupon_product .product_name {font-size: 13px; font-weight: 700;}
+.orderandpay .coupon_list .coupon_product .price {font-size: 14px; font-weight: 400; margin-top:5px;}
+.orderandpay .coupon_list .coupon_product .price .only_english { font-weight: 500;}
 
-.orderandpay .coupon_list_wrap .coupon_list {}
-.orderandpay .coupon_list_wrap .coupon_list .coupon_product {/* margin-top:28px; */padding-top: 28px; position: relative;}
-.orderandpay .coupon_list_wrap .coupon_list .coupon_product .product_name {font-size: 13px; font-weight: 700;}
-.orderandpay .coupon_list_wrap .coupon_list .coupon_product .price {font-size: 14px; font-weight: 400; margin-top:5px;}
-.orderandpay .coupon_list_wrap .coupon_list .coupon_product .price .only_english { font-weight: 500;}
-
-.orderandpay .coupon_list_wrap .coupon_list .coupon_name {font-size:13px;font-weight:500;  padding:12px 0;}
-.orderandpay .coupon_list_wrap .coupon_list .coupon_name:after {content: ''; display: block; clear: both;}
-.orderandpay .coupon_list_wrap .coupon_list .alert_coupon_text {font-size: 11px; color:#419BF9; margin-top: 12px;}
-.orderandpay .coupon_list_wrap .coupon_list .img {width:44px; height: 44px; border:1px #DBDBDB solid; position: absolute; top:28px; right: 0; box-sizing: border-box;}
-.orderandpay .coupon_list_wrap .coupon_list .img img {width:100%; height: 100%; display: block;}
+.orderandpay .coupon_list .coupon_name {font-size:13px;font-weight:500;  padding:12px 0;}
+.orderandpay .coupon_list .coupon_name:after {content: ''; display: block; clear: both;}
+.orderandpay .coupon_list .alert_coupon_text {font-size: 11px; color:#419BF9; margin-top: 12px;}
+.orderandpay .coupon_list .img {width:44px; height: 44px; border:1px #DBDBDB solid; position: absolute; top:28px; right: 0; box-sizing: border-box;}
+.orderandpay .coupon_list .img img {width:100%; height: 100%; display: block;}
 
 .orderandpay .free_order_wrap {padding-top: 16px;}
 .orderandpay .free_order_wrap .coupon_list {border-top:1px #DBDBDB solid;}
+
+/* 주문서 */
+.orderandpay .orderpaper_list li {border-bottom: 1px #777777 solid;}
+.orderandpay .orderpaper_list .coupon_list {padding-right:90px;}
+.orderandpay .orderpaper_list .coupon_list .coupon_product {padding-top:24px; padding-bottom: 20px}
+.orderandpay .orderpaper_list .coupon_list .option {font-size: 13px; font-weight:400; color:#777; margin-top:20px;}
+.orderandpay .orderpaper_list .coupon_list .img {width:80px; height:80px;}
+.orderandpay .orderpaper_list .coupon_list .bar {position: relative; padding-left:12px;}
+.orderandpay .orderpaper_list .coupon_list .bar:before {content: '';display: block;width:1px;height:13px;background: #000;position: absolute;top: 5px;left: 3px;}
+.orderandpay .all_product_price_wrap {margin-top:20px;}
+.orderandpay .all_product_price_wrap:after {content: ''; display: block; clear: both;}
+.orderandpay .all_product_price_wrap .all_product_sum_left {font-size: 14px; font-weight: 700; float: left;}
+.orderandpay .all_product_price_wrap .all_product_sum_right {font-size: 14px; font-weight: 700; float: right;}
 
 /* 쿠폰들 */
 .orderandpay .coupon_list_wrap .choice_wrap.have_inner_txt {padding-top:0;}
@@ -525,10 +541,19 @@
 .orderandpay .count_wrap .input_txt {float: left;    width: 39px !important;    padding: 5px 4px 6px 5px;    border-left: 0;    border-right: 0;}
 
 /* 최근 배송지 주소 */
-.orderandpay .last_address_list li {border:1px #f00 solid;}
+
+.orderandpay .last_address_list li {padding: 24px 0; border-bottom:1px #DBDBDB solid;}
+.orderandpay .last_address_list li:first-child {padding-top:0;}
 .orderandpay .last_address_list li .choice_wrap input[type="checkbox"] + label, 
-.orderandpay .last_address_list li .choice_wrap input[type="radio"] + label{width:100%; display: block; text-align: right;}
-.orderandpay .last_address_list li div[class="last_address"]
+.orderandpay .last_address_list li .choice_wrap input[type="radio"] + label{width:100%; display: block; text-align: right; position: relative;}
+.orderandpay .last_address_list li .choice_wrap input[type="checkbox"] + label:before, 
+.orderandpay .last_address_list li .choice_wrap input[type="radio"] + label:before {position: absolute; top:0; right:0; margin:0;}
+.orderandpay .last_address_list li div[class*="last_address"] {text-align:left;}
+.orderandpay .last_address_list .last_address_name {font-size: 16px; font-weight: 700; color:#000000;}
+.orderandpay .last_address_list .last_address_phone {font-size: 12px; font-weight: 500; color:#777777; margin-top: 6px;}
+.orderandpay .last_address_list .last_address {font-size: 14px; font-weight: 400; color: #313131; margin-top: 10px; padding-right: 55px;}
+.orderandpay .last_address_wrap .alert_txt {position: relative;padding-left: 21px;margin-top: 16px;}
+.orderandpay .last_address_wrap .alert_txt:before {content: '';display: block;width:16px;height:16px;border:1px #999999 solid;border-radius: 8px;background:url(../../images/new/icon_exclamation.png) no-repeat center center;background-size: 3px 15px;position: absolute;top: 2px;left: 0;box-sizing: border-box;}
 
 
 /* 고객 센터 */
@@ -588,8 +613,8 @@
 	.orderandpay .user_info_wrap .have_inner_txt .i_small_txt,
 	.orderandpay .choice_wrap input[type="checkbox"] + label,
 	.orderandpay .choice_wrap input[type=radio]+ label {font-size: 12px;/* letter-spacing: -1px; */}
-	/*.orderandpay .select_wrap select,
-	.orderandpay .input_wrap select {font-size: 12px;padding-right: 15px;background-position: center right 5px;}*/
+	.orderandpay .table_wrap .select_wrap select,
+	.orderandpay .table_wrap .input_wrap select { font-size: 11px;  padding-right: 15px;background-position: center right 5px;}
 	.orderandpay .select_wrap select, .orderandpay .input_wrap select {padding-top: 12px;padding-bottom: 12px;}
 	.orderandpay .input_wrap input::placeholder{text-align: left; font-size: 12px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{text-align: left; font-size: 12px;}
@@ -617,8 +642,7 @@
 
 	.orderandpay .inner_float .input_wrap {width: calc(33% - 11px);}
 
-	.orderandpay .select_wrap select,
-	.orderandpay .input_wrap select {/* font-size: 11px; *//*padding-right: 15px;background-position: center right 5px;*/}
+	
 	.orderandpay .input_wrap input {/*font-size: 11px;*/padding-right: 3px;padding-left: 3px;padding-top: 12px;padding-bottom: 13px;}
 	.orderandpay .input_wrap input::placeholder{font-size: 11px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{font-size: 11px;}
