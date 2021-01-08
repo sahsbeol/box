@@ -34,7 +34,7 @@
 	    <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
 	      <!-- 서브 -->
 	      <div class="sub_wrap">
-	       	<h2 class="head_title">안심번호 서비스 안내</h2>
+	       	<h2 class="head_title">GS&amp;POINT</h2>
             <a href="javascript:;" class="btn_cls">닫기</a>
 	      </div>
 	      <!--// 서브 --> 
@@ -42,119 +42,73 @@
 	  </div>
 	<!-- //#header -->
 
-	<style>
-		
-		
-	</style>
-
-
-    <!-- 201222 S : 작업부분 id="content" class="orderandpay" 넣어주세요-->
 	<!-- content -->
 	<div id="content" class="orderandpay">
 
-		<div class="coupon_list_wrap">
-			<ul class="text_list">
-	            <li>상품 쿠폰과 주문금액 쿠폰은 중복으로 사용이 불가능합니다.<br><span class="color">(무료배송 쿠폰은 가능합니다.)</span></li>
-	            <li>주문 취소/반품을 하시게 되면 적용된 쿠폰은 환원이 되지 않습니다. <br> 유념해주시기 바랍니다.</li>
-	            <li>무료배송 쿠폰은 국내 배송 상품만 사용 가능하며, 착불 상품 및 도선료는 해당되지 않습니다.</li>
-	        </ul>
-	        <div>
-	        	<p class="coupon_alert ">
-	        		적용 가능한 상품 쿠폰이 총 <span class="point02"> 2</span>장 있습니다.
-	        	</p>
-
-	            <dl class="coupon_list">
-	            	<dt class="coupon_product">웍스 S스케줄러 1년 라임그린 미디에스</dt>
-	            	<dd class="coupon_name">
-	            		<div class="choice_wrap have_inner_txt inner_float">
-                            <span class="input_wrap">
-                                쿠폰 선택
-                            </span>  
-                            <span class="select_wrap right">
-                                <select name="" id="" class="">
-                                    <option value="">선택</option>
-                                </select>
-                            </span>                                      
+		<div class="pull_box sorts">
+			<dl class="point_lookup_wrap">
+				<dt>GS 아이디</dt>
+				<dd>
+					<div class="input_wrap">
+                        <input type="text" placeholder="" class="width_name">
+                    </div>
+				</dd>
+			</dl>
+			<dl class="point_lookup_wrap space">
+				<dt>비밀번호</dt>
+				<dd>
+					<div class="have_inner_txt inner_float">                                                  
+                        <span class="input_wrap">
+                            <input type="password" placeholder="" class="width_point">
+                        </span>
+                        <a href="javascript:;" class="btn_defalut squre">모두 사용</a>                                      
+                    </div>
+				</dd>
+			</dl>
+			<dl class="all_point_lookup_wrap space">
+				<dt>총 보유포인트</dt>
+				<dd class="only_english">
+					<span>0</span><span>P</span>
+				</dd>
+			</dl>
+			<dl class="point_lookup_wrap space">
+				<dt class="float_wrap">
+					<div class="f_l">사용포인트</div>
+					<div class="f_r">						
+	                    <span class="choice_wrap have_inner_txt between_space">
+	                        <span class="choice_wrap_inner">
+	                            <input type="radio" name="orderInfo2" id="orderInfo_102" value="Y">
+	                            <label for="orderInfo_102">포인트 전체 사용</label>
+	                        </span>
+	                    </span>
+					</div>
+				</dt>
+				<dd>
+					<div class="input_wrap">
+                        <input type="text" placeholder="" class="width_name">
+                    </div>
+                    <div class="choice_wrap type_squre have_inner_txt margin_set_top">
+                        <div class="choice_wrap_inner">
+                            <input type="radio" name="orderInfo1" id="orderInfo_101" value="Y">
+                            <label for="orderInfo_101">GS&amp;POINT 적립 신청하기</label>
                         </div>
-	            	</dd>
-	            </dl>
-	        </div>
-
-	        <div>
-	        	<p class="coupon_alert ">
-	        		적용 가능한 주문금액 쿠폰이 총 <span class="point02"> 2</span>장 있습니다.
-	        	</p>
-	            <dl class="coupon_list">
-	            	<dt class="coupon_product">신규회원 10,000원</dt>
-	            	<dd class="coupon_name">
-	            		<div>
-                            <div class="choice_wrap have_inner_txt inner_float">                                    	
-                                <div class="choice_wrap_inner defalut">
-                                    <div class="choice_inner_set">
-                                        <input type="checkbox" name="orderInfo2" id="orderInfo_21" value="Y">
-                                        <label for="orderInfo_21">
-                                        	<span>쿠폰금액</span>
-                                        	<span class="point02 bold">10,000</span>
-                                        	<span>원</span>
-                                        	<span class="color">(적용기준 60,000원 이상 구매)</span>
-                                        	<p class="term"><span>사용기간</span><span>2020-11-11 ~ 2020-12-11</span></p>
-                                        </label>
-                                    </div>
-                                </div>  
-                            </div>
-	            		</div>
-	            	</dd>
-	            </dl>
-	        </div>
-
-	        <div>
-	        	<p class="coupon_alert ">무료배송 쿠폰</p>
-	            <dl class="coupon_list">
-	            	<dt class="coupon_product">씨앤씨코리아(주)/인터넷</dt>
-	            	<dd class="coupon_name">
-	            		<div class="choice_wrap have_inner_txt inner_float">
-                            <span class="input_wrap">
-                                무료배송 기준
-                            </span>  
-                            <span class="input_wrap right">
-                                50,000원 이상
-                            </span>                                      
-                        </div>
-	            	</dd>
-	            	<dd class="coupon_name">
-	            		<div class="choice_wrap have_inner_txt inner_float">
-                            <span class="input_wrap">
-                                배송비
-                            </span>  
-                            <span class="input_wrap right">
-                                2,500원
-                            </span>                                      
-                        </div>
-	            	</dd>
-	            	<dd class="coupon_name">
-	            		<div class="choice_wrap have_inner_txt inner_float">
-                            <span class="input_wrap">
-                                쿠폰 선택
-                            </span>  
-                            <span class="select_wrap right">
-                                <select name="" id="" class="">
-                                    <option value="">선택</option>
-                                </select>
-                            </span>                                      
-                        </div>
-	            	</dd>
-	            </dl>
-	        </div>
-	        <div class="coupon_sum">
-        		<span class="coupon_sum_left">총 쿠폰 할인금액 :</span>
-        		<span class="coupon_sum_right">
-        			<span class="point02">10,000</span>
-        			<span>원</span>
-        		</span>
-        	</div>
-        	<div class="btn_type_wrap distance">
-	            <a href="javascript:;" class="btn_basic">쿠폰 적용</a>
-	        </div>
+                    </div>
+				</dd>
+			</dl>
+			<div class="list_wrap_space">
+				<ul class="point_explain_list">
+					<li>- GS &amp; POINT는 1,000원 이상부터 10원 단위로 사용 가능합니다.</li>
+					<li>- GS &amp; POINT 사용, 적립을 위해 GS&amp;POINT 아이디와 비밀번호를 정확히 입력해주세요.</li>
+					<li>- GS &amp; POINT 비밀번호를 분실한 경우 ‘GS &amp; POINT 홈페이지 &gt; 비밀번호 찾기’에서 확인할 수 있습니다.</li>
+				</ul>
+				<div class="float_wrap margin_set_top_double">
+					<a href="javascript:;" class="gotopage_icon_arrow ">GS&POINT 홈페이지 바로가기</a>
+				</div>
+			</div>
+			<div class="btn_bottom_box">
+		        <a href="/m/help/listNotice">취소</a>
+		        <a href="/m/help/listEventPrize" class="active">확인</a>
+		    </div>
 		</div>
 		
 	</div>
