@@ -641,7 +641,7 @@
 	.orderandpay .inner_float .input_wrap {width: calc(33% - 11px);}
 
 	
-	.orderandpay .input_wrap input {/*font-size: 11px;*/padding-right: 3px;padding-left: 3px;padding-top: 12px;padding-bottom: 12px;}
+	.orderandpay .input_wrap input {/*font-size: 11px;*/padding-right: 3px;padding-left: 3px;}
 	.orderandpay .input_wrap input::placeholder{font-size: 11px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{font-size: 11px;}
 
