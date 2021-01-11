@@ -84,7 +84,7 @@
         url(../../font/GmarketSansLight.woff2) format("woff2");
     unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
   }
-  
+
   @font-face {
     font-family: NS;
     font-style: normal;
@@ -140,9 +140,88 @@
 
 .search_modi #content {padding:0; min-height:auto;}
 .search_modi .search_wrap {}
-.search_modi .search_result_list {margin-top:7px; margin-left:20px;}
-.search_modi .search_result_list li .link {font-size: 14px; font-weight: 500; padding:7px 10px; display: block;}
-.search_modi .search_result_list li .link span {font-size: inherit; font-weight: inherit;word-break: break-word;}
+.search_modi .search_result_list {margin-top:7px; margin-left:30px;margin-right: 20px;}
+/* .search_modi .search_result_list li .link {font-size: 14px; font-weight: 500; padding:7px 10px; display: block;}
+.search_modi .search_result_list li .link span {font-size: inherit; font-weight: inherit;word-break: break-word;} */
 .search_modi .search_result_list li .link span.point02 {color:#DA2128;}
 
+.search_modi .search_result_list li .link {
+  font-size: 14px;
+  width: 100%;
+  font-weight: 500;
+  padding:16px 0;
+  border-bottom:1px #eee solid;
+}
+.search_modi .search_result_list li .link > div {
+  float: left;
+  min-height: 48px;
+  width:calc(100% - 55px);
+}
+.search_modi .search_result_list li .link > div:last-child {
+  float: right;
+}
+.search_modi .search_result_list li .link > .thum{
+  width: 48px;
+  height: 48px;
+  border:1px #DBDBDB solid;
+  box-sizing: border-box;
+}
+.search_modi .search_result_list li .link > .thum img{
+  width: 100%;
+}
+.search_modi .search_result_list li .link:after {content:''; display: block; clear: both;}
+.search_modi .search_result_list li .link > div p{
+  line-height: 1.3;
+}
+.search_modi .search_result_list li .link > div p.price{
+  margin-top:8px;
+}
+/* 검색실패 */
+.fail_search{
+  padding:20px 30px;
+  width:100%;
+  margin:0 auto;
+  margin-top: 10px;
+}
+.fail_search .fail_search_tit{
+  font-size: 20px;
+  color: #419BF9;
+  font-weight: 400;
+  line-height: 1.6;
+  padding-left:34px;
+  background: url(../../images/biz/common/icon_none02.png) 0 50% no-repeat;
+  background-size: 28px;
+}
+.fail_search .text_list{margin-left: 60px;}
+.fail_search .text_list li {font-size: 13px;font-weight:400;color:#777777;position: relative;padding-left: 10px;margin: 12px 0;}
+.fail_search .text_list li:before {content: '';display: block;width:5px;height:1px;background: #777777;position: absolute;left: 0;top: 6px;}
+/* 연관키워드 */
+.about_search .search_tit{
+  font-weight: 600 !important;
+}
+.about_search .with_word{
+  width: 100%;
+  padding:0 30px;
+  margin-top: 0px;
+  overflow: hidden;
+}
+.about_search .with_word li{
+  width:calc(50% - 34px);
+  float: left;
+  border-radius: 20px;
+  border:1px #FFA18A solid;
+  text-align: center;
+  line-height: 40px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.about_search .with_word li:nth-child(2n){
+  margin-right: 0px;
+}
+.about_search .with_word:after{
+  content: "";
+  clear: both;
+}
 .search_modi .cont01 .swiper-wrapper {margin-bottom: 30px;}
