@@ -41,7 +41,7 @@
 			}
 		})
 
-		// 키워드
+		// 키워드 
 		$("input[name='searchTerm']").on("change keyup paste", function(){
 			$('.form_search_list_wrap').addClass('active');
 		});
@@ -50,14 +50,14 @@
 		});
 
 		// 인기검색어 슬라이드
-		$('.popular_search_wrap .bxslider').bxSlider({
-
+		$('.popular_search_wrap .bxslider').bxSlider({					    
+		    
 		    controls:false,
 		    slideWidth:380,
 		    slideMargin:30,
 		    infiniteLoop: false,
 		    touchEnabled:false
-		});
+		}); 
 
 		// 최근검색어 슬라이드
 		$('.keyword_wrap, .popular_search_wrap').mouseover(function(){
@@ -91,7 +91,7 @@
 	            </map>
 	            <!-- 화이트 버튼 white로 / 블랙 버튼 black로 클래스 추가 -->
 	            <a href="#none" class="btn_close black">닫기</a>
-            </div>
+            </div>				
 		</div>
 	</div>
 
@@ -139,63 +139,21 @@
 					<!-- 201221 키워드 S -->
 					<div class="form_search_list_wrap">
 						<ul class="form_search_list">
-							<li class="items">
-								<a href="javascript:;" class="link">
-									<div>
-										<p><span>[디자인문구 | 필기구]</span> <span class="point02">라미</span> <span>그라파이어 리뉴얼	대한민국 & 독일 수교 20주년 한정판</span></p>
-										<p class="price">25,000원</p>
-									</div>
-									<div class="thum"><img src="../../images/biz/thums/img_main08.png" alt=""></div>
-								</a>
-							</li>
-							<li class="items">
-								<a href="javascript:;" class="link">
-									<div>
-										<p><span>[디자인문구 | 필기구]</span> <span class="point02">라미</span> <span>그라파이어 리뉴얼</span></p>
-										<p class="price">25,000원</p>
-									</div>
-									<div class="thum"><img src="../../images/biz/thums/img_main08.png" alt=""></div>
-								</a>
-							</li>
-							<li class="items">
-								<a href="javascript:;" class="link">
-									<div>
-										<p><span>[디자인문구 | 필기구]</span> <span class="point02">라미</span> <span>그라파이어 대한민국 & 독일 수교 20주년 한정판 리뉴얼	대한민국 & 독일 수교 20주년 한정판</span></p>
-										<p class="price">25,000원</p>
-									</div>
-									<div class="thum"><img src="../../images/biz/thums/img_main08.png" alt=""></div>
-								</a>
-							</li>
-							<li class="items">
-								<a href="javascript:;" class="link">
-									<div>
-										<p><span>[디자인문구 | 필기구]</span> <span class="point02">라미</span> <span>그라파이어 리뉴얼</span></p>
-										<p class="price">25,000원</p>
-									</div>
-									<div class="thum"><img src="../../images/biz/thums/img_main08.png" alt=""></div>
-								</a>
-							</li>
-							<li class="items">
-								<a href="javascript:;" class="link">
-									<div>
-										<p><span>[디자인문구 | 필기구]</span> <span class="point02">라미</span> <span>그라파이어 리뉴얼</span></p>
-										<p class="price">25,000원</p>
-									</div>
-									<div class="thum"><img src="../../images/biz/thums/img_main08.png" alt=""></div>
-								</a>
-							</li>
-							<div class="form_search_list_page">
-								<a href="" class="arr prev first"></a>
-								<a href="" class="active">1</a>
-								<a href="" class="">5</a>
-								<a href="" class="arr next"></a>
-							</div>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미 라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미 라미</span><span>만년필</span></a></li>
+							<li class="items"><a href="javascript:;" class="link"><span class="point02">라미</span><span>만년필</span></a></li>
 						</ul>
-
 					</div>
-
+					
 					<div class="popular_search_wrap">
-						<div class="bxslider">
+						<div class="bxslider">					
 							<div class="inner_popular_search">
 								<div class="keyword_list_v2">
 								    <h5>인기 검색어</h5>
@@ -216,7 +174,7 @@
 								        <li><a href="javascript:;" onclick="gnbSearchKerword('크리스마스카드');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">10.</em><p>크리스마스카드</p><!-- ▲ up , ▼ down : class 추가 --><span>-</span></a></li>
 								    </ul>
 								</div>
-							</div>
+							</div>			  
 							<div class="inner_popular_search">
 								<div class="keyword_list_v2">
 								    <h5>추천 검색어</h5>
@@ -275,7 +233,7 @@
 								    </div>
 								</div>
 							</div>
-						</div>
+						</div>						
 					</div>
 					<!--// 201221 키워드 E -->
 
@@ -689,36 +647,6 @@
 								<span class="icon">결과 내 재검색</span>
 							</label>
 						</div>
-						<!-- 검색결과 실패 -->
-						<div class="fail_search">
-							<h5 class="fail_search_tit mgt10">일치되는 검색결과를 찾을 수 없습니다</h5>
-							<ul class="text_list mgt20">
-								<li>
-										찾으시는 상품이 일시적으로 품절일 수 있습니다.
-								</li>
-								<li>
-										검색어의 철자가 정확한지 다시 한번 확인해 주세요.
-								</li>
-								<li>
-									 검색어의 단어수를 줄이거나, 보다 일반적인 단어로 다시 검색해 보세요.
-								</li>
-							</ul>
-						</div>
-						<div class="about_search">
-							<h5 class="search_tit mgt10">혹시, 이런 키워드는 어떠세요?</h5>
-							<ul class="with_word">
-								<li>다이어리</li>
-								<li>필통</li>
-								<li>스티커</li>
-								<li>키링</li>
-								<li>디즈니</li>
-								<li>다이어리</li>
-								<li>필통</li>
-								<li>스티커</li>
-								<li>키링</li>
-								<li>디즈니</li>
-							</ul>
-						</div>
 				    </div>
 				</div>
 
@@ -728,7 +656,7 @@
 
 					<div class="cont02 pd_unit">
 						<!-- 201221 : -->
-						<h5 class="search_tit">핫트랙스가 고객님의 검색어 연관 상품을 추천 드립니다.</h5>
+						<h5 class="search_tit">핫트랙스가 고객님의 검색어 연관 상품을 추천 드립니다.</h5>    
 
 						<div class="category_slide">
 							<ul>
@@ -874,7 +802,7 @@
 						</div>
 					</div>
 					<!--// 검색 연관 상품 -->
-
+					
 
 					<div class="search_tab">
 						<ul>
@@ -886,7 +814,7 @@
 					<!-- 201221 : S -->
                     <div class="pd_filter">
                         <p class="pd_total">
-                            <em class="font_t">13,657</em>건의 검색결과가 있습니다.
+                            <em class="font_t">13,657</em>건의 검색결과가 있습니다. 
                         </p>
                         <div class="form_select">
                             <select id="ulSorta" >
@@ -896,7 +824,7 @@
                                 <option value="HIP" >높은가격순</option>
                                 <option value="DCR" >할인율순</option>
                                 <option value="LIK" >좋아요인기순</option>
-                                <option value="RVW" >리뷰많은순</option>
+                                <option value="RVW" >리뷰많은순</option> 
                             </select>
 
                             <select id="ulSortb">
@@ -972,7 +900,7 @@
 												<li><a href="#none">가나다순</a></li>
 											</ul>
 										</div>
-										<div class="search_dp2">
+										<div class="search_dp2">											
 											<ul>
 												<li><a href="#none" class="on">키스백</a></li>
 												<li><a href="#none">꾸밈</a></li>
@@ -1042,7 +970,7 @@
 					</div>
 
 					<div class="cont03 mgt10">
-
+						
 						<!-- 상품 -->
 						<div class="pd_list">
 							<ul>

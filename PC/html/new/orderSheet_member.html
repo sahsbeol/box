@@ -117,23 +117,29 @@
                $(this).siblings('.tooltip_wrap').show();
             });
         });
-        $('.tooltip_close, .js_confirm').each(function(){
+
+        // basic 닫기 
+        $('.tooltip_close_js').each(function(){            
             $(this).click(function(){
                $(this).closest('.tooltip_wrap').hide();
             });
         });
 
-        // 레이어팝업
-        // $('.safetynumber .layer_open').click(function(){
-        //     $('.layer_pop_box').addClass('active');
-        //     $('.layer_pop_box .tooltip_wrap').addClass('active');
-        //     $('html, body').css('overflow','hidden');
-        // });
-        // $('.layer_pop_box .layer_close').click(function(){
-        //     $('.layer_pop_box').removeClass('active');
-        //     $('html, body').css('overflow','visible');
+        $('.tooltip_close').each(function(){            
+            $(this).click(function(){
+               $(this).closest('.agency_select li').find($("input:radio")).removeAttr("checked"); 
+            });
+        });
 
-        // });
+        //  최근배송지
+        $('.last_address_js').click(function(){
+            $('.tooltip_wrap.last_address').addClass('active');
+        });
+
+        $('.tooltip_wrap.last_address .tooltip_close').click(function(){
+            $('.tooltip_wrap.last_address').removeClass('active');
+            $(this).closest('.choice_wrap').find($("input:radio")).removeAttr("checked"); 
+        })
 
 });
 
@@ -310,7 +316,93 @@
                                 </span>
                                 <span class="choice_wrap_inner">
                                     <input type="radio" name="orderInfo1" id="orderInfo_12" value="N" />
-                                    <label for="orderInfo_12">최근 배송지</label>
+                                    <label for="orderInfo_12" class="last_address_js">최근 배송지</label>
+                                    <div class="tooltip_wrap last_address">
+                                        <div class="tooltip_inner">  
+                                            <p class="tooltip_tit">최근 배송지 주소</p>
+
+                                            <div class="pop_cont">
+                                               <div class="pull_box last_address_wrap">
+                                                    <ul class="last_address_list">
+                                                        <li>
+                                                            <div class="choice_wrap">
+                                                                <input type="radio" name="orderInfo000" id="orderInfo_111" value="Y">
+                                                                <label for="orderInfo_111">
+                                                                    <div class="last_address_units">
+                                                                        <span class="last_address_name">하태경</span>
+                                                                        <span class="last_address_phone only_english">010-2365-8956</span>
+                                                                    </div>
+                                                                    <div class="last_address">서울특별시 은평구 은평로 11-1 (신사동) 은평노블리안 1105호 (24582)</div>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="choice_wrap">
+                                                                <input type="radio" name="orderInfo000" id="orderInfo_112" value="Y">
+                                                                <label for="orderInfo_112">
+                                                                    <div class="last_address_units">
+                                                                        <span class="last_address_name">하태경</span>
+                                                                        <span class="last_address_phone only_english">010-2365-8956</span>
+                                                                    </div>
+                                                                    <div class="last_address">서울특별시 은평구 은평로 11-1 (신사동) 은평노블리안 1105호 (24582)</div>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="choice_wrap">
+                                                                <input type="radio" name="orderInfo000" id="orderInfo_112" value="Y">
+                                                                <label for="orderInfo_112">
+                                                                    <div class="last_address_units">
+                                                                        <span class="last_address_name">하태경</span>
+                                                                        <span class="last_address_phone only_english">010-2365-8956</span>
+                                                                    </div>
+                                                                    <div class="last_address">서울특별시 은평구 은평로 11-1 (신사동) 은평노블리안 1105호 (24582)</div>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="choice_wrap">
+                                                                <input type="radio" name="orderInfo000" id="orderInfo_112" value="Y">
+                                                                <label for="orderInfo_112">
+                                                                    <div class="last_address_units">
+                                                                        <span class="last_address_name">하태경</span>
+                                                                        <span class="last_address_phone only_english">010-2365-8956</span>
+                                                                    </div>
+                                                                    <div class="last_address">서울특별시 은평구 은평로 11-1 (신사동) 은평노블리안 1105호 (24582)</div>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="choice_wrap">
+                                                                <input type="radio" name="orderInfo000" id="orderInfo_112" value="Y">
+                                                                <label for="orderInfo_112">
+                                                                    <div class="last_address_units">
+                                                                        <span class="last_address_name">하태경</span>
+                                                                        <span class="last_address_phone only_english">010-2365-8956</span>
+                                                                    </div>
+                                                                    <div class="last_address">서울특별시 은평구 은평로 11-1 (신사동) 은평노블리안 1105호 (24582)</div>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="choice_wrap">
+                                                                <input type="radio" name="orderInfo000" id="orderInfo_113" value="Y">
+                                                                <label for="orderInfo_113">
+                                                                    <div class="last_address_units">
+                                                                        <span class="last_address_name">하태경</span>
+                                                                        <span class="last_address_phone only_english">010-2365-8956</span>
+                                                                    </div>
+                                                                    <div class="last_address">서울특별시 은평구 은평로 11-1 (신사동) 은평노블리안 1105호 (24582)</div>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <p class="alert_txt">배송지 주소 목록은 최근에 배송한 주소 지역 5개만 노출됩니다.</p>
+                                            </div> 
+                                        </div>
+                                        <a href="javascript:;" class="tooltip_close">닫기</a>
+                                    </div>
                                 </span>
                             </div>
                         </div>
@@ -357,7 +449,7 @@
                                                             <p class="texts">상품 배송완료 후 부여된 안심번호는 14일 이내에 자동으로 해지/소멸됩니다. 장기 미처리 건의 경우 안심번호 채번 후 90일 경과시 자동으로 해지/소멸됩니다. 본 서비스는 KT와 제휴하여 무료로 제공되며, 고객에게 부여된 안심번호는 해지/소멸 후 KT에서 다른 번호에 연결하여 재사용할 수 있습니다. (단, 일부 택배사의 경우 택배사 사정으로 인해 안심번호 서비스 지원이 불가할 수 있음)</p>
                                                             <p class="texts">KT 안심번호 연동 오류 등으로 인해 안심번호 체번 실패시 해당 주문 고객님께 SMS안내후 실제 휴대전화번호로 상품주문이 진행됩니다. 안심번호서비스'는 고객이 서비스 이용 동의 시에 한해 서비스 제공이 됩니다. 해외 배송 상품의 경우 안심번호 서비스 제공이 되지 않습니다. 이 점 양해바랍니다.</p>
                                                         </div>
-                                                        <a href="javascript:;" class="tooltip_close">닫기</a>
+                                                        <a href="javascript:;" class="tooltip_close tooltip_close_js">닫기</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -422,7 +514,7 @@
 
                         <div class="user_title distance have_inner_txt">
                             <p class="i_txt"><span>주문상품  : </span><span class="point02">999</span> <span>개</span></p>
-                            <p class="i_small_txt">상품수량 및 옵션변경은 <span>상품상세</span> 또는 <span>장바구니</span>에서 가능합니다.</p>
+                            <p class="i_small_txt f_r">상품수량 및 옵션변경은 <span>상품상세</span> 또는 <span>장바구니</span>에서 가능합니다.</p>
                         </div>
                         <div class="user_table_wrap">
                             <div class="order_list" id="hid_order">
@@ -431,9 +523,9 @@
                                 <caption>핫트랙스 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
                                 </caption>
                                 <colgroup>
-                                <col style="width:11%">
+                                <col style="width:15%">
                                 <col style="width:14%">
-                                <col style="width:35%">
+                                <col style="width:30%">
                                 <col style="width:10%">
                                 <col style="width:10%">
                                 <col style="width:10%">
@@ -466,7 +558,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class="t_left">
+                                    <td class="only_english">
                                         2310040795247
                                     </td>
                                     <td>
@@ -480,17 +572,17 @@
                                         </p>
                                     </td>
                                     <td>
-                                        23,400원<br>
-                                        [10%↓]
+                                        <span class="only_english">23,400</span><span>원</span><br>
+                                        <span class="only_english">[10%↓]</span>
                                     </td>
                                     <td>
-                                        1
+                                        <span class="only_english">1</span>
                                     </td>
                                     <td>
-                                        23,400원
+                                        <span class="only_english">23,400</span>원
                                     </td>
                                     <td>
-                                         0원
+                                        <span class="only_english">0</span>원
                                     </td>
                                 </tr>
                                 </tbody>
@@ -503,9 +595,9 @@
                                     <caption>핫트랙스 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
                                     </caption>
                                     <colgroup>
-                                    <col style="width:11%">
+                                    <col style="width:15%">
                                     <col style="width:14%">
-                                    <col style="width:35%">
+                                    <col style="width:30%">
                                     <col style="width:10%">
                                     <col style="width:10%">
                                     <col style="width:10%">
@@ -539,13 +631,13 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="7">
-                                             상품금액 <strong>87,400</strong>원 + 배송비 <strong>0</strong>원 = <strong class="point02">87,400</strong>원
+                                             상품금액 <span class="only_english">87,400</span>원 + 배송비 <span class="only_english">0</span>원 = <span class="point02 only_english">87,400</span>원
                                         </td>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     <tr>
-                                        <td class="t_left">
+                                        <td class="only_english">
                                             2310040795247
                                         </td>
                                         <td>
@@ -559,21 +651,21 @@
                                             </p>
                                         </td>
                                         <td>
-                                            23,400원<br>
-                                            [10%↓]
+                                            <span class="only_english">23,400</span><span>원</span><br>
+                                            <span class="only_english">[10%↓]</span>
                                         </td>
                                         <td>
-                                            1
+                                            <span class="only_english">1</span>
                                         </td>
                                         <td>
-                                            23,400원
+                                            <span class="only_english">23,400</span>원
                                         </td>
                                         <td>
-                                             0원
+                                            <span class="only_english">0</span>원
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="t_left">
+                                        <td class="only_english">
                                             8809440339266
                                         </td>
                                         <td>
@@ -584,21 +676,21 @@
                                             GOT7 MINI ALBUM
                                         </td>
                                         <td>
-                                            16,300원<br>
-                                            [18%↓]
+                                            <span class="only_english">23,400</span><span>원</span><br>
+                                            <span class="only_english">[10%↓]</span>
                                         </td>
                                         <td>
-                                            1
+                                            <span class="only_english">1</span>
                                         </td>
                                         <td>
-                                            16,300원
+                                            <span class="only_english">23,400</span>원
                                         </td>
                                         <td>
-                                             170원
+                                            <span class="only_english">0</span>원
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="t_left">
+                                        <td class="only_english">
                                             2310003345595
                                         </td>
                                         <td>
@@ -615,17 +707,17 @@
                                             </p>
                                         </td>
                                         <td>
-                                            47,700원<br>
-                                            [10%↓]
+                                            <span class="only_english">23,400</span><span>원</span><br>
+                                            <span class="only_english">[10%↓]</span>
                                         </td>
                                         <td>
-                                            1
+                                            <span class="only_english">1</span>
                                         </td>
                                         <td>
-                                            47,700원
+                                            <span class="only_english">23,400</span>원
                                         </td>
                                         <td>
-                                             480원
+                                            <span class="only_english">0</span>원
                                         </td>
                                     </tr>
                                     </tbody>
@@ -637,9 +729,9 @@
                                     <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
                                     </caption>
                                     <colgroup>
-                                    <col style="width:11%">
+                                    <col style="width:15%">
                                     <col style="width:14%">
-                                    <col style="width:35%">
+                                    <col style="width:30%">
                                     <col style="width:10%">
                                     <col style="width:10%">
                                     <col style="width:10%">
@@ -673,13 +765,13 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="7">
-                                             상품금액 <strong>156,000</strong>원 + 배송비 <strong>0</strong>원 = <strong class="point02">156,000</strong>원
+                                             상품금액 <span class="only_english">87,400</span>원 + 배송비 <span class="only_english">0</span>원 = <span class="point02 only_english">87,400</span>원
                                         </td>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     <tr>
-                                        <td class="t_left">
+                                        <td class="only_english">
                                             2310040307839
                                         </td>
                                         <td>
@@ -693,17 +785,17 @@
                                             </p>
                                         </td>
                                         <td>
-                                            156,000원<br>
-                                            [2%↓]
+                                            <span class="only_english">23,400</span><span>원</span><br>
+                                            <span class="only_english">[10%↓]</span>
                                         </td>
                                         <td>
-                                            1
+                                            <span class="only_english">1</span>
                                         </td>
                                         <td>
-                                            156,000원
+                                            <span class="only_english">23,400</span>원
                                         </td>
                                         <td>
-                                             0원
+                                            <span class="only_english">0</span>원
                                         </td>
                                     </tr>
                                     </tbody>
@@ -715,9 +807,9 @@
                                     <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
                                     </caption>
                                     <colgroup>
-                                    <col style="width:11%">
+                                    <col style="width:15%">
                                     <col style="width:14%">
-                                    <col style="width:35%">
+                                    <col style="width:30%">
                                     <col style="width:10%">
                                     <col style="width:10%">
                                     <col style="width:10%">
@@ -751,13 +843,13 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="7">
-                                             상품금액 <strong>12,200</strong>원 + 배송비 <strong>2,500</strong>원 = <strong class="point02">14,700</strong>원
+                                             상품금액 <span class="only_english">87,400</span>원 + 배송비 <span class="only_english">0</span>원 = <span class="point02 only_english">87,400</span>원
                                         </td>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     <tr>
-                                        <td class="t_left">
+                                        <td class="only_english">
                                             2310040093039
                                         </td>
                                         <td>
@@ -774,21 +866,21 @@
                                             </p>
                                         </td>
                                         <td>
-                                            5,000원<br>
-                                            [0%↓]
+                                            <span class="only_english">23,400</span><span>원</span><br>
+                                            <span class="only_english">[10%↓]</span>
                                         </td>
                                         <td>
-                                            1
+                                            <span class="only_english">1</span>
                                         </td>
                                         <td>
-                                            5,000원
+                                            <span class="only_english">23,400</span>원
                                         </td>
                                         <td>
-                                             50원
+                                            <span class="only_english">0</span>원
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="only_english">
                                             2310036611216
                                         </td>
                                         <td>
@@ -805,17 +897,17 @@
                                             </p>
                                         </td>
                                         <td>
-                                            7,200원<br>
-                                            [20%↓]
+                                            <span class="only_english">23,400</span><span>원</span><br>
+                                            <span class="only_english">[10%↓]</span>
                                         </td>
                                         <td>
-                                            1
+                                            <span class="only_english">1</span>
                                         </td>
                                         <td>
-                                            7,200원
+                                            <span class="only_english">23,400</span>원
                                         </td>
                                         <td>
-                                             80원
+                                            <span class="only_english">0</span>원
                                         </td>
                                     </tr>
                                     </tbody>
@@ -827,9 +919,9 @@
                                     <caption>업체개별 배송<span>상품코드, 상품, 상품명, 판매가, 수량, 가격, 통합포인트</span>
                                     </caption>
                                     <colgroup>
-                                    <col style="width:11%">
+                                    <col style="width:15%">
                                     <col style="width:14%">
-                                    <col style="width:35%">
+                                    <col style="width:30%">
                                     <col style="width:10%">
                                     <col style="width:10%">
                                     <col style="width:10%">
@@ -863,13 +955,13 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="7">
-                                             상품금액 <strong>8,000</strong>원 + 배송비 <strong>2,700</strong>원 = <strong class="point02">10,700</strong>원
+                                             상품금액 <span class="only_english">87,400</span>원 + 배송비 <span class="only_english">0</span>원 = <span class="point02 only_english">87,400</span>원
                                         </td>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     <tr>
-                                        <td class="t_left">
+                                        <td class="only_english">
                                             8807333795496
                                         </td>
                                         <td>
@@ -880,17 +972,17 @@
                                             웍스 S스케줄러 1년 라임그린 미디에스
                                         </td>
                                         <td>
-                                            8,000원<br>
-                                            [0%↓]
+                                            <span class="only_english">23,400</span><span>원</span><br>
+                                            <span class="only_english">[10%↓]</span>
                                         </td>
                                         <td>
-                                            1
+                                            <span class="only_english">1</span>
                                         </td>
                                         <td>
-                                            8,000원
+                                            <span class="only_english">23,400</span>원
                                         </td>
                                         <td>
-                                             80원
+                                            <span class="only_english">0</span>원
                                         </td>
                                     </tr>
                                     </tbody>
@@ -988,7 +1080,7 @@
                                                             <li class="mgt5">· 휴대폰, 신용카드 등으로 결제 시 입금 확인 시간이 소요되어 환불 처리가 다소 지연될 수 있습니다.</li>
                                                         </ul>
                                                     </div>
-                                                    <a href="javascript:;" class="tooltip_close">닫기</a>
+                                                    <a href="javascript:;" class="tooltip_close tooltip_close_js">닫기</a>
                                                 </div>
                                             </div>
                                         </th>
@@ -1032,6 +1124,63 @@
                                     gspoint
                                   </span>
                                   <span class="current"></span>
+                                  <div class="tooltip_wrap left1">
+                                    <div class="tooltip_inner">
+                                        <p class="tooltip_tit only_english bold">GS&amp;POINT</p>
+                                        <ul class="tooltip_small_list">
+                                            <li>- GS&amp;POINT는 1,000원 이상부터 10원 단위로 사용 가능합니다.</li>
+                                            <li>- GS&amp;POINT 사용, 적립을 위해 GS&POINT 아이디와 비밀번호를 정확히 입력해주세요.</li>
+                                            <li>- GS&amp;POINT 비밀번호를 분실한 경우 'GS&amp;POINT 홈페이지 &gt; 비밀번호 찾기'에서 확인할 수 있습니다.</li>
+                                        </ul>
+                                        <a href="javascript:;" class="icon_arrow_goto">GS&amp;POINT 홈페이지 바로가기</a>
+                                        <div class="pull_box sorts">
+                                            <dl class="point_lookup_wrap border_top_go">
+                                                <dt>GS 아이디</dt>
+                                                <dd>
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="" class="width_points">
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>비밀번호</dt>
+                                                <dd>
+                                                    <div class="have_inner_txt inner_float">                                                  
+                                                        <span class="input_wrap">
+                                                            <input type="password" placeholder="" class="width_point">
+                                                        </span>
+                                                        <a href="javascript:;" class="btn_defalut">조회</a>                                      
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>보유포인트</dt>
+                                                <dd class="only_english other_box">
+                                                    <span>0</span><span>P</span>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>사용포인트</dt>
+                                                <dd>
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="0p" class="width_points only_english">
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <div class="border_sum">
+                                                <div class="choice_wrap type_squre">
+                                                    <input type="checkbox" name="orderInfo999" id="orderInfo_91" value="Y">
+                                                    <label for="orderInfo_91">GS&amp;POINT 적립 신청하기</label>
+                                                </div>
+                                            </div>
+                                            <div class="btn_bottom_box">
+                                                <a href="/m/help/listNotice">취소</a>
+                                                <a href="/m/help/listEventPrize" class="active">확인</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:;" class="tooltip_close" onclick="">닫기</a>
+                                   </div>
                                 </label>
                               </li>
                               <li>
@@ -1041,6 +1190,62 @@
                                     l_point
                                   </span>
                                   <span class="current"></span>
+                                <div class="tooltip_wrap left2">
+                                    <div class="tooltip_inner">
+                                        <p class="tooltip_tit only_english bold">L.POINT</p>
+                                        <ul class="tooltip_small_list">
+                                            <li>- L.POINT는 10원 단위로 사용 가능하며 보유하고 있는 잔액 내에서 제한 없이 사용 가능합니다.</li>
+                                            <li>- L.POINT 비밀번호는 L.POINT 홈페이지에서 설정 가능하며, 5회 이상 비밀번호 입력 오류 시 새로운 비밀번호를 등록하셔야 합니다.</li>
+                                        </ul>
+                                        <a href="javascript:;" class="icon_arrow_goto">L.POINT 홈페이지 바로가기</a>
+                                        <div class="pull_box sorts">
+                                            <dl class="point_lookup_wrap border_top_go">
+                                                <dt>L.POINT 아이디</dt>
+                                                <dd>
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="" class="width_points">
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>비밀번호</dt>
+                                                <dd>
+                                                    <div class="have_inner_txt inner_float">                                                  
+                                                        <span class="input_wrap">
+                                                            <input type="password" placeholder="" class="width_point">
+                                                        </span>
+                                                        <a href="javascript:;" class="btn_defalut">조회</a>                                      
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>보유포인트</dt>
+                                                <dd class="only_english other_box">
+                                                    <span>0</span><span>P</span>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>사용포인트</dt>
+                                                <dd>
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="0p" class="width_points only_english">
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <div class="border_sum">
+                                                <div class="choice_wrap type_squre">
+                                                    <input type="checkbox" name="orderInfo999" id="orderInfo_91" value="Y">
+                                                    <label for="orderInfo_91">L.POINT 적립 신청하기</label>
+                                                </div>
+                                            </div>
+                                            <div class="btn_bottom_box">
+                                                <a href="/m/help/listNotice">취소</a>
+                                                <a href="/m/help/listEventPrize" class="active">확인</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:;" class="tooltip_close" onclick="">닫기</a>
+                                   </div>
                                 </label>
                               </li>
                               <li>
@@ -1050,6 +1255,63 @@
                                     ok_cash
                                   </span>
                                   <span class="current"></span>
+                                  <div class="tooltip_wrap left3">
+                                    <div class="tooltip_inner">
+                                        <p class="tooltip_tit only_english bold">OK캐쉬백</p>
+                                        <ul class="tooltip_small_list">
+                                            <li>- OK캐쉬백은 10원 단위로 사용이 가능하며 보유하고 있는 잔액 내에서 제한 없이 사용하실 수 있습니다.</li>
+                                            <li>- OK캐쉬백 웹회원 비밀번호는 OK캐쉬백 홈페이지에서 조회/변경이 가능합니다.</li>
+                                            <li>- 카드번호가 잘못 입력되거나 유효하지 않을 경우 OK캐쉬백 잔액 확인이 불가할 수 있습니다.</li>
+                                        </ul>
+                                        <a href="javascript:;" class="icon_arrow_goto">L.POINT 홈페이지 바로가기</a>
+                                        <div class="pull_box sorts">
+                                            <dl class="point_lookup_wrap border_top_go">
+                                                <dt>OK캐쉬백 아이디</dt>
+                                                <dd>
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="" class="width_points">
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>비밀번호</dt>
+                                                <dd>
+                                                    <div class="have_inner_txt inner_float">                                                  
+                                                        <span class="input_wrap">
+                                                            <input type="password" placeholder="" class="width_point">
+                                                        </span>
+                                                        <a href="javascript:;" class="btn_defalut">조회</a>                                      
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>보유포인트</dt>
+                                                <dd class="only_english other_box">
+                                                    <span>0</span><span>P</span>
+                                                </dd>
+                                            </dl>
+                                            <dl class="point_lookup_wrap">
+                                                <dt>사용포인트</dt>
+                                                <dd>
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="0p" class="width_points only_english">
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <div class="border_sum">
+                                                <div class="choice_wrap type_squre">
+                                                    <input type="checkbox" name="orderInfo999" id="orderInfo_91" value="Y">
+                                                    <label for="orderInfo_91">OK캐쉬백 적립 신청하기</label>
+                                                </div>
+                                            </div>
+                                            <div class="btn_bottom_box">
+                                                <a href="/m/help/listNotice">취소</a>
+                                                <a href="/m/help/listEventPrize" class="active">확인</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:;" class="tooltip_close" onclick="">닫기</a>
+                                   </div>
                                 </label>
                               </li>
                             </ul>
@@ -1487,21 +1749,7 @@
 
                 <!--// 주문결제 form : E -->
 
-                <!-- popup 레이어 안심번호 -->
-                <!-- <div class="layer_pop_box">
-                    <div class="dimed"></div>
-                    <div class="layer_pop">
-                        <div class="tooltip_wrap ">
-                            <div class="tooltip_inner">
-                                <p class="tooltip_tit">안심번호 서비스 안내</p>
-                                <p class="texts">안심번호 서비스는 상품 수취인의 개인정보인 휴대폰 번호 및 전화번호를 1회성 임시번호 (0502-XXX-XXX)로 변환하여 사용하는 서비스입니다. 판매자/택배사에게 0502 안심번호가 전달되므로 만일에 발생할 수 있는 개인정보 유출을 사전에 차단할 수 있습니다. (택배상자에 안심번호 표시)</p>
-                                <p class="texts">상품 배송완료 후 부여된 안심번호는 14일 이내에 자동으로 해지/소멸됩니다. 장기 미처리 건의 경우 안심번호 채번 후 90일 경과시 자동으로 해지/소멸됩니다. 본 서비스는 KT와 제휴하여 무료로 제공되며, 고객에게 부여된 안심번호는 해지/소멸 후 KT에서 다른 번호에 연결하여 재사용할 수 있습니다. (단, 일부 택배사의 경우 택배사 사정으로 인해 안심번호 서비스 지원이 불가할 수 있음)</p>
-                                <p class="texts">KT 안심번호 연동 오류 등으로 인해 안심번호 체번 실패시 해당 주문 고객님께 SMS안내후 실제 휴대전화번호로 상품주문이 진행됩니다. 안심번호서비스'는 고객이 서비스 이용 동의 시에 한해 서비스 제공이 됩니다. 해외 배송 상품의 경우 안심번호 서비스 제공이 되지 않습니다. 이 점 양해바랍니다.</p>
-                            </div>
-                            <a href="javascript:;" class="layer_close">닫기</a>
-                        </div>
-                    </div>
-                </div> -->
+                
             </div>
             <!-- //컨텐츠 -->
         </div>

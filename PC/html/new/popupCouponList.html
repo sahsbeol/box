@@ -33,128 +33,103 @@
             <div class="tooltip_inner">  
                 <p class="tooltip_tit">쿠폰 조회/적용</p>
 
-                <div class="pop_cont">
-                    <ul class="list_type02_v2">
+                <div class="">
+                    <ul class="list_type02_v2 mgt20">
                         <li>상품 쿠폰과 주문금액 쿠폰은 중복으로 사용이 불가능합니다. (무료 배송 쿠폰은 가능합니다.)</li>
                         <li>주문 취소/반품을 하시게 되면 적용된 쿠폰은 환원이 되지 않습니다. 유념해주시기 바랍니다.</li>
                         <li>무료 배송 쿠폰은 국내 배송 상품만 사용 가능하며, 착불 상품 및 도선료는 해당되지 않습니다.</li>
                     </ul>
                     
-                    <h2 class="tit01">적용 가능한  상품 쿠폰</span>이 총 <span>0</span> 장 있습니다.</h2>
-                    <table class="table02_v1">
-                        <colgroup>  
-                            <col width="150px" /> 
-                            <col width="*" /> 
-                            <col width="100px" />
-                            <col width="60px" />
-                            <col width="200px" /> 
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="col">상품코드</th>
-                                <th scope="col">상품명</th>
-                                <th scope="col">단가</th>
-                                <th scope="col">수량</th>
-                                <th scope="col">쿠폰</th>
-                            </tr>
-                        </thead>
-                        <tbody id="divProductCoupon">
-                            <tr>
-                                <td class="t_center">
-                                    <span>8807333795496</span>
-                                </td>
-                                <td>웍스 S스케줄러 1년 라임그린 미디에스</td>
-                                <td class="t_right">8,000 원</td>
-                                <td class="t_right">1</td>
-                                <td class="t_center choice_wrap">
-                                    <div class="select_wrap popup_list_select_width">
-                                        <select name="" id="" class="">
-                                            <option value="">선택하세요</option>
-                                            <option value="62" style="color: rgb(76, 76, 76);">웍스 S스케줄러 1년 라임그린 미디에스</option>
-                                        </select>
-                                    </div>                                      
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h2 class="tit01">적용 가능한  주문금액 쿠폰</span>이 총 <span >0</span> 장 있습니다.</h2>
-                    <table class="table02_v1">
-                        <colgroup>  
-                            <col width="60px" /> 
-                            <col width="*" /> 
-                            <col width="100px" />
-                            <col width="200px" /> 
-                        </colgroup>
-                        <thead>
-                            <tr> 
-                                <th scope="col">선택</th>
-                                <th scope="col">쿠폰명</th>
-                                <th scope="col">쿠폰금액</th>
-                                <th scope="col">적용기준</th>
-                                <th scope="col">사용기간</th>
-                            </tr>
-                        </thead>
-                        <tbody id="divOrderCoupon">
-                            <tr class="choice_wrap">
-                                <td class="t_center">
-                                    <div>
-                                        <span class="choice_wrap_inner">
-                                            <input type="checkbox" name="orderInfo1" id="a11" value="Y"  />
-                                            <label for="a11" class="fz0">선택</label>
-                                        </span>
+                    <div class="coupon_list_wrap mgt60">
+                        <div class="coupon_alert_wrap">
+                            <p class="coupon_list_icon">쿠폰리스트</p>
+                            <dl class="coupon_alert">
+                                <dt>
+                                    적용 가능한 상품 쿠폰
+                                </dt>
+                                <dd>
+                                    <span class="color_02 only_english">999</span>
+                                    <span>장</span>
+                                </dd>
+                            </dl>
+                        </div>
+
+                        <!-- 리스트 반복 -->
+                        <dl class="coupon_list fir">
+                            <dt class="coupon_product">
+                                <div class="product_name">
+                                    1. 웍스 S스케줄러 1년 라임그린 미디에스
+                                </div>
+                                <div class="price"><span class="only_english">3000</span><span>원</span></div>
+                                <div class="img">
+                                    <img src="../../images/new/@img.png" alt="">
+                                </div>
+                            </dt>
+                            <dd class="coupon_name mgt15">
+                                <div class="select_wrap">
+                                    <select name="" id="" class="">
+                                        <option value="">웍스 10% (1,000원 할인) </option>
+                                    </select>
+                                </div>
+                                <div class="alert_coupon_text">쿠폰을 선택해주세요.</div>
+                            </dd>
+                        </dl>
+                        <!-- 리스트 반복 -->
+                        <dl class="coupon_list">
+                            <dt class="coupon_product">
+                                <div class="product_name">
+                                    1. 웍스 S스케줄러 1년 라임그린 미디에스
+                                </div>
+                                <div class="price"><span class="only_english">3000</span><span>원</span></div>
+                                <div class="img">
+                                    <img src="../../images/new/@img.png" alt="">
+                                </div>
+                            </dt>
+                            <dd class="coupon_name mgt15">
+                                <div class="select_wrap">
+                                    <select name="" id="" class="">
+                                        <option value="">웍스 10% (1,000원 할인) </option>
+                                    </select>
+                                </div>
+                                <div class="alert_coupon_text">쿠폰을 선택해주세요.</div>
+                            </dd>
+                        </dl>
+
+                         <div class="free_order_wrap">
+                            <dl class="coupon_list">
+                                <dt class="coupon_product">
+                                    <div class="product_name">
+                                        무료 배송 쿠폰
                                     </div>
-                                </td>
-                                <td>플래티넘 온라인전용 3천원</td>
-                                <td class="t_right">3,000원</td>
-                                <td class="t_center">50,000원 이상 구매</td>
-                                <td class="t_center">2019-12-01 ~ 2019-12-31</td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                    
-                        <h2 class="tit01">무료 배송 쿠폰</h2>
-                        <table class="table02_v1">
-                            <colgroup>  
-                                <col width="20%" /> 
-                                <col width="15%" /> 
-                                <col width="20%" />
-                                <col width="15%" />
-                                <col width="30%" /> 
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th scope="col">배송업체</th>
-                                    <th scope="col">무료배송 기준</th>
-                                    <th scope="col">주문금액</th>
-                                    <th scope="col">배송비</th>
-                                    <th scope="col">쿠폰</th>
-                                </tr>
-                            </thead>
-                            <tbody id="divDeliveryCoupon">
-                                <tr>
-                                    <td>디자인아지트/인터넷</td>
-                                    <td class="t_right">20,000원 이상</td>
-                                    <td class="t_right">12,200원</td>
-                                    <td class="t_right">2,500원</td>
-                                    <td class="t_center choice_wrap">
-                                        <div class="select_wrap popup_list_select_width">
-                                            <select name="" id="" class="">
-                                                <option value="">선택하세요</option>
-                                                <option value="62" style="color: rgb(76, 76, 76);">플래티넘 온라인 무료배송</option>
-                                            </select>
-                                        </div>                                      
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    
-                    <div class="box_gray02 mgt20">
-                        <p class="t_left fs18">
-                            <span>쿠폰 할인금액</span>
-                            <label for="totalCpnDscntPrice">
-                                <input type="text" name="totalCpnDscntPrice" id="totalCpnDscntPrice" style="text-align: right;    border: none;    /* margin-top: -4px; */    background-color: #FAFAFA;    vertical-align: middle;     max-width: 70px;" class="input_txt fs18" readonly="readonly" value="999,999" /></label><span>원</span></p>
+                                </dt>
+                                <dd class="coupon_name mgt15">
+                                    <div class="select_wrap">
+                                        <select name="" id="" class="">
+                                            <option value="">신규 회원 무료 배송 쿠폰</option>
+                                        </select>
+                                    </div>
+                                    <div class="alert_coupon_text">쿠폰을 선택해주세요.</div>
+                                </dd>
+                            </dl>
+                        </div>
+
+                        <div class="coupon_sum_wrap">
+                            <div class="coupon_sum">
+                                <span class="coupon_sum_left">쿠폰 할인 금액</span>
+                                <span class="coupon_sum_right">
+                                    <span class="point02 only_english">10,000</span>
+                                    <span>원</span>
+                                </span>
+                            </div>
+                            <p class="coupon_sum_txt">
+                                무료 배송 쿠폰 : 신규회원 무료배송 쿠폰 사용
+                            </p>
+                        </div>
                     </div>
-                    <div class="btn_area t_center mgt30">
+
+                   
+
+                    <div class="btn_area t_center mgt50">
                         <a href="#n" _onclick="self.close()" class="btn_type04_v2"><span>취소</span></a>
                         <a href="#n" _onclick="applyCoupon()" class="btn_type04_v1 mgl10"><span>쿠폰적용</span></a>
                     </div>
