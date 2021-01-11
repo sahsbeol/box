@@ -40,12 +40,25 @@ $(document).ready(function(){
     });
     $(".count_wrap .count_down").click(function(){
         if($(this).parent().find(".input_txt").val() == 1){
-            alert('수량은 0보다 커야합니다.');
+            alert('주문 가능한 최소 수량은 1개 입니다.');
             $(this).parent().find(".input_txt").val('1');
             return false;
         }
         $(this).parent().find(".input_txt").val(Number($(this).parent().find(".input_txt").val()) - 1)
     })
+
+    $("input[name=chkAll]").each(function(){
+        $(this).click(function(){ 
+         if($(this).prop("checked")) { 
+            $(this).closest('.bbs_list_v2').find($("input[type=checkbox]")).prop("checked",true); 
+        
+         } else { 
+            $(this).closest('.bbs_list_v2').find($("input[type=checkbox]")).prop("checked",false); } 
+        })
+    });
+    
+
+
 }); 
 </script>
 </head>
@@ -277,8 +290,8 @@ $(document).ready(function(){
             <tr>
                 <td>
                     <div class="choice_wrap type_squre">
-                        <input type="checkbox" name="cartChk" id="orderInfo_22">
-                        <label for="orderInfo_22"></label>
+                        <input type="checkbox" name="cartChk" id="orderInfo_27">
+                        <label for="orderInfo_27"></label>
                     </div>
                 </td>
                 <td>
@@ -329,8 +342,8 @@ $(document).ready(function(){
             <tr>
                 <td>
                     <div class="choice_wrap type_squre">
-                        <input type="checkbox" name="cartChk" id="orderInfo_22">
-                        <label for="orderInfo_22"></label>
+                        <input type="checkbox" name="cartChk" id="orderInfo_23">
+                        <label for="orderInfo_23"></label>
                     </div>
                 </td>
                 <td>
@@ -397,8 +410,8 @@ $(document).ready(function(){
             <tr>
                 <th scope="col" class="fir">
                     <div class="choice_wrap type_squre">
-                        <input type="checkbox" name="chkAll" id="orderInfo_21" value="Y">
-                        <label for="orderInfo_21"></label>
+                        <input type="checkbox" name="chkAll" id="orderInfo_25" value="Y">
+                        <label for="orderInfo_25"></label>
                     </div>
                 </th>
                 <th scope="col">
@@ -438,8 +451,8 @@ $(document).ready(function(){
             <tr>
                 <td>
                     <div class="choice_wrap type_squre">
-                        <input type="checkbox" name="cartChk" id="orderInfo_22">
-                        <label for="orderInfo_22"></label>
+                        <input type="checkbox" name="cartChk" id="orderInfo_29">
+                        <label for="orderInfo_29"></label>
                     </div>
                 </td>
                 <td>
