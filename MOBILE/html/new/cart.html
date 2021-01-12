@@ -70,7 +70,7 @@ jQuery(function($) {
         $(".count .down").click(function(){
             if($(this).parent().find("input[name='prdtCount']").val() == 1){
 
-                alert('수량은 0보다 커야합니다.');
+                alert('주문 가능한 최소 수량은 1개 입니다.');
                 $(this).parent().find("input[name='prdtCount']").val('1');
                 return false;
             }

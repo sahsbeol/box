@@ -458,7 +458,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .point_lookup_wrap dt {font-size: 13px;font-weight: 500;width: 205px;float: left;margin-top: 8px;}
 .orderandpay .point_lookup_wrap dd {margin-top: 0;width: 280px;float: left;}
 .orderandpay .point_info_text {font-size: 11px; color:#777; margin-top:9px;}
-.orderandpay .point_lookup_wrap .other_box {padding:7px 10px; background: #FAFAFA;}
+.orderandpay .point_lookup_wrap .other_box { padding: 7px 10px;background: #FAFAFA;width: 260px;}
 .orderandpay .point_lookup_wrap:after {content: ''; display: block; clear: both;}
 
 .orderandpay .point_lookup_wrap .btn_defalut {max-width: 67px;min-width: auto;font-size: 14px;padding: 8px 17px 7px 16px;margin-left: -1px;}
