@@ -788,7 +788,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .search_box02 .wordlist .usualword:after {content: '';display: block;width:1px;height:16px;background: #707070;position: absolute;top: 3px;right: 0;}
 .orderandpay .search_box02 .wordlist a {color:#000000; margin-left:15px;}
 
-.orderandpay .btn_type01 {height: 19px;line-height: normal;font-size: 13px;vertical-align: middle; background: #EEEEEE;border-radius: 30px;padding: 10px 30px 9px;font-size: 13px;font-weight: 700;color: #000 !important;}
+.orderandpay .btn_type01 {height: 19px;line-height: normal;font-size: 13px;vertical-align: middle; background: #EEEEEE;border-radius: 30px;padding: 10px 30px 9px;font-size: 13px;font-weight: 700;color: #000 !important; border-bottom: 0;}
 .orderandpay .btn_type07 {font-size: 14px;min-width: 105px;padding: 10px 13px 11px 13px;height: auto;line-height: normal; background: #000; text-align: center;}
 .orderandpay .btn_type03 {height: auto;line-height: normal;font-size: 18px;padding: 14px 0 13px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;min-width: 200px;background: #000;font-weight: 400;box-sizing: border-box;}
 .orderandpay .btn_type04 {height: auto;line-height: normal;font-size: 18px;padding: 14px 0 13px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;min-width: 200px;background: #fff;font-weight: 400; border:1px #000 solid; box-sizing: border-box; color:#000;}

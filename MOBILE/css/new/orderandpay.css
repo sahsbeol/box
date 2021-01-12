@@ -245,7 +245,7 @@
 
 /* btn */
 .orderandpay .btn_type_wrap {text-align: center;}
-.orderandpay .btn_defalut {padding: 12px 7px;height:auto;min-width: 88px;background: #F8F8F8;font-size: 12px;font-weight: 400;color:#FFFFFF;outline:none;color: #000;border-radius: 0;border: 1px #B5B5B5 solid;box-sizing: border-box;}
+.orderandpay .btn_defalut {padding: 12px 7px;height:44px;min-width: 88px;background: #F8F8F8;font-size: 12px;font-weight: 400;color:#FFFFFF;outline:none;color: #000;border-radius: 0;border: 1px #B5B5B5 solid;box-sizing: border-box;}
 .orderandpay .btn_defalut.squre {background: #F8F8F8;height: 44px;font-size: 12px;font-weight: 400;outline:none;color: #000;border:1px #B5B5B5 solid;border-radius: 0;/* max-width: 120px; */text-align: center;min-width: 88px;box-sizing: border-box;padding: 11px 8px;}
 .orderandpay button.btn_defalut.squre {padding: 10px 20px;height:38px; font-family: 'font_ns'; line-height: inherit;}
 
@@ -650,15 +650,11 @@
 	.orderandpay .inner_float .input_wrap {width: calc(33% - 11px);}
 
 
-	.orderandpay .input_wrap input {/*font-size: 11px;*/padding-right: 3px;padding-left: 3px;}
+	.orderandpay .input_wrap input {padding-right: 3px;padding-left: 3px;}
 	.orderandpay .input_wrap input::placeholder{font-size: 11px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{font-size: 11px;}
+	.orderandpay .have_inner_txt.address .btn_defalut {min-height:44px;}
 
 	.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {}
 	.orderandpay .coupon_list_wrap .choice_wrap .choice_wrap_inner .choice_inner_set .term {padding-left:20px;}
-
-
-
-
-
 }
