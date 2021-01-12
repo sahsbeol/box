@@ -639,7 +639,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .lnb > ul > li > .depth2 > li.active > a {color :#ff6600;}
 
 /* title */
-.orderandpay .page_location {background: none;padding-top: 52px; margin-bottom: 13px;}
+.orderandpay .page_location {background: none;padding-top: 50px; margin-bottom: 13px;}
 .orderandpay .page_location .title {float:left;font-size: 24px; font-weight:700; line-height: normal;}
 .orderandpay .page_location .title a {display: block;}
 
@@ -665,14 +665,14 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .table01 tbody th {padding:17px 24px; font-size: 14px;  line-height:1.4em;}
 .orderandpay .table01 tbody td {padding:17px 35px 17px 21px; font-size:14px;  line-height:1.4em;}
 
-.orderandpay .table02 {font-size:14px; line-height:1.4em;}
-.orderandpay .table02 thead th {padding:10px 0;color:#000;border-bottom: 1px solid #EEEEEE;background:#fafafa;}
-.orderandpay .table02 tbody th {padding: 19px 0px 19px 24px;font-weight: 500;background: #fafafa;font-size: 13px;font-weight: 500;color: #000;}
-.orderandpay .table02 tbody th label { font-weight: inherit;}
-.orderandpay .table02 tbody td {padding:10px 20px 11px; color:#000; font-size: 13px; font-weight: 400;}
+.orderandpay .tooltip_wrap .table02 {font-size:14px; line-height:1.4em;}
+.orderandpay .tooltip_wrap .table02 thead th {padding:10px 0;color:#000;border-bottom: 1px solid #EEEEEE;background:#fafafa; text-align: center;}
+.orderandpay .tooltip_wrap .table02 tbody th {padding: 19px 0px 19px 24px;font-weight: 500;background: #fafafa;font-size: 13px;font-weight: 500;color: #000; text-align: left;}
+.orderandpay .tooltip_wrap .table02 tbody th label { font-weight: inherit;}
+.orderandpay .tooltip_wrap .table02 tbody td {padding:10px 20px 11px; color:#000; font-size: 13px; font-weight: 400; text-align: center;}
 
-.orderandpay .table02 .choice_wrap .choice_wrap_inner {margin-left: 15px; display: block; float: left;   margin-top: 5px; line-height: 2;}
-.orderandpay .table02 .choice_wrap .choice_wrap_inner:first-child {margin-left:0;}
+.orderandpay .tooltip_wrap .table02 .choice_wrap .choice_wrap_inner {margin-left: 15px; display: block; float: left;   margin-top: 5px; line-height: 2;}
+.orderandpay .tooltip_wrap .table02 .choice_wrap .choice_wrap_inner:first-child {margin-left:0;}
 /*
 
 .orderandpay .table02.t_center tbody td {padding:17px 0;text-align:center;}
