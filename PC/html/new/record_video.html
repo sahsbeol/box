@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=950">
+    <title>HOTTRACKS - 생활 속 감성충전소</title>
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+    <!-- 210113 : S 작업부분 -->
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+
+    <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../js/m_contents.js"></script>
+    <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+    <script type="text/javascript" src="../../js/biz/hott.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/swiper.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+</head>
+<body>
+
+
+    <div id="wrap" class="content_new">
+
+        <div id="header">
+            <!-- util menu -->
+            <div class="util_menu">
+                <ul>
+
+                    <li><a href="#n" __onclick="login()">로그인</a></li>
+                    <li><a href="#n" __onclick="goMemJoin()">회원가입</a></li>
+
+                    <li><a href="#n">고객센터</a></li>
+                    <li><a href="#n">매장안내</a></li>
+                    <li><a href="#n">팬사인회</a></li>
+                </ul>
+            </div>
+            <!--// util menu -->
+            <!-- gnb -->
+            <nav id="gnb">
+                <div class="header_wrap">
+                    <h1 class="g_logo"><a href="#n">HOTTRACKS</a></h1>
+                    <div class="g_search">
+                        <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+                            <div class="form_select">
+                                <select id="gnbSearchMenu" name="gnbSearchMenu">
+                                    <option value='GIFT'>문구/기프트</option>
+                                    <option value='RECORD'>음반</option>
+                                </select>
+                            </div>
+                            <div class="form_search">
+                                <input type="text" placeholder="샤오미를 쓰는 이유" name="searchTerm" value="">
+                                <a href="#" class="btn_search" __onclick="gnbSrchFrm();return false;"></a>
+                            </div>
+                        </form>
+                        <div class="keyword_wrap" id="ticker">
+                            <a href="#n" __onclick="gnbSrchKerword('카드 지갑');return false;">
+                                <em class="font_t">1</em>
+                                <p>카드 지갑</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+
+                                <span class="txt"><strong>NEW</strong></span>
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="g_menu">
+                        <ul>
+                            <li class="icon_my">
+
+                                <a href="#n" __onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>
+
+                            </li>
+                            <li class="icon_today">
+                                <a href="#n">
+                                    <img src="../../images/biz/common/icon_today.png" alt="">
+                                    <em>오늘,<strong>혜택</strong></em>
+                                </a>
+                            </li>
+                            <li class="icon_cart">
+                                <a href="#n">
+                                    <img src="../../images/biz/common/icon_cart.png" alt="">
+                                    <em class="font_t bizCartCount"></em>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gnb_wrap">
+                    <div class="inner">
+                        <div class="category_wrap">
+                            <div class="btn_category">
+                                <a href="#">카테고리</a>
+                            </div>
+                        </div>
+                        <ul class="gnb_menu">
+                            <li><a href="#n">다이어리<em></em></a></li>
+                            <li><a href="#n">음반<em></em></a></li>
+
+                            <li><a id="gnbBest" href="#n">베스트</a></li>
+                            <li><a id="gnbFree" href="#n">무료배송</a></li>
+                            <li><a id="gnbNew" href="#n">신상품</a></li>
+                            <li><a id="gnbSale" href="#n">세일</a></li>
+                            <li><a href="#n">이벤트</a></li>
+                        </ul>
+                        <ul class="sub_menu">
+                            <li><a href="#n">개인의취향</a></li>
+                            <li><a href="#n">이럴 때,</a></li>
+                            <li><a href="#n">아지트</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
+        <!-- Container -->
+        <div id="container">
+            <!-- 컨텐츠 -->
+            <!-- 210113 : S 작업부분 id="content" class="orderandpay record_video" 넣어주세요-->
+            <div id="content" class="content orderandpay record_video">
+                <!-- 210113 : S 작업부분 -->
+                
+                     
+                
+                <div class="record_video_mirror_wrap">
+                    <div class="category_banner_wrap">
+                        <div class="category_banner">
+                            <div class="slide-item type01">
+                                <a href="javascript:;" onclick="location.href='/e/71582';return false;">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1078/1609218136467_hottracks_950x500.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="slide-item type01">
+                                <a href="javascript:;" onclick="location.href='/e/70349';return false;">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1603259865023_950_500.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="slide-item type01">
+                                <a href="javascript:;" onclick="location.href='/e/71449';return false;">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1608604313186_950_500.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="slide-item type01">
+                                <a href="javascript:;" onclick="location.href='/e/70387';return false;">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1603158072727_950_500.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="slide-item type01">
+                                <a href="javascript:;" onclick="location.href='/e/70094';return false;">
+                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1600844032655_950_500.jpg" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="custom_paging_wrap">
+                            <div class="custom_paging"></div>
+                        </div>
+                    </div>
+                
+                    <script type="text/javascript">
+                    $(document).ready(function() {
+                        setTimeout(function(){
+                            $(".category_banner_wrap").attr("style","visibility: visible;");
+                        },100);
+                        
+                        
+                        $('.category_banner').on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
+                            var i = (currentSlide ? currentSlide : 0) + 1;
+                            $('.category_banner_wrap .custom_paging').html('<strong>'+ i + '</strong>'+ slick.slideCount);
+                        });
+                        
+                        // 메인 배너
+                        var categorySwiper = $('.category_banner').slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            autoplay: true,
+                            speed: 1000,
+                            centerMode: true,
+                            arrows: true,
+                            infinite: true,
+                            centerPadding: '475px',
+                            variableWidth: true,
+                            variableHeight: true,
+                            dots: false,
+                            swipe: false,
+                        });
+
+                        //  예약상품 
+                        var categorySwiper02 = $('.record_video_mirror_wrap .pd_unit03 .category_slide ul').bxSlider({
+                            auto: false,
+                            pause: 3000,
+                            speed: 1000,
+                            hideControlOnEnd: true,
+                            minSlides: 4,
+                            maxSlides: 4,
+                            slideWidth: 230,
+                            slideMargin: 10,
+                            infiniteLoop: false,
+                            touchEnabled: false,
+                            pager: true,
+                            pagerType: 'short',
+                            pagerShortSeparator: '',
+                        });
+
+                        //  새로나온상품 
+                        var categorySwiper03 = $('.record_video_mirror_wrap .pd_unit04 .category_slide ul').bxSlider({
+                            auto: false,
+                            pause: 3000,
+                            speed: 1000,
+                            hideControlOnEnd: true,
+                            minSlides: 3,
+                            maxSlides: 3,
+                            slideWidth: 310,
+                            slideMargin: 10,
+                            infiniteLoop: false,
+                            touchEnabled: false,
+                            pager: true,
+                            pagerType: 'short',
+                            pagerShortSeparator: '',
+                        });
+
+                        // 예약상품, 새로나온상품 탭 
+                        $('.category_tab ul li').each(function(i){
+                            $(this).on('click', function(){
+                                $(this).addClass('active').siblings('li').removeClass('active');
+                                $('.category_slide_wrap .category_slide').hide();
+                                $('.category_slide_wrap .category_slide').eq(i).show();
+                            });
+                        });
+                    });
+                    </script>
+                    <!--// 상단 배너 -->
+
+                    <div class="reservation_wrap">
+                        <!-- 예약 상품 -->
+                        <div class="pd_unit pd_unit03">
+                            <h3 class="record_video_tit">예약 상품</h3>
+                            <div class="category_tab">
+                                <ul>
+                                    <li class="active"><a href="javascript:;" >가요</a></li>
+                                    <li><a href="javascript:;">팝</a></li>
+                                    <li><a href="javascript:;">클래식</a></li>
+                                    <li><a href="javascript:;">영상</a></li>
+                                </ul>
+                            </div>
+                            <div class="category_slide_wrap">                                
+                                <!-- 가요 -->
+                                <div class="category_slide" style="display: block;">
+                                    <ul id="newReleases">
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li> <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum ">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li><li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum ">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>  
+                                    </ul>
+                                </div>
+                                <!-- 팝 -->
+                                <div class="category_slide">
+                                    <ul id="newReleases">
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>   
+                                    </ul>
+                                </div>
+                                <!-- 클래식 -->
+                                <div class="category_slide">
+                                    <ul id="newReleases">
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>   
+                                    </ul>
+                                </div>
+                                <!-- 영상 -->
+                                <div class="category_slide">
+                                    <ul id="newReleases">
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                    <p class="date">발매일 <strong class="mgl5 font_t">2021.01.20</strong></p>
+                                                </div>
+                                            </a>
+                                        </li>   
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 새로 나온 상품 -->
+                        <div class="pd_unit pd_unit04 bigdistance">
+                            <h3 class="record_video_tit">새로 나온 상품</h3>
+                            <div class="category_tab">
+                                <ul>
+                                    <li class="active"><a href="javascript:;" >가요</a></li>
+                                    <li><a href="javascript:;">팝</a></li>
+                                    <li><a href="javascript:;">클래식</a></li>
+                                    <li><a href="javascript:;">영상</a></li>
+                                </ul>
+                            </div>
+                            <div class="category_slide_wrap">                                
+                                <!-- 가요 -->
+                                <div class="category_slide" style="display: block;">
+                                    <ul id="newReleases">
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum ">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>  
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum ">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                                <!-- 팝 -->
+                                <div class="category_slide">
+                                    <ul id="newReleases">
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum ">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li> 
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>   
+                                    </ul>
+                                </div>
+                                <!-- 클래식 -->
+                                <div class="category_slide">
+                                    <ul id="newReleases">
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum ">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li> 
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>   
+                                    </ul>
+                                </div>
+                                <!-- 영상 -->
+                                <div class="category_slide">
+                                    <ul id="newReleases">
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum ">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li> 
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="round">
+                                            <a href="javascript:;" title="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/music/large/4835/2538475.jpg" alt="SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]" />
+                                                </div>
+                                            </a>
+                                            <a href="javascript:;">
+                                                <div class="cont">
+                                                    <p class="brand">MELODY GARDOT</p>
+                                                    <p class="tit">SUNSET IN THE BLUE [180G LP] [다운로드 카드 한정반]</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">16%</span>
+                                                        <span>40,000</span>
+                                                        <span class="discount">47,500</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>   
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 이벤트 배너 -->
+                        <div class="event_banner bigdistance">
+                            <ul>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="img_wrap">
+                                            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1854/1610497122708_650_500.jpg" alt="잘 버텨낸 우리, 다독다독" />
+                                        </div>                                        
+                                        <strong>잘 버텨낸 우리, 다독다독</strong>
+                                        <p>집콕 도서 필수템 독서용품 기획전!</p>
+                                        <span class="date font_t">
+                                            2021.01.13 ~ 2021.01.24
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="img_wrap">
+                                            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1854/1586838630964_650_500.jpg" alt="엄마를 위한 선물, 한 박스에 담았어요 -" />
+                                        </div>
+                                        <strong>엄마를 위한 선물, 한 박스에 담았어요 -</strong>
+                                        <p>말로 표현 못했던 감사와 응원</p>
+                                        <span class="date font_t">
+                                            2021.01.13 ~ 2021.02.08
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="img_wrap">
+                                            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1854/1610007154063_650_500.jpg" alt="80년 전통의 주방가전 브랜드" />
+                                        </div>
+                                        <strong>80년 전통의 주방가전 브랜드</strong>
+                                        <p>주방을 감각적으로 바꾸는 벤소닉 최저가</p>
+                                        <span class="date font_t">
+                                            2021.01.07 ~ 2021.01.21
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" >
+                                        <div class="img_wrap">
+                                            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1356/1597388703212_1.jpg" alt="써본 사람들은 모두가 인정합니다!" />
+                                        </div>
+                                        <strong>써본 사람들은 모두가 인정합니다!</strong>
+                                        <p>로지텍 블루투스 키보드 K380</p>
+                                        <span class="date font_t">
+                                            2020.12.31 ~ 2021.01.31
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        
+
+                        <div class="lower_content">
+                            <div class="cont cont02">
+                                <!-- /////////오늘만 특가///////// -->
+                                <div class="cont_left">
+                                    <a href="javascript:" class="PC_MAIN_MENU_2">
+                                        <h3>오늘만 특가<span class="btn_detail">더보기</span>
+                                        </h3>
+                                    </a>
+                                    <span class="font_t time" id="txtOddTime"></span>
+                                    <div class="product">
+                                        <span class="percent font_t">
+                                            <em>20</em>%
+                                        </span>
+                                        <a href="javascript:;" class="main_pd PC_MAIN_MENU_2_1">
+                                            <div class="thum">
+                                                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1776/hot1609128302790.jpg" alt="고양이다방 전상품 20%" width="400" height="400" />
+                                            </div>
+                                            <p class="brand">고양이다방 전상품 20%</p>
+                                            <div class="info_wrap">
+                                                <p class="tit">단 하루만 브랜드특가! 고양이다방!</p>
+                                                <p class="price font_t">
+                                                    <em class="discount">2,000</em>
+                                                    1,600
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <ul class="event">
+                                        <li>
+                                            <a href="javascript:;" class="PC_MAIN_MENU_2_2">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1776/hot1609128302790.jpg" alt="OOTD 씰 스티커" width="400" height="400" />
+                                                </div>
+                                                <span class="percent font_t">
+                                                    20%
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" class="PC_MAIN_MENU_2_2">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1068/hot1609128362518.jpg" alt="마이룸VER.2 씰 스티커" width="400" height="400" />
+                                                </div>
+                                                <span class="percent font_t">
+                                                    20%
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" class="PC_MAIN_MENU_2_2">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1274/hot1607844620565.jpg" alt="메리크리스마스 씰 스티커" width="400" height="400" />
+                                                </div>
+                                                <span class="percent font_t">
+                                                    20%
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" class="PC_MAIN_MENU_2_2">
+                                                <div class="thum">
+                                                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1194/hot1607844527886.jpg" alt="산타요정 씰 스티커" width="400" height="400" />
+                                                </div>
+                                                <span class="percent font_t">
+                                                    20%
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- 남은 시간 -->
+                                    <div class="time_line">
+                                        <span class="txt">남은시간</span>
+                                        <div class="bar">
+                                            <span id="gauge" style="height:0%;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--// 오늘만 특가 -->
+                                <!-- /////////인기베스트///////// -->
+                                <div class="cont_right">
+                                    <a class="bestUrl PC_MAIN_MENU_3" href="http://www.hottracks.co.kr/ht/biz/welcome/hotAwardPage">
+                                        <h3>인기 베스트<span class="btn_detail">더보기</span>
+                                        </h3>
+                                    </a>
+                                    <div class="tab">
+                                        <ul>
+                                            <li class="PC_MAIN_MENU_3_1 active" type="munguBest">
+                                                <a href="javascript:;" onclick="main.loadTemplate(this, 'cont02');">문구/기프트</a>
+                                            </li>
+                                            <li class="PC_MAIN_MENU_3_2" type="recordBest">
+                                                <a href="javascript:;" onclick="main.loadTemplate(this, 'cont02');">음반</a>
+                                            </li>
+                                            <li class="PC_MAIN_MENU_3_3" type="dvdBest">
+                                                <a href="javascript:;" onclick="main.loadTemplate(this, 'cont02');">영상</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="best_list">
+                                        <ul class="listArea">
+                                            <li class="PC_MAIN_MENU_3_4">
+                                                <a href="javascript:;" onclick="location.href='/ht/product/detail?barcode=2310041272549';return false;">
+                                                    <em class="font_t">1</em>
+                                                    <div class="thum">
+                                                        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1698/hot1583919332400.jpg" alt="러브미모어X핫트랙스 스티커 세트" width="100" height="100" />
+                                                    </div>
+                                                    <div class="desc">
+                                                        <p class="tit">
+                                                            러브미모어X핫트랙스 스티커 세트
+                                                        </p>
+                                                        <p class="price font_t">
+                                                            <span class="percent">40%</span>
+                                                            3,000
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="PC_MAIN_MENU_3_4">
+                                                <a href="javascript:;" onclick="location.href='/ht/product/detail?barcode=4536117007190';return false;">
+                                                    <em class="font_t">2</em>
+                                                    <div class="thum">
+                                                        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1763/hot1606781988573.jpg" alt="드레텍 스탑워치 T-186WT 화이트" width="100" height="100" />
+                                                    </div>
+                                                    <div class="desc">
+                                                        <p class="tit">
+                                                            드레텍 스탑워치 T-186WT 화이트
+                                                        </p>
+                                                        <p class="price font_t">
+                                                            <span class="percent">40%</span>
+                                                            7,700
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="PC_MAIN_MENU_3_4">
+                                                <a href="javascript:;" onclick="location.href='/ht/product/detail?barcode=2310042947972';return false;">
+                                                    <em class="font_t">3</em>
+                                                    <div class="thum">
+                                                        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1019/hot1609985707715.jpg" alt="STARBUCKS 스타벅스 아이코닉 머그컵 414ml" width="100" height="100" />
+                                                    </div>
+                                                    <div class="desc">
+                                                        <p class="tit">
+                                                            STARBUCKS 스타벅스 아이코닉 머그컵 414ml
+                                                        </p>
+                                                        <p class="price font_t">
+                                                            <span class="percent">19%</span>
+                                                            10,500
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="PC_MAIN_MENU_3_4">
+                                                <a href="javascript:;" onclick="location.href='/ht/product/detail?barcode=2315026189614';return false;">
+                                                    <em class="font_t">4</em>
+                                                    <div class="thum">
+                                                        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1126/S1610065188132.jpg" alt="토소웅 풋파일" width="100" height="100" />
+                                                    </div>
+                                                    <div class="desc">
+                                                        <p class="tit">
+                                                            토소웅 풋파일
+                                                        </p>
+                                                        <p class="price font_t">
+                                                            <span class="percent">30%</span>
+                                                            6,900
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="PC_MAIN_MENU_3_4">
+                                                <a href="javascript:;" onclick="location.href='/ht/product/detail?barcode=2310041194155';return false;">
+                                                    <em class="font_t">5</em>
+                                                    <div class="thum">
+                                                        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/100/1451/hot1577745543739.jpg" alt="알루미늄 높이조절 노트북 거치대 SOME2V" width="100" height="100" />
+                                                    </div>
+                                                    <div class="desc">
+                                                        <p class="tit">
+                                                            알루미늄 높이조절 노트북 거치대 SOME2V
+                                                        </p>
+                                                        <p class="price font_t">
+                                                            <span class="percent">40%</span>
+                                                            29,900
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--// 인기베스트 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 와이드 배너 -->
+                    <div class="wide_banner bigdistance">
+                        <a href="javascript:;" class="link">
+                            <img src="../../images/new/@img00.png" alt="">
+                        </a>
+                    </div>
+
+                    <!-- 짧은 배너 3개 -->
+                    <div class="short_banner_wrap">
+                        <div class="event_banner">
+                            <ul>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="img_wrap">
+                                            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1854/1610497122708_650_500.jpg" alt="잘 버텨낸 우리, 다독다독" />
+                                        </div>
+                                        
+                                        <strong>잘 버텨낸 우리, 다독다독</strong>
+                                        <p>집콕 도서 필수템 독서용품 기획전!</p>
+                                        <span class="date font_t">
+                                            2021.01.13 ~ 2021.01.24
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="img_wrap">
+                                            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1854/1610497122708_650_500.jpg" alt="잘 버텨낸 우리, 다독다독" />
+                                        </div>
+                                        
+                                        <strong>잘 버텨낸 우리, 다독다독</strong>
+                                        <p>집콕 도서 필수템 독서용품 기획전!</p>
+                                        <span class="date font_t">
+                                            2021.01.13 ~ 2021.01.24
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="img_wrap">
+                                            <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1854/1610497122708_650_500.jpg" alt="잘 버텨낸 우리, 다독다독" />
+                                        </div>
+                                        
+                                        <strong>잘 버텨낸 우리, 다독다독</strong>
+                                        <p>집콕 도서 필수템 독서용품 기획전!</p>
+                                        <span class="date font_t">
+                                            2021.01.13 ~ 2021.01.24
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 테마별 추천 -->
+                    <div class="theme_wrap bigdistance">                        
+                        <h3 class="record_video_tit none">테마별 추천</h3>
+                    </div>
+                </div>
+                <!--// 201228 : E 작업부분 -->
+            </div>
+            <!-- //컨텐츠 -->
+        </div>
+        <!-- //Container -->
+
+        <!-- footer -->
+        <div id="footer">
+            <div class="util">
+                <div class="util_cont">
+                    <ul>
+                        <li><a href="#n">회사소개</a></li>
+                        <li><a href="#n">채용정보</a></li>
+                        <li><a href="#n">핫트합니다</a></li>
+                        <li><a href="#n">매장안내</a></li>
+                        <li><a href="#n">제휴/광고안내</a></li>
+                        <li><a href="#n">이용약관</a></li>
+                        <li><a href="#n"><strong>개인정보처리방침</strong></a></li>
+                        <li><a href="#n" __onclick="window.open(this.href,'popupPrizewinner','width=400,height=365');return false;" title="새 창으로 열림">이메일수집거부</a></li>
+                    </ul>
+                    <div class="family_site">
+                        <p>패밀리 사이트</p>
+                        <ul>
+                            <li><a href="#n" title="새 창 열림">교보생명</a></li>
+                            <li><a href="#n" title="새 창 열림">교보문고</a></li>
+                            <li><a href="#n" title="새 창 열림">교보증권</a></li>
+                            <li><a href="#n" title="새 창 열림">교보정보통신</a></li>
+                            <li><a href="#n" title="새 창 열림">교보리얼코</a></li>
+                            <li><a href="#n" title="새 창 열림">교보악사자산운용</a></li>
+                            <li><a href="#n" title="새 창 열림">교보라이프플래닛생명</a></li>
+                            <li><a href="#n" title="새 창 열림">KCA 손해사정</a></li>
+                            <li><a href="#n" title="새 창 열림">생보부동산신탁</a></li>
+                            <li><a href="#n" title="새 창 열림">대산문화재단</a></li>
+                            <li><a href="#n" title="새 창 열림">교보생명교육문화재단</a></li>
+                            <li><a href="#n" title="새 창 열림">대산농촌문화재단</a></li>
+                            <li><a href="#n" title="새 창 열림">교보아카데미</a></li>
+                            <li><a href="#n" title="새 창 열림">독서진단리드</a></li>
+                            <li><a href="#n" title="새 창 열림">에듀교보문고</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="inner">
+                <div class="cont left">
+                    <div class="cs_center">
+                        <strong class="font_t">1661-1112</strong>
+                        <span>고객센터: 평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
+                        <dl>
+                            <dt><a href="#n"><span>SOS 상담</span></a></dt>
+                            <dd>24시간 접수 가능<br />고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
+                        </dl>
+                    </div>
+                    <h2>교보핫트랙스㈜</h2>
+                    <span>대표이사 박영규</span>
+                    <span>사업자등록번호 : 102-81-29258 <a href="#n" __onclick="window.open('http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1028129258', 'communicationViewPopup', 'width=750, height=700;');return false;" title="새 창으로 열림">사업자정보확인 &gt;</a></span>
+                    <span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+                    <span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+                    <span>개인정보보호책임자 : 김재식 PRIVACY@HOTTRACKS.CO.KR</span>
+                </div>
+                <div class="cont right">
+                    <ul class="sns">
+                        <li><a href="#n"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a></li>
+                        <li><a href="#n"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a></li>
+                        <li><a href="#n"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a></li>
+                        <li><a href="#n"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a></li>
+                    </ul>
+                    <div class="mobile">
+                        <a href="#n" class="font_t ios">APP STORE</a>
+                        <a href="#n" class="font_t and">PLAY STORE</a>
+                    </div>
+                    <ul class="copyright">
+                        <li><a href="#n"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
+                        <li><a href="#n"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
+                    </ul>
+                    <span class="payment"><em class="font_t">LGU+</em><a href="#n" __onclick="goValidEscrow('hottracks');">서비스 가입사실 확인 &gt;</a></span>
+                    <span class="txt">고객님은 안전거래를 위해 현금 등으로 5만원 이상 결제 시 저희 쇼핑몰에서<br />가입한 LG데이콤의 구매 안전서비스를 이용하실 수 있습니다.</span>
+                </div>
+            </div>
+        </div>
+        <!--// footer -->
+    </div>
+</body>
+
+</html>
