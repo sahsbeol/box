@@ -166,6 +166,7 @@
 .search_modi .search_result_list li .link > div p.price{
   margin-top:8px;
 }
+.search_modi .cont01 .swiper-wrapper {margin-bottom: 30px;}
 
 /* 검색결과 유도 */
 .search_modi .search_none .none_txt p {line-height: 1.6}
