@@ -1,6 +1,12 @@
 @charset "utf-8";
 
 .search_modi {}
+.search_modi .distance {margin-top: 100px;}
+.search_modi .pb0 {padding-bottom: 0 !important;}
+.search_modi .pt0 {padding-top: 0 !important;}
+.search_modi .mt0 {margin-top: 0 !important;}
+.search_modi .mb0 {margin-bottom: 0 !important;}
+
 .search_modi.search_wrapper .search_top {padding-bottom: 0px}
 .search_modi.search_wrapper .btn_detail{vertical-align:top; font-size:14px; color:#FF6A5B; float:right; padding-right:16px; background:url('../../images/biz/common/icon_search_btn.png') 100% 50% no-repeat;}
 
@@ -199,3 +205,14 @@
 #gnb .popular_search_wrap .keyword_list_v2 .all_delete_txt {position: absolute; top:20px; right:33px; font-size: 13px; font-weight: 400; overflow: hidden;}
 #gnb .popular_search_wrap .keyword_list_v2 .all_delete_txt:after {content:''; display:block; float: left; width:14px; height:16px; margin-right:2px; background:url(../../images/new/icon_trash.png) no-repeat center;}
 #gnb .popular_search_wrap .inner_popular_search {width:380px !important; height:100%;}
+
+/* 검색결과 유도 */
+.search_modi .search_none .none_txt p {line-height: 1.6}
+.search_modi .search_none .none_txt.mt140 {margin-top:140px;}
+.search_modi .search_none .none_txt.another:before {content: ''; display: none;}
+.search_modi .search_none .none_txt .text_another {color: #000000; margin-bottom: 10px;}
+.search_modi .search_none .none_txt .text_another .color02 {color: #419BF9; font-weight:700;}
+.search_modi .search_none .none_txt .text_defalut {font-size: 16px; color:#777777; text-align: left;}
+
+.search_modi .icon_arrow {display: inline-block;margin-left:20px;font-size: 16px;font-weight: 500;border-bottom: 1px #000000 solid;padding-bottom: 5px; vertical-align: top;}
+.search_modi .icon_arrow:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/new/icon_arrow.png) no-repeat 0 0;margin-left:5px;margin-bottom: -1px;}
