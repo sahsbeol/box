@@ -30,7 +30,7 @@
 .search_modi .category_wrap .pd_filter .pd_total {}
 
 /* 검색결과 탭 */
-.search_modi.search_wrapper .search_tab {margin-top:120px;}
+.search_modi.search_wrapper .search_tab {margin-top:80px;}
 .search_modi.search_wrapper .pd_filter {margin-top: 40px;}
 .search_modi.search_wrapper .pd_filter .form_select {width: auto;}
 .search_modi.search_wrapper .pd_filter .form_select select {height: auto;width:auto; direction: rtl; margin-left: 10px;font-size: 18px;font-weight: 700;color: #000;padding: 2px 30px 2px 10px;background: url(../../images/new/search_modi_btn.png) center right no-repeat;box-sizing: border-box;display: block;float: left;text-align: right;}
@@ -208,7 +208,7 @@
 
 /* 검색결과 유도 */
 .search_modi .search_none .none_txt p {line-height: 1.6}
-.search_modi .search_none .none_txt.mt120 {margin-top:120px;}
+.search_modi .search_none .none_txt.mt120 {margin-top:70px;}
 .search_modi .search_none .none_txt.another:before {content: ''; display: none;}
 .search_modi .search_none .none_txt .text_another {color: #000000; margin-bottom: 10px;}
 .search_modi .search_none .none_txt .text_another .color02 {color: #419BF9; font-weight:700;}
@@ -216,3 +216,5 @@
 
 .search_modi .icon_arrow {display: inline-block;margin-left:5px;font-size: 16px;font-weight: 500;border-bottom: 1px #000000 solid;padding-bottom: 5px; vertical-align: top;}
 .search_modi .icon_arrow:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/new/icon_arrow.png) no-repeat 0 0;margin-left:5px;margin-bottom: -1px;}
+
+.search_modi .pt80 {padding-top:80px !important;}
