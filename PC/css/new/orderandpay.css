@@ -1063,7 +1063,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .short_banner_wrap .event_banner .img_wrap img{  max-width: 100%;  min-height: 100%;  position: relative;  top: 50%;  left: 50%;  transform: translate(-50%,-50%);}
 .orderandpay .short_banner_wrap .event_banner .percent{display:block; position:absolute; color:#DA2128; padding-left:15px; margin-top:10px; font-weight:bold; font-size:20px;}
 .orderandpay .short_banner_wrap .event_banner .percent:before{position:absolute; content:'~'; left:0;}
-.orderandpay .short_banner_wrap .event_banner strong{display:block; padding-top:25px;padding-bottom: 5px;font-size:16px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.orderandpay .short_banner_wrap .event_banner strong{display:block; padding-top:38px;padding-bottom: 5px;font-size:16px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .orderandpay .short_banner_wrap .event_banner p{font-size:16px; margin-top:5px;padding-bottom: 5px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .orderandpay .short_banner_wrap .event_banner .date{display:block; color:#999999; margin-top:12px; font-size:16px;}
 

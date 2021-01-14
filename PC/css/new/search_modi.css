@@ -208,11 +208,11 @@
 
 /* 검색결과 유도 */
 .search_modi .search_none .none_txt p {line-height: 1.6}
-.search_modi .search_none .none_txt.mt140 {margin-top:140px;}
+.search_modi .search_none .none_txt.mt120 {margin-top:120px;}
 .search_modi .search_none .none_txt.another:before {content: ''; display: none;}
 .search_modi .search_none .none_txt .text_another {color: #000000; margin-bottom: 10px;}
 .search_modi .search_none .none_txt .text_another .color02 {color: #419BF9; font-weight:700;}
 .search_modi .search_none .none_txt .text_defalut {font-size: 16px; color:#777777; text-align: left;}
 
-.search_modi .icon_arrow {display: inline-block;margin-left:20px;font-size: 16px;font-weight: 500;border-bottom: 1px #000000 solid;padding-bottom: 5px; vertical-align: top;}
+.search_modi .icon_arrow {display: inline-block;margin-left:5px;font-size: 16px;font-weight: 500;border-bottom: 1px #000000 solid;padding-bottom: 5px; vertical-align: top;}
 .search_modi .icon_arrow:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/new/icon_arrow.png) no-repeat 0 0;margin-left:5px;margin-bottom: -1px;}
