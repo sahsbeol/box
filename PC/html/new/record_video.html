@@ -132,35 +132,33 @@
             <!-- 컨텐츠 -->
             <!-- 210113 : S 작업부분 id="content" class="orderandpay record_video" 넣어주세요-->
             <div id="content" class="content orderandpay record_video">
-                <!-- 210113 : S 작업부분 -->
-                
-                     
-                
+                <!-- 210113 : S 작업부분 --> 
                 <div class="record_video_mirror_wrap">
+                    <!-- 상단배너 -->
                     <div class="category_banner_wrap">
                         <div class="category_banner">
                             <div class="slide-item type01">
-                                <a href="javascript:;" onclick="location.href='/e/71582';return false;">
+                                <a href="javascript:;">
                                     <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1078/1609218136467_hottracks_950x500.jpg" alt="" />
                                 </a>
                             </div>
                             <div class="slide-item type01">
-                                <a href="javascript:;" onclick="location.href='/e/70349';return false;">
+                                <a href="javascript:;">
                                     <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1603259865023_950_500.jpg" alt="" />
                                 </a>
                             </div>
                             <div class="slide-item type01">
-                                <a href="javascript:;" onclick="location.href='/e/71449';return false;">
+                                <a href="javascript:;">
                                     <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1608604313186_950_500.jpg" alt="" />
                                 </a>
                             </div>
                             <div class="slide-item type01">
-                                <a href="javascript:;" onclick="location.href='/e/70387';return false;">
+                                <a href="javascript:;">
                                     <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1603158072727_950_500.jpg" alt="" />
                                 </a>
                             </div>
                             <div class="slide-item type01">
-                                <a href="javascript:;" onclick="location.href='/e/70094';return false;">
+                                <a href="javascript:;">
                                     <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1661/1600844032655_950_500.jpg" alt="" />
                                 </a>
                             </div>
@@ -177,13 +175,13 @@
                         },100);
                         
                         
-                        $('.category_banner').on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
+                        $('.category_banner_wrap .category_banner').on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
                             var i = (currentSlide ? currentSlide : 0) + 1;
                             $('.category_banner_wrap .custom_paging').html('<strong>'+ i + '</strong>'+ slick.slideCount);
                         });
                         
                         // 메인 배너
-                        var categorySwiper = $('.category_banner').slick({
+                        var categorySwiper = $('.category_banner_wrap .category_banner').slick({
                             slidesToShow: 1,
                             slidesToScroll: 1,
                             autoplay: true,
@@ -232,14 +230,32 @@
                             pagerShortSeparator: '',
                         });
 
-                        // 예약상품, 새로나온상품 탭 
-                        $('.category_tab ul li').each(function(i){
+                        // 예약상품, 새로나온상품,  MD추천앨범 , 핫이슈 tab
+                        $('.category_tab ul li').each(function(){
+                            var idx = $(this).index();
                             $(this).on('click', function(){
                                 $(this).addClass('active').siblings('li').removeClass('active');
-                                $('.category_slide_wrap .category_slide').hide();
-                                $('.category_slide_wrap .category_slide').eq(i).show();
+                                $(this).parents('.category_tab').siblings('.category_slide_wrap').find('.category_slide').hide();
+                                $(this).parents('.category_tab').siblings('.category_slide_wrap').find('.category_slide').eq(idx).show();
                             });
                         });
+
+                        $('.theme_wrap .theme_recommend_list').on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
+                            var i = (currentSlide ? currentSlide : 0) + 1;
+                            $('.theme_recommend_wrap .custom_paging').html('<strong>'+ i + '</strong>'+ slick.slideCount);
+                        });
+
+                        var categorySwiper = $('.theme_wrap .theme_recommend_list').slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            autoplay: false,
+                            speed: 1000,
+                            arrows: true,
+                            infinite: false,
+                            dots: false,
+                            swipe: true,
+                        });
+
                     });
                     </script>
                     <!--// 상단 배너 -->
@@ -1253,10 +1269,719 @@
                     </div>
 
                     <!-- 테마별 추천 -->
-                    <div class="theme_wrap bigdistance">                        
-                        <h3 class="record_video_tit none">테마별 추천</h3>
-                        <div class="">
-                            
+                    <div class="theme_wrap bigdistance">
+                        <div class="marginCenter">
+                            <h3 class="record_video_tit none">테마별 추천</h3>
+                            <div class="theme_recommend_wrap">
+                                 <div class="theme_recommend_list">
+                                    <div class="slide-item">
+                                        <div class="category_tab">
+                                            <ul>
+                                                <li class="active items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img4.png" alt="" />
+                                                    </a>
+                                                </li>
+                                                <li class="items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img6.png" alt="" />
+                                                    </a>
+                                                </li>
+                                                <li class="items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img7.png" alt="" />
+                                                    </a>
+                                                </li>
+                                                <li class="items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img8.png" alt="" />
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="category_slide_wrap">                                
+                                            <!-- list 1-->
+                                            <div class="category_slide" style="display: block;">
+                                                <span class="theme_recommend_texts_wrap">
+                                                    <span class="theme_recommend_img">
+                                                        <a href="javascript:;" class="link">
+                                                            <img src="../../images/new/@img4.png" alt="" />
+                                                        </a>
+                                                    </span>
+                                                    <span class="theme_recommend_texts">
+                                                        <span class="unit_number only_english">01</span>
+                                                        <span class="unit_title">올 한해를 마무리 하며</span>
+                                                        <span class="unit_name">VARIOUS</span>
+                                                        <span class="unit_album">TRAVELLER [트래블러 프로젝트]</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <!-- list 2 -->
+                                            <div class="category_slide">
+                                                <span class="theme_recommend_texts_wrap">
+                                                    <span class="theme_recommend_img">
+                                                        <a href="javascript:;" class="link">
+                                                            <img src="../../images/new/@img6.png" alt="" />
+                                                        </a>
+                                                    </span>
+                                                    <span class="theme_recommend_texts">
+                                                        <span class="unit_number only_english">02</span>
+                                                        <span class="unit_title">올 한해를 마무리 하며2222</span>
+                                                        <span class="unit_name">VARIOUS</span>
+                                                        <span class="unit_album">TRAVELLER [트래블러 프로젝트]</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <!-- list 3 -->
+                                            <div class="category_slide">                                                
+                                                <span class="theme_recommend_texts_wrap">
+                                                    <span class="theme_recommend_img">
+                                                        <a href="javascript:;" class="link">
+                                                            <img src="../../images/new/@img7.png" alt="" />
+                                                        </a>
+                                                    </span>
+                                                    <span class="theme_recommend_texts">
+                                                        <span class="unit_number only_english">02</span>
+                                                        <span class="unit_title">올 한해를 마무리 하며444</span>
+                                                        <span class="unit_name">VARIOUS</span>
+                                                        <span class="unit_album">TRAVELLER [트래블러 프로젝트]</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>                                            
+                                    </div>
+                                    <div class="slide-item">
+                                        <div class="category_tab">
+                                            <ul>
+                                                <li class="active items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img4.png" alt="" />
+                                                    </a>
+                                                </li>
+                                                <li class="items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img6.png" alt="" />
+                                                    </a>
+                                                </li>
+                                                <li class="items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img7.png" alt="" />
+                                                    </a>
+                                                </li>
+                                                <li class="items">
+                                                    <a href="javascript:;" class="link">
+                                                        <img src="../../images/new/@img8.png" alt="" />
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="category_slide_wrap">                                
+                                            <!-- list 1-->
+                                            <div class="category_slide" style="display: block;">
+                                                <span class="theme_recommend_texts_wrap">
+                                                    <span class="theme_recommend_img">
+                                                        <a href="javascript:;" class="link">
+                                                            <img src="../../images/new/@img4.png" alt="" />
+                                                        </a>
+                                                    </span>
+                                                    <span class="theme_recommend_texts">
+                                                        <span class="unit_number only_english">01</span>
+                                                        <span class="unit_title">올 한해를 마무리 하며</span>
+                                                        <span class="unit_name">VARIOUS</span>
+                                                        <span class="unit_album">TRAVELLER [트래블러 프로젝트]</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <!-- list 2 -->
+                                            <div class="category_slide">
+                                                <span class="theme_recommend_texts_wrap">
+                                                    <span class="theme_recommend_img">
+                                                        <a href="javascript:;" class="link">
+                                                            <img src="../../images/new/@img6.png" alt="" />
+                                                        </a>
+                                                    </span>
+                                                    <span class="theme_recommend_texts">
+                                                        <span class="unit_number only_english">02</span>
+                                                        <span class="unit_title">올 한해를 마무리 하며2222</span>
+                                                        <span class="unit_name">VARIOUS</span>
+                                                        <span class="unit_album">TRAVELLER [트래블러 프로젝트]</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <!-- list 3 -->
+                                            <div class="category_slide">                                                
+                                                <span class="theme_recommend_texts_wrap">
+                                                    <span class="theme_recommend_img">
+                                                        <a href="javascript:;" class="link">
+                                                            <img src="../../images/new/@img7.png" alt="" />
+                                                        </a>
+                                                    </span>
+                                                    <span class="theme_recommend_texts">
+                                                        <span class="unit_number only_english">02</span>
+                                                        <span class="unit_title">올 한해를 마무리 하며444</span>
+                                                        <span class="unit_name">VARIOUS</span>
+                                                        <span class="unit_album">TRAVELLER [트래블러 프로젝트]</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>                                            
+                                    </div>
+                                </div>
+                                
+                                 <div class="custom_paging_wrap">
+                                     <div class="custom_paging"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MD추천, 핫이슈 -->
+                    <div class="album_issue_wrap marginCenter bigdistance">
+                        <div class="album_wrap">
+                            <h3 class="record_video_tit none">MD 추천앨범</h3>                            
+                            <div class="category_tab">
+                                <ul>
+                                    <li class="active"><a href="javascript:;" >가요</a></li>
+                                    <li><a href="javascript:;">팝</a></li>
+                                    <li><a href="javascript:;">클래식</a></li>
+                                    <li><a href="javascript:;">영상</a></li>
+                                </ul>
+                            </div>
+                            <div class="category_slide_wrap">                                
+                                <!-- 가요 -->
+                                <div class="category_slide" style="display: block;">
+                                    <ul class="album_list">
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 팝 -->
+                                <div class="category_slide">
+                                    <ul class="album_list">
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 클래식 -->
+                                <div class="category_slide">
+                                    <ul class="album_list">
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img7.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img7.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img7.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img7.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 영상 -->
+                                <div class="category_slide">
+                                    <ul class="album_list">
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items top_margin">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>
+                                                    <span class="unit_singer">에피톤 프로젝트</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="issue_wrap">
+                            <h3 class="record_video_tit none">핫이슈</h3>
+                            <div class="category_tab">
+                                <ul>
+                                    <li class="active"><a href="javascript:;" >가요</a></li>
+                                    <li><a href="javascript:;">팝</a></li>
+                                    <li><a href="javascript:;">클래식</a></li>
+                                    <li><a href="javascript:;">영상</a></li>
+                                </ul>
+                            </div>
+                            <div class="category_slide_wrap">                                
+                                <!-- 가요 -->
+                                <div class="category_slide" style="display: block;">
+                                    <ul class="issue_list">
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img4.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 팝 -->
+                                <div class="category_slide">
+                                    <ul class="issue_list">
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">THE 2ND ALBUM RESONANCE...THE 2ND ALBUM RESONANCE...sdfsdf</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">sdfsdf</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 클래식 -->
+                                <div class="category_slide">
+                                    <ul class="issue_list">
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img6.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 영상 -->
+                                <div class="category_slide">
+                                    <ul class="issue_list">
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="items">
+                                            <a href="javascript:;" class="link">
+                                                <span class="albums_wrap">
+                                                    <span class="albums_img">
+                                                        <img src="../../images/new/@img8.png" alt="">
+                                                    </span>                                                    
+                                                    <span class="unit_texts">
+                                                        <span class="unit_name">에피톤 프로젝트</span>      
+                                                        <span class="unit_price_wrap only_english">    
+                                                            <span class="unit_price">20%</span>                                                    
+                                                            <span class="unit_percent">19,300</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

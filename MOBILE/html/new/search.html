@@ -30,9 +30,9 @@
 		$('.search_top .input_wrap input').focusin(function(){
 			$('.search_result_list_wrap').addClass('active');
 		})
-		$('.search_top .input_wrap input').focusout(function(){
-			$('.search_result_list_wrap').removeClass('active');
-		})
+		// $('.search_top .input_wrap input').focusout(function(){
+		// 	$('.search_result_list_wrap').removeClass('active');
+		// })
 		// 검색레이어 높이 
 		var search_result_list_H = $(window).height();
 		$('.search_result_list_wrap').css('height',search_result_list_H - 170);
