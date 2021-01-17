@@ -112,7 +112,9 @@
 .form_search_list_wrap .bx-controls-direction .bx-prev {float: left;}
 .form_search_list_wrap .bx-controls-direction .bx-next {float: right;}
 .form_search_list_wrap .bx-next {background-position: -88px 0px}
-.form_search_list_wrap .bx-next.disabled {background-position: -88px 0px}
+.form_search_list_wrap .bx-next.disabled {background-position: -132px 0px}
+.form_search_list_wrap .bx-prev {background-position: -44px 0px}
+.form_search_list_wrap .bx-prev.disabled {background-position: 0px 0px}
 .form_search_list_wrap .bx-pager{font-size:18px;color:#777;font-family:'font_gs', 'sans-serif';letter-spacing: 1px; text-align: center;position: absolute;bottom: 10px;left: 50%;margin-left: -20px;}
 .form_search_list_wrap .bx-pager strong{ color:#000; font-weight:700; margin-right:8px; font-size: inherit; font-family: inherit; min-width: 20px; display: inline-block;}
 

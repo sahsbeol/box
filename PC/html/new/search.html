@@ -48,12 +48,12 @@
 		});
 
 		
-		var obj = $('.form_search_list_wrap');
-		obj.click(function(){
-			alert('asd');
-			obj.not(this).removeClass('active');
+		// 타겟영역을 제외하고 클릭했을 시 검색레이어 슬라이드 닫기
+		$('body').on('click',function(e){
+			if(!$('.form_search_list_wrap').has(e.target).length){
+				$('.form_search_list_wrap').removeClass('active');
+			}
 		});
-		
 	
 
 		// 인기검색어 슬라이드
@@ -82,6 +82,8 @@
 		    controls:true,
 		    slideWidth:424,
 		    infiniteLoop: false,
+		    hideControlOnEnd:true,
+		    auto:false,
 		    touchEnabled:false,
             pager: true,
             pagerType: 'short',
