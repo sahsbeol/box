@@ -562,8 +562,8 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 팝업 */
 /* 쿠폰조회 */
-.orderandpay .tooltip_wrap .table02_v1 thead th{background: #FAFAFA;font-size: 13px;font-weight: 500;}
-.orderandpay .tooltip_wrap .tit01 {font-size:16px; font-weight:700;}
+.orderandpay .tooltip_wrap .table02_v1 thead th {background: #FAFAFA;font-size: 13px;font-weight: 500; text-align: center;}
+.orderandpay .tooltip_wrap .tit01 {font-size:18px; font-weight:700;}
 .orderandpay .tooltip_wrap .box_gray02 { background: #FAFAFA; border: 0 none; font-size: 18px;font-weight: 500; color: #000;   }
 
 .orderandpay .tooltip_wrap .choice_wrap .select_wrap { min-width: 164px; margin: 0 auto; max-width: max-content;}
@@ -673,8 +673,9 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .tooltip_wrap .table02 .choice_wrap .choice_wrap_inner {margin-left: 15px; display: block; float: left;   margin-top: 5px; line-height: 2;}
 .orderandpay .tooltip_wrap .table02 .choice_wrap .choice_wrap_inner:first-child {margin-left:0;}
-/*
 
+.orderandpay .table02 th, .orderandpay .table02 td {font-size: 13px; font-weight:500;color:#000;}
+.orderandpay .table02 th { background: #fafafa; }
 .orderandpay .table02.t_center tbody td {padding:17px 0;text-align:center;}
 .orderandpay .table02.cash {border-collapse:separate;border:1px solid #a31112}
 .orderandpay .table02.cash th {padding:5px;border-left:1px solid #eaeaea}
@@ -684,10 +685,11 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .table02.cash td.t_center {padding:0}
 .orderandpay .table02.cash.t_center th {text-align:center}
 .orderandpay .table02.cash.t_center td {padding:5px}
-.orderandpay .table02.cash tr.tfoot th {border-bottom:1px solid #eaeaea;background:#f5f5f5}
-.orderandpay .table02.cash tr.tfoot td {border-bottom:1px solid #eaeaea;background:#f5f5f5}
+.orderandpay .table02.cash tr.tfoot th {border-bottom:1px solid #eaeaea;background:#fafafa}
+.orderandpay .table02.cash tr.tfoot td {border-bottom:1px solid #eaeaea;background:#fafafa}
 .orderandpay .table02 input[type=checkbox] {vertical-align:middle}
-.orderandpay .table02 input[type=checkbox] + * {position:relative;top:1px;}*/
+.orderandpay .table02 input[type=checkbox] + * {position:relative;top:1px;}
+.orderandpay .block {display: block;}
 
 
 /* 고객센터_통합멤버십 회원 등급 및 혜택안내 table */
@@ -776,14 +778,14 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* search */
 .orderandpay .search_box02 {padding:40px 10px;text-align:center;border: 0 none;background:#f5f5f1;position: relative;}
-.orderandpay .search_box02 .stit {font-size: 0;font-weight: 700;vertical-align: middle;}
-.orderandpay .search_box02 .text_box {position:relative;display:inline-block;width: 584px;height: auto;padding: 5px 45px 5px 10px;vertical-align: middle;background: #fff;border-radius: 0;border: 2px #000 solid;}
+.orderandpay .search_box02 .stit {font-size: 18px; font-weight: 700;vertical-align: middle;}
+.orderandpay .search_box02 .text_box {position:relative;display:inline-block;width: 481px;height: auto;padding: 5px 45px 5px 10px;vertical-align: middle;background: #fff;border-radius: 0;border: 2px #000 solid;}
 .orderandpay .search_box02 .text_box input[type="text"] {width:100%;height: 36px;color:#000;font-size: 16px;border:0;background: #fff;outline:none;}
 .orderandpay .search_box02 .text_box .search_btn {position:absolute;top: 50%;margin-top: -15px;right: 10px;display:inline-block;width: 33px;height: 29px;background:url(../../images/new/icon_cs_search.png) no-repeat 50% 50%;}
 .orderandpay .search_box02 .text_box .search_btn span {display:inline-block;visibility:hidden;font-size:0;line-height:0}
 .orderandpay .search_box02 .text_box .exm_txt {position:absolute;top: 50%;margin-top: -15px;left: 10px;color: #BDBDBD;font-size: 14px;line-height:30px;}
 
-.orderandpay .search_box02 .wordlist {height:auto;line-height: normal;text-align: left;margin-left: 31px;}
+.orderandpay .search_box02 .wordlist {height:auto;line-height: normal;text-align: left;margin-left: 23px;}
 .orderandpay .search_box02 .wordlist .usualword {color:#777;font-weight: 400;position: relative;padding-right: 10px;margin-right: -4px;}
 .orderandpay .search_box02 .wordlist .usualword:after {content: '';display: block;width:1px;height:16px;background: #707070;position: absolute;top: 3px;right: 0;}
 .orderandpay .search_box02 .wordlist a {color:#000000; margin-left:15px;}
@@ -873,8 +875,40 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .paging .first , .orderandpay .paging .prev {margin-right:50px;}
 .orderandpay .paging .last, .orderandpay .paging .next02 {margin-left:50px;}
 
+/* 고객센터 - 전체보기 버튼 */
+.orderandpay .btn_more {font-size: 16px; font-weight: 700; padding-bottom: 7px; border-bottom: 1px #000 solid;}
+.orderandpay .s_title_wrap .s_title {float: left;}
+.orderandpay .s_title_wrap .btn_more {float: right; margin-top: 60px;}
+.orderandpay .s_title_wrap:after {content: ''; display: block; clear: both;}
 
-/* 음반,영상 미러링 */
+.orderandpay .bbs_list01 tbody td.t_left {text-align: left; padding-left:25px;} 
+
+
+/* paging */
+.orderandpay .cs.paging {margin-top: 50px;}
+.orderandpay .cs.paging ul li a {display: inline-block;font-size: 18px;font-weight: 500;font-family: 'font_gs','Apple SD Gothic Neo', sans-serif;border: 0;width: 40px;height: 40px;/* height: auto; */line-height: 1;padding: 13px 0 0px;box-sizing: border-box;vertical-align: top;}
+.orderandpay .cs.paging ul li.active a,
+.orderandpay .cs.paging ul li a:hover,
+.orderandpay .cs.paging ul li a:focus {background: #000;color: #fff;border:0;width: 40px;height: 40px;padding: 13px 0 0 0;border-radius: 20px;font-weight: 700;display: inline-block;vertical-align: top;}
+
+.orderandpay .cs.paging ul {display: inline-block;line-height: 1;}
+.orderandpay .cs.paging ul li {display:block;float: left;text-align: center;box-sizing: border-box;width: auto;height: auto;font-family: 'font_gs';font-size: 18px;line-height: 1;box-sizing: border-box;}
+
+.orderandpay .cs.paging .first,
+.orderandpay .cs.paging .next02,
+.orderandpay .cs.paging .prev,
+.orderandpay .cs.paging .last  {border:0; display:inline-block; width:15px; height:25px; background:url('../../images/biz/sub/icon_page_arr.png') no-repeat; background-size:60px 25px; margin-top: 8px;}
+.orderandpay .cs.paging .next02 {background-position:-30px 0;}
+.orderandpay .cs.paging .prev {background-position:-15px 0}
+.orderandpay .cs.paging .last {background-position:100% 0}
+.orderandpay .cs.paging .first {background-position:0 0}
+.orderandpay .cs.paging .first , .orderandpay .cs.paging .prev {margin-right:50px;}
+.orderandpay .cs.paging .last, .orderandpay .cs.paging .next02 {margin-left:50px;}
+
+
+
+
+/* 음반,영상 미러링 -------*/
 .orderandpay.record_video {width:100% !important;}
 .orderandpay .cut_size {overflow: hidden; max-width: 950px; margin: 0 auto;}
 .orderandpay .marginCenter { width:950px; margin:0 auto;}
@@ -1101,14 +1135,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .theme_wrap .theme_recommend_wrap .slick-prev.slick-disabled { background: url(../../images/new/icon_theme_prev_off.png) no-repeat 0 0;}
 .orderandpay .theme_wrap .theme_recommend_wrap .slick-prev {right: 22px;background: url(../../images/new/icon_theme_prev_on.png) no-repeat 0 0;}
 .orderandpay .theme_wrap .theme_recommend_wrap .theme_recommend_list:after {content: '';display:  inline-block; position:absolute; bottom:0; right:17px; width:1px;height:20px;background:rgba(0,0,0,.5);;}
-/*.orderandpay .theme_wrap .theme_recommend_wrap .slick-dots {position:  absolute;  bottom: 0; right: 0;}
-.orderandpay .theme_wrap .theme_recommend_wrap .slick-dots:after {content: ''; clear: both; display: block;}
-.orderandpay .theme_wrap .theme_recommend_wrap .slick-dots li {float:   left; display: none;}
-.orderandpay .theme_wrap .theme_recommend_wrap .slick-dots li.slick-active,
-.orderandpay .theme_wrap .theme_recommend_wrap .slick-dots li:last-child {display: block;}
-.orderandpay .theme_wrap .theme_recommend_wrap .slick-dots li button {border:none; outline: none; font-size:  18px; font-weight:700; font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important; vertical-align: middle; opacity:  .5;}
-.orderandpay .theme_wrap .theme_recommend_wrap .slick-dots li.slick-active button{ opacity:   1; } 
-*/
+
 .orderandpay .theme_wrap .theme_recommend_wrap .custom_paging_wrap {position: absolute; bottom:-1px; right:70px;}
 .orderandpay .theme_wrap .theme_recommend_wrap .custom_paging_wrap .custom_paging {font-size:   18px; font-weight: 700; color:rgba(0,0,0,.5);font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important; vertical-align: middle; }
 .orderandpay .theme_wrap .theme_recommend_wrap .custom_paging_wrap .custom_paging strong {color:rgba(0,0,0,1); padding:0 10px;}
@@ -1169,3 +1196,4 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .unit_name {display:block;margin-top: 19px;font-size: 16px;font-weight: 500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .unit_price_wrap .unit_price {font-size:inherit;}
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .unit_price_wrap .unit_percent {font-size:inherit; color:#DA2128; margin-left: 5px;}
+

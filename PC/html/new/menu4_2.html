@@ -1,6 +1,4 @@
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTDXHTML1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
     <!-- 태그 라이브러리 -->
@@ -17,7 +15,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=950">
     <title>통합포인트/예치금/쿠폰 | 회원FAQ | 고객센터 - HOTTRACKS</title>
-    
 <!-- 태그 라이브러리 -->
 
 
@@ -29,7 +26,7 @@
 
 
 
-<link href="../..../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
 
 <link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
 <link rel="apple-touch-startup-image" href="../../images/ico_app.png">
@@ -61,7 +58,6 @@
 <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
 
-
 <!-- 데이타 스토리  script--> 
 <script type="text/javascript">
 (function() {
@@ -81,60 +77,50 @@
 })();
 </script>
 
-    
-
 <script type="text/javascript">
-jQuery(function($){
-    
-    $("tbody tr td a.click").click(function(event) {
-        event.preventDefault(); // # 링크 이동 중지
-        
-        var selectHref = $(this).attr("href");
-        if($(selectHref).hasClass("on")){
-            $(selectHref).removeClass("on");
-        }else{
-            $(selectHref).addClass("on");
-            
-            var seq = $(this).siblings("input").val();
-            var hit = $("#faqHit" + seq);
-            var hitVal = parseInt(hit.text()) + 1;
-            hit.text(hitVal);
-            //setHit
-            $.ajax({
-                type: "GET"
-                ,url: "/ht/help/AjaxFFaqSetHit"
-                ,dataType: "html"
-                ,data:{seq:seq}
-            });  
-        }
+    jQuery(function ($) {
+        $("tbody tr td a.click").click(function (event) {
+            event.preventDefault(); // # 링크 이동 중지
+            var selectHref = $(this).attr("href");
+            if ($(selectHref).hasClass("on")) {
+                $(selectHref).removeClass("on");
+            } else {
+                $(selectHref).addClass("on");
+                var seq = $(this).siblings("input").val();
+                var hit = $("#faqHit" + seq);
+                var hitVal = parseInt(hit.text()) + 1;
+                hit.text(hitVal);
+                // setHit
+                $.ajax({
+                    type: "GET",
+                    url: "/ht/help/AjaxFFaqSetHit",
+                    dataType: "html",
+                    data: {
+                        seq: seq
+                    }
+                });
+            }
+            var selectData = $(this).parents('tr');
+        });
+        $("a.searchText").click(function (event) {
+            event.preventDefault(); // # 링크 이동 중지
+            $("form[name='faqSearchForm']").submit();
+        });
+        $("form[name='faqSearchForm'] .exm_txt").click(function () {
+            $("form[name='faqSearchForm'] .exm_txt").hide();
+            $("form[name='faqSearchForm'] input[name='title']").focus();
+        });
+        $("form[name='faqSearchForm'] input[name='title']").focus(function () {
+            $("form[name='faqSearchForm'] .exm_txt").hide();
+        });
+        $("form[name='faqSearchForm'] input[name='title']").blur(function () {
+            if ($(this).val() == "") {
+                $("form[name='faqSearchForm'] .exm_txt").show();
+            }
+        });
+        $("form[name='faqSearchForm'] input[name='title']").select();
     });
-    
-    
-    $("a.searchText").click(function(event) {
-        event.preventDefault(); // # 링크 이동 중지
-        
-        $("form[name='faqSearchForm']").submit();
-    });
-    
-    $("form[name='faqSearchForm'] .exm_txt").click(function(){
-        $("form[name='faqSearchForm'] .exm_txt").hide();
-        $("form[name='faqSearchForm'] input[name='title']").focus();
-    });
-    
-    $("form[name='faqSearchForm'] input[name='title']").focus(function(){
-        $("form[name='faqSearchForm'] .exm_txt").hide();
-    });
-    
-    $("form[name='faqSearchForm'] input[name='title']").blur(function(){
-        if($(this).val() == ""){
-            $("form[name='faqSearchForm'] .exm_txt").show();
-        }
-    });
-    
-    $("form[name='faqSearchForm'] input[name='title']").select();
-});
 </script>
-
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -155,1325 +141,246 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-
-<!-- 태그 라이브러리 -->
-
-
-
-
-
-
-
-
-
-<!-- 탑 텍스트 배너 -->
-
-    <div class="top_txtbnr">
-       <ul class="inner PC_MAIN_TOP_15_N">
-        
-        
-           <li><a href="http://www.hottracks.co.kr/e/63326">모바일 첫구매 3천원 쿠폰</a></li>
-        
-           <li><a href="http://www.hottracks.co.kr/e/68610">핫트랙스 물류배송 인기</a></li>
-        
-           <li><a href="http://www.hottracks.co.kr/p/8809718445972">NCT - [이어북+포토카드 콜렉팅북]</a></li>
-        
-           <li><a href="http://www.hottracks.co.kr/ht/biz/agit?agitTypeCd=C1511">별걸 다 리뷰하는 핫트연구소</a></li>
-        
-       </ul>
+    <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
+    <div style="text-align: center;">
+        <img src="../../images/new/@img_banner.png" alt=""> 
     </div>
 
-
-    <!-- 커튼 배너 -->
-    <div class="top_banner PC_MAIN_TOP_1" style="background-color:#7e68ff;">
-        <div class="inner">
-            <!-- 영역 -->
-                <style>
-/* 좌에서 우로 컬러 #코드 모두 수정 필수 */
-.top_banner {
-background: -webkit-linear-gradient(left,  #eaa62b 0%,#eaa62b 50%,#f5d7be 50%,#f5d7be 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right,  #eaa62b 0%,#eaa62b 50%,#f5d7be 50%,#f5d7be 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-}
-</style>
-<div class="top_banner_a type2">
-    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1760/1609396827763_201231_03.jpg" usemap="#top_map">
-            <map name="top_map">
-                <area onfocus="this.blur()" href="/e/71252" shape="rect" coords="5,8,438,76">
-                <area onfocus="this.blur()" href="/e/71476" shape="rect" coords="496,4,972,87">
-    </map>
-    <!-- 화이트 버튼 white로 / 블랙 버튼 black로 클래스 추가 -->
-    <a class="btn_close white" href="#none">닫기</a>
-</div>              
-            <!--// 영역 -->
-        </div>
-    </div>
-
-
-<div id="wrap" class="content_new">
-    
-<!-- 태그 라이브러리 -->
-
-
-
-
-
-
-
-
-
-<style>
-
-#header.fixed #gnb .keyword_list_v2 {display:none !important;}
-#gnb .keyword_list_v2{border: 1px solid #dbdbdb;box-sizing:border-box;border-radius: 20px;background: #fff;z-index: 10;width: 270px;position: relative;top: -70px;margin: 0 auto;left: 510px;padding: 20px 10px 30px 36px;display:none;-webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);-moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);}
-
-#gnb .keyword_list_v2 h5{color:#000;font-size: 15px;font-weight:bold;}
-#gnb .keyword_list_v2 .keyword_close {display:none; position:absolute;top: 17.5px;width:20px;height:20px;right: 33px;text-indent:-9999px;background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_closeb_top.png') 50% 50% no-repeat;}
-#gnb .keyword_list_v2 ul{margin-top: 20px;}
-#gnb .keyword_list_v2 ul li{position:relative;background: #fff;}
-#gnb .keyword_list_v2 ul li + li{margin-top:20px;}
-#gnb .keyword_list_v2 a {display:block;}
-#gnb .keyword_list_v2 a > *{display:inline-block; vertical-align:top;}
-#gnb .keyword_list_v2 .font_t{width:20px;color: #999;font-size: 12px;padding: 2px 0 0 0;font-weight: normal;vertical-align:top;position: inherit;}
-#gnb .keyword_list_v2 p{width:70%;font-size: 14px;/* margin: 10px 0 0 0; */line-height: 14px;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-#gnb .keyword_list_v2 span{position:absolute;min-width: 26px;text-align:center;padding-top:7px;right:20px;font-size: 8px;vertical-align:top;box-sizing:border-box;font-family:font_gs, sans-serif;}
-#gnb .keyword_list_v2 .new{font-weight:bold;color: #000000;letter-spacing: -0.1em;}
-#gnb .keyword_list_v2 .num{padding-top: 6px;}
-#gnb .keyword_list_v2 .num:before{content:'';position:absolute;right:50%;margin-right: -5px;top: -2px;width: 10px;height: 6px;}
-#gnb .keyword_list_v2 .num.up:before{background:url('../..../../images/biz/common/icon_updown.png') no-repeat;background-size: 20px 6px;}
-#gnb .keyword_list_v2 .num.down:before{background:url('../..../../images/biz/common/icon_updown.png') no-repeat;background-size: 20px 6px;background-position: -10px 0;}
-#gnb .keyword_list_v2 .txt{color: #777;font-size: 12px;padding-top: 10px;}
-#gnb .keyword_list_v2 .txt strong{font-weight: normal; font-family: 'font_gs', 'AppleGothic', sans-serif;}
-
-</style>
-<script type="text/javascript">
-jQuery(function($){
-    var ticker = function(){
-            timer = setTimeout(function(){
-                $('#ticker a:first').animate( {marginTop: '-34px'}, 400, function()
-                {
-                    $(this).detach().appendTo('#ticker').removeAttr('style');
-                });
-                ticker();
-            }, 2000);         
-    };
-    var autoplay = true;
-    ticker();
-    
-    /*var chkInt = sessionStorage.getItem('chkInt');
-    if (chkInt && chkInt<5) {
-            sessionStorage.setItem('chkInt', (parseInt(chkInt)+1));
-            $("input[name=exLink]").val($("input[name=exLink"+(parseInt(chkInt)+1)+"]").val());
-            $("input[name=exTxt]").val($("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
-            $("input[name=searchTerm]").attr("placeholder",$("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
-    }else{
-        sessionStorage.setItem('chkInt', 1);
-    }*/
-
-});
-$(document).ready(function(){
-    $(".keyword_wrap").mouseover(function(){
-      $(".keyword_list_v2").show();
-    });
-    $(".keyword_list_v2").mouseover(function(){
-      $(".keyword_list_v2").show();
-    });
-    $(".keyword_list_v2").mouseout(function(){
-      $(".keyword_list_v2").hide();
-    });
-    $('.keyword_close').click(function(){
-      $('.keyword_list_v2').hide();
-    });
-});
-function gnbSearchKerword(keyword){
-    document.location.href="/ht/biz/bizSearchMain?searchTerm="+keyword;
-};
-</script>
-<!-- header -->
-<div id="header">
-    <!-- util menu -->
-    <div class="util_menu">
-        <ul>
-            <li class="gnbLoginStat PC_MAIN_TOP_8_N" style="display:none;"><a href="http://www.hottracks.co.kr/ht/user/logout">로그아웃</a></li>
-            <li class="gnbLoginStat PC_MAIN_TOP_9_N" style="display:none;"><a href="http://www.hottracks.co.kr/ht/mypage/mypageMain">마이핫트랙스</a></li>
-            <li class="gnbLogoutStat PC_MAIN_TOP_2_N" style="display:none;"><a href="javascript://" onclick="login()">로그인</a></li>
-            <li class="gnbLogoutStat PC_MAIN_TOP_3_N" style="display:none;"><a href="http://www.hottracks.co.kr/ht/biz/mypage/loginForm?returnUrl=http://www.hottracks.co.kr/ht/mypage/mypageMain">주문조회</a></li>
-<!--            <li class="gnbLogoutStat PC_MAIN_TOP_4" style="display:none;"><a href="javascript://" onclick="goMemJoin()">회원가입</a></li> -->
-            <li class="icon_topcart PC_MAIN_TOP_14_N"><a href="http://www.hottracks.co.kr/ht/order/cart">장바구니</a></li>
-            <li class="PC_MAIN_TOP_5_N"><a href="http://www.hottracks.co.kr/ht/help/helpMain">고객센터</a></li>
-            <li class="PC_MAIN_TOP_7_N"><a href="http://www.hottracks.co.kr/company/story/sign" target="_blank">팬사인회</a></li>
-            <li class="PC_MAIN_TOP_6_N"><a href="http://www.hottracks.co.kr/company/main/" target="_blank">매장안내</a></li>
-        </ul>
-    </div>
-    <!--// util menu -->
-    <!-- gnb -->
-       <nav id="gnb">
-        <div class="header_wrap">
-            <h1 class="g_logo PC_MAIN_TOP_10"><a href="http://www.hottracks.co.kr/ht/biz/welcomeMain">HOTTRACKS</a></h1>
-            <!-- 신규 수정추가 -->
-            <ul class="gnb_bmenu">
-                
-                    
-                        
-                                <li class="PC_MAIN_GNB_12_N"><a href="http://www.hottracks.co.kr/ht/biz/sticker/stickerMain">
-                                    스티커샵
-                                <em></em></a></li>
-                            
-                    
-                        
-                                <li class="PC_MAIN_GNB_15_N"><a href="http://www.hottracks.co.kr/ht/biz/diary/main">
-                                    다이어리
-                                <em></em></a></li>
-                            
-                    
-                        
-                                <li class="PC_MAIN_GNB_13_N"><a href="http://www.hottracks.co.kr/e/66442">
-                                    멈춰주세요
-                                </a></li>
-                            
-                    
-                
-                      <li class="PC_MAIN_GNB_2_N"><a href="http://www.hottracks.co.kr/ht/biz/record/recordCategoryMain?ctgrId=0003">음반</a></li>
-            </ul>
-            
-            <div class="g_search">
-                
-                    
-                        
-                        
-                        
-                        
-                        <input type="hidden" name="exLink1" value="/e/71554"/>
-                        <input type="hidden" name="exTxt1" value="모나미 탑골세트가 떴다!"/>
-                    
-                        
-                        
-                        
-                        
-                        <input type="hidden" name="exLink2" value="/p/"/>
-                        <input type="hidden" name="exTxt2" value=""/>
-                    
-                        
-                        
-                        
-                        
-                        <input type="hidden" name="exLink3" value="/p/"/>
-                        <input type="hidden" name="exTxt3" value=""/>
-                    
-                        
-                        
-                        
-                        
-                        <input type="hidden" name="exLink4" value="/e/"/>
-                        <input type="hidden" name="exTxt4" value=""/>
-                    
-                        
-                        
-                        
-                        
-                        <input type="hidden" name="exLink5" value="/e/"/>
-                        <input type="hidden" name="exTxt5" value=""/>
-                    
-                
-                <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
-                <input type="hidden" name="exLink" value="/e/"/>
-                <input type="hidden" name="exTxt" value=""/>
-                    <div class="form_search">
-                        <input type="text" name="searchTerm" value="" placeholder="" title="검색어 키워드" autocomplete="off" >
-                        <div class="PC_MAIN_TOP_11_N"> 
-                            <a href="#" class="btn_search" onclick="gnbSrchFrm();return false;"></a>
-                        </div>
-                    </div>
-                </form>
-                <script type="text/javascript">
-                    $("input[name=exLink]").val($("input[name=exLink1]").val());
-                    $("input[name=exTxt]").val($("input[name=exTxt1]").val());
-                    $("input[name=searchTerm]").attr("placeholder",$("input[name=exTxt1]").val());
-                </script>
-                <div class="keyword_wrap" id="ticker">
-                    
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('스티커');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">1</em>
-                                <p>스티커</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('다이어리');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">2</em>
-                                <p>다이어리</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('NCT');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">3</em>
-                                <p>NCT</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">4</em>
-                                <p>필통</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('러브미모어');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">5</em>
-                                <p>러브미모어</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="num up">1</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('2021다이어리');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">6</em>
-                                <p>2021다이어리</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="num down">1</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('스터디플래너');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">7</em>
-                                <p>스터디플래너</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('달력');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">8</em>
-                                <p>달력</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('마스킹테이프');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">9</em>
-                                <p>마스킹테이프</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                            <a href="javascript:;" onclick="gnbSearchKerword('모트모트');return false;" class="PC_MAIN_TOP_12_N">
-                                <em class="font_t">10</em>
-                                <p>모트모트</p>
-                                <!-- ▲ up , ▼ down : class 추가 -->
-                                
-                                        <span class="txt">-</span>
-                                    
-                            </a>
-                        
-                    
-                </div>
+    <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
+    <div id="wrap" class="content_new">            
+        <!-- header -->
+        <div id="header">
+            <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
+            <div style="text-align: center;">
+                <img src="../../images/new/@img_gnb.png" alt=""> 
             </div>
-            
-            <!-- 인기검색레이어 -->
-            
-            
-                <div class="keyword_list_v2">
-                    <h5>인기 검색어</h5>
-                    <p class="txt"><strong>2021.01.04 09:00</strong> 기준</p>
-                    <a href="#none" class="keyword_close">닫기</a>
+        </div>
+        <!--// header -->    
+        <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
+        <!-- Container -->
+        <div id="container">
+            <!-- 컨텐츠 -->
+            <div class="content orderandpay" id="content">
+                <!-- 201228 작업부분 -->
+                <script type="text/javascript">
+                    jQuery(function ($) {
+                        $(document).ready(function () {
+                            $('#content').addClass('f_set'); // 폰트 및 간격 재설정
+                        });
+                    });
+                </script>
+                <!-- lnb -->
+                <!-- 201228 S : 작업부분 -->
+                <div class="lnb">  
+                    <!-- 201228 작업부분 -->
+                    <!-- sub top -->
+                        <div class="page_location"> <h2 class="title">
+                            <a href="javascript:;">고객센터</a>
+                        </h2>
+                    </div>
+                    <!-- //sub top -->
                     <ul>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('스티커');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">1.</em>
-                                    <p>스티커</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('다이어리');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">2.</em>
-                                    <p>다이어리</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('NCT');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">3.</em>
-                                    <p>NCT</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">4.</em>
-                                    <p>필통</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('러브미모어');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">5.</em>
-                                    <p>러브미모어</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span class="num up">1</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('2021다이어리');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">6.</em>
-                                    <p>2021다이어리</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span class="num down">1</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('스터디플래너');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">7.</em>
-                                    <p>스터디플래너</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('달력');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">8.</em>
-                                    <p>달력</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('마스킹테이프');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">9.</em>
-                                    <p>마스킹테이프</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="javascript:;" onclick="gnbSearchKerword('모트모트');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">10.</em>
-                                    <p>모트모트</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    
-                                            <span>-</span>
-                                        
-                                </a>
-                            </li>
-                        
+                        <li>
+                            <a>FAQ 통합검색</a>
+                        </li>
+                        <li>
+                            <a>공지사항</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/listNotice">공지사항</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/eventPrizeList">이벤트 당첨자</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>주문 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0391">주문결제</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0392">배송</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0393">반품/교환/환불</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0394">세금계산서/증빙</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>회원 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0401">회원정보</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a>
+                                </li><!-- 
+                                <li>
+                                    <a href="/ht/help/faqListC0403">상품문의</a>
+                                </li> -->
+                                <li>
+                                    <a href="/ht/help/faqListC0404">이벤트</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>기타 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0411">영업점</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0412">사이트이용/장애/기타</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>문의사항</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/vendorInquiry">상품입점문의</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/businessBuy">대량구매상담</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/ht/help/sosCounselMain">SOS상담</a>
+                        </li>
+                        <li>
+                            <a>서비스안내</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/memberShip">통합 멤버십</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/carvingService">각인 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/packingService">포장 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/cardInfo">제휴/할인 카드</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
-            
-            
-            <div class="g_menu">
-                <ul>
-                    <li class="icon_my">
-                        <a class="gnbLoginStat" style="display:none;" href="http://www.hottracks.co.kr/ht/mypage/mypageMain"><img src="../../images/biz/common/icon_my.png" alt=""></a>
-                        <a class="gnbLogoutStat" style="display:none;" href="javascript://" onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>                                                                                     
-                    </li>
-                    <li class="icon_today">
-                        <a href="http://www.hottracks.co.kr/ht/biz/mypage/todayBenefit" class="PC_MAIN_TOP_13">
-                            <img src="../../images/biz/common/icon_today.png" alt="">
-                            <em>오늘,<strong>혜택</strong></em>
-                        </a>
-                    </li>
-                    <li class="icon_cart">
-                        <a href="http://www.hottracks.co.kr/ht/order/cart" class="PC_MAIN_TOP_14">
-                            <img src="../../images/biz/common/icon_cart.png" alt="">
-                            
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="gnb_wrap">
-            <div class="inner">
-                <div class="category_wrap">
-                    <div class="btn_category PC_MAIN_GNB_1">
-                        <a href="javascript:;">카테고리</a>
+                <!-- // 201228 E : 작업부분 -->
+                <!-- //lnb -->
+                <!-- sub contents -->
+                <div class="sub_contents">
+                    <!-- <h3 class="page_title mgt0"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/tit_member_faq.gif" alt="회원 FAQ" /></h3> -->
+                    <h3 class="page_title mgt0">통합포인트/예치금/쿠폰 FAQ</h3>
+                    <!-- search -->
+                    <div class="search_box02">
+                        <form method="get" action="/ht/help/faqListC0391" name="faqSearchForm">
+                            <fieldset>
+                                <legend>회원 FAQ 검색</legend>
+                                <label for="search_faq" class="stit">회원 FAQ 검색</label>
+                                <span class="text_box">
+                                    <input type="text" id="search_faq" name="title" value="" title="검색어 입력"/>
+                                    <a href="#" class="search_btn searchText">
+                                        <span>검색</span>
+                                    </a>
+                                    <span class="exm_txt">검색어를 입력하세요</span>
+                                </span>
+                            </fieldset>
+                        </form>
                     </div>
-                    <div class="category_cont">
+                    <!-- search -->
+                    <!-- tab -->
+                    <!-- 201228 작업부분 -->
+                    <div class="tab1 text_large">
+                        <ul> 
+                            <li><a href="/ht/help/faqListC0401"><span>회원정보</span></a></li>
+                            <li><a href="/ht/help/faqListC0402" class="on" ><span>통합포인트/예치금/쿠폰</span></a></li>
+                            <li><a href="/ht/help/faqListC0403" ><span>상품문의</span></a></li>
+                            <li><a href="/ht/help/faqListC0404" ><span>이벤트</span></a></li> 
+                        </ul>
+                    </div>
+                    <!-- //tab -->
+                    <!-- list -->
+                    <!-- 201228 : S 작업부분 -->
+                    <table class="bbs_list01 tbl_slide">
+                        <caption></caption>
+                        <colgroup><!-- 201228 작업부분 -->
+                            <col width="160" />
+                            <col width="*">
+                        </colgroup>
+                        <thead>
+                            <tr><!-- 201228 작업부분 -->
+                                <!--<th scope="col" class="fir">번호</th>-->
+                                <th scope="col">구분</th>
+                                <th scope="col">제목</th>
+                                <!--<th scope="col" class="last">조회수</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- 201228 작업부분 -->
+                                <!-- <td>1</td> -->
+                                <td>통합포인트/쿠폰</td>
+                                <td class="t_left">
+                                    <a href="#faq0" class="click">환불 시 쿠폰/통합포인트는 어떻게 되나요?</a>
+                                    <input type="hidden" value="261"/>
+                                </td>
+                                <!-- 201228 작업부분 --><!-- <td id="faqHit261">306</td> -->
+                            </tr>
+                            <tr class="conts" id="faq0">
+                                <!-- 201228 작업부분 -->
+                                <td colspan="2">
+                                    <div class="txt">
+                                        <P>&nbsp;주문 결제 시 사용하신 쿠폰 및 통합포인트는 환불(부분환불) 시, 아래의 기준에 따라 환불 진행됩니다.</P> 
+                                        <P>&nbsp;</P>
+                                        <P>&nbsp;(품절, 불량 등의 당사 귀책사유 포함)</P>
+                                        <P>&nbsp;</P>
+                                        <P>&nbsp;1) 상품쿠폰 : 쿠폰적용 상품이 취소 될 경우 상품쿠폰 &gt; 포인트 &gt; 기타결제수단 순서로 환불</P>
+                                        <P>&nbsp;</P>
+                                        <P>&nbsp;2) 장바구니쿠폰/통합포인트</P>
+                                        <P>&nbsp;</P>
+                                        <P>&nbsp; - 환불 후 장바구니 금액이 쿠폰 적용 기준보다 낮아질 경우 쿠폰 &gt; 포인트 &gt; 기타결제수단 순서로 환불</P>
+                                        <P>&nbsp;</P>
+                                        <P>&nbsp; - 환불 후 장바구니 금액이 쿠폰 적용 기준보다 높을 경우 포인트 &gt; 기타결제수단 순서로 환불</P>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- //list -->
+                    <!-- paging -->
+                    <div class="paging cs mgt40">
+                        <a title="맨 처음 페이지로 이동" href="/ht/help/faqListC0391?page=1" class="first">처음</a>
                         <ul>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000020" class="dp1" value="000020">디자인문구</a>                              
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000022" class="dp1" value="000022">디지털</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000007" class="dp1" value="000007">고급필기구</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000021" class="dp1" value="000021">오피스</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000025" class="dp1" value="000025">리빙/생활가전</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000026" class="dp1" value="000026">키친/푸드</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000024" class="dp1" value="000024">가구/수납</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000028" class="dp1" value="000028">패션잡화</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000006" class="dp1" value="000006">뷰티/헬스</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000027" class="dp1" value="000027">여행/자동차</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000023" class="dp1" value="000023">취미/펫</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000029" class="dp1" value="000029">유아동</a>
-                            </li>
-<!--                            <li> -->
-<!--                                <a href="/ht/biz/eventDetail?eventId=47389" class="dp1 c_call" value="999999">직수입/PB</a> -->
-<!--                            </li> -->
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/record/recordCategoryMain?ctgrId=0003" class="dp1" value="0003">CD/LP</a>
-                            </li>
-                            <li class="PC_SIDE_CATE_1">
-                                <a href="/ht/biz/record/dvdCategoryMain?ctgrId=000401" class="dp1" value="000401">DVD/BLU-RAY</a>
+                            <li class="active">
+                                <a href="javascript://">1</a>
                             </li>
                         </ul>
-                        <div class="banner PC_SIDE_CATE_IMG" id="gnbLbrnImgDiv">
-<!--                            <a href="#"><img src="" alt=""></a>                              -->
-                        </div>
+                        <a title="맨 나중 페이지로 이동" href="/ht/help/listNotice?page=1" class="next02">나중</a>
                     </div>
+                    <!-- //paging -->
                 </div>
-                <ul class="gnb_menu">
-                    <li class="PC_MAIN_GNB_8_N"><a id="gnbEvent" href="http://www.hottracks.co.kr/ht/biz/hotEventMain">이벤트</a></li>
-                    <li class="PC_MAIN_TOP_13_N"><a id="gnbTodayBenefit" href="http://www.hottracks.co.kr/ht/biz/mypage/todayBenefit">쿠폰&amp;혜택</a></li>
-                    <li class="PC_MAIN_GNB_9_N"><a id="gnbPersonalRecommend" href="http://www.hottracks.co.kr/ht/biz/personal/personalRecommend">추천</a></li>
-                    <li class="PC_MAIN_GNB_4_N"><a id="gnbBest" href="http://www.hottracks.co.kr/ht/biz/welcome/hotAwardPage">베스트</a></li>
-                    <li class="PC_MAIN_GNB_5_N"><a id="gnbFree" href="http://www.hottracks.co.kr/ht/biz/welcome/hotFreeDeliveryPage">무료배송</a></li>
-                    <li class="PC_MAIN_GNB_6_N"><a id="gnbNew" href="http://www.hottracks.co.kr/ht/biz/welcome/hotAwardRecentPage">신상</a></li>
-                    <li class="PC_MAIN_GNB_7_N"><a id="gnbSale" href="http://www.hottracks.co.kr/ht/biz/welcome/hotAwardPage?dispMstrId=CATE_GFT_SALE">할인</a></li>
-                </ul>
-                <ul class="sub_menu">
-                    <li class="PC_MAIN_GNB_10_N"><a id="gnbLifeMain" href="http://www.hottracks.co.kr/ht/biz/life/lifeMain">이럴 때,</a></li>
-                    <li class="PC_MAIN_GNB_11_N"><a id="gnbAgit" href="http://www.hottracks.co.kr/ht/biz/agit">아지트</a></li>
-                    <li class="PC_MAIN_GNB_14_N"><a id="gnbNews" href="http://www.hottracks.co.kr/ht/idol/news">뮤직매거진</a></li>
-                </ul>
+                <!-- //sub contents -->
+                <!--// 201228 : E 작업부분 -->
             </div>
-        </div>
-    </nav>
-</div>
-<!--// header -->
-<script type="text/javascript">
-var vid = getCookie('UserCookieKey');
-if (isEmpty(vid)) {//로그인이 안되있으면
-    $('.gnbLogoutStat').show();
-    $('.gnbLoginStat').hide();
-} else {
-    $('.gnbLogoutStat').hide(); 
-    $('.gnbLoginStat').show();
-    $(".gnbMypageBtn").find(".inner").addClass("member");
-}
-</script>
-    
-    
-    
-    
- <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
-    <!-- Container -->
-        <div id="container" >   
-            <!-- 컨텐츠 -->        
-            <div class="content orderandpay" id="content">
-
-
-
-
-
-
-
-<script type="text/javascript">
-jQuery(function($){
-    $(document).ready(function(){
-        $('#content').addClass('f_set');//폰트 및 간격 재설정
-    });
-});
-</script>
-            <!-- lnb -->
-            <!-- 201228 S : 작업부분 -->
-            <div class="lnb">
-                <!-- 201228 작업부분 -->    
-                <!-- sub top -->
-                <div class="page_location">
-                    <h2 class="title"><a href="javascript:;">고객센터</a></h2>
-                </div>
-                <!-- //sub top -->
-                <ul>
-                    <li>
-                        <a>FAQ 통합검색</a>
-                    </li>
-                    <li>
-                        <a>공지사항</a>
-                        <ul class="depth2">
-                            <li>
-                                <a href="/ht/help/listNotice">공지사항</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/eventPrizeList">이벤트 당첨자</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>주문 FAQ</a>
-                        <ul class="depth2">
-                            <li>
-                                <a href="/ht/help/faqListC0391">주문결제</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/faqListC0392">배송</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/faqListC0393">반품/교환/환불</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/faqListC0394">세금계산서/증빙</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>회원 FAQ</a>
-                        <ul class="depth2">
-                            <li>
-                                <a href="/ht/help/faqListC0401">회원정보</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a>
-                            </li><!-- 
-                            <li>
-                                <a href="/ht/help/faqListC0403">상품문의</a>
-                            </li> -->
-                            <li>
-                                <a href="/ht/help/faqListC0404">이벤트</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>기타 FAQ</a>
-                        <ul class="depth2">
-                            <li>
-                                <a href="/ht/help/faqListC0411">영업점</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/faqListC0412">사이트이용/장애/기타</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>문의사항</a>
-                        <ul class="depth2">
-                            <li>
-                                <a href="/ht/help/vendorInquiry">상품입점문의</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/businessBuy">대량구매상담</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/ht/help/sosCounselMain">SOS상담</a>
-                    </li>
-                    <li>
-                        <a>서비스안내</a>
-                        <ul class="depth2">
-                            <li>
-                                <a href="/ht/help/memberShip">통합 멤버십</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/carvingService">각인 서비스</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/packingService">포장 서비스</a>
-                            </li>
-                            <li>
-                                <a href="/ht/help/cardInfo">제휴/할인 카드</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- // 201228 E : 작업부분 -->
-            <!-- //lnb -->
-
-<!-- sub contents -->
-<div class="sub_contents">
-    
-            <!-- <h3 class="page_title mgt0"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/tit_member_faq.gif" alt="회원 FAQ" /></h3> -->
-            <h3 class="page_title mgt0">회원 FAQ</h3>
-        
-    <!-- search -->
-    <div class="search_box02">
-        <form method="get" action="/ht/help/faqListC0402" name="faqSearchForm">
-            <fieldset>
-                <legend>FAQ Search</legend>
-                <label for="search_faq" class="stit">FAQ Search</label>
-                <span class="text_box">
-                    <input type="text" id="search_faq" name="title" value="" title="검색어 입력" />
-                    <a href="#" class="search_btn searchText"><span>검색</span></a>
-                    <span class="exm_txt">검색어를 입력하세요</span>
-                </span>
-            </fieldset>
-        </form>
-    </div>
-    <!-- search -->
-
-    <!-- tab --> 
-    <!-- 201228 작업부분 -->
-    <div class="tab1 text_large">
-        
-                <ul> 
-                    <li><a href="/ht/help/faqListC0401" ><span>회원정보</span></a></li>
-                    <li><a href="/ht/help/faqListC0402" class="on"><span>통합포인트/예치금/쿠폰</span></a></li>
-                    <li><a href="/ht/help/faqListC0403" ><span>상품문의</span></a></li>
-                    <li><a href="/ht/help/faqListC0404" ><span>이벤트</span></a></li> 
-                </ul>
-             
-    </div>
-    <!-- //tab -->
-    <!-- list -->
-    <!-- 201228 : S 작업부분 -->
-    <table class="bbs_list01 tbl_slide">
-        <caption></caption>
-        <colgroup><!-- 201228 작업부분 -->
-            <col width="160" />
-            <col width="*">
-        </colgroup>
-        <thead>
-            <tr><!-- 201228 작업부분 -->
-                <!--<th scope="col" class="fir">번호</th>-->
-                <th scope="col">구분</th>
-                <th scope="col">제목</th>
-                <!--<th scope="col" class="last">조회수</th>-->
-            </tr>
-        </thead>
-        <tbody>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>1</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq0" class="click">환불 시 쿠폰/통합포인트는 어떻게 되나요?</a>
-                        <input type="hidden" value="261"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit261">306</td> -->
-                </tr>
-                <tr class="conts" id="faq0">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P>&nbsp;주문 결제 시 사용하신 쿠폰 및 통합포인트는 환불(부분환불) 시, 아래의 기준에 따라 환불 진행됩니다.</P>
-<P>&nbsp;</P>
-<P>&nbsp;(품절, 불량 등의 당사 귀책사유 포함)</P>
-<P>&nbsp;</P>
-<P>&nbsp;1) 상품쿠폰 : 쿠폰적용 상품이 취소 될 경우 상품쿠폰 &gt; 포인트 &gt; 기타결제수단 순서로 환불</P>
-<P>&nbsp;</P>
-<P>&nbsp;2) 장바구니쿠폰/통합포인트</P>
-<P>&nbsp;</P>
-<P>&nbsp; - 환불 후 장바구니 금액이 쿠폰 적용 기준보다 낮아질 경우 쿠폰 &gt; 포인트 &gt; 기타결제수단 순서로 환불</P>
-<P>&nbsp;</P>
-<P>&nbsp; - 환불 후 장바구니 금액이 쿠폰 적용 기준보다 높을 경우 포인트 &gt; 기타결제수단 순서로 환불</P></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>2</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq1" class="click">2만원 이상 구매시 추가 통합포인트를 받을 수 없는 경우는 어떻게 되나요?</a>
-                        <input type="hidden" value="114"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit114">660</td> -->
-                </tr>
-                <tr class="conts" id="faq1">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US>2</SPAN><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">만원 이상 구매시 추가 통합 포인트는 </SPAN><STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: red; FONT-SIZE: 9pt; mso-bidi-font-family: 굴림">실버<SPAN lang=EN-US>, </SPAN>골드<SPAN lang=EN-US>, </SPAN>플래티넘 회원에게만 </SPAN></STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">적용되며<SPAN lang=EN-US>, <xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">프렌즈등급 회원에게는 추가 통합포인트를 제공하지 않습니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></P>
-<P>
-<P>&nbsp;</P></P></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>3</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq2" class="click">2만원 이상 구매시 추가 통합포인트는 어떻게 받나요?</a>
-                        <input type="hidden" value="113"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit113">1283</td> -->
-                </tr>
-                <tr class="conts" id="faq2">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">한 장바구니에 담긴 주문건의 실결제액이<SPAN lang=EN-US> 2</SPAN>만원 이상일 때<SPAN lang=EN-US>, <xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">플래티넘 회원은<SPAN lang=EN-US> 4%, </SPAN>골드 회원은<SPAN lang=EN-US> 3%,</SPAN>실버 회원은<SPAN lang=EN-US> 2%</SPAN>의 추가 통합포인트를<SPAN lang=EN-US>&nbsp;</SPAN>부여합니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US>(</SPAN><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">결제<SPAN lang=EN-US> 1</SPAN>건당 산정<SPAN lang=EN-US>, </SPAN>동일 날짜의 주문번호 혹은 영수증 합산불가<SPAN lang=EN-US>)<o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">추가 통합포인트는 실결제액을 기준으로 부여하며<SPAN lang=EN-US>,<o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">통합포인트<SPAN lang=EN-US>&nbsp;</SPAN>사용액이나 할인쿠폰 사용액<SPAN lang=EN-US>, </SPAN>배송비는 추가 통합포인트<SPAN lang=EN-US>&nbsp;</SPAN>부여대상에서 제외됩니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">현재<SPAN lang=EN-US>&nbsp;</SPAN>통합포인트 사용분에 대한 이중적립은 시행하고 있지 않습니다<SPAN lang=EN-US>. </SPAN>양해해 주시기 바랍니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US>- </SPAN><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">실결제액 예시<SPAN lang=EN-US> - <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">①<SPAN lang=EN-US> 2</SPAN>만<SPAN lang=EN-US> 4</SPAN>천원 결제시<SPAN lang=EN-US>= 1</SPAN>만<SPAN lang=EN-US> 8</SPAN>천원 현금결제<SPAN lang=EN-US>, 5</SPAN>천원<SPAN lang=EN-US>&nbsp;</SPAN>포인트 사용<SPAN lang=EN-US>, 1</SPAN>천원 할인쿠폰 사용<SPAN lang=EN-US> (</SPAN>실결제액 </SPAN><STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #0900ff; FONT-SIZE: 9pt; mso-bidi-font-family: 굴림" lang=EN-US>1</SPAN></STRONG><STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #0900ff; FONT-SIZE: 9pt; mso-bidi-font-family: 굴림">만<SPAN lang=EN-US> 8</SPAN>천원</SPAN></STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US>) </SPAN><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">⇒ </SPAN><STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: red; FONT-SIZE: 9pt; mso-bidi-font-family: 굴림">추가 미적립</SPAN></STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US><o:p></o:p></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">②<SPAN lang=EN-US> 2</SPAN>만<SPAN lang=EN-US> 1</SPAN>천원 결제시<SPAN lang=EN-US>= 2</SPAN>만원 신용카드 결제<SPAN lang=EN-US>, 1</SPAN>천원 할인쿠폰 사용<SPAN lang=EN-US> (</SPAN>실결제액 </SPAN><STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #0900ff; FONT-SIZE: 9pt; mso-bidi-font-family: 굴림" lang=EN-US>2</SPAN></STRONG><STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #0900ff; FONT-SIZE: 9pt; mso-bidi-font-family: 굴림">만원</SPAN></STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US>) </SPAN><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">⇒ </SPAN><STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: red; FONT-SIZE: 9pt; mso-bidi-font-family: 굴림">추가 적립</SPAN></STRONG><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US><o:p></o:p></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt" lang=EN-US>- </SPAN><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">유의사항<SPAN lang=EN-US> - <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">※ 추가 통합포인트는 발송완료시점에 적립됩니다<SPAN lang=EN-US>.<o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">※ 반품시에는 해당 반품상품에 대한 통합포인트와 추가 통합포인트가 회수되며<SPAN lang=EN-US>,<o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">반품으로 인해 실결제액이<SPAN lang=EN-US> 2</SPAN>만원 이하로 남게 될 경우 적립받은 추가 통합포인트가 모두 회수될 수 있습니다<SPAN lang=EN-US>.<o:p></o:p></SPAN></SPAN></P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>4</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq3" class="click">2만원 이상 구매시 받은 추가 통합포인트는 어디서 확인하나요?</a>
-                        <input type="hidden" value="115"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit115">825</td> -->
-                </tr>
-                <tr class="conts" id="faq3">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">현재<SPAN lang=EN-US> 2</SPAN>만원 이상 구매시 추가 통합포인트는 기본 통합포인트에 자동합산 되어 적립됩니다<SPAN lang=EN-US>. <xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">장바구니에 담긴 상품별 통합포인트가 기본 통합포인트이며<SPAN lang=EN-US>, </SPAN>결제가 완료되어 결제완료 페이지에는<SPAN lang=EN-US> <BR></SPAN>기본 통합포인트가 아닌 상품별로 통합포인트가 추가된 합산된 금액으로 확인하실 수 있습니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">결제완료 페이지를 놓치셨다면 마이핫트랙스<SPAN lang=EN-US>&gt;</SPAN>주문<SPAN lang=EN-US>/</SPAN>배송조회<SPAN lang=EN-US>&gt;</SPAN>상세내역에서도 동일하게 확인하실 수 있습니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">발송완료와 함께 발송순서에 따라 주문<SPAN lang=EN-US>/</SPAN>배송조회에 안내된 통합포인트가 부여되며<SPAN lang=EN-US>, <o:p></o:p></SPAN></SPAN></P>
-<P style="LINE-HEIGHT: 18pt"><SPAN style="FONT-FAMILY: 돋움; COLOR: #252525; FONT-SIZE: 9pt">적립완료된 통합포인트는 마이핫트랙스<SPAN lang=EN-US>&gt;</SPAN>계좌정보<SPAN lang=EN-US>&gt;</SPAN>통합포인트에서 확인하실 수 있습니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>5</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq4" class="click">통합포인트 내역에 ‘대체손실금’이라는 것은 뭔가요?</a>
-                        <input type="hidden" value="147"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit147">351</td> -->
-                </tr>
-                <tr class="conts" id="faq4">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕">반품이나 주문취소를 하게 되면<SPAN lang=EN-US>, </SPAN>해당 상품에 부여된 통합포인트를 다시 회수하게 되는데<SPAN lang=EN-US>, <xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></FONT></FONT></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕">고객님의 사용가능 잔액이 <SPAN lang=EN-US>(</SPAN>이미 사용을 완료하여<SPAN lang=EN-US>) </SPAN>회수대상액보다 작을 경우<SPAN lang=EN-US>, </SPAN></FONT></FONT></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕">모자라는 금액이 발생하게 됩니다<SPAN lang=EN-US>. </SPAN></FONT></FONT></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕">해당 금액을 <SPAN lang=EN-US>‘</SPAN>대체손실금<SPAN lang=EN-US>’</SPAN>이란 내역으로 노출하고 있습니다<SPAN lang=EN-US>. </SPAN></FONT></FONT></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕"><SPAN lang=EN-US><o:p></o:p></SPAN></FONT></FONT></SPAN>&nbsp;</P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><STRONG><FONT color=#6600ff>해당 내역은 <SPAN style="mso-spacerun: yes">&nbsp;</SPAN>다음 주문 혹은 구매시 통합포인트가 적립될 경우 해당 금액을 채우고 나머지 금액을 적립되게 됩니다<SPAN lang=EN-US>.</SPAN></FONT></STRONG></SPAN></FONT></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT color=#000000><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"></SPAN></FONT></FONT><FONT color=#000000><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><SPAN lang=EN-US>&nbsp;‘</SPAN>대체손실금<SPAN lang=EN-US>’</SPAN>을 보유한 경우 탈퇴에 제한이 있을 수 있습니다<SPAN lang=EN-US>. </SPAN></SPAN></FONT></FONT></P></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>6</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq5" class="click">회원통합을 하지 않는다면,'통합포인트'가 아닌 '마일리지'로 적립 받을 수 있나요?</a>
-                        <input type="hidden" value="146"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit146">818</td> -->
-                </tr>
-                <tr class="conts" id="faq5">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT color=#000000><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US>2012.11.01 </SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">이후 발송준비 상품부터는 적립은 모두<SPAN lang=EN-US> '</SPAN>통합포인트<SPAN lang=EN-US>'</SPAN>로 자동적립됩니다<SPAN lang=EN-US>. <xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></SPAN></FONT></FONT></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕">마일리지의 적립은<SPAN lang=EN-US> 2012</SPAN>년<SPAN lang=EN-US> 10</SPAN>월<SPAN lang=EN-US> 31</SPAN>일부로<SPAN lang=EN-US>, </SPAN>종료되어 사용만 가능합니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></FONT></FONT></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT color=#000000><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US>2012</SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">년<SPAN lang=EN-US> 11</SPAN>월<SPAN lang=EN-US> 1</SPAN>일부로 교보문고/핫트랙스 전 구매처에서 새로운 멤버십 제도가 오픈하게 되는 것이기 때문에<SPAN lang=EN-US>, </SPAN>자동으로 통합포인트로 적립받게 됩니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></FONT></FONT></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT color=#000000 face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕">핫트랙스 상품에 대해 구매시 적립받고자 할 경우에는 반드시 <SPAN lang=EN-US>‘</SPAN>교보문고<SPAN lang=EN-US>&amp;</SPAN>핫트랙스 통합회원<SPAN lang=EN-US>’</SPAN>이셔야 적립이 되며<SPAN lang=EN-US>, </SPAN>통합회원이 아닐 경우에는 핫트랙스 상품 구매시 비회원 처리됩니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></FONT></FONT></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT color=#000000 face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT color=#000000><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">회원통합 처리는 영업점의 무인가입기<SPAN lang=EN-US>, </SPAN>혹은 핫트랙스 온라인몰에서 통합약관 동의를 하시면 자동으로 통합회원으로 변경됩니다<SPAN lang=EN-US>. </SPAN></SPAN></FONT></FONT></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT color=#000000><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><SPAN lang=EN-US><A class=tx-link href="http://www.kyobobook.co.kr/member/joinAgreement.laf" target=_blank><FONT color=#6600ff><STRONG>(▶</STRONG></FONT></A></SPAN><A class=tx-link href="http://www.kyobobook.co.kr/member/joinAgreement.laf" target=_blank><FONT color=#6600ff><STRONG>통합약관 동의하러 가기</STRONG></FONT></A><SPAN lang=EN-US><A class=tx-link href="http://www.kyobobook.co.kr/member/joinAgreement.laf" target=_blank><FONT color=#777777> </FONT></A>?)</SPAN></SPAN></FONT></FONT></P>
-<P style="TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt" class=MsoNormal align=left><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000>적립받지 못한 구매<SPAN lang=EN-US> 30</SPAN>일 이내 영수증은 인터넷 교보문고/핫트랙스 온라인몰 </FONT></SPAN><FONT color=#000000><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">에서 적립받을 수 있습니다<SPAN lang=EN-US>. ( <A class=tx-link href="http://www.kyobobook.co.kr/event/memberBenefit.laf?page=40" target=_blank><STRONG><FONT color=#6600ff>▶영수증 적립 바로가기</FONT></STRONG></A>)<o:p></o:p></SPAN></SPAN></FONT></FONT></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT color=#000000 face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#000000><FONT face="맑은 고딕">단<SPAN lang=EN-US>, </SPAN>반품 및 주문취소의 경우에만 마일리지 사용금액은 마일리지로<SPAN lang=EN-US>, </SPAN>통합포인트를 사용한 금액은 통합포인트로 환원됩니다<SPAN lang=EN-US>. (</SPAN>구매시 마일리지 적립이 되었던 상품 반품<SPAN lang=EN-US>,</SPAN>주문취소시 마일리지에서 해당금액 회수<SPAN lang=EN-US>, </SPAN>통합포인트 적립이 되었던 상품 반품<SPAN lang=EN-US>, </SPAN>주문취소시 통합포인트에서 해당 금액 회수<SPAN lang=EN-US>)</SPAN></FONT></FONT></SPAN></P>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>7</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq6" class="click">통합포인트를 사용해서 구매한 상품의 반품시에는 유효기간은 어떻게 되나요?</a>
-                        <input type="hidden" value="145"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit145">263</td> -->
-                </tr>
-                <tr class="conts" id="faq6">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕"><STRONG><SPAN style="COLOR: #3a32c3">사용시 잔여 유효기간에 따라</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US>, </SPAN><SPAN style="COLOR: #3a32c3">재적립 시에 재설정 됩니다</SPAN><SPAN lang=EN-US><SPAN style="COLOR: #3a32c3">.</SPAN></SPAN></STRONG></FONT></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">유효기간 마지막 날 사용하였을 경우에는<SPAN lang=EN-US> 1</SPAN>일의 사용기한을 더 드립니다<SPAN lang=EN-US>.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN><xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></FONT></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">사용한 적립금의 유효기간이 여러 개인 경우 가장 긴 유효기간을 따라 환원됩니다<SPAN lang=EN-US>. </SPAN></FONT></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕"><SPAN lang=EN-US><o:p></o:p></SPAN></FONT></SPAN>&nbsp;</P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US>(</SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">예<SPAN lang=EN-US>) 2012-11-15</SPAN>일 구매사용시 잔여 유효기간이<SPAN lang=EN-US> 5</SPAN>일이었다면<SPAN lang=EN-US>, <o:p></o:p></SPAN></SPAN></FONT></P><SPAN style="FONT-FAMILY: '맑은 고딕'; FONT-SIZE: 9pt; mso-ascii-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast; mso-bidi-font-family: 'Times New Roman'; mso-fareast-theme-font: minor-fareast; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: KO; mso-bidi-language: AR-SA" lang=EN-US><SPAN style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </SPAN>2012-12-01</SPAN><SPAN style="FONT-FAMILY: '맑은 고딕'; FONT-SIZE: 9pt; mso-ascii-theme-font: minor-fareast; mso-hansi-theme-font: minor-fareast; mso-bidi-font-family: 'Times New Roman'; mso-fareast-theme-font: minor-fareast; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: KO; mso-bidi-language: AR-SA">일 반품완료시 유효기한은<SPAN lang=EN-US> 2012-12-05</SPAN>일까지<SPAN lang=EN-US> 5</SPAN>일을 드립니다<SPAN lang=EN-US>.</SPAN></SPAN>
-<P>&nbsp;</P></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>8</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq7" class="click">통합포인트도 유효기간이 있나요?</a>
-                        <input type="hidden" value="144"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit144">1050</td> -->
-                </tr>
-                <tr class="conts" id="faq7">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><DD id=submenu5>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕"><STRONG><U><FONT color=#4641d9><SPAN style="COLOR: #3a32c3">통합포인트의 유효기간은</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US> 1</SPAN><SPAN style="COLOR: #3a32c3">년 입니다</SPAN></FONT><SPAN style="COLOR: #3a32c3" lang=EN-US><FONT color=#4641d9>.</FONT> </SPAN></U></STRONG></FONT></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">월<SPAN lang=EN-US> 1</SPAN>회 자동소멸되며<SPAN lang=EN-US>, </SPAN>유효기간은 적립일의<SPAN lang=EN-US> 12</SPAN>개월 후 해당월의 말일입니다<SPAN lang=EN-US>.<xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></FONT></SPAN></P>
-<P><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"></SPAN>&nbsp;</P>
-<P><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">예<SPAN lang=EN-US>) 2018.11.05 </SPAN>적립받은 통합포인트의 유효기간<SPAN lang=EN-US>&gt; 2019.11.30 23</SPAN>시까지 사용가능 <SPAN lang=EN-US><o:p></o:p></SPAN></FONT></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><SPAN style="mso-spacerun: yes">&nbsp;&nbsp; </SPAN>2018.12.27 </SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">적립받은 통합포인트의 유효기간<SPAN lang=EN-US>&gt; 2019.12.31 23</SPAN>시까지 사용가능<SPAN lang=EN-US><o:p></o:p></SPAN></SPAN></FONT></P>
-<P><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕"><STRONG><FONT color=#4641d9><SPAN style="COLOR: #3a32c3">유효기간은&nbsp;핫트랙스 온라인몰&nbsp;마이핫트랙스</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US>&gt;</SPAN><SPAN style="COLOR: #3a32c3">계좌정보</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US>&gt;</SPAN><SPAN style="COLOR: #3a32c3">통합포인트 내역에서 확인할 수 있으며</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US>, </SPAN><SPAN style="COLOR: #3a32c3">유효만료된 포인트는 자동으로 사용할 수 없게 되며</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US>, </SPAN><SPAN style="COLOR: #3a32c3">복원되지 않습니다</SPAN><SPAN lang=EN-US><SPAN style="COLOR: #3a32c3">.</SPAN><o:p></o:p></SPAN></FONT></STRONG></FONT></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P>
-<P><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">기존 마일리지<SPAN lang=EN-US>(3</SPAN>년<SPAN lang=EN-US>)</SPAN>과 통합포인트<SPAN lang=EN-US>(1</SPAN>년<SPAN lang=EN-US>)</SPAN>는 유효기간이 다르기 때문에 소멸은 각각 진행됩니다<SPAN lang=EN-US>.<o:p></o:p></SPAN></FONT></SPAN></P>
-<P><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">마일리지는 <SPAN lang=EN-US>36</SPAN>개월이 지난 월의 말일<SPAN lang=EN-US>24</SPAN>시에 소멸처리 됩니다<SPAN lang=EN-US>. </SPAN></FONT></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"></SPAN>&nbsp;</P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#4641d9 face="맑은 고딕"><SPAN lang=EN-US><STRONG>※ 소멸안내메일 및 SMS를 받으시려면?</STRONG></SPAN></FONT></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">마일리지의 소멸예정금액이 존재하면<SPAN lang=EN-US>, 1</SPAN>개월 전에 고객정보에 등록된 이메일로 안내되며<SPAN lang=EN-US>, </SPAN>일정금액 이상일 경우<SPAN lang=EN-US> SMS</SPAN>로 안내됩니다<SPAN lang=EN-US>.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN><o:p></o:p></SPAN></FONT></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">통합포인트는 유효기간 만료<SPAN lang=EN-US>1</SPAN>개월 전에 고객정보에 등록된 이메일로 안내됩니다<SPAN lang=EN-US>. </SPAN></FONT></SPAN></P>
-<P><BR>&nbsp;</P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT color=#4641d9 face="맑은 고딕"><SPAN lang=EN-US><STRONG><SPAN style="COLOR: #3a32c3">안내를 받고자 하실 경우에는 등록된 고객정보를 확인하여 '이메일 수신허용','SMS수신허용' 상태로 변경해주시기 바랍니다. </SPAN></STRONG></SPAN></FONT></SPAN></P>
-<P style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0cm; MARGIN: 0cm 0cm 0pt; PADDING-LEFT: 0cm; PADDING-RIGHT: 0cm; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-border-bottom-alt: solid windowtext .75pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕"><SPAN lang=EN-US><A class=tx-link href="https://www.kyobobook.co.kr/myroom/joinModForm.laf" target=_blank><STRONG><FONT color=#6600ff>(▶고객정보 수정하러 바로가기)</FONT></STRONG></A><STRONG><FONT color=#6600ff></FONT></STRONG></SPAN></FONT></SPAN></P></DD></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>9</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq8" class="click">회원통합을 하지 않는다면, 마일리지로 적립 받을 수 있나요?</a>
-                        <input type="hidden" value="143"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit143">841</td> -->
-                </tr>
-                <tr class="conts" id="faq8">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><DD id=submenu4>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT face="맑은 고딕"><STRONG><SPAN style="COLOR: #3a32c3; FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US>2012.11.01 </SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><SPAN style="COLOR: #3a32c3">이후 발송준비 상품부터는 적립은 모두</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US> '</SPAN><SPAN style="COLOR: #3a32c3">통합포인트</SPAN><SPAN style="COLOR: #3a32c3" lang=EN-US>'</SPAN><SPAN style="COLOR: #3a32c3">로 자동적립됩니다</SPAN><SPAN lang=EN-US><SPAN style="COLOR: #0075c8"><SPAN style="COLOR: #3a32c3">.</SPAN> </SPAN><xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></SPAN></STRONG></FONT></P></DD>
-<DD><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">마일리지의 적립은<SPAN lang=EN-US> 2012</SPAN>년<SPAN lang=EN-US> 10</SPAN>월<SPAN lang=EN-US> 31</SPAN>일부로<SPAN lang=EN-US>, </SPAN>종료되어 사용만 가능합니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></FONT></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US>2012</SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">년<SPAN lang=EN-US> 11</SPAN>월<SPAN lang=EN-US> 1</SPAN>일부로&nbsp;핫트랙스 전 구매처에서 새로운 멤버십 제도가 오픈하게 되는 것이기 때문에<SPAN lang=EN-US>, </SPAN>자동으로 통합포인트로 적립받게 됩니다<SPAN lang=EN-US>. <o:p></o:p></SPAN></SPAN></FONT></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">적립받지 못한 구매<SPAN lang=EN-US> 30</SPAN>일 이내 영수증은 인터넷 교보문고 / 핫트랙스 온라인몰 에서 적립받을 수 있습니다<SPAN lang=EN-US>. <STRONG>(</STRONG><A href="http://www.kyobobook.co.kr/event/memberBenefit.laf?page=40" target=_self><STRONG>적립하러 가기</STRONG></A><STRONG>)</STRONG></SPAN></FONT></SPAN></o:p></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">핫트랙스 상품에 대해 구매시 적립받고자 할 경우에는 반드시 <SPAN lang=EN-US>‘</SPAN>교보문고<SPAN lang=EN-US>&amp;</SPAN>핫트랙스 통합회원<SPAN lang=EN-US>’</SPAN>이셔야 적립이 되며<SPAN lang=EN-US>, </SPAN></FONT></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕"><SPAN lang=EN-US></SPAN>통합회원이 아닐 경우에는 핫트랙스 상품 구매시 비회원 처리됩니다<SPAN lang=EN-US>.&nbsp;</SPAN></FONT></SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">회원통합 처리는 영업점의 무인가입기<SPAN lang=EN-US>, </SPAN>혹은 핫트랙스 온라인몰에서 통합약관 동의를 하시면 자동으로 통합회원으로 변경됩니다<SPAN lang=EN-US>. <STRONG>(</STRONG></SPAN><A href="http://www.kyobobook.co.kr/member/joinAgreement.laf" target=_self><STRONG>통합약관 동의하러 가기</STRONG></A></SPAN></FONT><FONT face="맑은 고딕"><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><STRONG>)</STRONG></SPAN></FONT></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US><o:p><FONT face="맑은 고딕">&nbsp;</FONT></o:p></SPAN></P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕">단<SPAN lang=EN-US>, </SPAN>반품 및 주문취소의 경우에만 마일리지 사용금액은 마일리지로<SPAN lang=EN-US>, </SPAN>통합포인트를 사용한 금액은 통합포인트로 환원됩니다<SPAN lang=EN-US>. </SPAN></FONT></SPAN></P><BR>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast"><FONT face="맑은 고딕"><SPAN lang=EN-US>(</SPAN>구매시 마일리지 적립이 되었던 상품 반품<SPAN lang=EN-US>,</SPAN>주문취소시 마일리지에서 해당금액 회수<SPAN lang=EN-US>, </SPAN>통합포인트 적립이 되었던 상품 반품<SPAN lang=EN-US>, </SPAN>주문취소시 통합포인트에서 해당 금액 회수<SPAN lang=EN-US>) <o:p></o:p></SPAN></FONT></SPAN></P></DD></div></td>
-                </tr>
-            
-                <tr>
-                    <!-- 201228 작업부분 -->
-                    <!-- <td>10</td> -->
-                    <td>통합포인트/쿠폰</td>
-                    <td class="t_left">
-                        <a href="#faq9" class="click">마일리지가 통합포인트로 적립되는 것은 언제부터 달라지나요?</a>
-                        <input type="hidden" value="142"/>
-                    </td>
-                    <!-- 201228 작업부분 --><!-- <td id="faqHit142">639</td> -->
-                </tr>
-                <tr class="conts" id="faq9">
-                    <!-- 201228 작업부분 -->
-                    <td colspan="2"><div class="txt"><P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US>2012.11.01 </SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">이후 발송준비 상품부터는 적립은 모두 금액 그대로<SPAN lang=EN-US> '</SPAN>통합포인트<SPAN lang=EN-US>'</SPAN>로 적립됩니다<SPAN lang=EN-US>. <xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></SPAN></P>
-<P>&nbsp;</P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast" lang=EN-US>1</SPAN><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">번의 주문건이라도<SPAN lang=EN-US> 2</SPAN>개 이상의 상품을 주문한 경우<SPAN lang=EN-US>, </SPAN>상품 발송에 따라 적립이 되기 때문에<SPAN lang=EN-US>, </SPAN>분리발송된 상품에 따라 <B style="mso-bidi-font-weight: normal"><SPAN style="COLOR: #0075c8" lang=EN-US>2012.11.01 </SPAN><SPAN style="COLOR: #0075c8">이전 발송상품은<SPAN style="COLOR: #0075c8" lang=EN-US> '</SPAN>마일리지<SPAN style="COLOR: #0075c8" lang=EN-US>'</SPAN>로<SPAN style="COLOR: #0075c8" lang=EN-US>, </SPAN>이후 발송상품은<SPAN style="COLOR: #0075c8" lang=EN-US> '</SPAN>통합포인트<SPAN style="COLOR: #0075c8" lang=EN-US>'</SPAN>로 적립되게 됩니다<SPAN style="COLOR: #0075c8" lang=EN-US>.</SPAN></SPAN></B><SPAN lang=EN-US><SPAN style="COLOR: #0075c8; mso-spacerun: yes">&nbsp; </SPAN><o:p></o:p></SPAN></SPAN></P>
-<P>&nbsp;</P>
-<P style="MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-SIZE: 9pt; mso-ascii-font-family: '맑은 고딕'; mso-ascii-theme-font: minor-fareast; mso-hansi-font-family: '맑은 고딕'; mso-hansi-theme-font: minor-fareast">적립된 금액은 마이핫트랙스<SPAN lang=EN-US>&gt;</SPAN>계좌정보<SPAN lang=EN-US>&gt;</SPAN>통합포인트 내역에서 주문번호로 확인할 수 있습니다<SPAN lang=EN-US></SPAN></SPAN></P></div></td>
-                </tr>
-             
-            
-            
-        </tbody>
-    </table>
-    <!-- //list -->
-    <!-- paging -->
-    <div class="paging mgt40">
-        
-
-
-
-
-    <a title="맨 처음 페이지로 이동" href="/ht/help/faqListC0402?page=1" class="first">처음</a>
-    
-    <ul>
-        
-            
-            
-                <li class="active"><a href="javascript://">1</a></li>
-            
-        
-            
-                <li><a title="2페이지로 이동" href="/ht/help/faqListC0402?page=2">2</a></li>
-            
-            
-        
-    </ul>
-    
-
-    </div>
-    <!-- //paging -->
-</div>
-<!-- //sub contents -->
-<!--// 201228 : E 작업부분 -->
-
-            
-
-
-
-
-<script type="text/javascript">
-var firstYn = true;
-$(document).ready(function(){
-    loadHistoryTemplate(1);
-});
-function loadHistoryTemplate(page){
-    
-    if(page == null || page == "undefined"){
-        page = 1;
-    }
-    
-    $.ajax({
-        type: "POST"
-        ,url: "/menu/biz/getHistoryTemplete"
-        ,data: { page : page }
-        ,dataType: "html"
-        ,success : function(data){
-            
-            $("#recentFacelist").empty();
-            $("#recentFacelist").append(data);    
-            if(firstYn == true){
-                skyScraper();//scroll
-                firstYn = false;
-            }else{
-                //편집모드라면 편집취소
-                if($('.lastest_prd .history_inner').hasClass('case01')){
-                    $('.txt_blue').trigger("click");
-                }
-            }
-            skyScraper02();
-            
-        }
-        ,error: function(data) {            
-            alert('시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.');
-        }
-    });    
-}
-</script>
-<aside id='skyscraper' class="quick_menu">
-    
-        <div class='bnr_wrap PC_MAIN_WING'>
-            <a href="/e/66442" class='btn_banner'>
-                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1149/1608796858697_스카이스크래퍼_동그라미.png" alt="/e/66442" onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';"/>
-            </a>
-            <a href="/e/66442" class='btn_large'>
-                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1646/1608796863218_스카이스크래퍼_네모.jpg" alt="/e/66442" onerror="this.src='http://image.kyobobook.co.kr/images/no_image.gif';"/>
-            </a>
-        </div>
-        
-    <div id="recentFacelist">
-    </div>
-    <div class='btn_goTop'>
-        <a href="javascript:"><img src="../../images/biz/common/go_top.png" alt="페이지 상단으로 가기">TOP</a>
-    </div>
-</aside>
-        </div>
-        <!-- //컨텐츠 -->
-    </div>
-<!-- //Container -->
-    
-
-
-
-
-<script type="text/javascript">
-/* Array.from 미지원에 따른 추가내용 */
-// Production steps of ECMA-262, Edition 6, 22.1.2.1
-// Reference: https://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.from
-if (!Array.from) {
-  Array.from = (function () {
-    var toStr = Object.prototype.toString;
-    var isCallable = function (fn) {
-      return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
-    };
-    var toInteger = function (value) {
-      var number = Number(value);
-      if (isNaN(number)) { return 0; }
-      if (number === 0 || !isFinite(number)) { return number; }
-      return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
-    };
-    var maxSafeInteger = Math.pow(2, 53) - 1;
-    var toLength = function (value) {
-      var len = toInteger(value);
-      return Math.min(Math.max(len, 0), maxSafeInteger);
-    };
-
-    // The length property of the from method is 1.
-    return function from(arrayLike/*, mapFn, thisArg */) {
-      // 1. Let C be the this value.
-      var C = this;
-
-      // 2. Let items be ToObject(arrayLike).
-      var items = Object(arrayLike);
-
-      // 3. ReturnIfAbrupt(items).
-      if (arrayLike == null) {
-        throw new TypeError("Array.from requires an array-like object - not null or undefined");
-      }
-
-      // 4. If mapfn is undefined, then let mapping be false.
-      var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
-      var T;
-      if (typeof mapFn !== 'undefined') {
-        // 5. else      
-        // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
-        if (!isCallable(mapFn)) {
-          throw new TypeError('Array.from: when provided, the second argument must be a function');
-        }
-
-        // 5. b. If thisArg was supplied, let T be thisArg; else let T be undefined.
-        if (arguments.length > 2) {
-          T = arguments[2];
-        }
-      }
-
-      // 10. Let lenValue be Get(items, "length").
-      // 11. Let len be ToLength(lenValue).
-      var len = toLength(items.length);
-
-      // 13. If IsConstructor(C) is true, then
-      // 13. a. Let A be the result of calling the [[Construct]] internal method of C with an argument list containing the single item len.
-      // 14. a. Else, Let A be ArrayCreate(len).
-      var A = isCallable(C) ? Object(new C(len)) : new Array(len);
-
-      // 16. Let k be 0.
-      var k = 0;
-      // 17. Repeat, while k < len… (also steps a - h)
-      var kValue;
-      while (k < len) {
-        kValue = items[k];
-        if (mapFn) {
-          A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
-        } else {
-          A[k] = kValue;
-        }
-        k += 1;
-      }
-      // 18. Let putStatus be Put(A, "length", len, true).
-      A.length = len;
-      // 20. Return A.
-      return A;
-    };
-  }());
-}
-/* Array.from 미지원에 따른 추가내용 */
-
-jQuery(function($) {
-    $('select.select_style02').change(function(){
-        if($(this).val()!="Family Site"){
-            window.open($(this).val());
-        }
-    });
-    
-    $.ajax({
-        url: '//admin.hottracks.co.kr/admin/system/hotSiteClickCheck2'
-        ,dataType: 'jsonp'
-        ,jsonpCallback: "callback"
-        ,success: function(data) {
-        }
-    });
-});
-
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-968575-10']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
-
-<!-- 네이버 검색 광고 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 --> 
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script> 
-<script type="text/javascript"> 
-if (!wcs_add) var wcs_add={};
-wcs_add["wa"] = "s_4d6e800c5751";
-if (!_nasa) var _nasa={};
-wcs.inflow();
-wcs_do(_nasa);
-</script>
-<!-- 끝 -- 네이버 검색 광고 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
-
-<!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','//connect.facebook.net/en_US/fbevents.js');
-
-fbq('init', '2595348470556537');
-fbq('track', "PageView");
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1053245131399072&ev=PageView&noscript=1"/></noscript>
-<!-- End Facebook Pixel Code -->
-
-
-<!--  레코벨 스크립트 -->
-<script type="text/javascript">
-  var _recoUserId = getCookie('UserCookieKey');
-
-    window._eglqueue = window._eglqueue || [];
-    _eglqueue.push(['setVar','cuid','e15e978e-3623-4892-bf0a-485b9f8196ee']);
-    _eglqueue.push(['setVar','userId',SHA256(_recoUserId)]); // optional
-    _eglqueue.push(['track','visit']);
-    (function(s,x){s=document.createElement('script');s.type='text/javascript';
-    s.async=true;s.defer=true;s.src=(('https:'==document.location.protocol)?'https':'http')+'://logger.eigene.io/js/logger.min.js';
-    x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();
-</script>
-<!--  레코벨 스크립트 끝 -->
-
-<!-- SK Planet 유입경로 추적 스크립트 -->
-<script src="//js.ad4989.co.kr/common/js/mojise/intro.js"></script>
-<!--/ SK Planet 유입경로 추적 스크립트 -->
-
-<!-- footer -->
-<div id="footer">
-    <div class="util">
-        <div class="util_cont">
-            <ul>
-                <li><a href="http://www.hottracks.co.kr/company/about/introduce" target="_blank">회사소개</a></li>
-                <li><a href="http://info.hottracks.co.kr/company/recruit/notice" target="_blank">채용정보</a></li>
-                <li><a href="/heart" target="_blank">핫트합니다</a></li>
-                <li><a href="http://www.hottracks.co.kr/company/store/main?deptcode=030005" target="_blank">매장안내</a></li>
-                <li><a href="http://www.hottracks.co.kr/company/about/alliance" target="_blank">제휴/광고안내</a></li>
-                <li><a href="http://www.hottracks.co.kr/ht/welcomeMain/viewRule" target="_blank">이용약관</a></li>
-                <li><a href="http://www.hottracks.co.kr/ht/welcomeMain/privacy" target="_blank"><strong>개인정보처리방침</strong></a></li>
-                <li><a href="http://www.hottracks.co.kr/ht/welcomeMain/popupEmail" onclick="window.open(this.href,'popupPrizewinner','width=400,height=365');return false;" title="새 창으로 열림">이메일수집거부</a></li>
-            </ul>
-            <div class="family_site">
-                <p>패밀리 사이트</p>
-                <ul>
-                    <li><a href="http://www.kyobo.co.kr" title="새 창 열림" target="_blank">교보생명</a></li>
-                    <li><a href="http://www.kyobobook.co.kr" title="새 창 열림" target="_blank">교보문고</a></li>
-                    <li><a href="http://www.kyobotrade.com" title="새 창 열림" target="_blank">교보증권</a></li>
-                    <li><a href="http://www.kico.co.kr" title="새 창 열림" target="_blank">교보정보통신</a></li>
-                    <li><a href="http://www.kyobobldg.co.kr" title="새 창 열림" target="_blank">교보리얼코</a></li>
-                    <li><a href="http://www.kyoboitm.co.kr" title="새 창 열림" target="_blank">교보악사자산운용</a></li>
-                    <li><a href="http://www.lifeplanet.co.kr" title="새 창 열림" target="_blank">교보라이프플래닛생명</a></li>
-                    <li><a href="http://www.kcasonsa.co.kr" title="새 창 열림" target="_blank">KCA 손해사정</a></li>
-                    <li><a href="http://www.daesan.or.kr" title="새 창 열림" target="_blank">대산문화재단</a></li>
-                    <li><a href="http://www.kbedu.or.kr" title="새 창 열림" target="_blank">교보생명교육문화재단</a></li>
-                    <li><a href="http://www.dsa.or.kr" title="새 창 열림" target="_blank">대산농촌재단</a></li>
-                    <li><a href="http://www.kyoboacademy.co.kr" title="새 창 열림" target="_blank">교보아카데미</a></li>
-                </ul>
-            </div>
+            <!-- //컨텐츠 -->
         </div>
     </div>
-    <div class="inner">
-        <div class="cont left">
-            <div class="cs_center">
-                <strong class="font_t">1661-1112</strong>
-                <span>평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
-                <dl>
-                    <dt><a href="http://www.hottracks.co.kr/ht/help/sosCounselMain"><span>SOS 상담</span></a></dt>
-                    <dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
-                </dl>
-            </div>
-            <h2>교보핫트랙스㈜</h2>
-            <span>대표이사 오교철</span>
-            <span>사업자등록번호 : 102-81-29258 <a href="javascript://" onclick="window.open('http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1028129258', 'communicationViewPopup', 'scrollbars=yes, width=750, height=700;');return false;" title="새 창으로 열림">사업자정보확인 &gt;</a></span>
-            <span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
-            <span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
-            <span>개인정보보호책임자 : 오교철  PRIVACY@HOTTRACKS.CO.KR</span>
-        </div>
-        <div class="cont right">
-            <ul class="sns">
-                <li><a href="https://www.instagram.com/hottracks_online/" target="_blank"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a></li>
-                <li><a href="https://www.facebook.com/HOTTRACKSFRIEND/" target="_blank"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a></li>
-                <li><a href="https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg" target="_blank"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a></li>
-                <li><a href="https://twitter.com/hotonmusic" target="_blank"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a></li>
-                <li><a href="http://hottracks91.blog.me/" target="_blank"><img src="../../images/biz/common/icon_blog.png" alt="blog"></a></li>
-            </ul>
-               <div class="mobile">
-                    <a href="https://apps.apple.com/kr/app/hottracks/id1129743143" target="_blank" class="font_t ios">APP STORE</a>
-                    <a href="https://play.google.com/store/apps/details?id=kr.co.hottracks.m.and" target="_blank" class="font_t and">PLAY STORE</a>
-               </div>
-            <ul class="copyright">
-                <li><a href="/heart" target="_blank"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a></li>
-                <li><a href="http://www.copyrightok.kr" target="_blank"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a></li>
-            </ul>
-            <span class="payment"><em class="font_t">NICEPAY</em><a href="#n" onclick="window.open('http://image.kyobobook.co.kr/newimages/giftshop_new/company/nicepay2.html','window','location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no, width=740, height=867, left=100, top=50, scrollbars=no');return false">서비스 가입사실 확인 &gt;</a></span>
-            <span class="txt">핫트랙스는 나이스페이먼츠 에스크로 서비스에 가입된 사업자이며,<br/>고객님은 구매 안전서비스를 이용하실 수 있습니다.</span>
-        </div>
-    </div>
-</div>
-<!--// footer -->
-</div>
-<div id="mask"></div>
 </body>
+
 </html>

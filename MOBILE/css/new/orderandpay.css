@@ -612,6 +612,11 @@
 .orderandpay.positionTop {position:relative;}
 .orderandpay.positionTop .customer {padding:0;}
 
+.orderandpay .roundbox { padding: 17px 10px 20px; border-radius: 5px;    background: #fff;    box-shadow: 0 2px 3px #c1c1c1;}
+.orderandpay .roundbox .br_list {margin-top:23px;}
+.orderandpay .roundbox h3 strong {font-size: 14px;}
+.orderandpay .pull_box.coupon_list_wrap {padding-top:13px;}
+
 
 @media screen and (max-width: 360px) {
 
@@ -624,6 +629,7 @@
 	.orderandpay .select_wrap select, .orderandpay .input_wrap select {padding-top: 12px;padding-bottom: 12px;}
 	.orderandpay .input_wrap input::placeholder{text-align: left; font-size: 12px;}
 	.orderandpay .input_wrap input::-webkit-input-placeholder{text-align: left; font-size: 12px;}
+	.orderandpay .roundbox input + label {font-size: 13px !important;}  
 
 
 
@@ -656,4 +662,5 @@
 
 	.orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {}
 	.orderandpay .coupon_list_wrap .choice_wrap .choice_wrap_inner .choice_inner_set .term {padding-left:20px;}
+
 }
