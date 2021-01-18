@@ -733,7 +733,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .bbs_list01 tbody td,
 .orderandpay .bbs_list01.tbl_slide tbody td{padding: 25px 20px 24px;text-align:center;font-weight: 500;color: #000;}
 .orderandpay .bbs_list01.tbl_slide tbody td {/*padding-left:50px; padding-right: 50px;*/}
-.orderandpay .bbs_list01 tbody td a {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit;}
+.orderandpay .bbs_list01 tbody td a {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit; display: block;}
 
 .orderandpay .bbs_list01 tbody tr.conts td {padding:0 0;text-align:left;background:#fafafa;}
 
@@ -741,7 +741,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .bbs_list01 .list_fixed,
 .orderandpay .bbs_list01 .list_fixed.conts {}
 .orderandpay .bbs_list01 .list_fixed td {position: relative;}
-.orderandpay .bbs_list01 .list_fixed td a.click:before {content: '';display:block;width:8px;height:8px;background: #FF6A5B;/* position: absolute; */float: left;margin-top: 7px;margin-right: 12px;}
+.orderandpay .bbs_list01 .list_fixed td a.click:before {content: '';display:block;width:8px;height:8px;background: #FF6A5B; float: left;margin-top: 7px;margin-right: 12px;}
 
 
 /* text */
@@ -1197,3 +1197,10 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .unit_price_wrap .unit_price {font-size:inherit;}
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .unit_price_wrap .unit_percent {font-size:inherit; color:#DA2128; margin-left: 5px;}
 
+
+/* 펀딩 ---------------*/
+/* 펀딩 in 주문서  */
+.orderandpay .funding_policy_wrap {}
+.orderandpay .funding_policy .funding_title {font-size: 18px; font-weight:500;}
+.orderandpay .funding_policy .funding_policy_text_wrap {margin-top:20px; background: #FAFAFA; padding:34px 20px 16px;}
+.orderandpay .funding_policy_list .items {font-size: 13px; font-weight:500; line-height: 1.8;}
