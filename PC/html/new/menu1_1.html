@@ -1,100 +1,203 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTDXHTML1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
-    <head>
-        <!-- 태그 라이브러리 -->
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta http-equiv="Content-Script-Type" content="text/javascript">
-        <meta http-equiv="Content-Style-Type" content="text/css">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=950">
-        <title>고객센터</title>
-        <!-- 태그 라이브러리 -->
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
-        <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
-        <link rel="stylesheet" type="text/css" href="../../css/common.css">
-        <link rel="stylesheet" type="text/css" href="../../css/layout.css">
-        <link rel="stylesheet" type="text/css" href="../../css/contents.css">
-        <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
-        <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
-        <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
-        <!-- 20.12.28 -->
-        <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
-        <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="../../js/m_contents.js"></script>
-        <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
-        <script type="text/javascript" src="../../js/biz/hott.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+<head>
+    <!-- 태그 라이브러리 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=950">
+    <title>공지사항 | 공지/문의 | 고객센터 - HOTTRACKS</title>
+    <!-- 태그 라이브러리 -->
+    <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+    <link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+    <link rel="apple-touch-startup-image" href="../../images/ico_app.png">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../../css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+    <!-- 20.12.28 -->
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+    <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../js/m_contents.js"></script>
+    <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+    <script type="text/javascript" src="../../js/biz/hott.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
 
-        <script type="text/javascript">
-                jQuery(function ($) {
-                    var ticker = function () {
-                        timer = setTimeout(function () {
-                            $('#ticker a:first').animate({
-                                marginTop: '-34px'
-                            }, 400, function () {
-                                $(this)
-                                    .detach()
-                                    .appendTo('#ticker')
-                                    .removeAttr('style');
-                            });
-                            ticker();
-                        }, 2000);
-                    };
-                    var autoplay = true;
-                    ticker();
-                    /*var chkInt = sessionStorage.getItem('chkInt');
-    if (chkInt && chkInt<5) {
-            sessionStorage.setItem('chkInt', (parseInt(chkInt)+1));
-            $("input[name=exLink]").val($("input[name=exLink"+(parseInt(chkInt)+1)+"]").val());
-            $("input[name=exTxt]").val($("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
-            $("input[name=searchTerm]").attr("placeholder",$("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
-    }else{
-        sessionStorage.setItem('chkInt', 1);
-    }*/
-                });
-                $(document).ready(function () {
-                    $(".keyword_wrap").mouseover(function () {
-                        $(".keyword_list_v2").show();
-                    });
-                    $(".keyword_list_v2").mouseover(function () {
-                        $(".keyword_list_v2").show();
-                    });
-                    $(".keyword_list_v2").mouseout(function () {
-                        $(".keyword_list_v2").hide();
-                    });
-                    $('.keyword_close').click(function () {
-                        $('.keyword_list_v2').hide();
-                    });
-                });
-                function gnbSearchKerword(keyword) {
-                    document.location.href = "/ht/biz/bizSearchMain?searchTerm=" + keyword;
-                };
-            </script>
-    </head>
-    <body>
-        <!-- Google Tag Manager (noscript) -->
-        <noscript>
-            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-        </noscript>
-        <!-- End Google Tag Manager (noscript) -->
+<!-- 데이타 스토리  script--> 
+<script type="text/javascript">
+(function() {
+    var nl = document.createElement('script'); nl.type = 'text/javascript';
+    nl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.hottracks.co.kr/js/wl6.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(nl, s);
+    var done = false;
+    nl.onload = nl.onreadystatechange = function() {
+        if ( !done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') ) {
+            done = true;
+            _n_sid = 'pc.hottracks.co.kr';        // _n_sid 값 별로 로그파일이 생성이 됩니다
+            _n_uid_cookie = 'WNO';
+            n_logging();
+            nl.onload = nl.onreadystatechange = null;
+        }
+    }
+})();
+</script>
 
-        <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
-        <div style="text-align: center;">
-            <img src="../../images/new/@img_banner.png" alt=""> 
-        </div>
-        <!-- 태그 라이브러리 -->
-        
-        
+    
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("tbody tr td a.click").click(function (event) {
+            event.preventDefault(); // # 링크 이동 중지
+            var selectHref = $(this).attr("href");
+            if ($(selectHref).hasClass("on")) {
+                $(selectHref).removeClass("on");
+            } else {
+                $(selectHref).addClass("on");
+                var seq = $(this).siblings("input").val();
+                // setHit
+                $.ajax({
+                    type: "GET",
+                    // url: "/ht/help/listNotice/updateHit",
+                    dataType: "html",
+                    data: {
+                        notiSeq: seq
+                    }
+                });
+            }
+        });
+        $("#").click();
+        $(".bbs_list01 img").each(function () {
+            $(this).css("max-width", "100%");
+        });
+    });
+</script>
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5MVN3Z4');</script>
+<!-- End Google Tag Manager -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+    gnb();//gnb
+    nav();//nav 
+    if($('.header_wrap').length >0){
+        bodyScroll();//body scroll  
+    }
+})  
+</script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
         <div id="wrap" class="content_new">            
             <!-- header -->
             <div id="header">
-                <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
-                <div style="text-align: center;">
-                    <img src="../../images/new/@img_gnb.png" alt=""> 
+                <!-- util menu -->
+                <div class="util_menu">
+                    <ul>
+
+                        <li><a href="#n" __onclick="login()">로그인</a></li>
+                        <li><a href="#n" __onclick="goMemJoin()">회원가입</a></li>
+
+                        <li><a href="#n">고객센터</a></li>
+                        <li><a href="#n">매장안내</a></li>
+                        <li><a href="#n">팬사인회</a></li>
+                    </ul>
                 </div>
+                <!--// util menu -->
+                <!-- gnb -->
+                <nav id="gnb">
+                    <div class="header_wrap">
+                        <h1 class="g_logo"><a href="#n">HOTTRACKS</a></h1>
+                        <div class="g_search">
+                            <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+                                <div class="form_select">
+                                    <select id="gnbSearchMenu" name="gnbSearchMenu">
+                                        <option value='GIFT'>문구/기프트</option>
+                                        <option value='RECORD'>음반</option>
+                                    </select>
+                                </div>
+                                <div class="form_search">
+                                    <input type="text" placeholder="샤오미를 쓰는 이유" name="searchTerm" value="">
+                                    <a href="#" class="btn_search" __onclick="gnbSrchFrm();return false;"></a>
+                                </div>
+                            </form>
+                            <div class="keyword_wrap" id="ticker">
+                                <a href="#n" __onclick="gnbSrchKerword('카드 지갑');return false;">
+                                    <em class="font_t">1</em>
+                                    <p>카드 지갑</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+
+                                    <span class="txt"><strong>NEW</strong></span>
+
+                                </a>
+                            </div>
+                        </div>
+                        <div class="g_menu">
+                            <ul>
+                                <li class="icon_my">
+
+                                    <a href="#n" __onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>
+
+                                </li>
+                                <li class="icon_today">
+                                    <a href="#n">
+                                        <img src="../../images/biz/common/icon_today.png" alt="">
+                                        <em>오늘,<strong>혜택</strong></em>
+                                    </a>
+                                </li>
+                                <li class="icon_cart">
+                                    <a href="#n">
+                                        <img src="../../images/biz/common/icon_cart.png" alt="">
+                                        <em class="font_t bizCartCount"></em>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="gnb_wrap">
+                        <div class="inner">
+                            <div class="category_wrap">
+                                <div class="btn_category">
+                                    <a href="#">카테고리</a>
+                                </div>
+                            </div>
+                            <ul class="gnb_menu">
+                                <li><a href="#n">다이어리<em></em></a></li>
+                                <li><a href="#n">음반<em></em></a></li>
+
+                                <li><a id="gnbBest" href="#n">베스트</a></li>
+                                <li><a id="gnbFree" href="#n">무료배송</a></li>
+                                <li><a id="gnbNew" href="#n">신상품</a></li>
+                                <li><a id="gnbSale" href="#n">세일</a></li>
+                                <li><a href="#n">이벤트</a></li>
+                            </ul>
+                            <ul class="sub_menu">
+                                <li><a href="#n">개인의취향</a></li>
+                                <li><a href="#n">이럴 때,</a></li>
+                                <li><a href="#n">아지트</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
             <!--// header -->
             <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
@@ -212,58 +315,164 @@
                     <!-- // 201228 E : 작업부분 -->
                     <!-- //lnb -->
                     <!-- sub contents -->
-                    <div class="sub_contents"> <!-- 201228 작업부분 -->
-                        <h3 class="page_title mgt0 border">SOS상담</h3>
+                    <div class="sub_contents">
+                        <!-- 201228 작업부분 -->
+                        <!-- h3 class="page_title mgt0"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/tit_notice.gif" alt="공지사항" /></h3 -->
+                        <h3 class="page_title">공지사항</h3>
+
                         <ul class="list_type02">
-                            <li>핫트랙스는, 원활한 상담과 타인의 주민번호도용 및 허위정보로 인한 피해를 방지하기 위해 실명인증을 시행하고 있습니다.
-                            </li>
-                            <li>교보핫트랙스 회원이신 고객께서는 [회원 상담]을 선택해 주시기 바라며 (로그인 후 바로 이용가능하십니다),
-                                <br>
-                                비회원으로 상담을 원하시는 고객께서는 [비회원 상담]을 선택해 주시기 바랍니다.
-                            </li>
-                            <li>[비회원 상담]의 경우 실명확인을 하셔야만 접수가 가능합니다.
-                            </li>
-                            <li>입력하신 정보는 고객님의 동의 없이 공개되지 않으며, 개인정보보호정책에 의해 보호 받고 있습니다.
-                            </li>
+                            <li>핫트랙스에서 고객 여러분께 유익한 쇼핑 정보를 알려드립니다.</li>
                         </ul>
-                        <!-- <FORM id="reqForm" name="reqForm" method="POST" action="">
-                                <input class="small" type="hidden" id="SendInfo" name="SendInfo" >
-                                <input class="small" type="hidden" id="ProcessType" name="ProcessType" >
-                            </FORM> -->
-                        <FORM id="pageForm" name="pageForm" method="POST" action="">
-                            <input
-                            type="hidden" name="m" value="pubmain">
-                            <!-- 인증요청 암호화 데이터 -->
-                            <input
-                            type="hidden" name="enc_data" value="AgEERkoyOAnmzoT5VmB+15k1Wj0DXaBwp0m9lE7MkruvMDjEJ6IKh9phDekFJe1hsw565W6nIMZEu7j718j/wyTxIRknE5x2PhRZ1NJxMFESCDH34v1/+Em5Hbb2AZhvBRmDgMHfGvjWuDN4hfRhwUTEKBrHp4JjMS3PoNOrZru94yE1xgCHnmf7TWGv2Z0f+mvESC+VqYy+9A5680IIuAbPT4BoDj40sBUGhCGENaGixxawr2KiE0N3jxFdr9ffDzLi3+K+CoqM5s3XPbYMQM7wwdpWP21TPEb0adyJnNrPJ8k3LXq5nGc3Wf/3ZHGPebCMiuXURg==">
-                            <!-- 201228 : S 작업부분 -->
-                            <div class="sos_counsel">
-                                <div
-                                    class="f_left">
-                                    <!-- <h4 class="tit01">회원 상담</h4> -->
-                                    <div class="btn">
-                                        <a href="https://www.hottracks.co.kr/ht/mypage/loginForm" class="btn_type07">회원 상담 바로가기</a>
-                                    </div>
-                                </div>
-                                <div
-                                    class="f_right">
-                                    <!-- <h4 class="tit01">비회원 상담</h4> -->
-                                    <div class="btn">
-                                        <a href="javascript://" onclick="javascript:fnPopup('0', '정상 처리되었습니다.');" class="btn_type07">비회원 상담 바로가기</a>
-                                        <p class="mgt10">실명인증 후 상담이 가능합니다.</p>
-                                    </div>
-                                    <p class="txt">교보문고/핫트랙스 통합 회원으로 가입하시면<br/>
-                                        편리함과 혜택이 늘어납니다!</p>
-                                    <a href="javascript://" onclick="goMemJoin()" class="btn_type01">회원가입 바로가기</a>
-                                </div>
+
+                        <!-- 
+                            <div class="tab1">
+                                <ul>
+                                    <li><a href="/ht/help/listNotice" class="on"><span>핫트랙스공지사항</span></a></li>
+                                    <li><a href="/ht/help/listNotice?brandOrCategory=B" class="off"><span>브랜드공지사항</span></a></li>
+                                </ul>
                             </div>
-                            <!--// 201228 : E 작업부분 -->
-                        </FORM>
-                        <form
-                            name="vnoform" method="post">
-                            <!-- 인증결과 암호화 데이터 -->
-                            <input type="hidden" name="enc_data">
-                        </form>
+                        -->
+                        <table class="bbs_list01 mgt30 tbl_slide" summary="핫트랙스 공지사항의 번호, 제목, 등록일, 조회 항목이 있습니다">
+                            <caption>핫트랙스 공지사항</caption>
+                            <colgroup>
+                                <!-- 201228 작업부분 -->
+                                <!-- <col width="80"/> -->
+                                <col width="*"/>
+                                <col width="160"/>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <th scope="col" class="fir">
+                                                            번호
+                                                        </th> -->
+                                    <th scope="col"> 제목</th>
+                                    <th scope="col" class="last">
+                                        등록일
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- 고정 일때 class="list_fixed" -->
+                                <tr class="list_fixed">
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>121</td> -->
+                                    <td class="t_left"> <input type="hidden" value="22304"/>
+                                        <a href="#list-content22304" id="22304" class="click">
+                                            [공지사항] 한터차트 반영 정정 안내
+                                            <span class="icon_cs_new">N</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        2020.11.18
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="conts" id="list-content22304">
+                                    <!-- 201228 작업부분 -->
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <p>
+                                                안녕하세요, 핫트랙스입니다.
+                                            </p>
+                                            <p>
+                                                지난 11월 15일, '핫트랙스'의 판매량 중 하성운의 'MIRAGE: 미니앨범 4집'의 일부가 당사 처리 지연으로 정확한 일자에
+                                            </p>
+                                            <p>
+                                                한터차트에 미반영되었음이 확인되어. 전량 재확인과 함께 정정요청을 하였습니다.
+                                            </p>
+                                            <p>
+                                                해당 일자가 포함되는 15일과 16일 한터차트 일간 및 주간차트가 정정되었음을 안내 드립니다.
+                                            </p>
+                                            <p>
+                                                당사 처리 지연으로 정확한 일자에 미반영된 내역은 누락없이 전량 정정되었으며,
+                                            </p>
+                                            <p>
+                                                오랜시간 고객님들께 심려와 불편을 끼쳐 드린 점 머리 숙여 사과 말씀 드립니다.
+                                                <br>
+                                                아울러 처리 과정 중 명확한 답변을 드리지 못한 점 너그러이 양해 부탁드립니다.
+                                            </p>
+                                            <p>
+                                                핫트랙스 배상.
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>121</td> -->
+                                    <td class="t_left"> <input type="hidden" value="22305"/>
+                                        <a href="#list-content22305" id="22305" class="click">
+                                            [공지사항] 한터차트 반영 정정 안내
+                                            <span class="icon_cs_new">N</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        2020.11.18
+                                    </td>
+                                </tr>
+                                <tr class="conts" id="list-content22305">
+                                    <!-- 201228 작업부분 -->
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <p>
+                                                안녕하세요, 핫트랙스입니다.
+                                            </p>
+                                            <p>
+                                                지난 11월 15일, '핫트랙스'의 판매량 중 하성운의 'MIRAGE: 미니앨범 4집'의 일부가 당사 처리 지연으로 정확한 일자에
+                                            </p>
+                                            <p>
+                                                한터차트에 미반영되었음이 확인되어. 전량 재확인과 함께 정정요청을 하였습니다.
+                                            </p>
+                                            <p>
+                                                해당 일자가 포함되는 15일과 16일 한터차트 일간 및 주간차트가 정정되었음을 안내 드립니다.
+                                            </p>
+                                            <p>
+                                                당사 처리 지연으로 정확한 일자에 미반영된 내역은 누락없이 전량 정정되었으며,
+                                            </p>
+                                            <p>
+                                                오랜시간 고객님들께 심려와 불편을 끼쳐 드린 점 머리 숙여 사과 말씀 드립니다.
+                                                <br>
+                                                아울러 처리 과정 중 명확한 답변을 드리지 못한 점 너그러이 양해 부탁드립니다.
+                                            </p>
+                                            <p>
+                                                핫트랙스 배상.
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- paging -->
+                        <div class="paging cs mgt40">
+                            <a title="맨 처음 페이지로 이동" href="/ht/help/listNotice?page=1" class="first">처음</a>
+                            <ul>
+                                <li class="active">
+                                    <a href="javascript://">1</a>
+                                </li>
+                                <li>
+                                    <a title="2페이지로 이동" href="/ht/help/listNotice?page=2">2</a>
+                                </li>
+                                <li>
+                                    <a title="3페이지로 이동" href="/ht/help/listNotice?page=3">3</a>
+                                </li>
+                                <li>
+                                    <a title="4페이지로 이동" href="/ht/help/listNotice?page=4">4</a>
+                                </li>
+                                <li>
+                                    <a title="5페이지로 이동" href="/ht/help/listNotice?page=5">5</a>
+                                </li>
+                                <li>
+                                    <a title="6페이지로 이동" href="/ht/help/listNotice?page=6">6</a>
+                                </li>
+                                <li>
+                                    <a title="7페이지로 이동" href="/ht/help/listNotice?page=7">7</a>
+                                </li>
+                            </ul>
+                            <a title="맨 나중 페이지로 이동" href="/ht/help/listNotice?page=1" class="next02">나중</a>
+                        </div>
+                        <!-- //paging -->
                     </div>
                     <!-- //sub contents -->
                 </div>
@@ -386,5 +595,6 @@
             <!--// footer -->
         </div>
         <div id="mask"></div>
+
     </body>
 </html>

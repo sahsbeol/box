@@ -1,1337 +1,429 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTDXHTML1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
-    <head>
-        <!-- 태그 라이브러리 -->
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta http-equiv="Content-Script-Type" content="text/javascript">
-        <meta http-equiv="Content-Style-Type" content="text/css">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=950">
-        <title>상품입점문의 | 공지문의 | 고객센터 - HOTTRACKS</title>
-        <!-- 태그 라이브러리 -->
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
-        <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
-        <link rel="stylesheet" type="text/css" href="../../css/common.css">
-        <link rel="stylesheet" type="text/css" href="../../css/layout.css">
-        <link rel="stylesheet" type="text/css" href="../../css/contents.css">
-        <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
-        <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
-        <link
-        rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
-        <!-- 20.12.28 -->
-        <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
-        <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="../../js/m_contents.js"></script>
-        <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
-        <script type="text/javascript" src="../../js/biz/hott.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
-        <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
-        <!-- 데이타 스토리  script-->
-        <script type="text/javascript">
-            (function () {
-                var nl = document.createElement('script');
-                nl.type = 'text/javascript';
-                nl.src = (
-                    'https:' == document.location.protocol
-                        ? 'https://'
-                        : 'http://'
-                ) + 'www.hottracks.co.kr/js/wl6.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(nl, s);
-                var done = false;
-                nl.onload = nl.onreadystatechange = function () {
-                    if (! done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete')) {
-                        done = true;
-                        _n_sid = 'pc.hottracks.co.kr'; // _n_sid 값 별로 로그파일이 생성이 됩니다
-                        _n_uid_cookie = 'WNO';
-                        n_logging();
-                        nl.onload = nl.onreadystatechange = null;
-                    }
-                }
-            })();
-        </script>
-        <script type="text/javascript" src="/js/jquery.form.js" charset="utf-8"></script>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                $("form[name='vendorIqryForm']").submit(function () {
-                    var required = new Array();
-                    $(".required").each(function () {
-                        if (isEmpty($(this).val())) {
-                            required.push($(this).attr("title"));
-                        }
-                    });
-                    if ($("input[name=prdtGbn]:checked").val() == undefined) {
-                        required.push("상품종류");
-                    }
-                    if ($("#categorySelect select:eq(1)").val() == "0000") {
-                        required.push("2차 카테고리");
-                    }
-                    if (isEmpty($("textarea[name=iqryDesc]").val())) {
-                        required.push("상품설명");
-                    }
-                    if (! $("#chkAgree").is(":checked")) {
-                        alert("[제휴업체 담당자 개인정보 수집 및 이용에 대한 안내]에 대한 동의를 해주세요.");
-                        $("#chkAgree").focus();
-                    } else if (required.length > 0) {
-                        alert("※해당 항목들은 생략이 불가능합니다.\r\n-" + required.join("\r\n-"));
-                    } else {
-                        beforeSubmit();
-                        $(".newbtn_064").hide();
-                        $("form[name='vendorIqryForm']").ajaxSubmit({
-                            url: "/ht/help/createVendorInquiry",
-                            dataType: "json",
-                            success: saveSuccess,
-                            error: function (xhr, status, error) {
-                                alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
-                                $(".newbtn_064").show();
-                            }
-                        });
-                    }
-                    return false;
-                });
-            });
-            function saveSuccess(data) {
-                if (data.save) {
-                    alert('저장하였습니다.');
-                    document.location.href = "/ht/welcomeMain";
-                } else {
-                    var errorMessages = data.errorMessages;
-                    alert(errorMessages.join("\n"));
-                    $(".newbtn_064").show();
-                }
-            }
-            function beforeSubmit() {
-                var cnt = $("input[name=sellPsbltPrdtCount]");
-                var tmp = cnt.val().replace(/\D/gi, "");
-                cnt.val(tmp);
-                $(".inputNumberText").each(function () {
-                    if ($(this).val() == "" && !$(this).hasClass("nums")) {
-                        $(this).val(0);
-                    }
-                });
-            }
-            function get_number(val) {
-                val = $.trim(val);
-                var rv = [];
-                for (var i = 0; i < val.length; i++) {
-                    if (i == 0 && val.substring(i, i + 1) == "-") {
-                        rv.push("-");
-                    }
-                    if (!isNaN(val.substring(i, i + 1))) {
-                        rv.push(val.substring(i, i + 1));
-                    }
-                }
-                return rv.join("");
-            }
-            $(document).ready(function (event) {
-                $(".inputOnlyNum").change(function (event) {
-                    this.value = get_number(this.value);
-                });
-                categorySelectLoad("0000", 2);
-            });
-            function categorySelectLoad(parentCateId, maxLength, divId, inputName, mallId) {
-                if (maxLength == undefined || maxLength == "") {
-                    maxLength = 0;
-                }
-                if (divId == undefined || divId == '') {
-                    divId = 'categorySelect';
-                }
-                if (inputName == undefined || inputName == '') {
-                    inputName = 'selectCategory';
-                }
-                if (mallId == undefined) {
-                    mallId = '';
-                }
-                if (parentCateId == undefined || parentCateId == '') {
-                    parentCateId = '00';
-                }
-                var params = 'parentCateId=' + parentCateId;
-                params += '&maxLength=' + maxLength;
-                params += '&inputName=' + inputName;
-                params += '&divId=' + divId;
-                params += '&mallId=' + mallId;
-                $('#' + divId).html('');
+<head>
+    <!-- 태그 라이브러리 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=950">
+    <title>반품/교환/환불 | 주문FAQ | 고객센터 - HOTTRACKS</title>    
+    <!-- 태그 라이브러리 -->
+    <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+
+    <link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+    <link rel="apple-touch-startup-image" href="../../images/ico_app.png">
+
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../../css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+    <!-- 20.12.28 -->
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+    <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../js/m_contents.js"></script>
+    <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+    <script type="text/javascript" src="../../js/biz/hott.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+
+<!-- 데이타 스토리  script--> 
+<script type="text/javascript">
+(function() {
+    var nl = document.createElement('script'); nl.type = 'text/javascript';
+    nl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.hottracks.co.kr/js/wl6.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(nl, s);
+    var done = false;
+    nl.onload = nl.onreadystatechange = function() {
+        if ( !done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') ) {
+            done = true;
+            _n_sid = 'pc.hottracks.co.kr';        // _n_sid 값 별로 로그파일이 생성이 됩니다
+            _n_uid_cookie = 'WNO';
+            n_logging();
+            nl.onload = nl.onreadystatechange = null;
+        }
+    }
+})();
+</script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("tbody tr td a.click").click(function (event) {
+            event.preventDefault(); // # 링크 이동 중지
+            var selectHref = $(this).attr("href");
+            if ($(selectHref).hasClass("on")) {
+                $(selectHref).removeClass("on");
+                // 210119 수정
+                $(this).removeClass('icon_active');
+            } else {
+                $(selectHref).addClass("on");
+                // 210119 수정
+                $(this).addClass('icon_active');
+                var seq = $(this).siblings("input").val();
+                var hit = $("#faqHit" + seq);
+                var hitVal = parseInt(hit.text()) + 1;
+                hit.text(hitVal);
+                // setHit
                 $.ajax({
-                    type: 'GET',
-                    url: '/product/listCategoryForSelect',
-                    data: params,
-                    dataType: 'html',
-                    success: function (html) {
-                        $('#' + divId).html(html);
+                    type: "GET",
+                    url: "/ht/help/AjaxFFaqSetHit",
+                    dataType: "html",
+                    data: {
+                        seq: seq
                     }
                 });
             }
-            function checkLengthArea(chkObj, maxLength) {
-                var str = new String($("textarea[name=" + chkObj + "]").val());
-                var _byte = 0;
-                if (str.length != 0) {
-                    for (var i = 0; i < str.length; i++) {
-                        if (escape(str.charAt(i)).length > 4) 
-                            _byte += 2;
-                         // 2Byte else 
-                            _byte++;
-                         // 1Byte
-                        if (_byte > maxLength) {
-                            alert('제한 글자 수를 초과하였습니다');
-                            $("textarea[name=" + chkObj + "]").val(str.substr(0, i));
-                            if (escape(str.charAt(i)).length > 4) 
-                                _byte -= 2;
-                             else 
-                                _byte--;
-                            
-                            break;
-                        }
-                    }
-                }
-                $("#t_" + chkObj).html(Byte_Length($($("textarea[name=" + chkObj + "]")).val()) + " Byte");
+            var selectData = $(this).parents('tr');
+        });
+        $("a.searchText").click(function (event) {
+            event.preventDefault(); // # 링크 이동 중지
+            $("form[name='faqSearchForm']").submit();
+        });
+        $("form[name='faqSearchForm'] .exm_txt").click(function () {
+            $("form[name='faqSearchForm'] .exm_txt").hide();
+            $("form[name='faqSearchForm'] input[name='title']").focus();
+        });
+        $("form[name='faqSearchForm'] input[name='title']").focus(function () {
+            $("form[name='faqSearchForm'] .exm_txt").hide();
+        });
+        $("form[name='faqSearchForm'] input[name='title']").blur(function () {
+            if ($(this).val() == "") {
+                $("form[name='faqSearchForm'] .exm_txt").show();
             }
-            function Byte_Length(lvStr) {
-                var resultSize = 0;
-                if (lvStr == null) 
-                    return 0;
-                
-                for (var i = 0; i < lvStr.length; i++) {
-                    var c = escape(lvStr.charAt(i));
-                    if (c.length == 1) 
-                        resultSize++;
-                     else if (c.indexOf("%u") != -1) 
-                        resultSize += 2;
-                     else if (c.indexOf("%") != -1) 
-                        resultSize += c.length / 3;
-                    
-                }
-                return resultSize;
-            }
-            function submitFrm() {
-                $("form[name=vendorIqryForm]").submit();
-            }
-        </script>
-        <!-- Google Tag Manager -->
-        <script>
-            (function (w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer'
-                        ? '&l=' + l
-                        : '';
-                j.async = true;
-                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-5MVN3Z4');
-        </script>
-        <!-- End Google Tag Manager -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                gnb(); // gnb
-                nav(); // nav
-                if ($('.header_wrap').length > 0) {
-                    bodyScroll(); // body scroll
-                }
-            })
-        </script>
-    </head>
-    <body>
-        <!-- Google Tag Manager (noscript) -->
-        <noscript>
-            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-        </noscript>
-        <!-- End Google Tag Manager (noscript) -->
-        <!-- 태그 라이브러리 -->
-        <!-- 탑 텍스트 배너 -->
-            <div class="top_txtbnr"> <ul class="inner">
-                <li>
-                    <a href="http://dev.hottracks.co.kr/e/63326">모바일 첫구매 3천원 쿠폰</a>
-                </li>
-                <li>
-                    <a href="http://dev.hottracks.co.kr/e/68610">핫트랙스 물류배송 인기</a>
-                </li>
-                <li>
-                    <a href="http://dev.hottracks.co.kr/p/8809633189159">BTS(방탄소년단) - BE [딜럭스 한정반]</a>
-                </li>
-                <li>
-                    <a href="http://dev.hottracks.co.kr/ht/biz/agit?agitTypeCd=C1511">별걸 다 리뷰하는 핫트연구소</a>
-                </li>
-            </ul>
-        </div>
-        <!-- 커튼 배너 -->
-        <div class="top_banner PC_MAIN_TOP_1" style="background-color:#7e68ff;">
-            <div
-                class="inner">
-                <!-- 영역 -->
-                <style>
-                    /* 좌에서 우로 컬러 #코드 모두 수정 필수 */
-                    .top_banner {
-                        background: -webkit-linear-gradient(left, #ad3333 0%,#ad3333 50%,#bb8520 50%,#bb8520 100%); /* Chrome10-25,Safari5.1-6 */
-                        background: linear-gradient(to right, #ad3333 0%,#ad3333 50%,#bb8520 50%,#bb8520 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                    }
-                </style>
-                <div class="top_banner_a type2">
-                    <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1421/1607936103702_201214_03.jpg" usemap="#top_map">
-                    <map name="top_map">
-                        <area onfocus="this.blur()" href="/e/70991" shape="rect" coords="5,8,438,76">
-                        <area onfocus="this.blur()" href="/e/71286" shape="rect" coords="496,4,972,87">
-                    </map>
-                    <!-- 화이트 버튼 white로 / 블랙 버튼 black로 클래스 추가 -->
-                    <a class="btn_close white" href="#none">닫기</a>
-                </div>
-                <!--// 영역 -->
+        });
+        $("form[name='faqSearchForm'] input[name='title']").select();
+    });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5MVN3Z4');</script>
+<!-- End Google Tag Manager -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+    gnb();//gnb
+    nav();//nav 
+    if($('.header_wrap').length >0){
+        bodyScroll();//body scroll  
+    }
+})  
+</script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
+    <div id="wrap" class="content_new">            
+        <!-- header -->
+        <div id="header">
+            <!-- util menu -->
+            <div class="util_menu">
+                <ul>
+
+                    <li><a href="#n" __onclick="login()">로그인</a></li>
+                    <li><a href="#n" __onclick="goMemJoin()">회원가입</a></li>
+
+                    <li><a href="#n">고객센터</a></li>
+                    <li><a href="#n">매장안내</a></li>
+                    <li><a href="#n">팬사인회</a></li>
+                </ul>
             </div>
+            <!--// util menu -->
+            <!-- gnb -->
+            <nav id="gnb">
+                <div class="header_wrap">
+                    <h1 class="g_logo"><a href="#n">HOTTRACKS</a></h1>
+                    <div class="g_search">
+                        <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+                            <div class="form_select">
+                                <select id="gnbSearchMenu" name="gnbSearchMenu">
+                                    <option value='GIFT'>문구/기프트</option>
+                                    <option value='RECORD'>음반</option>
+                                </select>
+                            </div>
+                            <div class="form_search">
+                                <input type="text" placeholder="샤오미를 쓰는 이유" name="searchTerm" value="">
+                                <a href="#" class="btn_search" __onclick="gnbSrchFrm();return false;"></a>
+                            </div>
+                        </form>
+                        <div class="keyword_wrap" id="ticker">
+                            <a href="#n" __onclick="gnbSrchKerword('카드 지갑');return false;">
+                                <em class="font_t">1</em>
+                                <p>카드 지갑</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+
+                                <span class="txt"><strong>NEW</strong></span>
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="g_menu">
+                        <ul>
+                            <li class="icon_my">
+
+                                <a href="#n" __onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>
+
+                            </li>
+                            <li class="icon_today">
+                                <a href="#n">
+                                    <img src="../../images/biz/common/icon_today.png" alt="">
+                                    <em>오늘,<strong>혜택</strong></em>
+                                </a>
+                            </li>
+                            <li class="icon_cart">
+                                <a href="#n">
+                                    <img src="../../images/biz/common/icon_cart.png" alt="">
+                                    <em class="font_t bizCartCount"></em>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gnb_wrap">
+                    <div class="inner">
+                        <div class="category_wrap">
+                            <div class="btn_category">
+                                <a href="#">카테고리</a>
+                            </div>
+                        </div>
+                        <ul class="gnb_menu">
+                            <li><a href="#n">다이어리<em></em></a></li>
+                            <li><a href="#n">음반<em></em></a></li>
+
+                            <li><a id="gnbBest" href="#n">베스트</a></li>
+                            <li><a id="gnbFree" href="#n">무료배송</a></li>
+                            <li><a id="gnbNew" href="#n">신상품</a></li>
+                            <li><a id="gnbSale" href="#n">세일</a></li>
+                            <li><a href="#n">이벤트</a></li>
+                        </ul>
+                        <ul class="sub_menu">
+                            <li><a href="#n">개인의취향</a></li>
+                            <li><a href="#n">이럴 때,</a></li>
+                            <li><a href="#n">아지트</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-        <div
-            id="wrap" class="content_new">
-            <!-- 태그 라이브러리 -->
-            <style>
-                #header.fixed #gnb .keyword_list_v2 {
-                    display: none !important;
-                }
-                #gnb .keyword_list_v2 {
-                    border: 1px solid #dbdbdb;
-                    box-sizing: border-box;
-                    border-radius: 20px;
-                    background: #fff;
-                    z-index: 10;
-                    width: 270px;
-                    position: relative;
-                    top: -70px;
-                    margin: 0 auto;
-                    left: 510px;
-                    padding: 20px 10px 30px 36px;
-                    display: none;
-                    -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
-                    -moz-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
-                    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
-                }
-                #gnb .keyword_list_v2 h5 {
-                    color: #000;
-                    font-size: 15px;
-                    font-weight: bold;
-                }
-                #gnb .keyword_list_v2 .keyword_close {
-                    display: none;
-                    position: absolute;
-                    top: 17.5px;
-                    width: 20px;
-                    height: 20px;
-                    right: 33px;
-                    text-indent: -9999px;
-                    background: url('http://image.kyobobook.co.kr/newimages/giftshop_new/resources/img/common/btn_closeb_top.png') 50% 50% no-repeat;
-                }
-                #gnb .keyword_list_v2 ul {
-                    margin-top: 20px;
-                }
-                #gnb .keyword_list_v2 ul li {
-                    position: relative;
-                    background: #fff;
-                }
-                #gnb .keyword_list_v2 ul li + li {
-                    margin-top: 20px;
-                }
-                #gnb .keyword_list_v2 a {
-                    display: block;
-                }
-                #gnb .keyword_list_v2 a > * {
-                    display: inline-block;
-                    vertical-align: top;
-                }
-                #gnb .keyword_list_v2 .font_t {
-                    width: 20px;
-                    color: #999;
-                    font-size: 12px;
-                    padding: 2px 0 0;
-                    font-weight: normal;
-                    vertical-align: top;
-                    position: inherit;
-                }
-                #gnb .keyword_list_v2 p {
-                    width: 70%;
-                    font-size: 14px; /* margin: 10px 0 0 0; */
-                    line-height: 14px;
-                    color: #000;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-                #gnb .keyword_list_v2 span {
-                    position: absolute;
-                    min-width: 26px;
-                    text-align: center;
-                    padding-top: 7px;
-                    right: 20px;
-                    font-size: 8px;
-                    vertical-align: top;
-                    box-sizing: border-box;
-                    font-family: font_gs, sans-serif;
-                }
-                #gnb .keyword_list_v2 .new {
-                    font-weight: bold;
-                    color: #000000;
-                    letter-spacing: -0.1em;
-                }
-                #gnb .keyword_list_v2 .num {
-                    padding-top: 6px;
-                }
-                #gnb .keyword_list_v2 .num:before {
-                    content: '';
-                    position: absolute;
-                    right: 50%;
-                    margin-right: -5px;
-                    top: -2px;
-                    width: 10px;
-                    height: 6px;
-                }
-                #gnb .keyword_list_v2 .num.up:before {
-                    background: url('../../images/biz/common/icon_updown.png') no-repeat;
-                    background-size: 20px 6px;
-                }
-                #gnb .keyword_list_v2 .num.down:before {
-                    background: url('../../images/biz/common/icon_updown.png') no-repeat;
-                    background-size: 20px 6px;
-                    background-position: -10px 0;
-                }
-                #gnb .keyword_list_v2 .txt {
-                    color: #777;
-                    font-size: 12px;
-                    padding-top: 10px;
-                }
-                #gnb .keyword_list_v2 .txt strong {
-                    font-weight: normal;
-                    font-family: 'font_gs', 'AppleGothic', sans-serif;
-                }
-            </style>
-            <script type="text/javascript">
-                jQuery(function ($) {
-                    var ticker = function () {
-                        timer = setTimeout(function () {
-                            $('#ticker a:first').animate({
-                                marginTop: '-34px'
-                            }, 400, function () {
-                                $(this)
-                                    .detach()
-                                    .appendTo('#ticker')
-                                    .removeAttr('style');
-                            });
-                            ticker();
-                        }, 2000);
-                    };
-                    var autoplay = true;
-                    ticker();
-                    /*var chkInt = sessionStorage.getItem('chkInt');
-    if (chkInt && chkInt<5) {
-            sessionStorage.setItem('chkInt', (parseInt(chkInt)+1));
-            $("input[name=exLink]").val($("input[name=exLink"+(parseInt(chkInt)+1)+"]").val());
-            $("input[name=exTxt]").val($("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
-            $("input[name=searchTerm]").attr("placeholder",$("input[name=exTxt"+(parseInt(chkInt)+1)+"]").val());
-    }else{
-        sessionStorage.setItem('chkInt', 1);
-    }*/
-                });
-                $(document).ready(function () {
-                    $(".keyword_wrap").mouseover(function () {
-                        $(".keyword_list_v2").show();
+        <!--// header -->
+        <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
+        <!-- Container -->
+        <div id="container">
+            <!-- 컨텐츠 -->
+            <div class="content orderandpay" id="content">
+                <!-- 201228 작업부분 -->
+                <script type="text/javascript">
+                    jQuery(function ($) {
+                        $(document).ready(function () {
+                            $('#content').addClass('f_set'); // 폰트 및 간격 재설정
+                        });
                     });
-                    $(".keyword_list_v2").mouseover(function () {
-                        $(".keyword_list_v2").show();
-                    });
-                    $(".keyword_list_v2").mouseout(function () {
-                        $(".keyword_list_v2").hide();
-                    });
-                    $('.keyword_close').click(function () {
-                        $('.keyword_list_v2').hide();
-                    });
-                });
-                function gnbSearchKerword(keyword) {
-                    document.location.href = "/ht/biz/bizSearchMain?searchTerm=" + keyword;
-                };
-            </script>
-            <!-- header -->
-            <div
-                id="header">
-                <!-- util menu -->
-                <div class="util_menu">
+                </script>
+                <!-- lnb -->
+                <!-- 201228 S : 작업부분 -->
+                <div class="lnb">  
+                    <!-- 201228 작업부분 -->
+                    <!-- sub top -->
+                        <div class="page_location"> <h2 class="title">
+                            <a href="javascript:;">고객센터</a>
+                        </h2>
+                    </div>
+                    <!-- //sub top -->
                     <ul>
-                        <li class="gnbLoginStat PC_MAIN_TOP_8_N" style="display:none;">
-                            <a href="http://dev.hottracks.co.kr/ht/user/logout">로그아웃</a>
+                        <li>
+                            <a>FAQ 통합검색</a>
                         </li>
-                        <li class="gnbLoginStat PC_MAIN_TOP_9_N" style="display:none;">
-                            <a href="http://dev.hottracks.co.kr/ht/mypage/mypageMain">마이핫트랙스</a>
+                        <li>
+                            <a>공지사항</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/listNotice">공지사항</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/eventPrizeList">이벤트 당첨자</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="gnbLogoutStat PC_MAIN_TOP_2_N" style="display:none;">
-                            <a href="javascript://" onclick="login()">로그인</a>
+                        <li>
+                            <a>주문 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0391">주문결제</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0392">배송</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0393">반품/교환/환불</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0394">세금계산서/증빙</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="gnbLogoutStat PC_MAIN_TOP_3_N" style="display:none;">
-                            <a href="http://dev.hottracks.co.kr/ht/biz/mypage/loginForm?returnUrl=http://www.hottracks.co.kr/ht/mypage/mypageMain">주문조회</a>
+                        <li>
+                            <a>회원 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0401">회원정보</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a>
+                                </li><!-- 
+                                <li>
+                                    <a href="/ht/help/faqListC0403">상품문의</a>
+                                </li> -->
+                                <li>
+                                    <a href="/ht/help/faqListC0404">이벤트</a>
+                                </li>
+                            </ul>
                         </li>
-                        <!--            <li class="gnbLogoutStat PC_MAIN_TOP_4" style="display:none;"><a href="javascript://" onclick="goMemJoin()">회원가입</a></li> -->
-                        <li class="icon_topcart PC_MAIN_TOP_14_N">
-                            <a href="http://dev.hottracks.co.kr/ht/order/cart">장바구니</a>
+                        <li>
+                            <a>기타 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0411">영업점</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0412">사이트이용/장애/기타</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="PC_MAIN_TOP_5_N">
-                            <a href="http://dev.hottracks.co.kr/ht/help/helpMain">고객센터</a>
+                        <li>
+                            <a>문의사항</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/vendorInquiry">상품입점문의</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/businessBuy">대량구매상담</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="PC_MAIN_TOP_7_N">
-                            <a href="http://dev.hottracks.co.kr/company/story/sign" target="_blank">팬사인회</a>
+                        <li>
+                            <a href="/ht/help/sosCounselMain">SOS상담</a>
                         </li>
-                        <li class="PC_MAIN_TOP_6_N">
-                            <a href="http://dev.hottracks.co.kr/company/main/" target="_blank">매장안내</a>
+                        <li>
+                            <a>서비스안내</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/memberShip">통합 멤버십</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/carvingService">각인 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/packingService">포장 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/cardInfo">제휴/할인 카드</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
-                <!--// util menu -->
-                <!-- gnb -->
-                <nav id="gnb">
-                    <div class="header_wrap">
-                        <h1 class="g_logo PC_MAIN_TOP_10">
-                            <a href="http://dev.hottracks.co.kr/ht/biz/welcomeMain">HOTTRACKS</a>
-                        </h1>
-                        <!-- 신규 수정추가 -->
-                        <ul class="gnb_bmenu">
-                            <li class="PC_MAIN_GNB_12_N">
-                                <a href="http://dev.hottracks.co.kr/ht/biz/sticker/stickerMain">
-                                    스티커샵
-                                    <em></em>
-                                </a>
-                            </li>
-                            <li class="PC_MAIN_GNB_15_N">
-                                <a href="http://dev.hottracks.co.kr/ht/biz/diary/main">
-                                    다이어리
-                                    <em></em>
-                                </a>
-                            </li>
-                            <li class="PC_MAIN_GNB_13_N">
-                                <a href="http://dev.hottracks.co.kr/e/71061">
-                                    크리스마스
-                                    <em></em>
-                                </a>
-                            </li>
-                            <li class="PC_MAIN_GNB_2_N">
-                                <a href="http://dev.hottracks.co.kr/ht/biz/record/recordCategoryMain?ctgrId=0003">음반</a>
-                            </li>
-                        </ul>
-                        <div class="g_search">
-                            <input type="hidden" name="exLink1" value="/e/71087"/>
-                            <input type="hidden" name="exTxt1" value="절찬리 상영중! 미션 특파서블~"/>
-                            <input type="hidden" name="exLink2" value="/p/"/>
-                            <input type="hidden" name="exTxt2" value=""/>
-                            <input type="hidden" name="exLink3" value="/p/"/>
-                            <input type="hidden" name="exTxt3" value=""/>
-                            <input type="hidden" name="exLink4" value="/e/"/>
-                            <input type="hidden" name="exTxt4" value=""/>
-                            <input type="hidden" name="exLink5" value="/e/"/>
-                            <input type="hidden" name="exTxt5" value=""/>
-                            <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
-                                <input type="hidden" name="exLink" value="/e/"/>
-                                <input type="hidden" name="exTxt" value=""/>
-                                <div class="form_search">
-                                    <input type="text" name="searchTerm" value="" placeholder="" title="검색어 키워드" autocomplete="off">
-                                    <div class="PC_MAIN_TOP_11_N">
-                                        <a href="#" class="btn_search" onclick="gnbSrchFrm();return false;"></a>
-                                    </div>
-                                </div>
+                <!-- // 201228 E : 작업부분 -->
+                <!-- //lnb -->
+                <!-- sub contents -->
+                    <div class="sub_contents">
+                        <h3 class="page_title mgt0">반품/교환/환불 FAQ</h3>
+                        <!-- search -->
+                        <div class="search_box02">
+                            <form method="get" action="/ht/help/faqListC0391" name="faqSearchForm">
+                                <fieldset>
+                                    <legend>주문 FAQ 검색</legend>
+                                    <label for="search_faq" class="stit">주문 FAQ 검색</label>
+                                    <span class="text_box">
+                                        <input type="text" id="search_faq" name="title" value="" title="검색어 입력"/>
+                                        <a href="#" class="search_btn searchText">
+                                            <span>검색</span>
+                                        </a>
+                                        <span class="exm_txt">검색어를 입력하세요</span>
+                                    </span>
+                                </fieldset>
                             </form>
-                            <script type="text/javascript">
-                                $("input[name=exLink]").val($("input[name=exLink1]").val());
-                                $("input[name=exTxt]").val($("input[name=exTxt1]").val());
-                                $("input[name=searchTerm]").attr("placeholder", $("input[name=exTxt1]").val());
-                            </script>
-                            <div class="keyword_wrap" id="ticker">
-                                <a href="javascript:;" onclick="gnbSearchKerword('텐트');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">1</em>
-                                    <p>텐트</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num up">3</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">2</em>
-                                    <p>필통</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num down">1</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('아이패드미니');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">3</em>
-                                    <p>아이패드미니</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num up">4</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('카카오프렌즈');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">4</em>
-                                    <p>카카오프렌즈</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num up">4</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('화장품파우치');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">5</em>
-                                    <p>화장품파우치</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="txt">-</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('제트스트림');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">6</em>
-                                    <p>제트스트림</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num up">8</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('토토로');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">7</em>
-                                    <p>토토로</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num down">5</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('레코드북');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">8</em>
-                                    <p>레코드북</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num up">13</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('모기장');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">9</em>
-                                    <p>모기장</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num up">13</span>
-                                </a>
-                                <a href="javascript:;" onclick="gnbSearchKerword('어린왕자다이어리');return false;" class="PC_MAIN_TOP_12_N">
-                                    <em class="font_t">10</em>
-                                    <p>어린왕자다이어리</p>
-                                    <!-- ▲ up , ▼ down : class 추가 -->
-                                    <span class="num up">14</span>
-                                </a>
-                            </div>
                         </div>
-                        <!-- 인기검색레이어 -->
-                        <div class="keyword_list_v2">
-                            <h5>인기 검색어</h5>
-                            <p class="txt">
-                                <strong>2020.12.16 17:00</strong>
-                                기준</p>
-                            <a href="#none" class="keyword_close">닫기</a>
-                            <ul>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('텐트');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">1.</em><p>텐트</p><!-- ▲ up , ▼ down : class 추가 --><span class="num up">3</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('필통');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">2.</em><p>필통</p><!-- ▲ up , ▼ down : class 추가 --><span class="num down">1</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('아이패드미니');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">3.</em><p>아이패드미니</p><!-- ▲ up , ▼ down : class 추가 --><span class="num up">4</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('카카오프렌즈');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">4.</em><p>카카오프렌즈</p><!-- ▲ up , ▼ down : class 추가 --><span class="num up">4</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('화장품파우치');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">5.</em><p>화장품파우치</p><!-- ▲ up , ▼ down : class 추가 --><span>-</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('제트스트림');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">6.</em><p>제트스트림</p><!-- ▲ up , ▼ down : class 추가 --><span class="num up">8</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('토토로');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">7.</em><p>토토로</p><!-- ▲ up , ▼ down : class 추가 --><span class="num down">5</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('레코드북');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">8.</em><p>레코드북</p><!-- ▲ up , ▼ down : class 추가 --><span class="num up">13</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('모기장');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">9.</em><p>모기장</p><!-- ▲ up , ▼ down : class 추가 --><span class="num up">13</span></a></li>
-                                <li><a href="javascript:;" onclick="gnbSearchKerword('어린왕자다이어리');return false;" class="PC_MAIN_TOP_12_N"><em class="font_t">10.</em><p>어린왕자다이어리</p><!-- ▲ up , ▼ down : class 추가 --><span class="num up">14</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="g_menu">
-                            <ul>
-                                <li class="icon_my">
-                                    <a class="gnbLoginStat" style="display:none;" href="http://dev.hottracks.co.kr/ht/mypage/mypageMain"><img src="../../images/biz/common/icon_my.png" alt=""></a>
-                                    <a class="gnbLogoutStat" style="display:none;" href="javascript://" onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>
-                                </li>
-                                <li class="icon_today">
-                                    <a href="http://dev.hottracks.co.kr/ht/biz/mypage/todayBenefit" class="PC_MAIN_TOP_13">
-                                        <img src="../../images/biz/common/icon_today.png" alt="">
-                                        <em>오늘,<strong>혜택</strong>
-                                        </em>
-                                    </a>
-                                </li>
-                                <li class="icon_cart">
-                                    <a href="http://dev.hottracks.co.kr/ht/order/cart" class="PC_MAIN_TOP_14">
-                                        <img src="../../images/biz/common/icon_cart.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="gnb_wrap">
-                        <div class="inner">
-                            <div class="category_wrap">
-                                <div class="btn_category PC_MAIN_GNB_1">
-                                    <a href="javascript:;">카테고리</a>
-                                </div>
-                                <div class="category_cont">
-                                    <ul>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000020" class="dp1" value="000020">디자인문구</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000022" class="dp1" value="000022">디지털</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000007" class="dp1" value="000007">고급필기구</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000021" class="dp1" value="000021">오피스</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000025" class="dp1" value="000025">리빙/생활가전</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000026" class="dp1" value="000026">키친/푸드</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000024" class="dp1" value="000024">가구/수납</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000028" class="dp1" value="000028">패션잡화</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000006" class="dp1" value="000006">뷰티/헬스</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000027" class="dp1" value="000027">여행/자동차</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000023" class="dp1" value="000023">취미/펫</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/gift/giftCategoryMain?ctgrId=000029" class="dp1" value="000029">유아동</a>
-                                        </li>
-                                        <!--                            <li> -->
-                                        <!--                                <a href="/ht/biz/eventDetail?eventId=47389" class="dp1 c_call" value="999999">직수입/PB</a> -->
-                                        <!--                            </li> -->
-                                            <li class="PC_SIDE_CATE_1"> <a href="/ht/biz/record/recordCategoryMain?ctgrId=0003" class="dp1" value="0003">CD/LP</a>
-                                        </li>
-                                        <li class="PC_SIDE_CATE_1">
-                                            <a href="/ht/biz/record/dvdCategoryMain?ctgrId=000401" class="dp1" value="000401">DVD/BLU-RAY</a>
-                                        </li>
-                                    </ul>
-                                    <div
-                                        class="banner PC_SIDE_CATE_IMG" id="gnbLbrnImgDiv"><!--                            <a href="#"><img src="" alt=""></a>                              -->
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="gnb_menu">
-                                <li class="PC_MAIN_GNB_8_N">
-                                    <a id="gnbEvent" href="http://dev.hottracks.co.kr/ht/biz/hotEventMain">이벤트</a>
-                                </li>
-                                <li class="PC_MAIN_TOP_13_N">
-                                    <a id="gnbTodayBenefit" href="http://dev.hottracks.co.kr/ht/biz/mypage/todayBenefit">쿠폰&amp;혜택</a>
-                                </li>
-                                <li class="PC_MAIN_GNB_9_N">
-                                    <a id="gnbPersonalRecommend" href="http://dev.hottracks.co.kr/ht/biz/personal/personalRecommend">추천</a>
-                                </li>
-                                <li class="PC_MAIN_GNB_4_N">
-                                    <a id="gnbBest" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotAwardPage">베스트</a>
-                                </li>
-                                <li class="PC_MAIN_GNB_5_N">
-                                    <a id="gnbFree" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotFreeDeliveryPage">무료배송</a>
-                                </li>
-                                <li class="PC_MAIN_GNB_6_N">
-                                    <a id="gnbNew" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotAwardRecentPage">신상</a>
-                                </li>
-                                <li class="PC_MAIN_GNB_7_N">
-                                    <a id="gnbSale" href="http://dev.hottracks.co.kr/ht/biz/welcome/hotAwardPage?dispMstrId=CATE_GFT_SALE">할인</a>
-                                </li>
-                            </ul>
-                            <ul class="sub_menu">
-                                <li class="PC_MAIN_GNB_10_N">
-                                    <a id="gnbLifeMain" href="http://dev.hottracks.co.kr/ht/biz/life/lifeMain">이럴 때,</a>
-                                </li>
-                                <li class="PC_MAIN_GNB_11_N">
-                                    <a id="gnbAgit" href="http://dev.hottracks.co.kr/ht/biz/agit">아지트</a>
-                                </li>
-                                <li class="PC_MAIN_GNB_14_N">
-                                    <a id="gnbNews" href="http://dev.hottracks.co.kr/ht/idol/news">뮤직매거진</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <!--// header -->
-            <script type="text/javascript">
-                var vid = getCookie('UserCookieKey');
-                if (isEmpty(vid)) { // 로그인이 안되있으면
-                    $('.gnbLogoutStat').show();
-                    $('.gnbLoginStat').hide();
-                } else {
-                    $('.gnbLogoutStat').hide();
-                    $('.gnbLoginStat').show();
-                    $(".gnbMypageBtn").find(".inner").addClass("member");
-                }
-            </script>
-            <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
-            <!-- Container -->
-            <div
-                id="container">
-                <!-- 컨텐츠 -->
-                <div class="content orderandpay" id="content">
-                    <!-- 201228 작업부분 -->
-                    <script type="text/javascript">
-                        jQuery(function ($) {
-                            $(document).ready(function () {
-                                $('#content').addClass('f_set'); // 폰트 및 간격 재설정
-                            });
-                        });
-                    </script>
-                    <!-- lnb -->
-                    <!-- 201228 S : 작업부분 -->
-                    <div class="lnb">
+                        <!-- search -->
+                        <!-- tab -->
                         <!-- 201228 작업부분 -->
-                        <!-- sub top -->
-                            <div class="page_location"> <h2 class="title">
-                                <a href="javascript:;">고객센터</a>
-                            </h2>
-                        </div>
-                        <!-- //sub top -->
-                        <ul>
-                            <li>
-                                <a>FAQ 통합검색</a>
-                            </li>
-                            <li>
-                                <a>공지사항</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/listNotice">공지사항</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/eventPrizeList">이벤트 당첨자</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a>주문 FAQ</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/faqListC0391">주문결제</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0392">배송</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0393">반품/교환/환불</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0394">세금계산서/증빙</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a>회원 FAQ</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/faqListC0401">회원정보</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a>
-                                    </li><!-- 
-                                    <li>
-                                        <a href="/ht/help/faqListC0403">상품문의</a>
-                                    </li> -->
-                                    <li>
-                                        <a href="/ht/help/faqListC0404">이벤트</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a>기타 FAQ</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/faqListC0411">영업점</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0412">사이트이용/장애/기타</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a>문의사항</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/vendorInquiry">상품입점문의</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/businessBuy">대량구매상담</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/ht/help/sosCounselMain">SOS상담</a>
-                            </li>
-                            <li>
-                                <a>서비스안내</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/memberShip">통합 멤버십</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/carvingService">각인 서비스</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/packingService">포장 서비스</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/cardInfo">제휴/할인 카드</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- // 201228 E : 작업부분 -->
-                    <!-- //lnb -->
-                    <!-- sub contents -->
-                        <div class="sub_contents"> <h3 class="page_title mgt0">상품입점문의</h3>
-                        <ul class="list_type02">
-                            <li>핫트랙스와 함께 할 파트너를 모십니다.</li>
-                            <li>귀사의 상품을 입점하고자 하실 경우, 먼저 아래의 입점신청서를 작성하여 등록해 주세요.</li>
-                            <li>각 담당자가 신청서를 검토 및 확인 후 개별적으로 전화나 이메일로 답변을 드리고 있습니다.</li>
-                            <li>업무폭주로 인해 따로 전화상담은 받고 있지 않으니 참고 바랍니다.</li>
-                        </ul>
-                        <form name="vendorIqryForm" action="/" method="post">
-                            <div class="info_box mgt20">
-                                <ul class="incont">
-                                    <li class="info_tit">* 제휴업체 담당자 개인정보 수집 및 이용에 대한 안내</li>
-                                    <li>- 수집항목: 담당자명, 연락처, 이메일</li>
-                                    <li>- 수집목적: 제휴협의를 위한 문의내역 확인 및 답변처리</li>
-                                    <li>- 활용기간: 접수일로부터 한 달</li>
-                                    <li>- 기재하여 주신 개인 정보는 제휴협의 외 다른 목적으로 사용되지 않습니다</li>
-                                </ul>
-                                <p class="agree"><input type="checkbox" id="chkAgree"/><label for="chkAgree">
-                                        위 개인정보 수집, 이용에 동의합니다.</label>
-                                </p>
-                            </div>
-                            <table class="table02 mgt30" summary="상품입점문 양식의 회사명,회사주소,담당자명,부서,연락처,휴대폰,이메일,회사URL,주요납품처,사업자등록번호,대표자명,업종,연매출,상품브랜드,판매가능한 상품수,상품종류,카테고리,상품설명 항목이 있습니다.">
-                                <caption>상품입점문의 양식</caption>
-                                <colgroup>
-                                    <col width="18%"/>
-                                    <col width="32%"/>
-                                    <col width="18%"/>
-                                    <col width="*"/>
-                                </colgroup>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="vndrName">회사명</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="vndrName" id="vndrName" style="width:145px;" class="input_txt required" title="회사명"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="vndrAddr">회사주소</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="vndrAddr" id="vndrAddr" style="width:465px;" class="input_txt required" title="회사주소"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="mngrName">담당자명</label>
-                                        </th>
-                                        <td><input type="text" name="mngrName" id="mngrName" style="width:145px;" class="input_txt required" title="담당자명"/></td>
-                                        <th scope="row">
-                                            <label for="dptmtName">부서</label>
-                                        </th>
-                                        <td><input type="text" name="dptmtName" id="dptmtName" style="width:145px;" class="input_txt" title="부서"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">연락처</th>
-                                        <td>
-                                            <input type="text" name="telNum1" style="width:40px;ime-mode:disabled;" class="input_txt inputNumberText" maxlength="4" title="연락처 첫 번째 자리"/>
-                                            -
-                                            <input type="text" name="telNum2" style="width:40px;" class="input_txt inputNumberText" maxlength="4" title="연락처 두 번째 자리"/>
-                                            -
-                                            <input type="text" name="telNum3" style="width:40px;" class="input_txt inputNumberText" maxlength="4" title="연락처 세 번째 자리"/>
-                                        </td>
-                                        <th scope="row">휴대폰</th>
-                                        <td>
-                                            <input type="text" name="hdphnTelNum1" style="width:40px;ime-mode:disabled;" class="input_txt inputNumberText" maxlength="4" title="휴대폰 첫 번째 자리"/>
-                                            -
-                                            <input type="text" name="hdphnTelNum2" style="width:40px;" class="input_txt inputNumberText" maxlength="4" title="휴대폰 두 번째 자리"/>
-                                            -
-                                            <input type="text" name="hdphnTelNum3" style="width:40px;" class="input_txt inputNumberText" maxlength="4" title="휴대폰 세 번째 자리"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="emailAddr">이메일</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="emailAddr" id="emailAddr" style="width:190px;" class="input_txt required" title="이메일"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="vndrUrl">회사 URL</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="vndrUrl" id="vndrUrl" style="width:230px;" class="input_txt" title="회사 URL"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="primeDlvyCstm">주요납품처</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="primeDlvyCstm" id="primeDlvyCstm" style="width:230px;" class="input_txt" title="주요납품처"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="bizRegNum">사업자등록번호</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="bizRegNum" id="bizRegNum" style="width:170px;" class="input_txt required" title="사업자등록번호"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="primeName">대표자명</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="primeName" id="primeName" style="width:170px;" class="input_txt required" title="대표자명"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="bizKindInfo">업종</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="bizKindInfo" id="bizKindInfo" style="width:170px;" class="input_txt required" title="업종"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="yyyySales">연매출</label>
-                                        </th>
-                                        <td colspan="3"><input type="text" name="yyyySales" id="yyyySales" placeholder="숫자만가능" style="width:170px;ime-mode:disabled;" class="input input_txt inputNumberText inputOnlyNum required" maxlength="9" title="연매출"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="prdtBrand">상품브랜드</label>
-                                        </th>
-                                        <td><input type="text" name="prdtBrand" id="prdtBrand" style="width:170px;" class="input_txt required" title="상품브랜드"/></td>
-                                        <th scope="row">
-                                            <label for="sellPsbltPrdtCount">판매가능한 상품수</label>
-                                        </th>
-                                        <td><input type="text" name="sellPsbltPrdtCount" id="sellPsbltPrdtCount" style="width:170px;ime-mode:disabled;" class="input_txt inputNumberText required" maxlength="9" title="판매가능한 상품수"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">상품종류</th>
-                                        <td class="txt" colspan="3">
-                                            <input name="prdtGbn" id="internal" type="radio" value="N" class="radios first" title="상품종류"/><label for="internal" class="t01">국내유통 상품</label>
-                                            <input name="prdtGbn" id="importation" type="radio" value="I" class="radios" title="수입"/><label for="importation" class="t01">수입</label>
-                                            <input name="prdtGbn" id="itself" type="radio" value="S" class="radios" title="자체제작"/><label for="itself" class="t01">자체제작</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">카테고리</th>
-                                        <td class="txt" colspan="3">
-                                            <div class="left" id="categorySelect">
-                                                <select name="selectCategory" class="select" onchange="categorySelectLoad(this.value, '2', 'categorySelect', 'selectCategory');" title="1번째 카테고리">
-                                                    <option value="00">---- 선택 ----</option>
-                                                    <option value="0000" selected="">기프트</option>
-                                                </select>
-                                                <select name="selectCategory" class="select" onchange="categorySelectLoad(this.value, '2', 'categorySelect', 'selectCategory');" title="1번째 카테고리">
-                                                    <option value="00">---- 선택 ----</option>
-                                                    <option value="0000" selected="">기프트</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="iqryDesc">상품설명</label>
-                                        </th>
-                                        <td colspan="3">
-                                            <div>
-                                                <textarea class="in01" style="width:98%;height:80px;" name="iqryDesc" id="iqryDesc" onkeyup="checkLengthArea('iqryDesc', 2000)" title="상품설명"></textarea>
-                                            </div>
-                                            <div style="float:right;">(<span id="t_iqryDesc">0Byte</span>
-                                                / 2000 Byte)</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn_area t_center mgt50">
-                                <a href="javascript://" class="btn_type03" onclick="submitFrm()">접수</a>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- //sub contents -->
-                </div>
-                <!-- //컨텐츠 -->
-            </div>
-            <!-- //Container -->
-            <script type="text/javascript">
-                /* Array.from 미지원에 따른 추가내용 */
-                // Production steps of ECMA-262, Edition 6, 22.1.2.1
-                // Reference: https://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.from
-                if (!Array.from) {
-                    Array.from = (function () {
-                        var toStr = Object.prototype.toString;
-                        var isCallable = function (fn) {
-                            return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
-                        };
-                        var toInteger = function (value) {
-                            var number = Number(value);
-                            if (isNaN(number)) {
-                                return 0;
-                            }
-                            if (number === 0 || !isFinite(number)) {
-                                return number;
-                            }
-                            return(
-                                number > 0
-                                    ? 1
-                                    : -1
-                            ) * Math.floor(Math.abs(number));
-                        };
-                        var maxSafeInteger = Math.pow(2, 53) - 1;
-                        var toLength = function (value) {
-                            var len = toInteger(value);
-                            return Math.min(Math.max(len, 0), maxSafeInteger);
-                        };
-                        // The length property of the from method is 1.
-                        return function from(arrayLike /*, mapFn, thisArg */
-                        ) { // 1. Let C be the this value.
-                            var C = this;
-                            // 2. Let items be ToObject(arrayLike).
-                            var items = Object(arrayLike);
-                            // 3. ReturnIfAbrupt(items).
-                            if (arrayLike == null) {
-                                throw new TypeError("Array.from requires an array-like object - not null or undefined");
-                            }
-                            // 4. If mapfn is undefined, then let mapping be false.
-                            var mapFn = arguments.length > 1
-                                ? arguments[1]
-                                : void undefined;
-                            var T;
-                            if (typeof mapFn !== 'undefined') {
-                                // 5. else
-                                // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
-                                if (! isCallable(mapFn)) {
-                                    throw new TypeError('Array.from: when provided, the second argument must be a function');
-                                }
-                                // 5. b. If thisArg was supplied, let T be thisArg; else let T be undefined.
-                                if (arguments.length > 2) {
-                                    T = arguments[2];
-                                }
-                            }
-                            // 10. Let lenValue be Get(items, "length").
-                            // 11. Let len be ToLength(lenValue).
-                            var len = toLength(items.length);
-                            // 13. If IsConstructor(C) is true, then
-                            // 13. a. Let A be the result of calling the [[Construct]] internal method of C with an argument list containing the single item len.
-                            // 14. a. Else, Let A be ArrayCreate(len).
-                            var A = isCallable(C)
-                                ? Object(new C(len))
-                                : new Array(len);
-                            // 16. Let k be 0.
-                            var k = 0;
-                            // 17. Repeat, while k < len… (also steps a - h)
-                            var kValue;
-                            while (k < len) {
-                                kValue = items[k];
-                                if (mapFn) {
-                                    A[k] = typeof T === 'undefined'
-                                        ? mapFn(kValue, k)
-                                        : mapFn.call(T, kValue, k);
-                                } else {
-                                    A[k] = kValue;
-                                } k += 1;
-                            }
-                            // 18. Let putStatus be Put(A, "length", len, true).
-                            A.length = len;
-                            // 20. Return A.
-                            return A;
-                        };
-                    }());
-                }
-                /* Array.from 미지원에 따른 추가내용 */
-                jQuery(function ($) {
-                    $('select.select_style02').change(function () {
-                        if ($(this).val() != "Family Site") {
-                            window.open($(this).val());
-                        }
-                    });
-                    $.ajax({url: '//admin.hottracks.co.kr/admin/system/hotSiteClickCheck2', dataType: 'jsonp', jsonpCallback: "callback", success: function (data) {}});
-                });
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-968575-10']);
-                _gaq.push(['_trackPageview']);
-                (function () {
-                    var ga = document.createElement('script');
-                    ga.type = 'text/javascript';
-                    ga.async = true;
-                    ga.src = (
-                        'https:' == document.location.protocol
-                            ? 'https://ssl'
-                            : 'http://www'
-                    ) + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(ga, s);
-                })();
-            </script>
-            <!-- 네이버 검색 광고 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
-            <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-            <script type="text/javascript">
-                if (!wcs_add) 
-                    var wcs_add = {};
-                
-                wcs_add["wa"] = "s_4d6e800c5751";
-                if (!_nasa) 
-                    var _nasa = {};
-                
-                wcs.inflow();
-                wcs_do(_nasa);
-            </script>
-            <!-- 끝 -- 네이버 검색 광고 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
-            <!-- Facebook Pixel Code -->
-            <script>
-                !function (f, b, e, v, n, t, s) {
-                    if (f.fbq) 
-                        return;
-                    
-                    n = f.fbq = function () {
-                        n.callMethod
-                            ? n.callMethod.apply(n, arguments)
-                            : n.queue.push(arguments)
-                    };
-                    if (! f._fbq) 
-                        f._fbq = n;
-                    
-                    n.push = n;
-                    n.loaded = !0;
-                    n.version = '2.0';
-                    n.queue = [];
-                    t = b.createElement(e);
-                    t.async = !0;
-                    t.src = v;
-                    s = b.getElementsByTagName(e)[0];
-                    s.parentNode.insertBefore(t, s)
-                }(window, document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '2595348470556537');
-                fbq('track', "PageView");
-            </script>
-            <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1053245131399072&ev=PageView&noscript=1"/></noscript>
-            <!-- End Facebook Pixel Code -->
-            <!--  레코벨 스크립트 -->
-            <script type="text/javascript">
-                var _recoUserId = getCookie('UserCookieKey');
-                window._eglqueue = window._eglqueue || [];
-                _eglqueue.push(['setVar', 'cuid', 'e15e978e-3623-4892-bf0a-485b9f8196ee']);
-                _eglqueue.push(['setVar', 'userId', SHA256(_recoUserId)]); // optional
-                _eglqueue.push(['track', 'visit']);
-                (function (s, x) {
-                    s = document.createElement('script');
-                    s.type = 'text/javascript';
-                    s.async = true;
-                    s.defer = true;
-                    s.src = (
-                        ('https:' == document.location.protocol)
-                            ? 'https'
-                            : 'http'
-                    ) + '://logger.eigene.io/js/logger.min.js';
-                    x = document.getElementsByTagName('script')[0];
-                    x.parentNode.insertBefore(s, x);
-                })();
-            </script>
-            <!--  레코벨 스크립트 끝 -->
-            <!-- SK Planet 유입경로 추적 스크립트 -->
-            <script src="//js.ad4989.co.kr/common/js/mojise/intro.js"></script>
-            <!--/ SK Planet 유입경로 추적 스크립트 -->
-            <!-- footer -->
-            <div id="footer">
-                <div class="util">
-                    <div class="util_cont">
-                        <ul>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/company/about/introduce" target="_blank">회사소개</a>
-                            </li>
-                            <li>
-                                <a href="http://info.hottracks.co.kr/company/recruit/notice" target="_blank">채용정보</a>
-                            </li>
-                            <li>
-                                <a href="/heart" target="_blank">핫트합니다</a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/company/store/main?deptcode=030005" target="_blank">매장안내</a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/company/about/alliance" target="_blank">제휴/광고안내</a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/ht/welcomeMain/viewRule" target="_blank">이용약관</a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/ht/welcomeMain/privacy" target="_blank">
-                                    <strong>개인정보처리방침</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/ht/welcomeMain/popupEmail" onclick="window.open(this.href,'popupPrizewinner','width=400,height=365');return false;" title="새 창으로 열림">이메일수집거부</a>
-                            </li>
-                        </ul>
-                        <div class="family_site">
-                            <p>패밀리 사이트</p>
+                        <div class="tab1">
                             <ul>
-                                <li><a href="http://www.kyobo.co.kr" title="새 창 열림" target="_blank">교보생명</a></li>
-                                <li><a href="http://www.kyobobook.co.kr" title="새 창 열림" target="_blank">교보문고</a></li>
-                                <li><a href="http://www.kyobotrade.com" title="새 창 열림" target="_blank">교보증권</a></li>
-                                <li><a href="http://www.kico.co.kr" title="새 창 열림" target="_blank">교보정보통신</a></li>
-                                <li><a href="http://www.kyobobldg.co.kr" title="새 창 열림" target="_blank">교보리얼코</a></li>
-                                <li><a href="http://www.kyoboitm.co.kr" title="새 창 열림" target="_blank">교보악사자산운용</a></li>
-                                <li><a href="http://www.lifeplanet.co.kr" title="새 창 열림" target="_blank">교보라이프플래닛생명</a></li>
-                                <li><a href="http://www.kcasonsa.co.kr" title="새 창 열림" target="_blank">KCA 손해사정</a></li>
-                                <li><a href="http://www.daesan.or.kr" title="새 창 열림" target="_blank">대산문화재단</a></li>
-                                <li><a href="http://www.kbedu.or.kr" title="새 창 열림" target="_blank">교보생명교육문화재단</a></li>
-                                <li><a href="http://www.dsa.or.kr" title="새 창 열림" target="_blank">대산농촌재단</a></li>
-                                <li><a href="http://www.kyoboacademy.co.kr" title="새 창 열림" target="_blank">교보아카데미</a></li>
+                                <li><a href="/ht/help/faqListC0391"><span>주문결제</span></a></li>
+                                <li><a href="/ht/help/faqListC0392"><span>배송</span></a></li>
+                                <li><a href="/ht/help/faqListC0393" class="on"><span>반품/교환/환불</span></a></li>
+                                <li><a href="/ht/help/faqListC0394"><span>세금계산서/증빙</span></a></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="inner">
-                    <div class="cont left">
-                        <div class="cs_center">
-                            <strong class="font_t">1661-1112</strong>
-                            <span>평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
-                            <dl>
-                                <dt>
-                                    <a href="http://dev.hottracks.co.kr/ht/help/sosCounselMain">
-                                        <span>SOS 상담</span>
-                                    </a>
-                                </dt>
-                                <dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
-                            </dl>
-                        </div>
-                        <h2>교보핫트랙스㈜</h2>
-                        <span>대표이사 오교철</span>
-                        <span>사업자등록번호 : 102-81-29258
-                            <a href="javascript://" onclick="window.open('http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1028129258', 'communicationViewPopup', 'scrollbars=yes, width=750, height=700;');return false;" title="새 창으로 열림">사업자정보확인 &gt;</a>
-                        </span>
-                        <span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
-                        <span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
-                        <span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
-                    </div>
-                    <div class="cont right">
-                        <ul class="sns">
-                            <li>
-                                <a href="https://www.instagram.com/hottracks_online/" target="_blank"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com/HOTTRACKSFRIEND/" target="_blank"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg" target="_blank"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/hotonmusic" target="_blank"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a>
-                            </li>
-                            <li>
-                                <a href="http://hottracks91.blog.me/" target="_blank"><img src="../../images/biz/common/icon_blog.png" alt="blog"></a>
-                            </li>
-                        </ul>
-                        <div class="mobile">
-                            <a href="https://apps.apple.com/kr/app/hottracks/id1129743143" target="_blank" class="font_t ios">APP STORE</a>
-                            <a href="https://play.google.com/store/apps/details?id=kr.co.hottracks.m.and" target="_blank" class="font_t and">PLAY STORE</a>
-                        </div>
-                        <ul class="copyright">
-                            <li>
-                                <a href="/heart" target="_blank"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a>
-                            </li>
-                            <li>
-                                <a href="http://www.copyrightok.kr" target="_blank"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a>
+                        <!-- //tab -->
+                        <!-- list -->
+                        <!-- 201228 : S 작업부분 -->
+                        <table class="bbs_list01 tbl_slide">
+                            <caption>주문 FAQ</caption>
+                            <colgroup>
+                                <col width="160"/>
+                                <col width="*">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <!--<th scope="col" class="fir">번호</th>-->
+                                    <th scope="col">구분</th>
+                                    <th scope="col">제목</th>
+                                    <!--<th scope="col" class="last">조회수</th>-->
+                                </tr>
+                            </thead>
+                        <tbody>
+                            <tr>
+                                <!-- 201228 작업부분 -->
+                                <!-- <td>1</td> -->
+                                <td>반품/교환/환불</td>
+                                <td class="t_left">
+                                    <a href="#faq0" class="click">상품을 교환/반품하고 싶습니다. </a>
+                                    <input type="hidden" value="281"/>
+                                </td>
+                                <!-- 201228 작업부분 -->
+                                <!-- <td id="faqHit281">1485</td> -->
+                            </tr>
+                            <tr class="conts" id="faq0">
+                                <!-- 201228 작업부분 -->
+                                <td colspan="2"><div class="txt"><p>마이룸&gt;반품/교환신청 또는 마이룸 SOS 또는&nbsp;전화(국번없이) 1661-1112으로 연락주시면</p><p>교환/반품 절차 안내를 받으시실 수 있습니다. <br></p><p>고객변심으로 인한 교환/반품시 발생하는 왕복비용(배송비)은 고객 부담이며 사용된 할인쿠폰은 반환되지 않습니다. </p><p>업체배송 상품일 경우, &nbsp;발생된 배송비는 택배박스에 현금으로 동봉 부탁드립니다. </p></div></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <!-- //list -->
+                    <!-- paging -->
+                    <div class="paging cs mgt40">
+                        <a title="맨 처음 페이지로 이동" href="/ht/help/faqListC0391?page=1" class="first">처음</a>
+                        <ul>
+                            <li class="active">
+                                <a href="javascript://">1</a>
                             </li>
                         </ul>
-                        <span class="payment">
-                            <em class="font_t">NICEPAY</em>
-                            <a href="#n" onclick="window.open('http://image.kyobobook.co.kr/newimages/giftshop_new/company/nicepay.html','window','location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no, width=740, height=867, left=100, top=50, scrollbars=no');return false">서비스 가입사실 확인 &gt;</a>
-                        </span>
-                        <span class="txt">핫트랙스는 나이스페이먼츠 에스크로 서비스에 가입된 사업자이며,<br/>고객님은 구매 안전서비스를 이용하실 수 있습니다.</span>
+                        <a title="맨 나중 페이지로 이동" href="/ht/help/listNotice?page=1" class="next02">나중</a>
                     </div>
+                    <!-- //paging -->
                 </div>
+                <!-- //sub contents -->
+                <!--// 201228 : E 작업부분 -->
             </div>
-            <!--// footer -->
+            <!-- //컨텐츠 -->
         </div>
-        <div id="mask"></div>
-    </body>
+    </div>
+</body>
+
 </html>

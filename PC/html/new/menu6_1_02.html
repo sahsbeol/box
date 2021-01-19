@@ -2,62 +2,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
     <!-- 태그 라이브러리 -->
-    
-
-
-
-
-
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Script-Type" content="text/javascript">
     <meta http-equiv="Content-Style-Type" content="text/css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=950">
 	<title>영업점 이용상담 | SOS상담 | 고객센터 - HOTTRACKS</title>
-    
-<!-- 태그 라이브러리 -->
-
-
-
-
-
-
-
-
-
-
-<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
-
-<link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
-<link rel="apple-touch-startup-image" href="../../images/ico_app.png">
-
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
-<link rel="stylesheet" type="text/css" href="../../css/contents.css">
-<link rel="stylesheet" type="text/css" href="../../css/shop.css">
-<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
-<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
-<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
-<!-- 20.12.28 -->
-<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
-
-<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../../js/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="../../js/m_contents.js"></script>
-<script type="text/javascript" src="../../js/music.js"></script>
-<script type="text/javascript" src="../../js/musicPlayer.js"></script>
-<script type="text/javascript" src="../../scripts/common"></script>
-<script type="text/javascript" src="../../js/ht.common.utils.1.0.0.js"></script>
-<script type="text/javascript" src="../../js/ht.menu.topGnb.1.0.0.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/swiper.min.js"></script>
-<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
-<script type="text/javascript" src="../../js/biz/hott.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../js/biz/ht.menu.bizTopGnb.1.0.0.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+    <!-- 태그 라이브러리 -->
+    <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+    <link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+    <link rel="apple-touch-startup-image" href="../../images/ico_app.png">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../../css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+    <!-- 20.12.28 -->
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+    <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../js/m_contents.js"></script>
+    <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+    <script type="text/javascript" src="../../js/biz/hott.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
 
 <!-- 데이타 스토리  script--> 
 <script type="text/javascript">
@@ -189,21 +160,97 @@ $(document).ready(function(){
     <!-- End Google Tag Manager (noscript) -->
 
 
-    <!-- 태그 라이브러리 -->
-
-        <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
-        <div style="text-align: center;">
-            <img src="../../images/new/@img_banner.png" alt=""> 
-        </div>
-        <!-- 태그 라이브러리 -->
-
         <div id="wrap" class="content_new">            
             <!-- header -->
             <div id="header">
-                <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
-                <div style="text-align: center;">
-                    <img src="../../images/new/@img_gnb.png" alt=""> 
+                <!-- util menu -->
+                <div class="util_menu">
+                    <ul>
+
+                        <li><a href="#n" __onclick="login()">로그인</a></li>
+                        <li><a href="#n" __onclick="goMemJoin()">회원가입</a></li>
+
+                        <li><a href="#n">고객센터</a></li>
+                        <li><a href="#n">매장안내</a></li>
+                        <li><a href="#n">팬사인회</a></li>
+                    </ul>
                 </div>
+                <!--// util menu -->
+                <!-- gnb -->
+                <nav id="gnb">
+                    <div class="header_wrap">
+                        <h1 class="g_logo"><a href="#n">HOTTRACKS</a></h1>
+                        <div class="g_search">
+                            <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+                                <div class="form_select">
+                                    <select id="gnbSearchMenu" name="gnbSearchMenu">
+                                        <option value='GIFT'>문구/기프트</option>
+                                        <option value='RECORD'>음반</option>
+                                    </select>
+                                </div>
+                                <div class="form_search">
+                                    <input type="text" placeholder="샤오미를 쓰는 이유" name="searchTerm" value="">
+                                    <a href="#" class="btn_search" __onclick="gnbSrchFrm();return false;"></a>
+                                </div>
+                            </form>
+                            <div class="keyword_wrap" id="ticker">
+                                <a href="#n" __onclick="gnbSrchKerword('카드 지갑');return false;">
+                                    <em class="font_t">1</em>
+                                    <p>카드 지갑</p>
+                                    <!-- ▲ up , ▼ down : class 추가 -->
+
+                                    <span class="txt"><strong>NEW</strong></span>
+
+                                </a>
+                            </div>
+                        </div>
+                        <div class="g_menu">
+                            <ul>
+                                <li class="icon_my">
+
+                                    <a href="#n" __onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>
+
+                                </li>
+                                <li class="icon_today">
+                                    <a href="#n">
+                                        <img src="../../images/biz/common/icon_today.png" alt="">
+                                        <em>오늘,<strong>혜택</strong></em>
+                                    </a>
+                                </li>
+                                <li class="icon_cart">
+                                    <a href="#n">
+                                        <img src="../../images/biz/common/icon_cart.png" alt="">
+                                        <em class="font_t bizCartCount"></em>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="gnb_wrap">
+                        <div class="inner">
+                            <div class="category_wrap">
+                                <div class="btn_category">
+                                    <a href="#">카테고리</a>
+                                </div>
+                            </div>
+                            <ul class="gnb_menu">
+                                <li><a href="#n">다이어리<em></em></a></li>
+                                <li><a href="#n">음반<em></em></a></li>
+
+                                <li><a id="gnbBest" href="#n">베스트</a></li>
+                                <li><a id="gnbFree" href="#n">무료배송</a></li>
+                                <li><a id="gnbNew" href="#n">신상품</a></li>
+                                <li><a id="gnbSale" href="#n">세일</a></li>
+                                <li><a href="#n">이벤트</a></li>
+                            </ul>
+                            <ul class="sub_menu">
+                                <li><a href="#n">개인의취향</a></li>
+                                <li><a href="#n">이럴 때,</a></li>
+                                <li><a href="#n">아지트</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
             <!--// header -->
             <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->

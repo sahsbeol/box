@@ -2,62 +2,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
     <!-- 태그 라이브러리 -->
-    
-
-
-
-
-
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Script-Type" content="text/javascript">
     <meta http-equiv="Content-Style-Type" content="text/css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=950">
-    <title>공지사항 | 공지/문의 | 고객센터 - HOTTRACKS</title>
-    
-<!-- 태그 라이브러리 -->
+    <title>주문결제 | 주문FAQ | 고객센터 - HOTTRACKS</title>    
+    <!-- 태그 라이브러리 -->
+    <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
 
+    <link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+    <link rel="apple-touch-startup-image" href="../../images/ico_app.png">
 
-
-
-
-
-
-
-
-
-<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
-
-<link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
-<link rel="apple-touch-startup-image" href="../../images/ico_app.png">
-
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
-<link rel="stylesheet" type="text/css" href="../../css/contents.css">
-<link rel="stylesheet" type="text/css" href="../../css/shop.css">
-<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
-<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
-<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
-<!-- 20.12.28 -->
-<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
-
-<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../../js/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="../../js/m_contents.js"></script>
-<script type="text/javascript" src="../../js/music.js"></script>
-<script type="text/javascript" src="../../js/musicPlayer.js"></script>
-<script type="text/javascript" src="../../scripts/common"></script>
-<script type="text/javascript" src="../../js/ht.common.utils.1.0.0.js"></script>
-<script type="text/javascript" src="../../js/ht.menu.topGnb.1.0.0.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/swiper.min.js"></script>
-<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
-<script type="text/javascript" src="../../js/biz/hott.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../js/biz/ht.menu.bizTopGnb.1.0.0.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
-<script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../../css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+    <!-- 20.12.28 -->
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+    <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../js/m_contents.js"></script>
+    <script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+    <script type="text/javascript" src="../../js/biz/hott.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
 
 <!-- 데이타 스토리  script--> 
 <script type="text/javascript">
@@ -78,8 +51,6 @@
 })();
 </script>
 
-    
-
 <script type="text/javascript">
     jQuery(function ($) {
         $("tbody tr td a.click").click(function (event) {
@@ -87,27 +58,47 @@
             var selectHref = $(this).attr("href");
             if ($(selectHref).hasClass("on")) {
                 $(selectHref).removeClass("on");
+                // 210119 수정
+                $(this).removeClass('icon_active');
             } else {
                 $(selectHref).addClass("on");
+                // 210119 수정
+                $(this).addClass('icon_active');
                 var seq = $(this).siblings("input").val();
+                var hit = $("#faqHit" + seq);
+                var hitVal = parseInt(hit.text()) + 1;
+                hit.text(hitVal);
                 // setHit
                 $.ajax({
                     type: "GET",
-                    // url: "/ht/help/listNotice/updateHit",
+                    url: "/ht/help/AjaxFFaqSetHit",
                     dataType: "html",
                     data: {
-                        notiSeq: seq
+                        seq: seq
                     }
                 });
             }
+            var selectData = $(this).parents('tr');
         });
-        $("#").click();
-        $(".bbs_list01 img").each(function () {
-            $(this).css("max-width", "100%");
+        $("a.searchText").click(function (event) {
+            event.preventDefault(); // # 링크 이동 중지
+            $("form[name='faqSearchForm']").submit();
         });
+        $("form[name='faqSearchForm'] .exm_txt").click(function () {
+            $("form[name='faqSearchForm'] .exm_txt").hide();
+            $("form[name='faqSearchForm'] input[name='title']").focus();
+        });
+        $("form[name='faqSearchForm'] input[name='title']").focus(function () {
+            $("form[name='faqSearchForm'] .exm_txt").hide();
+        });
+        $("form[name='faqSearchForm'] input[name='title']").blur(function () {
+            if ($(this).val() == "") {
+                $("form[name='faqSearchForm'] .exm_txt").show();
+            }
+        });
+        $("form[name='faqSearchForm'] input[name='title']").select();
     });
 </script>
-
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -130,424 +121,580 @@ $(document).ready(function(){
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MVN3Z4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <!-- End Google Tag Manager (noscript) -->    
 
+    
+    <div id="wrap" class="content_new">            
+        <!-- header -->
+        <div id="header">
+            <!-- util menu -->
+            <div class="util_menu">
+                <ul>
 
-    <!-- 태그 라이브러리 -->
+                    <li><a href="#n" __onclick="login()">로그인</a></li>
+                    <li><a href="#n" __onclick="goMemJoin()">회원가입</a></li>
 
-        <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
-        <div style="text-align: center;">
-            <img src="../../images/new/@img_banner.png" alt=""> 
-        </div>
-        <!-- 태그 라이브러리 -->
-
-        <div id="wrap" class="content_new">            
-            <!-- header -->
-            <div id="header">
-                <!-- 상단부분은 너무 길이가 많고 현재 작업에서는 필요하지 않아 이미지로 대체하여 보여주기용으로만 넣었습니다.  -->
-                <div style="text-align: center;">
-                    <img src="../../images/new/@img_gnb.png" alt=""> 
-                </div>
+                    <li><a href="#n">고객센터</a></li>
+                    <li><a href="#n">매장안내</a></li>
+                    <li><a href="#n">팬사인회</a></li>
+                </ul>
             </div>
-            <!--// header -->
-            <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
-            <!-- Container -->
-            <div id="container">
-                <!-- 컨텐츠 -->
-                <div class="content orderandpay" id="content">
-                    <!-- lnb -->
-                    <!-- 201228 S : 작업부분 -->
-                    <div class="lnb">                        
-                        <!-- 201228 작업부분 -->
-                        <!-- sub top -->
-                        <div class="page_location"> 
-                            <h2 class="title">
-                                <a href="javascript:;">고객센터</a>
-                            </h2>
+            <!--// util menu -->
+            <!-- gnb -->
+            <nav id="gnb">
+                <div class="header_wrap">
+                    <h1 class="g_logo"><a href="#n">HOTTRACKS</a></h1>
+                    <div class="g_search">
+                        <form name="gnbSearchForm" action="/ht/biz/bizSearchMain" method="post" onsubmit="return false;">
+                            <div class="form_select">
+                                <select id="gnbSearchMenu" name="gnbSearchMenu">
+                                    <option value='GIFT'>문구/기프트</option>
+                                    <option value='RECORD'>음반</option>
+                                </select>
+                            </div>
+                            <div class="form_search">
+                                <input type="text" placeholder="샤오미를 쓰는 이유" name="searchTerm" value="">
+                                <a href="#" class="btn_search" __onclick="gnbSrchFrm();return false;"></a>
+                            </div>
+                        </form>
+                        <div class="keyword_wrap" id="ticker">
+                            <a href="#n" __onclick="gnbSrchKerword('카드 지갑');return false;">
+                                <em class="font_t">1</em>
+                                <p>카드 지갑</p>
+                                <!-- ▲ up , ▼ down : class 추가 -->
+
+                                <span class="txt"><strong>NEW</strong></span>
+
+                            </a>
                         </div>
-                        <!-- //sub top -->
+                    </div>
+                    <div class="g_menu">
                         <ul>
-                            <!-- <li>
-                                <a>FAQ 통합검색</a>
-                            </li> -->
-                            <li>
-                                <a>공지사항</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/listNotice">공지사항</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/eventPrizeList">이벤트 당첨자</a>
-                                    </li>
-                                </ul>
+                            <li class="icon_my">
+
+                                <a href="#n" __onclick="login()"><img src="../../images/biz/common/icon_my.png" alt=""></a>
+
                             </li>
-                            <li>
-                                <a>주문 FAQ</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/faqListC0391">주문결제</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0392">배송</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0393">반품/교환/환불</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0394">세금계산서/증빙</a>
-                                    </li>
-                                </ul>
+                            <li class="icon_today">
+                                <a href="#n">
+                                    <img src="../../images/biz/common/icon_today.png" alt="">
+                                    <em>오늘,<strong>혜택</strong></em>
+                                </a>
                             </li>
-                            <li>
-                                <a>회원 FAQ</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/faqListC0401">회원정보</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a>
-                                    </li><!-- 
-                                    <li>
-                                        <a href="/ht/help/faqListC0403">상품문의</a>
-                                    </li> -->
-                                    <li>
-                                        <a href="/ht/help/faqListC0404">이벤트</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a>기타 FAQ</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/faqListC0411">영업점</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/faqListC0412">사이트이용/장애/기타</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a>문의사항</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/vendorInquiry">상품입점문의</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/businessBuy">대량구매상담</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/ht/help/sosCounselMain">SOS상담</a>
-                            </li>
-                            <li>
-                                <a>서비스안내</a>
-                                <ul class="depth2">
-                                    <li>
-                                        <a href="/ht/help/memberShip">통합 멤버십</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/carvingService">각인 서비스</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/packingService">포장 서비스</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ht/help/cardInfo">제휴/할인 카드</a>
-                                    </li>
-                                </ul>
+                            <li class="icon_cart">
+                                <a href="#n">
+                                    <img src="../../images/biz/common/icon_cart.png" alt="">
+                                    <em class="font_t bizCartCount"></em>
+                                </a>
                             </li>
                         </ul>
                     </div>
-                    <!-- // 201228 E : 작업부분 -->
-                    <!-- //lnb -->
-                    <!-- sub contents -->
-                    <div class="sub_contents">
-                        <!-- 201228 작업부분 -->
-                        <!-- h3 class="page_title mgt0"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/tit_notice.gif" alt="공지사항" /></h3 -->
-                        <h3 class="page_title">공지사항</h3>
-
-                        <ul class="list_type02">
-                            <li>핫트랙스에서 고객 여러분께 유익한 쇼핑 정보를 알려드립니다.</li>
-                        </ul>
-
-                        <!-- 
-                            <div class="tab1">
-                                <ul>
-                                    <li><a href="/ht/help/listNotice" class="on"><span>핫트랙스공지사항</span></a></li>
-                                    <li><a href="/ht/help/listNotice?brandOrCategory=B" class="off"><span>브랜드공지사항</span></a></li>
-                                </ul>
+                </div>
+                <div class="gnb_wrap">
+                    <div class="inner">
+                        <div class="category_wrap">
+                            <div class="btn_category">
+                                <a href="#">카테고리</a>
                             </div>
-                        -->
-                        <table class="bbs_list01 mgt30 tbl_slide" summary="핫트랙스 공지사항의 번호, 제목, 등록일, 조회 항목이 있습니다">
-                            <caption>핫트랙스 공지사항</caption>
+                        </div>
+                        <ul class="gnb_menu">
+                            <li><a href="#n">다이어리<em></em></a></li>
+                            <li><a href="#n">음반<em></em></a></li>
+
+                            <li><a id="gnbBest" href="#n">베스트</a></li>
+                            <li><a id="gnbFree" href="#n">무료배송</a></li>
+                            <li><a id="gnbNew" href="#n">신상품</a></li>
+                            <li><a id="gnbSale" href="#n">세일</a></li>
+                            <li><a href="#n">이벤트</a></li>
+                        </ul>
+                        <ul class="sub_menu">
+                            <li><a href="#n">개인의취향</a></li>
+                            <li><a href="#n">이럴 때,</a></li>
+                            <li><a href="#n">아지트</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!--// header -->
+        <!-- 201228 S : id="content 에 class="orderandpay" 넣어주세요 -->
+        <!-- Container -->
+        <div id="container">
+            <!-- 컨텐츠 -->
+            <div class="content orderandpay" id="content">
+                <!-- 201228 작업부분 -->
+                <script type="text/javascript">
+                    jQuery(function ($) {
+                        $(document).ready(function () {
+                            $('#content').addClass('f_set'); // 폰트 및 간격 재설정
+                        });
+                    });
+                </script>
+                <!-- lnb -->
+                <!-- 201228 S : 작업부분 -->
+                <div class="lnb">  
+                    <!-- 201228 작업부분 -->
+                    <!-- sub top -->
+                        <div class="page_location"> <h2 class="title">
+                            <a href="javascript:;">고객센터</a>
+                        </h2>
+                    </div>
+                    <!-- //sub top -->
+                    <ul>
+                        <li>
+                            <a>FAQ 통합검색</a>
+                        </li>
+                        <li>
+                            <a>공지사항</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/listNotice">공지사항</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/eventPrizeList">이벤트 당첨자</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>주문 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0391">주문결제</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0392">배송</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0393">반품/교환/환불</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0394">세금계산서/증빙</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>회원 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0401">회원정보</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0402">통합포인트/예치금/쿠폰</a>
+                                </li><!-- 
+                                <li>
+                                    <a href="/ht/help/faqListC0403">상품문의</a>
+                                </li> -->
+                                <li>
+                                    <a href="/ht/help/faqListC0404">이벤트</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>기타 FAQ</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/faqListC0411">영업점</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/faqListC0412">사이트이용/장애/기타</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>문의사항</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/vendorInquiry">상품입점문의</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/businessBuy">대량구매상담</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/ht/help/sosCounselMain">SOS상담</a>
+                        </li>
+                        <li>
+                            <a>서비스안내</a>
+                            <ul class="depth2">
+                                <li>
+                                    <a href="/ht/help/memberShip">통합 멤버십</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/savePointByOffBill">영수증 적립 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/carvingService">각인 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/packingService">포장 서비스</a>
+                                </li>
+                                <li>
+                                    <a href="/ht/help/cardInfo">제휴/할인 카드</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- // 201228 E : 작업부분 -->
+                <!-- //lnb -->
+                <!-- sub contents -->
+                    <div class="sub_contents">
+                        <h3 class="page_title mgt0">주문결제 FAQ</h3>
+                        <!-- search -->
+                        <div class="search_box02">
+                            <form method="get" action="/ht/help/faqListC0391" name="faqSearchForm">
+                                <fieldset>
+                                    <legend>주문 FAQ 검색</legend>
+                                    <label for="search_faq" class="stit">주문 FAQ 검색</label>
+                                    <span class="text_box">
+                                        <input type="text" id="search_faq" name="title" value="" title="검색어 입력"/>
+                                        <a href="#" class="search_btn searchText">
+                                            <span>검색</span>
+                                        </a>
+                                        <span class="exm_txt">검색어를 입력하세요</span>
+                                    </span>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <!-- search -->
+                        <!-- tab -->
+                        <!-- 201228 작업부분 -->
+                        <div class="tab1">
+                            <ul>
+                                <li><a href="/ht/help/faqListC0391" class="on"><span>주문결제</span></a></li>
+                                <li><a href="/ht/help/faqListC0392"><span>배송</span></a></li>
+                                <li><a href="/ht/help/faqListC0393"><span>반품/교환/환불</span></a></li>
+                                <li><a href="/ht/help/faqListC0394"><span>세금계산서/증빙</span></a></li>
+                            </ul>
+                        </div>
+                        <!-- //tab -->
+                        <!-- list -->
+                        <!-- 201228 : S 작업부분 -->
+                        <table class="bbs_list01 tbl_slide">
+                            <caption>주문 FAQ</caption>
                             <colgroup>
-                                <!-- 201228 작업부분 -->
-                                <!-- <col width="80"/> -->
-                                <col width="*"/>
                                 <col width="160"/>
+                                <col width="*">
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <!-- 201228 작업부분 -->
-                                    <!-- <th scope="col" class="fir">
-                                                            번호
-                                                        </th> -->
-                                    <th scope="col"> 제목</th>
-                                    <th scope="col" class="last">
-                                        등록일
-                                    </th>
+                                    <!--<th scope="col" class="fir">번호</th>-->
+                                    <th scope="col">구분</th>
+                                    <th scope="col">제목</th>
+                                    <!--<th scope="col" class="last">조회수</th>-->
                                 </tr>
                             </thead>
-
                             <tbody>
-                                <!-- 고정 일때 class="list_fixed" -->
-                                <tr class="list_fixed">
+                                <!-- 상단 고정 : S -->
+                                <tr>
+                                    <!-- <td>0</td> -->
+                                    <td>주문결제</td>
+                                    <td class="t_left">
+                                        <a href="#faq0_0" class="click icon_arrow">상품권(문화상품권, 도서상품권 등)으로 결제할 수 있나요?</a>
+                                        <input type="hidden" value="40"/>
+                                    </td>
                                     <!-- 201228 작업부분 -->
-                                    <!-- <td>121</td> -->
-                                    <td class="t_left"> <input type="hidden" value="22304"/>
-                                        <a href="#list-content22304" id="22304" class="click">
-                                            [공지사항] 한터차트 반영 정정 안내
-                                            <span class="icon_cs_new">N</span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        2020.11.18
-                                    </td>
+                                    <!-- <td id="faqHit40">19748</td> -->
                                 </tr>
-                                <tr
-                                    class="conts" id="list-content22304">
-                                    <!-- 201228 작업부분 -->
+                                <tr class="list_fixed conts" id="faq0_0">
                                     <td colspan="2">
                                         <div class="txt">
-                                            <p>
-                                                안녕하세요, 핫트랙스입니다.
-                                            </p>
-                                            <p>
-                                                지난 11월 15일, '핫트랙스'의 판매량 중 하성운의 'MIRAGE: 미니앨범 4집'의 일부가 당사 처리 지연으로 정확한 일자에
-                                            </p>
-                                            <p>
-                                                한터차트에 미반영되었음이 확인되어. 전량 재확인과 함께 정정요청을 하였습니다.
-                                            </p>
-                                            <p>
-                                                해당 일자가 포함되는 15일과 16일 한터차트 일간 및 주간차트가 정정되었음을 안내 드립니다.
-                                            </p>
-                                            <p>
-                                                당사 처리 지연으로 정확한 일자에 미반영된 내역은 누락없이 전량 정정되었으며,
-                                            </p>
-                                            <p>
-                                                오랜시간 고객님들께 심려와 불편을 끼쳐 드린 점 머리 숙여 사과 말씀 드립니다.
-                                                <br>
-                                                아울러 처리 과정 중 명확한 답변을 드리지 못한 점 너그러이 양해 부탁드립니다.
-                                            </p>
-                                            <p>
-                                                핫트랙스 배상.
-                                            </p>
+                                            <P>죄송합니다 이전까지 진행되었던 컬쳐랜드 문화상품권 결제 서비스가
+                                                <BR>2016년 9월 19일 이후로&nbsp; 종료되었습니다.
+                                                <BR>앞으로 더욱 나은 서비스로 찾아뵐 수 있도록 노력하겠습니다
+                                                <BR></P>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!--// 상단 고정 : E -->
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>1</td> -->
+                                    <td>주문결제</td>
+                                        <td class="t_left"> <a href="#faq0" class="click icon_arrow">상품권(문화상품권, 도서상품권 등)으로 결제할 수 있나요?</a>
+                                        <input type="hidden" value="40"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit40">19748</td> -->
+                                </tr>
+                                <tr class="conts" id="faq0">
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <P>죄송합니다 이전까지 진행되었던 컬쳐랜드 문화상품권 결제 서비스가
+                                                <BR>2016년 9월 19일 이후로&nbsp; 종료되었습니다.
+                                                <BR>앞으로 더욱 나은 서비스로 찾아뵐 수 있도록 노력하겠습니다
+                                                <BR></P>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="">
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>2</td> -->
+                                    <td>주문결제</td>
+                                    <td class="t_left">
+                                        <a href="#faq1" class="click icon_arrow">크롬(Chrome) 결제시 INIpayPlugin.exe를 다운받아도 계속 재설치가 뜹니다.</a>
+                                        <input type="hidden" value="241"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit241">12537</td> -->
+                                </tr>
+                                <tr class="conts" id="faq1">
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <P>크롬에서 결제시INIpayPlugin.exe를 다운받아도 계속 재설치 하라고 할 경우,
+                                                <BR>아래와 같이 일시적으로 사용해주시기 바랍니다.
+                                                <BR>(KG이니시스 플러그인 크로스브라우저 서비스 관련 공지안내)
+                                                <BR><BR><B>1. 증상 및 원인
+                                                </B><BR><BR>(1) 증상
+                                                <BR>사용자가 Chrome브라우저에서 결제시 플러그인 설치 안내 페이지가 표시되며, INIpayPlugin.exe를 다운로드 받아 재설치
+                                                <BR>하여도 동일증상 무한반복
+                                                <BR><BR>(2) 원인
+                                                <BR>구글정책 상, 더 이상의 NPAPI(Chrome 브라우저에서 IE의 Active X와 동일한 기능을 수행하도록 지원하는 기술)차단
+                                                <BR>(Chrome 42.X버전 이상에서는 오픈웹 결제 플러그인 실행 불가)
+                                                <BR><BR><B>2. 대응방법</B>
+                                                <BR><BR>(1) Chrome 브라우저에서 주소창에 chrome://flags/#enable-npapi 입력 후 Enter
+                                            </P>
+                                            <P><BR><IMG alt="주소창에 chrome://flags/#enable-npapi 입력 후 Enter" src="http://image.kyobobook.co.kr/ink/images/cscenter/ini_01.jpg"></P>
+                                            <P>&nbsp;</P>
+                                            <P>&nbsp;</P>
+                                            <P>(2) NPAPI사용버튼 클릭
+                                            </P>
+                                            <P><BR><IMG alt="NPAPI사용버튼 클릭" src="http://image.kyobobook.co.kr/ink/images/cscenter/ini_02.jpg">
+                                                <BR><BR><FONT color="#ff5e00">
+                                                    <SPAN style="COLOR: rgb(59,156,233)">
+                                                        <FONT color="#ff5e00">(3) NPAPI사용의 사용버튼을 클릭 후 반드시 브라우저를 재실행 하시기 바랍니다.</FONT>
+                                                    </SPAN>
+                                                </FONT><BR>브라우저 재실행을 해야 해당기능이 활성화 됩니다.
+                                                <BR></P>
+                                            <P>
+                                                <STRONG></STRONG>&nbsp;</P>
+                                            <P>
+                                                <STRONG>
+                                                    <FONT color="#000000">※&nbsp;플러그인 차단 해제 방법</FONT>
+                                                </STRONG>
+                                            </P>
+                                            <P>&nbsp;(1)Chrome 브라우저에서 주소창 옆 X표시를 클릭<BR>&nbsp;(2)www.hottracks.co.kr에서 플러그인 항상 허용 클릭 후 완료 버튼 클릭</P>
+                                            <P>&nbsp;</P>
+                                            <P style="TEXT-ALIGN: left"><IMG class="tx-daum-image" style="FLOAT: none; CLEAR: none" src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1604/1438759526445_01.jpg"></P>
+                                            <P style="TEXT-ALIGN: left"><BR>&nbsp;</P>
+                                            <P style="TEXT-ALIGN: left"><IMG class="tx-daum-image" style="FLOAT: none; CLEAR: none" src="http://image.kyobobook.co.kr/newimages/giftshop_new/work/1125/1438759538841_02.jpg"></P>
+                                            <P style="TEXT-ALIGN: left">&nbsp;<BR><BR><STRONG>※ 크롬버전 확인 방법</STRONG>
+                                                <BR>- Chrome 정보 클릭
+                                                <BR><IMG alt="Chrome 정보 클릭" src="http://image.kyobobook.co.kr/ink/images/cscenter/ini_03.jpg">&nbsp;</P>
+                                            <P><BR>&nbsp;</P>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <!-- 201228 작업부분 -->
-                                    <!-- <td>121</td> -->
-                                    <td class="t_left"> <input type="hidden" value="22305"/>
-                                        <a href="#list-content22305" id="22305" class="click">
-                                            [공지사항] 한터차트 반영 정정 안내
-                                            <span class="icon_cs_new">N</span>
-                                        </a>
+                                    <!-- <td>3</td> -->
+                                    <td>주문결제</td>
+                                        <td class="t_left"> <a href="#faq2" class="click icon_arrow">결제한 내역은 취소가 가능합니까?</a>
+                                        <input type="hidden" value="49"/>
                                     </td>
-                                    <td>
-                                        2020.11.18
-                                    </td>
-                                </tr>
-                                <tr class="conts" id="list-content22305">
                                     <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit49">2995</td> -->
+                                </tr>
+                                <tr class="conts" id="faq2">
                                     <td colspan="2">
                                         <div class="txt">
-                                            <p>
-                                                안녕하세요, 핫트랙스입니다.
-                                            </p>
-                                            <p>
-                                                지난 11월 15일, '핫트랙스'의 판매량 중 하성운의 'MIRAGE: 미니앨범 4집'의 일부가 당사 처리 지연으로 정확한 일자에
-                                            </p>
-                                            <p>
-                                                한터차트에 미반영되었음이 확인되어. 전량 재확인과 함께 정정요청을 하였습니다.
-                                            </p>
-                                            <p>
-                                                해당 일자가 포함되는 15일과 16일 한터차트 일간 및 주간차트가 정정되었음을 안내 드립니다.
-                                            </p>
-                                            <p>
-                                                당사 처리 지연으로 정확한 일자에 미반영된 내역은 누락없이 전량 정정되었으며,
-                                            </p>
-                                            <p>
-                                                오랜시간 고객님들께 심려와 불편을 끼쳐 드린 점 머리 숙여 사과 말씀 드립니다.
-                                                <br>
-                                                아울러 처리 과정 중 명확한 답변을 드리지 못한 점 너그러이 양해 부탁드립니다.
-                                            </p>
-                                            <p>
-                                                핫트랙스 배상.
-                                            </p>
+                                            <P>주문취소/반품시 카드 결제는 승인 취소가, 현금성 결제 금액(실시간 계좌이체)은 핫트랙스 온라인몰 예치금으로 전환됩니다.
+                                            </P>
+                                            <P>&nbsp;</P>
+                                            <P>핫트랙스 온라인몰 예치금은 상품 주문시 현금과 동일하게 사용하실 수 있으며, 환불을 원하실 경우 예치금 환불 신청 또는 고객센터(1661-1112)로
+                                            </P>
+                                            <P>&nbsp;</P>
+                                            <P>연락 주시면 지정하신 계좌로 송금해 드립니다.
+                                            </P>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>4</td> --><td>주문결제
+                                    </td>
+                                        <td class="t_left"> <a href="#faq3" class="click icon_arrow">주문을 취소할 수 있나요?</a>
+                                        <input type="hidden" value="41"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit41">3185</td> -->
+                                </tr>
+                                <tr class="conts" id="faq3">
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <P>주문취소는 주문/배송조회에서 회원 로그인 후 하실 수 있습니다.</P>
+                                            <P><BR>비회원 주문의 경우는 주문하실 때 입력했던 이메일주소와 비밀번호로 로그인하실 수 있습니다.</P>
+                                            <P><BR>결제를 완료하신 상태에서‘상품준비중’ 직전단계까지 가능하며 전체취소, 부분취소 모두 가능합니다.</P>
+                                            <P>&nbsp;</P>
+                                            <P>상품준비중 단계 이후에는 주문취소가 어려우시며 반품처리로 진행하셔야 합니다.</P>
+                                            <P>&nbsp;</P>
+                                            <P>반품주소 : 경기도 파주시 교하읍 문발리 파주출판단지 정보산업단지 501-1 교보문고 북시티 B동 1층 교보핫트랙스 반품 담당자앞</P>
+                                            <P>&nbsp;</P>
+                                            <P>위 주소는 핫트랙스 온라인몰 구매고객께서 이용하시는 반품 주소입니다.</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>5</td> --><td>주문결제
+                                    </td>
+                                        <td class="t_left"> <a href="#faq4" class="click icon_arrow">인터넷 안전결제(ISP, 안심결제) 안내</a>
+                                        <input type="hidden" value="37"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit37">2952</td> -->
+                                </tr>
+                                <tr class="conts" id="faq4">
+                                    <td colspan="2">
+                                        <div class="txt"><IMG border="0" src="http://image.kyobobook.co.kr/newimages/apps/b2c/cscenter/System_011.gif" width="580" height="806" usemap="#Map">&nbsp;<BR><MAP id="Map" name="Map"><AREA href="http://www.kbcard.com/" shape="rect" target="_blank" coords="73,355,233,382"><AREA href="http://www.bccard.com/" shape="rect" target="_blank" coords="286,355,448,382"><BR><AREA href="http://www.lgcard.com" shape="rect" target="_blank" coords="34,693,117,717"><BR><AREA href="http://www.samsungcard.co.kr" shape="rect" target="_blank" coords="135,693,219,716"><BR><AREA href="http://www.yescard.co.kr" shape="rect" target="_blank" coords="239,694,324,716"><BR><AREA href="http://www.shinhancard.com" shape="rect" target="_blank" coords="341,693,426,715"><BR></MAP>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>6</td> --><td>주문결제
+                                    </td>
+                                        <td class="t_left"> <a href="#faq5" class="click icon_arrow">공인인증서 안내</a>
+                                        <input type="hidden" value="35"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit35">781</td> -->
+                                </tr>
+                                <tr class="conts" id="faq5">
+                                    <td colspan="2">
+                                        <div class="txt"><IMG border="0" src="http://image.kyobobook.co.kr/newimages/apps/b2c/cscenter/System_010.gif" width="580" height="1122" usemap="#Map">&nbsp;<BR><MAP id="Map" name="Map"><AREA href="https://www.yessign.or.kr/main/mod/modGuide.jsp" shape="rect" target="_blank" coords="21,61,181,88"><AREA href="http://www.yessign.or.kr/yessignFile/etc/yessign5Install.exe" shape="rect" target="_blank" coords="22,101,202,128"><BR></MAP>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>7</td> --><td>주문결제
+                                    </td>
+                                        <td class="t_left"> <a href="#faq6" class="click icon_arrow">장바구니, 보관함, 최근 본 상품목록 등의 사용법이 궁금해요.</a>
+                                        <input type="hidden" value="34"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit34">744</td> -->
+                                </tr>
+                                <tr class="conts" id="faq6">
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <P>장바구니의 하단을 보면 아래에 &lt;찜하기&gt;가 생성된 것을 확인할 수 있습니다.</P>
+                                            <P>&nbsp;</P>
+                                            <P>단, &lt;찜하기&gt;는 회원로그인을 할 때에만 장바구니에서 보여집니다.</P>
+                                            <P>&nbsp;</P>
+                                            <P>- &lt;장바구니&gt;에 담긴 상품은 최대 3일까지 저장됩니다.</P>
+                                            <P><BR>- 회원님의 &lt;찜하기&gt;에 담긴 상품은 저장 기간의 제한이 없습니다.</P>
+                                            <P><BR>&nbsp;&nbsp; 최근 본 상품이나 장바구니에 담은 상품 중 장기간 보관하실 상품은 &lt;찜하기&gt;로 옮겨 주십시오.</P>
+                                            <P><BR>- &lt;최근 본 상품&gt;은 고객님께서 핫트랙스 온라인몰에 방문하여 열람한 상품을 저장하여 보여드립니다.</P>
+                                            <P><BR>&nbsp;&nbsp; 이 정보는 고객님의 웹브라우저 쿠키값에 저장되므로, 대략 1~7일 이내에 자동삭제됩니다.
+                                            </P>
+                                            <P><BR>&nbsp;&nbsp; (고객님의 PC 환경에 따라 차이있음)</P>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>8</td> --><td>주문결제
+                                    </td>
+                                        <td class="t_left"> <a href="#faq7" class="click icon_arrow">결제방법을 변경할 수 있나요?</a>
+                                        <input type="hidden" value="33"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit33">2696</td> -->
+                                </tr>
+                                <tr class="conts" id="faq7">
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <P>주문/결제하신 후에는 인터넷 상에서 결제방법을 변경하실 수 없습니다.</P>
+                                            <P>&nbsp;</P>
+                                            <P>이 경우에는 기존 주문을 취소한 후 재주문하셔야 합니다.</P>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>9</td> --><td>주문결제
+                                    </td>
+                                        <td class="t_left"> <a href="#faq8" class="click icon_arrow">실시간 계좌이체 서비스란?</a>
+                                        <input type="hidden" value="30"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit30">2474</td> -->
+                                </tr>
+                                <tr class="conts" id="faq8">
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <P>실시간 계좌이체는 회원님의 은행계좌에서 바로 결제대금을 이체하여 지불하는 편리한 서비스 입니다.</P>
+                                            <P>&nbsp;</P>
+                                            <P>&nbsp;</P>
+                                            <P>실시간 계좌이체를 이용할 경우,</P>
+                                            <P><BR>- 회원님께서 별도 수수료를 부담할 필요가 없습니다.</P>
+                                            <P><BR>- 인터넷뱅킹에 가입하지 않은 고객도 이용할 수 있습니다.(국민은행제외)</P>
+                                            <P><BR>- 은행에 직접 가실 필요가 없으며, 입금확인이 실시간으로 가능합니다.</P>
+                                            <P>&nbsp;</P>
+                                            <P>&nbsp;</P>
+                                            <P>실시간 계좌이체 서비스를 사용할 수 있는 은행은 아래와 같습니다.</P>
+                                            <P><BR>&nbsp;</P>기업, 국민, 외환, 수협, 농협중앙회, 농협회원조합, 우리, 조흥, 제일, 신한, 한미, 대구, 부산, 광주, 제주, 전북, 경남, 하나은행<BR>
+                                            <P>&nbsp;</P>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td>10</td> --><td>주문결제
+                                    </td>
+                                        <td class="t_left"> <a href="#faq9" class="click icon_arrow">주문과 관련된 E-Mail을 받을 수 있나요?</a>
+                                        <input type="hidden" value="32"/>
+                                    </td>
+                                    <!-- 201228 작업부분 -->
+                                    <!-- <td id="faqHit32">1044</td> -->
+                                </tr>
+                                <tr class="conts" id="faq9">
+                                    <td colspan="2">
+                                        <div class="txt">
+                                            <P>네. 고객님께서 회원가입 시 지정하신 E-Mail 주소로 주문완료, 배송처리안내 등 주문과 관련한 E-Mail이 발송되고 있습니다.
+                                            </P>
+                                            <P><BR>뿐만 아니라 신규상품, 이벤트 및 쿠폰 등의 할인혜택에 대한 정보도 받아보실 수 있습니다.
+                                            </P>
+                                            <P><BR>혹시 주문하신 상품의 결제완료 후 E-Mail을 받지 못하셨다면 회원정보의 재확인 및 변경을 부탁드립니다.
+                                            </P>
+                                            <P><BR>그 외의 문의 사항은 고객센터(국번없이 1661-1112)로 연락주시기 바랍니다</P>
+                                            <P>&nbsp;</P>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <!-- paging -->
-                        <div class="paging cs mgt40">
-                            <a title="맨 처음 페이지로 이동" href="/ht/help/listNotice?page=1" class="first">처음</a>
-                            <ul>
-                                <li class="active">
-                                    <a href="javascript://">1</a>
-                                </li>
-                                <li>
-                                    <a title="2페이지로 이동" href="/ht/help/listNotice?page=2">2</a>
-                                </li>
-                                <li>
-                                    <a title="3페이지로 이동" href="/ht/help/listNotice?page=3">3</a>
-                                </li>
-                                <li>
-                                    <a title="4페이지로 이동" href="/ht/help/listNotice?page=4">4</a>
-                                </li>
-                                <li>
-                                    <a title="5페이지로 이동" href="/ht/help/listNotice?page=5">5</a>
-                                </li>
-                                <li>
-                                    <a title="6페이지로 이동" href="/ht/help/listNotice?page=6">6</a>
-                                </li>
-                                <li>
-                                    <a title="7페이지로 이동" href="/ht/help/listNotice?page=7">7</a>
-                                </li>
-                            </ul>
-                            <a title="맨 나중 페이지로 이동" href="/ht/help/listNotice?page=1" class="next02">나중</a>
-                        </div>
-                        <!-- //paging -->
-                    </div>
-                    <!-- //sub contents -->
-                </div>
-                <!-- //컨텐츠 -->
-            </div>
-            <!-- //Container -->
-           
-            <!-- footer -->
-            <div id="footer">
-                <div class="util">
-                    <div class="util_cont">
+                        <!-- //list -->
+                    <!-- paging -->
+                    <div class="paging cs mgt40">
+                        <a title="맨 처음 페이지로 이동" href="/ht/help/faqListC0391?page=1" class="first">처음</a>
                         <ul>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/company/about/introduce" target="_blank">회사소개</a>
-                            </li>
-                            <li>
-                                <a href="http://info.hottracks.co.kr/company/recruit/notice" target="_blank">채용정보</a>
-                            </li>
-                            <li>
-                                <a href="/heart" target="_blank">핫트합니다</a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/company/store/main?deptcode=030005" target="_blank">매장안내</a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/company/about/alliance" target="_blank">제휴/광고안내</a>
-                            <!-- </li> -->
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/ht/welcomeMain/viewRule" target="_blank">이용약관</a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/ht/welcomeMain/privacy" target="_blank">
-                                    <strong>개인정보처리방침</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://dev.hottracks.co.kr/ht/welcomeMain/popupEmail" onclick="window.open(this.href,'popupPrizewinner','width=400,height=365');return false;" title="새 창으로 열림">이메일수집거부</a>
+                            <li class="active">
+                                <a href="javascript://">1</a>
                             </li>
                         </ul>
-                        <div class="family_site">
-                            <p>패밀리 사이트</p>
-                            <ul>
-                                <li><a href="http://www.kyobo.co.kr" title="새 창 열림" target="_blank">교보생명</a></li>
-                                <li><a href="http://www.kyobobook.co.kr" title="새 창 열림" target="_blank">교보문고</a></li>
-                                <li><a href="http://www.kyobotrade.com" title="새 창 열림" target="_blank">교보증권</a></li>
-                                <li><a href="http://www.kico.co.kr" title="새 창 열림" target="_blank">교보정보통신</a></li>
-                                <li><a href="http://www.kyobobldg.co.kr" title="새 창 열림" target="_blank">교보리얼코</a></li>
-                                <li><a href="http://www.kyoboitm.co.kr" title="새 창 열림" target="_blank">교보악사자산운용</a></li>
-                                <li><a href="http://www.lifeplanet.co.kr" title="새 창 열림" target="_blank">교보라이프플래닛생명</a></li>
-                                <li><a href="http://www.kcasonsa.co.kr" title="새 창 열림" target="_blank">KCA 손해사정</a></li>
-                                <li><a href="http://www.daesan.or.kr" title="새 창 열림" target="_blank">대산문화재단</a></li>
-                                <li><a href="http://www.kbedu.or.kr" title="새 창 열림" target="_blank">교보생명교육문화재단</a></li>
-                                <li><a href="http://www.dsa.or.kr" title="새 창 열림" target="_blank">대산농촌재단</a></li>
-                                <li><a href="http://www.kyoboacademy.co.kr" title="새 창 열림" target="_blank">교보아카데미</a></li>
-                            </ul>
-                        </div>
+                        <a title="맨 나중 페이지로 이동" href="/ht/help/listNotice?page=1" class="next02">나중</a>
                     </div>
+                    <!-- //paging -->
                 </div>
-                <div class="inner">
-                    <div class="cont left">
-                        <div class="cs_center">
-                            <strong class="font_t">1661-1112</strong>
-                            <span>평일 09:00 ~ 18:00 점심시간 12:00 ~ 13:00</span>
-                            <dl>
-                                <dt>
-                                    <a href="http://dev.hottracks.co.kr/ht/help/sosCounselMain">
-                                        <span>SOS 상담</span>
-                                    </a>
-                                </dt>
-                                <dd>24시간 접수 가능<br/>고객센터 운영시간에 순차적으로 답변해드리겠습니다.</dd>
-                            </dl>
-                        <!-- </div> -->
-                        <h2>교보핫트랙스㈜</h2>
-                        <span>대표이사 오교철</span>
-                        <span>사업자등록번호 : 102-81-29258
-                            <a href="javascript://" onclick="window.open('http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1028129258', 'communicationViewPopup', 'scrollbars=yes, width=750, height=700;');return false;" title="새 창으로 열림">사업자정보확인 &gt;</a>
-                        </span>
-                        <span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
-                        <span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
-                        <span>개인정보보호책임자 : 김재식  PRIVACY@HOTTRACKS.CO.KR</span>
-                    </div>
-                    <div class="cont right">
-                        <ul class="sns">
-                            <li>
-                                <a href="https://www.instagram.com/hottracks_online/" target="_blank"><img src="../../images/biz/common/icon_instagram.png" alt="instagram"></a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com/HOTTRACKSFRIEND/" target="_blank"><img src="../../images/biz/common/icon_facebook.png" alt="facebook"></a>
-                            </li>
-                            <li>
-                                <!-- <a href="https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg" target="_blank"><img src="../../images/biz/common/icon_youtube.png" alt="youtube"></a> -->
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/hotonmusic" target="_blank"><img src="../../images/biz/common/icon_twitter.png" alt="twitter"></a>
-                            </li>
-                            <li>
-                                <a href="http://hottracks91.blog.me/" target="_blank"><img src="../../images/biz/common/icon_blog.png" alt="blog"></a>
-                            </li>
-                        </ul>
-                        <div class="mobile">
-                            <a href="https://apps.apple.com/kr/app/hottracks/id1129743143" target="_blank" class="font_t ios">APP STORE</a>
-                            <a href="https://play.google.com/store/apps/details?id=kr.co.hottracks.m.and" target="_blank" class="font_t and">PLAY STORE</a>
-                        </div>
-                        <ul class="copyright">
-                            <li>
-                                <a href="/heart" target="_blank"><img src="../../images/biz/common/img_award.png" alt="소셜아이어워드 2019"></a>
-                            </li>
-                            <li>
-                                <a href="http://www.copyrightok.kr" target="_blank"><img src="../../images/biz/common/img_copyright.png" alt="저작권마크"></a>
-                            </li>
-                        </ul>
-                        <span class="payment">
-                            <em class="font_t">NICEPAY</em>
-                            <a href="#n" onclick="window.open('http://image.kyobobook.co.kr/newimages/giftshop_new/company/nicepay.html','window','location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no, width=740, height=867, left=100, top=50, scrollbars=no');return false">서비스 가입사실 확인 &gt;</a>
-                        </span>
-                        <span class="txt">핫트랙스는 나이스페이먼츠 에스크로 서비스에 가입된 사업자이며,<br/>고객님은 구매 안전서비스를 이용하실 수 있습니다.</span>
-                    </div>
-                </div>
+                <!-- //sub contents -->
+                <!--// 201228 : E 작업부분 -->
             </div>
-            <!--// footer -->
+            <!-- //컨텐츠 -->
         </div>
-        <div id="mask"></div>
+    </div>
+</body>
 
-    </body>
 </html>
