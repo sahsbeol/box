@@ -368,7 +368,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tab_list .items .link {display: block;vertical-align: middle;padding: 13px 10px;font-size:18px;font-weight:400;color:#000;position: relative;text-align: center;border: 2px #DBDBDB solid;border-radius: 24px;}
 .orderandpay .tab_layer_wrap {position: relative; margin-top:20px;}
 .orderandpay .tab_layer {display: none; height: auto;}
-.orderandpay .tab_layer.is_active {display: block;}
+.orderandpay .tab_layer.is_active,
+.orderandpay .tab_layer.on {display: block;}
 .orderandpay .tab_list li.is_active .link {background: #DD1016; border-color: #DD1016; color:#fff;}
 
 /* 결제방법선택 tab_layer inner box */
@@ -690,7 +691,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .table02.cash tr.tfoot td {border-bottom:1px solid #eaeaea;background:#fafafa}
 .orderandpay .table02 input[type=checkbox] {vertical-align:middle}
 .orderandpay .table02 input[type=checkbox] + * {position:relative;top:1px;}
-.orderandpay .block {display: block;}
+.orderandpay .block {display: block !important;}
 
 
 /* 고객센터_통합멤버십 회원 등급 및 혜택안내 table */
@@ -1222,3 +1223,26 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_policy .funding_title {font-size: 18px; font-weight:500;}
 .orderandpay .funding_policy .funding_policy_text_wrap {margin-top:20px; background: #FAFAFA; padding:34px 20px 16px;}
 .orderandpay .funding_policy_list .items {font-size: 13px; font-weight:500; line-height: 1.8;}
+
+/* 펀딩 메인 */
+.orderandpay .funding_main_wrap {border:1px #f00 solid;}
+.orderandpay .funding_main_wrap .tab1 {margin:0;}
+.orderandpay .funding_main_wrap .tab1 .items {min-width:33.333%; margin:0;}
+.orderandpay .funding_main_wrap .tab_list {margin:0; display: block; width: auto;}
+.orderandpay .funding_main_wrap .tab_layer_wrap {margin-top:80px;}
+
+.orderandpay .funding_main_wrap .title_icon1 {font-size: 40px; font-weight: 700; text-align: center; line-height: normal;}
+.orderandpay .funding_main_wrap .title_icon1:before {content: ''; margin: 0 auto; display: block; width:83px; height: 45px; background: url(../../images/new/icon_funding_main1.png) no-repeat 0 0;}
+.orderandpay .funding_main_wrap .title_texts_list {font-size: 16px; font-weight: 400; color:#777777;text-align: center;}
+.orderandpay .funding_main_wrap .title_texts_list .items {margin-bottom: 10px; min-width: auto; float: none; display: block;}
+.orderandpay .funding_main_wrap .sort_order .tab_list .items {min-width: auto; display: block;}
+.orderandpay .funding_main_wrap .sort_order .tab_list .items:before {content: ''; display: block; width:4px; height:4px; background: #E0E0E0; border-radius: 4px;}
+.orderandpay .funding_main_wrap .sort_order .tab_list .items a {border:0;}
+.orderandpay .funding_main_wrap .sort_order .tab_list .items a span {padding:0 16px;}
+.orderandpay .funding_main_wrap .sort_order .tab_list .items .on {border:0;}
+.orderandpay .funding_main_wrap .sort_order .tab_list .items .on span {background: #fff; color:#000; font-size: 18px; font-weight:400;}
+.orderandpay .funding_main_wrap .sort_order .tab_list .items .on span:after {content: ''; display: none;}
+
+/* 펀딩 상세 */
+.orderandpay .mgt140 {margin-top:140px;}
+.orderandpay .funding_process_wrap {border:1px #f00 solid;}
