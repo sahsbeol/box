@@ -1,0 +1,13 @@
+날짜 : 210119
+주석 : 210119 수정  
+
+pc 
+
+html 
+record_video.html
+
+css
+orderandpay.css
+
+img
+없음

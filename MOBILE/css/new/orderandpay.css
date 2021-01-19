@@ -249,7 +249,7 @@
 .orderandpay .btn_defalut.squre {background: #F8F8F8;height: 44px;font-size: 12px;font-weight: 400;outline:none;color: #000;border:1px #B5B5B5 solid;border-radius: 0;/* max-width: 120px; */text-align: center;min-width: 88px;box-sizing: border-box;padding: 11px 8px;}
 .orderandpay button.btn_defalut.squre {padding: 10px 20px;height:38px; font-family: 'font_ns'; line-height: inherit;}
 
-.orderandpay .btn_basic {padding: 13px 20px 14px;height:auto;background: #000;font-size: 15px;font-weight: 400;color:#FFFFFF;min-width: auto;/* width: 100%; */display: block;}
+.orderandpay .btn_basic {padding: 13px 20px 14px;height:auto;background: #000;font-size: 15px;font-weight: 400;color:#FFFFFF;min-width: auto; line-height:normal;/* width: 100%; */display: block;}
 .orderandpay .bottom_wrap {margin-top: 50px;padding: 0 20px;}
 
 .orderandpay .btn_icon_arrow {font-size: 12px;color: #000;border:1px #777777 solid;background: #F8F8F8;display: block;padding: 7px 24px 7px 20px;font-weight: 400;/* min-width: 75px; */position: relative;}
@@ -574,6 +574,10 @@
 .orderandpay .customer .cs_button_list li:first-child .link {border-right:0;}
 .orderandpay .customer .cs_button_list .link span {font-size:inherit;}
 
+/* 1대1문의 */
+.orderandpay .customer.cs_direct .info02 {color:#000;}
+.orderandpay .customer.cs_direct .br_list li {color:#000;}
+/*.orderandpay .btn_style11 {color:;}*/
 
 .orderandpay .customer .bbs_box{}
 .orderandpay .customer .bbs_box h4 {font-size: 16px; font-weight: 700; padding-bottom: 16px;}
