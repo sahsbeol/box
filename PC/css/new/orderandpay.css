@@ -1268,7 +1268,7 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 펀딩 상세 */
 .orderandpay .mgt140 {margin-top:140px;}
-.orderandpay .mgt65 {margin-top:65px;}
+
 .orderandpay .funding_processbar_wrap {}
 .orderandpay .funding_detail_title {}
 .orderandpay .funding_detail_title:after {content: ''; display: block; clear:both;}
@@ -1277,8 +1277,11 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_detail_title .title_text .icon_text:before {content: '';display: block;width:24px;height:24px;background: url(../../images/new/icon_funding_detail_logo.png) no-repeat 0 0;position: absolute;top: -2px;right: 0;}
 .orderandpay .funding_detail_title .title_text .text {margin-left:-4px;}
 
-.orderandpay .funding_complete_wrap {float: right;}
+.orderandpay .funding_complete_wrap {float: right; text-align: right;}
+/* 펀딩 icon */
 .orderandpay .funding_complete_wrap .fund_alert:before {content: ''; width:23px; height:22px; background: url(../../images/new/icon_fund_alert.png) no-repeat 0 0; display: inline-block; vertical-align: middle; margin-top: -5px;}
+.orderandpay .funding_complete_wrap .fund_alert.end:before {content: ''; width:23px; height:22px; background: url(../../images/new/icon_fund_alert_end.png) no-repeat 0 0;background-size: contain; display: inline-block; vertical-align: middle; margin-top: -5px;}
+
 .orderandpay .funding_complete_wrap .fund_alert {font-size: 16px; font-weight:500;}
 .orderandpay .funding_complete_wrap .fund_alert .unit_number {color:#D41417; font-weight: 700;}
 
@@ -1287,8 +1290,8 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .funding_progressbar_wrap {}
 .orderandpay .funding_progressbar_wrap .funding_progressbar {width:100%; height:4px; background: #E0E0E0; position: relative;}
-.orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar {position: absolute; top:0; left:0; height:4px; background: #D41417;}
-.orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar:before {content: ''; display: block; width:34px; height:32px; background: url(../../images/new/ic_heart_funding.png) no-repeat 0 0;}
+.orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar {position: absolute; top:0; left:0; height:4px; background: #D41417; text-align: right; max-width: 100%;}
+.orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar:before {content: '';display: inline-block;width:34px;height:32px;background: #fff url(../../images/new/ic_heart_funding.png) no-repeat center;padding: 0 8px;margin-top: -13px;}
 
 .orderandpay .funding_goal_price_wrap {}
 .orderandpay .funding_goal_price_wrap .funding_goal_price_type1:after,
@@ -1307,5 +1310,10 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .funding_goal_text_wrap {}
 .orderandpay .funding_goal_text_wrap .funding_goal_text {background: #FAFAFA; padding:20px 30px 22px 108px; line-height: 1.6; position: relative;}
-.orderandpay .funding_goal_text_wrap .funding_icon1:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_01.png) no-repeat 0 0;}
+.orderandpay .funding_goal_text_wrap .funding_icon1:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_01.png) no-repeat 0 0; background-size: contain;}
+.orderandpay .funding_goal_text_wrap .funding_icon2:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_02.png) no-repeat 0 0; background-size: contain;}
+.orderandpay .funding_goal_text_wrap .funding_icon3:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_03.png) no-repeat 0 0; background-size: contain;}
 
+.orderandpay .brand_like_wrap {position: absolute; top:111px; right:0;}
+.orderandpay .brand_like_wrap .icon_brand_like {width:20px; height:19px; display: inline-block; vertical-align: middle; background: url(../../images/new/icon_funding_brand_like.png) no-repeat 0 0;}
+.orderandpay .brand_like_wrap .brand_like_count {font-size: 14px; color:#777; font-weight: 500;}
