@@ -1285,6 +1285,11 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_complete_wrap .fund_date {font-size: 13px; font-weight:400; text-align: right; margin-top:5px;}
 .orderandpay .funding_complete_wrap .fund_date .unit_number {font-size: 12px; font-weight:500;}
 
+.orderandpay .funding_progressbar_wrap {}
+.orderandpay .funding_progressbar_wrap .funding_progressbar {width:100%; height:4px; background: #E0E0E0; position: relative;}
+.orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar {position: absolute; top:0; left:0; height:4px; background: #D41417;}
+.orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar:before {content: ''; display: block; width:34px; height:32px; background: url(../../images/new/ic_heart_funding.png) no-repeat 0 0;}
+
 .orderandpay .funding_goal_price_wrap {}
 .orderandpay .funding_goal_price_wrap .funding_goal_price_type1:after,
 .orderandpay .funding_goal_price_wrap .funding_goal_price_type2:after {content: ''; display: block; clear:both;}
@@ -1301,6 +1306,6 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dd .unit_percent {color:#D41417;}
 
 .orderandpay .funding_goal_text_wrap {}
-funding_goal_text
-
+.orderandpay .funding_goal_text_wrap .funding_goal_text {background: #FAFAFA; padding:20px 30px 22px 108px; line-height: 1.6; position: relative;}
+.orderandpay .funding_goal_text_wrap .funding_icon1:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_01.png) no-repeat 0 0;}
 
