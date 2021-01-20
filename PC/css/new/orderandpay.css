@@ -1268,4 +1268,39 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 펀딩 상세 */
 .orderandpay .mgt140 {margin-top:140px;}
-.orderandpay .funding_process_wrap {border:1px #f00 solid;}
+.orderandpay .mgt65 {margin-top:65px;}
+.orderandpay .funding_processbar_wrap {}
+.orderandpay .funding_detail_title {}
+.orderandpay .funding_detail_title:after {content: ''; display: block; clear:both;}
+.orderandpay .funding_detail_title .title_text {font-size: 24px; font-weight: 700; color:#000; line-height: normal; float: left;}
+.orderandpay .funding_detail_title .title_text .icon_text {color:#D41417;position: relative;padding-right: 26px;}
+.orderandpay .funding_detail_title .title_text .icon_text:before {content: '';display: block;width:24px;height:24px;background: url(../../images/new/icon_funding_detail_logo.png) no-repeat 0 0;position: absolute;top: -2px;right: 0;}
+.orderandpay .funding_detail_title .title_text .text {margin-left:-4px;}
+
+.orderandpay .funding_complete_wrap {float: right;}
+.orderandpay .funding_complete_wrap .fund_alert:before {content: ''; width:23px; height:22px; background: url(../../images/new/icon_fund_alert.png) no-repeat 0 0; display: inline-block; vertical-align: middle; margin-top: -5px;}
+.orderandpay .funding_complete_wrap .fund_alert {font-size: 16px; font-weight:500;}
+.orderandpay .funding_complete_wrap .fund_alert .unit_number {color:#D41417; font-weight: 700;}
+
+.orderandpay .funding_complete_wrap .fund_date {font-size: 13px; font-weight:400; text-align: right; margin-top:5px;}
+.orderandpay .funding_complete_wrap .fund_date .unit_number {font-size: 12px; font-weight:500;}
+
+.orderandpay .funding_goal_price_wrap {}
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type1:after,
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type2:after {content: ''; display: block; clear:both;}
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type1 dt ,
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type1 dd {font-size: 16px; font-weight:700;}
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type1 dt,
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dt {float: left;}
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type1 dd,
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dd {float: right;}
+
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dt {font-size: 14px; font-weight: 400;}
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dt .unit_price {font-weight: 500;}
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dd {font-size: 16px; font-weight: 500;}
+.orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dd .unit_percent {color:#D41417;}
+
+.orderandpay .funding_goal_text_wrap {}
+funding_goal_text
+
+
