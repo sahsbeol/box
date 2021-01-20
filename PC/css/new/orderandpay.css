@@ -1225,7 +1225,30 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_policy_list .items {font-size: 13px; font-weight:500; line-height: 1.8;}
 
 /* 펀딩 메인 */
-.orderandpay .funding_main_wrap {border:1px #f00 solid;}
+.orderandpay .funding_main_wrap {}
+
+/* 펀딩 상단  */
+.orderandpay .funding_main_wrap .funding_main_logo_wrap { margin-top:114px; }
+.orderandpay .funding_main_wrap .funding_main_logo_wrap:after {content: ''; display: block; clear: both;}
+.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title {font-size: 32px; font-weight:500; color:#000; line-height: normal;}
+.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title .text_icon {font-size: 76px; font-weight:700; color:#D41417; letter-spacing: -14px; margin-top:-16px; position: relative;}
+.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title .text_icon:after {content: '';display: inline-block;width:66px;height:76px;background: url(../../images/new/icon_funding_logo.png) no-repeat 0 0;margin: -16px 0px 0px 7px;vertical-align: middle;}
+.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_desc_texts .text {font-size: 16px; font-weight: 400; color:#777;}
+
+.orderandpay .funding_main_wrap .funding_text_wrap,
+.orderandpay .funding_main_wrap .funding_process_wrap {float: left;}
+
+.orderandpay .funding_main_wrap .funding_process_wrap {margin-left:10px;}
+.orderandpay .funding_main_wrap .funding_process_wrap .funding_process_list:after {content: ''; display: block; clear: both;}
+.orderandpay .funding_main_wrap .funding_process_wrap .funding_process_list .items {float: left;}
+.orderandpay .funding_main_wrap .funding_process_wrap .funding_process_list .items:before {content: ''; display: block; background: url(../../images/new/icon_funding_process.png) no-repeat 0 0; width:11px; height: 19px;}
+.orderandpay .funding_main_wrap .funding_process_wrap .funding_process_list .items .text_wrap {width:90px; height:90px; border:2px #EDEDED solid; box-sizing: border-box; border-radius:100%; display: table;}
+.orderandpay .funding_main_wrap .funding_process_wrap .funding_process_list .items .text_wrap .unit_text {display: table-cell; vertical-align: middle; text-align: center; font-size: 16px; font-weight: 500; padding:0 20px; line-height: normal;}
+
+.orderandpay .funding_main_wrap .funding_process_wrap .funding_process_list .text_wrap:before {content:''; display: block;}
+.orderandpay .funding_main_wrap .funding_process_wrap .funding_process_list .step1 .text_wrap:before {}
+
+/* 펀딩 탭 */
 .orderandpay .funding_main_wrap .tab1 {margin:0;}
 .orderandpay .funding_main_wrap .tab1 .items {min-width:33.333%; margin:0;}
 .orderandpay .funding_main_wrap .tab_list {margin:0; display: block; width: auto;}
