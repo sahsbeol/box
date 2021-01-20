@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+
+<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="/images/ico_app.png">
+
+<link rel="stylesheet" type="text/css" href="/css/common.css?201906120101">
+<link rel="stylesheet" type="text/css" href="/css/layout.css?201906120101">
+<link rel="stylesheet" type="text/css" href="/css/contents.css?201906120101">
+<link rel="stylesheet" type="text/css" href="/css/shop.css?201906120101">
+
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906120101"></script>
+<script type="text/javascript" src="/js/jquery.lazyload.min.js?201906120101"></script>
+<script type="text/javascript" src="/js/m_contents.js?201906120101"></script>
+<script type="text/javascript" src="/js/music.js?201906120101"></script>
+<script type="text/javascript" src="/js/musicPlayer.js?201906120101"></script>
+<script type="text/javascript" src="/scripts/common?201906120101"></script>
+<script type="text/javascript" src="/js/ht.common.utils.1.0.0.js?201906120101"></script>
+<script type="text/javascript" src="/js/ht.menu.topGnb.1.0.0.js?201906120101"></script>
+
+
+
+<script type="text/javascript">
+var initBody;
+var footer;
+function beforePrint(){ 
+    initBody = document.body.innerHTML; 
+    
+    $(".pop_body").css("width","1000px");
+    $("body").html($(".pop_body"));
+    $(".order_btn").remove();
+   
+} 
+
+function afterPrint(){ 
+    $("body").html(initBody); 
+} 
+/*
+function goPrint()
+{
+     window.onbeforeprint = beforePrint; 
+     window.onafterprint = afterPrint; 
+     window.print(); 
+}
+*/
+
+function goPrint() {
+    var url = "/ht/order/printViewSpecificationOnTransaction?orderNo=191205000004";
+    window.open(url, "", "width=1000px");
+}
+
+</script>
+
+
+</head>
+<body class="popup">
+    
+<div class="f_noto">
+<h1 class="tit01 mgt0 fs24 c_white"><span class="fw500">거래명세서</span></h1>
+<div class="pop_cont">
+
+    <div class="p_re">
+        <table class="table02 cash">
+            <caption>거래명세서 상세정보</caption>
+            <colgroup>
+                <col style="width:78px" />
+                <col style="width:195px" />
+                <col style="width:36px" />
+                <col style="width:78px" />
+                <col style="width:140px" />
+                <col style="width:78px" />
+                <col style="width:*" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>주문번호</th>
+                    <td>No. 191205000004</td>
+                    <td rowspan="4" class="t_center">공<br />급<br />자</td>
+                    <th>등록번호</th>
+                    <td colspan="3">102-81-29258</td>
+                </tr>
+                <tr>
+                    <th>입금일</th>
+                    <td>2019년 12월 05일</td>
+                    <th>상호</th>
+                    <td>교보핫트랙스(주)</td>
+                    <th>성명</th>
+                    <td>박영규</td>
+                </tr>
+                <tr>
+                    <td colspan="2">하태경 귀하 (교보핫트랙스 아이디 : taekyung84)<br />아래금액을 영수함</td>
+                    <th>사업장<br />소재지</th>
+                    <td colspan="3">경기도 파주시 회동길 78 (출판단지내)</td>
+                </tr>
+                <tr>
+                    <th>총액</th>
+                    <td><strong>9,700원</strong></td>
+                    <th>업태</th>
+                    <td>제조/도소매</td>
+                    <th>종목</th>
+                    <td>문구 판촉물 음반</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="ingam"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/mbj.gif" alt="직인" /></div>
+    </div>
+
+    <table class="table02 cash t_center mgt10">
+        <caption>결제 금권 상세정보</caption>
+        <colgroup>
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:*">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>번호</th>
+                <th>결제 금권</th>
+                <th>결제 금액</th>
+                <th>비고</th>
+            </tr>
+            
+            
+                
+                <tr>
+                    <td>1</td>
+                    <td>예치금</td>
+                    <td class="t_right">9,700원</td>
+                    <td></td>
+                </tr>
+            
+        </tbody>
+    </table>
+
+    <table class="table02 cash t_center mgt10">
+        <caption>거래명세서 상세정보</caption>
+        <colgroup>
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:92px" />
+            <col style="width:*">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>번호</th>
+                <th>상품코드</th>
+                <th colspan="2">상품명</th>
+                <th>단가</th>
+                <th>VAT</th>
+                <th>수량</th>
+                <th>금액</th>
+            </tr>
+            
+            
+                
+                <tr> 
+                    <td>1</td>
+                    <td class="t_left">2310036611216</td>  
+                    <td class="t_left" colspan="2">
+                        [주문제작]자수네임택쪼꼬미
+                        
+                        (색상 : 5 Orange 물고기)
+                    </td>  
+                    <td class="t_right">6,545</td>  
+                    <td class="t_right">655</td>   
+                    <td>1</td>  
+                    <td class="t_right">7,200</td>  
+                </tr>
+                
+             
+            <tr class="tfoot">
+                <th colspan="6">합계</th>
+                <td>1</td>
+                <td class="t_right">7,200</td>
+            </tr>
+            <tr>
+                <td>주문일자</td>
+                <td>2019-12-05</td>
+                <td>배송비</td>
+                <td>2,500</td>
+                <td>포장비</td>
+                <td colspan="3" class="t_right">0원</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="mgt10 fs12">위 영수증 국세청 고시 제 95-24에 의거하여 영수증으로 사용할 수 있습니다.</p>
+    <div class="btn_area t_center mgt30 order_btn">
+        <a href="javascript://" onclick="goPrint()" class="btn_type01 fs16 pd10" style="width:100px"><strong>인쇄</strong></a>
+    </div>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

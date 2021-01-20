@@ -636,23 +636,13 @@
 
 /* 일대일 문의 */
 .orderandpay .block {display: block !important; }
-.orderandpay .cs_direct .btn_gray, .btn_orange {
-    width : 180px;
-    height : 40px; 
-}
-.orderandpay .cs_direct .btn_gray{
-    border : 1px solid #dedede;
-}
-.orderandpay .cs_direct .btnorder1{
-    width : 100px;
-    height : 40px;
-    background-color: #ff6600;
-    margin-right : 10px;
-    float: center;
-    margin-top: 0px;
-    margin-bottom: 4px;
-}
 
+/* 펀딩 ---------------*/
+/* 펀딩 in 주문서  */
+.orderandpay .funding_policy_wrap {margin-top:48px;}
+.orderandpay .funding_policy .funding_title {font-size: 13px; font-weight:700;}
+.orderandpay .funding_policy .funding_policy_text_wrap {margin-top:10px; background: #FAFAFA; padding:20px;}
+.orderandpay .funding_policy_list .items {font-size: 13px; font-weight:400; line-height: 1.8;}
 
 
 @media screen and (max-width: 360px) {
