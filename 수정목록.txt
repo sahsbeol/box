@@ -7,6 +7,7 @@ pc
 html 
 menu0_result.html
 menu4_1.html
+record_video.html
 
 css
 orderandpay.css
