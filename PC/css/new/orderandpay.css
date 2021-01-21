@@ -1332,3 +1332,36 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .modi_list li {float: left;}
 .orderandpay .modi_list li.bar {}
 .orderandpay .modi_list li.bar:before {content: ''; display: block;}
+
+/* 마이핫트렉스 메인 */
+.orderandpay .membership_user_wrap { background: #fafafa; padding:26px 0;}
+.orderandpay .membership_user_wrap:after {content: ''; display: block; clear: both;}
+.orderandpay .membership_user {float: left; width:145px; position: relative;}
+.orderandpay .membership_user:after {content: ''; display: block; width:1px; height:100px; background: rgba(0,0,0,.4); position: absolute; top:0; right: 0}
+.orderandpay .membership_user .unit_name,
+.orderandpay .membership_user .unit_membership_level {padding:0 10px 0 30px;}
+.orderandpay .membership_user .btn_go_benefit{margin: 12px 24px 0 30px;} 
+.orderandpay .membership_user .unit_name {font-size: 14px; font-weight:400;}
+.orderandpay .membership_user .unit_membership_level {font-size: 28px; font-weight: 700; margin-top:10px;}
+.orderandpay .btn_go_benefit {font-size: 12px;font-weight: 400;background: #000;border-radius: 24px;padding: 8px 22px;/* max-width: 88px; */color: #fff;}
+.orderandpay .membership_list {float: left; margin-top:22px;     width: 579px;}
+.orderandpay .membership_list:after {content: ''; display: block; clear: both;}
+.orderandpay .membership_list .items {float: left; width:25%}
+.orderandpay .membership_list .items.wide {padding:0 30px;}
+.orderandpay .membership_list .items .link {display: block; padding:0 15px;} 
+.orderandpay .membership_list .items .text_wrap .unit_go_text,
+.orderandpay .membership_list .items .text_wrap .unit_number {display: block; text-align: center;}
+.orderandpay .membership_list .items .text_wrap .unit_go_text {font-size: 14px; font-weight:400;}
+.orderandpay .membership_list .items .text_wrap .unit_go_text:after {content: ''; display: inline-block; width:7px; height:11px; margin-top:-2px; vertical-align: middle; background: url(../../images/new/icon_my_main_arrow.png) no-repeat 0 0;}
+.orderandpay .membership_list .items .text_wrap .unit_number {margin-top:25px; word-break: break-all; font-family: 'font_gs','Apple SD Gothic Neo', sans-serif; font-size: 18px; font-weight: 700;}
+
+/* 메인 하단 리스트 */
+.orderandpay .my_list_wrap {}
+.orderandpay .my_list_wrap .membership_list {width:100%; margin-top:0;}
+.orderandpay .my_list_wrap .membership_list .items {border-top:1px #EEEEEE solid; box-sizing: border-box;    border-right: 1px #eee solid;    border-bottom: 1px #eee solid;}
+.orderandpay .my_list_wrap .membership_list .items:first-child {border-left:1px #EEEEEE solid;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap {padding-bottom: 38px;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_go_text {font-size: 16px;margin-top: 35px;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_number {color:#FF6A5B; margin-top:31px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height: normal;}
+.orderandpay .my_list_wrap .membership_list.col2 .items {width:50%;}
+.orderandpay .my_list_wrap .membership_list.col3 .items {width:241px;}
