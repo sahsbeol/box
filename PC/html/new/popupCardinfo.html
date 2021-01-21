@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=950">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+    <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+
+    <link rel="stylesheet" type="text/css" href="../../pages/html/css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../scripts/common.js"></script>
+<script type="text/javascript">
+
+var url ='';
+var cart_yn = "";
+var height = 1050;
+var width  = 400;
+$(document).ready(function() {
+    window.resizeTo(500+35,350+65);
+
+    if(cart_yn=="Y"){
+        url = "/issue/CardIssueCart.do";
+    }else{
+        url = "/issue/CardIssue.do";
+    }
+    url+= "?TID=" + "kyobohot1m01012011131237267526" + "&svcCd="+""+"&sendMail="+"1" + "&cart_yn="+""+"&svc_cl="+"";
+    if("N" == "Y"){
+       window.resizeable = true;
+       window.resizeTo(width+35,height+65); //여백
+       window.location.href = url;
+    }
+    else{
+        document.getElementById("mainDiv").style.display = "block";
+    }
+})
+   
+   function nextchk(num,here,next){
+      var str = here.value.length;
+      if(str == num ){
+         next.focus();
+      }
+   }
+   
+   function onClickRadioBtn(flag)
+   {
+       if(flag == "amt") {
+           document.getElementById("trAmt1").style.display = 'block';
+           document.getElementById("trAmt2").style.display = 'block';
+           document.getElementById("trEmail").style.display = 'none';
+           document.getElementById("trCardno").style.display = 'none';
+       } else if(flag == "email") {
+           document.getElementById("trAmt1").style.display = 'none';
+           document.getElementById("trAmt2").style.display = 'none';
+           document.getElementById("trEmail").style.display = 'block';
+           document.getElementById("trCardno").style.display = 'none';
+       } else if(flag == "cardno") {
+           document.getElementById("trAmt1").style.display = 'none';
+           document.getElementById("trAmt2").style.display = 'none';
+           document.getElementById("trEmail").style.display = 'none';
+           document.getElementById("trCardno").style.display = 'block';
+       }
+   }
+   function getOnlyDigit( number )
+   {
+    if(number == undefined){
+        number = "0";
+    }
+    
+    var i;
+    var result = "";
+
+    for(i=0; i<number.length; i++)
+    {
+        if( number.charAt(i)>='0' && number.charAt(i)<='9' )
+            result += number.charAt(i);
+    }
+
+    return result;
+   }
+   
+   /* 천단위 콤마 표시 */
+   function numberMaskOn(myForm)
+   {                
+    var reverseMaskedNumber = "", maskedNumber = "";
+    var integerCount = 0, maskCount = 0, isPoint = 0;
+    var integerIndex ;
+    var tmpValue;
+
+    myForm.value = getOnlyDigit(myForm.value);
+    
+    integerIndex = myForm.value.length;
+    
+    for (i = myForm.value.length - 1 ; i >= 0 ; i--)
+    {
+        reverseMaskedNumber += myForm.value.charAt(i);
+        if (myForm.value.charAt(i) == ".")                          
+        {
+            integerIndex = i - 1;
+            isPoint = 1;
+            break;
+        }
+    }
+
+    if (isPoint == 0)
+    {
+        reverseMaskedNumber = "";
+        integerIndex -= 1;
+    }
+    
+    for ( i = integerIndex ; i >= 0 ; i--)
+    {
+        integerCount++;
+        reverseMaskedNumber += myForm.value.charAt(i);
+        if (integerCount % 3 == 0 && i != 0 && myForm.value.charAt(i-1) != "-")
+        {
+            reverseMaskedNumber += ",";
+            maskCount++;
+        }
+    }
+
+    for ( i = maskCount + myForm.value.length ; i >= 0 ; i--)
+    {
+        maskedNumber += reverseMaskedNumber.charAt(i);
+    }
+
+    myForm.value = maskedNumber;
+   }
+   function showCardIssue() {
+       var f = document.form;
+       var typeArr = document.getElementsByName("selType");
+       var typeCd = "";
+       
+       for(var i = 0; i < typeArr.length; i++) {
+           if(typeArr[i].checked) {
+               typeCd = typeArr[i].value;
+               if(typeCd == "0"){ //구매자명 + 금액
+                   if(f.ordNm.value == ""){
+                       alert("구매자명을 입력하세요.");
+                       f.ordNm.focus();
+                       return;
+                   }
+                   if(f.appAmt.value == ""){
+                       alert("결제금액을 입력하세요.");
+                       f.appAmt.focus();
+                       return;
+                   }
+               }else if(typeCd == "1"){ //이메일
+                   if(f.email.value == ""){
+                       alert("이메일을 입력하세요.");
+                       f.ordNm.focus();
+                       return;
+                   }
+               }else if(typeCd == "2"){ //카드번호
+                   if(f.card1.value.length != 4 || f.card2.value.length != 4 || f.card3.value.length != 4 || f.card4.value.length < 3){
+                       alert("카드번호를 입력하세요.");
+                       if(f.card1.value.length != 4){
+                           f.card1.focus();
+                           return;
+                       } 
+                       if(f.card2.value.length != 4){
+                           f.card2.focus();
+                           return;
+                       }
+                       if(f.card3.value.length != 4){
+                           f.card3.focus();
+                           return;
+                       }
+                   }
+               }
+           }
+       }
+       
+       $.ajax({
+           type : "POST",      
+           url : "./CheckCardInfoAjax.do",
+           data : { "tid" : "kyobohot1m01012011131237267526",
+                    "typeCd" : typeCd,
+                    "ordNm" : f.ordNm.value,
+                    "appAmt" : f.appAmt.value.split(",").join(""),
+                    "ordEmail" : f.email.value,
+                    "cardNo" : f.card1.value+f.card2.value+f.card3.value+f.card4.value
+                  },
+           contentType : "application/json",
+           dataType : 'json', 
+           success : function(data){
+               if(data.cnt != "0"){
+                   window.resizeTo(width+10,height+65); //여백
+                   window.location.href = url;
+               }else{
+                   alert("입력하신 정보와 일치하지않습니다.");
+               }
+           }
+       });
+   }
+   
+
+</script>
+
+</head>
+<!-- 201222 S : 작업부분 body에 class="orderandpay" 넣어주세요  -->
+<body class="popup orderandpay ">
+    <div>
+        <div class="tooltip_wrap active">
+            <div class="tooltip_inner">  
+                <p class="tooltip_tit">최근 배송지 주소</p>
+
+                <div class="pop_cont">
+                   <div class="pull_box">
+                        <form id = "mainform" name="form">
+                            <div id="mainDiv" style="display:none">
+                            <table width="460" style="margin-left: 8px;" valign="top" cellpadding="0" cellspacing="0">
+
+                                <tr>
+                                    <td height="20"></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td height="50" valign="top" class="popupCTitle" style="font-size: 14px">&nbsp;영수증 확인을 위해 아래의 정보를 정확히 입력해 주시기 바랍니다.</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <table align="center" cellpadding="0" cellspacing="0" bgcolor="#c8c8c8">
+                                            <tr>
+                                                <td>
+                                                    <table width="460" align="center" border="0" cellpadding="1" cellspacing="1">
+                                                        <tr>
+                                                            <td align="center" colspan="3" class="rTblA" height="25px" style="text-align: center;padding: 5px;border-bottom: 0px; width: 460px;">
+                                                                <input type="radio" name="selType" value="0" onClick="javascript:onClickRadioBtn('amt');" checked="checked" style=" vertical-align:text-bottom; margin-right: 3px;"><span>구매자명 + 금액</span></input>
+                                                                <input type="radio" name="selType" value="1" onClick="javascript:onClickRadioBtn('email');" style="margin-left: 10px; vertical-align:text-bottom; margin-right: 3px;"><span>이메일</span></input>
+                                                                <input type="radio" name="selType" value="2" onClick="javascript:onClickRadioBtn('cardno');" style="margin-left: 10px; vertical-align:text-bottom; margin-right: 3px;"><span>카드번호</span></input>
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="trAmt1">
+                                                            <td class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8; border-bottom:0;">구매자명</td>
+                                                            <td class="rTblA" style="width: 390px;">
+                                                                <input type='text' name="ordNm" style="width:80;height: 25px;  border-bottom:0;"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="trAmt2">
+                                                            <td  class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8;">결제금액</td>
+                                                            <td class="rTblA" style="width: 390px;">
+                                                                <input type='text' name="appAmt" style="width:120;height: 25px;text-align: right;" maxlength='12' onkeyup="javascript:numberMaskOn(this);">
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="trEmail" style="display:none">
+                                                            <td class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8;">이메일</td>
+                                                            <td class="rTblA" style="width: 390px;">
+                                                            <input type="text" name="email" style="width:250;height: 25px;"/></td>
+                                                        </tr>
+                                                        <tr id="trCardno" style="display:none">
+                                                            <td class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8;">카드번호</td>
+                                                            <td width="472" class="rTblA" style="height:25px;width: 390px; text-align: center;">
+                                                                <input name="card1" type="text" size="4" maxlength="4"  style="width: 40px;height: 25px;"onKeyUp="javascript:nextchk(4,this,this.form.card2);"/>
+                                                                 &nbsp; - &nbsp;
+                                                                <input name="card2" type="password" size="4" maxlength="4"style="width: 40px;height: 25px;" onKeyUp="javascript:nextchk(4,this,this.form.card3);"/>
+                                                                 &nbsp; - &nbsp;
+                                                                <input name="card3" type="password" size="4"  maxlength="4"style="width: 40px;height: 25px;" onKeyUp="javascript:nextchk(4,this,this.form.card4);"/>
+                                                                 &nbsp; - &nbsp;
+                                                                <input name="card4" type="text" size="4"style="width: 40px;height: 25px;" maxlength="4"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>
+                                    </td>
+                                </tr> 
+
+                                <tr>
+                                    <td align="center" valign="middle" height="80"><a class="cctnL02c add" style="display: block;line-height:25px; border: 0px;background-color:#5886be;color: white; " href="javascript:showCardIssue();">입력</a></td>
+                                </tr>
+
+                                <tr>
+                                    <td height="10">&nbsp;[참고사항]<br/>&nbsp;구매자명과 금액은 결제결과 안내 메일에 기재된 내역 기준으로 입력하시기 바랍니다.</td>
+                                </tr>
+                            </table>
+                            </div>
+                            </form>
+                    </div>
+                </div> 
+            </div>
+            <a href="javascript:;" class="tooltip_close">닫기</a>
+        </div>
+    </div>
+    
+
+
+
+</body>
+<!--// 201222 E : 작업부분
+</html>

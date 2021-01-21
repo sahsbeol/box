@@ -8,6 +8,10 @@ html
 menu0_result.html
 menu4_1.html
 record_video.html
+menu6_1_02.html
+menu6_1_01.html
+popupSearchOrderProduct.html
+popupSearchOrder.html
 
 css
 orderandpay.css
@@ -29,3 +33,4 @@ img
 없음
 
 
+p39 제외 다른 부분은 수정완료
