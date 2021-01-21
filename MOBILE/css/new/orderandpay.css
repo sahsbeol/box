@@ -621,8 +621,9 @@
 /* 고객센터 새창 팝업 */
 .orderandpay .customer_layer_title {font-size:20px;font-weight: 700;padding: 20px 0;text-align: center;}
 .orderandpay .customer_layer_title h1 {font-size:inherit;font-weight: inherit;display: block; width: 70%;margin: 0 auto; text-overflow: ellipsis; overflow: hidden; white-space:nowrap;}
-.orderandpay .customer_layer_contents .accordion > li > a {padding: 25px 45px 25px 20px; font-size:13px; font-weight: 500; color:#000; overflow: hidden; text-overflow:ellipsis;white-space:nowrap; background:url(../../images/new/icon_cs_layer.png) no-repeat center right 20px;background-size:10px 5px;}
+.orderandpay .customer_layer_contents .accordion > li > a {padding: 25px 45px 25px 20px; font-size:13px; font-weight: 500; color:#000;  background:url(../../images/new/icon_cs_layer.png) no-repeat center right 20px;background-size:10px 5px; display: block;}
 .orderandpay .customer_layer_contents .accordion > li > a.on {background:url(../../images/new/icon_cs_layer_on.png) no-repeat center right 20px; background-size:10px 5px;}
+.orderandpay .customer_layer_contents .accordion > li > a > span {display: block; overflow: hidden; text-overflow:ellipsis;white-space:nowrap;}
 .orderandpay .customer_layer_contents .text {color:#777; font-size: 11px; font-weight:400; padding-left: 20px;}
 .orderandpay .customer_layer_contents .btn_cls {width:17px; height:17px; font-size: 0; padding:10px; position:absolute; top: 12px;right: 2px; background:url(../../images/new/layer_cs_icon_close.png) no-repeat center center;background-size:17px 17px;}
 
@@ -636,6 +637,12 @@
 
 /* 일대일 문의 */
 .orderandpay .block {display: block !important; }
+
+.orderandpay .cs_direct .table02 td,
+.orderandpay .cs_direct th {border:0 none; padding:0 !important;}
+.orderandpay .cs_direct .close .btn.btn_black {width:17px; height:17px; font-size: 0; padding:10px; position:absolute; top: 0px;right: 2px; background:url(../../images/new/layer_cs_icon_close.png) no-repeat center center;background-size:17px 17px;}
+.orderandpay .cs_direct .close .btn.btn_black img {display: none !important;}
+.orderandpay .cs_direct .close + .sub_contents div {color:#000 !important;}
 
 /* 펀딩 ---------------*/
 /* 펀딩 in 주문서  */

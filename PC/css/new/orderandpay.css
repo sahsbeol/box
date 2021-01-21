@@ -116,6 +116,7 @@ a.addr.btn_defalut{
 /* 주문상품 _table  */
 .orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;padding-right: 10px;padding-left: 10px;}
 .orderandpay .table_wrap.bbs_list_v2 tfoot th, .orderandpay .table_wrap.bbs_list_v2 tfoot td {text-align:right;font-size: 22px;font-weight: 500;border-bottom: 0;}
+.orderandpay .bbs_list_v2 tbody td a.click {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit; display: block;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 
 /* 제휴포인트_table*/
 .orderandpay .table_wrap.type_1 {}
@@ -735,7 +736,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .bbs_list01 tbody td,
 .orderandpay .bbs_list01.tbl_slide tbody td{padding: 25px 20px 24px;text-align:center;font-weight: 500;color: #000;}
 .orderandpay .bbs_list01.tbl_slide tbody td {/*padding-left:50px; padding-right: 50px;*/}
-.orderandpay .bbs_list01 tbody td a {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit; display: block;}
+.orderandpay .bbs_list01 tbody td a {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit; display: block;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 
 .orderandpay .bbs_list01 tbody tr.conts td {padding:0 0;text-align:left;background:#fafafa;}
 .orderandpay .bbs_list01 .click.icon_arrow{position: relative;}
@@ -1000,8 +1001,8 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 발매일 디데이 */
 .orderandpay .reservation_wrap .pd_unit .category_slide ul li a .thum.d_day_txt {}
-.orderandpay .reservation_wrap .pd_unit .category_slide ul li a .thum.d_day_txt:before {content: '';display: block;width:100%;height:100%;position: absolute;top:0;left:0;background: rgba(0,0,0,.6);}
-.orderandpay .reservation_wrap .pd_unit .category_slide ul li a .thum.d_day_txt .d_day {font-family:font_gs;font-size:40px;font-weight: 700;color:#fff;position: absolute;top: 50%;margin-top: -20px;width: 90%;left: 50%;margin-left: -45%;text-align: center;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;}
+.orderandpay .reservation_wrap .pd_unit .category_slide ul li a .thum.d_day_txt:before {content: '';display: block;width:100%;height:100%; z-index: 1;position: absolute;top:0;left:0;background: rgba(0,0,0,.6);}
+.orderandpay .reservation_wrap .pd_unit .category_slide ul li a .thum.d_day_txt .d_day {font-family:font_gs;font-size:40px;font-weight: 700;color:#fff; z-index: 12;position: absolute;top: 50%;margin-top: -20px;width: 90%;left: 50%;margin-left: -45%;text-align: center;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;}
 .orderandpay .reservation_wrap .pd_unit .category_slide ul li.round .thum{border:1px solid #DBDBDB; border-radius:50%; overflow:hidden; box-sizing:border-box; position: relative; width:310px; height:310px;}
 /*.orderandpay .reservation_wrap .pd_unit .category_slide ul li.round .thum img{  max-width: 100%;  min-height: 100%;  position: relative;  top: 50%;  left: 50%;  transform: translate(-50%,-50%);}*/
 .orderandpay .reservation_wrap .pd_unit .category_slide ul li .cont{padding:13px 7px 0;}
@@ -1321,3 +1322,13 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .brand_like_wrap {position: absolute; top:111px; right:0;}
 .orderandpay .brand_like_wrap .icon_brand_like {width:20px; height:19px; display: inline-block; vertical-align: middle; background: url(../../images/new/icon_funding_brand_like.png) no-repeat 0 0;}
 .orderandpay .brand_like_wrap .brand_like_count {font-size: 14px; color:#777; font-weight: 500;}
+
+
+/* 마이 핫트랙스 */
+/* 상품평 수정삭제 */
+.orderandpay .modi_wrap:after {content: ''; display: block; clear: both;}
+.orderandpay .modi_list:after {content: ''; display: block; clear: both;}
+.orderandpay .modi_list {float: right;}
+.orderandpay .modi_list li {float: left;}
+.orderandpay .modi_list li.bar {}
+.orderandpay .modi_list li.bar:before {content: ''; display: block;}

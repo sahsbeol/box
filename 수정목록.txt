@@ -1,13 +1,30 @@
-날짜 : 210119
-주석 : 210119 수정  
+
+날짜 : 210121
+주석 : 210121 수정  
 
 pc 
 
 html 
-record_video.html
+menu0_result.html
+menu4_1.html
 
 css
 orderandpay.css
 
 img
 없음
+
+mo
+
+html 
+cs_main.html
+popup_listFaq.html
+listone_pop.html
+
+css
+orderandpay.css
+
+img
+없음
+
+
