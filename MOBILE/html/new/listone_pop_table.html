@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
 <link rel="stylesheet" type="text/css" href="../../css/biz/hottm_yj.css">
-<!-- 201228 작업부분 -->
+<!-- 210122 작업부분 -->
 <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
 <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
@@ -41,22 +41,63 @@
   <!-- //#header -->
   
 <!-- #content -->
-<!-- 201228 : S 작업부분 id="content" class="orderandpay" 넣어주세요-->
+<!-- 210122 : S 작업부분 id="content" class="orderandpay" 넣어주세요-->
 <div id="content" class="orderandpay">        
     <!-- content -->
-    <!-- 201228 : S 작업부분 -->
+    <!-- 210122 : S 작업부분 -->
     <div class="customer cs_direct">
         <div class="sub_contents">
             <!-- *** 운영에 있는 소스를 가져있는 소스를 직접 넣어서 연결은 되지 않습니다. 운영소스 참고하세요 -->
             
             <!-- 레이어 펼치기 전 -->
-            <div id="layer" style="position:relative;width:100%;background-color:#fff;display:none;border:1px solid #2a2a2a;border-radius:5px;margin:10px 0;">
+            <div id="layer" style="position:relative;width:100%;background-color:#fff;display:block;border:1px solid #2a2a2a;border-radius:5px;margin:10px 0;">
+            	<div class="close">
+			         <a href="javascript:closeOrder();" class="btn btn_black" style="margin :5px;"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/common/close_1.png" style="width: 30px; height: 30px; margin-top: 5px;"></a>
+			    </div>
+            	<div class="sub_contents">
+    				<div class="inner_padding two">
+				        <table class="table02 mt40">
+				            <caption>주문내역 조회 <span>주문일, 주문번호, 상품명, 상품금액(배송금액), 배송업체, 처리상태</span></caption>
+				            <colgroup>  
+				                <col width="*"> 
+				                <col width="*">
+				            </colgroup>
+				            <tbody>
+                        		<tr> 
+		                            <td> 
+		                            	<a href="javascript:;" class="link">
+		                            		<span class="texts unit_number"><span>주문번호 :</span><span>101011500728</span></span>
+		                            		<span class="texts unit_product"><span>상품명 :</span><span>갤럭시노트10 플러스 전면 풀커버 마그네틱 케이스</span></span>
+    		                                <input type="hidden" name="deliveryId" value="101011500728001">
+	        	                            <input type="hidden" name="orderNum" value="101011500728">
+		                            	</a>
+		                            </td>  
+        		                </tr>
+                        		<tr> 
+		                            <td> 
+		                            	<a href="javascript:;" class="link">
+		                            		<span class="texts unit_number"><span>주문번호 :</span><span>101011500728</span></span>
+		                            		<span class="texts unit_product"><span>상품명 :</span><span>갤럭시노트10 플러스 전면 풀커버 마그네틱 케이스</span></span>
+    		                                <input type="hidden" name="deliveryId" value="101011500728001">
+	        	                            <input type="hidden" name="orderNum" value="101011500728">
+		                            	</a>
+		                            </td>  
+        		                </tr>
+				            </tbody>  
+				        </table>
+        				<div class="paging cs">
+    						<ul>
+                				<li><a href="javascript://" class="active">1</a></li>
+						    </ul>
+						</div>
+					</div>
+				</div>
             </div>
             <!-- //sub contents -->
         </div>
     </div>
 </div>
-<!--// 201228 : E 작업부분 -->
+<!--// 210122 : E 작업부분 -->
 
 <script>
 $(document).ready(function() {

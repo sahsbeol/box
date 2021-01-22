@@ -1080,14 +1080,14 @@
                                 <option value="LOP" >120개씩</option>
                             </select>
 
-                            <a href="javascript:;" class="filter_btn">필터</a>
+                            <a href="javascript:;" class="filter_btn active">필터</a>
                         </div>
                     </div>
                     <!--// 201221 : E -->                   
 
 					<div class="search_filter_wrap">
 						<!-- 상세조건 선택시 on_select : class 추가-->
-						<div class="search_filter">
+						<div class="search_filter active on_select">
 							<div class="inner">
 								<ul>
 									<li>
@@ -1207,9 +1207,18 @@
 									</li>
 								</ul>
 
-								<div class="btn_wrapper">
-									<a href="#none" class="btn_reset">초기화</a>
-									<!-- <a href="#none" class="btn_black">적용하기</a> -->
+								<!-- 210122 수정 -->
+								<div class="detail">
+									<div class="select_condition">
+										<ul>
+											<li class="add" value="#searchCate" seq="1"><a href="javascript://" onclick="filterClickEvent(this);return false;">오피스</a></li><li class="add" value="#saleYn" seq="4"><a href="javascript://" onclick="filterClickEvent(this);return false;">품절제외</a>
+											</li>
+										</ul>
+									</div>
+									<div class="btn_wrapper">
+										<a href="#" onclick="initFrm();return false;" class="btn_reset">초기화</a>
+										<a href="#" onclick="submitFrm();return false;" class="btn_black">적용하기</a>
+									</div>
 								</div>
 							</div>
 							<!-- <a href="#none" class="btn_filter"></a> -->
