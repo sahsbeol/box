@@ -1219,6 +1219,8 @@ ul.agency_select li:nth-child(3) .ele {
 
 
 /* 펀딩 ---------------*/
+@font-face { font-family: 'GmarketSansBold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff'); font-weight: normal; font-style: normal; }
+
 /* 펀딩 in 주문서  */
 .orderandpay .funding_policy_wrap {}
 .orderandpay .funding_policy .funding_title {font-size: 18px; font-weight:500;}
