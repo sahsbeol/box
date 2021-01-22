@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/content.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<!-- 210122 작업부분 -->
+<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/swiper.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+<script type="text/javascript" src="../../js/biz/m_hott.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+</head>
+<body>
+
+<div id="wrap" class="mini">
+  <!-- #header -->
+  <div id="header">
+    <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
+      <!-- 서브 -->
+      <div class="sub_wrap"> <a href="#n" _onclick="locBack();return false;" class="btn_back">뒤로가기</a> <a href="#n" class="btn_category" _onclick="bizOpenGnbMenu();return false;">카테고리 보기</a> <a href="#n" class="btn_search" _onclick="gnbSrchFrm();return false;">검색</a>
+        <h2 id="subTitle">마이페이지</h2>
+      </div>
+      <!--// 서브 --> 
+    </div>
+  </div>
+  <!-- //#header -->
+  
+<!-- #content -->
+<div id="content">
+        
+<!-- content -->
+<div id="sc_content" style="margin-top: -10px;">
+<!-- tit_section -->
+<div id="sc_header">
+    <h1>상품평 수정하기</h1>
+</div>
+<!-- //tit_section -->
+
+<form name="imageUploadFrm" id="imageUploadFrm" action="/uploadImage" enctype="multipart/form-data" style="display:none;">
+    <input type="file" name="uploadImage" id="uploadImage" onchange="fileSelected();" accept="image/*">
+</form>
+<form name="reviewForm" action="/m/gift/detail/submitReview" method="post">
+    <input type="hidden" name="prdtQnaSeq" value="195642">
+    <input type="hidden" name="prdtGrade" value="5">
+    <input type="hidden" name="rcrdCd" value="">
+    <input type="hidden" name="openYn" value="false">
+    <input type="hidden" name="imageUrl" value="">
+    <div class="prod_info">
+        
+                <p class="img"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1461/hot1560238038751.jpg" alt="[2+1] [카멜] 전자노트 카멜보드 12인치 CB1210 " width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"></p>
+            
+        <p class="txt">[2+1] [카멜] 전자노트 카멜보드 12인치 CB1210 </p>
+    </div>
+
+    <div class="rating_box">
+        <input type="hidden" name="practicality" value="5">
+        <input type="hidden" name="design" value="5">
+        
+                <div class="rating rate5" id="r_practicality">
+                    <strong>실용성</strong>
+                    <a href="#" class="r01" onclick="setGrade('practicality', 1);return false;">1점</a>
+                    <a href="#" class="r02" onclick="setGrade('practicality', 2);return false;">2점</a>
+                    <a href="#" class="r03" onclick="setGrade('practicality', 3);return false;">3점</a>
+                    <a href="#" class="r04" onclick="setGrade('practicality', 4);return false;">4점</a>
+                    <a href="#" class="r05" onclick="setGrade('practicality', 5);return false;">5점</a>
+                </div>
+                <div class="rating rate5" id="r_design">
+                    <strong>디자인</strong>
+                    <a href="#" class="r01" onclick="setGrade('design', 1);return false;">1점</a>
+                    <a href="#" class="r02" onclick="setGrade('design', 2);return false;">2점</a>
+                    <a href="#" class="r03" onclick="setGrade('design', 3);return false;">3점</a>
+                    <a href="#" class="r04" onclick="setGrade('design', 4);return false;">4점</a>
+                    <a href="#" class="r05" onclick="setGrade('design', 5);return false;">5점</a>
+                </div>
+            
+    </div>
+    <p class="info mt5 t_c">별점을 등록해 주세요.</p>
+    <p class="info mt5 t_c">단순문자 및 기호의 나열/반복 입력 시 적립금 지급 제외</p>
+    <p class="info mt5 t_c">1천원 미만 상품의 경우 적립금 지급 제외</p>
+    
+    <div class="box_flex t_select">
+        <select class="select" name="simpleTxt" onchange="setSimpleReview();">
+            <option value="">간단 리뷰 등록</option>
+            <option value="마음에 쏙 들어요.">마음에 쏙 들어요.</option>
+            <option value="빠른 배송 감사합니다.">빠른 배송 감사합니다.</option>
+            <option value="친구에게 추천하고 싶어요.">친구에게 추천하고 싶어요.</option>
+            <option value="생각보다 별로네요.">생각보다 별로네요.</option>
+        </select>
+    </div>
+    <div class="textarea_box"><textarea class="textarea" title=" 상품후기 입력" style="height:100px;" name="prdtQnaTitle" onkeydown="checkLength('textarea[name=prdtQnaTitle]', 'span#chkByte', 500)">친구에게 추천하고 싶어요.</textarea></div>
+    <p class="info mt5"><span class="fl_r" id="chkByte">(25/500)</span></p>
+    
+        <div class="photo_upload">
+            <strong>사진 첨부하기</strong>
+            
+                    <a href="#" onclick="findImageFile();return false;"><img src="/images/season02/btn_plus_2.png" alt="이미지추가" id="thums"></a>
+                
+        </div>
+    
+    <div class="box_flex btn_area btn_area02 mt30">
+        
+                <a href="/m/gift/detail/removeReview?prdtQnaSeq=195642&amp;rcrdReviewSeq=&amp;rtnGbn=M&amp;sellPrdtBcode=2310040601340" class="btn btn_gray">삭제</a>
+                <a href="javascript:submitFrm();" class="btn btn_gray bg_orange">수정</a>
+            
+    </div>
+    <a href="javascript:history.back();" class="btn_back">뒤로</a>
+    </form>
+</div>
+<!-- //content -->
+</div>
+
+<script>
+$(document).ready(function() {
+    footerFn(); //footer
+});
+function footerFn(){
+    $('#footer .btn_cont').on('click', function(){
+        if($("#footer .txt").hasClass('on')){
+           $("#footer .txt").removeClass('on');
+        }else{
+           $("#footer .txt").addClass('on');
+        }
+    })
+}
+</script>
+  <!-- footer -->
+	<div id="footer">
+		<div class="inner">
+			<p>고객센터 <em class="font_t">1661-1112</em></p>
+			<div class="util_menu">
+		        <ul>
+		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">핫트합니다</a></li>
+		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/viewRule');return false;">이용약관</a></li>
+		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/privacy');return false;"><strong>개인정보취급방침</strong></a></li>
+		        </ul>
+		    </div>
+			<div class="cont">
+				<a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">
+					<img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019">
+				</a>
+				<ul class="sns_wrap">
+		            <li class="ig"><a href="#n" _traget="_blank" _onclick="linkToInstagram('home');return false;">instagram</a></li>
+		            <li class="fb"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.facebook.com/HOTTRACKSFRIEND/');return false;">facebook</a></li>
+		            <li class="tt"><a href="#n" _traget="_blank" _onclick="goTwitter('모바일핫트랙스', 'http://m.hottracks.co.kr/');return false;">twitter</a></li>
+		            <li class="bg"><a href="#n" _traget="_blank" _onclick="winOpen('https://hottracks91.blog.me/');return false;">blog</a></li>
+		            <li class="yt"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg');return false;">youtube</a></li>
+		        </ul>
+			</div>
+			<a href="javascript://;" class="btn_cont">(주)교보핫트랙스</a>
+			<div class="txt">
+				<span>대표이사 박영규</span>
+				<span>사업자등록번호 : 102-81-29258</span>
+				<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+				<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+				<span>개인정보보호책임자 : 김재식</span>
+				<span>이메일 : PRIVACY@HOTTRACKS.CO.KR</span>
+				<span class="copyright">ⓒ Kyobo Hottracks inc.</span>
+			</div>
+		</div>
+	</div>
+	<!--// footer -->
+  
+    <div id="app_bar"> <a href="#n" class="btn_home">HOTTRACKS</a> <a href="#n" class="btn_today">오늘,혜택</a> <a href="#n" class="btn_cart">장바구니<em class="font_t">99+</em></a>
+      <a href="#n" class="btn_history">히스토리</a>
+    </div>
+    
+</div>
+</body>
+</html>

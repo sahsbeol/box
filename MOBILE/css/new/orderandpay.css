@@ -644,6 +644,11 @@
 .orderandpay .cs_direct .close .btn.btn_black img {display: none !important;}
 .orderandpay .cs_direct .close + .sub_contents div {color:#000 !important;}
 
+.orderandpay .cs_direct .br_list li .fl_l {line-height:1.6 !important;}
+.orderandpay .cs_direct .br_list li .conts {color:#000; border-bottom:1px #000 solid;}
+.orderandpay .cs_direct .btn.btn_type01 {background: #000 !important; border:none !important; font-weight:400 !important;}
+.orderandpay .cs_direct #layer {border-radius:0 none !important;}
+
 /* 펀딩 ---------------*/
 /* 펀딩 in 주문서  */
 .orderandpay .funding_policy_wrap {margin-top:48px;}
