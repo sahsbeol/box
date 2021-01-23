@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/contents.css">
 <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
 <link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
-<!-- 210119 작업부분 -->
+<!-- 210125 작업부분 -->
 <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
 <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
@@ -37,6 +37,19 @@
             moveSlides: 1,
 			pager: true
         })
+        
+		// 210125 작업부분 
+        var swiper = new Swiper('.best_gift .swiper-container',{
+            nextButton: '.best_gift .swiper-button-next',
+            prevButton: '.best_gift .swiper-button-prev',
+            pagination: '.best_gift .swiper-pagination',
+            paginationType: 'fraction'
+        });
+	
+		$('.best_gift .swiper-pagination-fraction').each(function() {
+			var text = $(this).html();
+			$(this).html(text.replace(' / ', ' '));
+		});
 	})
 </script>
 </head>
@@ -480,7 +493,7 @@
 		</div>
 		<!--// header -->
 
-		<!-- 210119 S : 작업부분 id="container" 에 class="orderandpay" 넣어주세요  -->
+		<!-- 210125 S : 작업부분 id="container" 에 class="orderandpay" 넣어주세요  -->
 		<!-- Container -->
 		<div id="container" class="orderandpay">
 
@@ -550,12 +563,12 @@
                             <strong class="stuff-title">라미 사파리 미디움 시리즈 38ml 퍼플/한정판 서비스</strong>
                             <div class="funding_processbar_wrap mgt65">
                             	<div class="funding_detail_title">
-	                            	<h3 class="title_text only_english">
+	                            	<h3 class="title_text">
 	                            		<span class="icon_text">핫트딜</span>
 	                            		<span class="text">펀딩</span>
 	                            	</h3>
 	                            	<div class="funding_complete_wrap">
-	                            		<div class="fund_alert end">
+	                            		<div class="fund_alert">
 		                            		<span>주문종료</span>
 		                            		<!-- <span class="unit_number only_english">16</span>
 	    	                        		<span>일 남음</span> -->

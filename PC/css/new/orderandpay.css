@@ -646,7 +646,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .page_location .title a {display: block;}
 
 .orderandpay h3.page_title {font-size: 24px;font-weight: 700;margin-bottom: 15px; min-height:auto; margin-top:0;}
-.orderandpay h3.page_title.border {border-bottom: 2px #000000 solid; margin-bottom: 26px; padding-bottom: 34px;}
+/*.orderandpay h3.page_title.border {border-bottom: 2px #000000 solid; margin-bottom: 26px; padding-bottom: 34px;}
+*/.orderandpay h3.page_title.border {border-bottom: 2px #000000 solid; margin-bottom: 26px; padding-bottom: 25px;}
 
 .orderandpay .tit01 {font-size: 18px; color: #000; font-weight:500; line-height: normal; min-height:auto; margin-bottom:20px; margin-top:60px;}
 .orderandpay h4.tit01 {font-size:20px; font-weight:700; color:#000; margin-bottom: 10px;}
@@ -1234,8 +1235,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_main_wrap .funding_main_logo_wrap { margin-top:114px; }
 .orderandpay .funding_main_wrap .funding_main_logo_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title {font-size: 32px; font-weight:500; color:#000; line-height: normal;}
-.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title .text_icon {font-size: 76px; font-weight:700; color:#D41417; letter-spacing: -14px; margin-top:-16px; position: relative;}
-.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title .text_icon:after {content: '';display: inline-block;width:66px;height:76px;background: url(../../images/new/icon_funding_logo.png) no-repeat 0 0;margin: -16px 0px 0px 7px;vertical-align: middle;}
+.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title .text_icon {font-size: 76px; font-weight:700; font-family: 'GmarketSansBold';color:#D41417; letter-spacing: -5px; margin-top:0px; position: relative;}
+.orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_title .text_icon:after {content: '';display: inline-block;width:66px;height:76px;background: url(../../images/new/icon_funding_logo.png) no-repeat 0 0;margin: -10px 0px 0px 7px;vertical-align: middle;}
 .orderandpay .funding_main_wrap .funding_main_logo_wrap .funding_desc_texts .text {font-size: 16px; font-weight: 400; color:#777;}
 
 .orderandpay .funding_main_wrap .funding_text_wrap {float: left;}
@@ -1279,9 +1280,9 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_processbar_wrap {}
 .orderandpay .funding_detail_title {}
 .orderandpay .funding_detail_title:after {content: ''; display: block; clear:both;}
-.orderandpay .funding_detail_title .title_text {font-size: 24px; font-weight: 700; color:#000; line-height: normal; float: left;}
+.orderandpay .funding_detail_title .title_text {font-size: 24px; font-weight: 700; color:#000; line-height: 1.2; float: left; font-family: 'GmarketSansBold';}
 .orderandpay .funding_detail_title .title_text .icon_text {color:#D41417;position: relative;padding-right: 26px;}
-.orderandpay .funding_detail_title .title_text .icon_text:before {content: '';display: block;width:24px;height:24px;background: url(../../images/new/icon_funding_detail_logo.png) no-repeat 0 0;position: absolute;top: -2px;right: 0;}
+.orderandpay .funding_detail_title .title_text .icon_text:before {content: '';display: block;width:24px;height:24px;background: url(../../images/new/icon_funding_detail_logo.png) no-repeat 0 0;position: absolute;top: -1px;right: 0;}
 .orderandpay .funding_detail_title .title_text .text {margin-left:-4px;}
 
 .orderandpay .funding_complete_wrap {float: right; text-align: right;}
@@ -1318,8 +1319,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_goal_text_wrap {}
 .orderandpay .funding_goal_text_wrap .funding_goal_text {background: #FAFAFA; padding:20px 30px 22px 108px; line-height: 1.6; position: relative;}
 .orderandpay .funding_goal_text_wrap .funding_icon1:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_01.png) no-repeat 0 0; background-size: contain;}
-.orderandpay .funding_goal_text_wrap .funding_icon2:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_02.png) no-repeat 0 0; background-size: contain;}
-.orderandpay .funding_goal_text_wrap .funding_icon3:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_03.png) no-repeat 0 0; background-size: contain;}
+.orderandpay .funding_goal_text_wrap .funding_icon2:before {content: ''; display: block; position: absolute; top:9px; left:24px; width:59px; height:70px; background: url(../../images/new/icon_funding_02.png) no-repeat 0 0; background-size: contain;}
+.orderandpay .funding_goal_text_wrap .funding_icon3:before {content: ''; display: block; position: absolute; top:22px; left:20px; width:67px; height:48px; background: url(../../images/new/icon_funding_03.png) no-repeat 0 0; background-size: contain;}
 
 .orderandpay .brand_like_wrap {position: absolute; top:111px; right:0;}
 .orderandpay .brand_like_wrap .icon_brand_like {width:20px; height:19px; display: inline-block; vertical-align: middle; background: url(../../images/new/icon_funding_brand_like.png) no-repeat 0 0;}
@@ -1327,6 +1328,8 @@ ul.agency_select li:nth-child(3) .ele {
 
 
 /* 마이 핫트랙스 */
+.orderandpay .elip{  display: block;  width: 100%;  text-overflow: ellipsis;  white-space: nowrap;  overflow: hidden;}
+.orderandpay .elip2{  display: block;  width: 100%;  overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient: vertical;}
 /* 상품평 수정삭제 */
 .orderandpay .modi_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .modi_list:after {content: ''; display: block; clear: both;}
@@ -1350,7 +1353,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .membership_list:after {content: ''; display: block; clear: both;}
 .orderandpay .membership_list .items {float: left; width:25%}
 .orderandpay .membership_list .items.wide {padding:0 30px;}
-.orderandpay .membership_list .items .link {display: block; padding:0 15px;} 
+.orderandpay .membership_list .items .link {display: block;} 
+
 .orderandpay .membership_list .items .text_wrap .unit_go_text,
 .orderandpay .membership_list .items .text_wrap .unit_number {display: block; text-align: center;}
 .orderandpay .membership_list .items .text_wrap .unit_go_text {font-size: 14px; font-weight:400;}
@@ -1359,11 +1363,44 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 메인 하단 리스트 */
 .orderandpay .my_list_wrap {}
+.orderandpay .mgt8 {margin-top: 8px !important;}
 .orderandpay .my_list_wrap .membership_list {width:100%; margin-top:0;}
-.orderandpay .my_list_wrap .membership_list .items {border-top:1px #EEEEEE solid; box-sizing: border-box;    border-right: 1px #eee solid;    border-bottom: 1px #eee solid;}
-.orderandpay .my_list_wrap .membership_list .items:first-child {border-left:1px #EEEEEE solid;}
-.orderandpay .my_list_wrap .membership_list .items .text_wrap {padding-bottom: 38px;}
+.orderandpay .my_list_wrap .membership_list .items {box-sizing: border-box;}
+.orderandpay .my_list_wrap .membership_list .items .link {display: block; border: 1px #eee solid; box-sizing: border-box; margin: 0 0 0 7px; text-align: center;} 
+.orderandpay .my_list_wrap .membership_list .items:first-child .link {margin-left:0;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap {padding-bottom: 38px; text-align: center;    padding-left: 10px;    padding-right: 10px;}
 .orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_go_text {font-size: 16px;margin-top: 35px;}
 .orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_number {color:#FF6A5B; margin-top:31px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height: normal;}
-.orderandpay .my_list_wrap .membership_list.col2 .items {width:50%;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_status {color: #777;}
+
+.orderandpay .my_list_wrap .membership_list.col3 .items.other {width:482px;}
 .orderandpay .my_list_wrap .membership_list.col3 .items {width:241px;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .icon_my_like:before {content: ''; display: block; width:42px;height: 38px; margin: 0 auto 10px; background: url(../../images/new/icon_my_main_like.png) no-repeat 0 0;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .my_like_text {color: #777777;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .my_like_text .text {color:#000;}
+
+.orderandpay .my_list_wrap .membership_list .items .my_like_list {width:420px; margin: 0 auto;}
+.orderandpay .my_list_wrap .membership_list .items .my_like_list:after{content: ''; display: block; clear: both;}
+.orderandpay .my_list_wrap .membership_list .items .my_like_list .items {float: left; width:88px; margin:0 26px; position: relative;}
+.orderandpay .my_list_wrap .membership_list .items .my_like_list .items:before {content: ''; display: block; width:1px; height:30px; background: #777777; position: absolute; top:0; left:-26px;}
+.orderandpay .my_list_wrap .membership_list .items .my_like_list .items:first-child:before {content: ''; display: none;}
+.orderandpay .my_list_wrap .membership_list .items .my_like_list .my_like_list_text {font-size: 13px; color:#777;}
+.orderandpay .my_list_wrap .membership_list .items .my_like_list .my_like_list_num {color:#FF6A5B; font-weight: 500; margin-top: 21px;}
+
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .icon_my_edit {margin-top: 51px;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .icon_my_edit + .my_like_text{padding-bottom: 53px;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .icon_my_edit:before {content: ''; display: block; width:35px;height: 45px; margin: 0 auto 10px; background: url(../../images/new/icon_my_main_edit.png) no-repeat 0 0;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .my_edit_num {color:#FF6A5B; font-weight: 500;}
+
+.orderandpay .my_list_wrap .membership_list .items .inner_link .text_wrap{padding-bottom: 20px;}
+.orderandpay .my_list_wrap .membership_list .items .unit_go_consulting {display:inline-block; margin: 0 auto; font-size: 14px; font-weight: 700; padding-bottom: 5px; border-bottom: 1px #000 solid; margin-bottom: 35px;}
+
+.orderandpay .my_list_wrap .membership_list .items .height_set .text_wrap {padding-top:38px; padding-bottom: 69px;}
+
+/* 주문배송조회 */
+.orderandpay .period_srch ul.tab_btn02 {left:auto; right:0;}
+.orderandpay .period_srch ul.tab_btn02 li {margin-left:5px;}
+.orderandpay .period_srch ul.tab_btn02 li a {display:inline-block;height:28px;padding: 0px 16px 0 16px;border:1px solid #313131;font-size:12px;font-weight:400;color:#000000;line-height: 27px;}
+.orderandpay .period_srch ul.tab_btn02 li.active a,
+.orderandpay .period_srch ul.tab_btn02 li a:hover {border:1px solid #000;background:#000;color:#fff;}
+ 
