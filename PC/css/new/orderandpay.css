@@ -1398,6 +1398,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .my_list_wrap .membership_list .items .height_set .text_wrap {padding-top:38px; padding-bottom: 69px;}
 
 /* 주문배송조회 */
+.orderandpay .period_srch {margin-bottom: 0;}
 .orderandpay .period_srch ul.tab_btn02 {left:auto; right:0;}
 .orderandpay .period_srch ul.tab_btn02 li {margin-left:5px;}
 .orderandpay .period_srch ul.tab_btn02 li a {display:inline-block;height:28px;padding: 0px 16px 0 16px;border:1px solid #313131;font-size:12px;font-weight:400;color:#000000;line-height: 27px;}
