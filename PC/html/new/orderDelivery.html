@@ -369,7 +369,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <li ><a href="#n" _onclick="orderSearch(2)">취소 주문 조회</a></li>
                         </ul>
                     </div> -->
-                    <table class="bbs_list_v2">
+                    <table class="bbs_list_v2 space_pad">
                         <caption>조회기간별 주문내역 <span>주문일, 주문번호, 주문상품, 주문금액, 주문상태</span>
                         </caption>
                         <colgroup>
@@ -390,12 +390,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>2019.12.05</td>
-                                <td><a href="#n">191205000002</a></td>
+                                <td class="only_english">2019.12.05</td>
+                                <td><a href="#n" class="only_english">191205000002</a></td>
                                 <td>
                                     <div class="aprdtName_list">
                                         <a href="#n" class="aprdtName">
-                                            <p class="prdtName">로이텀 미디엄 노트 뮤트 데님</p>                                        
+                                            <p class="prdtName elip2">로이텀 미디엄 노트 뮤트 데님</p>                                        
                                             <p class="specName">
                                                 <span>LINE (1개)</span>
                                             </p>
@@ -404,21 +404,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 
                                     <div class="aprdtName_list">
                                         <a href="#n" class="aprdtName">
-                                            <p class="prdtName">GOT7 MINI ALBUM</p>
+                                            <p class="prdtName elip2">GOT7 MINI ALBUM</p>
                                         </a>       
                                     </div>
                                     <div class="aprdtName_list">
                                         <a href="#n" class="aprdtName">
-                                            <p class="prdtName">[2+1] [카멜] 전자노트 카멜보드 12인치 CB1210 </p>
+                                            <p class="prdtName elip2">[2+1] [카멜] 전자노트 카멜보드 12인치 CB1210 </p>
                                         </a>
                                         <!-- 음반이면 버튼 없애기 / 기프트 인경우에만 (상품평 적립 완료, 혹은 상품평 쓰기 완료)-->
                                         <!--  상품 후기완료 && 배송완료 && 적립 후  -->
-                                        <div class="btn_display">
-                                            <span _onclick="return false;" class="btn_type05_v2" style="width:150px;">상품평 포인트 적립완료</span>
+                                        <!-- <div class="btn_display">
+                                            <span _onclick="return false;" class="btn_type05_v2 bg" style="width:150px;">상품평 포인트 적립완료</span>
+                                        </div> -->
+                                        <div class="btn_display mgt15">
+                                            <span _onclick="return false;" class="btn_type05_v2 bg">상품평 작성</span>
                                         </div>
                                     </div>
                                 </td> 
-                                <td>262,800원</td>
+                                <td class="color_01"><span class="only_english base">262,800</span><span>원</span></td>
                                 <td>
                                     <span>결제완료</span>
                                 </td>
@@ -442,10 +445,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <li><strong>배송완료</strong> 상품고객수령</li>
                     </ol> -->
                     <div class="img_change_box">
-                        <ul class="change_list">
+                        <ul class="change_list my">
                             <li>
                                 <span class="img_include_wrap">
-                                    <span class="img_include_txt key">
+                                    <span class="img_include_txt card">
                                         결제완료
                                     </span>
                                     <span class="texts">
@@ -455,7 +458,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </li>
                             <li>
                                 <span class="img_include_wrap">
-                                    <span class="img_include_txt receipt">
+                                    <span class="img_include_txt ready">
                                         상품준비
                                     </span>
                                     <span class="texts">
@@ -465,7 +468,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </li>
                             <li>
                                 <span class="img_include_wrap">
-                                    <span class="img_include_txt allpoint">
+                                    <span class="img_include_txt delivery">
                                         배송중
                                     </span>
                                     <span class="texts">
@@ -475,7 +478,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </li>
                             <li>
                                 <span class="img_include_wrap">
-                                    <span class="img_include_txt allpoint">
+                                    <span class="img_include_txt delivery_end">
                                         배송완료
                                     </span>
                                     <span class="texts">

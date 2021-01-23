@@ -10,6 +10,7 @@
 /* ---------- common_style --------------*/
 .orderandpay {font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-size:14px;}
 .orderandpay .only_english {font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important; vertical-align: middle;}
+.orderandpay .only_english.base {font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important; vertical-align: baseline;}
 
 .orderandpay.f_set {margin-top:0;}
 .orderandpay h2.tit {font-size: 40px; margin-top:48px; font-weight: 700;}
@@ -21,6 +22,7 @@
 .orderandpay .f_r {float: right !important;}
 
 .orderandpay .bold {font-weight: 700 !important; }
+.orderandpay .medium {font-weight: 500 !important; }
 .orderandpay .fz0 {font-size:0 !important;}
 
 .orderandpay .mgt100 {margin-top:100px !important;}
@@ -595,6 +597,7 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .txt_option {}
 .orderandpay .btn_type05_v2 {font-size: 13px;height:32px;width:112px;padding: 0;box-sizing: border-box;border: 1px #D6D6D6 solid;line-height: 28px;}
+.orderandpay .btn_type05_v2.bg {background: #F8F8F8; border:1px #B5B5B5 solid; color:#000;}
 
 .orderandpay .count_up,
 .orderandpay .count_down  {width:32px;height:32px;display:block;border:1px #D6D6D6 solid;font-size: 0;float: left;box-sizing: border-box;}
@@ -720,6 +723,7 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .bbs_list_v2 tbody td:first-child {border-left:1px #EEEEEE solid;}
 .orderandpay .bbs_list_v2 tbody td:last-child {border-right:1px #EEEEEE solid;}
+.orderandpay .bbs_list_v2.space_pad tbody td {padding-left: 10px; padding-right: 10px; font-size: 13px;}
 
 /* 주문상품 _table  */
 .orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;padding-right: 10px;padding-left: 10px;}
@@ -871,6 +875,17 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .img_change_box .img_include_txt.key:before {width:58px; height:46px; background:url(../../images/new/cs_receipt_step1.png) no-repeat center;}
 .orderandpay .img_change_box .img_include_txt.receipt:before {width:42px; height:46px; background:url(../../images/new/cs_receipt_step2.png) no-repeat center;}
 .orderandpay .img_change_box .img_include_txt.allpoint:before {width:37px; height:46px; background:url(../../images/new/cs_receipt_step3.png) no-repeat center;}
+
+/* 주문배송조회 */
+.orderandpay .img_change_box .change_list.my li {width:25%;}
+
+.orderandpay .img_change_box .img_include_txt.card:before {width:46px; height:44px; background:url(../../images/new/my_delivery_step1.png) no-repeat center;}
+.orderandpay .img_change_box .img_include_txt.ready:before {width:44px; height:44px; background:url(../../images/new/my_delivery_step2.png) no-repeat center;}
+.orderandpay .img_change_box .img_include_txt.delivery:before {width:57px; height:44px; background:url(../../images/new/my_delivery_step3.png) no-repeat center;}
+.orderandpay .img_change_box .img_include_txt.delivery_end:before {width:38px; height:44px; background:url(../../images/new/my_delivery_step4.png) no-repeat center;}
+
+.orderandpay div.my_list_section p.specName {position: static;margin-top: 4px;width: 100%;height: auto;line-height: normal;}
+.orderandpay div.my_list_section a.aprdtName {margin-bottom: 0;}
 
 /* 대량구매상담 팝업 */
 .orderandpay .save_point {}
@@ -1329,7 +1344,7 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 마이 핫트랙스 */
 .orderandpay .elip{  display: block;  width: 100%;  text-overflow: ellipsis;  white-space: nowrap;  overflow: hidden;}
-.orderandpay .elip2{  display: block;  width: 100%;  overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient: vertical;}
+.orderandpay .elip2{ width: 100%;  max-height: 3em; height: auto !important; line-height: 1.5em !important; overflow:hidden; text-overflow:ellipsis; white-space: normal !important;  display:-webkit-box !important; -webkit-line-clamp:2; -webkit-box-orient: vertical;}
 /* 상품평 수정삭제 */
 .orderandpay .modi_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .modi_list:after {content: ''; display: block; clear: both;}
