@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/contents.css">
 <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
 <link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
-<!-- 210119 작업부분 -->
+<!-- 210125 작업부분 -->
 <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
 <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
@@ -24,15 +24,17 @@
 <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
 <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
 <script type="text/javascript" src="../../js/biz/jquery/swiper.min.js"></script>
+<!-- 210125 작업부분 -->
+<script type="text/javascript" src="../../js/biz/jquery/slick.min.js"></script>
 <script>
 	$(function(){
-		// 210119 작업부분
+		// 210125 작업부분
 		// 펀딩
         $('.tab_list').on('click', 'a', function(){
         	var $tab = $(this);
             var i = $tab.parent('li').index();
             var $contents = $tab.parent('li').closest('.tab_wrap');
-            var $Layers = $contents.find('.tab_layer');
+            var $Layers = $contents.find('> .tab_layer_wrap > .tab_layer');
 
             // 누르면 실행
             if(!$tab.hasClass('on')){
@@ -43,6 +45,35 @@
                 $($Layers[i]).addClass('on');
             }
         });
+
+        var main_bnr = $(".best_hott_banner");
+		main_bnr.on('init afterChange', function(event, slick, currentSlide, nextSlide){
+			if(event.type === 'init'){
+				$('.main_banner_btn .num').text(' / ').append('<span>' + slick.slideCount + '</span>');
+				$('.main_banner_btn .num').prepend('<strong>1</strong>')
+			} else if(event.type === 'afterChange'){
+				$('.main_banner_btn .num strong').text(currentSlide + 1);
+			}
+		});
+		main_bnr.slick({
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			autoplay: true,
+			speed: 1000,
+			centerMode: true,
+			arrows: false,
+			infinite: true,
+			variableWidth: true,
+			dots: false,
+			swipe: false,
+		})
+
+		$('.main_banner_btn .prev').click(function(){
+			main_bnr.slick('slickPrev');
+		})
+		$('.main_banner_btn .next').click(function(){
+			main_bnr.slick('slickNext');
+		})
 	})
 </script>
 </head>
@@ -486,13 +517,14 @@
 		</div>
 		<!--// header -->
 
-		<!-- 210119 S : 작업부분 id="container" 에 class="orderandpay" 넣어주세요  -->
+		<!-- 210125 S : 작업부분 id="container" 에 class="orderandpay" 넣어주세요  -->
 		<!-- Container -->
 		<div id="container" class="orderandpay">
 
 			<!-- 컨텐츠 -->
-			<div class="content" id="content">
-				<!-- 210119 S : 작업부분 -->
+			<!-- 210125 S : 작업부분 id="content" 에 class="width100" 넣어주세요  -->
+			<div class="content width100" id="content">
+				<!-- 210125 S : 작업부분 -->
                 <div class="funding_main_wrap">
                 	<!-- logo -->
                 	<div class="funding_main_logo_wrap">
@@ -532,31 +564,301 @@
                 		</div>
                 	</div>
                 	<!-- swiper -->
-                	<div></div>
+                	<div class="best_hott_wrap">
+                		<h3 class="best_hott_tit">베스트 핫트딜</h3>
+						<div class="best_hott_banner">
+							<div class="item">
+								<a href="#">
+									<div class="best_hott_img">
+										<img src="../../images/new/best_hott_banner00.png" alt="">
+									</div>
+									<div class="info">
+										<p class="dday"><span class="only_english">D-99</span>일</p>
+										<p class="tit">#모나미 프러스펜 60색 세트</p>
+										<p class="txt">잘 익은 블랙체리를 푹 절여 만든 잼을 식빵 위에 발라 사랑하는 이에게 전달할 때의 설레임을 닮은 향<br>자스민과 헬리오트로프의 화사한 봄 풍경과 디저트가 함께 할 때의 바로 그 행복입니다.</p>
+										<p class="price"><span class="only_english">15,735</span>원</p>
+										<p class="discount"><span class="percent only_english">24%</span><span class="sale only_english">12,730</span>원</p>
+										<p class="progress only_english"><span class="complete">135%</span></p>
+									</div>
+								</a>
+							</div>
+							<div class="item">
+								<a href="#">
+									<div class="best_hott_img">
+										<img src="../../images/new/best_hott_banner01.png" alt="">
+									</div>
+									<div class="info">
+										<p class="dday"><span class="only_english">D-99</span>일</p>
+										<p class="tit">#모나미 프러스펜 60색 세트</p>
+										<p class="txt">잘 익은 블랙체리를 푹 절여 만든 잼을 식빵 위에 발라 사랑하는 이에게 전달할 때의 설레임을 닮은 향<br>자스민과 헬리오트로프의 화사한 봄 풍경과 디저트가 함께 할 때의 바로 그 행복입니다.</p>
+										<p class="price"><span class="only_english">15,735</span>원</p>
+										<p class="discount"><span class="percent only_english">24%</span><span class="sale only_english">12,730</span>원</p>
+										<p class="progress only_english"><span>35%</span></p>
+									</div>
+								</a>
+							</div>
+							<div class="item">
+								<a href="#">
+									<div class="best_hott_img">
+										<img src="../../images/new/best_hott_banner02.png" alt="">
+									</div>
+									<div class="info">
+										<p class="dday"><span class="only_english">D-99</span>일</p>
+										<p class="tit">#모나미 프러스펜 60색 세트</p>
+										<p class="txt">잘 익은 블랙체리를 푹 절여 만든 잼을 식빵 위에 발라 사랑하는 이에게 전달할 때의 설레임을 닮은 향<br>자스민과 헬리오트로프의 화사한 봄 풍경과 디저트가 함께 할 때의 바로 그 행복입니다.</p>
+										<p class="price"><span class="only_english">15,735</span>원</p>
+										<p class="discount"><span class="percent only_english">24%</span><span class="sale only_english">12,730</span>원</p>
+										<p class="progress only_english"><span>35%</span></p>
+									</div>
+								</a>
+							</div>
+						</div>
+
+                        <div class="main_banner_control">
+                            <div class="main_banner_btn">
+                                <button type="button" class="prev">이전</button>
+                                <span class="num"></span>
+                                <button type="button" class="next">다음</button>
+                            </div>
+                        </div>
+                	</div>
 
                 	<!-- tab -->
                 	<div class="tab1 tab_wrap mgt80">
                         <ul class="tab_list"> 
-                            <li class="items"><a href="javascript:;" class="on"><span>핫트딜ING</span></a></li>
-                            <li class="items"><a href="javascript:;"><span>배송준비 및 출발</span></a></li> 
-                            <li class="items"><a href="javascript:;" ><span>앵콜요청</span></a></li> 
+                            <li class="items">
+                            	<a href="javascript:;" class="on links">
+                            		<span>핫트딜ING</span>
+                            	</a>
+                            </li>
+                            <li class="items">
+                            	<a href="javascript:;" class="links">
+                            		<span>배송준비 및 출발</span>
+                            	</a>
+                            </li> 
+                            <li class="items">
+                            	<a href="javascript:;" class="links">
+                            		<span>앵콜요청</span>
+                            	</a>
+                            </li> 
                         </ul>
 					    <div class="tab_layer_wrap">
 					        <div class="tab_layer on">
-					        	<h3 class="title_icon1">핫트딜ING</h3>
+					        	<h3 class="title_icon ico01">핫트딜ING</h3>
 					        	<ul class="title_texts_list mgt10">
 						        	<li class="items">가장 핫한 상품들을 핫트딜 하세요!</li>
 					        		<li class="items">현재 진행중인 핫트딜 상품들을 만나보세요!</li>
 					        	</ul>
 					        	<div class="tab_wrap sort_order">
 					        		<ul class="tab_list"> 
-			                            <li class="items"><a href="javascript:;" class="on"><span>최신순</span></a></li>
-			                            <li class="items"><a href="javascript:;"><span>마감임박순</span></a></li> 
-			                            <li class="items"><a href="javascript:;" ><span>인기순</span></a></li> 
+			                            <li class="items">
+			                            	<a href="javascript:;" class="links on">
+			                            		<span class="">최신순</span>
+			                            	</a>
+			                            </li>
+			                            <li class="items">
+			                            	<a href="javascript:;" class="links">
+			                            		<span>마감임박순</span>
+			                            	</a>
+			                            	</li> 
+			                            <li class="items">
+			                            	<a href="javascript:;" class="links">
+			                            		<span>인기순</span>
+			                            	</a>
+			                            </li> 
 			                        </ul>
 			                        <div class="tab_layer_wrap">
 			                        	<div class="tab_layer on">
-			                        		as
+			                        		<div class="stuff-main-wrap">
+				                        		<div class="stuff-right">
+				                        			<div class="stuff-img">
+				                        				<img src="../../images/new/stuff_main_img00.png" alt="">
+				                        			</div>
+							                        <div class="stuff-title-wrap">
+						                            	<div class="funding_detail_title">
+							                            	<div class="funding_complete_wrap">
+							                            		<div class="fund_alert">
+								                            		<span>주문종료</span>
+								                            		<span class="unit_number only_english">16</span>
+							    	                        		<span>일 남음</span>
+							                            		</div>
+							                            	</div>
+						                            	</div>
+							                            <strong class="stuff-title">라미 사파리 미디움 시리즈 38ml 퍼플/한정판 서비스</strong>
+							                            <div class="price-wrap clear">
+							                                <strong class="price"><b>12,730</b>원</strong>
+							                            </div>
+							                            <div class="funding_processbar_wrap mgt65">
+							                            	<div class="funding_progressbar_wrap mgt80">
+							                            		<div class="funding_progressbar">
+							                            			<div class="funding_bar" style="width:40%;"></div>
+							                            		</div>
+							                            	</div>
+							                            	<div class="funding_goal_price_wrap mgt30">
+							                            		<dl class="funding_goal_price_type1">
+							                            			<dt>핫트딜 달성금액</dt>
+							                            			<dd>
+							                            				<span class="only_english">2,256,700</span>
+							                            				<span>원</span>
+							                            			</dd>
+							                            		</dl>
+							                            		<dl class="funding_goal_price_type2 mgt5">
+							                            			<dt>
+							                            				<span>목표금액</span>
+							                            				<span class="only_english unit_price">5,000,000</span>
+							                            				<span>원</span>
+							                            			</dt>
+							                            			<dd>
+							                            				<span class="only_english unit_percent">35%</span>
+							                            				<span>달성</span>
+							                            			</dd>
+							                            		</dl>
+							                            	</div>
+							                            </div>
+							                        </div>
+							                    </div>
+				                        		<div class="stuff-right">
+				                        			<div class="stuff-img">
+				                        				<img src="../../images/new/stuff_main_img00.png" alt="">
+				                        			</div>
+							                        <div class="stuff-title-wrap">
+						                            	<div class="funding_detail_title">
+							                            	<div class="funding_complete_wrap">
+							                            		<div class="fund_alert">
+								                            		<span>주문종료</span>
+								                            		<span class="unit_number only_english">16</span>
+							    	                        		<span>일 남음</span>
+							                            		</div>
+							                            	</div>
+						                            	</div>
+							                            <strong class="stuff-title">라미 사파리 미디움 시리즈 38ml 퍼플/한정판 서비스</strong>
+							                            <div class="price-wrap clear">
+							                                <strong class="price"><b>12,730</b>원</strong>
+							                            </div>
+							                            <div class="funding_processbar_wrap mgt65">
+							                            	<div class="funding_progressbar_wrap mgt80">
+							                            		<div class="funding_progressbar">
+							                            			<div class="funding_bar" style="width:40%;"></div>
+							                            		</div>
+							                            	</div>
+							                            	<div class="funding_goal_price_wrap mgt30">
+							                            		<dl class="funding_goal_price_type1">
+							                            			<dt>핫트딜 달성금액</dt>
+							                            			<dd>
+							                            				<span class="only_english">2,256,700</span>
+							                            				<span>원</span>
+							                            			</dd>
+							                            		</dl>
+							                            		<dl class="funding_goal_price_type2 mgt5">
+							                            			<dt>
+							                            				<span>목표금액</span>
+							                            				<span class="only_english unit_price">5,000,000</span>
+							                            				<span>원</span>
+							                            			</dt>
+							                            			<dd>
+							                            				<span class="only_english unit_percent">35%</span>
+							                            				<span>달성</span>
+							                            			</dd>
+							                            		</dl>
+							                            	</div>
+							                            </div>
+							                        </div>
+							                    </div>
+				                        		<div class="stuff-right">
+				                        			<div class="stuff-img">
+				                        				<img src="../../images/new/stuff_main_img00.png" alt="">
+				                        			</div>
+							                        <div class="stuff-title-wrap">
+						                            	<div class="funding_detail_title">
+							                            	<div class="funding_complete_wrap">
+							                            		<div class="fund_alert">
+								                            		<span>주문종료</span>
+								                            		<span class="unit_number only_english">16</span>
+							    	                        		<span>일 남음</span>
+							                            		</div>
+							                            	</div>
+						                            	</div>
+							                            <strong class="stuff-title">라미 사파리 미디움 시리즈 38ml 퍼플/한정판 서비스</strong>
+							                            <div class="price-wrap clear">
+							                                <strong class="price"><b>12,730</b>원</strong>
+							                            </div>
+							                            <div class="funding_processbar_wrap mgt65">
+							                            	<div class="funding_progressbar_wrap mgt80">
+							                            		<div class="funding_progressbar">
+							                            			<div class="funding_bar" style="width:40%;"></div>
+							                            		</div>
+							                            	</div>
+							                            	<div class="funding_goal_price_wrap mgt30">
+							                            		<dl class="funding_goal_price_type1">
+							                            			<dt>핫트딜 달성금액</dt>
+							                            			<dd>
+							                            				<span class="only_english">2,256,700</span>
+							                            				<span>원</span>
+							                            			</dd>
+							                            		</dl>
+							                            		<dl class="funding_goal_price_type2 mgt5">
+							                            			<dt>
+							                            				<span>목표금액</span>
+							                            				<span class="only_english unit_price">5,000,000</span>
+							                            				<span>원</span>
+							                            			</dt>
+							                            			<dd>
+							                            				<span class="only_english unit_percent">35%</span>
+							                            				<span>달성</span>
+							                            			</dd>
+							                            		</dl>
+							                            	</div>
+							                            </div>
+							                        </div>
+							                    </div>
+				                        		<div class="stuff-right">
+				                        			<div class="stuff-img">
+				                        				<img src="../../images/new/stuff_main_img00.png" alt="">
+				                        			</div>
+							                        <div class="stuff-title-wrap">
+						                            	<div class="funding_detail_title">
+							                            	<div class="funding_complete_wrap">
+							                            		<div class="fund_alert">
+								                            		<span>주문종료</span>
+								                            		<span class="unit_number only_english">16</span>
+							    	                        		<span>일 남음</span>
+							                            		</div>
+							                            	</div>
+						                            	</div>
+							                            <strong class="stuff-title">라미 사파리 미디움 시리즈 38ml 퍼플/한정판 서비스</strong>
+							                            <div class="price-wrap clear">
+							                                <strong class="price"><b>12,730</b>원</strong>
+							                            </div>
+							                            <div class="funding_processbar_wrap mgt65">
+							                            	<div class="funding_progressbar_wrap mgt80">
+							                            		<div class="funding_progressbar">
+							                            			<div class="funding_bar" style="width:40%;"></div>
+							                            		</div>
+							                            	</div>
+							                            	<div class="funding_goal_price_wrap mgt30">
+							                            		<dl class="funding_goal_price_type1">
+							                            			<dt>핫트딜 달성금액</dt>
+							                            			<dd>
+							                            				<span class="only_english">2,256,700</span>
+							                            				<span>원</span>
+							                            			</dd>
+							                            		</dl>
+							                            		<dl class="funding_goal_price_type2 mgt5">
+							                            			<dt>
+							                            				<span>목표금액</span>
+							                            				<span class="only_english unit_price">5,000,000</span>
+							                            				<span>원</span>
+							                            			</dt>
+							                            			<dd>
+							                            				<span class="only_english unit_percent">35%</span>
+							                            				<span>달성</span>
+							                            			</dd>
+							                            		</dl>
+							                            	</div>
+							                            </div>
+							                        </div>
+							                    </div>
+			                        		</div>
 			                        	</div>
 			                        	<div class="tab_layer">
 			                        		sf
@@ -568,15 +870,24 @@
 					        	</div>
 					        </div>
 					        <div class="tab_layer">
-					        	sdff
+					        	<h3 class="title_icon ico02">배송준비 및 출발</h3>
+					        	<ul class="title_texts_list mgt10">
+					        		<li class="items">종료된 핫트딜 상품을 준비하여 배송 준비 중입니다.</li>
+									<li class="items">준비가 완료된 상품은 순차적으로 배송이 시작됩니다.</li>
+									<li class="items"><span class="items_red">(딜 종료 후 배송이 완료된 상품은 목록에서 노출되지 않습니다.)</span></li>
+					        	</ul>
 					        </div>
 					        <div class="tab_layer">
-					        	sdffs
+					        	<h3 class="title_icon ico03">앵콜요청!</h3>
+					        	<ul class="title_texts_list mgt10">
+						        	<li class="items">재구매를 원하시거나 아깝게 놓친 상품은 앵콜요청을</li>
+					        		<li class="items">통해 다시 만나보실 수 있어요!</li>
+					        	</ul>
 					        </div>
 					    </div>
                     </div>
                 </div>
-				<!--// 210119 E : 작업부분 -->
+				<!--// 210125 E : 작업부분 -->
             </div>
             <!-- // 컨텐츠 -->
             
