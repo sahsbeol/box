@@ -9,18 +9,24 @@
 <meta name="viewport" content="width=950">
 <title>HOTTRACKS - 생활 속 감성충전소</title>
 <!-- 태그 라이브러리 -->
-<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
-<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
-<link rel="apple-touch-startup-image" href="/images/ico_app.png">
+<!-- 태그 라이브러리 -->
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="../../images/ico_app.png">
 
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/contents.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
-
-<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906210101"></script>
-<script type="text/javascript" src="/scripts/common?201906210101"></script>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+<link rel="stylesheet" type="text/css" href="../..//css/shop.css">
+<!-- 210125 작업부분 -->
+<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../scripts/common.js"></script>
 
 <style>
 .table02_v1 tbody th {padding: 20px 0 20px 10px;}
@@ -28,87 +34,99 @@
 
 
 </head>
-<body class="popup">
+<!-- 201228 S : 작업부분 body에 class="orderandpay" 넣어주세요  -->
+<body class="popup orderandpay ">
     
-<div class="f_noto">
-<h1 class="tit01 mgt0 fs24 c_white"><span class="fw500">주소 변경</span></h1>
-<div class="pop_cont">
-    <form name="chageDeliveryDestination" id="chageDeliveryDestination" method="post">
-        <input type="hidden" name="orderNum" value="191205000002"/>
-        <table class="table02_v1">
-            <colgroup> 
-			    <col width="13%">
-			    <col width="37%">
-			    <col width="13%">
-			    <col width="37%"> 
-			</colgroup>
-            <tbody>
-                <tr>
-                    <th scope="row">이름</th>
-                    <td colspan="3">
-                        <input type="text" name="receiverName" value="하태경" style="width:135px;" class="input_txt" />
-                    </td>
-                </tr>
-                <tr>
-                 	<th scope="row">휴대폰</th>
-                    <td>
-                    	
-                        
-                            
+    <div class="">
+       <div class="tooltip_wrap active">
+            <div class="tooltip_inner">
+                <p class="tooltip_tit">배송지 변경</p>
+                <div class="pop_cont reset">
+                    <form name="chageDeliveryDestination" id="chageDeliveryDestination" method="post">
+                        <input type="hidden" name="orderNum" value="191205000002"/>
+                        <table class="table02_v1 border_little">
+                            <colgroup> 
+                                <col width="140px">
+                                <col width="*">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">수취인명 <span class="star">*</span></th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" name="receiverName" value="하태경" style="width:135px;" class="width_cs" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">휴대폰 <span class="star">*</span></th>
+                                    <td>
+                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                            <span class="input_wrap">
+                                                <input type="text" name="receiverHandPhone1" value="010" maxlength="3" class="width_phone only_english" style="ime-mode:disabled;"/>
+                                            </span>
+                                            <span class="input_wrap">
+                                                <input type="text" name="receiverHandPhone2" value="9285" maxlength="4" class="width_phone only_english" style="ime-mode:disabled;"/>
+                                            </span>
+                                            <span class="input_wrap">
+                                                 <input type="text" name="receiverHandPhone3" value="0898" maxlength="4" class="width_phone only_english" style="ime-mode:disabled;"/>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     
-                                
-                        
-                            
-                                    
-                                
-                        
-                            
-                                    
-                                
-                        
-                        <input type="text" name="receiverHandPhone1" value="010" maxlength="3" class="input_txt inputNumberText" style="width:31px;ime-mode:disabled;"/> -
-                        <input type="text" name="receiverHandPhone2" value="9285" maxlength="4" class="input_txt inputNumberText" style="width:31px;ime-mode:disabled;"/> -
-                        <input type="text" name="receiverHandPhone3" value="0898" maxlength="4" class="input_txt inputNumberText" style="width:31px;ime-mode:disabled;"/>
-                    </td>
-                    <th scope="row">전화번호</th>
-                    <td>
-                        
-                        
-                            
-                                    
-                                
-                        
-                        
-                        <input type="text" name="receiverTelePhone1" value="" maxlength="3" class="input_txt inputNumberText" style="width:31px;ime-mode:disabled;"/> -
-                        <input type="text" name="receiverTelePhone2" value="" maxlength="4" class="input_txt inputNumberText" style="width:31px;ime-mode:disabled;"/> -
-                        <input type="text" name="receiverTelePhone3" value="" maxlength="4" class="input_txt inputNumberText" style="width:31px;ime-mode:disabled;"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">주소</th>
-                    <td colspan="3" class="txt">
-                        <input type="text" name="receiverPostNum1" style="width:31px;" class="input_txt" value="108" readonly="readonly"/>
-                        -
-                        <input type="text" name="receiverPostNum2" style="width:31px;" class="input_txt" value="81" readonly="readonly"/>
-                        <span class="mgt10"><a href="#n" class="btn_type01_v2" _onclick="window.open('/ht/listZipcode','popupZipcode','width=400,height=372'); return false;" style="margin-left:8px; width:84px;">우편번호 검색</a></span>
-                        <br />
-                        <span>
-                            <input type="text" name="receiverAddress" style="width:200px;" class="input_txt mgt10" value="경기 파주시 회동길 78 " readonly="readonly"/>
-                            <input type="text" name="receiverDetailAddress" style="width:202px;" class="input_txt mgt10" value="교보핫트랙스 "/>
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-    <div class="btn_area t_center mgt30">
-        <a href="#n" class="btn_type04_v2" _onclick="self.close()" id="">취소</a>
-        <a href="#n" class="btn_type04_v1 mgl10" id="">변경</a>
-    </div>
-</div>  
+                                    <th scope="row">전화번호 <span class="star">*</span></th>
+                                    <td>
+                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                            <span class="input_wrap">
+                                                <input type="text" name="receiverTelePhone1" value="" maxlength="3" class="width_phone only_english" style="ime-mode:disabled;"/>
+                                            </span>
+                                            <span class="input_wrap">
+                                                <input type="text" name="receiverTelePhone2" value="" maxlength="4" class="width_phone only_english" style="ime-mode:disabled;"/>
+                                            </span>
+                                            <span class="input_wrap">
+                                                 <input type="text" name="receiverTelePhone3" value="" maxlength="4" class="width_phone only_english" style="ime-mode:disabled;"/>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">주소 <span class="star">*</span></th>
+                                    <td class="txt">
+                                        <div class="have_inner_txt address">
+                                            <div class="input_wrap pdr118">
+                                               <input type="text" placeholder="" class="width100" readonly="readonly" value="(108-81) 경기도 파주시 회동길 78 교보핫트랙스">
+                                            </div>
+                                            <div class="input_wrap mgt10">
+                                               <input type="text" placeholder="" class="width100" readonly="readonly" value="상세주소 " readonly="readonly">
+                                            </div>
+                                            <!-- <a href="javascript:;" class="btn_defalut addr">우편번호검색</a> -->
+                                            <button onclick="javascript:;" class="btn_defalut black">우편번호검색</button>
+                                        </div>
+                                        <!-- <input type="text" name="receiverPostNum1" style="width:31px;" class="input_txt" value="108" readonly="readonly"/>
+                                        -
+                                        <input type="text" name="receiverPostNum2" style="width:31px;" class="input_txt" value="81" readonly="readonly"/>
+                                        <span class="mgt10"><a href="#n" class="btn_type01_v2" _onclick="window.open('/ht/listZipcode','popupZipcode','width=400,height=372'); return false;" style="margin-left:8px; width:84px;">우편번호 검색</a></span>
+                                        <br />
+                                        <span>
+                                            <input type="text" name="receiverAddress" style="width:200px;" class="input_txt mgt10" value="경기 파주시 회동길 78 " readonly="readonly"/>
+                                            <input type="text" name="receiverDetailAddress" style="width:202px;" class="input_txt mgt10" value="교보핫트랙스 "/>
+                                        </span> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <div class="btn_area t_center mgt40">
+                        <a href="#n" class="btn_type04_v1" id="">변경</a>
+                        <a href="#n" class="btn_type04_v2" _onclick="self.close()" id="">취소</a>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:;" class="tooltip_close">닫기</a>
+        </div>
+    </div> 
 
-</div> 
-
-</div>
 </body>
 </html>

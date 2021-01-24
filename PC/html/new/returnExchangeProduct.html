@@ -9,70 +9,97 @@
 <meta name="viewport" content="width=950">
 <title>HOTTRACKS - 생활 속 감성충전소</title>
 <!-- 태그 라이브러리 -->
-<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
-<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
-<link rel="apple-touch-startup-image" href="/images/ico_app.png">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="../../images/ico_app.png">
 
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/contents.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
-
-<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906210101"></script>
-<script type="text/javascript" src="/scripts/common?201906210101"></script>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/shop.css">
+<!-- 210125 작업부분 -->
+<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../scripts/common.js"></script>
 
 </head>
-<body>
-<div class="popup f_noto">
-<h1 class="tit01 mgt0 fs24 c_white"><span class="fw500">반품/교환 상품 조회</span></h1>
-<div class="pop_cont">
-    <ul class="list_type02_v2 mgb20">
-        <li>반품/교환 신청은 발송 완료일로부터 7일 이내에 가능합니다.</li>
-        <li>반품/교환을 원하시는 상품 및 수량을 선택하세요.</li>
-    </ul>
-    <form name="returnExchangeForm" id="returnExchangeForm">
-        <table class="table02_v1 t_center">
-            <caption>반품/교환 상품조회 <span>선택, 상품명, 가격, 신청수량</span>
-            </caption>
-            <colgroup>
-                <col style="width:60px" />
-                <col style="width:*" />
-                <col style="width:80px" />
-                <col style="width:80px" />
-            </colgroup>
-            <thead>
-                <tr>
-                    <th scope="col" class="fir">선택</th>
-                    <th scope="col">상품명</th>
-                    <th scope="col">가격</th>
-                    <th scope="col" class="last">신청수량</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                
-                    <tr> 
-                        <td><input name="userBizRegNumSeq" type="radio" value="1" class="radios" title="[1]번 사업자등록번호 선택"/>1</td>  
-                        <td>105-87-72964</td> 
-                        <td>서비스</td> 
-                        <td>광고대행</td> 
-                    </tr>
-                    <tr>
-                        <td><input name="userBizRegNumSeq" type="checkbox" value="1" class="radios" title="[1]번 사업자등록번호 선택"/>1</td>  
-                        <td>105-87-72964</td> 
-                        <td>서비스</td> 
-                        <td><select name="" id=""></select></td>
-                    </tr>
-                
-            </tbody>
-        </table>    	
-        <div class="btn_area t_center mgt30">
-            <a href="#n" class="btn_type04_v2" _onclick="self.close()">취소</a>
-            <a href="#n" class="btn_type04_v1 mgl10" id="">저장</a>
+<!-- 201228 S : 작업부분 body에 class="orderandpay" 넣어주세요  -->
+<body class="popup orderandpay ">
+<div class="">
+    <div class="tooltip_wrap active">
+        <div class="tooltip_inner">
+            <p class="tooltip_tit">반품/교환 상품 조회</p>
+            <div class="pop_cont reset">
+                <ul class="list_type02_v2 mgb20">
+                    <li>반품/교환 신청은 발송 완료일로부터 7일 이내에 가능합니다.</li>
+                    <li>반품/교환을 원하시는 상품 및 수량을 선택하세요.</li>
+                </ul>
+                <form name="returnExchangeForm" id="returnExchangeForm">
+                    <table class="table02_v1 border_little t_center">
+                        <caption>반품/교환 상품조회 <span>선택, 상품명, 가격, 신청수량</span>
+                        </caption>
+                        <colgroup>
+                            <col style="width:100px" />
+                            <col style="width:*" />
+                            <col style="width:120px" />
+                            <col style="width:110px" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="fir">선택</th>
+                                <th scope="col">상품명</th>
+                                <th scope="col">가격</th>
+                                <th scope="col" class="last">신청수량</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> 
+                                <td>
+                                    <div class="choice_wrap">
+                                        <input name="userBizRegNumSeq" type="radio" value="1" class="radios"  id="check" title="선택"/>
+                                        <label for="check"></label>
+                                    </div>
+                                </td>  
+                                <td>로이텀 미디엄 노트 뮤트 데님</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="choice_wrap type_squre">
+                                        <input name="aaa" type="checkbox" value="1" class="radios"  id="checkaa" title="선택"/>
+                                        <label for="checkaa"></label>
+                                    </div>
+                                </td>  
+                                <td>로이텀 미디엄 노트 뮤트 데님</td> 
+                                <td><span class="only_english base">234500</span>원</td> 
+                                <td>
+                                    <div class="input_wrap">
+                                        <select name="" id="" class="width100">
+                                            <option value="">선택</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="no_data t_center">반품/교환신청 가능한 내역이 없습니다.</td>
+                            </tr>
+                        </tbody>
+                    </table>        
+                    <div class="btn_area t_center mgt40">
+                        <a href="#n" class="btn_type04_v1" id="">저장</a>
+                        <a href="#n" class="btn_type04_v2" _onclick="self.close()">취소</a>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
-</div>
+        <a href="javascript:;" class="tooltip_close">닫기</a>
+    </div>
 
 </div>
 </body>

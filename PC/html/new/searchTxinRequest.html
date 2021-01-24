@@ -9,65 +9,80 @@
 <meta name="viewport" content="width=950">
 <title>HOTTRACKS - 생활 속 감성충전소</title>
 <!-- 태그 라이브러리 -->
-<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
-<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
-<link rel="apple-touch-startup-image" href="/images/ico_app.png">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="apple-touch-icon-precomposed" href="../../images/ico_app.png" />
+<link rel="apple-touch-startup-image" href="../../images/ico_app.png">
 
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/contents.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
-
-<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906210101"></script>
-<script type="text/javascript" src="/scripts/common?201906210101"></script>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+<link rel="stylesheet" type="text/css" href="../..//css/shop.css">
+<!-- 210125 작업부분 -->
+<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../scripts/common.js"></script>
 </head>
-<body class="popup">
-    
-<div class="f_noto">
-    <h1 class="tit01 mgt0 fs24 c_white"><span class="fw500">사업자등록번호 조회</span></h1>
-    <div class="pop_cont">
-        <div class="t_right mgb25">
-            <a href="#n" class="btn_type01_v2" id="">등록</a>
+
+<!-- 201228 S : 작업부분 body에 class="orderandpay" 넣어주세요  -->
+<body class="popup orderandpay ">
+<div class="">
+    <div class="tooltip_wrap active">
+        <div class="tooltip_inner">
+            <p class="tooltip_tit">사업자등록번호 조회</p>
+            <div class="pop_cont">
+                <div class="t_right mgb10">
+                    <a href="#n" class="btn_type07" id="">신규등록</a>
+                </div>
+                <table class="table02_v1 border_little t_center">
+                    <colgroup>  
+                        <col width="100px" />
+                        <col width="*" />
+                        <col width="130px" />
+                        <col width="140px" />
+                        <col width="140px" />
+                        <col width="140px" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">선택</th>
+                            <th scope="col">상호명(법인명)</th>
+                            <th scope="col">대표자명</th>
+                            <th scope="col">사업자등록번호</th>
+                            <th scope="col">업태</th>
+                            <th scope="col">종목</th>
+                        </tr>
+                    </thead>
+                    <tbody class="one">
+                        <tr> 
+                            <td>
+                                <div class="choice_wrap exclusive">
+                                    <input name="userBizRegNumSeq" type="radio" value="1" class="radios" id="sf" title="[1]번 사업자등록번호 선택"/>
+                                    <label for="sf"></label>
+                                </div>
+                            </td>  
+                            <td>(주)엠에스에스비즈니스</td> 
+                            <td>이문수</td> 
+                            <td class="only_english">105-87-72964</td> 
+                            <td>서비스</td> 
+                            <td>광고대행</td> 
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="no_data">검색된 사업자등록번호가 없습니다 .</td>
+                        </tr>
+                    </tbody>
+                </table>        
+                <div class="btn_area t_center mgt40">
+                    <a href="#n" class="btn_type04_v1" id="">선택</a>
+                    <a href="#n" class="btn_type04_v2" id="">취소</a>
+                </div>
+            </div>
         </div>
-        <table class="table02_v1">
-            <colgroup>  
-                <col width="10%" />
-                <col width="20%" />
-                <col width="10%" />
-                <col width="20%" />
-                <col width="20%" />
-                <col width="20%" />
-            </colgroup>
-            <thead>
-                <tr>
-                    <th scope="col">선택</th>
-                    <th scope="col">상호명(법인명)</th>
-                    <th scope="col">대표자명</th>
-                    <th scope="col">사업자등록번호</th>
-                    <th scope="col">업태</th>
-                    <th scope="col">종목</th>
-                </tr>
-            </thead>
-            <tbody class="one">
-                
-                
-                    <tr> 
-                        <td><input name="userBizRegNumSeq" type="radio" value="1" class="radios" title="[1]번 사업자등록번호 선택"/>1</td>  
-                        <td>(주)엠에스에스비즈니스</td> 
-                        <td>이문수</td> 
-                        <td>105-87-72964</td> 
-                        <td>서비스</td> 
-                        <td>광고대행</td> 
-                    </tr>
-                    
-                
-            </tbody>
-        </table>        
-        <div class="btn_area t_center mgt30">
-            <a href="#n" class="btn_type04_v2" id="">취소</a>
-            <a href="#n" class="btn_type04_v1 mgl10" id="">선택</a>
-        </div>
+        <a href="javascript:;" class="tooltip_close">닫기</a>
     </div>
 </div>
 

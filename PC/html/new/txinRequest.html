@@ -337,18 +337,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- //lnb -->
                 <!-- sub contents -->
                 <div class="sub_contents">
-                    <h3 class="page_title mgt0">FAQ 통합검색</h3>
-                    <h2 class="tit01 mgt0 pdb10 fs24 bb_line">세금계산서 신청</h2>
-                    <a href="#n" _onclick="goTxinRequestList()" class="btn_type01_v2 f_left mgt20 mgb20">세금계산서 신청내역 보기</a>
+                    <!-- <h2 class="tit01 mgt0 pdb10 fs24 bb_line">세금계산서 신청</h2> -->
+                    <h3 class="page_title mgt0 border">세금계산서 신청</h3>
+                    <h4 class="page_title mgt30">주문번호 조회</h4>
+                    <ul class="list_type02_v2 mgb20">
+                        <li>결제일이 전월인 주문은 당월 7일까지 조회, 신청 가능합니다. 8일부터는 당월 주문만 조회됩니다.</li>
+                        <li>해당 주문의 상품이 모두 출고 완료된 주문만 신청 가능하며 월 단위로 신청 가능합니다.</li>
+                    </ul>
+                    <!-- <a href="#n" _onclick="goTxinRequestList()" class="btn_type01_v2 f_left mgt20 mgb20">세금계산서 신청내역 보기</a>
                     <div class="c_both box_gray02 mgb30 t_left">
                         <h2 class="c_both tit01 mgt0 fs18 mgl5">주문번호 조회</h2>
                         <ul class="list_type02_v2 mgb20">
                             <li>결제일이 전월인 주문은 당월 7일까지 조회, 신청 가능합니다. 8일부터는 당월 주문만 조회됩니다.</li>
                             <li>해당 주문의 상품이 모두 출고 완료된 주문만 신청 가능하며 월 단위로 신청 가능합니다.</li>
                         </ul>
+                    </div> -->
+
+                   
+                    <div class="positionR">
+                        <h4 class="page_title mgt80">신청 결제월 선택</h4>
+                        <a href="#n" _onclick="goTxinRequestList()" class="btn_type05_v3 location_btn">세금계산서 신청내역 보기</a>
                     </div>
                     <form id="txRequestForm">
-                        <div class="">
+                        <!-- <div class="">
                             <p class="f_left fs14 bold" style="margin-top:3px;"><strong>주문 결제월 선택</strong></p>
                             <select class="mgl10 f_left select" name="searchMonth" style="width:70px;">
                                 
@@ -358,17 +369,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 
                             </select>
                             <span class="mgl5"><a class="btn_type01_v2" href="#n" _onclick="goSearchOtherMonth()">조회</a></span> 
-                        </div>
+                        </div> -->
                         <div id ="orderInfo">
-                            <table class="bbs_list_v2 mgt20">
+                            <table class="bbs_list_v2 space_pad mgt20">
                                 <caption>주문번호 조회 <span>선택, 주문번호, 결제완료일, 상품내역, 결제금액</span>
                                 </caption>
                                 <colgroup>
-                                    <col style="width:50px" />
-                                    <col style="width:80px" />
-                                    <col style="width:120px" />
+                                    <col style="width:90px" />
+                                    <col style="width:130px" />
+                                    <col style="width:140px" />
                                     <col style="width:*" />
-                                    <col style="width:80px" />
+                                    <col style="width:150px" />
                                 </colgroup>
                                 <thead>
                                     <tr>
@@ -380,30 +391,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td colspan="5" class="no_data">검색된 주문내용이 없습니다.</td></tr>
-                                    
+                                    <tr>
+                                        <td>
+                                            <div class="choice_wrap">
+                                                <input name="userBizRegNumSeq" type="radio" value="1" class="radios" id="check" title="선택">
+                                                <label for="check"></label>
+                                            </div>
+                                        </td>
+                                        <td><a href="#n" class="only_english">140619000119</a></td>                                        
+                                        <td class="only_english">2021.11.12</td>
+                                        <td class="t_left"><a href="#n">[에이치티엠엘]HTML - U1 Ecobag(Wine)외 7건</a></td>
+                                        <td class="color_01"><span class="only_english">1,000</span>원</td>
+                                    </tr>
+                                    <tr><td colspan="5" class="no_data">검색된 주문내용이 없습니다.</td></tr>                                    
                                 </tbody>
                             </table>
                         </div>
-                        <div class="c_both box_gray02 mgt60 mgb30 t_left">    
+
+                        <h4 class="page_title mgt80">사업자등록증 등록 및 조회</h4>
+                        <ul class="list_type02_v2 mgb20">
+                            <li>1회 이상 신청하거나 자주 쓰는 사업자등록번호에 등록하시면 사업등록번호를 작성하신 후 '조회'를 클릭하면 관련 정보를 불러올 수 있습니다.</li>
+                            <li>세금계산서는 이메일로 발송되므로 정확하게 기재해 주셔야 합니다.</li>
+                        </ul>
+
+                       <!--  <div class="c_both box_gray02 mgt60 mgb30 t_left">    
                             <h2 class="tit01 mgt0 fs18 mgl5">사업자등록증 등록 및 조회</h2>
                             <ul class="list_type02_v2 mgb20">
                                 <li>1회 이상 신청하거나 자주 쓰는 사업자등록번호에 등록하시면<br/>사업등록번호를 작성하신 후 '조회'를 클릭하면 관련 정보를 불러올 수 있습니다.</li>
                                 <li>세금계산서는 이메일로 발송되므로 정확하게 기재해 주셔야 합니다.</li>
                             </ul>
-                        </div>
+                        </div> -->
                         
                         <div id="callBackTxinRequest">
-                            <table class="table02_v2 mgt20 bt_line">
+                            <table class="table02_v1 border_little mgt25">
                                 <caption>사업자 등록증 신청<span>사업자등록번호, 상호명(법인명), 대표자명, 업태, 종목, 사업자소재지, 담당자명, 이메일, 신청자명, 산청자 연락처</span></caption>
                                 <colgroup>
-                                    <col width="17%" />
-                                    <col width="33%" />
-                                    <col width="17%" />
-                                    <col width="*" />
+                                    <col width="19.6%" />
+                                    <col width="30.4%" />
+                                    <col width="19.6%" />
+                                    <col width="30.4%" />
                                 </colgroup>
                                 <tbody>
-                                    <tr>
+                                    <!-- <tr>
                                         <th scope="row"><label for="bizRegNum">사업자등록번호</label></th>
                                         <td colspan="3">
                                             <input name="bizRegNum1" maxlength="3" type="text" class="input_txt" id="bizRegNum" title="사업자등록번호 앞자리입력" style="width:44px;" /> -
@@ -467,16 +496,162 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                             <input name="sscbrTelNum2" maxlength="4" type="text" style="width:43px;" class="input_txt" title="신청자 연락처 두 번째 자리"/> -
                                             <input name="sscbrTelNum3" maxlength="4" type="text" style="width:43px;" class="input_txt" title="신청자 연락처 세 번째 자리"/>
                                         </td>
+                                    </tr> -->
+                                    <tr>
+                                        <th scope="row"><label for="bizRegNum">사업자등록번호</label></th>
+                                        <td colspan="3">
+                                            <div class="positionR">                                                
+                                                <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                    <span class="input_wrap">
+                                                        <input name="bizRegNum1" maxlength="3" type="text" class="width_popup_point" id="bizRegNum" title="사업자등록번호 앞자리입력" /> 
+                                                    </span>
+                                                    <span class="input_wrap">
+                                                        <input name="bizRegNum2" maxlength="2" type="text" class="width_popup_point" title="사업자등록번호 중간자리입력" />
+                                                    </span>
+                                                    <span class="input_wrap">
+                                                        <input name="bizRegNum3" maxlength="5" type="text" class="width_popup_point" title="사업자등록번호 뒷자리입력" />
+                                                    </span>
+                                                </div>
+                                                <div class="btns_go_wrap">                                                
+                                                    <a href="javascript://" onclick="window.open('/pages/html/searchTxinRequest.html', '', 'width=820,height=419');return false;" class="btn_type01_v2">조회</a>                
+                                                    <a href="javascript://" onclick="window.open('/pages/html/createFormTxinRequest.html', '', 'width=804,height=630');return false;" class="btn_type01_v2">등록</a>
+                                                </div>
+                                            </div>                                            
+                                        </td>
                                     </tr>
+                                    <tr>
+                                        <th scope="row"><label for="vndrName">상호명</label></th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input  name="vndrName" type="text" placeholder=""  id="vndrName" class="width100">
+                                            </div>
+                                        </td>
+                                        <th scope="row"><label for="primeName">휴대전화</label></th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input  name="primeName" type="text" placeholder=""  id="primeName" class="width100">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="bizKindInfo">업태</label></th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input  name="bizTypeInfo" type="text" placeholder=""  id="bizKindInfo" class="width100">
+                                            </div>
+                                        </td>
+                                        <th scope="row"><label for="division">종목</label></th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input  name="bizKindInfo" type="text" placeholder=""  id="division" class="width100">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="vndrAddr">사업자 소재</label></th>
+                                        <td colspan="3">
+                                            <div class="input_wrap">
+                                                <input  name="vndrAddr" type="text" placeholder=""  id="vndrAddr" class="width100">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="mngrName">담당자명</label></th>
+                                        <td colspan="3">
+                                            <div class="input_wrap">
+                                                <input  name="mngrName" type="text" placeholder=""  id="mngrName" class="width_name">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="mail">이메일</label></th>
+                                        <td colspan="3">
+                                            <div class="choice_wrap type_squre have_inner_txt inner_float_dot">
+                                                <span class="input_wrap">
+                                                    <input  name="emailAddr1" type="text" placeholder=""  id="mail" title="이메일 아이디입력" class="width_name">
+                                                </span>
+                                                <span class="input_wrap">@</span>
+                                                <span class="input_wrap">
+                                                    <input name="emailAddr2" type="text" placeholder="" title="이메일 도메인입력"  class="width_op">
+                                                </span>
+                                                <span class="input_wrap mgl12">
+                                                    <select name="emailSelect" onchange="emailSelect()" class="width_op"  title="이메일 도메인선택">
+                                                        <option value="naver.com">naver.com</option>
+                                                        <option value="hanmail.net">hanmail.net</option>
+                                                        <option value="hotmail.com">hotmail.com</option>
+                                                        <option value="nate.com">nate.com</option>
+                                                        <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                                        <option value="empas.com">empas.com</option>
+                                                        <option value="dreamwiz.com">dreamwiz.com</option>
+                                                        <option value="freechal.com">freechal.com</option>
+                                                        <option value="lycos.co.kr">lycos.co.kr</option>
+                                                        <option value="korea.com">korea.com</option>
+                                                        <option value="gmail.com">gmail.com</option>
+                                                        <option value="hanmir.com">hanmir.com</option>
+                                                        <option value="paran.com">paran.com</option>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                            <!-- <input name="emailAddr1" type="text" class="input_txt" id="mail" title="이메일 아이디입력" style="width:170px;" /> @
+                                            <input name="emailAddr2" type="text" class="input_txt" title="이메일 도메인입력" style="width:170px;" />
+                                            <select name="emailSelect" onchange="emailSelect()" class="select" title="이메일 도메인선택" style="width:159px;">
+                                                <option value="">직접입력</option>   
+                                                <option value="naver.com">naver.com</option>
+                                                <option value="hanmail.net">hanmail.net</option>
+                                                <option value="hotmail.com">hotmail.com</option>
+                                                <option value="nate.com">nate.com</option>
+                                                <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                                <option value="empas.com">empas.com</option>
+                                                <option value="dreamwiz.com">dreamwiz.com</option>
+                                                <option value="freechal.com">freechal.com</option>
+                                                <option value="lycos.co.kr">lycos.co.kr</option>
+                                                <option value="korea.com">korea.com</option>
+                                                <option value="gmail.com">gmail.com</option>
+                                                <option value="hanmir.com">hanmir.com</option>
+                                                <option value="paran.com">paran.com</option>
+                                            </select> -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="applicant">신청자명</label></th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input  name="sscbrName" type="text" placeholder=""  id="applicant" class="width_name">
+                                            </div>
+                                        </td>
+                                        <th scope="row"><label for="applicantTel1">신청자 연락처</label></th>
+                                        <td>
+                                            <div class="input_wrap">
+                                                <input  name="sscbrName" type="text" placeholder=""  id="applicant" class="width100">
+                                            </div>
+                                        </td>
+                                    </tr> 
                                 </tbody>
                             </table>
                         </div>
-                        <div class="btn_area t_center mgt50">
+                        <div class="btn_area t_center mgt80">
+                            <a href="#n" id="" class="btn_type04_v1">신청하기</a>
                             <a href="#n" id="" class="btn_type04_v2">취소</a>
-                            <a href="#n" id="" class="btn_type04_v1 mgl10">신청</a>
                         </div>
                     </form>
-                    <h2 class="tit01 mgt60 fs18 bt_line pdt20">세금계산서 신청 시 유의사항
+                    <div class="box_gray_02 distance positionR">
+                        <h4 class="page_title">세금계산서 신청 시 유의사항</h4>
+                        <a href="#n" _onclick="goFaq()" class="btn_type01_v2 mgl10 v_middle">세금계산서 FAQ</a>
+                        <ul class="list_type02_v2 mgt25 mgb40">
+                            <li>'세금계산서'는 과세/면세 각 1장씩 발행됩니다.</li>
+                            <li>면세 상품은 꽃 종류, 도서(화보집)입니다.</li>
+                            <li>'세금계산서' 신청은 발송 완료 후 익월 7일 이내에 가능합니다.</li>
+                            <li>'세금계산서' 작성일(세금계산서 내 작성될 날짜)은 결제 완료일로 기재됩니다. 단, 익월 7일까지 신청해야 발급 가능하며 이후 신청 불가능합니다.
+                            (예: 2006년 1월 30일 결제 완료일을 2006년 2월 7일까지 신청해야 '세금계산서' 작성일 란에 2006년 1월 30일로 기재됩니다.)</li>
+                            <li>'세금계산서'를 신청하면 기재한 이메일로 신청내역 발송함과 동시에, 인쇄 페이지로 이동됩니다.</li>
+                            <li>현금영수증이 발행된 주문은 '세금계산서' 발행 시 현금영수증이 자동취소됩니다.</li>
+                            <li>발급은 현금성 거래로 인정되는 수단에 한해서만 가능합니다. (실시간 계좌이체, 무통장 송금 주문 건)</li>
+                            <li>배송비는 주문 내용에 따라 세금계산서 발행 시, 미포함될 수 있습니다.</li>
+                            <li>신용카드결제 혹은 신용카드+현금성 수단 결제 주문인 경우에는 '세금계산서' 신청이 불가능합니다. (카드매출전표 + 현금영수증 제공)</li>
+                            <li>합주문, 분리 배송, 부분 배송 건에 대한 '세금계산서'는 고객센터 (1661-1112)로 문의해주세요.</li>
+                        </ul>
+                    </div>
+                    <!-- <h2 class="tit01 mgt60 fs18 bt_line pdt20">세금계산서 신청 시 유의사항
                         <a href="#n" _onclick="goFaq()" class="btn_type01_v2 mgl10 v_middle">세금계산서 FAQ</a>
                     </h2>
                     <ul class="list_type02_v2 mgt20 mgb40">
@@ -491,7 +666,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <li class="mgt10">배송비는 주문 내용에 따라 세금계산서 발행 시, 미포함될 수 있습니다.</li>
                         <li class="mgt10">신용카드결제 혹은 신용카드+현금성 수단 결제 주문인 경우에는 '세금계산서' 신청이 불가능합니다. (카드매출전표 + 현금영수증 제공)</li>
                         <li class="mgt10">합주문, 분리 배송, 부분 배송 건에 대한 '세금계산서'는 고객센터 (1661-1112)로 문의해주세요.</li>
-                    </ul>
+                    </ul> -->
                 </div>
                 <!-- //sub contents -->                
             </div>

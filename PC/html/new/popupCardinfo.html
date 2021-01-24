@@ -216,83 +216,99 @@ $(document).ready(function() {
     <div>
         <div class="tooltip_wrap active">
             <div class="tooltip_inner">  
-                <p class="tooltip_tit">최근 배송지 주소</p>
+                <p class="tooltip_tit">전표출력 확인</p>
 
                 <div class="pop_cont">
-                   <div class="pull_box">
-                        <form id = "mainform" name="form">
-                            <div id="mainDiv" style="display:none">
-                            <table width="460" style="margin-left: 8px;" valign="top" cellpadding="0" cellspacing="0">
+                   <form id = "mainform" name="form">
+                        <p class="cardinfo_alert_text">
+                            영수증 확인을 위해 아래의 정보를 정확히 입력해 주시기 바랍니다.
+                        </p>
+                        <div id="mainDiv" style="display:none">
+                            <div class="cardinfopop_wrap mgt40">
+                                <div>
+                                    <div class="choice_wrap">
+                                        <div class="choice_wrap_inner">
+                                            <input type="radio" name="selType" value="0" onClick="javascript:onClickRadioBtn('amt');" id="cashReceipt11" checked="">
+                                            <label for="cashReceipt11">구매자명 + 금액 </label>
+                                        </div>
+                                        <div class="choice_wrap_inner">
+                                            <input type="radio"  name="selType" value="1"  onClick="javascript:onClickRadioBtn('email');" id="cashReceipt12" value="N">
+                                            <label for="cashReceipt12">이메일</label>
+                                        </div>
+                                        <div class="choice_wrap_inner">
+                                            <input type="radio"  name="selType" value="2"  onClick="javascript:onClickRadioBtn('cardno');" id="cashReceipt13" value="N">
+                                            <label for="cashReceipt13">카드번호</label>
+                                        </div>
+                                    </div>
 
-                                <tr>
-                                    <td height="20"></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td height="50" valign="top" class="popupCTitle" style="font-size: 14px">&nbsp;영수증 확인을 위해 아래의 정보를 정확히 입력해 주시기 바랍니다.</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>
-                                        <table align="center" cellpadding="0" cellspacing="0" bgcolor="#c8c8c8">
-                                            <tr>
-                                                <td>
-                                                    <table width="460" align="center" border="0" cellpadding="1" cellspacing="1">
-                                                        <tr>
-                                                            <td align="center" colspan="3" class="rTblA" height="25px" style="text-align: center;padding: 5px;border-bottom: 0px; width: 460px;">
-                                                                <input type="radio" name="selType" value="0" onClick="javascript:onClickRadioBtn('amt');" checked="checked" style=" vertical-align:text-bottom; margin-right: 3px;"><span>구매자명 + 금액</span></input>
-                                                                <input type="radio" name="selType" value="1" onClick="javascript:onClickRadioBtn('email');" style="margin-left: 10px; vertical-align:text-bottom; margin-right: 3px;"><span>이메일</span></input>
-                                                                <input type="radio" name="selType" value="2" onClick="javascript:onClickRadioBtn('cardno');" style="margin-left: 10px; vertical-align:text-bottom; margin-right: 3px;"><span>카드번호</span></input>
-                                                            </td>
-                                                        </tr>
-                                                        <tr id="trAmt1">
-                                                            <td class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8; border-bottom:0;">구매자명</td>
-                                                            <td class="rTblA" style="width: 390px;">
-                                                                <input type='text' name="ordNm" style="width:80;height: 25px;  border-bottom:0;"/>
-                                                            </td>
-                                                        </tr>
-                                                        <tr id="trAmt2">
-                                                            <td  class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8;">결제금액</td>
-                                                            <td class="rTblA" style="width: 390px;">
-                                                                <input type='text' name="appAmt" style="width:120;height: 25px;text-align: right;" maxlength='12' onkeyup="javascript:numberMaskOn(this);">
-                                                            </td>
-                                                        </tr>
-                                                        <tr id="trEmail" style="display:none">
-                                                            <td class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8;">이메일</td>
-                                                            <td class="rTblA" style="width: 390px;">
-                                                            <input type="text" name="email" style="width:250;height: 25px;"/></td>
-                                                        </tr>
-                                                        <tr id="trCardno" style="display:none">
-                                                            <td class="sTblTitA" width='80' style="background-color:#E8F0F8;border: 1px solid #c8c8c8;">카드번호</td>
-                                                            <td width="472" class="rTblA" style="height:25px;width: 390px; text-align: center;">
-                                                                <input name="card1" type="text" size="4" maxlength="4"  style="width: 40px;height: 25px;"onKeyUp="javascript:nextchk(4,this,this.form.card2);"/>
-                                                                 &nbsp; - &nbsp;
-                                                                <input name="card2" type="password" size="4" maxlength="4"style="width: 40px;height: 25px;" onKeyUp="javascript:nextchk(4,this,this.form.card3);"/>
-                                                                 &nbsp; - &nbsp;
-                                                                <input name="card3" type="password" size="4"  maxlength="4"style="width: 40px;height: 25px;" onKeyUp="javascript:nextchk(4,this,this.form.card4);"/>
-                                                                 &nbsp; - &nbsp;
-                                                                <input name="card4" type="text" size="4"style="width: 40px;height: 25px;" maxlength="4"/>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            
-                                        </table>
-                                    </td>
-                                </tr> 
-
-                                <tr>
-                                    <td align="center" valign="middle" height="80"><a class="cctnL02c add" style="display: block;line-height:25px; border: 0px;background-color:#5886be;color: white; " href="javascript:showCardIssue();">입력</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td height="10">&nbsp;[참고사항]<br/>&nbsp;구매자명과 금액은 결제결과 안내 메일에 기재된 내역 기준으로 입력하시기 바랍니다.</td>
-                                </tr>
-                            </table>
+                                    <div class="mgt20 choice_layer_wrap">
+                                        <div class="" id="trAmt1">
+                                            <dl class="cardinfo_choice_list">
+                                                <dt class="cardinfo_title">구매자명</dt>
+                                                <dd class="cardinfo_desc">
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="" name="ordNm"  class="width_cs">
+                                                    </div>
+                                                </dd>
+                                            </dl>                                        
+                                        </div>
+                                        <div class=""  id="trAmt2">                                            
+                                            <dl class="cardinfo_choice_list mgt15">
+                                                <dt class="cardinfo_title">결제금액</dt>
+                                                <dd class="cardinfo_desc">
+                                                    <span class="input_wrap">
+                                                        <input type='text' name="appAmt" class="width_cs" maxlength='12' onkeyup="javascript:numberMaskOn(this);">
+                                                    </span>
+                                                    <span class="unit_price">원</span>
+                                                </dd>
+                                            </dl>    
+                                        </div>
+                                        <div class="" id="trEmail" style="display:none">                                           
+                                            <dl class="cardinfo_choice_list">
+                                                <dt class="cardinfo_title">이메일</dt>
+                                                <dd class="cardinfo_desc">
+                                                    <div class="input_wrap">
+                                                        <input type="text" placeholder="" name="email" class="width_cs">
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="" id="trCardno" style="display:none">                                         
+                                            <dl class="cardinfo_choice_list">
+                                                <dt class="cardinfo_title">카드번호</dt>
+                                                <dd class="cardinfo_desc">
+                                                    <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                                        <div class="input_wrap">
+                                                            <input name="card1" type="text" size="4" maxlength="4"  onKeyUp="javascript:nextchk(4,this,this.form.card2);"/>
+                                                        </div>
+                                                        <div class="input_wrap">
+                                                            <input name="card2" type="password" size="4" maxlength="4" onKeyUp="javascript:nextchk(4,this,this.form.card3);"/>
+                                                        </div>
+                                                        <div class="input_wrap">
+                                                            <input name="card3" type="password" size="4"  maxlength="4" onKeyUp="javascript:nextchk(4,this,this.form.card4);"/>
+                                                        </div>
+                                                        <div class="input_wrap">
+                                                            <input name="card4" type="text" size="4" maxlength="4"/>
+                                                        </div>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <!-- <input name="card1" type="text" size="4" maxlength="4"  style="width: 40px;height: 25px;"onKeyUp="javascript:nextchk(4,this,this.form.card2);"/>
+                                             &nbsp; - &nbsp;
+                                            <input name="card2" type="password" size="4" maxlength="4"style="width: 40px;height: 25px;" onKeyUp="javascript:nextchk(4,this,this.form.card3);"/>
+                                             &nbsp; - &nbsp;
+                                            <input name="card3" type="password" size="4"  maxlength="4"style="width: 40px;height: 25px;" onKeyUp="javascript:nextchk(4,this,this.form.card4);"/>
+                                             &nbsp; - &nbsp;
+                                            <input name="card4" type="text" size="4"style="width: 40px;height: 25px;" maxlength="4"/> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="btn_type03 type1 mgt40" href="javascript:showCardIssue();">확인</a>
                             </div>
-                            </form>
-                    </div>
+                        </div>
+                    </form>
+                    <p class="cardinfo_alert_text mgt40">[참고사항]</p>
+                    <p class="cardinfo_alert_text">구매자명과 금액은 결제결과 안내 메일에 기재된 내역 기준으로 입력하시기 바랍니다.</p>
                 </div> 
             </div>
             <a href="javascript:;" class="tooltip_close">닫기</a>
