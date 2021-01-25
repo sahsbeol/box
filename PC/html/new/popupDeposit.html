@@ -1,108 +1,120 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTDXHTML1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
-<head>
-<!-- 태그 라이브러리 -->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=950">
-<title>HOTTRACKS - 생활 속 감성충전소</title>
-<!-- 태그 라이브러리 -->
-<link href="/images/biz/common/favicon.ico" rel="shortcut icon">
-<link rel="apple-touch-icon-precomposed" href="/images/ico_app.png" />
-<link rel="apple-touch-startup-image" href="/images/ico_app.png">
-
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/contents.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
-
-<script type="text/javascript" src="/js/jquery-1.9.1.min.js?201906210101"></script>
-<script type="text/javascript" src="/scripts/common?201906210101"></script>
-<script type="text/javascript" src="/js/jquery.form.js"></script>
-
-
-</head>
-<body class="popup">
-    
-<div class="f_noto">
-<h1 class="tit01 mgt0 fs24 c_white"><span class="fw500">예치금 환불신청</span></h1>
-<div class="pop_cont">
-    <ul class="list_type02_v2">
-        
-            <li>환불계좌 예금주는 회원 본인만 가능합니다.</li>
-            <li>환불 요청 예치금은 신청한 다음날 해당 계좌로 입금됩니다.</li>
-        
-        
-    </ul>
-    <form id="form" name="form"> 
-        <table class="table02_v1 mgt15">
-            <caption>예치금환불신청 <span>환불가능 금액, 예금주, 환불대기 금액, 환불은행, 환불신청 금액, 환불계좌번호</span></caption>
-            <colgroup>
-                <col style="width:110px">
-                <col style="width:180px">
-                <col style="width:110px">
-                <col style="width:*">
-            </colgroup>
-            <tr> 
-                <th scope="row">환불 가능금액</th> 
-                <td><span class="c_red">88,264,100</span>원</td> 
-                <th scope="row"><label for="accountHolderName">예금주</label></th>
-                <td><input type="text" name="accountHolderName" id="accountHolderName" value="" style="width:130px;" class="input_txt" readonly/></td> 
-            </tr>  
-            <tr> 
-                <th scope="row">환불 대기금액</th> 
-                <td>0원</td> 
-                <th scope="row">환불 은행</th>
-                <td><select name="bankCode" class="select" style="width:140px;">
-    <option value="">---- 선택 ----</option>
-    <option value="C0631">HSBC</option>
-    <option value="C0632">국민</option>
-    <option value="C0633">신한</option>
-    <option value="C0634">우리</option>
-    <option value="C0635">농협(중앙)</option>
-    <option value="C0636">지역농협</option>
-    <option value="C0637">SC제일</option>
-    <option value="C0639">하나</option>
-    <option value="C063A">씨티</option>
-    <option value="C063B">기업</option>
-    <option value="C063C">수협</option>
-    <option value="C063D">우체국</option>
-    <option value="C063E">산업</option>
-    <option value="C063F">부산</option>
-    <option value="C063G">전북</option>
-    <option value="C063H">경남</option>
-    <option value="C063I">광주</option>
-    <option value="C063J">대구</option>
-    <option value="C063K">제주</option>
-    <option value="C063L">새마을금고</option>
-    <option value="C063M">신용협동조합</option>
-    <option value="C063N">상호저축은행</option>
-    <option value="C063O">도이치</option>
-</select>
-</td> 
-            </tr>  
-            <tr> 
-                <th scope="row"><label for="requestAmount">환불 신청금액</label></th> 
-                <td>
-                    <input type="text" value="0" name="requestAmount" id="requestAmount" style="width:130px;ime-mode:disabled;" class="input_txt inputNumberText cutofftextbox" />
-                    
-                </td> 
-                <th scope="row"><label for="paymentAccountNum">환불 계좌번호</label></th>
-                <td><input type="text" name="paymentAccountNum" id="paymentAccountNum" style="width:130px;ime-mode:disabled;" class="input_txt textbox inputNumberText"/></td>
-            </tr>
-        </table>
-    </form>
-    <div class="btn_area t_center mgt30">
-        <a href="#n" class="btn_type04_v2" id="">취소</a>
-        <a href="#n" class="btn_type04_v1 mgl10" id="">신청</a>
-    </div>
-</div>  
-</div>
-
-
-</div>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="Content-Script-Type" content="text/javascript">
+        <meta http-equiv="Content-Style-Type" content="text/css">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=950">
+        <title>HOTTRACKS - 생활 속 감성충전소</title>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+        <link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+        <link rel="stylesheet" type="text/css" href="../../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+        <link rel="stylesheet" type="text/css" href="../../css/contents.css">
+        <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+        <link rel="stylesheet" type="text/css" href="../../css/biz/hottweb_yj.css">
+        <link rel="stylesheet" type="text/css" href="../../css/biz/slick.css">
+        <link rel="stylesheet" type="text/css" href="../..//css/shop.css">
+        <!-- 20.12.28 -->
+        <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+        <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="../../scripts/common.js"></script>
+    </head>
+        <!-- 201228 S : 작업부분 body에 class="orderandpay" 넣어주세요  -->
+    <body class="popup orderandpay ">
+        <div>
+            <div class="tooltip_wrap active">
+                <div class="tooltip_inner">
+                    <p class="tooltip_tit">예치금 환불신청</p>
+                    <div class="pop_cont">
+                        <ul class="list_type02_v2">
+                            <li>환불계좌 예금주는 회원 본인만 가능합니다.</li>
+                            <li>환불 요청 예치금은 신청한 다음날 해당 계좌로 입금됩니다.</li>
+                        </ul>
+                        <form id="form" name="form"> 
+                            <table class="table02_v1 mgt15">
+                                <caption>예치금환불신청 <span>환불가능 금액, 예금주, 환불대기 금액, 환불은행, 환불신청 금액, 환불계좌번호</span></caption>
+                                <colgroup>
+                                    <col style="width:140px">
+                                    <col style="width:220px">
+                                    <col style="width:140px">
+                                    <col style="width:*">
+                                </colgroup>
+                                <tr> 
+                                    <th scope="row">환불 가능금액</th> 
+                                    <td>
+                                        <span class="c_red only_english base">88,264,100</span>원
+                                    </td> 
+                                    <th scope="row">
+                                        <label for="accountHolderName">예금주</label>
+                                    </th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" name="accountHolderName" id="accountHolderName" value="" class="width100" readonly/>
+                                        </div>
+                                    </td> 
+                                </tr>  
+                                <tr> 
+                                    <th scope="row">환불 대기금액</th> 
+                                    <td><span class="only_english base">0</span>원</td> 
+                                    <th scope="row">환불 은행</th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <select name="bankCode" class="width100">
+                                                <option value="">---- 선택 ----</option>
+                                                <option value="C0631">HSBC</option>
+                                                <option value="C0632">국민</option>
+                                                <option value="C0633">신한</option>
+                                                <option value="C0634">우리</option>
+                                                <option value="C0635">농협(중앙)</option>
+                                                <option value="C0636">지역농협</option>
+                                                <option value="C0637">SC제일</option>
+                                                <option value="C0639">하나</option>
+                                                <option value="C063A">씨티</option>
+                                                <option value="C063B">기업</option>
+                                                <option value="C063C">수협</option>
+                                                <option value="C063D">우체국</option>
+                                                <option value="C063E">산업</option>
+                                                <option value="C063F">부산</option>
+                                                <option value="C063G">전북</option>
+                                                <option value="C063H">경남</option>
+                                                <option value="C063I">광주</option>
+                                                <option value="C063J">대구</option>
+                                                <option value="C063K">제주</option>
+                                                <option value="C063L">새마을금고</option>
+                                                <option value="C063M">신용협동조합</option>
+                                                <option value="C063N">상호저축은행</option>
+                                                <option value="C063O">도이치</option>
+                                            </select>
+                                        </div>
+                                    </td> 
+                                </tr>  
+                                <tr> 
+                                    <th scope="row"><label for="requestAmount">환불 신청금액</label></th> 
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" value="0" name="requestAmount" id="requestAmount" class="only_english" style="ime-mode:disabled;" />
+                                        </div>
+                                    </td> 
+                                    <th scope="row"><label for="paymentAccountNum">환불 계좌번호</label></th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" name="paymentAccountNum" id="paymentAccountNum" style="ime-mode:disabled;" class="only_english"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <div class="btn_area t_center mgt40">
+                            <a href="#n" class="btn_type04_v1" id="">신청하기</a>
+                            <a href="#n" class="btn_type04_v2 mgl10" id="">취소</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:;" class="tooltip_close">닫기</a>
+            </div>
+        </div>
+    </body>
+    <!--// 201222 E : 작업부분-->
 </html>

@@ -86,10 +86,10 @@ $(document).ready(function(){
     $("input[name=chkAll]").each(function(){
         $(this).click(function(){ 
          if($(this).prop("checked")) { 
-            $(this).closest('.bbs_list_v2').find($("input[type=checkbox]")).prop("checked",true); 
+            $(this).closest('.at_this_time_like_wrap').find($("input[type=checkbox]")).prop("checked",true); 
         
          } else { 
-            $(this).closest('.bbs_list_v2').find($("input[type=checkbox]")).prop("checked",false); } 
+            $(this).closest('.at_this_time_like_wrap').find($("input[type=checkbox]")).prop("checked",false); } 
         })
     });
 })  
@@ -300,77 +300,110 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </ul>
                     </div>
 
-                    <div>
-                        <div>
-                            <span class="choice_wrap type_squre">
-                                <input type="checkbox" name="chkAll" id="orderInfo_21" value="Y">
-                                <label for="orderInfo_21">전체선택</label>
-                            </span>
-                            <span>선택삭제</span>
-                        </div>
-                        <div class="go_select_wrap">
-                            <div class="form_select">
-                                <select id="gnbSearchMenu" name="gnbSearchMenu">
-                                    <option value="GIFT">문구/기프트</option>
-                                    <option value="RECORD">음반</option>
-                                </select>
+                    <div class="at_this_time_like_wrap">
+                        <div class="clear">
+                            <div class="unit_like_allcheck_wrap">
+                                <span class="choice_wrap type_squre">
+                                    <input type="checkbox" name="chkAll" id="orderInfo_22" value="Y">
+                                    <label for="orderInfo_22">전체선택</label>
+                                </span>
+                                <button class="choice_delete">선택삭제</button>
+                            </div>
+                            <div class="go_select_wrap">
+                                <div class="form_select">
+                                    <select id="gnbSearchMenu" name="gnbSearchMenu">
+                                        <option value="GIFT">문구/기프트</option>
+                                        <option value="RECORD">음반</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-
-                        <div>
-                            <div class="pd_list">
+                        <div class="pd_list">
                             <ul>
                                 <!-- 대체상품 sold_out-t : class 추가 -->
                                 <li class="sold_out-t">
-                                    <a href="#none">
-                                        <div class="thum">
-                                            <!-- <img src="../../images/biz/thums/main_slide01.png" alt=""> -->
-                                            <div class="soldout-wrap">
-                                                <div class="absol-center">
-                                                    <p>아쉽지만!</p>
-                                                    <p><b></b>이에요</p>
-                                                    <button type="button" class="replace-stuff-btn">대체상품</button>
+                                    <div class="choice_wrap type_squre">
+                                        <input type="checkbox" name="chk" id="orderInfo_21" value="Y">
+                                        <label class="choice_like_thing" for="orderInfo_21">
+                                            <div>
+                                                <div class="thum">
+                                                    <!-- <img src="../../images/biz/thums/main_slide01.png" alt=""> -->
+                                                    <div class="soldout-wrap">
+                                                        <div class="absol-center">
+                                                            <p>아쉽지만!</p>
+                                                            <p><b></b>이에요</p>
+                                                            <button type="button" class="replace-stuff-btn">대체상품</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="cont">
+                                                    <p class="brand">wearinggeul</p>
+                                                    <p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">20%</span>
+                                                        <span>999,999</span>
+                                                        <span class="discount">999,999</span>
+                                                    </p>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                    <!-- 클릭시 active : class 추가 -->
-                                    <a href="#none">
-                                        <div class="cont">
-                                            <p class="brand">wearinggeul</p>
-                                            <p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
-                                            <p class="price font_t">
-                                                <span class="percent">20%</span>
-                                                <span>999,999</span>
-                                                <span class="discount">999,999</span>
-                                            </p>
-                                        </div>
-                                    </a>
+                                        </label>
+                                    </div>
                                 </li>
                                 <li>
-                                    <a href="#none">
-                                        <div class="thum">
-                                            <img src="../../images/biz/thums/img_taste01.png" alt="">
-                                        </div>
-                                    </a>
-                                    <!-- 클릭시 active : class 추가 -->
-                                    <a href="#none">
-                                        <div class="cont">
-                                            <p class="brand">wearinggeul</p>
-                                            <p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
-                                            <p class="price font_t">
-                                                <span class="percent">20%</span>
-                                                <span>999,999</span>
-                                                <!-- <span class="discount">999,999</span> -->
-                                            </p>
-                                        </div>
-                                    </a>
+                                    <div class="choice_wrap type_squre">
+                                        <input type="checkbox" name="chk" id="orderInfo_26" value="Y">
+                                        <label class="choice_like_thing" for="orderInfo_26">
+                                            <div>
+                                                <div class="thum">
+                                                    <img src="../../images/biz/thums/main_slide01.png" alt="">
+                                                    <div class="soldout-wrap">
+                                                        <div class="absol-center">
+                                                            <p>아쉽지만!</p>
+                                                            <p><b></b>이에요</p>
+                                                            <button type="button" class="replace-stuff-btn">대체상품</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="cont">
+                                                    <p class="brand">wearinggeul</p>
+                                                    <p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">20%</span>
+                                                        <span>999,999</span>
+                                                        <span class="discount">999,999</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </li>
-                            </ul>
-                        </div>
-                            <ul>
                                 <li>
-                                    <label for=""></label>
+                                    <div class="choice_wrap type_squre">
+                                        <input type="checkbox" name="chk" id="orderInfo_267" value="Y">
+                                        <label class="choice_like_thing" for="orderInfo_267">
+                                            <div>
+                                                <div class="thum">
+                                                    <img src="../../images/biz/thums/main_slide01.png" alt="">
+                                                    <div class="soldout-wrap">
+                                                        <div class="absol-center">
+                                                            <p>아쉽지만!</p>
+                                                            <p><b></b>이에요</p>
+                                                            <button type="button" class="replace-stuff-btn">대체상품</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="cont">
+                                                    <p class="brand">wearinggeul</p>
+                                                    <p class="tit">[페이스인페이스]실키포어 선스틱 실키포어 선스틱</p>
+                                                    <p class="price font_t">
+                                                        <span class="percent">20%</span>
+                                                        <span>999,999</span>
+                                                        <span class="discount">999,999</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

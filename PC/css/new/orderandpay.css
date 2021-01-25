@@ -399,6 +399,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tab1.none ul li a.on {background:#000;}
 .orderandpay .tab1.none ul li a.on span {border:0 none;background:#000; color:#fff; font-weight: 700;}
 .orderandpay .tab1.none ul li a.on span:after {content:''; display:none;}
+.orderandpay .tab1.none ul li a em {font-size: 18px; font-weight: 500; font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important;}
+.orderandpay .tab1.none ul li a.on em {color:#FF7764; } 
 
 /* 마이핫트랙스 tab */
 .orderandpay .my.tab1 {margin:80px 0 0px;}
@@ -1639,3 +1641,25 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .go_select_wrap .form_select select{position:relative; width:100%; border:0; outline: none; font-weight: 700; height:32px; line-height:32px; font-size:20px; color:#000; padding-right:14px; background:transparent; z-index:1; cursor:pointer;}
 .orderandpay .go_select_wrap .form_select select{-webkit-appearance: none; -moz-appearance: none; appearance: none;}
 .orderandpay .go_select_wrap .form_select select::-ms-expand {display:none;}
+
+/* 좋아요 */
+.orderandpay .at_this_time_like_wrap .pd_list ul li .choice_like_thing {display: block; position: relative;}
+.orderandpay .at_this_time_like_wrap .pd_list ul li .choice_like_thing .thum{width:230px; height:230px; background:#fff; box-sizing:border-box; text-align: center; position: relative;}
+.orderandpay .at_this_time_like_wrap .pd_list ul li .choice_like_thing .thum img{width:auto; height:100%;}
+.orderandpay .at_this_time_like_wrap .sold_out .soldout-wrap,
+.orderandpay .at_this_time_like_wrap .sold_out-t .soldout-wrap,
+.orderandpay .at_this_time_like_wrap .sold_out-m .soldout-wrap,
+.orderandpay .at_this_time_like_wrap .sold_out-t-m .soldout-wrap{  display: block;}
+.orderandpay .at_this_time_like_wrap .soldout-wrap{  display: none;  position: absolute;  top: 0;  left: 0;  width: 100%;  height: 100%;  background: rgba(0, 0, 0, 0.6);}
+
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap {float: left;}
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap{}
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap:after {content: ''; display: inline-block; width:1px; height:15px; background:#777; margin: 0px 1px 2px 7px; vertical-align: middle;}
+.orderandpay .at_this_time_like_wrap .go_select_wrap {float: right;}
+.orderandpay .at_this_time_like_wrap .choice_delete {font-size: 14px; color: #000; font-weight: 400;font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-size:14px; vertical-align: baseline; outline: none;}
+.orderandpay .at_this_time_like_wrap {}
+
+/* checkbox */
+.orderandpay .at_this_time_like_wrap .pd_list {margin-top:40px;}
+.orderandpay .at_this_time_like_wrap .pd_list .choice_wrap.type_squre input[type="checkbox"] + label:before,
+.orderandpay .at_this_time_like_wrap .pd_list .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:8px ; position: absolute; top:5px; left:5px; z-index: 1;}

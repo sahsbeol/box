@@ -51,77 +51,15 @@
     
 
 <script type="text/javascript">
+
 jQuery(function($){
-    $("tbody#sosTbody tr td a.click").click(function(event) {
+    $("tbody#qnaTbody tr td a.click").click(function(event) {
         event.preventDefault(); // # 링크 이동 중지
-        var returnSeq = $(this).attr("id");
-        var tr = $($(this).attr("href"));
-        if(!tr.hasClass("on")){
-            $.ajax({
-                type: "GET"
-                , url: "/ht/mypage/getSosCounsel"
-                , data: "returnSeq=" + returnSeq
-                , dataType: "json"
-                , success: function(data) {
-                    var counsel = data.counsel;
-                    var listProduct = counsel.listProduct;
-                    var listProductStr = "";
-                    var htmlStr = "";
-                    
-                    if (listProduct.length >= 1) {
-                        listProductStr = "[" + counsel.orderNum + "] " + listProduct[0].productName;
-                    }
-                    
-                    var htmlStr;
-                    htmlStr += "<div class=\"one\">";
-                    htmlStr += "    <p style='padding:5px 0;'><strong>문의]</strong> <em>" + counsel.counselTitle + "</em></p>";
-                    htmlStr += "    <p style='padding:5px 0;color:#FF0000;'>" + listProductStr + "</p>";
-                    htmlStr += "    <p style='padding:5px 0;'>" + counsel.counselContent + "</p>";
-                    htmlStr += "</div>";
-                    
-                    if (counsel.sosProcessGubun == "E") {
-                        var modifyDtm = new Date(counsel.lastModifyDtm);
-                        htmlStr += "<div class=\"two\">";
-                        htmlStr += "    <p style='padding:5px 0;'><strong>답변]</strong></span> <em>답변일시 : " + formatDate(modifyDtm) + "</em>";
-                        htmlStr += "    <p style='padding:5px 0;'>" + counsel.replyContent + "</p>";
-                        htmlStr += "</div>";
-                     }
-                     tr.find("div").html(htmlStr);
-                }
-                , error: function() {
-                    alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
-                }
-            });
-            
-            tr.addClass("on");
+        var selectHref = $(this).attr("href");
+        if($(selectHref).hasClass("on")){
+            $(selectHref).removeClass("on");
         }else{
-            tr.removeClass("on");
-        }
-    });
-    
-    $("tbody#sosTbody tr td a.del_click").click(function(event) {
-        event.preventDefault(); // # 링크 이동 중지
-        var returnSeq = $(this).attr("id");
-        var tr = $($(this).attr("href"));
-        
-        if (confirm("삭제하시겠습니까?")) {
-            $.ajax({
-                type: "GET"
-                , url: "/ht/mypage/deleteSosCounsel"
-                , data: "returnSeq=" + returnSeq
-                , dataType: "json"
-                , success: function(data) {
-                    if (data.isDeleted) {
-                        tr.prev().remove();
-                        tr.remove();
-                    } else {
-                        alert("삭제할 수 없습니다.");
-                    }
-                }
-                , error: function() {
-                    alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
-                }
-            });
+            $(selectHref).addClass("on");
         }
     });
 });
@@ -143,6 +81,17 @@ $(document).ready(function(){
     if($('.header_wrap').length >0){
         bodyScroll();//body scroll  
     }
+
+    // 전체선택
+    $("input[name=chkAll]").each(function(){
+        $(this).click(function(){ 
+         if($(this).prop("checked")) { 
+            $(this).closest('.at_this_time_like_wrap').find($("input[type=checkbox]")).prop("checked",true); 
+        
+         } else { 
+            $(this).closest('.at_this_time_like_wrap').find($("input[type=checkbox]")).prop("checked",false); } 
+        })
+    });
 })  
 </script>
 </head>
@@ -337,48 +286,123 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- //lnb -->
                 <!-- sub contents -->
                 <div class="sub_contents">
-                    <h3 class="page_title mgt0">FAQ 통합검색</h3>
-                    <h2 class="tit01 mgt0 pdb10 fs24 bb_line">좋아요♥ 내역보기</h2>
-				    <ul class="list_type02_v2 mgt20 mgb40">
-			            <li>회원님께서 선택하신 '좋아요'브랜드는 보관기간에 제한이 없이 영구보존됩니다.</li>
-			            <li>더 이상 '좋아요'를 원치 않는 브랜드는 개별 삭제를 해주시기 바랍니다.</li>
-				    </ul>
-				    <h2 class="bt_line pdt20 tit01 mgt20 mgb40 fs18">좋아요♥ 브랜드 <span>5</span>건</h2>        
-		            <ul class="wish_blist">
-		                
-		                    <li>
-		                        <a href="#n" class="photo"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1827/hot1571795319429.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1208/hot1571795539316.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1827/hot1571795319429.jpg'" alt="Flying Whales" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
-		                        <a href="#n" class="make txt_line1">Flying Whales</a>
-		                        <div class="del_btn"><a href="#n" class="btn_type05_v2" _onclick="deleteWishBrand('24807')">삭제</a></div>
-		                    </li>
-		                
-		                    <li>
-		                        <a href="#n" class="photo"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1433/hot1569560484441.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1443/hot1569560494471.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1433/hot1569560484441.jpg'" alt="글입다 공방" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
-		                        <a href="/ht/hot/brandDetail?brandId=27798" class="make txt_line1">글입다 공방</a>
-		                        <div class="del_btn"><a href="#n" class="btn_type05_v2" _onclick="deleteWishBrand('27798')">삭제</a></div>
-		                    </li>
-		                
-		                    <li>
-		                        <a href="#n" class="photo"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1175/hot1569470424768.jpg" alt="LEUCHTTURM" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
-		                        <a href="/ht/hot/brandDetail?brandId=91779" class="make txt_line1">LEUCHTTURM</a>
-		                        <div class="del_btn"><a href="#n" class="btn_type05_v2" _onclick="deleteWishBrand('91779')">삭제</a></div>
-		                    </li>
-		                
-		                    <li>
-		                        <a href="#n" class="photo"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1868/hot1487919246605.jpg" onmouseover="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1352/hot1487919255368.jpg'" onmouseout="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/goods/200/1868/hot1487919246605.jpg'" alt="indigo" width="200" height="200" onerror="this.src='http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/no_image2.gif';"/></a>
-		                        <a href="/ht/hot/brandDetail?brandId=10623" class="make txt_line1">indigo</a>
-		                        <div class="del_btn"><a href="#n" class="btn_type05_v2" _onclick="deleteWishBrand('10623')">삭제</a></div>
-		                    </li>
-		                
-		            </ul>
-		            <!-- paging -->
-				    <div class="paging c_both">
-					    <a title="맨 처음 페이지로 이동" href="#n" class="first">처음</a>
-					    <ul>
-							<li class="active"><a href="#n">1</a></li>
-					    </ul>
-					</div>
-					<!-- //paging -->
+                    <h3 class="page_title mgt0">좋아요♥  내역보기</h3>
+                    <ul class="list_type02_v2 mgt20 mgb60">
+                        <li>고객님이 좋아요한 상품/브랜드/이럴 때 좋아요는 보관 기간 제한이 없이 영구보존 됩니다.</li>
+                        <li>관심있는 상품/브랜드/이럴 때 좋아요 를 누르고 관리하세요. 쿠폰, 혜택을 한 번에 확인하실 수 있습니다.</li>
+                    </ul>
+
+                    <div class="tab1 none mgt60">
+                        <ul>
+                            <li><a href="#n"><span>좋아요♥ 상품 <em>(99)</em></span></a></li>
+                            <li><a href="#n" class="on"><span>좋아요♥ 브랜드 <em>(99)</em></span></a></li>
+                            <li><a href="#n" ><span>이럴 때, 좋아요♥ <em>(99)</em></span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="at_this_time_like_wrap">
+                        <div class="clear">
+                            <div class="unit_like_allcheck_wrap">
+                                <span class="choice_wrap type_squre">
+                                    <input type="checkbox" name="chkAll" id="orderInfo_22" value="Y">
+                                    <label for="orderInfo_22">전체선택</label>
+                                </span>
+                                <button class="choice_delete">선택삭제</button>
+                            </div>
+                            <div class="go_select_wrap">
+                                <div class="form_select">
+                                    <select id="gnbSearchMenu" name="gnbSearchMenu">
+                                        <option value="GIFT">문구/기프트</option>
+                                        <option value="RECORD">음반</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pd_list">
+                            <ul>
+                                <!-- 대체상품 sold_out-t : class 추가 -->
+                                <li class="sold_out-t">
+                                    <div class="choice_wrap type_squre">
+                                        <input type="checkbox" name="chk" id="orderInfo_21" value="Y">
+                                        <label class="choice_like_thing" for="orderInfo_21">
+                                            <div>
+                                                <div class="thum">
+                                                    <!-- <img src="../../images/biz/thums/main_slide01.png" alt=""> -->
+                                                    <div class="soldout-wrap">
+                                                        <div class="absol-center">
+                                                            <p>아쉽지만!</p>
+                                                            <p><b></b>이에요</p>
+                                                            <button type="button" class="replace-stuff-btn">대체상품</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="cont">
+                                                    <p class="brand">wearinggeul</p>
+                                                    <a href="#n" class="btn_type05_v2 small mgt20">삭제</a>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="choice_wrap type_squre">
+                                        <input type="checkbox" name="chk" id="orderInfo_26" value="Y">
+                                        <label class="choice_like_thing" for="orderInfo_26">
+                                            <div>
+                                                <div class="thum">
+                                                    <img src="../../images/biz/thums/main_slide01.png" alt="">
+                                                    <div class="soldout-wrap">
+                                                        <div class="absol-center">
+                                                            <p>아쉽지만!</p>
+                                                            <p><b></b>이에요</p>
+                                                            <button type="button" class="replace-stuff-btn">대체상품</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="cont">
+                                                    <p class="brand">wearinggeul</p>
+                                                    <a href="#n" class="btn_type05_v2 small mgt20">삭제</a>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="choice_wrap type_squre">
+                                        <input type="checkbox" name="chk" id="orderInfo_267" value="Y">
+                                        <label class="choice_like_thing" for="orderInfo_267">
+                                            <div>
+                                                <div class="thum">
+                                                    <img src="../../images/biz/thums/main_slide01.png" alt="">
+                                                    <div class="soldout-wrap">
+                                                        <div class="absol-center">
+                                                            <p>아쉽지만!</p>
+                                                            <p><b></b>이에요</p>
+                                                            <button type="button" class="replace-stuff-btn">대체상품</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="cont">
+                                                    <p class="brand">wearinggeul</p>
+                                                    <a href="#n" class="btn_type05_v2 small mgt20">삭제</a>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- paging -->
+                    <div class="paging cs">
+                        <a title="맨 처음 페이지로 이동" href="#n" class="first">처음</a>
+                        <ul>                        
+                            <li class="active"><a href="#n">1</a></li>
+                        </ul>
+                        <a title="맨 나중 페이지로 이동" href="/ht/help/listNotice?page=1" class="next02">나중</a>
+                    </div>
+                    <!-- //paging -->                    
                 </div>
                 <!-- //sub contents -->                
             </div>
