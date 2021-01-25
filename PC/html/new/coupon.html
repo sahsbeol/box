@@ -345,14 +345,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				        <li>무료 배송 쿠폰을 사용하여 주문한 경우 반품 시 적용된 쿠폰은 소멸됩니다.</li>
 				        <li>따라서 주문 취소/반품을 하시게 되면 적용된 쿠폰은 환원이 되지 않습니다. 유념해주시기 바랍니다.</li>
 				    </ul>
-				    <div class="box_gray02 mgb0 bt_line fs16">회원님의 현재 보유쿠폰은 <span class="order_num">0장</span> 입니다.</div>
-				    <div class="bt_line"></div>
+
+                    <div class="box_gray02 delivery_detail mgt15 regular">
+                        <span class="bold">회원님의 현재 보유쿠폰은</span>
+                        <span class="mgl10 order_num only_english color_01 bold">2</span>
+                        <span calss="">장 입니다.</span>
+                    </div>
+				    <!-- <div class="box_gray02 mgb0 bt_line fs16">회원님의 현재 보유쿠폰은 <span class="order_num">0장</span> 입니다.</div>
+				    <div class="bt_line"></div> -->
 
 				    <table class="bbs_list_v2 mgt60">
 				        <caption>현재 보유쿠폰 <span>No, 구분, 쿠폰이름, 할인율(금액), 적용기준, 시작일자, 만료일자</span></caption>
 				        <colgroup>
 				            <col style="width:50px" />
-				            <col style="width:80px" />
+				            <col style="width:100px" />
 				            <col style="width:*" />
 				            <col style="width:100px" />
 				            <col style="width:120px" />
@@ -371,27 +377,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				            </tr>
 				        </thead>
 				        <tbody>
+                            <tr>
+                                <td class="only_english">
+                                    13
+                                    <input type="hidden" name="couponId" value="8004351974">
+                                    <input type="hidden" name="kyoboCouponId" value="8004351975">
+                                </td>
+                                <td>무료배송</td>
+                                <td class="t_left">플랜티넘 무료배송</td>
+                                <td class="t_right">무료</td>
+                                <td>국내 배송 상품</td>
+                                <td class="only_english">2021.01.20</td>
+                                <td class="only_english">2021.01.30</td>
+                            </tr>
 				            <tr><td colspan="7" class="no-data">보유하신 쿠폰이 없습니다.</td></tr>
 				            
 				        </tbody>
 				    </table>
-				    <!-- paging -->
-				    <div class="paging">
-					</div>
-				    <!-- //paging -->
+
+                    <!-- paging -->
+                    <div class="paging cs mgt40">
+                        <a title="맨 처음 페이지로 이동" href="#n" class="first">처음</a>
+                        <ul>
+                            <li class="active"><a href="#n">1</a></li>
+                        </ul>
+                    </div>
+                    <!-- //paging -->
+
 				    <form id="couponForm" name="couponForm">
 				        <input type="hidden" name="trackGcardNum" style="width:100px;"/>
 				    </form>
-   				    <h3 class="page_title mgt60">다양한 이벤트 쿠폰을 등록하여 할인 혜택 받으세요!</h3>
+
+                    <h4 class="page_title mgt80">다양한 이벤트 쿠폰을 등록하여 할인 혜택 받으세요!</h4>
 				    <ul class="list_type02_v2 mgt10 mgb40">
 				        <li>해당 상품권 및 보너스 쿠폰의 사용기준과 기간을 반드시 확인하여 주세요.</li>
 				        <li>오프라인 및 제휴사에서 받으신 쿠폰은 번호 입력을 통해 보너스 쿠폰으로 우선 발급을 받으셔야 이용하실 수 있습니다.</li>
 				        <li>유효기간이 만기 된 상품권 및 보너스 쿠폰은 등록이 불가합니다.</li>
 				    </ul>
-   				    <h3 class="page_title mgt30">쿠폰번호를 입력하세요.</h3>
-				    <div class="box_gray fs14 mgt10">
-				        <div class="coupon_regist"><label class="mgr10" for="couponNum">쿠폰 번호</label> <input type="text" name="couponNum" id="couponNum" maxlength="16" class="input_txt" title="쿠폰번호 입력" style="width:150px;"/><span class="mgl10 v_middle">쿠폰 번호는 영문의 대소문자를 구별합니다.</span></div>
-				        <div class="f_right"><a href="#n" _onclick="couponReg()" class="btn_type01_v2" style="width:50px;">등록</a></div>
+
+                    <h4 class="page_title mgt80">쿠폰번호를 입력하세요.</h4>
+				    <div class="box_gray_02 fs14 mgt10 clear">
+				        <div class="coupon_regist">
+                            <span class="input_wrap">
+                                <label class="mgr10" for="couponNum">쿠폰 번호</label> 
+                                <input type="text" name="couponNum" id="couponNum" maxlength="16" class="width_barcode inlineblock" title="쿠폰번호 입력" />    
+                            </span>
+                            <span class="mgl10 v_middle">쿠폰 번호는 영문의 대소문자를 구별합니다.</span>
+                        </div>
+				        <div class="f_right">
+                            <a href="#n" _onclick="couponReg()" class="btn_type01_v2 btn_styl11 mgt10" style="width:50px;">등록</a>
+                        </div>
 				    </div>
                 </div>
                 <!-- //sub contents -->                

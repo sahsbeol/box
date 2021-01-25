@@ -50,6 +50,15 @@
 			var text = $(this).html();
 			$(this).html(text.replace(' / ', ' '));
 		});
+
+		//프로그레스바 
+		var aa = $('.funding_bar').width();
+		var aW = Math.round((aa/430 )* 100)
+		if(aW == 100){
+			$('.funding_bar').addClass('end');
+		}else{
+			$('.funding_bar').removeClass('end');
+		}
 	})
 </script>
 </head>
@@ -542,7 +551,7 @@
 								<img src="../../images/biz/stuff-detail/dummy-brand.png">
 							</div>
                             <div class="text-wrap">
-                                <div class="banner-title">
+                                <div class="banner-title clear">
                                     <strong class="elip">독일 라미 브랜드샵</strong>
                                 </div>
                                 <div class="banner-description">

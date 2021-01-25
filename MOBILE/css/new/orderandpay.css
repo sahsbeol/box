@@ -770,6 +770,7 @@
 .orderandpay .stuff_detail_wrap .stuff_cont .funding_goal_box .funding_progressbar{position:relative; height:4px; margin-bottom:30px; background:#e0e0e0;}
 .orderandpay .stuff_detail_wrap .stuff_cont .funding_goal_box .funding_progressbar .funding_bar{position:absolute; left:0; top:0; max-width:100%; min-width:13%; height:4px; background:#D41417; text-align:right;}
 .orderandpay .stuff_detail_wrap .stuff_cont .funding_goal_box .funding_progressbar .funding_bar:before{content:""; display:inline-block; width:51px; height:31px; margin-top:-13px; margin-right:-2px; background:url('../../images/new/ic_heart_funding.png') center no-repeat; background-size:51px 31px;}
+.orderandpay .stuff_detail_wrap .stuff_cont .funding_goal_box .funding_progressbar .funding_bar.end:before{content:""; display:inline-block; width:51px; height:31px; margin-top:-13px; margin-right:-2px; background:url('../../images/new/ic_heart_funding_end.png') center no-repeat; background-size:51px 31px;}
 .orderandpay .stuff_detail_wrap .stuff_cont .funding_goal_box .funding_goal_price_wrap dl:after{content:""; display:block; clear:both;}
 .orderandpay .stuff_detail_wrap .stuff_cont .funding_goal_box .funding_goal_price_wrap dl dt{float:left;}
 .orderandpay .stuff_detail_wrap .stuff_cont .funding_goal_box .funding_goal_price_wrap dl dd{float:right;}

@@ -68,6 +68,16 @@
             hide: true,
           }
         });
+
+        //프로그레스바
+        var dw = $(document).width()- 40; 
+        var aa = $('.funding_bar').width();
+        var aW = Math.round((aa/dw )* 100)
+        if(aW == 100){
+            $('.funding_bar').addClass('end');
+        }else{
+            $('.funding_bar').removeClass('end');
+        }
     })
 
 </script>
@@ -146,7 +156,7 @@
                     </div>
                     <div class="funding_goal_box mt40">
                         <div class="funding_progressbar">
-                            <span class="funding_bar" style="width:40%"></span>
+                            <span class="funding_bar" style="width:120%"></span>
                         </div>
                         <div class="funding_goal_price_wrap">
                             <dl class="funding_goal_price_type1">
@@ -163,7 +173,7 @@
                                     <span>원</span>
                                 </dt>
                                 <dd>
-                                    <span class="unit_percent only_english">35%</span>
+                                    <span class="unit_percent only_english">125%</span>
                                     <span>달성</span>
                                 </dd>
                             </dl>

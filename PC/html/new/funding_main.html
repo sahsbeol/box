@@ -74,6 +74,15 @@
 		$('.main_banner_btn .next').click(function(){
 			main_bnr.slick('slickNext');
 		})
+
+		//프로그레스바 
+		var aa = $('.funding_bar').width();
+		var aW = Math.round((aa/430 )* 100)
+		if(aW == 100){
+			$('.funding_bar').addClass('end');
+		}else{
+			$('.funding_bar').removeClass('end');
+		}
 	})
 </script>
 </head>

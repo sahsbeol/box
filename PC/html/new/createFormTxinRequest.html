@@ -40,45 +40,105 @@
                 <p class="tooltip_tit">사업자등록번호 등록</p>
                 <div class="pop_cont reset">
                     <form name="createTaxBillRequestForm" id="createTaxBillRequestForm" action="/ht/mypage/addUserBusinessRegistNum" method="post">
-                        <table class="table02_v1 mgt15">
+                        <table class="table02_v1 border_little mgt15">
                             <colgroup> 
-                                <col width="15%" />
-                                <col width="35%" />
-                                <col width="15%" />
-                                <col width="35%" />
+                                <col width="142px" />
+                                <col width="*" />
+                                <col width="142px" />
+                                <col width="*" />
                             </colgroup>
                             <tbody>
                                 <tr>
                                     <th>사업자등록번호</th>
-                                    <td colspan="3"><input type="text" name="bizRegNum1" style="width:36px;" class="input_txt" maxlength="3"/> -
-                                    <input type="text" name="bizRegNum2" style="width:36px;" class="input_txt" maxlength="2"/> -
-                                    <input type="text" name="bizRegNum3" style="width:36px;" class="input_txt" maxlength="6"/></td>
+                                    <td colspan="3">
+                                        <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                            <span class="input_wrap">
+                                                <input name="bizRegNum1" maxlength="3" type="text" class="width_popup_point" id="bizRegNum" title="사업자등록번호 앞자리입력" /> 
+                                            </span>
+                                            <span class="input_wrap">
+                                                <input name="bizRegNum2" maxlength="2" type="text" class="width_popup_point" title="사업자등록번호 중간자리입력" />
+                                            </span>
+                                            <span class="input_wrap">
+                                                <input name="bizRegNum3" maxlength="6" type="text" class="width_popup_point" title="사업자등록번호 뒷자리입력" />
+                                            </span>
+                                        </div>
+                                    </td>
                                 </tr> 
                                 <tr> 
-                                    <th>상호명(법인명)</th>
-                                    <td><input type="text" name="vndrName" style="width:200px;" class="input_txt"/></td>
-                                    <th>대표자명</th>
-                                    <td><input type="text" name="primeName" style="width:140px;" class="input_txt" /></td>
+                                    <th><label for="">상호명(법인명)</label></th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" placeholder="" class="width100">
+                                        </div>
+                                    </td>
+                                    <th><label for="">대표자명</label></th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" placeholder="" class="width100">
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th>업태</th>
-                                    <td><input type="text" name="bizTypeInfo" style="width:200px;" class="input_txt"/></td>
-                                    <th>종목</th>
-                                    <td><input type="text" name="bizKindInfo" style="width:140px;" class="input_txt"/></td>
+                                    <th><label for="">업태</label></th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" placeholder="" class="width100">
+                                        </div>
+                                    </td>
+                                    <th><label for="">종목</label></th>
+                                    <td>
+                                        <div class="input_wrap">
+                                            <input type="text" placeholder="" class="width100">
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                 <tr>
-                                    <th>사업자 소재지</th>
-                                    <td colspan="3"><input type="text" name="vndrAddr" style="width:530px;" class="input_txt" /></td>
+                                    <th><label for="">사업자 소재지</label></th>
+                                    <td colspan="3">
+                                        <div class="input_wrap">
+                                            <input type="text" placeholder="" class="width100">
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th>담당자명</th>
-                                    <td colspan="3"><input type="text" name="mngrName" style="width:130px;" class="input_txt" /></td>
+                                    <th><label for="">담당자명</label></th>
+                                    <td colspan="3">
+                                        <div class="input_wrap">
+                                            <input type="text" placeholder="" class="width_name">
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>이메일</th>
                                     <td colspan="3">
-                                        <input type="text" name="emailAddr1" class="input_txt" style="width:170px;"/><span class="mm1"> @ </span>
+                                        <div class="choice_wrap type_squre have_inner_txt inner_float_dot">
+                                                <span class="input_wrap">
+                                                    <input  name="emailAddr1" type="text" placeholder=""  id="mail" title="이메일 아이디입력" class="width_name">
+                                                </span>
+                                                <span class="input_wrap">@</span>
+                                                <span class="input_wrap">
+                                                    <input name="emailAddr2" type="text" placeholder="" title="이메일 도메인입력"  class="width_email">
+                                                </span>
+                                                <span class="input_wrap mgl15">
+                                                    <select name="emailSelect" onchange="emailSelect()" class="width_email"  title="이메일 도메인선택">
+                                                        <option value="naver.com">naver.com</option>
+                                                        <option value="hanmail.net">hanmail.net</option>
+                                                        <option value="hotmail.com">hotmail.com</option>
+                                                        <option value="nate.com">nate.com</option>
+                                                        <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                                        <option value="empas.com">empas.com</option>
+                                                        <option value="dreamwiz.com">dreamwiz.com</option>
+                                                        <option value="freechal.com">freechal.com</option>
+                                                        <option value="lycos.co.kr">lycos.co.kr</option>
+                                                        <option value="korea.com">korea.com</option>
+                                                        <option value="gmail.com">gmail.com</option>
+                                                        <option value="hanmir.com">hanmir.com</option>
+                                                        <option value="paran.com">paran.com</option>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                        <!-- <input type="text" name="emailAddr1" class="input_txt" style="width:170px;"/><span class="mm1"> @ </span>
                                         <input type="text" name="emailAddr2" class="input_txt" style="width:170px;" class="input_txt" />
                                         <select name="emailSelect" class="select" style="width:157px;">
                                             <option value="">직접입력</option>
@@ -95,7 +155,7 @@
                                             <option value="gmail.com">gmail.com</option>
                                             <option value="hanmir.com">hanmir.com</option>
                                             <option value="paran.com">paran.com</option>
-                                        </select>
+                                        </select> -->
                                     </td>
                                 </tr>
                             </tbody>

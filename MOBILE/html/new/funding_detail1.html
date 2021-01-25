@@ -68,6 +68,15 @@
             hide: true,
           }
         });
+        //프로그레스바
+        var dw = $(document).width()- 40; 
+        var aa = $('.funding_bar').width();
+        var aW = Math.round((aa/dw )* 100)
+        if(aW == 100){
+            $('.funding_bar').addClass('end');
+        }else{
+            $('.funding_bar').removeClass('end');
+        }
     })
 
 </script>

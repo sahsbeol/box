@@ -23,6 +23,7 @@
 
 .orderandpay .bold {font-weight: 700 !important; }
 .orderandpay .medium {font-weight: 500 !important; }
+.orderandpay .regular {font-weight: 400 !important; }
 .orderandpay .fz0 {font-size:0 !important;}
 
 .orderandpay .mgt100 {margin-top:100px !important;}
@@ -34,7 +35,7 @@
 .orderandpay .width_op {max-width: 161.2px; width:161.2px !important;}
 .orderandpay .width_cs {max-width: 300px; width:300px !important;}
 .orderandpay .width_phone {max-width: 80px;}
-.orderandpay .width_name {max-width: 190px;}
+.orderandpay .width_name {max-width: 190px; width: 190px !important;}
 .orderandpay .width_point {max-width: 220px; width:220px !important; text-align: right;}
 .orderandpay .width_address {max-width: 196px;width: 196px !important;}
 .orderandpay .width_email {max-width: 140px; width:140px !important;}
@@ -368,7 +369,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tab_layer {display: none; height: auto;}
 .orderandpay .tab_layer.is_active,
 .orderandpay .tab_layer.on {display: block;}
-.orderandpay .tab_list li.is_active .link {background: #DD1016; border-color: #DD1016; color:#fff;}
+.orderandpay .tab_list li.is_active .link {background: #fff; border-color: #DD1016;}
 
 /* 결제방법선택 tab_layer inner box */
 .orderandpay .tab_layer .tab_layer_text_box {background: #FAFAFA; padding:30px;}
@@ -393,7 +394,22 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .tab1.text_large ul li {min-width: 23.1%;}
 
+.orderandpay .tab1.none ul li {min-width: 33.3333%}
+.orderandpay .tab1.none ul li a span.none {padding:0px;}
+.orderandpay .tab1.none ul li a.on {background:#000;}
+.orderandpay .tab1.none ul li a.on span {border:0 none;background:#000; color:#fff; font-weight: 700;}
+.orderandpay .tab1.none ul li a.on span:after {content:''; display:none;}
 
+/* 마이핫트랙스 tab */
+.orderandpay .my.tab1 {margin:80px 0 0px;}
+.orderandpay .my.tab1 ul {overflow:visible; display: table; width:100%;}
+.orderandpay .my.tab1 ul li {float:left;margin-right:0px; display:table-cell; min-width:50%; width:auto;}
+.orderandpay .my.tab1 ul li a {display: block; height: auto !important;background:#fff; text-align: center;border-top: 1px #DBDBDB solid; border-bottom: 1px #DBDBDB solid; border-right: 1px #DBDBDB solid;}
+.orderandpay .my.tab1 ul li a span {display:inline-block;width:auto;height:auto;border:none;text-align:center; font-weight:inherit; font-size:16px; color:#000;line-height:normal; position: relative; padding: 17px;}
+.orderandpay .my.tab1 ul li:first-child a { border-left: 1px #DBDBDB solid;}
+.orderandpay .my.tab1 ul li a.on {background:#000;}
+.orderandpay .my.tab1 ul li a.on span {border:0 none;background:#000; color:#fff; font-weight: 700;}
+.orderandpay .my.tab1 ul li a.on span:after {content:''; display:none;}
 
 
 /* 현금영수증 */
@@ -694,8 +710,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tooltip_wrap .table02 tbody th label { font-weight: inherit;}
 .orderandpay .tooltip_wrap .table02 tbody td {padding:10px 20px 11px; color:#000; font-size: 13px; font-weight: 400; text-align: center;}
 
-.orderandpay .tooltip_wrap .table02.cash {}
-.orderandpay .tooltip_wrap .table02.cash tbody th, .orderandpay .tooltip_wrap .table02.cash tbody td {padding:5px;}
+.orderandpay .tooltip_wrap .table02.cash {border:1px #000 solid;}
+.orderandpay .tooltip_wrap .table02.cash tbody th, .orderandpay .tooltip_wrap .table02.cash tbody td {padding:14px;}
 
 .orderandpay .tooltip_wrap .table02 .choice_wrap .choice_wrap_inner {margin-left: 15px; display: block; float: left;   margin-top: 5px; line-height: 2;}
 .orderandpay .tooltip_wrap .table02 .choice_wrap .choice_wrap_inner:first-child {margin-left:0;}
@@ -832,7 +848,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .btn_style11.btn_type03 { font-size: 13px; min-width: auto; padding: 10px 20px; margin-left: 15px }
 .orderandpay .btn_type04 {height: auto;line-height: normal;font-size: 18px;padding: 14px 0 13px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;min-width: 200px;background: #fff;font-weight: 400; border:1px #000 solid; box-sizing: border-box; color:#000;}
 .orderandpay .btn_type04_v1,.orderandpay .btn_type04_v2 {font-size: 18px; height: 58px; line-height: 58px;}
-
+.orderandpay .mgl20 {margin-left:20px !important;}
 
 .orderandpay .btn_type03.type1 {font-size: 16px; height:48px; min-width:160px; padding:0; line-height: 46px;}
 .orderandpay .tooltip_wrap .btn_type04_v1, 
@@ -1252,7 +1268,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .album_wrap .album_list .items .link {display:block; width:100%; height: 100%;}
 .orderandpay .album_wrap .album_list .items .link .albums_wrap {display:block; text-align: center;}
 .orderandpay .album_wrap .album_list .items .link .albums_wrap .albums_img {display:block; width: 246px; height: 246px; overflow: hidden;}
-.orderandpay .album_wrap .album_list .items .link .albums_wrap img {display:block; max-width: 100%; min-height: 100%; position: relative; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+.orderandpay .album_wrap .album_list .items .link .albums_wrap img {display:block; max-width: 100%; min-height: 100%;/* position: relative; top: 50%; left: 50%; transform: translate(-50%,-50%);*/}
 .orderandpay .album_wrap .album_list .items .link .albums_wrap .unit_singer {display:block;margin-top: 11px;font-size: 16px;font-weight: 700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0px 10px 11px;}
 
 /* 핫이슈 */
@@ -1264,7 +1280,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap {display:block; text-align: center;}
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap:after {content: ''; display: block; clear:both;}
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .albums_img {display:block; width: 80px; height: 80px; border-radius: 100%; overflow: hidden; float: left;}
-.orderandpay .issue_wrap .issue_list .items .link .albums_wrap img {display:block; max-width: 100%; min-height: 100%; position: relative; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+.orderandpay .issue_wrap .issue_list .items .link .albums_wrap img {display:block; max-width: 100%; min-height: 100%;/* position: relative; top: 50%; left: 50%; transform: translate(-50%,-50%);*/}
 
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .unit_texts {float: left; display: block; width: 240px; margin-left: 10px; text-align: left;}
 .orderandpay .issue_wrap .issue_list .items .link .albums_wrap .unit_price_wrap { display: block; font-size: 14px;font-weight: 700; margin-top:11px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; line-height: normal;}
@@ -1428,6 +1444,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_progressbar_wrap .funding_progressbar {width:100%; height:4px; background: #E0E0E0; position: relative;}
 .orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar {position: absolute; top:0; left:0; height:4px; background: #D41417; text-align: right; max-width: 100%;}
 .orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar:before {content: '';display: inline-block;width:52px;height:32px;background: url(../../images/new/ic_heart_funding.png) no-repeat center;margin-top: -14px;}
+.orderandpay .funding_progressbar_wrap .funding_progressbar .funding_bar.end:before {content: '';display: inline-block;width:52px;height:32px;background: url(../../images/new/ic_heart_funding_end.png) no-repeat center;margin-top: -14px;}
+
 
 .orderandpay .funding_goal_price_wrap {}
 .orderandpay .funding_goal_price_wrap .funding_goal_price_type1:after,
@@ -1586,3 +1604,38 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .location_btn {position: absolute; top:0; right:0;}
 .orderandpay .box_gray_02 {background: #FAFAFA; padding:16px 20px;}
 .orderandpay .tbl_top {font-size: 13px; font-weight: 400; text-align: left; margin:0;}
+.orderandpay .btns_go_wrap {position: absolute; top:0; right:0;}
+.orderandpay .btns_go_wrap .btn_type05_v2 {margin-left: -4px; height:38px; line-height:35px; width:88px;}
+
+/* 세금계산서 신청 */
+.orderandpay .txin_title_wrap {}
+.orderandpay .txin_title_wrap:after {content: ''; display:block; clear: both;} 
+.orderandpay .txin_title_wrap .page_title,
+.orderandpay .txin_title_wrap .btn_type01_v2 {float: left;}
+.orderandpay .txin_title_wrap .btn_type01_v2 {height: 28px; min-width: 120px; line-height: 25px; font-size: 12px; box-sizing: border-box;}
+.orderandpay .txin_title_wrap .page_title {line-height: normal;}
+.orderandpay .t_ar {text-align: right !important;}
+
+/* 통합포인트 */
+.orderandpay .tbl_top .use_point {color: #000; font-size: 13px;}
+.orderandpay .tbl_top .tab_btn02 {}
+.orderandpay .tbl_top ul.tab_btn02 li {float:left;margin-right:6px;}
+.orderandpay .tbl_top ul.tab_btn02 li a {display:inline-block;height:28px;padding:0 9px 0 8px; text-align: center; min-width:60px; box-sizing: border-box; border:1px solid #000;font-size:12px;color:#000;line-height:26px;}
+.orderandpay .tbl_top ul.tab_btn02 li.active a,
+.orderandpay .tbl_top ul.tab_btn02 li a:hover {border:1px solid #000;background:#000;color:#fff;}
+.orderandpay .tbl_top .btn_r ul + ul {margin-left:10px;padding-left:0px;border:0;}
+
+/* 마일리지 */
+.orderandpay .go_check_wrap {border-top:1px #EEEEEE solid; position: relative; padding-top: 30px;}
+.orderandpay .go_check_wrap.borderno {border-top:0 none; position: relative; padding-top: 30px;}
+.orderandpay .go_check_wrap .txt_info {font-size: 14px; font-weight: 400;}
+.orderandpay .go_check_wrap .txt_info:after {content: ''; display: block; clear: both;}
+.orderandpay .go_check_wrap .btn_type06 {font-size: 16px; font-weight: 700; padding-bottom:4px; border-bottom: 1px #000 solid; background: #fff; color:#000; padding-left:0; padding-right:0; }
+.orderandpay .go_check_wrap .btn_type06 span{ padding-right:0; }
+.orderandpay .color_03 {color: #777 !important;}
+.orderandpay .inlineblock {display: inline-block !important;}
+.orderandpay .go_select_wrap .form_select{float:left; width:132px; vertical-align:middle; overflow:hidden; position:relative;}
+.orderandpay .go_select_wrap .form_select:before{content:''; position:absolute; right:0; top:12px; width:14px; height:8px; background:url('../../images/biz/common/icon_select_arr.png') 0 0 no-repeat;}
+.orderandpay .go_select_wrap .form_select select{position:relative; width:100%; border:0; outline: none; font-weight: 700; height:32px; line-height:32px; font-size:20px; color:#000; padding-right:14px; background:transparent; z-index:1; cursor:pointer;}
+.orderandpay .go_select_wrap .form_select select{-webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.orderandpay .go_select_wrap .form_select select::-ms-expand {display:none;}
