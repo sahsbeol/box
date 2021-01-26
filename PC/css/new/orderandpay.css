@@ -7,6 +7,46 @@
   700: bold
 
 */
+
+
+/* --- webfont --- */
+/* 국문 */
+@font-face {
+  font-family:font_ns;
+  font-weight:100;
+  src:local(※), url(../../font/NotoSansKR-Thin.woff) format('woff');
+}
+@font-face {
+  font-family:font_ns;
+  font-weight:300;
+  src:local(※), url(../../font/NotoSansKR-Light.woff) format('woff');
+}
+@font-face {
+  font-family:font_ns;
+  font-weight:normal;
+  src:local(※), url(../../font/NotoSansKR-Regular.woff) format('woff');
+}
+@font-face {
+  font-family:font_ns;
+  font-weight:bold;
+  src:local(※), url(../../font/NotoSansKR-Bold.woff) format('woff');
+}
+/* 영문/숫자 */
+@font-face {
+  font-family:font_gs;
+  font-weight:300;
+  src:local(※), url(../../font/GmarketSansTTFLight.woff) format('woff');
+}
+@font-face {
+  font-family:font_gs;
+  font-weight:normal;
+  src:local(※), url(../../font/GmarketSansTTFMedium.woff) format('woff');
+}
+@font-face {
+  font-family:font_gs;
+  font-weight:bold;
+  src:local(※), url(../../font/GmarketSansTTFBold.woff) format('woff');
+}
 /* ---------- common_style --------------*/
 .orderandpay {font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-size:14px;}
 .orderandpay .only_english {font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important; vertical-align: middle;}
@@ -1344,6 +1384,9 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .stuff_main_detail {display: block !important;}
 .orderandpay .stuff_main_detail .stuff-right {display: block !important; width:456px;}
 .orderandpay .stuff_main_detail .stuff-right:nth-child(2n-1) {margin-left:0;}
+.orderandpay .stuff_main_detail .stuff-right .go_there {border:0; text-align: left;}
+.orderandpay .stuff_main_detail .stuff-right:first-child .go_there {border-left:0 none;}
+.orderandpay .stuff_main_detail .stuff-right .go_there span {text-align: initial; padding:0;}
 .orderandpay .stuff_main_detail .funding_complete_wrap{float:none; text-align:left; margin-top:32px;}
 .orderandpay .stuff_main_detail .stuff-title {margin-top:16px; font-size: 26px;}
 .orderandpay .stuff_main_detail .stuff-right .price-wrap .price {color: #000; margin-top: 64px;}
@@ -1353,9 +1396,11 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 배송준비및 출발 */
 .orderandpay .stuff_main_detail_wrap {}
+.orderandpay .stuff_main_detail_wrap .stuff-right .go_there {}
+.orderandpay .stuff_main_detail_wrap .stuff-title-wrap {padding-bottom: 40px;}
 .orderandpay .stuff_main_detail_wrap .stuff_sold_out {}
 .orderandpay .stuff_main_detail_wrap .stuff_sold_out .stuff-img {position: relative;}
-.orderandpay .stuff-right .end_dim{position:absolute; width:200px; height:200px; color:#fff; text-align:center;font-size: 30px; font-weight: 500; background:rgba(0,0,0,0.4);top: 50%; left: 50%; transform: translate(-50%,-50%);border-radius: 100%;}
+.orderandpay .stuff-right .end_dim{position:absolute; width:200px; height:200px; color:#fff; text-align:center !important;font-size: 30px; font-weight: 500; background:rgba(0,0,0,0.4);top: 50%; left: 50%; transform: translate(-50%,-50%);border-radius: 100%;}
 .orderandpay .stuff-right .end_dim:after{content:""; display:inline-block; height:100%; vertical-align:middle;}
 
 

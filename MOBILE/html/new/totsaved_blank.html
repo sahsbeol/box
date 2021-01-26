@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/common.css">
 <link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
-<!-- 210122 작업부분 -->
+<!-- 210129 작업부분 -->
 <link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
 
 <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
@@ -27,7 +27,9 @@
 </head>
 <body>
 
-<div id="wrap" class="mini content_new">
+<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
+<div id="wrap" class="content_new orderandpay positionTop">
+<!-- <div id="wrap" class="mini content_new orderandpay"> -->
   <!-- #header -->
   <div id="header">
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
@@ -46,16 +48,20 @@
 <div class="">
     <div id="my_content">
         <div class="my_smenu4">
-            <a href="/m/mypage/totsaved" class="btn_totsaved active">통합포인트</a>
+            <a href="/m/mypage/totsaved" class="btn_totsaved active">통합 <br>포인트</a>
             <a href="/m/mypage/deposit" class="btn_deposit">예치금</a>
             <a href="/m/mypage/coupon"  class="btn_coupon">쿠폰</a>
-            <a href="/m/offLine/listReceipt" class="btn_recepit">영업점영수증</a>
+            <a href="/m/offLine/listReceipt" class="btn_recepit">영업점 <br>영수증</a>
         </div>
-        <p class="info t_c">
+        <!-- <p class="info t_c">
           <p class="f20 t_c">고객님의 통합포인트는 <span class="col_orange"><strong>0</strong></span>원 입니다.</p>
           <p class="f12 col_grey">(구)마일리지를 소지하신 고객님께서는 교보문고에서 확인가능합니다.</p>
-        </p>
-        <div class="box_flex tog_area mt20">
+        </p> -->
+        <div class="info t_c space_pad mt30">
+          <p class="t_c">고객님의 통합포인트는 <span class="color_01"><strong class="only_english">0</strong></span>원 입니다.</p>
+          <p class="f12 col_grey mt10">(구)마일리지를 소지하신 고객님께서는 교보문고에서 확인가능합니다.</p>
+        </div>
+        <div class="box_flex tog_area space_pad mt20">
             <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=3&srchGbn=1')" class="btn tog_btn active">3개월</a>
             <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=6&srchGbn=1')" class="btn tog_btn">6개월</a>
             <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=12&srchGbn=1')" class="btn tog_btn">12개월</a>
@@ -66,144 +72,10 @@
             </select>
         </div>
         <div id="orderList" class="mt30">
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-        <li class="line bg_eeeeee">
-            <strong class="fl_l">2019.10.26</strong>
-        </li>
-        <li>
-            <strong class="fl_l">상품후기 적립</strong>
-            <strong class="fl_r"><span class="col_orange">200 P</span></strong>
-        </li>
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul>
-
-
-
-
-
-
-<ul class="br_list mb30">
-    
-    
-</ul></div>
+            <ul class="br_list mb30">
+                <li class="line bg_eeeeee"><strong>6개월 이내에 고객님께서 사용/적립하신 내역이 존재하지 않습니다.</strong></li>
+            </ul>
+        </div>
     </div>
     <!-- //content -->
 </div>
@@ -224,41 +96,41 @@ function footerFn(){
 }
 </script>
   <!-- footer -->
-	<div id="footer">
-		<div class="inner">
-			<p>고객센터 <em class="font_t">1661-1112</em></p>
-			<div class="util_menu">
-		        <ul>
-		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">핫트합니다</a></li>
-		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/viewRule');return false;">이용약관</a></li>
-		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/privacy');return false;"><strong>개인정보취급방침</strong></a></li>
-		        </ul>
-		    </div>
-			<div class="cont">
-				<a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">
-					<img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019">
-				</a>
-				<ul class="sns_wrap">
-		            <li class="ig"><a href="#n" _traget="_blank" _onclick="linkToInstagram('home');return false;">instagram</a></li>
-		            <li class="fb"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.facebook.com/HOTTRACKSFRIEND/');return false;">facebook</a></li>
-		            <li class="tt"><a href="#n" _traget="_blank" _onclick="goTwitter('모바일핫트랙스', 'http://m.hottracks.co.kr/');return false;">twitter</a></li>
-		            <li class="bg"><a href="#n" _traget="_blank" _onclick="winOpen('https://hottracks91.blog.me/');return false;">blog</a></li>
-		            <li class="yt"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg');return false;">youtube</a></li>
-		        </ul>
-			</div>
-			<a href="javascript://;" class="btn_cont">(주)교보핫트랙스</a>
-			<div class="txt">
-				<span>대표이사 박영규</span>
-				<span>사업자등록번호 : 102-81-29258</span>
-				<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
-				<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
-				<span>개인정보보호책임자 : 김재식</span>
-				<span>이메일 : PRIVACY@HOTTRACKS.CO.KR</span>
-				<span class="copyright">ⓒ Kyobo Hottracks inc.</span>
-			</div>
-		</div>
-	</div>
-	<!--// footer -->
+  <div id="footer">
+    <div class="inner">
+      <p>고객센터 <em class="font_t">1661-1112</em></p>
+      <div class="util_menu">
+            <ul>
+                <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">핫트합니다</a></li>
+                <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/viewRule');return false;">이용약관</a></li>
+                <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/privacy');return false;"><strong>개인정보취급방침</strong></a></li>
+            </ul>
+        </div>
+      <div class="cont">
+        <a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">
+          <img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019">
+        </a>
+        <ul class="sns_wrap">
+                <li class="ig"><a href="#n" _traget="_blank" _onclick="linkToInstagram('home');return false;">instagram</a></li>
+                <li class="fb"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.facebook.com/HOTTRACKSFRIEND/');return false;">facebook</a></li>
+                <li class="tt"><a href="#n" _traget="_blank" _onclick="goTwitter('모바일핫트랙스', 'http://m.hottracks.co.kr/');return false;">twitter</a></li>
+                <li class="bg"><a href="#n" _traget="_blank" _onclick="winOpen('https://hottracks91.blog.me/');return false;">blog</a></li>
+                <li class="yt"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg');return false;">youtube</a></li>
+            </ul>
+      </div>
+      <a href="javascript://;" class="btn_cont">(주)교보핫트랙스</a>
+      <div class="txt">
+        <span>대표이사 박영규</span>
+        <span>사업자등록번호 : 102-81-29258</span>
+        <span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+        <span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+        <span>개인정보보호책임자 : 김재식</span>
+        <span>이메일 : PRIVACY@HOTTRACKS.CO.KR</span>
+        <span class="copyright">ⓒ Kyobo Hottracks inc.</span>
+      </div>
+    </div>
+  </div>
+  <!--// footer -->
   
     <div id="app_bar"> <a href="#n" class="btn_home">HOTTRACKS</a> <a href="#n" class="btn_today">오늘,혜택</a> <a href="#n" class="btn_cart">장바구니<em class="font_t">99+</em></a>
       <a href="#n" class="btn_history">히스토리</a>
