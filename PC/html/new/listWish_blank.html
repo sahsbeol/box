@@ -51,77 +51,15 @@
     
 
 <script type="text/javascript">
+
 jQuery(function($){
-    $("tbody#sosTbody tr td a.click").click(function(event) {
+    $("tbody#qnaTbody tr td a.click").click(function(event) {
         event.preventDefault(); // # 링크 이동 중지
-        var returnSeq = $(this).attr("id");
-        var tr = $($(this).attr("href"));
-        if(!tr.hasClass("on")){
-            $.ajax({
-                type: "GET"
-                , url: "/ht/mypage/getSosCounsel"
-                , data: "returnSeq=" + returnSeq
-                , dataType: "json"
-                , success: function(data) {
-                    var counsel = data.counsel;
-                    var listProduct = counsel.listProduct;
-                    var listProductStr = "";
-                    var htmlStr = "";
-                    
-                    if (listProduct.length >= 1) {
-                        listProductStr = "[" + counsel.orderNum + "] " + listProduct[0].productName;
-                    }
-                    
-                    var htmlStr;
-                    htmlStr += "<div class=\"one\">";
-                    htmlStr += "    <p style='padding:5px 0;'><strong>문의]</strong> <em>" + counsel.counselTitle + "</em></p>";
-                    htmlStr += "    <p style='padding:5px 0;color:#FF0000;'>" + listProductStr + "</p>";
-                    htmlStr += "    <p style='padding:5px 0;'>" + counsel.counselContent + "</p>";
-                    htmlStr += "</div>";
-                    
-                    if (counsel.sosProcessGubun == "E") {
-                        var modifyDtm = new Date(counsel.lastModifyDtm);
-                        htmlStr += "<div class=\"two\">";
-                        htmlStr += "    <p style='padding:5px 0;'><strong>답변]</strong></span> <em>답변일시 : " + formatDate(modifyDtm) + "</em>";
-                        htmlStr += "    <p style='padding:5px 0;'>" + counsel.replyContent + "</p>";
-                        htmlStr += "</div>";
-                     }
-                     tr.find("div").html(htmlStr);
-                }
-                , error: function() {
-                    alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
-                }
-            });
-            
-            tr.addClass("on");
+        var selectHref = $(this).attr("href");
+        if($(selectHref).hasClass("on")){
+            $(selectHref).removeClass("on");
         }else{
-            tr.removeClass("on");
-        }
-    });
-    
-    $("tbody#sosTbody tr td a.del_click").click(function(event) {
-        event.preventDefault(); // # 링크 이동 중지
-        var returnSeq = $(this).attr("id");
-        var tr = $($(this).attr("href"));
-        
-        if (confirm("삭제하시겠습니까?")) {
-            $.ajax({
-                type: "GET"
-                , url: "/ht/mypage/deleteSosCounsel"
-                , data: "returnSeq=" + returnSeq
-                , dataType: "json"
-                , success: function(data) {
-                    if (data.isDeleted) {
-                        tr.prev().remove();
-                        tr.remove();
-                    } else {
-                        alert("삭제할 수 없습니다.");
-                    }
-                }
-                , error: function() {
-                    alert("시스템 오류가 발생 했습니다. 관리자에게 문의 하세요.");
-                }
-            });
+            $(selectHref).addClass("on");
         }
     });
 });
@@ -143,6 +81,17 @@ $(document).ready(function(){
     if($('.header_wrap').length >0){
         bodyScroll();//body scroll  
     }
+
+    // 전체선택
+    $("input[name=chkAll]").each(function(){
+        $(this).click(function(){ 
+         if($(this).prop("checked")) { 
+            $(this).closest('.at_this_time_like_wrap').find($("input[type=checkbox]")).prop("checked",true); 
+        
+         } else { 
+            $(this).closest('.at_this_time_like_wrap').find($("input[type=checkbox]")).prop("checked",false); } 
+        })
+    });
 })  
 </script>
 </head>
@@ -337,97 +286,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- //lnb -->
                 <!-- sub contents -->
                 <div class="sub_contents">
-                    <h3 class="page_title mgt0">쿠폰/상품권 등록</h3>
-				   	<ul class="list_type02_v2 mgt20 mgb40">
-				        <li>쿠폰별 혜택과 사용조건, 유효기간을 꼭 확인해 주세요.</li>
-				        <li>하나의 장바구니에 두 건 이상의 배송비가 발생하였을 경우 배송비 쿠폰은 한 건의 배송비만 무료가 됩니다.</li>
-				        <li>무료 배송 쿠폰은 국내 배송 상품만 사용 가능하며, 착불 상품 및 도선료는 해당되지 않습니다.</li>
-				        <li>무료 배송 쿠폰을 사용하여 주문한 경우 반품 시 적용된 쿠폰은 소멸됩니다.</li>
-				        <li>따라서 주문 취소/반품을 하시게 되면 적용된 쿠폰은 환원이 되지 않습니다. 유념해주시기 바랍니다.</li>
-				    </ul>
+                    <h3 class="page_title mgt0">좋아요♥  내역보기</h3>
+                    <ul class="list_type02_v2 mgt20 mgb60">
+                        <li>고객님이 좋아요한 상품/브랜드/이럴 때 좋아요는 보관 기간 제한이 없이 영구보존 됩니다.</li>
+                        <li>관심있는 상품/브랜드/이럴 때 좋아요 를 누르고 관리하세요. 쿠폰, 혜택을 한 번에 확인하실 수 있습니다.</li>
+                    </ul>
 
-                    <div class="box_gray02 delivery_detail mgt15 regular">
-                        <span class="bold">회원님의 현재 보유쿠폰은</span>
-                        <span class="mgl10 order_num only_english color_01 bold">2</span>
-                        <span class="">장 입니다.</span>
-                    </div>
-				    <!-- <div class="box_gray02 mgb0 bt_line fs16">회원님의 현재 보유쿠폰은 <span class="order_num">0장</span> 입니다.</div>
-				    <div class="bt_line"></div> -->
-
-				    <table class="bbs_list_v2 space_pad border mgt60">
-				        <caption>현재 보유쿠폰 <span>No, 구분, 쿠폰이름, 할인율(금액), 적용기준, 시작일자, 만료일자</span></caption>
-				        <colgroup>
-				            <col style="width:50px" />
-				            <col style="width:100px" />
-				            <col style="width:*" />
-				            <col style="width:100px" />
-				            <col style="width:120px" />
-				            <col style="width:100px" />
-				            <col style="width:100px" />
-				        </colgroup>
-				        <thead>
-				            <tr>
-				                <th scope="col" class="fir">No</th>
-				                <th scope="col">구분</th>
-				                <th scope="col">쿠폰이름</th>
-				                <th scope="col">할인율(금액)</th>
-				                <th scope="col">적용기준</th>
-				                <th scope="col">시작일자</th>
-				                <th scope="col" class="last">만료일자</th>
-				            </tr>
-				        </thead>
-				        <tbody>
-                            <tr>
-                                <td class="only_english">
-                                    13
-                                    <input type="hidden" name="couponId" value="8004351974">
-                                    <input type="hidden" name="kyoboCouponId" value="8004351975">
-                                </td>
-                                <td>무료배송</td>
-                                <td class="t_left">플랜티넘 무료배송</td>
-                                <td class="t_right">무료</td>
-                                <td>국내 배송 상품</td>
-                                <td class="only_english">2021.01.20</td>
-                                <td class="only_english">2021.01.30</td>
-                            </tr>
-				            <tr><td colspan="7" class="no-data">보유하신 쿠폰이 없습니다.</td></tr>
-				            
-				        </tbody>
-				    </table>
-
-                    <!-- paging -->
-                    <div class="paging cs mgt40">
-                        <a title="맨 처음 페이지로 이동" href="#n" class="first">처음</a>
+                    <div class="tab1 none mgt60">
                         <ul>
-                            <li class="active"><a href="#n">1</a></li>
+                            <li><a href="#n" class="on"><span>좋아요♥ 상품 <em>(99)</em></span></a></li>
+                            <li><a href="#n" ><span>좋아요♥ 브랜드 <em>(99)</em></span></a></li>
+                            <li><a href="#n" ><span>이럴 때, 좋아요♥ <em>(99)</em></span></a></li>
                         </ul>
                     </div>
-                    <!-- //paging -->
 
-				    <form id="couponForm" name="couponForm">
-				        <input type="hidden" name="trackGcardNum" style="width:100px;"/>
-				    </form>
-
-                    <h4 class="page_title mgt80">다양한 이벤트 쿠폰을 등록하여 할인 혜택 받으세요!</h4>
-				    <ul class="list_type02_v2 mgt10 mgb40">
-				        <li>해당 상품권 및 보너스 쿠폰의 사용기준과 기간을 반드시 확인하여 주세요.</li>
-				        <li>오프라인 및 제휴사에서 받으신 쿠폰은 번호 입력을 통해 보너스 쿠폰으로 우선 발급을 받으셔야 이용하실 수 있습니다.</li>
-				        <li>유효기간이 만기 된 상품권 및 보너스 쿠폰은 등록이 불가합니다.</li>
-				    </ul>
-
-                    <h4 class="page_title mgt80">쿠폰번호를 입력하세요.</h4>
-				    <div class="box_gray_02 fs14 mgt10 clear">
-				        <div class="coupon_regist">
-                            <span class="input_wrap">
-                                <label class="mgr10" for="couponNum">쿠폰 번호</label> 
-                                <input type="text" name="couponNum" id="couponNum" maxlength="16" class="width_barcode inlineblock" title="쿠폰번호 입력" />    
-                            </span>
-                            <span class="mgl10 v_middle">쿠폰 번호는 영문의 대소문자를 구별합니다.</span>
+                    <div class="at_this_time_like_wrap">
+                        <div class="blank_text_wrap">
+                            <p>좋아요한 브랜드가 없습니다.</p> 
                         </div>
-				        <div class="f_right">
-                            <a href="#n" _onclick="couponReg()" class="btn_type01_v2 btn_styl11 mgt10" style="width:50px;">등록</a>
-                        </div>
-				    </div>
+                    </div>                  
                 </div>
                 <!-- //sub contents -->                
             </div>

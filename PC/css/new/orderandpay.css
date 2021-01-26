@@ -1479,12 +1479,13 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .elip{  display: block;  width: 100%;  text-overflow: ellipsis;  white-space: nowrap;  overflow: hidden;}
 .orderandpay .elip2{ margin:0; padding:0; width: 100%;  max-height: 2.8em; height: auto !important; line-height: 1.4em !important; overflow:hidden; text-overflow:ellipsis; white-space: normal !important;  display:-webkit-box !important; -webkit-line-clamp:2; -webkit-box-orient: vertical;}
 /* 상품평 수정삭제 */
+.orderandpay .modi_wrap{text-align: right;}
 .orderandpay .modi_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .modi_list:after {content: ''; display: block; clear: both;}
-.orderandpay .modi_list {float: right;}
+.orderandpay .modi_list {display: inline-block;}
 .orderandpay .modi_list li {float: left;}
-.orderandpay .modi_list li.bar {}
-.orderandpay .modi_list li.bar:before {content: ''; display: block;}
+.orderandpay .modi_list li a.bar {float: left; overflow: hidden;}
+.orderandpay .modi_list li a.bar:after {content: '';     display: inline-block;    width: 1px;    height: 15px;    background: #777;    vertical-align: middle; margin: -2px 10px 0px;}
 
 /* 마이핫트렉스 메인 */
 .orderandpay .membership_user_wrap { background: #fafafa; padding:26px 0;}
@@ -1557,11 +1558,16 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .color_03 {color:#777 !important;}
 .orderandpay .bite_size_text_wrap{ font-weight: 500; color:#777 }
 .orderandpay .bite_size_text_wrap strong { font-weight: 500; }
-.orderandpay .satisfaction_check_wrap {border-top:1px #EEEEEE solid; padding-top: 50px;}
+.orderandpay .satisfaction_check_wrap {border-top:1px #EEEEEE solid; padding-top: 40px;}
 .orderandpay .satisfaction_check_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .pop_star_wrap {}
-.orderandpay .pop_star_wrap strong {font-size: 20px; font-weight: 500;}
- 
+.orderandpay .pop_star_wrap strong {font-size: 20px; font-weight: 500; margin-top:10px;}
+
+.orderandpay .pop_star_wrap .star_grade_wrap {} 
+.orderandpay .pop_star_wrap .star_grade_wrap:after {content: ''; display: block; clear: both;}
+.orderandpay .pop_star_wrap .star_grade_wrap .star_unit {font-size: 0; float: left; margin-left:23px; display:block; width: 54px; height:50px; background: url(../../images/new/bg_star_grade.png) no-repeat top left;}
+.orderandpay .pop_star_wrap .star_grade_wrap .star_unit.active {display:block; width: 54px; height:50px; background: url(../../images/new/bg_star_grade.png) no-repeat top right;}
+
  /* 주문배송 상세내역 */
 .orderandpay .box_gray02 {background: #FAFAFA;}
 .orderandpay .box_gray02.delivery_detail {margin:0; padding:32px 10px 24px; border:0; font-size: 18px; font-weight: 700; color: #000000;}
@@ -1663,3 +1669,18 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .at_this_time_like_wrap .pd_list {margin-top:40px;}
 .orderandpay .at_this_time_like_wrap .pd_list .choice_wrap.type_squre input[type="checkbox"] + label:before,
 .orderandpay .at_this_time_like_wrap .pd_list .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:8px ; position: absolute; top:5px; left:5px; z-index: 1;}
+
+.orderandpay .at_this_time_like_wrap .blank_text_wrap {text-align: center; margin: 80px auto; }
+.orderandpay .at_this_time_like_wrap .blank_text_wrap p {font-size: 32px; color: #419BF9;}
+
+/* */
+.orderandpay .answer_content_wrap{ border-top:1px #DBDBDB solid; padding:32px 0;}
+.orderandpay .answer_content_wrap .answer_content_title {font-size: 14px;}
+.orderandpay .answer_content_wrap .answer_content_txt {line-height: 1.8; margin-top:14px;}
+.orderandpay .question-content {padding-bottom: 32px;}
+.orderandpay .tab_unit_list:after {content: ''; display: block; clear: both;}
+.orderandpay .tab_unit_list .items {margin-right:10px; float: left; overflow: hidden;}
+.orderandpay .tab_unit_list .items:before {content: ''; display: block; width:1px; height:15px; background: #777; float: left; margin-right:10px;}
+.orderandpay .tab_unit_list .items:first-child:before {content: ''; display: none;}
+.orderandpay .tab_unit_list .items .link {color: #777;}
+.orderandpay .tab_unit_list .items .link.active {color: #000;}

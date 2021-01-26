@@ -81,6 +81,12 @@ $(document).ready(function(){
     if($('.header_wrap').length >0){
         bodyScroll();//body scroll  
     }
+
+    // 210129 tab 
+    $('.tab_unit_list a').click(function(){
+        $(this).addClass('active').parent('li').siblings('li').children('a').removeClass('active');
+    });
+
 })  
 </script>
 </head>
@@ -280,7 +286,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				        <li>상품페이지에서 문의하신 질문에 대한 답변을 편리하게 보실 수 있습니다.</li>
 				        <li>상품 이미지를 클릭하시면 상품 상세페이지로 이동하실 수 있습니다.</li>
 				    </ul>
-				    <table class="bbs_list_v2 mgt20">
+                    <ul class="tab_unit_list">
+                        <li class="items">
+                            <!-- 활성화 class="active" -->
+                            <a href="javascript:;" class="link active">전체 (999)</a>
+                        </li>
+                        <li class="items">
+                            <a href="javascript:;" class="link">답변완료 (999)</a>
+                        </li>
+                        <li class="items">
+                            <a href="javascript:;" class="link">접수 (999)</a>
+                        </li>
+                    </ul>
+				    <table class="bbs_list_v2 space_pad border mgt20">
 				        <caption>상품 Q&amp;A 내역 <span>작성일자, 상품, 제목, 답변여부</span></caption>
 				        <colgroup>
 				            <col style="width:90px" />
@@ -315,8 +333,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			                        <div class="txt">
 			                            <p class="question-content">안녕하세요.<br/>새 배터리, 기준 몇시간 사용 가능한가요?<br/></p>
 			                            
-	                                    <p class="answer bt_line mgt20 mgb30 pdt10"><strong class="">문의글 답변</strong></p>
-	                                    <p class="answer-content"><p>안녕하세요</p><p> 고객님.</p><p>핫트랙스 온라인몰 담당자&nbsp; 입니다.</p><p>&nbsp;</p><p>문의주신 상품은 지우는 버튼을 누를 때 배터리가 소모됩니다.</p><p>때문에 정확한 수치를 알려드리기는 어렵지만,&nbsp;몇 백번 이상 사용이 가능하십니다.</p><p>구매 시 참고 바랍니다.</p><p>&nbsp;</p><p>기타 문의사항이 있으시면 언제든지 상품 Q&amp;A로 재문의주시거나</p><p>1661-1112번으로 문의주시기 바랍니다.</p><p>행복한 하루 보내시길 바랍니다.</p><p>감사합니다.</p><p>&nbsp;</p><br/></p>
+	                                    <!-- <p class="answer bt_line mgt20 mgb30 pdt10"><strong class="">문의글 답변</strong></p>
+	                                    <p class="answer-content"><p>안녕하세요</p><p> 고객님.</p><p>핫트랙스 온라인몰 담당자&nbsp; 입니다.</p><p>&nbsp;</p><p>문의주신 상품은 지우는 버튼을 누를 때 배터리가 소모됩니다.</p><p>때문에 정확한 수치를 알려드리기는 어렵지만,&nbsp;몇 백번 이상 사용이 가능하십니다.</p><p>구매 시 참고 바랍니다.</p><p>&nbsp;</p><p>기타 문의사항이 있으시면 언제든지 상품 Q&amp;A로 재문의주시거나</p><p>1661-1112번으로 문의주시기 바랍니다.</p><p>행복한 하루 보내시길 바랍니다.</p><p>감사합니다.</p><p>&nbsp;</p><br/></p> -->
+                                        <div class="answer_content_wrap">
+                                            <div class="answer_content_title"><strong class="color_01">문의글 답변</strong></div>
+                                            <div class="answer_content_txt">
+                                                문의주신 상품은 지우는 버튼을 누를 때 배터리가 소모됩니다.때문에 정확한 수치를 알려드리기는 어렵지만,&nbsp;몇    백번 이상 사용이 가능하십니다.
+                                            </div>
+                                        </div>
                                         <div class="modi_wrap">
                                             <ul class="modi_list">
                                                 <li><a href="javascript:;" onclick="" class="bar">수정</a></li>
