@@ -30,7 +30,7 @@
 <script type="text/javascript">
     jQuery(function($){
     $(document).ready(function(){
-        //$('body').addClass('bg_gray').css("overflow-x", "hidden");//상단 mini 모드
+        $('body').addClass('bg_gray').css("overflow-x", "hidden");//상단 mini 모드
         $("#barcode").barcode("52006044880", "code128",{barWidth:2, barHeight:30});
     });
     
@@ -84,10 +84,9 @@ div.btn_white_l { position: absolute; top : -27px; right: 5px;display:block;back
 </style>
 </head>
 
-<body class="">
+<body class="bg_gray">
 
-<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
-<div id="wrap" class="content_new orderandpay positionTop">
+<div id="wrap" class="mini">
 
 <!-- #header -->
 <div id="header">
@@ -103,19 +102,24 @@ div.btn_white_l { position: absolute; top : -27px; right: 5px;display:block;back
 
 <!-- #content -->
 <div id="content">
-    <div class="my">
-        <div class="my_point">
-            <div class="my_info">
-                <dl>
-                    <dt>                    
-                        <em class="ic_medal friends">프렌즈</em>
-                    </dt>
-                    <dd>
-                        <p class="txt"><strong>하태경</strong>회원님 </p>
-                        <a href="/m/help/memberShip" class="btn arrow01">멤버십 혜택보기</a>
-                        <!-- <a href="#" onclick="showBarcode();return false;" class="btn barcode">회원바코드</a> -->
-                    </dd>
-                </dl>
+<div class="mb30">
+    <div class="my_point">
+        <div class="my_info">
+            <dl>
+                <dt>
+                    
+                    
+                    
+                    
+                    
+                    <em class="ic_medal" id="grade04">플래티넘</em>
+                    <a href="/m/help/memberShip" class="btn arrow01">등급혜택</a>
+                </dt>
+                <dd>
+                    <p class="txt"><strong>하태경</strong>회원님 ^0^ <br/><strong class="col_red">반갑구만 반가워요~! &gt;0&lt;</strong></p>
+                    <a href="#" onclick="showBarcode();return false;" class="btn barcode">회원바코드</a>
+                </dd>
+            </dl>
             <div class="ly_box" onclick="showBarcode()">
                 <div class="ly_conts">
                     <p class="t_c">통합포인트1</p>
@@ -127,16 +131,10 @@ div.btn_white_l { position: absolute; top : -27px; right: 5px;display:block;back
                     <div onclick="closeBarcode();" class="btn_white_l">닫기</div>
                 </div>
             </div>
-            <!-- <div class="btn_box">
+            <div class="btn_box">
                 <a href="/m/help/listAlarm" class="btn_alarm noover"><span><em class="col_red">0</em></span></a>
-                <a href="#" onclick="goSetting();return false;" class="btn_setting"> 설정 바로가기 </a>
-            </div> -->
-        </div>
-        <div class="card_unit_list_wrap">
-            <ul class="card_unit_list">
-                <li><a href="#n">영업점 영수증</a></li>
-                <li><a href="#n">멤버십 카드</a></li>
-            </ul>
+                <!--<a href="#" onclick="goSetting();return false;" class="btn_setting"> 설정 바로가기 </a>-->
+            </div>
         </div>
         <ul class="my_point_list">
             <li>
@@ -156,12 +154,12 @@ div.btn_white_l { position: absolute; top : -27px; right: 5px;display:block;back
                     <strong>쿠폰</strong>
                     
                 </a>
-            </li><!-- 
+            </li>
             <li>
                 <a href="/m/offLine/listReceipt" style="position:relative; top : 5px;">
                     <strong>영업점<br/>영수증</strong>
                 </a>
-            </li> -->
+            </li>
         </ul>
     </div>
     <div class="my_point_menu">

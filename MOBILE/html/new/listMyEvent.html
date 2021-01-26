@@ -26,14 +26,14 @@
 <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
 </head>
 <body id="layer">
-
-<div id="wrap" class="mini">
+<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
+<div id="wrap" class="content_new orderandpay positionTop">
   <!-- #header -->
   <div id="header">
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
       <!-- 서브 -->
       <div class="sub_wrap"> <a href="#n" _onclick="locBack();return false;" class="btn_back">뒤로가기</a> <a href="#n" class="btn_category" _onclick="bizOpenGnbMenu();return false;">카테고리 보기</a> <a href="#n" class="btn_search" _onclick="gnbSrchFrm();return false;">검색</a>
-        <h2 id="subTitle">마이페이지</h2>
+        <h2 id="subTitle">나의 Q&amp;A</h2>
       </div>
       <!--// 서브 --> 
     </div>
@@ -41,62 +41,45 @@
   <!-- //#header -->
   
 <!-- #content -->
-<div id="sc_content" style="padding:0 10px;">
-<!-- tit_section -->
-<div id="sc_header">
-    <h1>이벤트 참여 내역</h1>
-</div>
-<div class="tit_orange full">
-    <h3 class="tit">HOTTRACKS EVENT</h3>
-</div>
-<ul class="br_list mb30 mt40">
-    
-    
-        <li class="line bg_eeeeee">
+<div id="content">
+        
+  <!-- sub contents -->
+  <div id="my_content">
+    <div class="tit_orange">
+      <h3 class="tit">HOTTRACKS EVENT</h3>
+  </div>
+    <ul class="br_list mb30 mt40">    
+    <li class="line bg_eeeeee">
             2019.04.05(참여일자)
-        </li>
-        <li>
-            <strong class="fl_l2"><a href="#" onclick="showMyEvent('59855','0');return false;">&lt;꿈꾸는 4월&gt;  출석체크</a></strong>
-            <span class="fl_r">
-                
-                
-                발표완료
-            </span>
-        </li>
-        <li id="li_0" style="display: none;">
-            <span style="width:100%;">
-                <a href="#" class="li_a" onclick="goEvent('59855');return false;">해당 이벤트 보기 &gt;&gt;</a>
-            </span>
-            <span class="fl_l4">
-            </span>
-        </li>
+    </li>
+    <li>
+        <strong class="fl_l2"><a href="#" onclick="showMyEvent('59855','0');return false;">&lt;꿈꾸는 4월&gt;  출석체크</a></strong>
+        <span class="fl_r">
+            
+            
+            발표완료
+        </span>
+    </li>
+    <li id="li_0" style="display: block;">
+        <span style="width:100%;">
+            <a href="#" class="li_a" onclick="goEvent('59855');return false;">해당 이벤트 보기 &gt;&gt;</a>
+        </span>
+        <span class="fl_l4">
+        </span>
+    </li>
     
 </ul>
-<!-- paging -->
-<div class="paging mb30">
-    
-
-
-
-
-    
-    <ul>
-        
-            
-            
-                <li><a href="javascript://" class="active">1</a></li>
-            
-        
-    </ul>
-    
-
+    <!-- paging -->
+    <div class="paging cs">    
+      <ul>
+        <li><a href="javascript://" class="active">1</a></li>
+      </ul>
+    </div>
+    <!-- //paging -->
 </div>
-<!-- //paging -->
-<a href="javascript:history.back();" class="btn_back">뒤로</a>
+<!-- //sub contents -->
 </div>
 
-
-    
-</div>
+  
 </body>
 </html>

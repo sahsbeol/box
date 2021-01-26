@@ -26,8 +26,8 @@
 <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
 </head>
 <body>
-
-<div id="wrap" class="mini">
+<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
+<div id="wrap" class="content_new orderandpay positionTop">
   <!-- #header -->
   <div id="header">
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
@@ -43,27 +43,33 @@
 <!-- #content -->
 <div id="content">
         
-<input type="hidden" name="eof" value="1">
-<div class="customer mt17">
-    <div class="gray_box2 pt5">
-        <div class="tab_box">
-            <a href="/m/mypage/listTargetReview" class="active">상품평 쓰기 (0)</a>
-            <a href="/m/mypage/listMyReview">내 상품평(1)</a>
+    <input type="hidden" name="eof" value="1">
+    <div id="my_content" class="space_pad">
+        <div class="gray_box2">
+            <div class="tab_box">
+                <a href="/m/mypage/listTargetReview" class="active">상품평 쓰기 (0)</a>
+                <a href="/m/mypage/listMyReview">내 상품평(1)</a>
+            </div>
+            <!-- <hr class="hr_01"> -->
         </div>
-        <hr class="hr_01">
-    </div>
-    <p class="noti_re" style="display: inline-block; width: 100%; max-width: 564px; margin: 20px 0;">
-        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/20_targetreview.jpg" style="width:100%;">
-    </p>
-    <div class="bbs_box02 edit">
-        <ul>
-            
-        </ul>
-    </div>
-    <p class="info">매월 우수 상품평 작성자 10분께 통합포인트 5,000점이 적립됩니다. 상품평에 적합하지 않은 내용, 미풍양속을 해치는 내용 등은 통보없이 삭제될 수 있으며 통합포인트가 지급되지 않습니다. 상품문의 교환 반품 요청 제품이상 등 불편사항은 1:1 문의 하기를 이용해 주세요.</p>
-</div>
+        <div class="noti_re mt30">
+            <p>텍스트 후기를 남겨주시면 100P적립, 포토 후기를 남겨주시면
+            200P적립됩니다.</p>
 
+            <p class="mt20">CD,DVD 관련 상품은 상품평을 작성하셔도 후기 포인트가
+            적립되지 않습니다.</p>
+
+            <!-- <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mypage/20_targetreview.jpg" style="width:100%;"> -->
+        </div>
+        <div class="bbs_box02 edit">
+            <ul>
+            
+            </ul>
+        </div>
+        <p class="info">매월 우수 상품평 작성자 10분께 통합포인트 5,000점이 적립됩니다. 상품평에 적합하지 않은 내용, 미풍양속을 해치는 내용 등은 통보없이 삭제될 수 있으며 통합포인트가 지급되지 않습니다. 상품문의 교환 반품 요청 제품이상 등 불편사항은 1:1 문의 하기를 이용해 주세요.</p>
     </div>
+
+</div>
 <script>
 $(document).ready(function() {
     footerFn(); //footer

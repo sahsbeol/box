@@ -729,6 +729,9 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tit01 {font-size: 18px; color: #000; font-weight:500; line-height: normal; min-height:auto; margin-bottom:20px; margin-top:60px;}
 .orderandpay h4.tit01 {font-size:20px; font-weight:700; color:#000; margin-bottom: 10px;}
 .orderandpay h4.tit01.border {margin-bottom:0; padding-bottom:10px; border-bottom: 1px #000 solid;}
+.orderandpay h3.tit01.fz {font-size:16px; font-weight: 700;}
+.orderandpay h3.page_title.fz22 {font-size: 22px;}
+
 .orderandpay .page_stitle a { font-size: 22px; line-height: 1.4; margin-bottom: 0px; letter-spacing: -1px; font-weight: 700; color:#000;}
 
 .orderandpay h4.important_info {font-size:18px; line-height: normal; margin-bottom: 5px; }
@@ -1007,6 +1010,7 @@ ul.agency_select li:nth-child(3) .ele {
 
 /* 고객센터 - 전체보기 버튼 */
 .orderandpay .btn_more {font-size: 16px; font-weight: 700; padding-bottom: 7px; border-bottom: 1px #000 solid;}
+.orderandpay .btn_more.type2 {font-size: 14px; border-bottom: 0; font-weight: 400; padding-bottom: 0; font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; color:#777777;}
 .orderandpay .s_title_wrap .s_title {float: left;}
 .orderandpay .s_title_wrap .btn_more {float: right; margin-top: 60px;}
 .orderandpay .s_title_wrap:after {content: ''; display: block; clear: both;}
@@ -1558,13 +1562,13 @@ ul.agency_select li:nth-child(3) .ele {
 /* 메인 하단 리스트 */
 .orderandpay .my_list_wrap {}
 .orderandpay .mgt8 {margin-top: 8px !important;}
-.orderandpay .my_list_wrap .membership_list {width:100%; margin-top:0;}
+.orderandpay .my_list_wrap .membership_list {width:100%; margin-top:0; float: none;}
 .orderandpay .my_list_wrap .membership_list .items {box-sizing: border-box;}
 .orderandpay .my_list_wrap .membership_list .items .link {display: block; border: 1px #eee solid; box-sizing: border-box; margin: 0 0 0 7px; text-align: center;} 
 .orderandpay .my_list_wrap .membership_list .items:first-child .link {margin-left:0;}
 .orderandpay .my_list_wrap .membership_list .items .text_wrap {padding-bottom: 38px; text-align: center;    padding-left: 10px;    padding-right: 10px;}
-.orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_go_text {font-size: 16px;margin-top: 35px;}
-.orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_number {color:#FF6A5B; margin-top:31px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height: normal;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_go_text {font-size: 16px;margin-top: 35px; font-weight: 500;}
+.orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_number {color:#DA2128; margin-top:31px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height: normal;font-family: 'font_gs','Apple SD Gothic Neo', sans-serif !important; font-weight: 500;}
 .orderandpay .my_list_wrap .membership_list .items .text_wrap .unit_status {color: #777;}
 
 .orderandpay .my_list_wrap .membership_list.col3 .items.other {width:482px;}
@@ -1590,6 +1594,13 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .my_list_wrap .membership_list .items .unit_go_consulting {display:inline-block; margin: 0 auto; font-size: 14px; font-weight: 700; padding-bottom: 5px; border-bottom: 1px #000 solid; margin-bottom: 35px;}
 
 .orderandpay .my_list_wrap .membership_list .items .height_set .text_wrap {padding-top:38px; padding-bottom: 69px;}
+
+.orderandpay .mypage_wish_list .zzim-list {background: #fff; padding:0; border:0;}
+.orderandpay .mypage_wish_list .zzim-list ul .items {width:172px; height:172px; margin-left:12px;}
+.orderandpay .mypage_wish_list .zzim-list ul .items .link {display:block;}
+.orderandpay .mypage_wish_list .zzim-list ul .items img {width:100% !important; height: 100%;}
+.orderandpay .mypage_wish_list .zzim-list ul .items:first-child {margin-left:0;}
+
 
 /* 주문배송조회 */
 .orderandpay .period_srch {margin-bottom: 0;}
@@ -1705,10 +1716,12 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap {float: left;}
 .orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap{}
-.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap:after {content: ''; display: inline-block; width:1px; height:15px; background:#777; margin: 0px 1px 2px 7px; vertical-align: middle;}
+/*.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap:after {content: ''; display: inline-block; width:1px; height:15px; background:#777; margin: 0px 1px 2px 7px; vertical-align: middle;}*/
 .orderandpay .at_this_time_like_wrap .go_select_wrap {float: right;}
-.orderandpay .at_this_time_like_wrap .choice_delete {font-size: 14px; color: #000; font-weight: 400;font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-size:14px; vertical-align: baseline; outline: none;}
-.orderandpay .at_this_time_like_wrap {}
+.orderandpay .at_this_time_like_wrap .choice_delete {font-size: 14px; color: #000; font-weight: 400;font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; vertical-align: baseline; outline: none; width:96px; height:32px; border:1px #777 solid; display: inline-block; line-height: 30px; margin-left:10px;}
+.orderandpay .at_this_time_like_wrap .pd_list ul li .tit {margin-top:0px; width:80%;}
+.orderandpay .at_this_time_like_wrap .trash_delete {position:absolute; right:0; top:12px; width:26px; height:26px; background:url('../../images/new/icon_my_trash.png') 0 0 no-repeat; font-size: 0;}
+.orderandpay .at_this_time_like_wrap .pd_list ul li .cont {position: relative;}
 
 /* checkbox */
 .orderandpay .at_this_time_like_wrap .pd_list {margin-top:40px;}
@@ -1717,8 +1730,10 @@ ul.agency_select li:nth-child(3) .ele {
 
 .orderandpay .at_this_time_like_wrap .blank_text_wrap {text-align: center; margin: 80px auto; }
 .orderandpay .at_this_time_like_wrap .blank_text_wrap p {font-size: 32px; color: #419BF9;}
+.orderandpay .at_this_time_like_wrap .blank_text_wrap .tt{position: relative;}
+.orderandpay .at_this_time_like_wrap .blank_text_wrap .tt:before{position:absolute; content:''; width:47px; height:47px; left:48px; top:-8px; background:url('../../images/biz/common/icon_none.png')no-repeat;}
 
-/* */
+/* tab */
 .orderandpay .answer_content_wrap{ border-top:1px #DBDBDB solid; padding:32px 0;}
 .orderandpay .answer_content_wrap .answer_content_title {font-size: 14px;}
 .orderandpay .answer_content_wrap .answer_content_txt {line-height: 1.8; margin-top:14px;}
@@ -1729,3 +1744,6 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tab_unit_list .items:first-child:before {content: ''; display: none;}
 .orderandpay .tab_unit_list .items .link {color: #777;}
 .orderandpay .tab_unit_list .items .link.active {color: #000;}
+
+.orderandpay .mypage_wish_list_title {position: relative;}
+.orderandpay .position_right {position: absolute; top:0; right:0; color:#777;}

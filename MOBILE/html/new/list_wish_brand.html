@@ -26,6 +26,7 @@
 <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
 </head>
 <body>
+
 <!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
 <div id="wrap" class="content_new orderandpay positionTop">
   <!-- #header -->
@@ -42,73 +43,129 @@
   
 <!-- #content -->
 <div id="content">
-        
-<!-- sub top -->
-<!-- //sub top -->
-<!-- sub contents -->
+<input type="hidden" name="eof" value="0">
 <div class="gray_box">
     <hr class="hr_01">
     <div id="my_content">
         <div class="my_smenu4">
             <a href="/m/mypage/totsaved" class="btn_totsaved">통합<br>포인트</a>
             <a href="/m/mypage/deposit" class="btn_deposit">예치금</a>
-            <a href="/m/mypage/coupon" class="btn_coupon">쿠폰</a>
-            <a href="/m/offLine/listReceipt" class="btn_recepit active">영업점<br>영수증</a>
+            <a href="/m/mypage/coupon" class="btn_coupon active">쿠폰</a>
+            <a href="/m/offLine/listReceipt" class="btn_recepit">영업점<br>영수증</a>
         </div>
-        <!-- <div class="my_smenu2">
-            <a href="#" class="my_info" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/listReceipt';return false;"><span>영업점 영수증</span></a>
-            <a href="#" class="my_info active" style="float:right;" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/savePointByOffBill';return false;"><span>영수증 후 적립</span></a>
-        </div> -->
+        
+        <div class="my_smenu_ment"><strong>이벤트 쿠폰 등록</strong></div>
+        <div style="text-align: center;">
+            <input name="couponNum" id="couponNum" value="" type="text" class="i_input">
+            <a href="javascript:couponReg()" class="btn btn_type01 bg_orange">등록</a>
+        </div>
+        
 
+        <div class="info t_c space_pad mt30">고고객님의 보유 쿠폰은 <span class="color_01"><strong class="only_english">88,264,100</strong></span> 장 입니다.</div>
+        
+        <!-- <div class="my_smenu_ment">고객님의 보유 쿠폰은 <span class="col_orange">0</span>장 입니다.</div> -->
         <div class="space_pad">
             <div class="tab_box distance">
-                <a href="javascript:;">영업점 영수증</a>
-                <a href="javascript:;" class="active">영수증 후 적립</a>
+                <a href="javascript:;" class="active">온라인 쿠폰 <span class="only_english">(99)</span></a>
+                <a href="javascript:;">영업점 쿠폰<span class="only_english">(99)</span></a>
             </div>
-            <form id="offPoint" name="offPoint" style="margin:30px 0;">
-                <table class="table" summary="영수증 적립" border="1">
-                    <caption>영수증 적립</caption>
-                    <colgroup>
-                        <col width="*">
-                        <col width="*">
-                    </colgroup>
-                    <tbody id="savePoint">
-                        <tr>
-                            <th scope="row" class="t_right">승인금액</th>
-                            <td><span class="f_left"><input type="number" pattern="\d*" name="textfield2" placeholder="승인금액" id="txtReciptAmt" class="inputNumberText"></span></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="t_right">영수증 바코드 번호</th>
-                            <td><span class="f_left"><input type="number" pattern="\d*" name="textfield1" class="inputNumberText" id="txtReciptNo" placeholder="영수증 바코드 번호" value=""></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <!-- <a href="#" onclick="scanCall();return false;" id="btnScan" class="btn_type02 hid_obj"><span>바코드검색</span></a>
-            <a href="#" onclick="offSavePoint();return false;" class="btn_type01"><span>적립하기</span></a> -->
-            <a href="#" onclick="scanCall();return false;" id="btnScan" class="btn_type02 hid_obj"><span>바코드검색</span></a>
-            <a href="#" onclick="offSavePoint();return false;" class="btn btn_basic"><span>적립하기</span></a>
-            
-           
-            <h4 class="mt40">적립방법</h4>
-            <ul>
-                <li>영수증 하단에 있는 바코드 번호와 승인금액을 입력하신 후 적립하기 버튼을 누르시면 적립이 가능합니다. <br>(핫트랙스 영수증만 후 적립 가능)</li>
-            </ul>
-            <h4 class="mt40">알림</h4>
-            <ul>
-                <li>영업점에서 결제하신 핫트랙스 영수증은 통합포인트 후 적립이 가능합니다.</li>
-                <li>교보문고 영업점 영수증은 검색만 가능하며 영수증 후 적립은 교보문고 APP에서 적립이 가능합니다.</li>
-                <li>단, 후 적립은 7일 이전 영수증까지만 가능합니다.</li>
-                <li>일부 상품은 적립대상에서 제외되며, 등급 산정을 하는 구매금액에는 포함됩니다. </li>
-            </ul>
-            <!-- <div class="bill_noti">
-                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/9_a_text1.jpg">
-                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/9_a_text2.jpg">
-            </div> -->
+            <div class="my_list" id="orderList">
+                
+<!--  여기 까지 삭제 -->
+<style type="text/css">
+span.btn_area { padding : 0 38px; text-align: center; border : 1px solid #a0a0a0;}
+span.btn_area a.btn{color : #000;}
+.box_tit { font-size:15px;font-weight:bold;padding-bottom:10px;margin-bottom:20px;border-bottom:1px solid #dadada;display:block; }
+.ly_box.active{ background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/company/bg_10x10.png') }
+.ly_box .ly_conts { display: block; margin: auto; padding:10px 0;text-align: center; position: relative; top: 50%; margin-top: -65px; overflow: visible; background-color: #fff; border-radius: 5px;  border: 2px solid #ff4400;}
+.btn_white_l { position: absolute;top: -28px;right: 5px;display:block;width:25px;height:25px;background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/btn_close04.png') no-repeat 50% 50%;background-size:25px;overflow:hidden;text-overflow:ellipsis;text-indent:-999px;text-align:left;}
+.ly_box .ly_conts .line01 { width : 100%;border-bottom: 1px solid #dadada;border-width: 0 0 1px 0; }
+#my_content .my_list .couponbox .box_on{     background-repeat: no-repeat; margin: 10px 10px; border: 5px solid #ff6600; border-radius: 20px; background: url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/online_coupon.png) no-repeat 90% center; background-size: 97px auto;    background-color: #f60;
+}
+</style>
+<script type="text/javascript" src="/js/jquery-barcode.min.js"></script>
+<script type="text/javascript">
+function showBarcode(cpnId, offCpnName, offUseYn){
+    $("#cpnTit").html(offCpnName);
+    $(".barcode").barcode(cpnId, "code128");
+    $(".bar_hidden").val(cpnId);
+    
+    if(offUseYn == 'N'){
+        $("div#btn_barcode").hide();
+    } else {
+        $("div#btn_barcode").show();
+    }
+    
+    if($(".ly_box").hasClass("active")){
+        $(".ly_box").removeClass("active");
+        $(".ly_box").hide();
+        $(".btn_white_l").hide();
+    }else{
+        $(".ly_box").addClass("active");
+        $(".ly_box").show();
+        $(".btn_white_l").show();
+    }
+    
+}
+function completeBarcode(){
+    var offCpnId = $(".bar_hidden").val();
+    $.ajax({
+        type: "POST"
+       ,url: "/m/offLine/updateUseBarcode"
+       ,data: { offCpnId : offCpnId}
+       ,dataType: "JSON"
+       ,success : function(data){
+            alert("사용완료 되었습니다.");
+            location.reload();
+       }
+       ,error: function(data) {
+           alert("사용되지 않았습니다.");
+       }
+   });
+}
+function closeBarcode(){
+    $(".ly_box").hide();
+    $(".btn_white_l").hide();
+    return false;
+}
+</script>
+
+<div class="ly_box" onclick="showBarcode();">
+    <div class="ly_conts">
+        <strong id="cpnTit" class="box_tit"></strong>
+        <div class="barcode" style="margin:10px auto;"></div>
+        <div id="btn_barcode">
+            <input class="bar_hidden" type="hidden" value="">
+            <span class="btn_area"><a class="btn" href="#" onclick="completeBarcode();return false;">사용</a></span><br>
+            <p style="padding : 8px 0 8px;">●사용완료 버튼은 영업점 결제시, <br> 카운터에서 체크하는 버튼입니다.</p>
         </div>
+        <div onclick="closeBarcode();" class="btn_white_l">닫기</div>
     </div>
 </div>
-<!-- //sub contents -->
+<div class="couponbox_none">
+<div class="box">
+    <p class="nocoupon"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/common/oncoupon_none.jpg" alt="온라인쿠폰없음"></p>
+</div>
+</div>
+<!--  여기 까지 삭제 -->
+            </div>
+            <dl class="notice_txt mt30 mb30">
+                <dt><h3>꼭 알아두기</h3></dt>
+                <dd class="mt10">쿠폰별 혜택과 사용조건, 유효기간을 꼭 확인해주세요.</dd>
+                <dd>취소/반품을 하시게 되면 적용된 쿠폰은 환원이 되지 않습니다.</dd>
+                <dd>배송비 쿠폰을 사용해서 주문한 경우 반품 시 적용된 쿠폰은 소멸합니다.</dd>
+                <dd>장바구니에 두 건 이상의 배송비가 발생했을 경우, 배송비 쿠폰은 한 건의 배송비만 무료로 적용됩니다.</dd>
+            </dl>
+        </div>
+        <!-- <div class="my_smenu2">
+            <a href="/m/mypage/coupon" class="my_info active"><span>온라인 쿠폰(<span>0)</span></span></a>
+            <a href="/m/offLine/offLineCoupon" class="my_info"><span>영업점 쿠폰(0)</span></a>
+        </div> -->
+
+        
+
+    </div>
+</div>
 </div>
 
 <script>

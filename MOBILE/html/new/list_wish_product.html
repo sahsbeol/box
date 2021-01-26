@@ -26,6 +26,7 @@
 <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
 </head>
 <body>
+
 <!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
 <div id="wrap" class="content_new orderandpay positionTop">
   <!-- #header -->
@@ -42,73 +43,24 @@
   
 <!-- #content -->
 <div id="content">
-        
-<!-- sub top -->
-<!-- //sub top -->
-<!-- sub contents -->
-<div class="gray_box">
-    <hr class="hr_01">
-    <div id="my_content">
-        <div class="my_smenu4">
-            <a href="/m/mypage/totsaved" class="btn_totsaved">통합<br>포인트</a>
-            <a href="/m/mypage/deposit" class="btn_deposit">예치금</a>
-            <a href="/m/mypage/coupon" class="btn_coupon">쿠폰</a>
-            <a href="/m/offLine/listReceipt" class="btn_recepit active">영업점<br>영수증</a>
+    <div>
+        <div class="search_tab">
+            <ul>
+                <li class="active"><a href="#none">좋아요♥ 상품<span class="font_t">(2,110)</span></a></li>
+                <li><a href="#none">좋아요♥ 브랜드<span class="font_t">(2,110)</span></a></li>
+                <li><a href="#none">이럴 때, 좋아요♥<span class="font_t">(2,110)</span></a></li>
+            </ul>
         </div>
-        <!-- <div class="my_smenu2">
-            <a href="#" class="my_info" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/listReceipt';return false;"><span>영업점 영수증</span></a>
-            <a href="#" class="my_info active" style="float:right;" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/savePointByOffBill';return false;"><span>영수증 후 적립</span></a>
-        </div> -->
-
-        <div class="space_pad">
-            <div class="tab_box distance">
-                <a href="javascript:;">영업점 영수증</a>
-                <a href="javascript:;" class="active">영수증 후 적립</a>
-            </div>
-            <form id="offPoint" name="offPoint" style="margin:30px 0;">
-                <table class="table" summary="영수증 적립" border="1">
-                    <caption>영수증 적립</caption>
-                    <colgroup>
-                        <col width="*">
-                        <col width="*">
-                    </colgroup>
-                    <tbody id="savePoint">
-                        <tr>
-                            <th scope="row" class="t_right">승인금액</th>
-                            <td><span class="f_left"><input type="number" pattern="\d*" name="textfield2" placeholder="승인금액" id="txtReciptAmt" class="inputNumberText"></span></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="t_right">영수증 바코드 번호</th>
-                            <td><span class="f_left"><input type="number" pattern="\d*" name="textfield1" class="inputNumberText" id="txtReciptNo" placeholder="영수증 바코드 번호" value=""></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <!-- <a href="#" onclick="scanCall();return false;" id="btnScan" class="btn_type02 hid_obj"><span>바코드검색</span></a>
-            <a href="#" onclick="offSavePoint();return false;" class="btn_type01"><span>적립하기</span></a> -->
-            <a href="#" onclick="scanCall();return false;" id="btnScan" class="btn_type02 hid_obj"><span>바코드검색</span></a>
-            <a href="#" onclick="offSavePoint();return false;" class="btn btn_basic"><span>적립하기</span></a>
-            
-           
-            <h4 class="mt40">적립방법</h4>
+        <div class="tab_01_st">
             <ul>
-                <li>영수증 하단에 있는 바코드 번호와 승인금액을 입력하신 후 적립하기 버튼을 누르시면 적립이 가능합니다. <br>(핫트랙스 영수증만 후 적립 가능)</li>
+                <li class="active"><a href="#none">기프트<span class="font_t">(2,110)</span></a></li>
+                <li><a href="#none">브랜드<span class="font_t">(2,110)</span></a></li>
             </ul>
-            <h4 class="mt40">알림</h4>
-            <ul>
-                <li>영업점에서 결제하신 핫트랙스 영수증은 통합포인트 후 적립이 가능합니다.</li>
-                <li>교보문고 영업점 영수증은 검색만 가능하며 영수증 후 적립은 교보문고 APP에서 적립이 가능합니다.</li>
-                <li>단, 후 적립은 7일 이전 영수증까지만 가능합니다.</li>
-                <li>일부 상품은 적립대상에서 제외되며, 등급 산정을 하는 구매금액에는 포함됩니다. </li>
-            </ul>
-            <!-- <div class="bill_noti">
-                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/9_a_text1.jpg">
-                <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/9_a_text2.jpg">
-            </div> -->
+        </div>
+        <div>
+            <a href="#none">전체</a>
         </div>
     </div>
-</div>
-<!-- //sub contents -->
 </div>
 
 <script>
