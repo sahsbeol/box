@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>HOTTRACKS - 생활 속 감성충전소</title>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/content.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<!-- 210122 작업부분 -->
+<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/swiper.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+<script type="text/javascript" src="../../js/biz/m_hott.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+</head>
+<body>
+
+<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
+<div id="wrap" class="content_new orderandpay positionTop">
+  <!-- #header -->
+  <div id="header">
+    <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
+      <!-- 서브 -->
+      <div class="sub_wrap"> <a href="#n" _onclick="locBack();return false;" class="btn_back">뒤로가기</a> <a href="#n" class="btn_category" _onclick="bizOpenGnbMenu();return false;">카테고리 보기</a> <a href="#n" class="btn_search" _onclick="gnbSrchFrm();return false;">검색</a>
+        <h2 id="subTitle">마이페이지</h2>
+      </div>
+      <!--// 서브 --> 
+    </div>
+  </div>
+  <!-- //#header -->
+  
+<!-- #content -->
+<div id="content">
+<input type="hidden" name="eof" value="0">
+<div class="gray_box">
+    <hr class="hr_01">
+    <div id="my_content">
+        <div class="my_smenu4">
+            <a href="/m/mypage/totsaved" class="btn_totsaved">통합<br>포인트</a>
+            <a href="/m/mypage/deposit" class="btn_deposit">예치금</a>
+            <a href="/m/mypage/coupon" class="btn_coupon active">쿠폰</a>
+            <a href="/m/offLine/listReceipt" class="btn_recepit">영업점<br>영수증</a>
+        </div>
+        
+        <div class="my_smenu_ment"><strong>이벤트 쿠폰 등록</strong></div>
+        <div style="text-align: center;">
+            <input name="couponNum" id="couponNum" value="" type="text" class="i_input">
+            <a href="javascript:couponReg()" class="btn btn_type01 bg_orange">등록</a>
+        </div>
+        
+
+        <div class="info t_c space_pad mt30">고고객님의 보유 쿠폰은 <span class="color_01"><strong class="only_english">88,264,100</strong></span> 장 입니다.</div>
+        
+        <!-- <div class="my_smenu_ment">고객님의 보유 쿠폰은 <span class="col_orange">0</span>장 입니다.</div> -->
+        <div class="space_pad">
+            <div class="tab_box distance">
+                <a href="javascript:;" class="active">온라인 쿠폰 <span class="only_english">(99)</span></a>
+                <a href="javascript:;">영업점 쿠폰<span class="only_english">(99)</span></a>
+            </div>
+            <div class="my_list" id="orderList">
+                
+<!--  여기 까지 삭제 -->
+<style type="text/css">
+span.btn_area { padding : 0 38px; text-align: center; border : 1px solid #a0a0a0;}
+span.btn_area a.btn{color : #000;}
+.box_tit { font-size:15px;font-weight:bold;padding-bottom:10px;margin-bottom:20px;border-bottom:1px solid #dadada;display:block; }
+.ly_box.active{ background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/company/bg_10x10.png') }
+.ly_box .ly_conts { display: block; margin: auto; padding:10px 0;text-align: center; position: relative; top: 50%; margin-top: -65px; overflow: visible; background-color: #fff; border-radius: 5px;  border: 2px solid #ff4400;}
+.btn_white_l { position: absolute;top: -28px;right: 5px;display:block;width:25px;height:25px;background:url('http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/renewal/common/btn_close04.png') no-repeat 50% 50%;background-size:25px;overflow:hidden;text-overflow:ellipsis;text-indent:-999px;text-align:left;}
+.ly_box .ly_conts .line01 { width : 100%;border-bottom: 1px solid #dadada;border-width: 0 0 1px 0; }
+#my_content .my_list .couponbox .box_on{     background-repeat: no-repeat; margin: 10px 10px; border: 5px solid #ff6600; border-radius: 20px; background: url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/online_coupon.png) no-repeat 90% center; background-size: 97px auto;    background-color: #f60;
+}
+</style>
+<script type="text/javascript" src="/js/jquery-barcode.min.js"></script>
+<script type="text/javascript">
+function showBarcode(cpnId, offCpnName, offUseYn){
+    $("#cpnTit").html(offCpnName);
+    $(".barcode").barcode(cpnId, "code128");
+    $(".bar_hidden").val(cpnId);
+    
+    if(offUseYn == 'N'){
+        $("div#btn_barcode").hide();
+    } else {
+        $("div#btn_barcode").show();
+    }
+    
+    if($(".ly_box").hasClass("active")){
+        $(".ly_box").removeClass("active");
+        $(".ly_box").hide();
+        $(".btn_white_l").hide();
+    }else{
+        $(".ly_box").addClass("active");
+        $(".ly_box").show();
+        $(".btn_white_l").show();
+    }
+    
+}
+function completeBarcode(){
+    var offCpnId = $(".bar_hidden").val();
+    $.ajax({
+        type: "POST"
+       ,url: "/m/offLine/updateUseBarcode"
+       ,data: { offCpnId : offCpnId}
+       ,dataType: "JSON"
+       ,success : function(data){
+            alert("사용완료 되었습니다.");
+            location.reload();
+       }
+       ,error: function(data) {
+           alert("사용되지 않았습니다.");
+       }
+   });
+}
+function closeBarcode(){
+    $(".ly_box").hide();
+    $(".btn_white_l").hide();
+    return false;
+}
+</script>
+
+<div class="ly_box" onclick="showBarcode();">
+    <div class="ly_conts">
+        <strong id="cpnTit" class="box_tit"></strong>
+        <div class="barcode" style="margin:10px auto;"></div>
+        <div id="btn_barcode">
+            <input class="bar_hidden" type="hidden" value="">
+            <span class="btn_area"><a class="btn" href="#" onclick="completeBarcode();return false;">사용</a></span><br>
+            <p style="padding : 8px 0 8px;">●사용완료 버튼은 영업점 결제시, <br> 카운터에서 체크하는 버튼입니다.</p>
+        </div>
+        <div onclick="closeBarcode();" class="btn_white_l">닫기</div>
+    </div>
+</div>
+<div class="couponbox_none">
+<div class="box">
+    <p class="nocoupon"><img src="http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/mobile/common/oncoupon_none.jpg" alt="온라인쿠폰없음"></p>
+</div>
+</div>
+<!--  여기 까지 삭제 -->
+            </div>
+            <dl class="notice_txt mt30 mb30">
+                <dt><h3>꼭 알아두기</h3></dt>
+                <dd class="mt10">쿠폰별 혜택과 사용조건, 유효기간을 꼭 확인해주세요.</dd>
+                <dd>취소/반품을 하시게 되면 적용된 쿠폰은 환원이 되지 않습니다.</dd>
+                <dd>배송비 쿠폰을 사용해서 주문한 경우 반품 시 적용된 쿠폰은 소멸합니다.</dd>
+                <dd>장바구니에 두 건 이상의 배송비가 발생했을 경우, 배송비 쿠폰은 한 건의 배송비만 무료로 적용됩니다.</dd>
+            </dl>
+        </div>
+        <!-- <div class="my_smenu2">
+            <a href="/m/mypage/coupon" class="my_info active"><span>온라인 쿠폰(<span>0)</span></span></a>
+            <a href="/m/offLine/offLineCoupon" class="my_info"><span>영업점 쿠폰(0)</span></a>
+        </div> -->
+
+        
+
+    </div>
+</div>
+</div>
+
+<script>
+$(document).ready(function() {
+    footerFn(); //footer
+});
+function footerFn(){
+    $('#footer .btn_cont').on('click', function(){
+        if($("#footer .txt").hasClass('on')){
+           $("#footer .txt").removeClass('on');
+        }else{
+           $("#footer .txt").addClass('on');
+        }
+    })
+}
+</script>
+  <!-- footer -->
+	<div id="footer">
+		<div class="inner">
+			<p>고객센터 <em class="font_t">1661-1112</em></p>
+			<div class="util_menu">
+		        <ul>
+		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">핫트합니다</a></li>
+		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/viewRule');return false;">이용약관</a></li>
+		            <li><a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/ht/welcomeMain/privacy');return false;"><strong>개인정보취급방침</strong></a></li>
+		        </ul>
+		    </div>
+			<div class="cont">
+				<a href="#n" _traget="_blank" _onclick="winOpen('http://www.hottracks.co.kr/heart/');return false;">
+					<img src="/images/biz/common/img_award.png" alt="소셜아이어워드 2019">
+				</a>
+				<ul class="sns_wrap">
+		            <li class="ig"><a href="#n" _traget="_blank" _onclick="linkToInstagram('home');return false;">instagram</a></li>
+		            <li class="fb"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.facebook.com/HOTTRACKSFRIEND/');return false;">facebook</a></li>
+		            <li class="tt"><a href="#n" _traget="_blank" _onclick="goTwitter('모바일핫트랙스', 'http://m.hottracks.co.kr/');return false;">twitter</a></li>
+		            <li class="bg"><a href="#n" _traget="_blank" _onclick="winOpen('https://hottracks91.blog.me/');return false;">blog</a></li>
+		            <li class="yt"><a href="#n" _traget="_blank" _onclick="winOpen('https://www.youtube.com/channel/UCqQkoRX4rN-RCbBqVPUv3Hg');return false;">youtube</a></li>
+		        </ul>
+			</div>
+			<a href="javascript://;" class="btn_cont">(주)교보핫트랙스</a>
+			<div class="txt">
+				<span>대표이사 박영규</span>
+				<span>사업자등록번호 : 102-81-29258</span>
+				<span>통신판매업신고번호 : 제 2012-경기파주-3911호</span>
+				<span>주소 : 경기도 파주시 회동길 78 (출판단지내)</span>
+				<span>개인정보보호책임자 : 김재식</span>
+				<span>이메일 : PRIVACY@HOTTRACKS.CO.KR</span>
+				<span class="copyright">ⓒ Kyobo Hottracks inc.</span>
+			</div>
+		</div>
+	</div>
+	<!--// footer -->
+  
+    <div id="app_bar"> <a href="#n" class="btn_home">HOTTRACKS</a> <a href="#n" class="btn_today">오늘,혜택</a> <a href="#n" class="btn_cart">장바구니<em class="font_t">99+</em></a>
+      <a href="#n" class="btn_history">히스토리</a>
+    </div>
+    
+</div>
+</body>
+</html>
