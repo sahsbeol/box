@@ -22,6 +22,7 @@
 .orderandpay .padding_set_top {padding-top:12px  !important;}
 .orderandpay .point02 {color:#DA2128 !important;/* margin-right:3px;*/}
 .orderandpay .bold {font-weight: 700 !important;/* margin-right: 0 !important;*/}
+.orderandpay .padlr0 {padding-left:0 !important; padding-right: 0 !important;}
 
 .orderandpay .float_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .f_r {float: right !important;}
@@ -33,6 +34,7 @@
 .orderandpay .width_point {max-width:100%; width:100%; text-align:left !important;}
 .orderandpay .width_email {max-width:100%; width:100%;}
 .orderandpay .width_address {/* max-width: 257px; */width: calc(100% - 87px);/* max-width: 257px; */ text-align:left !important;}
+.orderandpay .width100 {max-width:100%; width:100%; text-align: center;}
 
 .orderandpay .input_wrap select.width_phone,
 .orderandpay .select_wrap select.width_phone  {width: 70px !important;width: 100% !important;/* max-width: 100%; *//* min-width: 70px; */}
@@ -883,13 +885,14 @@
 .orderandpay #my_content div.my_smenu4 a.btn_totsaved,
 .orderandpay #my_content div.my_smenu4 a.btn_deposit, 
 .orderandpay #my_content div.my_smenu4 a.btn_coupon,
-.orderandpay #my_content div.my_smenu4 a.btn_recepit {width:60px;height:60px; margin: 0 auto;background: #fff !important;border-radius: 100%;font-weight: 700;font-size: 14px;text-indent: 0;display: block;}
+.orderandpay #my_content div.my_smenu4 a.btn_recepit {width:60px;height:60px; margin: 0 auto;background: #fff !important;border-radius: 100%;font-weight: 700;font-size: 14px;text-indent: 0;display: table-cell;}
 
 .orderandpay #my_content div.my_smenu4 a.btn_totsaved.active, 
 .orderandpay #my_content div.my_smenu4 a.btn_deposit.active, 
 .orderandpay #my_content div.my_smenu4 a.btn_coupon.active,
 .orderandpay #my_content div.my_smenu4 a.btn_recepit.active {background: #DA2128 !important; border-radius: 100%; color:#fff;}
 .orderandpay .couponbox_none img{ margin: 10px 20px;width: 90%;}
+.orderandpay #my_content div.my_smenu4 .mysmenu_box {margin: 0 auto; width:60px;}
 
 .orderandpay #my_content .tog_btn {height:34px;background:#F8F8F8;border:1px solid #777; font-size:12px;color:#333;line-height:32px;}
 .orderandpay #my_content .tog_btn.active {background:#000; color:#fff;}
@@ -982,6 +985,9 @@
 .orderandpay .my_point .my_info dl dt {position: static; width:auto; float: left;}
 .orderandpay .my_point .my_info dl dt .ic_medal {background: none; text-indent: 0px; width:64px; height:64px;  color:#fff; display: table-cell;    vertical-align: middle;    text-align: center;    font-size: 16px;    font-weight: 700;}
 .orderandpay .my_point .my_info dl dt .ic_medal.friends {background: #6EB327;}
+.orderandpay .my_point .my_info dl dt .ic_medal.platinum {background: #513BB7;}
+.orderandpay .my_point .my_info dl dt .ic_medal.gold {background: #D2992A;}
+.orderandpay .my_point .my_info dl dt .ic_medal.silver {background: #949494;}
 .orderandpay .my_point .my_info dl dd {float: left; margin-left: 12px;}
 .orderandpay .my_point .btn.arrow01 {background: none;color: #000;font-size: 13px;height: auto;line-height: normal;font-weight: 400;padding: 0;}
 .orderandpay .my_point .my_point_list {margin-top: 0; padding:0; border:0;}
@@ -992,12 +998,41 @@
 .orderandpay .my_point .card_unit_list_wrap .card_unit_list li a { padding:16px 0; display: block;}
 .orderandpay .my_point .my_point_list {}
 .orderandpay .my_point .my_point_list li {float: left; width:33.333%; border-top:1px solid #d3d3d3; border-bottom: 1px solid #d3d3d3; height:80px;}
-.my_point .my_point_list li + li { border-left:1px solid #d3d3d3;margin-left:-1px; height :  37px; }
+.orderandpay .my_point .my_point_list li + li { border-left:1px solid #d3d3d3;margin-left:-1px; }
+.orderandpay .my_point .my_point_list strong {font-size: 13px; color:#777777;}
+.orderandpay .my_point .my_point_list li a {padding-top: 16px;}
+.orderandpay .my_point .my_point_list li a span {font-family: 'font_ns','Apple SD Gothic Neo', sans-serif;}
+.orderandpay .my_point_menu ul li a {padding-top:68px;}
+.orderandpay .my_point_menu ul li a {font-size: 12px; color:#000; font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-weight: 400;}
+.orderandpay .my_point_menu ul li a span {font-size: 10px; color:#FF7764;font-weight: 500; display: block; margin-top:8px;}
+.orderandpay .my_point_menu ul li:nth-child(1) a {background: url(../../images/new/icon_my_basket.png) no-repeat top center; background-size: 60px 60px;}
+.orderandpay .my_point_menu ul li:nth-child(2) a {background: url(../../images/new/icon_my_delivery.png) no-repeat top center; background-size: 60px 60px;}
+.orderandpay .my_point_menu ul li:nth-child(3) a {background: url(../../images/new/icon_my_like.png) no-repeat top center; background-size: 60px 60px;}
+.orderandpay .my_point_menu {margin:0 auto;}
 
+.orderandpay .my_point_table td {border-color: #ccc}
+.orderandpay .my_point_table td strong {font-weight: 500;}
+.orderandpay .my_point_table td a {font-size: 12px; font-weight: 500; line-height: 39px;}
+.orderandpay .my p.info {font-size: 12px; font-weight: 400; color:#777; margin-top: 0;}
+.orderandpay .my_info {}
 
-
-
-
+.orderandpay .my_info { display:block;text-align: center; padding:38px 0; }
+.orderandpay .box_slidelist { margin:0;border-top:1px solid #EEEEEE; }
+.orderandpay .box_slidelist li { border-bottom:1px solid #EEEEEE; }
+.orderandpay .box_slidelist .btn_tit {display:block;padding: 14px 20px;height: 24px;line-height: 23px;font-size: 14px;font-weight:bold;background:url('../../images/new/icon_select.png') calc(100% - 10px) center no-repeat #FAFAFA;background-size:10px auto;}
+.orderandpay .box_slidelist .btn_tit span {padding-left: 36px;background:url('../../images/new/icon_grade_human.png') left top no-repeat;background-size:23px auto;height: 24px;line-height: 20px;}
+.orderandpay .box_slidelist .btn_tit.grade01 span {background:url('../../images/new/icon_grade_p.png') left top no-repeat;background-size: 24px auto;}
+.orderandpay .box_slidelist .btn_tit.grade02 span { background:url('../../images/new/icon_grade_g.png') left top no-repeat;background-size:23px auto;}
+.orderandpay .box_slidelist .btn_tit.grade03 span { background:url('../../images/new/icon_grade_s.png') left top no-repeat;background-size:23px auto;}
+.orderandpay .box_slidelist .btn_tit.grade04 span { background:url('../../images/new/icon_grade_f.png') left top no-repeat;background-size:23px auto;}
+.orderandpay .box_slidelist .cont { display:none;padding:20px;border-top:1px solid #EEEEEE; }
+.orderandpay .box_slidelist .cont p { margin-top:5px; color: #777 }
+.orderandpay .box_slidelist .cont p strong { font-size:14px; color:#000; }
+.orderandpay .box_slidelist .cont img { width:calc(32% - 10px);margin-right:10px;margin-bottom:10px; }
+.orderandpay .box_slidelist .active .btn_tit { background:url('../../images/new/icon_select.png') calc(100% - 10px) center no-repeat #FAFAFA;background-size:10px auto; }
+.orderandpay .box_slidelist .active .cont { /* display:block; */ }
+.orderandpay .box_info { padding:40px 20px;  color:#777; font-size: 12px;}
+.orderandpay .color_03 {color:#777 !important;}
 
 
 @media screen and (max-width: 360px) {
