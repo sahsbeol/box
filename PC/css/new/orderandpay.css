@@ -620,19 +620,21 @@ ul.agency_select li:nth-child(3) .ele {
 /* 결제정보 */
 .orderandpay .table02_v1 {}
 .orderandpay .table02_v1 {/* margin-top: 15px; */}
-.orderandpay .table02_v1 th, .orderandpay .table02_v1 td {text-align: left; font-size:13px; font-weight: 400; padding-right: 15px; }
-.orderandpay .table02_v1 th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid; border-left: 1px #EEEEEE solid;  border-top: 1px #EEEEEE solid;}
-.orderandpay .table02_v1 th span.star {color:#DA2128;}
+.orderandpay .table02_v1 tbody th, .orderandpay .table02_v1 tbody td {font-family:'font_ns'; text-align: left; font-size:13px; font-weight: 400; padding-right: 15px; }
+.orderandpay .table02_v1 tbody th {font-size: 13px;font-weight: 500;background: #FAFAFA;text-align: center;border-bottom: 1px #EEEEEE solid; border-left: 1px #EEEEEE solid;  border-top: 1px #EEEEEE solid;}
+.orderandpay .table02_v1 tbody th span.star {color:#DA2128;}
+.orderandpay .table02_v1 tbody tr:last-child th,.orderandpay .table02_v1 tbody tr:last-child td {border-bottom: 1px #EEEEEE solid;}
 /*.orderandpay .table02_v1 td {padding: 10px 15px 10px 24px;height:38px;border-bottom: 1px #EEEEEE solid; border-right: 1px #EEEEEE solid;}
-*/.orderandpay .table02_v1 td {padding: 10px 15px 10px 15px;height:38px;border-bottom: 1px #EEEEEE solid; border-right: 1px #EEEEEE solid;}
+*/.orderandpay .table02_v1 tbody td {padding: 10px 15px 10px 15px;height:38px;border-bottom: 1px #EEEEEE solid; border-right: 1px #EEEEEE solid;}
 .orderandpay .payment_list li {word-break: break-all;}
+
 
 
 
 /* 팝업 */
 /* 쿠폰조회 */
-.orderandpay .tooltip_wrap .table02_v1 th, .orderandpay .tooltip_wrap .table02_v1 td {border:0;}
-.orderandpay .tooltip_wrap .table02_v1.border_little th, .orderandpay .tooltip_wrap .table02_v1.border_little td {border-top: 1px #EEEEEE solid; border-bottom: 1px #EEEEEE solid; text-align: center; padding-left: 15px;}
+.orderandpay .tooltip_wrap .table02_v1 tbody th, .orderandpay .tooltip_wrap .table02_v1 tbody td {border:0;}
+.orderandpay .tooltip_wrap .table02_v1.border_little tbody th, .orderandpay .tooltip_wrap .table02_v1.border_little tbody td {border-top: 1px #EEEEEE solid; border-bottom: 1px #EEEEEE solid; text-align: center; padding-left: 15px;}
 .orderandpay .tooltip_wrap .table02_v1 thead th {background: #FAFAFA;font-size: 13px;font-weight: 500; text-align: center;}
 .orderandpay .tooltip_wrap .tit01 {font-size:18px; font-weight:700;}
 .orderandpay .tooltip_wrap .box_gray02 { background: #FAFAFA; border: 0 none; font-size: 18px;font-weight: 500; color: #000;   }
@@ -813,26 +815,26 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .bbs_search {margin:25px 0 10px; text-align:right;}
 .orderandpay .bbs_search * {vertical-align:top;}
 
-.orderandpay .bbs_list01 {border-collapse: separate; position: relative;}
-.orderandpay .bbs_list01 .t_left {padding-left:0px;}
+.orderandpay .this_step.bbs_list01 {border-collapse: separate; position: relative;}
+.orderandpay .this_step.bbs_list01 .t_left {padding-left:0px;}
 
-.orderandpay .bbs_list01 thead {}
-.orderandpay .bbs_list01 thead th, .orderandpay .bbs_list01 tbody td {font-size:14px; line-height: normal; border-right:0;border-left:0;  text-align:center;}
-.orderandpay .bbs_list01 thead th {font-size: 14px; color: #313131; padding: 16px 0 17px;font-weight:500;background: #fafafa;border-top:2px #000 solid;border-bottom:1px #eee solid;}
-.orderandpay .bbs_list01 tbody td,
-.orderandpay .bbs_list01.tbl_slide tbody td{padding: 25px 20px 24px;text-align:center;font-weight: 500;color: #000;}
-.orderandpay .bbs_list01.tbl_slide tbody td {/*padding-left:50px; padding-right: 50px;*/}
-.orderandpay .bbs_list01 tbody td a {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit; display: block;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.orderandpay .this_step.bbs_list01 thead {}
+.orderandpay .this_step.bbs_list01 thead th, .orderandpay .this_step.bbs_list01 tbody td {font-size:14px; line-height: normal; border-right:0;border-left:0;  text-align:center;}
+.orderandpay .this_step.bbs_list01 thead th {font-size: 14px; color: #313131; padding: 16px 0 17px;font-weight:500;background: #fafafa;border-top:2px #000 solid;border-bottom:1px #eee solid;}
+.orderandpay .this_step.bbs_list01 tbody td,
+.orderandpay .this_step.bbs_list01.tbl_slide tbody td{padding: 25px 20px 24px;text-align:center;font-weight: 500;color: #000;}
+.orderandpay .this_step.bbs_list01.tbl_slide tbody td {/*padding-left:50px; padding-right: 50px;*/}
+.orderandpay .this_step.bbs_list01 tbody td a {color:inherit; font-size:inherit; line-height: inherit; font-weight: inherit; display: block;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 
-.orderandpay .bbs_list01 tbody tr.conts td {padding:0 0;text-align:left;background:#fafafa;}
-.orderandpay .bbs_list01 .click.icon_arrow{position: relative;}
-.orderandpay .bbs_list01 .click.icon_arrow:after {content: ''; display: block; position: absolute; top:50%; margin-top:-5px; right:0; width:15px; height:9px; background: url(../../images/new/icon_cs_arrow_off.png) no-repeat center center;}
-.orderandpay .bbs_list01 .click.icon_arrow.icon_active:after {display: block; position: absolute; top:50%; margin-top:-5px; right:0; width:15px; height:9px; background: url(../../images/new/icon_cs_arrow_on.png) no-repeat center center;}
+.orderandpay .this_step.bbs_list01 tbody tr.conts td {padding:0 0;text-align:left;background:#fafafa;}
+.orderandpay .this_step.bbs_list01 .click.icon_arrow{position: relative;}
+.orderandpay .this_step.bbs_list01 .click.icon_arrow:after {content: ''; display: block; position: absolute; top:50%; margin-top:-5px; right:0; width:15px; height:9px; background: url(../../images/new/icon_cs_arrow_off.png) no-repeat center center;}
+.orderandpay .this_step.bbs_list01 .click.icon_arrow.icon_active:after {display: block; position: absolute; top:50%; margin-top:-5px; right:0; width:15px; height:9px; background: url(../../images/new/icon_cs_arrow_on.png) no-repeat center center;}
 /*_ board 최상단 고정 */
-.orderandpay .bbs_list01 .list_fixed,
-.orderandpay .bbs_list01 .list_fixed.conts {}
-.orderandpay .bbs_list01 .list_fixed td {position: relative;}
-.orderandpay .bbs_list01 .list_fixed td a.click:before {content: '';display:block;width:8px;height:8px;background: #FF6A5B; float: left;margin-top: 7px;margin-right: 12px;}
+.orderandpay .this_step.bbs_list01 .list_fixed,
+.orderandpay .this_step.bbs_list01 .list_fixed.conts {}
+.orderandpay .this_step.bbs_list01 .list_fixed td {position: relative;}
+.orderandpay .this_step.bbs_list01 .list_fixed td a.click:before {content: '';display:block;width:8px;height:8px;background: #FF6A5B; float: left;margin-top: 7px;margin-right: 12px;}
 
 
 /* text */
@@ -1015,7 +1017,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .s_title_wrap .btn_more {float: right; margin-top: 60px;}
 .orderandpay .s_title_wrap:after {content: ''; display: block; clear: both;}
 
-.orderandpay .bbs_list01 tbody td.t_left {text-align: left; padding-left:25px;} 
+.orderandpay .this_step.bbs_list01 tbody td.t_left {text-align: left; padding-left:25px;} 
 
 
 /* paging */
@@ -1667,7 +1669,7 @@ ul.agency_select li:nth-child(3) .ele {
 /* 반품 교환신청 */
 .orderandpay .location_btn {position: absolute; top:0; right:0;}
 .orderandpay .box_gray_02 {background: #FAFAFA; padding:16px 20px;}
-.orderandpay .tbl_top {font-size: 13px; font-weight: 400; text-align: left; margin:0;}
+.orderandpay .tbl_top {font-size: 13px; font-weight: 400; text-align: left; margin:0; border:0 none; padding: 0;}
 .orderandpay .btns_go_wrap {position: absolute; top:0; right:0;}
 .orderandpay .btns_go_wrap .btn_type05_v2 {margin-left: -4px; height:38px; line-height:35px; width:88px;}
 

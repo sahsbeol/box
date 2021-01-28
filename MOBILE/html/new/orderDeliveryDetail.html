@@ -34,7 +34,7 @@
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
       <!-- 서브 -->
       <div class="sub_wrap"> <a href="#n" _onclick="locBack();return false;" class="btn_back">뒤로가기</a> <a href="#n" class="btn_category" _onclick="bizOpenGnbMenu();return false;">카테고리 보기</a> <a href="#n" class="btn_search" _onclick="gnbSrchFrm();return false;">검색</a>
-        <h2 id="subTitle">마이페이지</h2>
+        <h2 id="subTitle">주문상세내역</h2>
       </div>
       <!--// 서브 --> 
     </div>
@@ -46,8 +46,8 @@
     
     <h2 class="w_top tit_h2">주문/배송 내역</h2>
     <div class="info_txt text1 space_pad">
-        <p class="">모바일로 확인되지 않는 정보는 PC버전에서 확인해주시기 바랍니다.<br>
-        <b>상품준비 이전 단계까지만 주문 취소가 가능합니다.</b><br>상품준비 이전 단계에서의 부분취소는 [1:1문의]를 이용하시거나 고객센터로 연락주시기 바랍니다.</p>
+        <p class=""><!-- 모바일로 확인되지 않는 정보는 PC버전에서 확인해주시기 바랍니다.<br> -->
+        <b>상품준비 이전 단계까지만 주문 취소가 가능합니다.</b><br>상품준비 이전 단계에서의 부분취소는 [SOS상담]를 이용하시거나 고객센터로 연락주시기 바랍니다.</p>
     </div>
 
     <div class="space_pad">
@@ -126,10 +126,12 @@
                     <strong class="fl_l">주문상태</strong>
                     <span class="fl_r">
                         <span>배송대기</span>
+                        <a href="#n" class="detail_view">
+                        고객센터</a>
                     </span>
                 </li>
             </ul>
-            <a href="#n" class="detail_view"><span>고객센터</span></a>
+            <a href="#n" class="detail_view arrow"><span>고객센터</span></a>
         </div>
     </div>
 
@@ -137,11 +139,11 @@
         <ul class="br_list">
             <li>
                 <strong class="fl_l">주문상품 합계 :</strong>
-                <span class="fl_r">7종 7개</span>
+                <span class="fl_r"><span class="only_english bold">7</span>종 <span class="only_english bold">7</span>개</span>
             </li>
             <li>
                 <strong class="fl_l">주문총액 :</strong>
-                <span class="fl_r"><span class="col_salmon">263,600원</span></span>
+                <span class="fl_r"><span class=""><span class="only_english color_01 bold base">263,600</span>원</span></span>
             </li>
         </ul>   
     </div>
@@ -157,21 +159,21 @@
         <ul class="br_list">
             <li class="br_none">
                 <strong class="fl_l">상품총금액</strong>
-                <span class="fl_r">263,600원</span>
+                <span class="fl_r"><span class="only_english bold base">263,600</span>원</span></span>
             </li>
             <li>
                 <strong class="fl_l">배송비</strong>
-                <span class="fl_r">5,200원</span>
+                <span class="fl_r"><span class="only_english bold base">263,600</span>원</span></span>
             </li>
             <li>
                 <strong class="fl_l">주문합계</strong>
-                <span class="fl_r">268,800원</span>
-            </li>
-            <li class="info_type">
-                <strong class="col_black">통합포인트 적립 예정액은 총 <span class="col_salmon">0원</span> 입니다.</strong>
-                <p class="mt5">쿠폰 또는 통합포인트 상용 시 예상적립 통합포인트는 변동괼 수 있습니다.</p>
+                <span class="fl_r"><span class="only_english bold base">263,600</span>원</span></span>
             </li>
         </ul>
+    </div>    
+    <div class="info_type mt20">
+        <strong class="col_black">통합포인트 적립 예정액은 총 <span class="color_01 only_english bold base">0</span> 원 입니다.</strong>
+        <p class="text_type9 mt5">쿠폰 또는 통합포인트 상용 시 예상적립 통합포인트는 변동될 수 있습니다.</p>
     </div>
 
     <div class=" order_inquiry">
@@ -179,23 +181,23 @@
         <ul class="br_list">
             <li class="br_none">
                 <strong class="fl_l">할인쿠폰</strong>
-                <span class="fl_r">800원</span>
+                <span class="fl_r"><span class="color_02 only_english bold base">5000</span> 원</span>
             </li>
             <li>
                 <strong class="fl_l">통합포인트</strong>
-                <span class="fl_r">0원</span>
+                <span class="fl_r"><span class="only_english bold base">5000</span> 원</span>
             </li>
             <li>
                 <strong class="fl_l">마일리지</strong>
-                <span class="fl_r">0원</span>
+                <span class="fl_r"><span class="only_english bold base">5000</span> 원</span>
             </li>
             <li>
                 <strong class="fl_l">예치금</strong>
-                <span class="fl_r">268,000원</span>
+                <span class="fl_r"><span class="only_english bold base">5000</span> 원</span>
             </li>
             <li class="line">
-                <strong class="fl_l col_salmon">할인총금액</strong>
-                <strong class="fl_r col_salmon">268,800원</strong>
+                <strong class="fl_l color_01">할인총금액</strong>
+                <strong class="fl_r "><span class="only_english bold base color_01">5000</span> 원</strong>
             </li>
         </ul>
     </div>
@@ -205,42 +207,30 @@
         <ul class="br_list">
             <li class="br_none">
                 <strong class="fl_l">주문금액</strong>
-                <span class="fl_r">0원</span>
+                <span class="fl_r"><span class="only_english bold base">5000</span> 원</span>
             </li>
             <li>
                 <strong class="fl_l">할인금액</strong>
-                <span class="fl_r">268,800원</span>
+                <span class="fl_r"><span class="only_english bold base">5000</span> 원</span>
             </li>
-            <li class="line">
-                <strong class="fl_l col_salmon">총결제금액 : </strong>
-                <strong class="fl_r col_salmon">268,800원</strong>
+            <li>
+                <strong class="fl_l color_01">총결제금액</strong>
+                <strong class="fl_r "><span class="color_01 only_english bold base">5000</span> 원</strong>
             </li>
-        </ul>
-    </div>
-
-
-    <div class=" order_inquiry">
-        <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">결제내용</strong>
-                <span class="fl_r">
-                    예치금
-                       
-                    
-                    
-                    
-                      
-                    
-                    
-                </span>
+            <li>
+                <strong class="fl_l">할인금액</strong>
+                <span class="fl_r text_type9">나이스무통장(신한은행  12345678901234) <br>
+                                    *예금주 : 교보핫트랙스㈜ <br>
+                                    주문일로  부터 7일 동안 입금이 안될 경우
+                                주문이 자동으로 취소됩니다.</span>
             </li>
             <li>
                 <strong class="fl_l">금액</strong>
-                <span class="fl_r"><span class="col_salmon">0원</span></span>
+                <span class="fl_r"><span class="color_01 only_english bold base">5000</span> 원</span>
             </li>
             <li>
                 <strong class="fl_l">일자</strong>
-                <span class="fl_r">2019.12.03</span>
+                <span class="fl_r"><span class="only_english bold base">2019.12.03</span></span>
             </li>
             <li>
                 <strong class="fl_l">비고</strong>
@@ -248,6 +238,7 @@
             </li>
         </ul>
     </div>
+
 
 
   <!--   <div class="btn_area box_flex mt30 mb30">

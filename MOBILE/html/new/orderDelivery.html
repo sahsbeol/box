@@ -49,7 +49,7 @@
 <div class="">
     <!-- 정렬 -->
     <div class="space_pad pt20">
-        <div class="option_box t_select">
+        <!-- <div class="option_box t_select">
             <div class="select_box">
                 <p>최근 6개월</p>
                 
@@ -76,6 +76,28 @@
                     </dl>
                 </div>
             </div>
+        </div> -->
+        <div class="box_flex tog_area mt10">
+            <select name="year" onchange="getRece        iptList(1);">
+                <option value="2020" selected="selected">2020년</option>
+                <option value="2019">2019년</option>
+                <option value="2018">2018년</option>
+            </select>
+
+            <select name="month" onchange="getReceiptList(1);">
+                <option value="01" selected="selected"> 01월</option>
+                <option value="02"> 02월</option>
+                <option value="03"> 03월</option>
+                <option value="04"> 04월</option>
+                <option value="05"> 05월</option>
+                <option value="06"> 06월</option>
+                <option value="07"> 07월</option>
+                <option value="08"> 08월</option>
+                <option value="09"> 09월</option>
+                <option value="10"> 10월</option>
+                <option value="11"> 11월</option>
+                <option value="12"> 12월</option>
+            </select>
         </div>
     </div>
     <!-- //정렬 -->

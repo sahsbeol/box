@@ -23,10 +23,15 @@
 .orderandpay .point02 {color:#DA2128 !important;/* margin-right:3px;*/}
 .orderandpay .bold {font-weight: 700 !important;/* margin-right: 0 !important;*/}
 .orderandpay .padlr0 {padding-left:0 !important; padding-right: 0 !important;}
+.orderandpay .width_80 {width:80px !important; min-width: auto !important;}
+.orderandpay .width_auto {width:auto !important;}
+.orderandpay .mlmn {margin-left:-1px !important;}
+.orderandpay .mt15 {margin-top:15px !important;}
 
 .orderandpay .float_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .f_r {float: right !important;}
 .orderandpay .f_l {float: left !important;}
+.orderandpay .inline_block {display: inline-block !important;}
 
 .orderandpay .width_check,
 .orderandpay .width_phone,
@@ -35,6 +40,7 @@
 .orderandpay .width_email {max-width:100%; width:100%;}
 .orderandpay .width_address {/* max-width: 257px; */width: calc(100% - 87px);/* max-width: 257px; */ text-align:left !important;}
 .orderandpay .width100 {max-width:100%; width:100%; text-align: center;}
+.orderandpay .width275 {width:275px !important;} 
 
 .orderandpay .input_wrap select.width_phone,
 .orderandpay .select_wrap select.width_phone  {width: 70px !important;width: 100% !important;/* max-width: 100%; *//* min-width: 70px; */}
@@ -494,6 +500,8 @@
 
 .orderandpay .color_01 {color:#DA2128 !important;}
 .orderandpay .color_02 {color:#419BF9 !important;}
+.orderandpay .color_03 {color:#777 !important;}
+.orderandpay .color_04 {color:#000 !important;}
 .orderandpay .space_pad {padding-right:20px !important; padding-left:20px !important;}
 .orderandpay .t_center {text-align: center !important;}
 
@@ -702,20 +710,46 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .cs_direct #layer .sub_contents .inner_padding .border-bottom {border-bottom: 1px #707070 solid;padding-bottom: 7px;padding-top: 30px;}
 
 .orderandpay .my .w_top.tit_h2 {font-size: 16px; border:0; padding:10px 20px;}
+.orderandpay .detail_view {position:static; height:34px; line-height:32px; margin-left:10px;border-radius: 0;border:1px #777777 solid;color:#000;font-size: 12px;background: #f8f8f8;padding:0px 20px 0 19px;box-sizing: border-box;}
+
 .orderandpay .text1.info_txt {font-size: 13px; color:#313131; margin:0; padding-top:0; padding-bottom: 0;}
 .orderandpay .order_number_check {background: #fafafa; padding: 16px 20px; text-align: center;}
 .orderandpay .order_number_check .tit_type1 {color: #000;}
-.orderandpay .order_inquiry .order_num {margin:0; background: #fff; font-size:14px ; padding:10px 0;}
+.orderandpay .order_inquiry .order_num {margin:0; background: #fff; font-size:16px ; padding:10px 0;}
 .orderandpay .order_inquiry .br_list li {border-top:1px #DBDBDB solid; padding:22px 0; font-size: 13px;}
 .orderandpay .order_inquiry .br_list .fl_l {color:#000;}
 .orderandpay .order_inquiry .br_list li .fl_r {color: #000; font-weight: 400;}
 .orderandpay .order_inquiry .br_list li .fl_r.only_english.bold{vertical-align: middle; margin-top: 5px;}
 
-.orderandpay .order_inquiry {position: relative; margin-top:64px;}
+.orderandpay .order_inquiry {position: relative; margin-top:54px;}
+.orderandpay .order_inquiry .detail_view {font-size: 12px;padding:0px 21px 0 21px;}
+.orderandpay .order_inquiry .detail_view.white {border:1px #313131 solid;color:#000;font-size: 13px;background: #fff;}
+.orderandpay .order_inquiry .detail_view.arrow {position:absolute; top:4px; right:0; border-radius: 0;border:1px #777777 solid;color:#000;font-size: 12px;background: #f8f8f8 url(../../images/new/stuff_more_btn.png) no-repeat center right 10px;background-size: 5px 10px;padding: 0px 23px 0 17px;box-sizing: border-box;}
+.orderandpay .order_inquiry .detail_view.arrow span {height: 32px;line-height: 32px;border:0 none;padding: 0 7px;}
 
+.orderandpay .order_price {margin:25px 0 0; background: #fafafa;}
+.orderandpay .order_price * {color:#000;}
+.orderandpay .order_price ul {padding:8px 20px;}
+.orderandpay .order_price .br_list li{font-size: 16px;}
+.orderandpay .info_type {background: #fafafa; padding:16px;}
+.orderandpay .info_type strong {font-size: 13px;}
+.orderandpay .text_type9 {font-size: 12px !important; color:#777777 !important; font-weight: 400  !important;}
 
-
-
+/* 상품평 리스트  */
+.t_ar {text-align: right !important;}
+.orderandpay .myreview_edit_wrap {}
+.orderandpay .myreview_edit_wrap .detail_view{border:1px #313131 solid;color:#000;font-size: 13px;background: #fff;}
+.orderandpay .myreview_edit_wrap .myreview_edit_box {border:1px #DBDBDB solid;}
+.orderandpay .myreview_edit_wrap .myreview_edit_title {padding:10px; background: #FAFAFA; overflow: hidden;}
+.orderandpay .myreview_edit_wrap .myreview_edit_title .img_wrap{border:1px #DBDBDB solid; float: left; width:44px; height:44px; box-sizing: border-box;}
+.orderandpay .myreview_edit_wrap .myreview_edit_title .img_wrap img {display:block; max-width:100%; min-height:100%;}
+.orderandpay .myreview_edit_wrap .myreview_edit_title .text_wrap {width:calc(100% - 54px); float: left; margin-left:10px; font-size: 13px; font-weight: 700;}
+.orderandpay .myreview_edit_wrap .myreview_edit_list {border-top:1px #DBDBDB solid;}
+.orderandpay .myreview_edit_wrap .myreview_edit_list .itmes {border-top:1px #DBDBDB solid; }
+.orderandpay .myreview_edit_wrap .myreview_order_list {overflow: hidden; padding:10px 10px 20px;}
+.orderandpay .myreview_edit_wrap .myreview_order_list dt{font-size: 14px; font-weight: 700; float: left;}
+.orderandpay .myreview_edit_wrap .myreview_order_list dd{font-size: 13px; float: right;}
+.orderandpay .myreview_edit_wrap .myreview_order_list:first-child {padding-top:20px;}
 /* 펀딩 ---------------*/
 /* 펀딩 in 주문서  */
 .orderandpay .funding_policy_wrap {margin-top:48px;}
@@ -1001,6 +1035,16 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .tab_01_st ul li.active {}
 .orderandpay .tab_01_st ul li.active a {font-weight: 700;}
 .orderandpay .tab_01_st ul li.active a span {font-weight: 500;  }
+.orderandpay .tab_01_st ul li.active a:before {content: ''; display: inline-block; width:12px; height:10px; background: url(../../images/new/icon_my_check.png) no-repeat top center; background-size: 12px 10px; margin-right:5px;}
+
+/* 알림 */
+.alarm_wrap {position:relative;}
+
+.alarm_wrap .no_alarm {text-align: center;padding-top:62px;}
+.alarm_wrap .no_alarm img{width:97px;}
+.alarm_wrap .no_alarm p{font-size: 14px;word-break: keep-all; line-height:1.5;margin: 28px auto 70px;}
+.alarm_wrap .no_alarm p span{color: #424A5D;}
+.alarm_wrap .no_alarm a{display: block;font-size: 14px; color: #fff;height: 50px;line-height: 49px;background: #000;text-align: center;margin: 0 40px 100px;}
 
 
  /* 마이핫트랙스 메인 */
@@ -1081,6 +1125,12 @@ div.bill_noti div{margin-bottom:5px;}
 
 .orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap {float: left; margin-top:6px;}
 .orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap{}
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap.type_squre input[type="checkbox"] + label,
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap.type_squre input[type="radio"] + label {font-size: 14px;}
+
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap.type_squre input[type="checkbox"] + label:before,
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:9px;}
+
 /*.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap:after {content: ''; display: inline-block; width:1px; height:15px; background:#777; margin: 0px 1px 2px 7px; vertical-align: middle;}*/
 .orderandpay .at_this_time_like_wrap .go_select_wrap {float: right;}
 .orderandpay .at_this_time_like_wrap .choice_delete {font-size: 14px; color: #000; font-weight: 400;font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; vertical-align: baseline; outline: none; width:80px; height:34px; border:1px #313131 solid; display: inline-block; line-height: 32px;}
@@ -1129,9 +1179,26 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .tab_unit_list .items .link {color: #777;}
 .orderandpay .tab_unit_list .items .link.active {color: #000;}
 
+.orderandpay .br_list li .fl_l2 a {color:#000;}
+
+.orderandpay .notice_txt {font-size: 13px; font-weight: 400;} 
+.orderandpay .not.no-data {    border: 1px #eee solid;    background: #fafafa;    padding: 15px;}
+.orderandpay #my_content .my_comment {font-size: 11px; color:#777; text-align: center;}
+
+.orderandpay #my_content .my_info { color: #525252; text-align: center; padding: 10px 0px; font-size: 1.2em;}
+.orderandpay #my_content { margin:0 -10px; }
+.orderandpay #my_content .couponbox { position:relative; }
+.orderandpay #my_content .couponbox + .couponbox:last-child { border-bottom:5px solid #eee; }
+.orderandpay #my_content .couponbox .box { margin:10px 20px;border:5px solid #ff6600;border-radius:20px;background:url('../../images/content/ic_logo_white.png') no-repeat 90% center;background-size:80px auto;background-color: #f60; }
+.orderandpay #my_content .couponbox .inner_box {padding: 20px;  margin-right: 133px; background-color: #fff; border-radius: 18px 0 0 18px;}
+.orderandpay #my_content .couponbox .cpn_tit { color:#DA2128 !important;font-weight:bold; }
+.orderandpay #my_content .couponbox .cpn_txt { font-size:1.5em;font-weight:bold;padding-bottom:5px;margin-bottom:10px;border-bottom:2px solid #dadada; }
+.orderandpay #my_content .couponbox .cpn_txt span { font-size:1.5em; }
+.orderandpay #my_content .couponbox .cpn_cont { margin-top:10px; }
+.orderandpay #my_content .couponbox .nocoupon { padding: 20px; background-color: #fff; border-radius: 18px; font-size: 1.2em; text-align: center;}
+.orderandpay #my_content .couponbox .box_on{   background-repeat: no-repeat;    margin: 10px 10px;    border: 5px solid #000;    border-radius: 20px;    background: url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/online_coupon.png) no-repeat 90% center;    background-size: 97px auto;    background-color: #000;}
 
 
->>>>>>> 32771bdae38f22e370c190251631f34c25026553
 
 @media screen and (max-width: 360px) {
 

@@ -6,27 +6,28 @@
 <meta name="format-detection" content="telephone=no, address=no, email=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>HOTTRACKS - 생활 속 감성충전소</title>
-<META http-equiv="Expires" content="-1">
-<META http-equiv="Pragma" content="no-cache">
-<META http-equiv="Cache-Control" content="No-Cache">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-itunes-app" content="app-id=1129743143">
-<meta name="google-play-app" content="app-id=kr.co.hottracks.m.and">
-<link rel="apple-touch-icon-precomposed" href="/images/content/ico_app.png" />
-<link rel="apple-touch-startup-image" href="/images/content/ico_app.png">
-<link href="/favicon.ico" rel="shortcut icon">
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700|Titillium+Web:400,600&display=swap&subset=korean">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/content.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/common_v2.css">
-<link rel="stylesheet" type="text/css" href="/pages/html/css/swiper-5.1.0.min.css">
-<script type="text/javascript" src="/js/jquery-1.9.1.min.js?20191101"></script> 
-<script type="text/javascript" src="/js/common.js?20191101"></script>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link href="../../images/biz/common/favicon.ico" rel="shortcut icon">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/content.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/biz/common_v2.css">
+<!-- 210122 작업부분 -->
+<link rel="stylesheet" type="text/css" href="../../css/new/orderandpay.css">
+
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../js/swiper.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/biz/common_v2.js"></script>
+<script type="text/javascript" src="../../js/biz/m_hott.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
 </head>
 <body>
-
-<div id="wrap" class="mini">
+<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
+<div id="wrap" class="content_new orderandpay positionTop">
   <!-- #header -->
   <div id="header">
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
@@ -42,12 +43,23 @@
 <!-- #content -->
 <div id="content">
 <div class="customer">
-    <p class="noti">1개월 이전 알림함은 자동 삭제됩니다.</p>
-    <div class="bbs_box03 edit">
+    <!-- <p class="noti">1개월 이전 알림함은 자동 삭제됩니다.</p> -->
+    <!-- <div class="bbs_box03 edit">
         <ul>
             
         </ul>
-    </div>
+    </div> -->
+    <div class="alarm_wrap ">
+
+		<!-- 알림 없음 -->
+		<div class="no_alarm">
+			<img class="alarm_no" src="../../images/biz/sub/no_alarm.png" alt="알림내역없음">
+			<p><span>앗! 이럴수가! 수신된 알림 메시지가 없어요.<br>혹시 놓치고 있지 않으세요?<br>알림 수신 시, </span><br><br>더 많은 쿠폰, 상품할인<br> 혜택을 받으실 수 있습니다.</p>
+			<a href="javascript:;" onclick="bizGoSetting();return false;">알림설정 확인하기</a>
+		</div>
+		<!--// 알림 없음 -->
+					
+	</div>
 </div>
 </div>
 

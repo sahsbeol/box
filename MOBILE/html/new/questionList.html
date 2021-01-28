@@ -24,6 +24,17 @@
 <script type="text/javascript" src="../../js/biz/m_hott.js"></script>
 <script type="text/javascript" src="../../js/biz/jquery/jquery.easing.1.3.min.js"></script>
 <script type="text/javascript" src="../../js/biz/jquery/TweenMax.min.js"></script>
+<script>
+  function showComment(index){
+    if($("#qna-content"+index).is(":hidden")){
+        $("#qna-content"+index).slideDown();
+    } else {
+        $("#qna-content"+index).slideUp();
+    }
+}
+
+
+</script>
 </head>
 <body>
 
@@ -46,8 +57,8 @@
         
   <!-- sub contents -->
   <div id="my_content">
-    <ul class="br_list">
-      <li class="line">
+    <ul class="br_list space_pad">
+      <li class="">
           <strong class="fl_l">
               <em>등록일 : 2019.09.03</em><br>
               <em>상품명 : [2+1] [카멜] 전자노트 카멜보드 10인치 CB1010</em>
@@ -56,9 +67,8 @@
             <a href="#" onclick="showComment('1');return false;" class="btn btn_type01 black" id="0">답변보기</a>
           </strong>
       </li>
-      <li class="bg_eeeeee conts" id="qna-content1" style="display: block;">
+      <li class="bg_eeeeee conts" id="qna-content1" style="display: none;">
           <div class="txt">
-              
                 sdfskfsdfsdfsdfsdf  
           </div>
       </li>
