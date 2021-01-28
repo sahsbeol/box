@@ -706,10 +706,12 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .order_number_check {background: #fafafa; padding: 16px 20px; text-align: center;}
 .orderandpay .order_number_check .tit_type1 {color: #000;}
 .orderandpay .order_inquiry .order_num {margin:0; background: #fff; font-size:14px ; padding:10px 0;}
-.orderandpay .order_inquiry .br_list li {border-top:1px #DBDBDB solid; padding:20px 0; font-size: 14px;}
+.orderandpay .order_inquiry .br_list li {border-top:1px #DBDBDB solid; padding:22px 0; font-size: 13px;}
 .orderandpay .order_inquiry .br_list .fl_l {color:#000;}
 .orderandpay .order_inquiry .br_list li .fl_r {color: #000; font-weight: 400;}
-.orderandpay .order_inquiry {position: relative;}
+.orderandpay .order_inquiry .br_list li .fl_r.only_english.bold{vertical-align: middle; margin-top: 5px;}
+
+.orderandpay .order_inquiry {position: relative; margin-top:64px;}
 
 
 
