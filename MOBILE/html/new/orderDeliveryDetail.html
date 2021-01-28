@@ -27,7 +27,8 @@
 </head>
 <body>
 
-<div id="wrap" class="content_new">
+<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
+<div id="wrap" class="content_new orderandpay positionTop">
   <!-- #header -->
   <div id="header">
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
@@ -41,120 +42,99 @@
   <!-- //#header -->
 
 <!-- #content -->
-<div id="content">
-<div class="w_top">
-    <h2 class="tit_h2">주문/배송 내역</h2>
-    <p class="">모바일로 확인되지 않는 정보는 PC버전에서 확인해주시기 바랍니다.<br>
-    <b>상품준비 이전 단계까지만 주문 취소가 가능합니다.</b><br>
-상품준비 이전 단계에서의 부분취소는 [1:1문의]를 이용하시거나 고객센터로 연락주시기 바랍니다.</p>
-</div>
-
-<div class="pd0_10">
-    <h2 class="tit_type1">※주문번호 <span class="col_salmon">191203000003</span></h2>
-</div>
-
-<div class="roundbox mg0 order_inquiry">
-    <strong class="order_num">주문자 정보</strong>
-    <ul class="br_list">
-        <li class="br_none">
-            <strong class="fl_l">주문하시는 분</strong>
-            <span class="fl_r">하태경</span>
-        </li>
-        <li>
-            <strong class="fl_l">주문접수</strong>
-            <span class="fl_r">2019.12.03</span>
-        </li>
-<!-- 
-        <li>
-            <strong class="fl_l">전화번호</strong>
-            <span class="fl_r">/</span>
-        </li>
- -->
-        <li>
-            <strong class="fl_l">주문상태</strong>
-            <span class="fl_r">결제완료</span>
-        </li>
-    </ul>
-</div>
-
-
-<div class="roundbox order_inquiry">
-    <strong class="order_num">배송 정보</strong>
-    <ul class="br_list">
-        <li class="br_none">
-            <strong class="fl_l">받으실 분</strong>
-            <span class="fl_r">하태경</span>
-        </li>
-        <li>
-            <strong class="fl_l">받으실 분<br>주소</strong>
-            <span class="fl_r">
-                <span class="name">[109-19]</span>
-                <span class="name">경기도 파주시 쇠재로 133 </span>
-                <span class="name">510동 1104호 </span>
-            </span>
-        </li>
-        <li>
-            <strong class="fl_l">전화번호</strong>
-            <span class="fl_r">02-388-9112</span>
-        </li>
-        <li>
-            <strong class="fl_l">핸드폰번호</strong>
-            <span class="fl_r">010-9285-0898</span>
-        </li>
-    </ul>
-</div>
-
-
-
-
-
-
+<div id="content" class="my">
     
-    
-    
-    
-    
-    <div class="roundbox order_inquiry">
-        <strong class="order_num">주문상품 정보</strong>
-        <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">상품명</strong>
-                <span class="fl_r">
-                    <span class="name"><a href="#n">로이텀 미디엄 노트 뮤트 데님<br>
-                    LINE
-                    </a></span>
-                </span>
-            </li>
-            <li>
-                <strong class="fl_l">수량</strong>
-                <span class="fl_r">1개</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매가</strong>
-                <span class="fl_r"><span class="col_salmon">23,400</span>원</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매자</strong>
-                <span class="fl_r">핫트랙스</span>
-            </li>
-<!--
-            <li>
-                <strong class="fl_l">쿠폰사용금액</strong>
-                <span class="fl_r">0원</span>
-            </li>
- -->
-            <li>
-                <strong class="fl_l">주문상태</strong>
-                <span class="fl_r">
-                배송대기
-                </span>
-            </li>
-        </ul>
-        <a href="#n" class="detail_view"><span>고객센터</span></a>
+    <h2 class="w_top tit_h2">주문/배송 내역</h2>
+    <div class="info_txt text1 space_pad">
+        <p class="">모바일로 확인되지 않는 정보는 PC버전에서 확인해주시기 바랍니다.<br>
+        <b>상품준비 이전 단계까지만 주문 취소가 가능합니다.</b><br>상품준비 이전 단계에서의 부분취소는 [1:1문의]를 이용하시거나 고객센터로 연락주시기 바랍니다.</p>
     </div>
 
-    <div class="roundbox mtm2 order_inquiry">
-        <ul class="br_list mtm22">
+    <div class="space_pad">
+        
+        <div class="order_number_check mt30">
+            <h2 class="tit_type1 bold">주문번호 <span class="color_01 only_english">191203000003</span></h2>
+        </div>
+        <div class=" order_inquiry">
+            <strong class="order_num">주문자 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">주문하시는 분</strong>
+                    <span class="fl_r">하태경</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문접수</strong>
+                    <span class="fl_r only_english bold">2021.01.05</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">결제완료</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class=" order_inquiry">
+            <strong class="order_num">배송 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">받으실 분</strong>
+                    <span class="fl_r">하태경</span>
+                </li>
+                <li>
+                    <strong class="fl_l">받으실 분<br>주소</strong>
+                    <span class="fl_r">
+                        <span class="name only_english bold">[109-19]</span>
+                        <span class="name">경기도 파주시 쇠재로 133 </span>
+                        <span class="name">510동 1104호 </span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">전화번호</strong>
+                    <span class="fl_r only_english bold">02-388-9112</span>
+                </li>
+                <li>
+                    <strong class="fl_l">휴대전화</strong>
+                    <span class="fl_r only_english bold">010-9285-0898</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class=" order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">상품명</strong>
+                    <span class="fl_r">
+                        <span class="name"><a href="#n">로이텀 미디엄 노트 뮤트 데님<br>
+                        LINE
+                        </a></span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">수량</strong>
+                    <span class="fl_r"><em class="only_english bold">1</em>개</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매가</strong>
+                    <span class="fl_r"><span class="only_english bold color_01">23,400</span>원</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매자</strong>
+                    <span class="fl_r">핫트랙스</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">
+                        <span>배송대기</span>
+                    </span>
+                </li>
+            </ul>
+            <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </div>
+
+        <!-- <div class=" order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
                 <li class="mg0">
                     <strong class="fl_l">사은품</strong>
                     <span class="fl_r">
@@ -176,302 +156,242 @@
                 <li class="mg0">
                     <strong class="fl_l">포스터케이스증정</strong>
                 </li>
-        </ul>
-    </div>
+            </ul>
+        </div> -->
         
-    <div class="roundbox order_inquiry">
-        <strong class="order_num">주문상품 정보</strong>
-        <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">상품명</strong>
-                <span class="fl_r">
-                    <span class="name"><a href="#n">GOT7 MINI ALBUM<br>
-                    
-                    </a></span>
-                </span>
-            </li>
-            <li>
-                <strong class="fl_l">수량</strong>
-                <span class="fl_r">1개</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매가</strong>
-                <span class="fl_r"><span class="col_salmon">16,300</span>원</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매자</strong>
-                <span class="fl_r">핫트랙스</span>
-            </li>
-<!--
-            <li>
-                <strong class="fl_l">쿠폰사용금액</strong>
-                <span class="fl_r">0원</span>
-            </li>
- -->
-            <li>
-                <strong class="fl_l">주문상태</strong>
-                <span class="fl_r">
-                    배송중
-                    <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+        <div class=" order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">상품명</strong>
+                    <span class="fl_r">
+                        <span class="name"><a href="#n">GOT7 MINI ALBUM<br>
+                        
+                        </a></span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">수량</strong>
+                    <span class="fl_r">1개</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매가</strong>
+                    <span class="fl_r"><span class="col_salmon">16,300</span>원</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매자</strong>
+                    <span class="fl_r">핫트랙스</span>
+                </li>
+
+                <li>
+                    <strong class="fl_l">쿠폰사용금액</strong>
+                    <span class="fl_r">0원</span>
+                </li>
+     
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">
+                        배송중
+                        <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                        <a href="#n" class="bt_sbgb ml5 btn_tacbae"><span>배송추적</span></a>
+                    </span>
+                </li>
+            </ul>
+            <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </div>
+    
+        <div class=" order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">상품명</strong>
+                    <span class="fl_r">
+                        <span class="name"><a href="#n">파버카스텔 룸 피아노 만년필 (화이트 / 블랙)<br>
+                        피아노 블랙 - EF촉
+                        </a></span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">수량</strong>
+                    <span class="fl_r">1개</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매가</strong>
+                    <span class="fl_r"><span class="col_salmon">47,700</span>원</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매자</strong>
+                    <span class="fl_r">핫트랙스</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">
+                    배송완료
                     <a href="#n" class="bt_sbgb ml5 btn_tacbae"><span>배송추적</span></a>
-                </span>
-            </li>
-        </ul>
-        <a href="#n" class="detail_view"><span>고객센터</span></a>
-    </div>
-
-    
-    
-    
-    
-    
-    <div class="roundbox order_inquiry">
-        <strong class="order_num">주문상품 정보</strong>
-        <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">상품명</strong>
-                <span class="fl_r">
-                    <span class="name"><a href="#n">파버카스텔 룸 피아노 만년필 (화이트 / 블랙)<br>
-                    피아노 블랙 - EF촉
-                    </a></span>
-                </span>
-            </li>
-            <li>
-                <strong class="fl_l">수량</strong>
-                <span class="fl_r">1개</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매가</strong>
-                <span class="fl_r"><span class="col_salmon">47,700</span>원</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매자</strong>
-                <span class="fl_r">핫트랙스</span>
-            </li>
-<!--
-            <li>
-                <strong class="fl_l">쿠폰사용금액</strong>
-                <span class="fl_r">0원</span>
-            </li>
- -->
-            <li>
-                <strong class="fl_l">주문상태</strong>
-                <span class="fl_r">
-                배송완료
-                <a href="#n" class="bt_sbgb ml5 btn_tacbae"><span>배송추적</span></a>
-                </span>
-            </li>
-        </ul>
-        <a href="#n" class="detail_view"><span>고객센터</span></a>
-    </div>
-
-    
-    
-    
-    
-    
-    <div class="roundbox order_inquiry">
-        <strong class="order_num">주문상품 정보</strong>
-        <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">상품명</strong>
-                <span class="fl_r">
-                    <span class="name"><a href="#n">[삼성전자] 갤럭시버즈 블루투스 이어폰<br>
-                    블랙
-                    </a></span>
-                </span>
-            </li>
-            <li>
-                <strong class="fl_l">수량</strong>
-                <span class="fl_r">1개</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매가</strong>
-                <span class="fl_r"><span class="col_salmon">156,000</span>원</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매자</strong>
-                <span class="fl_r">휘인테크/인터넷</span>
-            </li>
-<!--
-            <li>
-                <strong class="fl_l">쿠폰사용금액</strong>
-                <span class="fl_r">0원</span>
-            </li>
- -->
-            <li>
-                <strong class="fl_l">주문상태</strong>
-                <span class="fl_r">
-                    배송대기
-                    <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                    </span>
+                </li>
+            </ul>
+            <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </div>
+        
+        <div class=" order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">상품명</strong>
+                    <span class="fl_r">
+                        <span class="name"><a href="#n">[삼성전자] 갤럭시버즈 블루투스 이어폰<br>
+                        블랙
+                        </a></span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">수량</strong>
+                    <span class="fl_r">1개</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매가</strong>
+                    <span class="fl_r"><span class="col_salmon">156,000</span>원</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매자</strong>
+                    <span class="fl_r">휘인테크/인터넷</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">
+                        배송대기
+                        <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                            
+                    </span>
+                </li>
+            </ul>
+            <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </div>
+        <div class="order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">상품명</strong>
+                    <span class="fl_r">
+                        <span class="name"><a href="#n">슈즈용네임스티커냥냥이<br>
                         
-                </span>
-            </li>
-        </ul>
-        <a href="#n" class="detail_view"><span>고객센터</span></a>
-    </div>
-
-    
-    
-    
-    
-    
-    <div class="roundbox order_inquiry">
-        <strong class="order_num">주문상품 정보</strong>
-        <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">상품명</strong>
-                <span class="fl_r">
-                    <span class="name"><a href="#n">슈즈용네임스티커냥냥이<br>
-                    
-                    </a></span>
-                </span>
-            </li>
-            <li>
-                <strong class="fl_l">수량</strong>
-                <span class="fl_r">1개</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매가</strong>
-                <span class="fl_r"><span class="col_salmon">5,000</span>원</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매자</strong>
-                <span class="fl_r">디자인아지트/인터넷</span>
-            </li>
-<!--
-            <li>
-                <strong class="fl_l">쿠폰사용금액</strong>
-                <span class="fl_r">0원</span>
-            </li>
- -->
-            <li>
-                <strong class="fl_l">주문상태</strong>
-                <span class="fl_r">
-                    배송대기
-                    <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                        </a></span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">수량</strong>
+                    <span class="fl_r">1개</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매가</strong>
+                    <span class="fl_r"><span class="col_salmon">5,000</span>원</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매자</strong>
+                    <span class="fl_r">디자인아지트/인터넷</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">
+                        배송대기
+                        <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                            
+                    </span>
+                </li>
+            </ul>
+            <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </div>
+        
+        <div class=" order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">상품명</strong>
+                    <span class="fl_r">
+                        <span class="name"><a href="#n">[주문제작]자수네임택쪼꼬미<br>
                         
-                </span>
-            </li>
-        </ul>
-        <a href="#n" class="detail_view"><span>고객센터</span></a>
-    </div>
-
-    
-    
-    
-    
-    
-    <div class="roundbox order_inquiry">
-        <strong class="order_num">주문상품 정보</strong>
-        <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">상품명</strong>
-                <span class="fl_r">
-                    <span class="name"><a href="#n">[주문제작]자수네임택쪼꼬미<br>
-                    
-                    </a></span>
-                </span>
-            </li>
-            <li>
-                <strong class="fl_l">수량</strong>
-                <span class="fl_r">1개</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매가</strong>
-                <span class="fl_r"><span class="col_salmon">7,200</span>원</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매자</strong>
-                <span class="fl_r">디자인아지트/인터넷</span>
-            </li>
-<!--
-            <li>
-                <strong class="fl_l">쿠폰사용금액</strong>
-                <span class="fl_r">0원</span>
-            </li>
- -->
-            <li>
-                <strong class="fl_l">주문상태</strong>
-                <span class="fl_r">
-                    배송대기
-                    <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                        </a></span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">수량</strong>
+                    <span class="fl_r">1개</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매가</strong>
+                    <span class="fl_r"><span class="col_salmon">7,200</span>원</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매자</strong>
+                    <span class="fl_r">디자인아지트/인터넷</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">
+                        배송대기
+                        <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                            
+                    </span>
+                </li>
+            </ul>
+            <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </div>
+        
+        <div class="order_inquiry">
+            <strong class="order_num">주문상품 정보</strong>
+            <ul class="br_list">
+                <li class="br_none">
+                    <strong class="fl_l">상품명</strong>
+                    <span class="fl_r">
+                        <span class="name"><a href="#n">웍스 S스케줄러 1년 라임그린 미디에스<br>
                         
-                </span>
-            </li>
-        </ul>
-        <a href="#n" class="detail_view"><span>고객센터</span></a>
+                        </a></span>
+                    </span>
+                </li>
+                <li>
+                    <strong class="fl_l">수량</strong>
+                    <span class="fl_r">1개</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매가</strong>
+                    <span class="fl_r"><span class="col_salmon">8,000</span>원</span>
+                </li>
+                <li>
+                    <strong class="fl_l">판매자</strong>
+                    <span class="fl_r">한국폼텍/인터넷</span>
+                </li>
+                <li>
+                    <strong class="fl_l">주문상태</strong>
+                    <span class="fl_r">
+                        배송대기
+                        <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
+                            
+                    </span>
+                </li>
+            </ul>
+            <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </div>
     </div>
 
-    
-    
-    
-    
-    
-    <div class="roundbox order_inquiry">
-        <strong class="order_num">주문상품 정보</strong>
+    <div class="order_price">
         <ul class="br_list">
-            <li class="br_none">
-                <strong class="fl_l">상품명</strong>
-                <span class="fl_r">
-                    <span class="name"><a href="#n">웍스 S스케줄러 1년 라임그린 미디에스<br>
-                    
-                    </a></span>
-                </span>
+            <li>
+                <strong class="fl_l">주문상품 합계 :</strong>
+                <span class="fl_r">7종 7개</span>
             </li>
             <li>
-                <strong class="fl_l">수량</strong>
-                <span class="fl_r">1개</span>
+                <strong class="fl_l">주문총액 :</strong>
+                <span class="fl_r"><span class="col_salmon">263,600원</span></span>
             </li>
-            <li>
-                <strong class="fl_l">판매가</strong>
-                <span class="fl_r"><span class="col_salmon">8,000</span>원</span>
-            </li>
-            <li>
-                <strong class="fl_l">판매자</strong>
-                <span class="fl_r">한국폼텍/인터넷</span>
-            </li>
-<!--
-            <li>
-                <strong class="fl_l">쿠폰사용금액</strong>
-                <span class="fl_r">800원</span>
-            </li>
- -->
-            <li>
-                <strong class="fl_l">주문상태</strong>
-                <span class="fl_r">
-                    배송대기
-                    <!-- 배송 대기 상태에서는 추적하기 버튼이 안보이게 함 -->
-                        
-                </span>
-            </li>
-        </ul>
-        <a href="#n" class="detail_view"><span>고객센터</span></a>
+        </ul>   
     </div>
 
-
-
-
-
-
-<div class="order_price">
-    <ul class="br_list">
-        <li>
-            <strong class="fl_l">주문상품 합계 :</strong>
-            <span class="fl_r">7종 7개</span>
-        </li>
-        <li>
-            <strong class="fl_l">주문총액 :</strong>
-            <span class="fl_r"><span class="col_salmon">263,600원</span></span>
-        </li>
-    </ul>   
-</div>
-
-<div class="pd0_10">
+<!-- <div class="pd0_10">
     <h2 class="tit_type1">※결제정보</h2>
 </div>
-
-<div class="roundbox mg0 order_inquiry">
+ -->
+<div class="order_inquiry">
     <strong class="order_num">주문내용</strong>
     <ul class="br_list">
         <li class="br_none">
@@ -493,7 +413,7 @@
     </ul>
 </div>
 
-<div class="roundbox order_inquiry">
+<div class=" order_inquiry">
     <strong class="order_num">할인내용</strong>
     <ul class="br_list">
         <li class="br_none">
@@ -519,7 +439,7 @@
     </ul>
 </div>
 
-<div class="roundbox order_inquiry">
+<div class=" order_inquiry">
     <strong class="order_num">결제내용</strong>
     <ul class="br_list">
         <li class="br_none">
@@ -538,7 +458,7 @@
 </div>
 
 
-    <div class="roundbox order_inquiry">
+    <!-- <div class=" order_inquiry">
         <ul class="br_list">
             <li class="br_none">
                 <strong class="fl_l">결제방식</strong>
@@ -567,7 +487,7 @@
             </li>
         </ul>
     </div>
-
+ -->
 
 <div class="btn_area box_flex mt30 mb30">
     <a href="#n" class="bt_mbgb btnCancelOrder">주문취소</a>

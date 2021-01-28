@@ -27,7 +27,8 @@
 </head>
 <body>
 
-<div id="wrap" class="mini">
+<!-- 210129 S : 작업부분 id="wrap" class="orderandpay positionTop" 넣어주세요-->
+<div id="wrap" class="content_new orderandpay positionTop">
   <!-- #header -->
   <div id="header">
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
@@ -59,16 +60,22 @@
         <div class="my_smenu_ment"><strong>이벤트 쿠폰 등록</strong></div>
         <div style="text-align: center;">
             <input name="couponNum" id="couponNum" value="" type="text" class="i_input">
-            <a href="javascript:couponReg()" class="btn btn_type01 bg_orange">등록</a>
+            <a href="javascript:couponReg()" class="btn btn_type01 black">등록</a>
         </div>
+        <div class="info t_c space_pad mt30">고고객님의 보유 쿠폰은 <span class="color_01"><strong class="only_english">88,264,100</strong></span> 장 입니다.</div>
         
-        
-        <div class="my_smenu_ment">고객님의 보유 쿠폰은 <span class="col_orange">0</span>장 입니다.</div>
-        <div class="my_smenu2">
-            <a href="/m/mypage/coupon" class="my_info active"><span>온라인 쿠폰(<span>0)</span></span></a>
-            <a href="/m/offLine/offLineCoupon" class="my_info"><span>영업점 쿠폰(0)</span></a>
+        <!-- <div class="my_smenu_ment">고객님의 보유 쿠폰은 <span class="col_orange">0</span>장 입니다.</div> -->
+        <div class="space_pad">
+          <div class="tab_box distance">
+              <a href="javascript:;" class="active">온라인 쿠폰 <span class="only_english">(99)</span></a>
+              <a href="javascript:;">영업점 쿠폰<span class="only_english">(99)</span></a>
+          </div>
         </div>
-        <div class="my_list" id="orderList">
+          <!-- <div class="my_smenu2">
+              <a href="/m/mypage/coupon" class="my_info active"><span>온라인 쿠폰(<span>0)</span></span></a>
+              <a href="/m/offLine/offLineCoupon" class="my_info"><span>영업점 쿠폰(0)</span></a>
+          </div> -->
+          <div class="my_list" id="orderList">
 
 
 

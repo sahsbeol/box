@@ -67,34 +67,60 @@
             <a href="#" class="my_info active" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/listReceipt';return false;"><span>영업점 영수증</span></a>
             <a href="#" class="my_info" onclick="location.href='http://devm.hottracks.co.kr/m/offLine/savePointByOffBill';return false;"><span>영수증 후 적립</span></a>
         </div> -->
-            <div class="my_smenu3">
-                <select name="year" onchange="getReceiptList(1);">
-                    <option value="2020" selected="selected">2020년</option>
-                    <option value="2019">2019년</option>
-                    <option value="2018">2018년</option>
-                </select>
-                <select name="month" onchange="getReceiptList(1);">
-                    <option value="01" selected="selected"> 01월</option>
-                    <option value="02"> 02월</option>
-                    <option value="03"> 03월</option>
-                    <option value="04"> 04월</option>
-                    <option value="05"> 05월</option>
-                    <option value="06"> 06월</option>
-                    <option value="07"> 07월</option>
-                    <option value="08"> 08월</option>
-                    <option value="09"> 09월</option>
-                    <option value="10"> 10월</option>
-                    <option value="11"> 11월</option>
-                    <option value="12"> 12월</option>
-                </select>
-                <select name="company" onchange="getReceiptList(1);">
-                    <option value="A">전체</option>
-                    <option value="H">핫트랙스</option>
-                    <option value="K">교보문고</option>
-                    
-                </select>
-            </div>
-            <table class="table" summary="스마트영수증" border="1">
+
+        <div class="box_flex tog_area mt10">
+            <select name="year" onchange="getReceiptList(1);">
+                <option value="2020" selected="selected">2020년</option>
+                <option value="2019">2019년</option>
+                <option value="2018">2018년</option>
+            </select>
+
+            <select name="month" onchange="getReceiptList(1);">
+                <option value="01" selected="selected"> 01월</option>
+                <option value="02"> 02월</option>
+                <option value="03"> 03월</option>
+                <option value="04"> 04월</option>
+                <option value="05"> 05월</option>
+                <option value="06"> 06월</option>
+                <option value="07"> 07월</option>
+                <option value="08"> 08월</option>
+                <option value="09"> 09월</option>
+                <option value="10"> 10월</option>
+                <option value="11"> 11월</option>
+                <option value="12"> 12월</option>
+            </select>
+            <select name="company" onchange="getReceiptList(1);">
+                <option value="A">전체</option>
+                <option value="H">핫트랙스</option>
+                <option value="K">교보문고</option>
+            </select>
+        </div>
+        <table class="table_wrap vertical">
+            <colgroup>
+                <col width="25%">
+                <col width="25%">
+                <col width="25%">
+                <col width="25%">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>a</th>
+                    <th>s</th>
+                    <th>d</th>
+                    <th>f</th>
+                </tr>
+                <tr>
+                    <td>s</td>
+                    <td>d</td>
+                    <td>f</td>
+                    <td>f</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="no-data t_center">내역이 없습니다.</td>
+                </tr>
+            </tbody>
+        </table><!-- 
+            <table class="table width100 mt10" summary="스마트영수증" border="1">
                 <caption>스마트 영수증 조회 결과</caption>
                 <colgroup>
                     <col width="*">
@@ -106,8 +132,10 @@
                     <tr>
                     </tr>
                 </thead>
-                <tbody id="receiptTable"><tr><td colspan="4">내역이 없습니다.</td></tr></tbody>
-            </table>
+                <tbody id="receiptTable"><tr>
+                    <td colspan="4">내역이 없습니다.</td></tr>
+                </tbody>
+            </table> -->
             <div class="my_comment">※ 영업점 영수증은 최근 3년까지 내역만 제공합니다. ※</div>
             <div class="receipt_back" style="display: none;">
                 <div class="receipt_inner">
