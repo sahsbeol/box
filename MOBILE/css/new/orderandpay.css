@@ -947,7 +947,7 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .text1.info_txt {font-size: 13px; color:#313131; margin:0; padding-top:0; padding-bottom: 0;}
 
 .orderandpay .dlvy_list {border:1px #DBDBDB solid;}
-.orderandpay .dlvy_list .info {padding:0;}
+.orderandpay .dlvy_list .info {padding:0; background: #fafafa;}
 .orderandpay .dlvy_list .info .link {display: block; font-size: 14px; font-weight: 500; padding:19px 10px; color:#000;}
 .orderandpay .dlvy_list .info .link:after{content: ''; display: block; clear: both;}
 .orderandpay .dlvy_list .info .link .num {float: right; color:#777777; text-decoration: none;}
@@ -1058,10 +1058,9 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .box_info { padding:40px 20px;  color:#777; font-size: 12px;}
 .orderandpay .color_03 {color:#777 !important;}
 
-<<<<<<< HEAD
 .orderandpay .tog_area .select {background-color:#F8F8F8; border:1px #777777 solid; font-size: 12px;}
 .orderandpay #my_content .my_list {margin:0;}
-=======
+
 /* 좋아요 */
 .orderandpay .sort_link_wrap {padding: 20px 10px;margin: 0 0px;}
 .orderandpay .sort_link_wrap .sort_link {border: 1px #B5B5B5 solid;padding:12px 20px;font-size:14px;font-weight: 400; margin: 0 5px 10px;border-radius: 34px;}

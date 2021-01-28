@@ -440,31 +440,53 @@
                             <col width="auto" />
                         </colgroup>
                         <tbody>
-                            <tr>
-                                <th>이름 </th>
+                             <tr>
+                                <th>이름 <span class="star">*</span></th>
                                 <td>
-                                    홍길동
+                                    <div class="input_wrap">
+                                        <input type="text" placeholder="" class="width_name">
+                                    </div>
                                 </td>
                             </tr>
                              <tr>
-                                <th>휴대전화 </th>
-                                <td class="only_english">
-                                    010-1234-5678
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>이메일</th>
+                                <th>휴대전화 <span class="star">*</span></th>
                                 <td>
-                                    <div>
-                                        <div class="only_english">
-                                            hottracks@ottracks.co.kr
-                                        </div>                                    
+                                    <div class="choice_wrap type_squre have_inner_txt inner_float">
+                                        <span class="input_wrap">
+                                            <select name="" id="" class="width_phone">
+                                                <option value="">선택</option>
+                                            </select>
+                                        </span>
+                                        <span class="input_wrap">
+                                            <input type="text" placeholder="" class="width_phone">
+                                        </span>
+                                        <span class="input_wrap">
+                                            <input type="text" placeholder="" class="width_phone">
+                                        </span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
+                                <th colspan="2">이메일</th>
+                            </tr>
+                            <tr>
                                 <td colspan="2">
-                                    <a href="javascript:;" class="btn_big_box margin_set_top">회원정보수정</a>
+                                    <div class="choice_wrap type_squre  inner_float_dot">
+                                        <div class="have_inner_txt">
+                                            <span class="input_wrap">
+                                                <input type="text" placeholder="" class="width_email">
+                                            </span>
+                                            <span class="input_wrap inner_dot">@</span>
+                                            <span class="input_wrap">
+                                                <input type="text" placeholder="" class="width_email">
+                                            </span>
+                                            <span class="input_wrap">
+                                                <select name="" id="" class="width_email">
+                                                    <option value="">직접입력</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -490,7 +512,7 @@
 
                 <div class="user_title distance have_inner_txt">
                     <h3 class="i_txt">배송지 정보</h3>
-                    <a href="javascript:;" class="btn_icon_arrow">신규배송지</a>
+                    
                 </div>
                 <div class="user_table_wrap">
                     <table class="table_wrap">
@@ -506,13 +528,9 @@
                                 <td>
                                     <div class="choice_wrap have_inner_txt between_space">
                                         <!-- 한개만 사용시 class="f_r" 넣어주세요 -->
-                                        <div class="choice_wrap_inner f_l">
-                                            <input type="radio" name="orderInfo1" id="orderInfo_11" value="Y" />
-                                            <label for="orderInfo_11">주문자 정보와 동일</label>
-                                        </div>
                                         <div class="choice_wrap_inner f_r">
-                                            <input type="radio" name="orderInfo1" id="orderInfo_12" value="N" />
-                                            <label for="orderInfo_12">최근 배송지</label>
+                                            <input type="checkbox" name="orderInfo22222" id="orderInfo_144" />
+                                            <label for="orderInfo_144">주문자 정보와 동일</label>
                                         </div>
                                     </div>
                                 </td>
