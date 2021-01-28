@@ -60,7 +60,7 @@
                 <a href="#n" _onclick="locBack();return false;" class="btn_back">뒤로가기</a>
                 <a href="#n" class="btn_category" _onclick="bizOpenGnbMenu();return false;">카테고리 보기</a>
                 <a href="#n" class="btn_search" _onclick="gnbSrchFrm();return false;">검색</a>
-                <h2 id="subTitle">나의 Q&amp;A</h2>
+                <h2 id="subTitle">마이페이지</h2>
             </div>
             <!--// 서브 --> 
         </div>
@@ -74,24 +74,26 @@
             <div class="tit_orange">
                 <h3 class="tit">HOTTRACKS EVENT</h3>
             </div>
-            <ul class="br_list mb30 mt40">    
-                <li class="line bg_eeeeee">
-                    2019.04.05(참여일자)
-                </li>
-                <li>
-                    <strong class="fl_l2">
-                        <a href="#" onclick="showMyEvent('59855','0');return false;">&lt;꿈꾸는 4월&gt;  출석체크</a>
-                    </strong>
-                    <span class="fl_r">발표완료</span>
-                </li>
-                <li id="li_0" style="display: none;">
-                    <span style="width:100%;">
-                        <a href="#" class="li_a" onclick="goEvent('59855');return false;">해당 이벤트 보기 &gt;&gt;</a>
-                    </span>
-                    <span class="fl_l4">
-                    </span>
-                </li>
-            </ul>
+            <div class="space_pad myevet_wrap">
+                <ul class="br_list mb30">    
+                    <li class="bg_eeeeee">
+                        2019.04.05(참여일자)
+                    </li>
+                    <li class="">
+                        <strong class="fl_l2">
+                            <a href="#" onclick="showMyEvent('59855','0');return false;">&lt;꿈꾸는 4월&gt;  출석체크</a>
+                        </strong>
+                        <span class="fl_r">발표완료</span>
+                    </li>
+                    <li id="li_0" style="display: none;" class="t_c">
+                        <span style="width:100%;">
+                            <a href="#" class="li_a" onclick="goEvent('59855');return false;">해당 이벤트 보기</a>
+                        </span>
+                        <span class="fl_l4">
+                        </span>
+                    </li>
+                </ul>
+            </div>
             <!-- paging -->
             <div class="paging cs">    
                 <ul>
