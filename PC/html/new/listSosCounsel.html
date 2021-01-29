@@ -337,22 +337,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- sub contents -->
                 <div class="sub_contents">
 
-                    <h3 class="page_title mgt0">SOS 상담</h3> 
-				    <ul class="list_type02_v2 mgt20 mgb40">
+                    <h3 class="page_title border mgt0">SOS 상담</h3> 
+				    <ul class="list_type02_v2 mgb80 mgt20">
 				        <li>회원님이 접수하신 상담 및 처리내역을 확인하실 수 있습니다.</li>
 				        <li>고객센터 운영시간은 오전 9시~오후 6시(토/일/공휴일 제외)입니다.</li>
-				        <li>매장 이용 상담의 문의는 등록하신 <strong class="c_red">이메일 또는 전화번호로 회신</strong>을 드립니다.</li>
-				    </ul>
-				    <a href="#n" class="btn_type01_v2 f_left mgb20">SOS 상담접수</a>
+				        <li>매장 이용 상담의 문의는 등록하신 <!-- <strong class="c_red"> -->이메일 또는 전화번호로 회신<!-- </strong> -->을 드립니다.</li>
+				    </ul> 
+                    <div class="positionR">
+                        <h4 class="page_title mgt80">SOS 접수내역</h4>
+                        <a href="#n" _onclick="goTxinRequestList()" class="btn_type05_v3 location_btn">SOS 상담접수</a>
+                    </div>
 				    <!-- 내역 없음 -->
-				    <table class="bbs_list_v2">
+				    <table class="bbs_list_v2 border ">
 				        <caption>SOS상담 <span>접수일, 상담구분, 제목, 답변여부, 삭제</span></caption>
 				        <colgroup>
 				            <col style="width:110px" />
 				            <col style="width:110px" />
 				            <col style="width:*" />
 				            <col style="width:90px" />
-				            <col style="width:80px" />
+				            <col style="width:120px" />
 				        </colgroup>
 				        <thead>
 				            <tr>
@@ -365,22 +368,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				        </thead>
 				        <tbody id="sosTbody">				            
 				            <tr>
-			                    <td>2021.01.15</td>
+			                    <td class="only_english">2021.01.15</td>
 			                    <td>주문취소/변경</td>
 			                    <td class="t_left"><a href="#sos-content0997876" id="997876" class="click">주문취소합니다.</a></td> 
 			                    <td>완료</td>
 			                    <td>
-			                        &nbsp;
+			                        <a href="#n" class="btn_type05_v2 small bg ">삭제</a>
 			                    </td>
 			                </tr>
 			                <tr class="conts" id="sos-content0997876">
 			                	<td colspan="5">
 			                		<div class="txt">
-			                			<div class="one">
-			                				<p style="padding:5px 0;">
-			                					<strong>문의]</strong> <em>주문취소합니다.</em></p>    <p style="padding:5px 0;color:#FF0000;">[101011500728] 갤럭시노트10 플러스 전면 풀커버 마그네틱 케이스</p>    <p style="padding:5px 0;">무통장 입금을 하였는데 예치금으로 들어가나요?</p></div><div class="two">    <p style="padding:5px 0;"><strong>답변]</strong> <em>답변일시 : 2021-01-15 14:35:37</em>    </p><p style="padding:5px 0;"><br>안녕하세요, 이문수고객님. 온라인 핫트랙스몰을 찾아 주시고 이용해 주셔서 감사합니다. <br><br>주문 번호 : 101011500728 취소 완료 되었습니다.<br><br>해당주문건의 결제수단:무통장입금으로 확인되며, 취소한 상품 금액은 1차로 고객님의 예치금17,300원으로 전환되었습니다.<br><br>예치금은 다음 주문시 다시 사용하거나, 홈페이지&gt; 마이룸&gt; 핫트랙스 온라인 예치금 메뉴에서 고객님의 계좌로 환불 접수하실 수 있습니다.<br><br>주문자 명의의 계좌로만 환불 접수 가능하며 환불 접수 시 평일 기준으로 다음 날 오후 6시 이후 금액 확인 가능합니다.<br>(금,토,일요일/공휴일 의 경우 월요일 및 다음 평일날 오후 6시 이후 금액 확인 가능합니다.)<br><br>명의가 다르거나 시스템 오류가 발생할 경우 고객센터 1661-1112 나 홈페이지 sos상담을 통해, [계좌번호/예금주] 안내해 주시면 접수 해드리겠습니다.<br><br>불편을 드려 대단히 죄송합니다. <br>
-			                				</p>
-	                					</div>
+                                        <p class="question-content">안녕하세요.<br/>새 배터리, 기준 몇시간 사용 가능한가요?<br/></p>
+			                			<div class="answer_content_wrap">
+                                            <div class="answer_content_title"><strong class="color_01">문의글 답변</strong></div>
+                                            <div class="answer_content_txt">
+                                                문의주신 상품은 지우는 버튼을 누를 때 배터리가 소모됩니다.때문에 정확한 수치를 알려드리기는 어렵지만,&nbsp;몇    백번 이상 사용이 가능하십니다.
+                                            </div>
+                                        </div>
 	                				</div>
 	                			</td>
 	                		</tr>
@@ -388,7 +393,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				    </table>
 
 					<!-- paging -->
-				    <div class="paging cs">
+				    <div class="paging cs mgt80">
 				    	<a title="맨 처음 페이지로 이동" href="#n" class="first">처음</a>
 				        <ul>			            
 				            <li class="active"><a href="#n">1</a></li>

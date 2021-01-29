@@ -98,7 +98,7 @@ a.addr.btn_defalut{  padding: 10px 19px;    height: auto;    min-width: 116px;  
 .orderandpay .have_inner_txt:after {content: ''; display:block; clear:both;}
 
 .orderandpay .have_inner_txt.address .btn_defalut {position: absolute;top:0;left: 195px;}
-.orderandpay .have_inner_txt.address .btn_defalut.black {left: auto; right:0;}
+.orderandpay .have_inner_txt.address .btn_defalut {left: auto; right:1px;}
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_txt,
 .orderandpay .user_info_wrap .user_title.have_inner_txt .i_small_txt,
 .orderandpay .user_info_wrap .user_title.have_inner_txt .choice_wrap {float: left;}
@@ -309,7 +309,7 @@ ul.agency_select li:nth-child(3) .ele {
 /* btn */
 .orderandpay .btn_type_wrap {text-align: center;}
 /* 변경 되어서 바뀜*/
-.orderandpay .btn_defalut {padding: 10px 19px 9px; min-height: 38px;min-width: 118px;  box-sizing:border-box; background: #EEEEEE; border:1px #B5B5B5 solid; font-size: 13px;font-weight: 500;color:#FFFFFF;outline:none;color: #000;}
+.orderandpay .btn_defalut {padding: 10px 19px 9px; min-height: 38px; max-height:38px; line-height:normal; min-width: 118px;  box-sizing:border-box; background: #EEEEEE; border:1px #B5B5B5 solid; font-size: 13px;font-weight: 500;color:#FFFFFF;outline:none;color: #000;}
 .orderandpay .btn_defalut.squre {background: #fff; height: auto;font-size: 14px;font-weight: 400;outline:none;color: #000;border:1px #B5B5B5 solid;border-radius: 0;/* max-width: 120px; */text-align: center;min-width: 120px;box-sizing: border-box;padding: 11px 10px}
 .orderandpay button.btn_defalut.squre {padding: 10px 20px;height:38px; font-family: 'font_ns'; line-height: inherit;}
 
@@ -396,6 +396,9 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .box_wrap .box_gray02 .bold {font-weight:700;}
 .orderandpay .list_type02_v2 li {color:#313131; padding-left:10px; position: relative;}
 .orderandpay .list_type02_v2 li:before {content: ''; display: block; width:4px; height:4px;  background: #000; position:absolute; top:8px; left:0;}
+.orderandpay .list_type02_v2.none li {padding-left: 0;}
+.orderandpay .list_type02_v2.none li:before {content: ''; display: none;}
+
 
 /* tab */
 
@@ -410,6 +413,11 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tab_layer.is_active,
 .orderandpay .tab_layer.on {display: block;}
 .orderandpay .tab_list li.is_active .link {background: #fff; border-color: #DD1016;}
+
+.orderandpay .sort_order .tab_layer {display: none; height: auto;}
+.orderandpay .sort_order .tab_layer.is_active,
+.orderandpay .sort_order .tab_layer.on {display: block;}
+.orderandpay .sort_order .tab_list li.is_active .link {background: #fff; border-color: #DD1016;}
 
 /* 결제방법선택 tab_layer inner box */
 .orderandpay .tab_layer .tab_layer_text_box {background: #FAFAFA; padding:30px;}
@@ -627,8 +635,12 @@ ul.agency_select li:nth-child(3) .ele {
 /*.orderandpay .table02_v1 td {padding: 10px 15px 10px 24px;height:38px;border-bottom: 1px #EEEEEE solid; border-right: 1px #EEEEEE solid;}
 */.orderandpay .table02_v1 tbody td {padding: 10px 15px 10px 15px;height:38px;border-bottom: 1px #EEEEEE solid; border-right: 1px #EEEEEE solid;}
 .orderandpay .payment_list li {word-break: break-all;}
-
-
+.orderandpay .table02_v1.padsmall {line-height: normal;}
+.orderandpay .table02_v1.padsmall tbody th,.orderandpay .table02_v1.padsmall tbody td {padding:14px 15px; height:auto;} 
+.orderandpay .pb20 {padding-bottom: 20px !important;}
+.orderandpay .pb10 {padding-bottom: 10px !important;}
+.orderandpay .pt20 {padding-top: 20px !important;}
+.orderandpay .pt10 {padding-top: 10px !important;}
 
 
 /* 팝업 */
@@ -723,7 +735,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay h3.page_title {font-size: 24px;font-weight: 700;margin-bottom: 15px; min-height:auto; margin-top:0;}
 /*.orderandpay h3.page_title.border {border-bottom: 2px #000000 solid; margin-bottom: 26px; padding-bottom: 34px;}
 */.orderandpay h3.page_title.border {border-bottom: 2px #000000 solid; margin-bottom: 26px; padding-bottom: 25px;}
-.orderandpay h4.page_title {font-size: 20px;font-weight: 700;margin-bottom: 15px; min-height:auto; margin-top:0; background: none; height: auto; padding:0;}
+.orderandpay h4.page_title {font-size: 20px;font-weight: 700;margin-bottom: 24px; min-height:auto; margin-top:0; background: none; height: auto; padding:0;}
 .orderandpay h4.page_title.border {border-bottom: 2px #000000 solid; margin-bottom: 26px; padding-bottom: 22px;}
 .orderandpay h4.page_title.border_type1 {border-bottom: 2px #000000 solid; margin-bottom: 0; margin-top:0; padding-bottom: 30px;}
 .orderandpay h4.page_title.border_type2 {border-bottom: 2px #000000 solid; margin-bottom: 0; margin-top:0; padding-bottom: 22px;}
@@ -757,7 +769,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .tooltip_wrap .table02 tbody th label { font-weight: inherit;}
 .orderandpay .tooltip_wrap .table02 tbody td {padding:10px 20px 11px; color:#000; font-size: 13px; font-weight: 400; text-align: center;}
 
-.orderandpay .tooltip_wrap .table02.cash {border:1px #000 solid;}
+.orderandpay .tooltip_wrap .table02.cash {border-top:1px solid #eaeaea; border-right:1px solid #eaeaea; border-bottom:0; border-left:0;}
 .orderandpay .tooltip_wrap .table02.cash tbody th, .orderandpay .tooltip_wrap .table02.cash tbody td {padding:14px;}
 
 .orderandpay .tooltip_wrap .table02 .choice_wrap .choice_wrap_inner {margin-left: 15px; display: block; float: left;   margin-top: 5px; line-height: 2;}
@@ -767,9 +779,8 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .table02 th { background: #fafafa; }
 .orderandpay .table02.t_center tbody td {padding:17px 0;text-align:center;}
 .orderandpay .table02.cash {border-collapse:separate;border:1px solid #a31112}
-.orderandpay .table02.cash th {padding:5px;border-left:1px solid #eaeaea}
-.orderandpay .table02.cash td {padding:5px;border-left:1px solid #eaeaea}
-.orderandpay .table02.cash th + td {border-left:0}
+.orderandpay .table02.cash th {padding:5px;border-left:1px solid #eaeaea} 
+.orderandpay .table02.cash th + td {border-left:1px solid #eaeaea}
 .orderandpay .table02.cash td + th {border-left:1px solid #eaeaea}
 .orderandpay .table02.cash td.t_center {padding:0}
 .orderandpay .table02.cash.t_center th {text-align:center}
@@ -802,11 +813,14 @@ ul.agency_select li:nth-child(3) .ele {
 /*
   table02 td: height: 58px;
 */
-
+.orderandpay .mgb80 {margin-bottom: 80px !important;}
+.orderandpay .mgt130 {margin-top: 130px !important;}
 .orderandpay .bbs_list_v2 tbody td:first-child {border-left:1px #EEEEEE solid;}
 .orderandpay .bbs_list_v2 tbody td:last-child {border-right:1px #EEEEEE solid;}
 .orderandpay .bbs_list_v2.space_pad tbody td {padding-left: 10px; padding-right: 10px; font-size: 13px;}
+.orderandpay .bbs_list_v2.pd35 tbody td { padding-top:35px; padding-bottom: 35px;}
 .orderandpay .bbs_list_v2.border {border-top:2px #000000 solid;}
+.orderandpay .bbs_list_v2 tbody tr.conts td .txt {padding: 30px;}
 
 /* 주문상품 _table  */
 .orderandpay .table_wrap.bbs_list_v2 th, .orderandpay .table_wrap.bbs_list_v2 td {text-align: center;padding-right: 10px;padding-left: 10px;}
@@ -889,6 +903,14 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .search_box02 .wordlist a {color:#000000; margin-left:15px;}
 
 /*.orderandpay .btn_type01 {height: 19px;line-height: normal;font-size: 13px;vertical-align: middle; background: #EEEEEE;border-radius: 30px;padding: 10px 30px 9px;font-size: 13px;font-weight: 700;color: #000 !important; border-bottom: 0;}*/
+.orderandpay .min80 {min-width: 80px !important;}
+.orderandpay .fz13 {font-size: 13px !important;}
+.orderandpay .color_03 {color:#777;}
+
+.orderandpay .bbs_list_v2 tbody tr td{background: #fff;}
+.orderandpay .bbs_list_v2 tbody tr.conts.on td{background: #fafafa;}
+
+.orderandpay .coupon_regist {float: none; padding-left:0; padding: 5px 0;}
 .orderandpay .btn_style11.btn_type01 {padding: 9px 19px 10px; margin-left:-1px; min-height: 38px; max-height: 38px;min-width: 118px;box-sizing:border-box;background: #EEEEEE;border:1px #B5B5B5 solid;font-size: 13px;font-weight: 500;outline:none;color: #000 !important;display: inline-block;vertical-align: middle;line-height: inherit;}
 .orderandpay .btn_type07 {font-size: 14px;min-width: 105px;padding: 10px 13px 11px 13px;height: auto;line-height: normal; background: #000; text-align: center;}
 .orderandpay .btn_type03 {height: auto;line-height: normal;font-size: 18px;padding: 14px 0 13px;vertical-align: middle;width: auto;font-weight: 500;letter-spacing: 1.5px;min-width: 200px;background: #000;font-weight: 400;box-sizing: border-box;}
@@ -958,7 +980,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .img_change_box .change_list li:first-child:before {display: none; content: '';}
 .orderandpay .img_change_box .img_include_wrap {display: block;text-align: center;}
 .orderandpay .img_change_box .img_include_txt {font-size:11px;font-weight:500;color:#000;display: block;margin-top: 0px;}
-.orderandpay .img_change_box .texts {font-size: 10px;font-weight:400;color:#777;display: block; margin-top:5px;}
+.orderandpay .img_change_box .texts {font-size: 13px;font-weight:400;color:#777;display: block; margin-top:10px;}
 .orderandpay .img_change_box .img_include_txt:before {content: '';display: block;margin: 0px auto 5px;}
 
 .orderandpay .img_change_box .img_include_txt.key:before {width:58px; height:46px; background:url(../../images/new/cs_receipt_step1.png) no-repeat center;}
@@ -980,10 +1002,10 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .img_change_box .img_include_txt.edit:before {width:36px; height:46px; background:url(../../images/new/my_return_step1.png) no-repeat center;}
 .orderandpay .img_change_box .img_include_txt.wait:before {width:40px; height:46px; background:url(../../images/new/my_return_step2.png) no-repeat center;}
 .orderandpay .img_change_box .img_include_txt.check:before {width:45px; height:46px; background:url(../../images/new/my_return_step3.png) no-repeat center;}
-.orderandpay .img_change_box .img_include_txt.return:before {width:37px; height:46px; background:url(../../images/new/my_return_step4.png) no-repeat center;}
+.orderandpay .img_change_box .img_include_txt.return:before {width:40px; height:46px; background:url(../../images/new/my_return_step4.png) no-repeat center;}
 
 .orderandpay .img_change_box .img_include_txt.move:before {width:57px; height:46px; background:url(../../images/new/my_exchange_step2.png) no-repeat center;}
-.orderandpay .img_change_box .img_include_txt.exchange:before {width:31px; height:46px; background:url(../../images/new/my_exchange_step3.png) no-repeat center;}
+.orderandpay .img_change_box .img_include_txt.exchange:before {width:38px; height:46px; background:url(../../images/new/my_exchange_step3.png) no-repeat center;}
 
 .orderandpay div.my_list_section p.specName {position: static;margin-top: 0px;width: 100%;height: auto;line-height: normal;}
 .orderandpay div.my_list_section a.aprdtName {margin-bottom: 0; height:auto; line-height: normal;}
@@ -1379,7 +1401,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .best_hott_wrap .main_banner_control .main_banner_btn .num strong{color:#000;}
 
 .orderandpay .funding_main_wrap .tab_wrap.tab1{width:950px; margin:0 auto;}
-.orderandpay .funding_main_wrap .title_icon{font-size: 40px; font-weight: 700; text-align: center; line-height: normal;}
+.orderandpay .funding_main_wrap .title_icon{font-size: 40px; font-weight: 700; text-align: center; line-height: normal; margin-top:80px;}
 .orderandpay .funding_main_wrap .title_icon:before{content: ''; margin: 0 auto; display: block; width:100px; height: 51px;}
 .orderandpay .funding_main_wrap .title_icon.ico01:before{background: url(../../images/new/icon_funding_main1.png) no-repeat center center;}
 .orderandpay .funding_main_wrap .title_icon.ico02:before{background: url(../../images/new/icon_funding_main2.png) no-repeat center center;}
@@ -1451,7 +1473,10 @@ ul.agency_select li:nth-child(3) .ele {
 /* 펀딩 탭 */
 .orderandpay .funding_main_wrap .tab1 {margin:0;}
 .orderandpay .funding_main_wrap .tab1 .items {min-width:33.333%; margin:0;}
-.orderandpay .funding_main_wrap .tab_list {margin:0; display: block; width: auto;}
+.orderandpay .funding_main_wrap .tab_list {margin:0; display: block; width: auto; overflow: hidden;}
+.orderandpay .funding_main_wrap .tab_list:after {content: ''; display: block; clear: both;}
+
+.orderandpay .funding_main_wrap .stuff_main_detail {overflow: hidden;}
 /*.orderandpay .funding_main_wrap .tab_layer_wrap {margin-top:80px;}
 */
 .orderandpay .funding_main_wrap .title_icon1 {font-size: 40px; font-weight: 700; text-align: center; line-height: normal;}
@@ -1516,7 +1541,7 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .funding_goal_price_wrap .funding_goal_price_type2 dd .unit_percent {color:#D41417;}
 
 .orderandpay .funding_goal_text_wrap {}
-.orderandpay .funding_goal_text_wrap .funding_goal_text {background: #FAFAFA; padding:20px 30px 22px 108px; line-height: 1.6; position: relative;}
+.orderandpay .funding_goal_text_wrap .funding_goal_text {background: #FAFAFA; padding:20px 30px 22px 108px; line-height: 1.6; position: relative; min-height: 48px;}
 .orderandpay .funding_goal_text_wrap .funding_icon1:before {content: ''; display: block; position: absolute; top:17px; left:19px; width:60px; height:61px; background: url(../../images/new/icon_funding_01.png) no-repeat 0 0; background-size: contain;}
 .orderandpay .funding_goal_text_wrap .funding_icon2:before {content: ''; display: block; position: absolute; top:9px; left:24px; width:59px; height:70px; background: url(../../images/new/icon_funding_02.png) no-repeat 0 0; background-size: contain;}
 .orderandpay .funding_goal_text_wrap .funding_icon3:before {content: ''; display: block; position: absolute; top:22px; left:20px; width:67px; height:48px; background: url(../../images/new/icon_funding_03.png) no-repeat 0 0; background-size: contain;}
@@ -1716,24 +1741,24 @@ ul.agency_select li:nth-child(3) .ele {
 .orderandpay .at_this_time_like_wrap .sold_out-t-m .soldout-wrap{  display: block;}
 .orderandpay .at_this_time_like_wrap .soldout-wrap{  display: none;  position: absolute;  top: 0;  left: 0;  width: 100%;  height: 100%;  background: rgba(0, 0, 0, 0.6);}
 
-.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap {float: left;}
+.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap {float: right;}
 .orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap{}
 /*.orderandpay .at_this_time_like_wrap .unit_like_allcheck_wrap .choice_wrap:after {content: ''; display: inline-block; width:1px; height:15px; background:#777; margin: 0px 1px 2px 7px; vertical-align: middle;}*/
-.orderandpay .at_this_time_like_wrap .go_select_wrap {float: right;}
+.orderandpay .at_this_time_like_wrap .go_select_wrap {float: left;}
 .orderandpay .at_this_time_like_wrap .choice_delete {font-size: 14px; color: #000; font-weight: 400;font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; vertical-align: baseline; outline: none; width:96px; height:32px; border:1px #777 solid; display: inline-block; line-height: 30px; margin-left:10px;}
 .orderandpay .at_this_time_like_wrap .pd_list ul li .tit {margin-top:0px; width:80%;}
-.orderandpay .at_this_time_like_wrap .trash_delete {position:absolute; right:0; top:12px; width:26px; height:26px; background:url('../../images/new/icon_my_trash.png') 0 0 no-repeat; font-size: 0;}
+.orderandpay .at_this_time_like_wrap .trash_delete {position:absolute; right:0; top:12px; width:20px; height:23px; background:url('../../images/new/icon_my_trash.png') 0 0 no-repeat; font-size: 0;}
 .orderandpay .at_this_time_like_wrap .pd_list ul li .cont {position: relative;}
 
 /* checkbox */
 .orderandpay .at_this_time_like_wrap .pd_list {margin-top:40px;}
 .orderandpay .at_this_time_like_wrap .pd_list .choice_wrap.type_squre input[type="checkbox"] + label:before,
-.orderandpay .at_this_time_like_wrap .pd_list .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:8px ; position: absolute; top:5px; left:5px; z-index: 1;}
+.orderandpay .at_this_time_like_wrap .pd_list .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:8px ; position: absolute; top:7px; left:5px; z-index: 1;}
 
 .orderandpay .at_this_time_like_wrap .blank_text_wrap {text-align: center; margin: 80px auto; }
 .orderandpay .at_this_time_like_wrap .blank_text_wrap p {font-size: 32px; color: #419BF9;}
-.orderandpay .at_this_time_like_wrap .blank_text_wrap .tt{position: relative;}
-.orderandpay .at_this_time_like_wrap .blank_text_wrap .tt:before{position:absolute; content:''; width:47px; height:47px; left:48px; top:-8px; background:url('../../images/biz/common/icon_none.png')no-repeat;}
+.orderandpay .at_this_time_like_wrap .blank_text_wrap .tt{position: relative; padding-left: 58px;}
+.orderandpay .at_this_time_like_wrap .blank_text_wrap .tt:before{position:absolute; content:''; width:47px; height:47px; left:0px; top:-8px; background:url('../../images/biz/common/icon_none.png')no-repeat;}
 
 /* tab */
 .orderandpay .answer_content_wrap{ border-top:1px #DBDBDB solid; padding:32px 0;}

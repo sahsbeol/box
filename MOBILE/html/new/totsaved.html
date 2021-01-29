@@ -35,7 +35,7 @@
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
       <!-- 서브 -->
       <div class="sub_wrap"> <a href="#n" _onclick="locBack();return false;" class="btn_back">뒤로가기</a> <a href="#n" class="btn_category" _onclick="bizOpenGnbMenu();return false;">카테고리 보기</a> <a href="#n" class="btn_search" _onclick="gnbSrchFrm();return false;">검색</a>
-        <h2 id="subTitle">마이페이지</h2>
+        <h2 id="subTitle">마이핫트랙스</h2>
       </div>
       <!--// 서브 --> 
     </div>
@@ -46,7 +46,7 @@
 <div id="content">
     <input type="hidden" name="eof" value="1"/>
     <div class="">
-        <div id="my_content">
+        <div id="my_content" class="">
             <div class="my_smenu4">
               <ul>
                 <li><div class="mysmenu_box"><a href="/m/mypage/totsaved" class="btn_totsaved active">통합 <br>포인트</a></div></li>
@@ -63,18 +63,31 @@
               <p class="t_c">고객님의 통합포인트는 <span class="color_01"><strong class="only_english">0</strong></span>원 입니다.</p>
               <p class="f12 col_grey mt10">(구)마일리지를 소지하신 고객님께서는 교보문고에서 확인가능합니다.</p>
             </div>
-            <div class="box_flex tog_area space_pad distance">
-                <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=3&srchGbn=1')" class="btn tog_btn active">3개월</a>
-                <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=6&srchGbn=1')" class="btn tog_btn">6개월</a>
-                <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=12&srchGbn=1')" class="btn tog_btn">12개월</a>
-                <!-- <select name="srchGbn" class="select" title="포인트 검색옵션 선택" onchange="location.replace('/m/mypage/totsaved?srchMaxDate=3&srchGbn='+this.value)"> -->
-                  <select name="srchGbn" class="select" title="포인트 검색옵션 선택" >
+
+            <div class="space_pad clear distance">
+              <select name="srchGbn" class="select bg" title="포인트 검색옵션 선택" style="width:80px;">
                     <option value="1" selected="selected">전체</option>
                     <option value="2" >적립</option>
                     <option value="3" >사용</option>
                 </select>
+                <ul class="tab993030 mt10">
+                  <li><a href="javascript:;" class="active">3개월</a></li>
+                  <li><a href="javascript:;" class="">6개월</a></li>
+                  <li><a href="javascript:;" class="">12개월</a></li>
+                </ul>
             </div>
-            <div id="orderList" class="mt30">
+            <!-- <div class="box_flex tog_area space_pad distance">
+                <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=3&srchGbn=1')" class="btn tog_btn active">3개월</a>
+                <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=6&srchGbn=1')" class="btn tog_btn">6개월</a>
+                <a href="javascript:location.replace('/m/mypage/totsaved?srchMaxDate=12&srchGbn=1')" class="btn tog_btn">12개월</a>
+                <select name="srchGbn" class="select" title="포인트 검색옵션 선택" onchange="location.replace('/m/mypage/totsaved?srchMaxDate=3&srchGbn='+this.value)">
+                  <select name="srchGbn" class="select bg" title="포인트 검색옵션 선택" >
+                    <option value="1" selected="selected">전체</option>
+                    <option value="2" >적립</option>
+                    <option value="3" >사용</option>
+                </select>
+            </div> -->
+            <div id="orderList" class="mt30 space_pad">
                 <ul class="br_list mb30">
                     <li class="line bg_eeeeee">
                         <strong class="fl_l only_english bold">2019.10.26</strong>

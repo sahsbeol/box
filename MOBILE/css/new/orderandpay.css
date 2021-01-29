@@ -27,6 +27,8 @@
 .orderandpay .width_auto {width:auto !important;}
 .orderandpay .mlmn {margin-left:-1px !important;}
 .orderandpay .mt15 {margin-top:15px !important;}
+.orderandpay .pt15 {padding-top:15px !important;}
+
 
 .orderandpay .float_wrap:after {content: ''; display: block; clear: both;}
 .orderandpay .f_r {float: right !important;}
@@ -50,6 +52,15 @@
   border-bottom: 1px #DBDBDB solid;
   padding: 18px 0;
 }
+.orderandpay .my .ly_box {background: rgba(0,0,0,.7);}
+.orderandpay .my .ly_box.active { display:block; }
+.orderandpay .my .ly_box .ly_conts { display: block;margin:20px 67px;padding:20px 16px;width:auto;text-align:center;position: relative;top:50%;margin-top:-100px;overflow:hidden;background-color:#fff;border:0 none; border-radius: 0;}
+.orderandpay .my .ly_box .ly_conts .line01 { border:1px solid #000; }
+.orderandpay .my .ly_box .ly_conts .tit { font-size:13px;font-weight:bold; }
+.orderandpay .my .ly_box .ly_conts .txt { font-size:11px;color:#777777; font-weight: 400 }
+.orderandpay .my .ly_box .ly_conts .round_orange { padding:5px 20px;border-radius:10px;background-color:#DA2128;color:#fff;width:100px;margin:10px auto; }
+ 
+
 /* 기본 박스 */
 .orderandpay .user_info_wrap {padding:24px 20px 0;}
 .orderandpay .user_info_wrap .user_title {font-size: 16px;font-weight: 700;border-bottom: 2px #000 solid;padding-bottom: 6px;}
@@ -968,12 +979,18 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay #my_content a.btn_addres span {display:inline-block;height:30px;line-height:30px;padding-right:15px;color:#fff;background:url(/images/common/bg_detail.png) no-repeat 100% 50%;background-size:11px 12px;}
 
 .orderandpay #my_content .br_list {border-top:2px #000000 solid;}
+.orderandpay #my_content .br_list.brnone {border-top:0;}
 .orderandpay #my_content .br_list li {background: #fff; font-size: 11px; font-weight: 500; color: #000; padding:15px 10px;}
 .orderandpay #my_content .br_list li.bg_eeeeee {background: #FAFAFA !important;}
 .orderandpay #my_content .br_list li strong { font-weight: 500;font-size: 12px;}
 .orderandpay #my_content .br_list li:first-child {margin-top:0;}
 .orderandpay #my_content .my_smenu_ment {font-size: 14px; color:#000;}
 .orderandpay .gray_box2 {margin:0;}
+
+.orderandpay #my_content .my_qna.br_list li {padding:16px 0; min-height:90px; border-top:1px #DBDBDB solid; font-size: 13px;}
+.orderandpay #my_content .my_qna.br_list li:first-child {border-top:0;}
+.orderandpay #my_content .my_qna.br_list li strong{font-size: 13px;}   
+.orderandpay #my_content .my_qna .this_sss {height:34px; width:100px; background: #000; line-height: 32px; color: #fff; text-align: center;margin-top: 55px;}
 
 /* 마이 핫트랙스 tab */
 .orderandpay #my_content .tab_box {display:-webkit-box;margin: 15px 0 0 0;border: 0 none;border-radius: 0;background-color:#fff;}
@@ -997,7 +1014,7 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .dlvy_list .prod dl .pinfo span.stat {font-size: 14px;}
 
 .orderandpay .dlvy_list_next_wrap.btn_box {background: #fff; padding:0; margin-top:28px; display: -webkit-box;}
-.orderandpay .dlvy_list_next_wrap.btn_box a {border-radius: 0; padding:13px 0;    -webkit-box-flex: 1;    display: block;}
+.orderandpay .dlvy_list_next_wrap.btn_box a {border-radius: 0; padding:15px 0;    -webkit-box-flex: 1;    display: block;}
 .orderandpay .dlvy_list_next_wrap.btn_box a + a {margin-left:0;}
 .orderandpay .dlvy_list_next_wrap.btn_box .bt_mbgb {background: #000;}
 .orderandpay .dlvy_list_next_wrap.btn_box .btn_mbrg {border-color:#000; color:#000;}
@@ -1051,6 +1068,14 @@ div.bill_noti div{margin-bottom:5px;}
 
  /* 마이핫트랙스 메인 */
 .orderandpay .my {} 
+.orderandpay .my .my_info .grade {}
+
+.orderandpay .my_info .gradea {width:24px; height:24px; display: inline-block; margin-right:15px;vertical-align: middle; background:url('../../images/new/icon_grade_human.png') left top no-repeat;background-size:23px auto;height: 24px;line-height: 20px;}
+.orderandpay .my_info .gradea.grade1 {background:url('../../images/new/icon_grade_p.png') left top no-repeat;background-size: 24px auto;}
+.orderandpay .my_info .gradea.grade2 { background:url('../../images/new/icon_grade_g.png') left top no-repeat;background-size:23px auto;}
+.orderandpay .my_info .gradea.grade3 { background:url('../../images/new/icon_grade_s.png') left top no-repeat;background-size:23px auto;}
+.orderandpay .my_info .gradea.grade4 { background:url('../../images/new/icon_grade_f.png') left top no-repeat;background-size:23px auto;}
+
 .orderandpay .my_point {margin:0;}
 .orderandpay .my_point .my_info {background: #F8F8F8;}
 .orderandpay .my_point .my_info dl {width:auto; padding:8px 30px; overflow: hidden;}
@@ -1061,7 +1086,9 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .my_point .my_info dl dt .ic_medal.gold {background: #D2992A;}
 .orderandpay .my_point .my_info dl dt .ic_medal.silver {background: #949494;}
 .orderandpay .my_point .my_info dl dd {float: left; margin-left: 12px;}
-.orderandpay .my_point .btn.arrow01 {background: none;color: #000;font-size: 13px;height: auto;line-height: normal;font-weight: 400;padding: 0;}
+.orderandpay .my_point .btn.arrow01 {background: none; color: #000;font-size: 13px;height: auto;line-height: normal;font-weight: 400;padding: 0;}
+.orderandpay .my_point .btn.arrow01:after {content:'';display:inline-block;width:6px;height: 12px;background: url(../../images/new/icon_arrow.png) no-repeat 0 0;margin-left: 5px;margin-bottom: -3px;background-size: 5px 10px;}
+
 .orderandpay .my_point .my_point_list {margin-top: 0; padding:0; border:0;}
 .orderandpay .my_point .card_unit_list_wrap .card_unit_list {overflow: hidden;}
 .orderandpay .my_point .card_unit_list_wrap .card_unit_list li {float: left; width:50%; text-align: center; position: relative;}
@@ -1076,7 +1103,7 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .my_point .my_point_list li a span {font-family: 'font_ns','Apple SD Gothic Neo', sans-serif;}
 .orderandpay .my_point_menu ul li a {padding-top:68px;}
 .orderandpay .my_point_menu ul li a {font-size: 12px; color:#000; font-family: 'font_ns','Apple SD Gothic Neo', sans-serif; font-weight: 400;}
-.orderandpay .my_point_menu ul li a span {font-size: 10px; color:#FF7764;font-weight: 500; display: block; margin-top:8px;}
+.orderandpay .my_point_menu ul li a span {font-size: 12px; color:#FF7764;font-weight: 500; display: block; margin-top:8px;}
 .orderandpay .my_point_menu ul li:nth-child(1) a {background: url(../../images/new/icon_my_basket.png) no-repeat top center; background-size: 60px 60px;}
 .orderandpay .my_point_menu ul li:nth-child(2) a {background: url(../../images/new/icon_my_delivery.png) no-repeat top center; background-size: 60px 60px;}
 .orderandpay .my_point_menu ul li:nth-child(3) a {background: url(../../images/new/icon_my_like.png) no-repeat top center; background-size: 60px 60px;}
@@ -1108,6 +1135,7 @@ div.bill_noti div{margin-bottom:5px;}
 
 .orderandpay .tog_area .select {background-color:#F8F8F8; border:1px #777777 solid; font-size: 12px;}
 .orderandpay #my_content .my_list {margin:0;}
+.orderandpay #my_content select.bg {background-color:#F8F8F8;}
 
 /* 좋아요 */
 .orderandpay .sort_link_wrap {padding: 20px 10px;margin: 0 0px;}
@@ -1142,7 +1170,7 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .at_this_time_like_wrap .recobell_list {padding-right: 20px;padding-top: 0;border-top: 1px #DBDBDB solid;margin-top: 12px;}
 .orderandpay .at_this_time_like_wrap .recobell_list .category .swiper-container .choice_wrap{position: relative; overflow: hidden; padding:14px 0;}
 .orderandpay .at_this_time_like_wrap .recobell_list .category .swiper-container .choice_wrap.type_squre input[type="checkbox"] + label:before,
-.orderandpay .at_this_time_like_wrap .recobell_list .category .swiper-container .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:8px ; position: absolute; top:8px; left:8px; z-index: 1;}
+.orderandpay .at_this_time_like_wrap .recobell_list .category .swiper-container .choice_wrap.type_squre input[type="radio"] + label:before {margin-right:8px ; position: absolute; top:10px; left:8px; z-index: 1;}
 
 .orderandpay .at_this_time_like_wrap .recobell_list .category .swiper-slide {width:100% !important; display: block !important;}
 .orderandpay .at_this_time_like_wrap .recobell_list .category .swiper-slide .link {width:100%; display: block;}
@@ -1170,6 +1198,12 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay .at_this_time_like_wrap .blank_text_wrap .tt:before{position:absolute; content:''; width:47px; height:47px; left:48px; top:-8px; background:url('../../images/biz/common/icon_none.png')no-repeat;}
 
 /* tab */
+.orderandpay .tab993030 {overflow: hidden; float: right;}
+.orderandpay .tab993030 li {position: relative; float: left;}
+.orderandpay .tab993030 li:before {content: ''; display: block; width:1px; height:11px; background: #000; position: absolute; top:5px; left:0;}
+.orderandpay .tab993030 li a{display: block; padding:0 15px; font-size: 12px;}
+.orderandpay .tab993030 li:first-child:before {content: ''; display: none;}
+
 .orderandpay .answer_content_wrap{ border-top:1px #DBDBDB solid; padding:32px 0;}
 .orderandpay .answer_content_wrap .answer_content_title {font-size: 14px;}
 .orderandpay .answer_content_wrap .answer_content_txt {line-height: 1.8; margin-top:14px;}
@@ -1188,7 +1222,8 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay #my_content .my_comment {font-size: 11px; color:#777; text-align: center;}
 
 .orderandpay #my_content .my_info { color: #525252; text-align: center; padding: 10px 0px; font-size: 1.2em;}
-.orderandpay #my_content { margin:0 -10px; }
+.orderandpay #my_content {/* margin:0 -10px; */}
+.orderandpay #my_content.aa { margin:0px; }
 .orderandpay #my_content .couponbox { position:relative; }
 .orderandpay #my_content .couponbox + .couponbox:last-child { border-bottom:5px solid #eee; }
 .orderandpay #my_content .couponbox .box { margin:10px 20px;border:5px solid #ff6600;border-radius:20px;background:url('../../images/content/ic_logo_white.png') no-repeat 90% center;background-size:80px auto;background-color: #f60; }
@@ -1199,7 +1234,10 @@ div.bill_noti div{margin-bottom:5px;}
 .orderandpay #my_content .couponbox .cpn_cont { margin-top:10px; }
 .orderandpay #my_content .couponbox .nocoupon { padding: 20px; background-color: #fff; border-radius: 18px; font-size: 1.2em; text-align: center;}
 .orderandpay #my_content .couponbox .box_on{   background-repeat: no-repeat;    margin: 10px 10px;    border: 5px solid #000;    border-radius: 20px;    background: url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/online_coupon.png) no-repeat right 20px center;    background-size: 97px auto;    background-color: #000;}
+.orderandpay #my_content .couponbox .box_off{   background-repeat: no-repeat;    margin: 10px 10px;    border: 5px solid #000;    border-radius: 20px;    background: url(http://image.kyobobook.co.kr/newimages/giftshop_new/common/images/common/offline_coupon.png) no-repeat right 20px center;    background-size: 97px auto;    background-color: #000;}
+
 .orderandpay #my_content .my_qua {}
+.orderandpay .myevet_wrap .icon_arrow:after {margin-left:2px;}
 
 
 @media screen and (max-width: 360px) {

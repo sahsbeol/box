@@ -337,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- //lnb -->
                 <!-- sub contents -->
                 <div class="sub_contents">
-                    <h3 class="page_title mgt0">쿠폰/상품권 등록</h3>
+                    <h3 class="page_title mgt0 border">쿠폰/상품권 등록</h3>
 				   	<ul class="list_type02_v2 mgt20 mgb40">
 				        <li>쿠폰별 혜택과 사용조건, 유효기간을 꼭 확인해 주세요.</li>
 				        <li>하나의 장바구니에 두 건 이상의 배송비가 발생하였을 경우 배송비 쿠폰은 한 건의 배송비만 무료가 됩니다.</li>
@@ -408,25 +408,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				        <input type="hidden" name="trackGcardNum" style="width:100px;"/>
 				    </form>
 
-                    <h4 class="page_title mgt80">다양한 이벤트 쿠폰을 등록하여 할인 혜택 받으세요!</h4>
+                    <h4 class="page_title mgt80">다양한 이벤트 쿠폰/상품권을 등록하여 할인 혜택 받으세요!</h4>
 				    <ul class="list_type02_v2 mgt10 mgb40">
 				        <li>해당 상품권 및 보너스 쿠폰의 사용기준과 기간을 반드시 확인하여 주세요.</li>
 				        <li>오프라인 및 제휴사에서 받으신 쿠폰은 번호 입력을 통해 보너스 쿠폰으로 우선 발급을 받으셔야 이용하실 수 있습니다.</li>
 				        <li>유효기간이 만기 된 상품권 및 보너스 쿠폰은 등록이 불가합니다.</li>
 				    </ul>
 
-                    <h4 class="page_title mgt80">쿠폰번호를 입력하세요.</h4>
+                    <h4 class="page_title mgt80">쿠폰/상품권 번호를 입력하세요.</h4>
 				    <div class="box_gray_02 fs14 mgt10 clear">
 				        <div class="coupon_regist">
-                            <span class="input_wrap">
-                                <label class="mgr10" for="couponNum">쿠폰 번호</label> 
-                                <input type="text" name="couponNum" id="couponNum" maxlength="16" class="width_barcode inlineblock" title="쿠폰번호 입력" />    
-                            </span>
-                            <span class="mgl10 v_middle">쿠폰 번호는 영문의 대소문자를 구별합니다.</span>
-                        </div>
-				        <div class="f_right">
+                            <div class="have_inner_txt inner_float">
+                                <span class="input_wrap">
+                                    <label class="mgr10" for="couponNum" style="font-size: 16px;">쿠폰/상품권 번호</label> 
+                                    <input type="text" placeholder="" class="width_name inlineblock" id="prdtBrand">
+                                </span>
+                                <a href="./popupBulkList.html" onclick="window.open(this.href, '_searchPrdt', 'width=780,height=600,scrollbars=yes');return false;" target="_blank" title="새창에서 열림" class="btn_type01 btn_style11 min80">등록</a>
+                                <span class="mgl10 v_middle color_03 fz13">쿠폰/상품권 번호는 영문의 대소문자를 구별합니다.</span>
+                            </div>
+				        <!-- <div class="f_right">
                             <a href="#n" _onclick="couponReg()" class="btn_type01_v2 btn_styl11 mgt10" style="width:50px;">등록</a>
-                        </div>
+                        </div> -->
 				    </div>
                 </div>
                 <!-- //sub contents -->                

@@ -45,7 +45,7 @@
     <div class="inner"> <a href="#n" class="btn_home" _onclick="location.href='http://devm.hottracks.co.kr/';return false;">홈버튼</a>       
       <!-- 서브 -->
       <div class="sub_wrap"> <a href="#n" _onclick="locBack();return false;" class="btn_back">뒤로가기</a> <a href="#n" class="btn_category" _onclick="bizOpenGnbMenu();return false;">카테고리 보기</a> <a href="#n" class="btn_search" _onclick="gnbSrchFrm();return false;">검색</a>
-        <h2 id="subTitle">마이페이지</h2>
+        <h2 id="subTitle">나의 Q&amp;A</h2>
       </div>
       <!--// 서브 --> 
     </div>
@@ -57,19 +57,39 @@
         
   <!-- sub contents -->
   <div id="my_content">
-    <ul class="br_list space_pad my_qna">
-      <li class="color_03">
+    <ul class="br_list my_qna brnone">
+      <li class="color_03" style="padding: 20px;">
           <strong class="fl_l">
-              <em>등록일 : <span class="only_english base bold">2019.09.03</span></em><br>
-              <em>상품명 : [2+1] [카멜] 전자노트 카멜보드 10인치 CB1010</em>
+              <em class="bold color_04 elip">[2+1] [카멜] 전자노트 카멜보드 10인치 CB1010</em>
+              <em class="block mt10">등록일 : <span class="only_english base">2019.09.03</span></em>
           </strong>
           <strong class="fl_r">
-            <a href="#" onclick="showComment('1');return false;" class="btn btn_type01 black" id="0">답변보기</a>
+            <a href="#" onclick="showComment('1');return false;" class="this_sss" id="0">답변보기</a>
           </strong>
       </li>
       <li class="bg_eeeeee conts" id="qna-content1" style="display: none;">
-          <div class="txt">
-                sdfskfsdfsdfsdfsdf  
+          <div class="txt" style="padding: 0px 20px 20px 20px;">
+               <p class="text_a color_01">핫트랙스 상품담당자</p>
+               <div class="text_a1 mt10">
+                 sfsdfsdfsdf
+               </div>
+          </div>
+      </li>
+      <li class="color_03" style="padding: 20px;">
+          <strong class="fl_l">
+              <em class="bold color_04  elip">[2+1] [카멜] 전자노트 카멜보드 10인치 CB1010</em>
+              <em class="block mt10">등록일 : <span class="only_english base">2019.09.03</span></em>
+          </strong>
+          <strong class="fl_r">
+            <a href="#" onclick="showComment('2');return false;" class="this_sss" id="0">답변보기</a>
+          </strong>
+      </li>
+      <li class="bg_eeeeee conts" id="qna-content2" style="display: none;">
+          <div class="txt" style="padding: 0px 20px 20px 20px;">
+               <p class="text_a color_01">핫트랙스 상품담당자</p>
+               <div class="text_a1 mt10">
+                 sfsdfsdfsdf
+               </div>
           </div>
       </li>
     </ul>
