@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment>OnlineAccount</comment>
-	<entry key="onlineAccountNum">30702642465</entry>
-	<entry key="onlineAccountHolderName">온라인사업팀</entry>
-	<entry key="onlineAccountBankCode">C0633</entry>
-</properties>

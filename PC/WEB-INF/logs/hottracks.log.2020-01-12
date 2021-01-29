@@ -1,8 +1,0 @@
-2020-01-12 07:24:20,056 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
-2020-01-12 07:24:20,057 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
-2020-01-12 07:24:21,228 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
-2020-01-12 07:24:21,229 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt
-2020-01-12 07:24:21,840 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
-2020-01-12 07:24:21,841 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/robots.txt
-2020-01-12 07:24:22,441 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:36) - [이전URL]null
-2020-01-12 07:24:22,442 ERROR kr.co.hottracks.site.exceptions.ExceptionResolver.resolveException(ExceptionResolver.java:37) - [요청URL]/ads.txt
